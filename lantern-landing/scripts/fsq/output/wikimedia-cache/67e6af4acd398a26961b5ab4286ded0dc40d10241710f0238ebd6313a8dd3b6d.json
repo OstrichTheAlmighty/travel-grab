@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:16.958Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 76371,
+          "ns": 0,
+          "title": "古賀政男",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こか まさお",
+            "page_image_free": "Koga_Masao_1950.JPG",
+            "wikibase_item": "Q485275"
+          },
+          "terms": {
+            "description": [
+              "日本の作曲家 (1904-1978)"
+            ]
+          }
+        },
+        {
+          "pageid": 193165,
+          "ns": 0,
+          "title": "丘を越えて",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おかをこえて",
+            "wikibase_item": "Q11362563"
+          },
+          "terms": {
+            "description": [
+              "日本の藤山一郎の楽曲"
+            ]
+          }
+        },
+        {
+          "pageid": 943031,
+          "ns": 0,
+          "title": "斉藤恒夫",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さいとう つねお",
+            "wikibase_item": "Q11500277"
+          },
+          "terms": {
+            "description": [
+              "日本の作曲家、編曲家 (1930-1990)"
+            ]
+          }
+        },
+        {
+          "pageid": 1667248,
+          "ns": 0,
+          "title": "鈴木道明",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すすき とうめい",
+            "wikibase_item": "Q11649312"
+          },
+          "terms": {
+            "description": [
+              "日本の作詞家、作曲家 (1920-2015)"
+            ]
+          }
+        },
+        {
+          "pageid": 4287812,
+          "ns": 0,
+          "title": "西鉄野球団歌",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にしてつやきゆうたんか",
+            "wikibase_item": "Q104867462"
+          },
+          "terms": {
+            "description": [
+              "西鉄クリッパースの球団歌"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

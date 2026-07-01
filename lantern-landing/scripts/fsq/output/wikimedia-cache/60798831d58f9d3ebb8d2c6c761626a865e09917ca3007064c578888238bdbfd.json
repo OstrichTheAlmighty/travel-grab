@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:12.725Z",
+  "value": {
+    "searchinfo": {
+      "search": "旧古河庭園"
+    },
+    "search": [
+      {
+        "id": "Q3082256",
+        "title": "Q3082256",
+        "pageid": 2945857,
+        "concepturi": "http://www.wikidata.org/entity/Q3082256",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3082256",
+        "display": {
+          "label": {
+            "value": "Kyu-Furukawa Gardens",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Kyu-Furukawa Gardens",
+        "description": "park in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "旧古河庭園"
+        },
+        "aliases": [
+          "旧古河庭園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

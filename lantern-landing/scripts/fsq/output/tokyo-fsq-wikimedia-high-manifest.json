@@ -1,0 +1,90 @@
+{
+  "city": "tokyo",
+  "eligibility": "high_wikimedia_likelihood",
+  "sourceBatches": 6,
+  "expectedRecords": 1474,
+  "generatedAt": "2026-06-29T08:01:25.269Z",
+  "noNewApiRequests": true,
+  "noSupabaseWrites": true,
+  "sourceFiles": [
+    {
+      "file": "scripts/fsq/output/tokyo-fsq-curated.json",
+      "sha256": "064712e91757ff57a25419e0d1219720664697cf955a539f9d81f5365eb47c5e"
+    },
+    {
+      "file": "scripts/fsq/output/tokyo-fsq-wikimedia-high-batch-001.json",
+      "sha256": "87b6bf43b744ed402aa9861c84ca7f6ab9fa78413c65c4fa31f77b7fba2bf95b"
+    },
+    {
+      "file": "scripts/fsq/output/tokyo-fsq-wikimedia-high-batch-001.report.json",
+      "sha256": "ee117844dc5c651e2d9c454b028082a8aaaf3861749c5bc098e41273858c90c8"
+    },
+    {
+      "file": "scripts/fsq/output/tokyo-fsq-wikimedia-high-batch-002.json",
+      "sha256": "a84992ea798f415c69d9d4de6b84f51ae2dfae4011d99cc22beadb0d29c6905c"
+    },
+    {
+      "file": "scripts/fsq/output/tokyo-fsq-wikimedia-high-batch-002.report.json",
+      "sha256": "b3fd51a21741400ab1a61baef7c26542d8f447cb45f703460150718e96a81176"
+    },
+    {
+      "file": "scripts/fsq/output/tokyo-fsq-wikimedia-high-batch-003.json",
+      "sha256": "72293197fd55bf84c07d9503bcccdfa9c40dcd9fb9b2f90eb6cdcf0bf3f7de2e"
+    },
+    {
+      "file": "scripts/fsq/output/tokyo-fsq-wikimedia-high-batch-003.report.json",
+      "sha256": "e72026906b7cfce2b87a0a5fb57455d42067305b2f148c67f2567b2b65d68080"
+    },
+    {
+      "file": "scripts/fsq/output/tokyo-fsq-wikimedia-high-batch-004.json",
+      "sha256": "9cc0881607dcab094bed58f25179d8f15cad0370ef33db882d543f3c01690f2c"
+    },
+    {
+      "file": "scripts/fsq/output/tokyo-fsq-wikimedia-high-batch-004.report.json",
+      "sha256": "c6445f71bcbebc2d722da57884fdcd79249f69ee6c817637ed204064e3025b19"
+    },
+    {
+      "file": "scripts/fsq/output/tokyo-fsq-wikimedia-high-batch-005.json",
+      "sha256": "af2a2fa593c04c56290c3fdb653528d3dde16c22354e54a902483c8ef157f941"
+    },
+    {
+      "file": "scripts/fsq/output/tokyo-fsq-wikimedia-high-batch-005.report.json",
+      "sha256": "4682f6388ec7958347573a6511bf4ebb506ab0d1d30d2ed766ba085a6c68e077"
+    },
+    {
+      "file": "scripts/fsq/output/tokyo-fsq-wikimedia-high-batch-006.json",
+      "sha256": "742f1918ca263f97b6acacce8fb5cedbd7b3afcba00c87e0c9659dcb1c1b8f87"
+    },
+    {
+      "file": "scripts/fsq/output/tokyo-fsq-wikimedia-high-batch-006.report.json",
+      "sha256": "0a9941d971cf5a8cfb6c669b2260c1bd246f90cb3ba8f437c6c1f7109a450bb0"
+    }
+  ],
+  "outputFiles": [
+    {
+      "file": "scripts/fsq/output/tokyo-fsq-wikimedia-high-enriched.json",
+      "sha256": "fb3e45f38f9c247abf9bc1d2f137e4a7dc10e4d587ec8771c45fc3ea32f68fc2",
+      "bytes": 5808164
+    },
+    {
+      "file": "scripts/fsq/output/tokyo-fsq-wikimedia-high-manual-review.json",
+      "sha256": "2d24b10bf4ba6a0e007cb16501560c7ce86024c6bfe6557fc082fcc15b91331f",
+      "bytes": 730003
+    },
+    {
+      "file": "scripts/fsq/output/tokyo-fsq-wikimedia-high-manual-review.csv",
+      "sha256": "a84e65430cf23e648233ff6eca40898d638859ebe54c03405048d63e2486b00a",
+      "bytes": 8543
+    },
+    {
+      "file": "scripts/fsq/output/tokyo-fsq-wikimedia-high.report.json",
+      "sha256": "c46de3865806feae5543052395bda80c2db9f67e1edd841e833e0c7d2f374539",
+      "bytes": 2697
+    }
+  ],
+  "integrity": {
+    "passed": true,
+    "totalRecords": 1474,
+    "uniqueFsqPlaceIds": 1474
+  }
+}

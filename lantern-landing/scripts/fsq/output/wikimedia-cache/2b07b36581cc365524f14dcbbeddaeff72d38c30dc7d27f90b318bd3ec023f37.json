@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:38.521Z",
+  "value": {
+    "searchinfo": {
+      "search": "民音音楽博物館"
+    },
+    "search": [
+      {
+        "id": "Q65272034",
+        "title": "Q65272034",
+        "pageid": 64912123,
+        "concepturi": "http://www.wikidata.org/entity/Q65272034",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q65272034",
+        "display": {
+          "label": {
+            "value": "Min-on Music Museum",
+            "language": "en"
+          }
+        },
+        "label": "Min-on Music Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "民音音楽博物館"
+        },
+        "aliases": [
+          "民音音楽博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

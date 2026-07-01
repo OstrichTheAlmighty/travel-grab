@@ -1,0 +1,36 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:19.627Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 8587,
+          "ns": 0,
+          "title": "名古屋市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "なこやし",
+            "kartographer_frames": "1",
+            "page_image_free": "View_of_Westward_from_Sky_Deck_MIRAI360,_Nishiki_Naka_Ward_Nagoya_2022.jpg",
+            "wikibase_item": "Q11751"
+          },
+          "coordinates": [
+            {
+              "lat": 35.1814,
+              "lon": 136.9064,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県庁所在地"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

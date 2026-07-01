@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:12.052Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 10742,
+          "ns": 0,
+          "title": "板橋区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いたはしく",
+            "kartographer_frames": "1",
+            "page_image_free": "Itabashi-at-nakajuku.JPG",
+            "wikibase_item": "Q232635"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75119,
+              "lon": 139.70928,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 69481,
+          "ns": 0,
+          "title": "東京教育大学",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようきよういく",
+            "page_image_free": "Tokyo_Bunkyo_School_Building,_Univ._of_Tsukuba.jpg",
+            "wikibase_item": "Q11524880"
+          },
+          "terms": {
+            "description": [
+              "かつて東京都文京区にあった国立大学 (1949-1978)"
+            ]
+          }
+        },
+        {
+          "pageid": 923274,
+          "ns": 0,
+          "title": "常盤台 (板橋区)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ときわたい",
+            "kartographer_frames": "1",
+            "page_image_free": "TokiwadaiPlatanusPromenade.jpg",
+            "wikibase_item": "Q11481497"
+          },
+          "terms": {
+            "description": [
+              "東京都板橋区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 946530,
+          "ns": 0,
+          "title": "板橋区立教育科学館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "いたはしくりつきよういくかかくかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Itabashi_Science_and_Education_Hall.JPG",
+            "wikibase_item": "Q11532661"
+          },
+          "coordinates": [
+            {
+              "lat": 35.76340556,
+              "lon": 139.67957222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都板橋区にある科学館"
+            ]
+          }
+        },
+        {
+          "pageid": 3473960,
+          "ns": 0,
+          "title": "板橋区立図書館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いたはしくりつとしよかん",
+            "page_image_free": "板橋区立中央図書館.jpg",
+            "wikibase_item": "Q28003257"
+          },
+          "terms": {
+            "description": [
+              "東京都板橋区にある公立図書館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

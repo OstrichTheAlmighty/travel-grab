@@ -1,0 +1,132 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:43.058Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 294236,
+          "ns": 0,
+          "title": "Meiji Shrine",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Meiji_Jingu_2023-3.jpg",
+            "wikibase-shortdesc": "Shinto shrine in Tokyo, Japan",
+            "wikibase_item": "Q287165"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67611111,
+              "lon": 139.69916667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Shinto shrine in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 579053,
+          "ns": 0,
+          "title": "Ise Shrine",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Naiku_04.jpg",
+            "wikibase-shortdesc": "Shinto shrine in Japan",
+            "wikibase_item": "Q687168"
+          },
+          "coordinates": [
+            {
+              "lat": 34.455,
+              "lon": 136.72583333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Shinto shrine in Mie Prefecture, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 1059378,
+          "ns": 0,
+          "title": "Shinto shrine",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Shinto Shrine",
+            "page_image_free": "Plum_trees_Kitano_Tenmangu.jpg",
+            "wikibase-shortdesc": "Japanese shrine of the Shinto religion",
+            "wikibase_item": "Q845945"
+          },
+          "terms": {
+            "description": [
+              "Japanese shrine of the Shinto religion"
+            ]
+          }
+        },
+        {
+          "pageid": 1906462,
+          "ns": 0,
+          "title": "Meiji Jingu Stadium",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image": "Meiji_Jingu_Stadium_logo.jpg",
+            "page_image_free": "Meiji_Jingu_Stadium_aerial_view.jpg",
+            "wikibase-shortdesc": "Baseball stadium in Shinjuku, Tokyo, Japan",
+            "wikibase_item": "Q944559"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67452778,
+              "lon": 139.71705556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "baseball stadium in Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 13757360,
+          "ns": 0,
+          "title": "Hokkaidō Shrine",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Hokkaido Shrine",
+            "page_image_free": "(JPN-Hokkaido)_Hokkaido_Shrine_2026-06-06.jpg",
+            "wikibase-shortdesc": "Shinto shrine in Sapporo, Hokkaido, Japan",
+            "wikibase_item": "Q710826"
+          },
+          "coordinates": [
+            {
+              "lat": 43.05423527,
+              "lon": 141.30770534,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Shinto shrine in Chūō-ku, Sapporo, Hokkaidō, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:29.598Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 12518,
+          "ns": 0,
+          "title": "西武新宿線",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せいふしんしゆくせん",
+            "page_image_free": "Seibu-Series10000-10108F_Koedo-7.jpg",
+            "wikibase_item": "Q195685"
+          },
+          "terms": {
+            "description": [
+              "西武鉄道の鉄道路線"
+            ]
+          }
+        },
+        {
+          "pageid": 366797,
+          "ns": 0,
+          "title": "ヤマトホールディングス",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "やまとほおるていんくす",
+            "page_image_free": "Yamato_Holdings_headquarters,_at_Ginza,_Chuo,_Tokyo_(2019-01-02)_04.jpg",
+            "wikibase_item": "Q3571463"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都中央区にあるヤマトグループを統括する持株会社"
+            ]
+          }
+        },
+        {
+          "pageid": 394183,
+          "ns": 0,
+          "title": "東京都水道局",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようとすいとうきよく",
+            "page_image_free": "Tokyo_Metropolitan_Government_Building_No.2_2009.jpg",
+            "wikibase_item": "Q7813954"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68919444,
+              "lon": 139.69163889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "水道事業を行う東京都の地方公営企業"
+            ]
+          }
+        },
+        {
+          "pageid": 631582,
+          "ns": 0,
+          "title": "笹塚 (渋谷区)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ささつか",
+            "kartographer_frames": "1",
+            "page_image_free": "笹塚-18.JPG",
+            "wikibase_item": "Q11602515"
+          },
+          "terms": {
+            "description": [
+              "東京都渋谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1855047,
+          "ns": 0,
+          "title": "新宿駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しんしゆく",
+            "kartographer_frames": "1",
+            "page_image_free": "JRE_Shinjuku-STA_South.jpg",
+            "wikibase_item": "Q801447"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69083333,
+              "lon": 139.70027778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の鉄道駅"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

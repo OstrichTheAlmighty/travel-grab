@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:28.417Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18873,
+          "ns": 0,
+          "title": "落語家",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "らくこか",
+            "page_image_free": "春風亭正太郎さん_2015_(23717025705).jpg",
+            "wikibase_item": "Q11620676"
+          },
+          "terms": {
+            "description": [
+              "落語を演じることを職業とする人"
+            ]
+          }
+        },
+        {
+          "pageid": 23902,
+          "ns": 0,
+          "title": "木戸孝允",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きと たかよし",
+            "page_image_free": "Takayoshi_Kido_suit.jpg",
+            "wikibase_item": "Q696402"
+          },
+          "terms": {
+            "description": [
+              "幕末の長州藩士、明治時代の政治家"
+            ]
+          }
+        },
+        {
+          "pageid": 114745,
+          "ns": 0,
+          "title": "楠木正儀",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "くすのき まさのり",
+            "page_image_free": "Kusunoki_Masanori,_from_Meiyo_Sanjûroku_Kassen.jpg",
+            "wikibase_item": "Q11541193"
+          },
+          "terms": {
+            "description": [
+              "南北朝時代の武将、公卿。楠木氏棟梁。楠木正成の三男。"
+            ]
+          }
+        },
+        {
+          "pageid": 1625413,
+          "ns": 0,
+          "title": "明治天皇",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "めいしてんのう",
+            "page_image_free": "Emperor_Meiji_in_1873.jpg",
+            "wikibase_item": "Q174231"
+          },
+          "terms": {
+            "description": [
+              "日本の第122代天皇 (1852-1912)"
+            ]
+          }
+        },
+        {
+          "pageid": 2385140,
+          "ns": 0,
+          "title": "安藤和風",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あんとう はるかせ",
+            "page_image_free": "Wahu_andou_1929.jpg",
+            "wikibase_item": "Q11451279"
+          },
+          "terms": {
+            "description": [
+              "日本のジャーナリスト"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

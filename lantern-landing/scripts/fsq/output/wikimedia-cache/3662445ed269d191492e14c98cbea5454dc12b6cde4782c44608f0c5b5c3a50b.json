@@ -1,0 +1,100 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:37:59.469Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 500431,
+          "ns": 0,
+          "title": "Christian Friedrich, Baron Stockmar",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Stockmar, Christian Friedrich, Baron",
+            "page_image_free": "Christian_Friedrich,_Baron_Stockmar.jpg",
+            "wikibase-shortdesc": "German physician and statesman (1787-1863)",
+            "wikibase_item": "Q69416"
+          },
+          "terms": {
+            "description": [
+              "German physician and statesman (1787-1863)"
+            ]
+          }
+        },
+        {
+          "pageid": 8919972,
+          "ns": 0,
+          "title": "List of Knight's Cross of the Iron Cross recipients (M)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "M",
+            "page_image_free": "DE_Band_mit_RK_(1).jpg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q6576095"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 16361879,
+          "ns": 0,
+          "title": "Oxford Centre for Hebrew and Jewish Studies",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Yarnton_Manor_east.JPG",
+            "wikibase-shortdesc": "UK charitable organization",
+            "wikibase_item": "Q3379616"
+          },
+          "terms": {
+            "description": [
+              "UK charitable organization"
+            ]
+          }
+        },
+        {
+          "pageid": 28826862,
+          "ns": 0,
+          "title": "The White Horse Inn (1952 film)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "White Horse Inn (1952 film), The",
+            "displaytitle": "<i>The White Horse Inn</i> (1952 film)",
+            "page_image": "The_White_Horse_Inn_(1952_film).jpg",
+            "wikibase-shortdesc": "1952 film",
+            "wikibase_item": "Q1659547"
+          },
+          "terms": {
+            "description": [
+              "1952 film by Willi Forst"
+            ]
+          }
+        },
+        {
+          "pageid": 67145361,
+          "ns": 0,
+          "title": "Michael Breisky",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Breisky, Michael",
+            "page_image_free": "\"Dialog_der_Bücher_-_Das_Gemeinsame_finden\"_(Atelier_Gräff)_05.jpg",
+            "wikibase-shortdesc": "Austrian jurist (born 1940)",
+            "wikibase_item": "Q1927045"
+          },
+          "terms": {
+            "description": [
+              "Austrian jurist"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:48.417Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 34092,
+          "ns": 0,
+          "title": "エリック・クラプトン",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "くらふとん えりつく",
+            "page_image_free": "JeffBeckTribute1RAH220523_(106_of_136)_(52920038844)_(Eric_Clapton).jpg",
+            "wikibase_item": "Q48187"
+          },
+          "terms": {
+            "description": [
+              "イギリスのシンガーソングライター、ミュージシャン (1945-)"
+            ]
+          }
+        },
+        {
+          "pageid": 114686,
+          "ns": 0,
+          "title": "大塚芳忠",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおつか ほうちゆう",
+            "wikibase_item": "Q520669"
+          },
+          "terms": {
+            "description": [
+              "日本の声優、ナレーター"
+            ]
+          }
+        },
+        {
+          "pageid": 139093,
+          "ns": 0,
+          "title": "池田勝",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いけた まさる",
+            "wikibase_item": "Q4117042"
+          },
+          "terms": {
+            "description": [
+              "日本の声優、俳優 (1942-2026)"
+            ]
+          }
+        },
+        {
+          "pageid": 486507,
+          "ns": 0,
+          "title": "東京ディズニーランドのスペシャルイベントの一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいらんとのすへしやるいへんと",
+            "wikibase_item": "Q11524285"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1905276,
+          "ns": 0,
+          "title": "東芸エンタテイメンツ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうけいえんたていめんつ",
+            "wikibase_item": "Q11528269"
+          }
+        }
+      ]
+    }
+  }
+}

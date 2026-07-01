@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:04.356Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 22636,
+          "ns": 0,
+          "title": "名古屋城",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "なこやしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Nagoya_Castle_7.jpg",
+            "wikibase_item": "Q648629"
+          },
+          "coordinates": [
+            {
+              "lat": 35.18549167,
+              "lon": 136.89908611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県の城"
+            ]
+          }
+        },
+        {
+          "pageid": 301265,
+          "ns": 0,
+          "title": "江戸城",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "えとしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Edo_Castle_1979.94.21P01B.jpg",
+            "wikibase_item": "Q865913"
+          },
+          "coordinates": [
+            {
+              "lat": 35.688325,
+              "lon": 139.75436667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にあった城（現・皇居）"
+            ]
+          }
+        },
+        {
+          "pageid": 922518,
+          "ns": 0,
+          "title": "外濠 (東京都)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "そとほり",
+            "page_image_free": "Edo_hori.png",
+            "wikibase_item": "Q11430499"
+          },
+          "terms": {
+            "description": [
+              "江戸城の外側の堀の総称"
+            ]
+          }
+        },
+        {
+          "pageid": 2206402,
+          "ns": 0,
+          "title": "常盤橋 (日本橋川)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ときわはし",
+            "page_image_free": "常盤橋.JPG",
+            "wikibase_item": "Q11481526"
+          },
+          "terms": {
+            "description": [
+              "東京都の橋"
+            ]
+          }
+        },
+        {
+          "pageid": 2757259,
+          "ns": 0,
+          "title": "江戸城三十六見附",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "えとしようさんしゆうろくみつけ",
+            "wikibase_item": "Q11551006"
+          },
+          "terms": {
+            "description": [
+              "江戸城に置かれた主な見附36か所"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

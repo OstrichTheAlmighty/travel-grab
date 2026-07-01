@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:48.070Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1192,
+          "ns": 0,
+          "title": "声優",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せいゆう",
+            "page_image_free": "Scene_from_a_Radio_Broadcast_of_a_Drama_of_Family_Life.jpg",
+            "wikibase_item": "Q622807"
+          },
+          "terms": {
+            "description": [
+              "声だけで出演する俳優"
+            ]
+          }
+        },
+        {
+          "pageid": 41515,
+          "ns": 0,
+          "title": "V6 (グループ)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふいしつくす",
+            "wikibase_item": "Q1156338"
+          },
+          "terms": {
+            "description": [
+              "日本の男性アイドルグループ (1995-2021)"
+            ]
+          }
+        },
+        {
+          "pageid": 54549,
+          "ns": 0,
+          "title": "ザクII",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さくつう",
+            "page_image": "ガンダムvsザク.JPG",
+            "wikibase_item": "Q842056"
+          },
+          "terms": {
+            "description": [
+              "ガンダムシリーズの登場兵器"
+            ]
+          }
+        },
+        {
+          "pageid": 1575836,
+          "ns": 0,
+          "title": "ガンダム (架空の兵器)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かんたむ",
+            "wikibase_item": "Q1141551"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビアニメ番組、『機動戦士ガンダム』に登場する架空の兵器"
+            ]
+          }
+        },
+        {
+          "pageid": 3281124,
+          "ns": 0,
+          "title": "オーシャンシティ (メリーランド州)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おうしやんしてい",
+            "page_image_free": "Ocean_City_MD_beach_looking_north_from_pier.jpeg",
+            "wikibase_item": "Q687905"
+          },
+          "coordinates": [
+            {
+              "lat": 38.39138889,
+              "lon": -75.06972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

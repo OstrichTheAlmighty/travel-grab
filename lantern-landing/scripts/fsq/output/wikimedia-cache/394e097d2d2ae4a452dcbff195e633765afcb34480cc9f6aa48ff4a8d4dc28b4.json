@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:40.293Z",
+  "value": {
+    "searchinfo": {
+      "search": "ドリームスタジオ"
+    },
+    "search": [
+      {
+        "id": "Q11323251",
+        "title": "Q11323251",
+        "pageid": 12461621,
+        "concepturi": "http://www.wikidata.org/entity/Q11323251",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11323251",
+        "display": {
+          "label": {
+            "value": "ドリームスタジオ",
+            "language": "ja"
+          }
+        },
+        "label": "ドリームスタジオ",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ドリームスタジオ"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

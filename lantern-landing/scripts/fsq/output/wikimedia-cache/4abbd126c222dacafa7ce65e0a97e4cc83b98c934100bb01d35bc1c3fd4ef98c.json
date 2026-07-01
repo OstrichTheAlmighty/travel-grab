@@ -1,0 +1,612 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:29:46.197Z",
+  "value": {
+    "entities": {
+      "Q99961928": {
+        "type": "item",
+        "id": "Q99961928",
+        "labels": {
+          "ja": {
+            "language": "ja",
+            "value": "MIYASHITA PARK"
+          },
+          "en": {
+            "language": "en",
+            "value": "MIYASHITA PARK"
+          }
+        },
+        "descriptions": {
+          "en": {
+            "language": "en",
+            "value": "shopping complex in Shibuya, Tokyo"
+          },
+          "ja": {
+            "language": "ja",
+            "value": "東京都渋谷区にある複合施設"
+          }
+        },
+        "aliases": {
+          "ja": [
+            {
+              "language": "ja",
+              "value": "ミヤシタパーク"
+            }
+          ]
+        },
+        "claims": {
+          "P31": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P31",
+                "hash": "9df941e10eb31980a031521633c1ac9978f19afa",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 56352703,
+                    "id": "Q56352703"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "id": "Q99961928$b12ca05d-4c90-ba0c-88a1-605dd0ff21fc",
+              "rank": "normal"
+            },
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P31",
+                "hash": "cea1c2c6ff36fabe8394aa9e2c2c780ed48b3107",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 11315,
+                    "id": "Q11315"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "id": "Q99961928$104057ee-4d62-97d5-2940-c5760d065abb",
+              "rank": "normal"
+            }
+          ],
+          "P17": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P17",
+                "hash": "55178c20e031f1579d34d802f16f6b9951b631e1",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 17,
+                    "id": "Q17"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "id": "Q99961928$3bbc504d-4f48-d3a9-44bc-c1bee7ffb462",
+              "rank": "normal"
+            }
+          ],
+          "P1889": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P1889",
+                "hash": "50ef4726358b7cbfb7238183861ade2fa17c78b8",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 6884419,
+                    "id": "Q6884419"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "id": "Q99961928$d3c1879a-489d-3287-10de-62ef7502fa7d",
+              "rank": "normal"
+            }
+          ],
+          "P2002": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P2002",
+                "hash": "da398c5eb289ea12df76cccc9db2b308f9cbade8",
+                "datavalue": {
+                  "value": "miyashitapark_",
+                  "type": "string"
+                },
+                "datatype": "external-id"
+              },
+              "type": "statement",
+              "qualifiers": {
+                "P6552": [
+                  {
+                    "snaktype": "value",
+                    "property": "P6552",
+                    "hash": "7a4f3f3fdc910bfd20fb347ae5fa2a99e43c05d0",
+                    "datavalue": {
+                      "value": "1224509159426539520",
+                      "type": "string"
+                    },
+                    "datatype": "external-id"
+                  }
+                ],
+                "P580": [
+                  {
+                    "snaktype": "value",
+                    "property": "P580",
+                    "hash": "0448697da4282f468ede90d79de5115026b7581c",
+                    "datavalue": {
+                      "value": {
+                        "time": "+2020-02-04T00:00:00Z",
+                        "timezone": 0,
+                        "before": 0,
+                        "after": 0,
+                        "precision": 11,
+                        "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                      },
+                      "type": "time"
+                    },
+                    "datatype": "time"
+                  }
+                ],
+                "P585": [
+                  {
+                    "snaktype": "value",
+                    "property": "P585",
+                    "hash": "1d1d62dc3d63d6dd8ca08f2fa4945ca43bcfd306",
+                    "datavalue": {
+                      "value": {
+                        "time": "+2020-12-27T00:00:00Z",
+                        "timezone": 0,
+                        "before": 0,
+                        "after": 0,
+                        "precision": 11,
+                        "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                      },
+                      "type": "time"
+                    },
+                    "datatype": "time"
+                  }
+                ]
+              },
+              "qualifiers-order": [
+                "P6552",
+                "P580",
+                "P585"
+              ],
+              "id": "Q99961928$9718d4af-4be8-9410-fe2f-159d495968a7",
+              "rank": "normal"
+            }
+          ],
+          "P18": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P18",
+                "hash": "07f197593706c50c23bfdd12af800d0438a2ac9b",
+                "datavalue": {
+                  "value": "MIYASHITA PARK 2025年1月22日の渋谷 202501221309 IMG 2541.jpg",
+                  "type": "string"
+                },
+                "datatype": "commonsMedia"
+              },
+              "type": "statement",
+              "id": "Q99961928$8f523592-4e91-d822-272e-075fd0258641",
+              "rank": "normal"
+            }
+          ],
+          "P625": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P625",
+                "hash": "7c7e2ed7d6326573aa0ddaa7e5e2218568a445d6",
+                "datavalue": {
+                  "value": {
+                    "latitude": 35.6612,
+                    "longitude": 139.7017,
+                    "altitude": null,
+                    "precision": 0.000002777777777777778,
+                    "globe": "http://www.wikidata.org/entity/Q2"
+                  },
+                  "type": "globecoordinate"
+                },
+                "datatype": "globe-coordinate"
+              },
+              "type": "statement",
+              "id": "Q99961928$6073334b-477f-f13f-0c1e-2a6123a441e5",
+              "rank": "normal"
+            }
+          ],
+          "P131": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P131",
+                "hash": "1e75feb0122bc4f86e39ed74b781fc0378a31751",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 11589465,
+                    "id": "Q11589465"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "id": "Q99961928$9b6d7b7b-4435-2a3b-d04c-d52baacd1164",
+              "rank": "normal"
+            }
+          ],
+          "P1619": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P1619",
+                "hash": "63345c32d71ba195d31bd3ef54017a21aed06060",
+                "datavalue": {
+                  "value": {
+                    "time": "+2020-07-28T00:00:00Z",
+                    "timezone": 0,
+                    "before": 0,
+                    "after": 0,
+                    "precision": 11,
+                    "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                  },
+                  "type": "time"
+                },
+                "datatype": "time"
+              },
+              "type": "statement",
+              "id": "Q99961928$6664477e-41b9-852b-9a14-7a61a9264b43",
+              "rank": "normal"
+            }
+          ],
+          "P2003": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P2003",
+                "hash": "76f8db089ae091134b966fcbc88a3fe9f5a06c89",
+                "datavalue": {
+                  "value": "miyashitapark_",
+                  "type": "string"
+                },
+                "datatype": "external-id"
+              },
+              "type": "statement",
+              "id": "Q99961928$1b291624-4388-502e-d427-6686e7e45925",
+              "rank": "normal"
+            }
+          ],
+          "P527": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P527",
+                "hash": "3cb192509b7b0213179a9cb28f9764f26d4c895e",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 6884419,
+                    "id": "Q6884419"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "id": "Q99961928$ca5b389a-4577-066e-55f2-8993a691667b",
+              "rank": "normal"
+            },
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P527",
+                "hash": "fda945f5119ac18006bf49f010174a703181e377",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 123138239,
+                    "id": "Q123138239"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "id": "Q99961928$faf94d8e-40be-092a-c66f-1a9d76747f33",
+              "rank": "normal"
+            }
+          ],
+          "P8687": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P8687",
+                "hash": "8f6fc4646b90cb06eb1298279d0dc86101dcfb76",
+                "datavalue": {
+                  "value": {
+                    "amount": "+1162",
+                    "unit": "1"
+                  },
+                  "type": "quantity"
+                },
+                "datatype": "quantity"
+              },
+              "type": "statement",
+              "qualifiers": {
+                "P6552": [
+                  {
+                    "snaktype": "value",
+                    "property": "P6552",
+                    "hash": "7a4f3f3fdc910bfd20fb347ae5fa2a99e43c05d0",
+                    "datavalue": {
+                      "value": "1224509159426539520",
+                      "type": "string"
+                    },
+                    "datatype": "external-id"
+                  }
+                ],
+                "P585": [
+                  {
+                    "snaktype": "value",
+                    "property": "P585",
+                    "hash": "5e87034f0d28e51df907453fa46fe72e1480e65a",
+                    "datavalue": {
+                      "value": {
+                        "time": "+2021-01-01T00:00:00Z",
+                        "timezone": 0,
+                        "before": 0,
+                        "after": 0,
+                        "precision": 11,
+                        "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                      },
+                      "type": "time"
+                    },
+                    "datatype": "time"
+                  }
+                ]
+              },
+              "qualifiers-order": [
+                "P6552",
+                "P585"
+              ],
+              "id": "Q99961928$b7efd297-a1bc-47cf-87e3-344d795bb3dd",
+              "rank": "normal"
+            },
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P8687",
+                "hash": "8efd7a1471fef041aa3ef6ee0c8050255f4fd7fa",
+                "datavalue": {
+                  "value": {
+                    "amount": "+3945",
+                    "unit": "1"
+                  },
+                  "type": "quantity"
+                },
+                "datatype": "quantity"
+              },
+              "type": "statement",
+              "qualifiers": {
+                "P6552": [
+                  {
+                    "snaktype": "value",
+                    "property": "P6552",
+                    "hash": "7a4f3f3fdc910bfd20fb347ae5fa2a99e43c05d0",
+                    "datavalue": {
+                      "value": "1224509159426539520",
+                      "type": "string"
+                    },
+                    "datatype": "external-id"
+                  }
+                ],
+                "P585": [
+                  {
+                    "snaktype": "value",
+                    "property": "P585",
+                    "hash": "7e426387a0f5aa1fad00f3505fbccbf848301359",
+                    "datavalue": {
+                      "value": {
+                        "time": "+2025-03-14T00:00:00Z",
+                        "timezone": 0,
+                        "before": 0,
+                        "after": 0,
+                        "precision": 11,
+                        "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                      },
+                      "type": "time"
+                    },
+                    "datatype": "time"
+                  }
+                ]
+              },
+              "qualifiers-order": [
+                "P6552",
+                "P585"
+              ],
+              "id": "Q99961928$fc2265eb-498b-e928-629b-2a9d2a324f18",
+              "rank": "preferred"
+            }
+          ],
+          "P2671": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P2671",
+                "hash": "53660e47088da0e7a33b5ba9997b46a2206216d1",
+                "datavalue": {
+                  "value": "/g/11bc5h703k",
+                  "type": "string"
+                },
+                "datatype": "external-id"
+              },
+              "type": "statement",
+              "id": "Q99961928$9C9995D8-AA96-44DA-A307-B527C6418DCE",
+              "rank": "normal"
+            }
+          ],
+          "P373": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P373",
+                "hash": "8388a881c3e2f7876177aeedda8ba8103c8342f5",
+                "datavalue": {
+                  "value": "MIYASHITA PARK",
+                  "type": "string"
+                },
+                "datatype": "string"
+              },
+              "type": "statement",
+              "id": "Q99961928$26c19b0a-4323-8078-d63e-70eec7adc50d",
+              "rank": "normal"
+            }
+          ],
+          "P3025": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P3025",
+                "hash": "0d7c3b69c36cd4b921d1829b60d50dc8c91e6db6",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 26214163,
+                    "id": "Q26214163"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "qualifiers": {
+                "P8626": [
+                  {
+                    "snaktype": "value",
+                    "property": "P8626",
+                    "hash": "f358c9f1551e5d106e491697665509deeb208135",
+                    "datavalue": {
+                      "value": {
+                        "entity-type": "item",
+                        "numeric-id": 55811097,
+                        "id": "Q55811097"
+                      },
+                      "type": "wikibase-entityid"
+                    },
+                    "datatype": "wikibase-item"
+                  }
+                ],
+                "P8627": [
+                  {
+                    "snaktype": "value",
+                    "property": "P8627",
+                    "hash": "97c9f749db7c17f09d82cf50ac00154ddeaf318f",
+                    "datavalue": {
+                      "value": {
+                        "entity-type": "item",
+                        "numeric-id": 55812301,
+                        "id": "Q55812301"
+                      },
+                      "type": "wikibase-entityid"
+                    },
+                    "datatype": "wikibase-item"
+                  }
+                ]
+              },
+              "qualifiers-order": [
+                "P8626",
+                "P8627"
+              ],
+              "id": "Q99961928$72c0cf8c-4ff6-ba20-bae8-a196248af97b",
+              "rank": "normal"
+            }
+          ],
+          "P10689": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P10689",
+                "hash": "97a40cead95b590859b6d20799755c476ccf1b50",
+                "datavalue": {
+                  "value": "855259085",
+                  "type": "string"
+                },
+                "datatype": "external-id"
+              },
+              "type": "statement",
+              "id": "Q99961928$c6b94e20-4414-2bd8-6695-a380710a992d",
+              "rank": "normal"
+            }
+          ],
+          "P1705": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P1705",
+                "hash": "10f39289a3f2c2317d9957f887084d6b76575e5d",
+                "datavalue": {
+                  "value": {
+                    "text": "ミヤシタパーク",
+                    "language": "ja"
+                  },
+                  "type": "monolingualtext"
+                },
+                "datatype": "monolingualtext"
+              },
+              "type": "statement",
+              "qualifiers": {
+                "P2125": [
+                  {
+                    "snaktype": "value",
+                    "property": "P2125",
+                    "hash": "f1ed8a9be43548af4134243127b586a932b32be3",
+                    "datavalue": {
+                      "value": "Miyashita pāku",
+                      "type": "string"
+                    },
+                    "datatype": "string"
+                  }
+                ]
+              },
+              "qualifiers-order": [
+                "P2125"
+              ],
+              "id": "Q99961928$6c0af307-4295-777a-d6c6-61841b7f0c8e",
+              "rank": "normal"
+            }
+          ]
+        },
+        "sitelinks": {
+          "commonswiki": {
+            "site": "commonswiki",
+            "title": "Category:MIYASHITA PARK",
+            "badges": []
+          },
+          "jawiki": {
+            "site": "jawiki",
+            "title": "MIYASHITA PARK",
+            "badges": []
+          }
+        }
+      }
+    },
+    "success": 1
+  }
+}

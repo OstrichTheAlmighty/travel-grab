@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:42.741Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 5388,
+          "ns": 0,
+          "title": "日本料理",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にほんりようり",
+            "page_image_free": "Osechi_001.jpg",
+            "wikibase_item": "Q234138"
+          },
+          "terms": {
+            "description": [
+              "日本の料理あるいは食文化"
+            ]
+          }
+        },
+        {
+          "pageid": 102600,
+          "ns": 0,
+          "title": "味の素",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あしのもと",
+            "page_image_free": "Ajinomoto_global_logo.svg",
+            "wikibase_item": "Q412826"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67697222,
+              "lon": 139.77330556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都中央区にある食品企業"
+            ]
+          }
+        },
+        {
+          "pageid": 134834,
+          "ns": 0,
+          "title": "犬食文化",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "けんしよくふんか",
+            "page_image_free": "Beijing.viande_de_chien_pour_fondue.specialitee_de_minorite_Bouyei.jpg",
+            "wikibase_item": "Q826031"
+          }
+        },
+        {
+          "pageid": 1178804,
+          "ns": 0,
+          "title": "農山漁村文化協会",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "のうさんきよそんふんかきようかい",
+            "page_image_free": "Ruralculcureasoiation.jpg",
+            "wikibase_item": "Q11637951"
+          },
+          "terms": {
+            "description": [
+              "日本の出版社"
+            ]
+          }
+        },
+        {
+          "pageid": 3195802,
+          "ns": 0,
+          "title": "味の素食の文化センター",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あしのもとしよくのふんかせんたあ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ajinomoto_Group_Takanawa_Training_Center.jpg",
+            "wikibase_item": "Q20042951"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63284611,
+              "lon": 139.73287,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "食文化の研究支援・普及活動を行う組織"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:18:06.836Z",
+  "value": {
+    "searchinfo": {
+      "search": "足立区生物園"
+    },
+    "search": [
+      {
+        "id": "Q11636941",
+        "title": "Q11636941",
+        "pageid": 12777400,
+        "concepturi": "http://www.wikidata.org/entity/Q11636941",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11636941",
+        "display": {
+          "label": {
+            "value": "Adachi Park of Living Things",
+            "language": "en"
+          }
+        },
+        "label": "Adachi Park of Living Things",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "足立区生物園"
+        },
+        "aliases": [
+          "足立区生物園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

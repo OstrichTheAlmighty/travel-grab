@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:50.608Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 157288,
+          "ns": 0,
+          "title": "Tamworth, Staffordshire",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Tamworth_-_panoramio_(4).jpg",
+            "wikibase-shortdesc": "Town in Staffordshire, England",
+            "wikibase_item": "Q704864"
+          },
+          "coordinates": [
+            {
+              "lat": 52.63388889,
+              "lon": -1.695,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "town in Staffordshire, England"
+            ]
+          }
+        },
+        {
+          "pageid": 2406973,
+          "ns": 0,
+          "title": "Snow globe",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Snow Globes",
+            "page_image_free": "Santa_snow_globe.jpg",
+            "wikibase-shortdesc": "Decorative water filled small glass sphere enclosing a miniaturized scene",
+            "wikibase_item": "Q262046"
+          },
+          "terms": {
+            "description": [
+              "transparent sphere enclosing a miniaturized scene, filled with water with unattached objects resembling snowflakes"
+            ]
+          }
+        },
+        {
+          "pageid": 7470680,
+          "ns": 0,
+          "title": "Fiona Hall (artist)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Hall, Fiona",
+            "forcetoc": "",
+            "wikibase-shortdesc": "Australian photographer, sculptor (born 1953)",
+            "wikibase_item": "Q4499087"
+          },
+          "terms": {
+            "description": [
+              "Australian photographer, sculptor, Painter (born 1953)"
+            ]
+          }
+        },
+        {
+          "pageid": 9170516,
+          "ns": 0,
+          "title": "National Glass Centre",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "NGC_006_ngc_front_facia_reduced.jpg",
+            "wikibase-shortdesc": "Glass museum in Tyne and Wear, England",
+            "wikibase_item": "Q6972904"
+          },
+          "coordinates": [
+            {
+              "lat": 54.91291667,
+              "lon": -1.37097222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "glass museum in Sunderland, Tyne and Wear"
+            ]
+          }
+        },
+        {
+          "pageid": 10811694,
+          "ns": 0,
+          "title": "Take a Bow (TV series)",
+          "index": 3,
+          "pageprops": {
+            "displaytitle": "<i>Take a Bow</i> (TV series)",
+            "wikibase-shortdesc": "British TV series or programme",
+            "wikibase_item": "Q7677855"
+          },
+          "terms": {
+            "description": [
+              "television series"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:11.352Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 176899,
+          "ns": 0,
+          "title": "吉川晃司",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きつかわ こうし",
+            "wikibase_item": "Q1114137"
+          },
+          "terms": {
+            "description": [
+              "日本のシンガーソングライター、俳優"
+            ]
+          }
+        },
+        {
+          "pageid": 654905,
+          "ns": 0,
+          "title": "検事・朝日奈耀子",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "けんしあさひなようこ",
+            "wikibase_item": "Q11540906"
+          }
+        },
+        {
+          "pageid": 2073576,
+          "ns": 0,
+          "title": "芸能グルメストーカー",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "けいのうくるめすとおかあ",
+            "wikibase_item": "Q11615917"
+          }
+        },
+        {
+          "pageid": 2605705,
+          "ns": 0,
+          "title": "有吉ジャポン",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ありよししやほん",
+            "wikibase_item": "Q11516309"
+          },
+          "terms": {
+            "description": [
+              "TBSテレビのテレビ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 3393035,
+          "ns": 0,
+          "title": "羽山みずき",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はやま みすき",
+            "wikibase_item": "Q24860872"
+          },
+          "terms": {
+            "description": [
+              "日本の演歌歌手"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

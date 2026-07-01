@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:26.004Z",
+  "value": {
+    "searchinfo": {
+      "search": "えんけい"
+    },
+    "search": [
+      {
+        "id": "Q3140857",
+        "title": "Q3140857",
+        "pageid": 3000699,
+        "concepturi": "http://www.wikidata.org/entity/Q3140857",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3140857",
+        "display": {
+          "label": {
+            "value": "horticulturist",
+            "language": "en"
+          },
+          "description": {
+            "value": "person who works and conducts research in the science and art of growing flowers, fruits, vegetables or ornamental plants",
+            "language": "en"
+          }
+        },
+        "label": "horticulturist",
+        "description": "person who works and conducts research in the science and art of growing flowers, fruits, vegetables or ornamental plants",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "えんげいか"
+        },
+        "aliases": [
+          "えんげいか"
+        ]
+      },
+      {
+        "id": "Q42898444",
+        "title": "Q42898444",
+        "pageid": 44149493,
+        "concepturi": "http://www.wikidata.org/entity/Q42898444",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q42898444",
+        "display": {
+          "label": {
+            "value": "round building",
+            "language": "en"
+          },
+          "description": {
+            "value": "building that is round",
+            "language": "en"
+          }
+        },
+        "label": "round building",
+        "description": "building that is round",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "えんけいけんちくぶつ"
+        },
+        "aliases": [
+          "えんけいけんちくぶつ"
+        ]
+      },
+      {
+        "id": "Q24910394",
+        "title": "Q24910394",
+        "pageid": 26870962,
+        "concepturi": "http://www.wikidata.org/entity/Q24910394",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q24910394",
+        "display": {
+          "label": {
+            "value": "Envision Energy",
+            "language": "en"
+          },
+          "description": {
+            "value": "Chinese wind turbine company",
+            "language": "en"
+          }
+        },
+        "label": "Envision Energy",
+        "description": "Chinese wind turbine company",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "えんけいのうげん"
+        },
+        "aliases": [
+          "えんけいのうげん"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

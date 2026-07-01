@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:11.014Z",
+  "value": {
+    "searchinfo": {
+      "search": "林芙美子記念館"
+    },
+    "search": [
+      {
+        "id": "Q11533289",
+        "title": "Q11533289",
+        "pageid": 12673197,
+        "concepturi": "http://www.wikidata.org/entity/Q11533289",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11533289",
+        "display": {
+          "label": {
+            "value": "Hayashi Fumiko Memorial Hall",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Shinjuku, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Hayashi Fumiko Memorial Hall",
+        "description": "museum in Shinjuku, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "林芙美子記念館"
+        },
+        "aliases": [
+          "林芙美子記念館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:29.747Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1530,
+          "ns": 0,
+          "title": "相撲",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すもう",
+            "page_image_free": "Kunisada_Sumo_Triptychon_c1860s.jpg",
+            "wikibase_item": "Q40561"
+          },
+          "terms": {
+            "description": [
+              "土俵の上で力士が組合って戦う形を取る日本古来の神事、祭り、武芸、武道"
+            ]
+          }
+        },
+        {
+          "pageid": 9416,
+          "ns": 0,
+          "title": "大相撲",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおすもう",
+            "page_image_free": "Kunisada_Sumo_Triptychon_c1860s.jpg",
+            "wikibase_item": "Q10937013"
+          },
+          "terms": {
+            "description": [
+              "日本の競技、一般的に国技と認識される"
+            ]
+          }
+        },
+        {
+          "pageid": 16962,
+          "ns": 0,
+          "title": "相撲用語一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "すもうようこいちらん",
+            "wikibase_item": "Q2631819"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 162167,
+          "ns": 0,
+          "title": "葛城市相撲館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かつらきしすもうかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Katsuragishi_sumokan.jpg",
+            "wikibase_item": "Q11620899"
+          },
+          "coordinates": [
+            {
+              "lat": 34.51555556,
+              "lon": 135.70333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "奈良県葛城市にある市立の博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 260841,
+          "ns": 0,
+          "title": "相撲博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すもうはくふつかん",
+            "page_image_free": "Japan_Tokyo_wards_location_map.svg",
+            "wikibase_item": "Q11582043"
+          },
+          "coordinates": [
+            {
+              "lat": 35.697139,
+              "lon": 139.793528,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区の両国国技館内にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

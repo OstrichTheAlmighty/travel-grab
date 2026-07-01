@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:37:53.252Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17313,
+          "ns": 0,
+          "title": "ボーイズラブ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ほおいすらふ",
+            "wikibase_item": "Q33111443"
+          },
+          "terms": {
+            "description": [
+              "日本における男性同士の同性愛を題材とした小説などのジャンル"
+            ]
+          }
+        },
+        {
+          "pageid": 304749,
+          "ns": 0,
+          "title": "東京都青少年の健全な育成に関する条例",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようとせいしようねんのけんせんないくせいにかんするしようれい",
+            "page_image_free": "Flag_of_Tokyo_Metropolis.svg",
+            "wikibase_item": "Q1083054"
+          }
+        },
+        {
+          "pageid": 460292,
+          "ns": 0,
+          "title": "愛・地球博記念公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あいちきゆうはくきねんこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "モリコロパーク1.JPG",
+            "wikibase_item": "Q11493428"
+          },
+          "coordinates": [
+            {
+              "lat": 35.17277778,
+              "lon": 137.08972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県長久手市にある都市公園"
+            ]
+          }
+        },
+        {
+          "pageid": 644881,
+          "ns": 0,
+          "title": "花咲ける青少年",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はなさけるせいしようねん",
+            "wikibase_item": "Q706655"
+          },
+          "terms": {
+            "description": [
+              "日本の少女漫画、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 650990,
+          "ns": 0,
+          "title": "少年愛",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しようねんあい",
+            "page_image_free": "Apotheosis_of_Polydeukion,_detail.jpg",
+            "wikibase_item": "Q211354"
+          }
+        }
+      ]
+    }
+  }
+}

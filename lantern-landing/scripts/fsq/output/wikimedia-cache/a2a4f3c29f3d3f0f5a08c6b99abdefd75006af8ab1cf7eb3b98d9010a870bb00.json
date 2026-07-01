@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:17:55.001Z",
+  "value": {
+    "searchinfo": {
+      "search": "吉原弁財天"
+    },
+    "search": [
+      {
+        "id": "Q109063741",
+        "title": "Q109063741",
+        "pageid": 104275064,
+        "concepturi": "http://www.wikidata.org/entity/Q109063741",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q109063741",
+        "display": {
+          "label": {
+            "value": "Yoshiwara Benzaiten",
+            "language": "en"
+          },
+          "description": {
+            "value": "Shinto shrine in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Yoshiwara Benzaiten",
+        "description": "Shinto shrine in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "吉原弁財天"
+        },
+        "aliases": [
+          "吉原弁財天"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

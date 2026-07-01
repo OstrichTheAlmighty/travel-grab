@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:10.939Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18986,
+          "ns": 0,
+          "title": "荒川区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あらかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "Entsuji_(Arakawa)_08.jpg",
+            "wikibase_item": "Q232624"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73611,
+              "lon": 139.78339,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 956214,
+          "ns": 0,
+          "title": "加賀 (足立区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かか",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q11399635"
+          },
+          "terms": {
+            "description": [
+              "東京都足立区の町"
+            ]
+          }
+        },
+        {
+          "pageid": 1043955,
+          "ns": 0,
+          "title": "西日暮里",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にしにつほり",
+            "kartographer_frames": "1",
+            "page_image_free": "開成中学校高等学校.JPG",
+            "wikibase_item": "Q3342140"
+          },
+          "terms": {
+            "description": [
+              "東京都荒川区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1052653,
+          "ns": 0,
+          "title": "舎人 (足立区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とねり",
+            "kartographer_frames": "1",
+            "page_image_free": "Minumadai_Shinsui_Park.jpg",
+            "wikibase_item": "Q11613508"
+          },
+          "terms": {
+            "description": [
+              "東京都足立区の町"
+            ]
+          }
+        },
+        {
+          "pageid": 1191876,
+          "ns": 0,
+          "title": "稲荷台",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いなりたい",
+            "kartographer_frames": "1",
+            "page_image_free": "Inaridaiarmytruck.jpg",
+            "wikibase_item": "Q11596848"
+          },
+          "terms": {
+            "description": [
+              "東京都板橋区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

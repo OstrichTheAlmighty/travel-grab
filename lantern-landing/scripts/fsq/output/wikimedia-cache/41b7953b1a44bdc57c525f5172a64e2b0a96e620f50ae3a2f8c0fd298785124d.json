@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:11.412Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 124296,
+          "ns": 0,
+          "title": "サッカー日本代表",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さつかにほんたいひよう",
+            "wikibase_item": "Q170566"
+          },
+          "terms": {
+            "description": [
+              "日本の男子サッカーナショナルチーム"
+            ]
+          }
+        },
+        {
+          "pageid": 130554,
+          "ns": 0,
+          "title": "小谷実可子",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こたに みかこ",
+            "page_image_free": "Talk_show_with_Mikako_Kotani_(cropped).jpg",
+            "wikibase_item": "Q3132564"
+          },
+          "terms": {
+            "description": [
+              "日本の女性アーティスティックスイミング選手、スポーツコメンテーター (1966-)"
+            ]
+          }
+        },
+        {
+          "pageid": 454757,
+          "ns": 0,
+          "title": "1940年札幌オリンピック",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さつほろおりんひつく1940",
+            "wikibase_item": "Q9607"
+          },
+          "terms": {
+            "description": [
+              "1940年に日本で行われる予定だった冬季オリンピック"
+            ]
+          }
+        },
+        {
+          "pageid": 1530388,
+          "ns": 0,
+          "title": "オリンピックのサッカー競技・日本代表選手",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おりんひつくのさつかあきようきにつほんたいひようせんしゆ",
+            "wikibase_item": "Q16140990"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3963930,
+          "ns": 0,
+          "title": "JAPAN SPORT OLYMPIC SQUARE",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しやはんすほおつおりんひつくすくえあ",
+            "kartographer_frames": "1",
+            "page_image_free": "Japan_Sport_Association-10a.jpg",
+            "wikibase_item": "Q81411309"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67513889,
+              "lon": 139.71516667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区にあるJSPO・JOCの本部ビル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

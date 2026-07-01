@@ -1,0 +1,62 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:41.448Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 6533,
+          "ns": 0,
+          "title": "名数一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "めいすういちらん",
+            "toc": "",
+            "wikibase_item": "Q11415455"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2415908,
+          "ns": 0,
+          "title": "真盛寺",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しんせいし",
+            "page_image_free": "Shinsei-ji_main_gate_2023-04-29.jpg",
+            "wikibase_item": "Q11583422"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69577778,
+              "lon": 139.65286111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都杉並区梅里一丁目にある寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 3987150,
+          "ns": 0,
+          "title": "本朝高僧伝",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ほんちようこうそうてん",
+            "page_image_free": "NAJDA-192-0478_本朝高僧伝1.pdf",
+            "wikibase_item": "Q86729664"
+          }
+        }
+      ]
+    }
+  }
+}

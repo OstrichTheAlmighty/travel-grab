@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:54.204Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 15945,
+          "ns": 0,
+          "title": "東京ドーム",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようとおむ",
+            "page_image_free": "Tokyo_Dome_2007-12.jpg",
+            "wikibase_item": "Q733748"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70583333,
+              "lon": 139.75194444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 41570,
+          "ns": 0,
+          "title": "ナゴヤドーム",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "なこやとおむ",
+            "page_image_free": "Nagoya_Dome_-_3.jpg",
+            "wikibase_item": "Q929524"
+          },
+          "coordinates": [
+            {
+              "lat": 35.18597778,
+              "lon": 136.94731389,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県名古屋市東区にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 69069,
+          "ns": 0,
+          "title": "サンテレビボックス席",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さんてれひほつくすせき",
+            "page_image_free": "熱血！タイガース党_(3664714372).jpg",
+            "wikibase_item": "Q11305714"
+          },
+          "terms": {
+            "description": [
+              "サンテレビのプロ野球中継番組"
+            ]
+          }
+        },
+        {
+          "pageid": 972359,
+          "ns": 0,
+          "title": "ビジター応援席",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひしたあおうえんせき",
+            "page_image_free": "Hanshin_Kosien_Stadium_outfield_seats_1.jpg",
+            "wikibase_item": "Q11330546"
+          },
+          "terms": {
+            "description": [
+              "対戦相手チームの応援席"
+            ]
+          }
+        },
+        {
+          "pageid": 4588589,
+          "ns": 0,
+          "title": "阪神タイガース",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はんしんたいかあす",
+            "page_image_free": "Hanshin_tigers_insignia.svg",
+            "wikibase_item": "Q127635"
+          },
+          "terms": {
+            "description": [
+              "日本のプロ野球チーム"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

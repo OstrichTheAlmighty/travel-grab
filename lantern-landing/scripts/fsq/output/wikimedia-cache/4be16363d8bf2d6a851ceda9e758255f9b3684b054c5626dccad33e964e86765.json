@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:31.894Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 20031,
+          "ns": 0,
+          "title": "東京国立博物館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようこくりつはくふつかん",
+            "page_image_free": "Tokyo_National_Museum,_Honkan_2010.jpg",
+            "wikibase_item": "Q653433"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71905556,
+              "lon": 139.77666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある国立博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 60877,
+          "ns": 0,
+          "title": "動態保存",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうたいほそん",
+            "page_image_free": "Amemiya_21gou_Steam_Locomotive_Hokkaido_Japan.jpg",
+            "wikibase_item": "Q11400023"
+          },
+          "terms": {
+            "description": [
+              "機械が運転・運用できる状態で保存されること"
+            ]
+          }
+        },
+        {
+          "pageid": 1074410,
+          "ns": 0,
+          "title": "ゼンリン",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せんりん",
+            "page_image_free": "Zenrin-honsha.jpg",
+            "wikibase_item": "Q6150832"
+          },
+          "terms": {
+            "description": [
+              "日本の地図情報会社"
+            ]
+          }
+        },
+        {
+          "pageid": 1158032,
+          "ns": 0,
+          "title": "紙わらべ資料館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かみわらへしりようかん",
+            "kartographer_frames": "2",
+            "page_image_free": "Kamiwarabe_museum01s3872.jpg",
+            "wikibase_item": "Q11605497"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65627778,
+              "lon": 136.06688889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福井県敦賀市にある、高木栄子の和紙人形を展示する美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 2412263,
+          "ns": 0,
+          "title": "日本大学文理学部・大学院文学研究科及び総合基礎科学研究科",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にほんたいかくふんりかくふ",
+            "page_image_free": "Nihon_univ_college_of_humanities_and_sciences_2009.JPG",
+            "wikibase_item": "Q125120920"
+          }
+        }
+      ]
+    }
+  }
+}

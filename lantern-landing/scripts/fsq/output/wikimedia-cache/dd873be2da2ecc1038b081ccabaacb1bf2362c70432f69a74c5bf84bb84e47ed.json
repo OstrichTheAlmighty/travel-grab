@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:32.687Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 356868,
+          "ns": 0,
+          "title": "ヨドバシカメラ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "よとはしかめら",
+            "page_image_free": "Yodobashi-office.jpg",
+            "wikibase_item": "Q168467"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69177778,
+              "lon": 139.71125,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の家電量販店"
+            ]
+          }
+        },
+        {
+          "pageid": 824546,
+          "ns": 0,
+          "title": "2007年のテレビ (日本)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "2007ねんのてれひ",
+            "wikibase_item": "Q4609759"
+          }
+        },
+        {
+          "pageid": 2233813,
+          "ns": 0,
+          "title": "ピカルの定理",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひかるのていり",
+            "wikibase_item": "Q10852155"
+          },
+          "terms": {
+            "description": [
+              "日本のフジテレビ系列のバラエティ番組 (2010-2013)"
+            ]
+          }
+        },
+        {
+          "pageid": 2438544,
+          "ns": 0,
+          "title": "ハウステンボス",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はうすてんほす",
+            "kartographer_frames": "2",
+            "page_image_free": "Huis_Ten_Bosch_-_01.jpg",
+            "wikibase_item": "Q1191845"
+          },
+          "coordinates": [
+            {
+              "lat": 33.08593611,
+              "lon": 129.78988333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長崎県佐世保市にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 3386408,
+          "ns": 0,
+          "title": "ゲームセンターCX",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "けえむせんたあしいえつくす",
+            "wikibase_item": "Q5519770"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビバラエティ番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

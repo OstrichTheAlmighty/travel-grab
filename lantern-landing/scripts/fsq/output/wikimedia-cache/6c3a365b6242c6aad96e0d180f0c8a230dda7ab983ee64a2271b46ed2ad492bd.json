@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:56.582Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17784,
+          "ns": 0,
+          "title": "東京理科大学",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようりか",
+            "page_image_free": "TokyoUniversityOfScience-Kagurazaka.jpg",
+            "wikibase_item": "Q1069994"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69938889,
+              "lon": 139.74138889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 703691,
+          "ns": 0,
+          "title": "学校法人東京理科大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようりか",
+            "wikibase_item": "Q11448565"
+          },
+          "terms": {
+            "description": [
+              "東京理科大学を設置する日本の学校法人"
+            ]
+          }
+        },
+        {
+          "pageid": 1426435,
+          "ns": 0,
+          "title": "東京物理学校",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようふつりかつこう",
+            "page_image_free": "Ridai_Museum_of_Modern_Science.JPG",
+            "wikibase_item": "Q11525016"
+          }
+        },
+        {
+          "pageid": 1554242,
+          "ns": 0,
+          "title": "東京大学",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Yasuda_Auditorium_-_Tokyo_University_3.jpg",
+            "wikibase_item": "Q7842"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71333333,
+              "lon": 139.76222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある国立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 1635101,
+          "ns": 0,
+          "title": "東京理科大学近代科学資料館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようりかたいかくきんたいかかくしりようかん",
+            "page_image_free": "Ridai_Museum_of_Modern_Science.JPG",
+            "wikibase_item": "Q11525035"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区にある大学施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

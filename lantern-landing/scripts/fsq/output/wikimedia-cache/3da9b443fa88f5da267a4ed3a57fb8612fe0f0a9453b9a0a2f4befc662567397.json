@@ -1,0 +1,179 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:45.136Z",
+  "value": {
+    "searchinfo": {
+      "search": "海味"
+    },
+    "search": [
+      {
+        "id": "Q2143404",
+        "title": "Q2143404",
+        "pageid": 2069223,
+        "concepturi": "http://www.wikidata.org/entity/Q2143404",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2143404",
+        "display": {
+          "label": {
+            "value": "Himono",
+            "language": "en"
+          },
+          "description": {
+            "value": "Japanese fish drying technique",
+            "language": "en"
+          }
+        },
+        "label": "Himono",
+        "description": "Japanese fish drying technique",
+        "match": {
+          "type": "label",
+          "language": "yue",
+          "text": "海味"
+        },
+        "aliases": [
+          "海味"
+        ]
+      },
+      {
+        "id": "Q14190006",
+        "title": "Q14190006",
+        "pageid": 15856816,
+        "concepturi": "http://www.wikidata.org/entity/Q14190006",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q14190006",
+        "display": {
+          "label": {
+            "value": "海味村",
+            "language": "gan"
+          },
+          "description": {
+            "value": "village in China",
+            "language": "en"
+          }
+        },
+        "label": "海味村",
+        "description": "village in China",
+        "match": {
+          "type": "label",
+          "language": "gan",
+          "text": "海味村"
+        }
+      },
+      {
+        "id": "Q137798821",
+        "title": "Q137798821",
+        "pageid": 131450323,
+        "concepturi": "http://www.wikidata.org/entity/Q137798821",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q137798821",
+        "display": {
+          "label": {
+            "value": "Chinese dried seafood",
+            "language": "en"
+          },
+          "description": {
+            "value": "dried seafood in Chinese cuisine",
+            "language": "en"
+          }
+        },
+        "label": "Chinese dried seafood",
+        "description": "dried seafood in Chinese cuisine",
+        "match": {
+          "type": "label",
+          "language": "yue",
+          "text": "海味"
+        },
+        "aliases": [
+          "海味"
+        ]
+      },
+      {
+        "id": "Q10386764",
+        "title": "Q10386764",
+        "pageid": 11691188,
+        "concepturi": "http://www.wikidata.org/entity/Q10386764",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q10386764",
+        "display": {
+          "label": {
+            "value": "海味街",
+            "language": "zh"
+          }
+        },
+        "label": "海味街",
+        "match": {
+          "type": "label",
+          "language": "zh",
+          "text": "海味街"
+        }
+      },
+      {
+        "id": "Q48927842",
+        "title": "Q48927842",
+        "pageid": 49943185,
+        "concepturi": "http://www.wikidata.org/entity/Q48927842",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q48927842",
+        "display": {
+          "label": {
+            "value": "海味街",
+            "language": "zh"
+          }
+        },
+        "label": "海味街",
+        "match": {
+          "type": "label",
+          "language": "zh",
+          "text": "海味街"
+        }
+      },
+      {
+        "id": "Q134734581",
+        "title": "Q134734581",
+        "pageid": 128562589,
+        "concepturi": "http://www.wikidata.org/entity/Q134734581",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q134734581",
+        "display": {
+          "label": {
+            "value": "海味61號",
+            "language": "zh-hant"
+          }
+        },
+        "label": "海味61號",
+        "match": {
+          "type": "label",
+          "language": "zh-hant",
+          "text": "海味61號"
+        }
+      },
+      {
+        "id": "Q121242370",
+        "title": "Q121242370",
+        "pageid": 115663378,
+        "concepturi": "http://www.wikidata.org/entity/Q121242370",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q121242370",
+        "display": {
+          "label": {
+            "value": "海味",
+            "language": "zh"
+          },
+          "description": {
+            "value": "scholarly article in Foreign Literature, no. 5, 1992",
+            "language": "en"
+          }
+        },
+        "label": "海味",
+        "description": "scholarly article in Foreign Literature, no. 5, 1992",
+        "match": {
+          "type": "label",
+          "language": "zh",
+          "text": "海味"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

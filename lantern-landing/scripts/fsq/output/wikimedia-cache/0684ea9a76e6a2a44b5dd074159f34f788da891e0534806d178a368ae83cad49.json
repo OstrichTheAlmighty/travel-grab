@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:51.933Z",
+  "value": {
+    "searchinfo": {
+      "search": "トゥモローランド・ホール"
+    },
+    "search": [
+      {
+        "id": "Q11321042",
+        "title": "Q11321042",
+        "pageid": 12459491,
+        "concepturi": "http://www.wikidata.org/entity/Q11321042",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11321042",
+        "display": {
+          "label": {
+            "value": "トゥモローランド・ホール",
+            "language": "ja"
+          }
+        },
+        "label": "トゥモローランド・ホール",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "トゥモローランド・ホール"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

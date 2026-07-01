@@ -1,0 +1,138 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:20.181Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2891,
+          "ns": 0,
+          "title": "ワールドトレードセンター (ニューヨーク)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "わあるととれえとせんたあにゆうよおく",
+            "page_image_free": "World_Trade_Center,_New_York_City_-_aerial_view_(March_2001).jpg",
+            "wikibase_item": "Q11235"
+          },
+          "coordinates": [
+            {
+              "lat": 40.71166667,
+              "lon": -74.01361111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "ニューヨーク州マンハッタンのかつての超高層ビル群"
+            ]
+          }
+        },
+        {
+          "pageid": 179940,
+          "ns": 0,
+          "title": "東京スカイツリー",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようすかいつりい",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Skytree_2014_Ⅲ.jpg",
+            "wikibase_item": "Q57965"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71013889,
+              "lon": 139.81083333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区の電波塔"
+            ]
+          }
+        },
+        {
+          "pageid": 385164,
+          "ns": 0,
+          "title": "上海ワールド・フィナンシャル・センター",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しやんはいかんきゆうきんゆうちゆうしん",
+            "kartographer_frames": "1",
+            "page_image_free": "上海国际金融中心.jpg",
+            "wikibase_item": "Q80852"
+          },
+          "coordinates": [
+            {
+              "lat": 31.23666667,
+              "lon": 121.50277778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "上海の超高層ビル"
+            ]
+          }
+        },
+        {
+          "pageid": 413956,
+          "ns": 0,
+          "title": "テレコムセンター",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "てれこむせんたあ",
+            "kartographer_frames": "1",
+            "page_image_free": "Telecom_Center_Building.jpg",
+            "wikibase_item": "Q11278723"
+          },
+          "coordinates": [
+            {
+              "lat": 35.61708333,
+              "lon": 139.77988889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "ビルディング"
+            ]
+          }
+        },
+        {
+          "pageid": 2096020,
+          "ns": 0,
+          "title": "FCGビル",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "えふしいしいひる",
+            "page_image_free": "2018_FCG_Headquarters_Building_2.jpg",
+            "wikibase_item": "Q10954019"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62694444,
+              "lon": 139.77444444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区のビル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

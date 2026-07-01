@@ -1,0 +1,118 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:00.952Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 7827,
+          "ns": 0,
+          "title": "品川区",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しなかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "Gate_City_Osaki.jpg",
+            "wikibase_item": "Q233495"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60917,
+              "lon": 139.73017,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の1つ"
+            ]
+          }
+        },
+        {
+          "pageid": 8587,
+          "ns": 0,
+          "title": "名古屋市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "なこやし",
+            "kartographer_frames": "1",
+            "page_image_free": "View_of_Westward_from_Sky_Deck_MIRAI360,_Nishiki_Naka_Ward_Nagoya_2022.jpg",
+            "wikibase_item": "Q11751"
+          },
+          "coordinates": [
+            {
+              "lat": 35.1814,
+              "lon": 136.9064,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 37137,
+          "ns": 0,
+          "title": "国道15号",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こくとう015",
+            "kartographer_frames": "1",
+            "page_image_free": "Japan_National_Route_15_Map.png",
+            "wikibase_item": "Q1045667"
+          },
+          "terms": {
+            "description": [
+              "東京から神奈川県横浜市に至る一般国道"
+            ]
+          }
+        },
+        {
+          "pageid": 850158,
+          "ns": 0,
+          "title": "東八ツ山公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひかしやつやまこうえん",
+            "page_image_free": "東八ツ山公園.jpg",
+            "wikibase_item": "Q11526050"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62469444,
+              "lon": 139.74358333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1154034,
+          "ns": 0,
+          "title": "北品川",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きたしなかわ",
+            "kartographer_frames": "1",
+            "page_image_free": "品川御殿山_Goten-yama,_Shinagawa_-_panoramio.jpg",
+            "wikibase_item": "Q11401302"
+          },
+          "terms": {
+            "description": [
+              "東京都品川区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

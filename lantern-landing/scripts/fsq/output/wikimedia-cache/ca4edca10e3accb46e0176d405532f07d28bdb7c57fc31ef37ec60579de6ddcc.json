@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:20.484Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 21688,
+          "ns": 0,
+          "title": "三鷹市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みたかし",
+            "page_image_free": "Mitaka_Inokashira_Park_In_Spring_1.JPG",
+            "wikibase_item": "Q242885"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68356,
+              "lon": 139.55953,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の市"
+            ]
+          }
+        },
+        {
+          "pageid": 113493,
+          "ns": 0,
+          "title": "文学館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふんかくかん",
+            "wikibase_item": "Q1865249"
+          },
+          "terms": {
+            "description": [
+              "作家や文学運動に関する品々を集めた博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 207653,
+          "ns": 0,
+          "title": "山本有三",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やまもと ゆうそう",
+            "page_image_free": "Yuzo_Yamamoto,_1954.jpg",
+            "wikibase_item": "Q986753"
+          },
+          "terms": {
+            "description": [
+              "作家 (1887-1974)"
+            ]
+          }
+        },
+        {
+          "pageid": 2234363,
+          "ns": 0,
+          "title": "万町 (栃木市)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "よろすちよう",
+            "page_image_free": "Tobu_Tochigi_cityhall_2.jpg",
+            "wikibase_item": "Q11353890"
+          },
+          "terms": {
+            "description": [
+              "日本の栃木県栃木市の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 3217886,
+          "ns": 0,
+          "title": "三鷹市山本有三記念館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みたかしやまもとゆうそうきねんかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Yuzo_Yamamoto2.JPG",
+            "wikibase_item": "Q21019634"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69957222,
+              "lon": 139.56766667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都三鷹市にある文学館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:07.403Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 98257,
+          "ns": 0,
+          "title": "サンフランシスコ・ジャイアンツ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さんふらんしすこしやいあんつ",
+            "page_image_free": "Usa_edcp_location_map.svg",
+            "wikibase_item": "Q308966"
+          },
+          "terms": {
+            "description": [
+              "アメリカのプロ野球チーム"
+            ]
+          }
+        },
+        {
+          "pageid": 180356,
+          "ns": 0,
+          "title": "MLBオールスターゲーム",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "MLBおおるすたあけえむ",
+            "wikibase_item": "Q1069698"
+          },
+          "terms": {
+            "description": [
+              "毎年7月にアメリカで行われる、MLBを構成する2リーグの選抜選手による対抗試合"
+            ]
+          }
+        },
+        {
+          "pageid": 1167582,
+          "ns": 0,
+          "title": "メルヘンメイズ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "めるへんめいす",
+            "wikibase_item": "Q6949985"
+          }
+        },
+        {
+          "pageid": 2828275,
+          "ns": 0,
+          "title": "カール・メイズ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "めいす かある",
+            "page_image_free": "Carl_Mays,_1915.jpg",
+            "wikibase_item": "Q5040536"
+          },
+          "terms": {
+            "description": [
+              "アメリカ合衆国の野球選手 (1891-1971)"
+            ]
+          }
+        },
+        {
+          "pageid": 3750895,
+          "ns": 0,
+          "title": "ハンドメイズ・テイル/侍女の物語",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はんとめいすている ししよのものかたり",
+            "page_image_free": "The_Handmaid's_Tale_intertitle.png",
+            "wikibase_item": "Q25207350"
+          }
+        }
+      ]
+    }
+  }
+}

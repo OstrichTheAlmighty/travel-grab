@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:49:04.234Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 52648,
+          "ns": 0,
+          "title": "Camera",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "LEI0440_Leica_IIIf_chrom_-_Sn._580566_1951-52-M39_Blitzsynchron_front_view-6531_hf-.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Optical device for recording images",
+            "wikibase_item": "Q15328"
+          },
+          "terms": {
+            "description": [
+              "optical device for recording or transmitting photographic images or videos"
+            ]
+          }
+        },
+        {
+          "pageid": 6101052,
+          "ns": 0,
+          "title": "Ritz Camera & Image",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Ritz Camera and Image",
+            "page_image_free": "RITZLOGO.jpg",
+            "wikibase-shortdesc": "American photographic retail and photofinishing specialty store",
+            "wikibase_item": "Q7336909"
+          },
+          "terms": {
+            "description": [
+              "American photographic retail and photofinishing specialty store"
+            ]
+          }
+        },
+        {
+          "pageid": 6319245,
+          "ns": 0,
+          "title": "Camera resectioning",
+          "index": 2,
+          "pageprops": {
+            "wikibase-shortdesc": "Process of estimating the parameters of a pinhole camera model",
+            "wikibase_item": "Q2933935"
+          },
+          "terms": {
+            "description": [
+              "determination of the geometric model parameters of a camera for technical and scientific applications"
+            ]
+          }
+        },
+        {
+          "pageid": 12365918,
+          "ns": 0,
+          "title": "Camera matrix",
+          "index": 3,
+          "pageprops": {
+            "wikibase-shortdesc": "Computer vision geometry concept",
+            "wikibase_item": "Q5026015"
+          },
+          "terms": {
+            "description": [
+              "computer vision geometry concept"
+            ]
+          }
+        },
+        {
+          "pageid": 12518245,
+          "ns": 0,
+          "title": "Pinhole camera model",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Pinhole-camera.svg",
+            "wikibase-shortdesc": "Model of 3D points projected onto planar image via a lens-less aperture",
+            "wikibase_item": "Q14369636"
+          },
+          "terms": {
+            "description": [
+              "mathematical model describing an ideal pinhole camera"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

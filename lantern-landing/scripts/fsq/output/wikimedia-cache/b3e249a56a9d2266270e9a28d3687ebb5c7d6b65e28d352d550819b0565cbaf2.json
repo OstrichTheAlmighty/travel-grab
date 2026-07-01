@@ -1,0 +1,27 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:07.415Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 3834074,
+          "ns": 0,
+          "title": "栗山久次郎",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "くりやま きゆうしろう",
+            "page_image_free": "「栗山久次郎翁」像.jpg",
+            "wikibase_item": "Q56350295"
+          },
+          "terms": {
+            "description": [
+              "日本の篤農家、政治家、地主(1853-1934)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

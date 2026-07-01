@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:56.413Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 500894,
+          "ns": 0,
+          "title": "ASIMO",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Asimo",
+            "page_image_free": "Honda_ASIMO_(ver._2011)_2011_Tokyo_Motor_Show.jpg",
+            "wikibase-shortdesc": "Humanoid robot created by Honda",
+            "wikibase_item": "Q297769"
+          },
+          "terms": {
+            "description": [
+              "humanoid robot created by Honda"
+            ]
+          }
+        },
+        {
+          "pageid": 9809750,
+          "ns": 0,
+          "title": "Robo One",
+          "index": 1,
+          "pageprops": {
+            "wikibase-shortdesc": "Robot competition category",
+            "wikibase_item": "Q7353261"
+          },
+          "terms": {
+            "description": [
+              "competition"
+            ]
+          }
+        },
+        {
+          "pageid": 18503930,
+          "ns": 0,
+          "title": "Tokyo Teleport Station",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Rinkai-line-R04-Tokyo-teleport-station-entrance-A-20220101-143853.jpg",
+            "wikibase-shortdesc": "Railway station in Tokyo, Japan",
+            "wikibase_item": "Q906738"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6275,
+              "lon": 139.7788,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "railway station in Koto, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 18933360,
+          "ns": 0,
+          "title": "Björk",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Bjork",
+            "page_image_free": "Bjork_Orkestral_Paris_(cropped).png",
+            "wikibase-shortdesc": "Icelandic singer (born 1965)",
+            "wikibase_item": "Q42455"
+          },
+          "terms": {
+            "description": [
+              "Icelandic singer (born 1965)"
+            ]
+          }
+        },
+        {
+          "pageid": 23154126,
+          "ns": 0,
+          "title": "Aomi",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Telecom_Center-5.jpg",
+            "wikibase-shortdesc": "Area in Kōtō, Tokyo, Japan",
+            "wikibase_item": "Q4778662"
+          },
+          "coordinates": [
+            {
+              "lat": 35.61666667,
+              "lon": 139.78361111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "town located in Koto-ku, Tokyo"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

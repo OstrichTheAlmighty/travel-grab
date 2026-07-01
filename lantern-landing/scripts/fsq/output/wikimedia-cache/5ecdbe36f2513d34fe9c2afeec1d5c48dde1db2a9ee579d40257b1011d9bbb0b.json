@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:49.772Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 100191,
+          "ns": 0,
+          "title": "Lakshmi",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Raja_Ravi_Varma,_Goddess_Lakshmi,_1896.jpg",
+            "wikibase-shortdesc": "Major Hindu goddess; goddess of wealth and beauty",
+            "wikibase_item": "Q131443"
+          },
+          "terms": {
+            "description": [
+              "Hindu goddess of wealth, love, prosperity"
+            ]
+          }
+        },
+        {
+          "pageid": 335939,
+          "ns": 0,
+          "title": "Shinagawa",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Meguro-gawa,_Ōsaki_01.jpg",
+            "wikibase-shortdesc": "Special ward in Tokyo, Japan",
+            "wikibase_item": "Q233495"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6,
+              "lon": 139.73333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "special ward in the Tokyo Metropolis in Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 892787,
+          "ns": 0,
+          "title": "MVRDV",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "MVRDV_WOZOCOs.JPG",
+            "wikibase-shortdesc": "Dutch architecture practice",
+            "wikibase_item": "Q932801"
+          },
+          "terms": {
+            "description": [
+              "Dutch architecture firm"
+            ]
+          }
+        },
+        {
+          "pageid": 1878698,
+          "ns": 0,
+          "title": "Steven Holl",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Holl, Steven",
+            "page_image_free": "Steven_Holl.jpg",
+            "wikibase-shortdesc": "American architect",
+            "wikibase_item": "Q451141"
+          },
+          "terms": {
+            "description": [
+              "American architect (born 1947)"
+            ]
+          }
+        },
+        {
+          "pageid": 49333116,
+          "ns": 0,
+          "title": "Ferrovia Adriatico Sangritana",
+          "index": 3,
+          "pageprops": {
+            "wikibase_item": "Q3743281"
+          }
+        }
+      ]
+    }
+  }
+}

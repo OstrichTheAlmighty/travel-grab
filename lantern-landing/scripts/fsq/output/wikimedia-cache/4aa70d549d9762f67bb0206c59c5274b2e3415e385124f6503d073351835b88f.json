@@ -1,0 +1,135 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:34.055Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1834902,
+          "ns": 0,
+          "title": "Estadio Azteca",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Vista_aérea_del_Estadio_Azteca_-_2026_-_02.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Stadium in Mexico City",
+            "wikibase_item": "Q320454"
+          },
+          "coordinates": [
+            {
+              "lat": 19.30305556,
+              "lon": -99.15055556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "football stadium in Mexico City, Mexico"
+            ]
+          }
+        },
+        {
+          "pageid": 4247629,
+          "ns": 0,
+          "title": "Football at the 1964 Summer Olympics",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Olympics",
+            "kartographer_frames": "1",
+            "kartographer_links": "1",
+            "page_image_free": "1964_Olympics_football_stamp_of_Japan.jpg",
+            "wikibase-shortdesc": "International football competition",
+            "wikibase_item": "Q202510"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6781,
+              "lon": 139.7147,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "association football played at the 1964 Summer Olympics"
+            ]
+          }
+        },
+        {
+          "pageid": 4464008,
+          "ns": 0,
+          "title": "Olympic Park Stadium (Melbourne)",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Mbnolypkst.jpg",
+            "wikibase-shortdesc": "Former sports stadium in Melbourne",
+            "wikibase_item": "Q1847793"
+          },
+          "coordinates": [
+            {
+              "lat": -37.82472222,
+              "lon": 144.98111111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "sports stadium in Melbourne (demolished in 2012)"
+            ]
+          }
+        },
+        {
+          "pageid": 5792275,
+          "ns": 0,
+          "title": "Komazawa Olympic Park Stadium",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Komazawa_olympic_park_2025_June_15_various_12.jpg",
+            "wikibase-shortdesc": "Sports venue in Tokyo, Japan",
+            "wikibase_item": "Q4229116"
+          },
+          "coordinates": [
+            {
+              "lat": 35.625611,
+              "lon": 139.663664,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "building in Setagaya-ku, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 24552272,
+          "ns": 0,
+          "title": "Komazawa Olympic Park",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Komazawa_Olympic_Park.jpg",
+            "wikibase-shortdesc": "Park in Tokyo",
+            "wikibase_item": "Q2021485"
+          },
+          "terms": {
+            "description": [
+              "park located in Setagaya-ku and Meguro-ku, Tokyo"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

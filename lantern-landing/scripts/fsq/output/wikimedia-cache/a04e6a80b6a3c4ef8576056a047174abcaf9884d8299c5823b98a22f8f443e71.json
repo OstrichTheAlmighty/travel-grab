@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:33.431Z",
+  "value": {
+    "searchinfo": {
+      "search": "Komazawa Olympic Park Stadium"
+    },
+    "search": [
+      {
+        "id": "Q4229116",
+        "title": "Q4229116",
+        "pageid": 4038550,
+        "concepturi": "http://www.wikidata.org/entity/Q4229116",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q4229116",
+        "display": {
+          "label": {
+            "value": "Komazawa Olympic Park Stadium",
+            "language": "en"
+          },
+          "description": {
+            "value": "building in Setagaya-ku, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Komazawa Olympic Park Stadium",
+        "description": "building in Setagaya-ku, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Komazawa Olympic Park Stadium"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

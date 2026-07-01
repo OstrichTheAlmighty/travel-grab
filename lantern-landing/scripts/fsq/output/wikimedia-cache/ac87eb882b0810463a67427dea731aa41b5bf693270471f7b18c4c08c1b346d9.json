@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:33.105Z",
+  "value": {
+    "searchinfo": {
+      "search": "印刷博物館"
+    },
+    "search": [
+      {
+        "id": "Q110534846",
+        "title": "Q110534846",
+        "pageid": 105578136,
+        "concepturi": "http://www.wikidata.org/entity/Q110534846",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q110534846",
+        "display": {
+          "label": {
+            "value": "printing museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum about printing or featuring historic printing presses",
+            "language": "en"
+          }
+        },
+        "label": "printing museum",
+        "description": "museum about printing or featuring historic printing presses",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "印刷博物館"
+        },
+        "aliases": [
+          "印刷博物館"
+        ]
+      },
+      {
+        "id": "Q8323",
+        "title": "Q8323",
+        "pageid": 9619,
+        "concepturi": "http://www.wikidata.org/entity/Q8323",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q8323",
+        "display": {
+          "label": {
+            "value": "Musée de l'Imprimerie et de la Communication Graphique",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Lyon, France",
+            "language": "en"
+          }
+        },
+        "label": "Musée de l'Imprimerie et de la Communication Graphique",
+        "description": "museum in Lyon, France",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "印刷博物館"
+        },
+        "aliases": [
+          "印刷博物館"
+        ]
+      },
+      {
+        "id": "Q994083",
+        "title": "Q994083",
+        "pageid": 943642,
+        "concepturi": "http://www.wikidata.org/entity/Q994083",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q994083",
+        "display": {
+          "label": {
+            "value": "Printing Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Printing Museum",
+        "description": "museum in Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "印刷博物館"
+        },
+        "aliases": [
+          "印刷博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

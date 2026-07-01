@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:07.475Z",
+  "value": {
+    "searchinfo": {
+      "search": "貨幣博物館"
+    },
+    "search": [
+      {
+        "id": "Q865607",
+        "title": "Q865607",
+        "pageid": 816983,
+        "concepturi": "http://www.wikidata.org/entity/Q865607",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q865607",
+        "display": {
+          "label": {
+            "value": "Currency Museum of the Bank of Japan",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum",
+            "language": "en"
+          }
+        },
+        "label": "Currency Museum of the Bank of Japan",
+        "description": "museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "貨幣博物館"
+        },
+        "aliases": [
+          "貨幣博物館"
+        ]
+      },
+      {
+        "id": "Q52987309",
+        "title": "Q52987309",
+        "pageid": 53752433,
+        "concepturi": "http://www.wikidata.org/entity/Q52987309",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q52987309",
+        "display": {
+          "label": {
+            "value": "numismatic museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "type of museum; institution that collects and exhibits coins",
+            "language": "en"
+          }
+        },
+        "label": "numismatic museum",
+        "description": "type of museum; institution that collects and exhibits coins",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "貨幣博物館"
+        },
+        "aliases": [
+          "貨幣博物館"
+        ]
+      },
+      {
+        "id": "Q6631526",
+        "title": "Q6631526",
+        "pageid": 6460355,
+        "concepturi": "http://www.wikidata.org/entity/Q6631526",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6631526",
+        "display": {
+          "label": {
+            "value": "list of numismatic museums",
+            "language": "en"
+          },
+          "description": {
+            "value": "Wikimedia list article",
+            "language": "en"
+          }
+        },
+        "label": "list of numismatic museums",
+        "description": "Wikimedia list article",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "貨幣博物館の一覧"
+        },
+        "aliases": [
+          "貨幣博物館の一覧"
+        ]
+      },
+      {
+        "id": "Q117436729",
+        "title": "Q117436729",
+        "pageid": 112198731,
+        "concepturi": "http://www.wikidata.org/entity/Q117436729",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q117436729",
+        "display": {
+          "label": {
+            "value": "貨幣博物館",
+            "language": "zh"
+          },
+          "description": {
+            "value": "Wikimedia disambiguation page",
+            "language": "en"
+          }
+        },
+        "label": "貨幣博物館",
+        "description": "Wikimedia disambiguation page",
+        "match": {
+          "type": "label",
+          "language": "zh",
+          "text": "貨幣博物館"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

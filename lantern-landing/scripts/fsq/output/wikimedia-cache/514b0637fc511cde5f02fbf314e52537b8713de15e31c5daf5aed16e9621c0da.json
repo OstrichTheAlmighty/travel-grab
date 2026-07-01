@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:21.465Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 140967,
+          "ns": 0,
+          "title": "ラクーア",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "らくうあ",
+            "kartographer_frames": "1",
+            "page_image_free": "LaQua(Tokyo_Dome_City_).jpg",
+            "wikibase_item": "Q5368622"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70711111,
+              "lon": 139.75280556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京ドームシティ内のスパを中心とした商業施設"
+            ]
+          }
+        },
+        {
+          "pageid": 860999,
+          "ns": 0,
+          "title": "関ジャニ∞青春ドラマシリーズ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かんしやにえいとせいしゆんとらましりいす",
+            "wikibase_item": "Q11655511"
+          },
+          "terms": {
+            "description": [
+              "2006年の日本のスペシャルドラマ"
+            ]
+          }
+        },
+        {
+          "pageid": 989244,
+          "ns": 0,
+          "title": "ザ・13ドアーズ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さ13とあす",
+            "wikibase_item": "Q11306459"
+          }
+        },
+        {
+          "pageid": 1027068,
+          "ns": 0,
+          "title": "ボディ・プレス",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ほていふれす",
+            "page_image_free": "Akebono_spalsh.jpg",
+            "wikibase_item": "Q11338679"
+          },
+          "terms": {
+            "description": [
+              "プロレス技の一種"
+            ]
+          }
+        },
+        {
+          "pageid": 1765929,
+          "ns": 0,
+          "title": "ダンス イン ザ ヴァンパイアバンド",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たんすいんさうあんはいあはんと",
+            "wikibase_item": "Q1159317"
+          },
+          "terms": {
+            "description": [
+              "環望による日本の漫画作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

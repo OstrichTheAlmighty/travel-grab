@@ -1,0 +1,126 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:30.950Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1951,
+          "ns": 0,
+          "title": "ソニー",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "そにい",
+            "page_image_free": "Sony_headquaters_1.jpg",
+            "wikibase_item": "Q6014034"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63119444,
+              "lon": 139.74375,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "ソニーグループ傘下の電機メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 69958,
+          "ns": 0,
+          "title": "ソニー・ミュージックエンタテインメント (日本)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "そにいみゆうしつくえんたていんめんと",
+            "page_image_free": "SME_Rokubancho_Building.jpg",
+            "wikibase_item": "Q732503"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68883611,
+              "lon": 139.73481667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の音楽会社"
+            ]
+          }
+        },
+        {
+          "pageid": 106749,
+          "ns": 0,
+          "title": "ソニーグループ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "そにいくるうふ",
+            "page_image_free": "Sony_headquaters_1.jpg",
+            "wikibase_item": "Q41187"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63119444,
+              "lon": 139.74375,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の多国籍コングロマリット"
+            ]
+          }
+        },
+        {
+          "pageid": 167977,
+          "ns": 0,
+          "title": "ソニー・ミュージックレコーズ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "そにいみゆうしつくれこおす",
+            "wikibase_item": "Q8193865"
+          },
+          "terms": {
+            "description": [
+              "ソニー・ミュージックレーベルズの社内レコードレーベル"
+            ]
+          }
+        },
+        {
+          "pageid": 2500948,
+          "ns": 0,
+          "title": "ソニー・インタラクティブエンタテインメント",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "そにいいんたらくていふえんたていんめんと",
+            "page_image_free": "Sony_headquaters_1.jpg",
+            "wikibase_item": "Q18594"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63119444,
+              "lon": 139.74375,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "多国籍ビデオゲーム・デジタルエンタテインメント企業"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

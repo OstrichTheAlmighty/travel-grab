@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:40.336Z",
+  "value": {
+    "searchinfo": {
+      "search": "浅草寺"
+    },
+    "search": [
+      {
+        "id": "Q615183",
+        "title": "Q615183",
+        "pageid": 579419,
+        "concepturi": "http://www.wikidata.org/entity/Q615183",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q615183",
+        "display": {
+          "label": {
+            "value": "Sensō-ji Temple",
+            "language": "en"
+          },
+          "description": {
+            "value": "Buddhist temple in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Sensō-ji Temple",
+        "description": "Buddhist temple in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "浅草寺"
+        },
+        "aliases": [
+          "浅草寺"
+        ]
+      },
+      {
+        "id": "Q107045289",
+        "title": "Q107045289",
+        "pageid": 102297362,
+        "concepturi": "http://www.wikidata.org/entity/Q107045289",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q107045289",
+        "display": {
+          "label": {
+            "value": "Sensō-ji Sutra",
+            "language": "en"
+          }
+        },
+        "label": "Sensō-ji Sutra",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "浅草寺経"
+        },
+        "aliases": [
+          "浅草寺経"
+        ]
+      },
+      {
+        "id": "Q109362059",
+        "title": "Q109362059",
+        "pageid": 104524821,
+        "concepturi": "http://www.wikidata.org/entity/Q109362059",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q109362059",
+        "display": {
+          "label": {
+            "value": "Sensōji Hospital",
+            "language": "en"
+          }
+        },
+        "label": "Sensōji Hospital",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "浅草寺病院"
+        },
+        "aliases": [
+          "浅草寺病院"
+        ]
+      },
+      {
+        "id": "Q45264844",
+        "title": "Q45264844",
+        "pageid": 46439912,
+        "concepturi": "http://www.wikidata.org/entity/Q45264844",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q45264844",
+        "display": {
+          "label": {
+            "value": "浅草寺",
+            "language": "ja"
+          },
+          "description": {
+            "value": "Wikimedia disambiguation page",
+            "language": "en"
+          }
+        },
+        "label": "浅草寺",
+        "description": "Wikimedia disambiguation page",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "浅草寺"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:22.040Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 41358,
+          "ns": 0,
+          "title": "貝塚",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かいつか",
+            "page_image_free": "Conchero_Arguin.jpg",
+            "wikibase_item": "Q1152199"
+          },
+          "terms": {
+            "description": [
+              "古代の人々が捨てた貝殻が積み重なったもの"
+            ]
+          }
+        },
+        {
+          "pageid": 97198,
+          "ns": 0,
+          "title": "大森貝塚",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおもりかいつか",
+            "page_image_free": "Omori_Shell_Mound,_sekihi-3.jpg",
+            "wikibase_item": "Q11436418"
+          },
+          "coordinates": [
+            {
+              "lat": 35.59077778,
+              "lon": 139.72916667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区・大田区にある貝塚"
+            ]
+          }
+        },
+        {
+          "pageid": 157190,
+          "ns": 0,
+          "title": "エドワード・S・モース",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "もす えとわと",
+            "page_image_free": "Edward_Sylvester_Morse_-_Frank_Benson_(PEM_M4311).jpg",
+            "wikibase_item": "Q2519303"
+          },
+          "terms": {
+            "description": [
+              "アメリカの動物学者 (1838-1925)"
+            ]
+          }
+        },
+        {
+          "pageid": 1426446,
+          "ns": 0,
+          "title": "山王 (大田区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さんのう",
+            "kartographer_frames": "1",
+            "page_image_free": "Sannō_Benten_Pond_-_panoramio.jpg",
+            "wikibase_item": "Q11470028"
+          },
+          "terms": {
+            "description": [
+              "東京都大田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1778099,
+          "ns": 0,
+          "title": "大田区",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-International-Airport_Satellite.jpg",
+            "wikibase_item": "Q217234"
+          },
+          "coordinates": [
+            {
+              "lat": 35.56128,
+              "lon": 139.71603,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:10.550Z",
+  "value": {
+    "searchinfo": {
+      "search": "ローズガーデン"
+    },
+    "search": [
+      {
+        "id": "Q48765193",
+        "title": "Q48765193",
+        "pageid": 49786536,
+        "concepturi": "http://www.wikidata.org/entity/Q48765193",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q48765193",
+        "display": {
+          "label": {
+            "value": "ローズガーデン",
+            "language": "ja"
+          },
+          "description": {
+            "value": "2000 novel by Natsuo Kirino",
+            "language": "en"
+          }
+        },
+        "label": "ローズガーデン",
+        "description": "2000 novel by Natsuo Kirino",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ローズガーデン"
+        }
+      },
+      {
+        "id": "Q133273885",
+        "title": "Q133273885",
+        "pageid": 127127511,
+        "concepturi": "http://www.wikidata.org/entity/Q133273885",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q133273885",
+        "display": {
+          "label": {
+            "value": "ローズガーデン",
+            "language": "mul"
+          },
+          "description": {
+            "value": "hardcover edition (ja)",
+            "language": "en"
+          }
+        },
+        "label": "ローズガーデン",
+        "description": "hardcover edition (ja)",
+        "match": {
+          "type": "label",
+          "language": "mul",
+          "text": "ローズガーデン"
+        }
+      },
+      {
+        "id": "Q7231049",
+        "title": "Q7231049",
+        "pageid": 7133621,
+        "concepturi": "http://www.wikidata.org/entity/Q7231049",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q7231049",
+        "display": {
+          "label": {
+            "value": "Port and Airport Development Strategy",
+            "language": "en"
+          }
+        },
+        "label": "Port and Airport Development Strategy",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ローズガーデン・プロジェクト"
+        },
+        "aliases": [
+          "ローズガーデン・プロジェクト"
+        ]
+      },
+      {
+        "id": "Q11350926",
+        "title": "Q11350926",
+        "pageid": 12488794,
+        "concepturi": "http://www.wikidata.org/entity/Q11350926",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11350926",
+        "display": {
+          "label": {
+            "value": "ローズガーデンちっぷべつ",
+            "language": "ja"
+          }
+        },
+        "label": "ローズガーデンちっぷべつ",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ローズガーデンちっぷべつ"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

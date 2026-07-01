@@ -1,0 +1,191 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:48.134Z",
+  "value": {
+    "searchinfo": {
+      "search": "Tokyo Tower"
+    },
+    "search": [
+      {
+        "id": "Q183536",
+        "title": "Q183536",
+        "pageid": 182570,
+        "concepturi": "http://www.wikidata.org/entity/Q183536",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q183536",
+        "display": {
+          "label": {
+            "value": "Tokyo Tower",
+            "language": "en"
+          },
+          "description": {
+            "value": "tower in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Tower",
+        "description": "tower in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Tower"
+        }
+      },
+      {
+        "id": "Q431725",
+        "title": "Q431725",
+        "pageid": 407259,
+        "concepturi": "http://www.wikidata.org/entity/Q431725",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q431725",
+        "display": {
+          "label": {
+            "value": "Tokyo Tower",
+            "language": "en"
+          },
+          "description": {
+            "value": "2005 film by Takashi Minamoto",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Tower",
+        "description": "2005 film by Takashi Minamoto",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Tower"
+        }
+      },
+      {
+        "id": "Q46984328",
+        "title": "Q46984328",
+        "pageid": 48094243,
+        "concepturi": "http://www.wikidata.org/entity/Q46984328",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q46984328",
+        "display": {
+          "label": {
+            "value": "Tokyo Tower",
+            "language": "en"
+          },
+          "description": {
+            "value": "painting by Ming Murray",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Tower",
+        "description": "painting by Ming Murray",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Tower"
+        }
+      },
+      {
+        "id": "Q87581499",
+        "title": "Q87581499",
+        "pageid": 86823406,
+        "concepturi": "http://www.wikidata.org/entity/Q87581499",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q87581499",
+        "display": {
+          "label": {
+            "value": "🗼",
+            "language": "en"
+          },
+          "description": {
+            "value": "Unicode character (U+1F5FC)",
+            "language": "en"
+          }
+        },
+        "label": "🗼",
+        "description": "Unicode character (U+1F5FC)",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "TOKYO TOWER"
+        },
+        "aliases": [
+          "TOKYO TOWER"
+        ]
+      },
+      {
+        "id": "Q11249732",
+        "title": "Q11249732",
+        "pageid": 12396322,
+        "concepturi": "http://www.wikidata.org/entity/Q11249732",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11249732",
+        "display": {
+          "label": {
+            "value": "Tokyo Tower",
+            "language": "en"
+          },
+          "description": {
+            "value": "Toshiki Kadomatsu song",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Tower",
+        "description": "Toshiki Kadomatsu song",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Tower"
+        }
+      },
+      {
+        "id": "Q105766816",
+        "title": "Q105766816",
+        "pageid": 101127051,
+        "concepturi": "http://www.wikidata.org/entity/Q105766816",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q105766816",
+        "display": {
+          "label": {
+            "value": "Tokyo Tower",
+            "language": "en"
+          },
+          "description": {
+            "value": "ship built in 2007",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Tower",
+        "description": "ship built in 2007",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Tower"
+        }
+      },
+      {
+        "id": "Q5358546",
+        "title": "Q5358546",
+        "pageid": 5125172,
+        "concepturi": "http://www.wikidata.org/entity/Q5358546",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5358546",
+        "display": {
+          "label": {
+            "value": "Tokyo Tower: Mom and Me, and Sometimes Dad",
+            "language": "en"
+          },
+          "description": {
+            "value": "2007 film by Joji Matsuoka",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Tower: Mom and Me, and Sometimes Dad",
+        "description": "2007 film by Joji Matsuoka",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Tower: Mom and Me, and Sometimes Dad"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

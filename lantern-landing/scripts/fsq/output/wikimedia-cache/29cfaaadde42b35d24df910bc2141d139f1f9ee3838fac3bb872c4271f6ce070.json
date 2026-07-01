@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:37:51.547Z",
+  "value": {
+    "searchinfo": {
+      "search": "嘉納治五郎先生像"
+    },
+    "search": [
+      {
+        "id": "Q85847335",
+        "title": "Q85847335",
+        "pageid": 85119657,
+        "concepturi": "http://www.wikidata.org/entity/Q85847335",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q85847335",
+        "display": {
+          "label": {
+            "value": "Statue of Kanō Jigorō, Bunkyō",
+            "language": "en"
+          },
+          "description": {
+            "value": "sculpture in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Statue of Kanō Jigorō, Bunkyō",
+        "description": "sculpture in Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "嘉納治五郎先生像"
+        },
+        "aliases": [
+          "嘉納治五郎先生像"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

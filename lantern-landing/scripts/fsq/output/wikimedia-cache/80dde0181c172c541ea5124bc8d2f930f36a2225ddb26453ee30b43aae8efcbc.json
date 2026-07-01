@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:51.566Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 9489,
+          "ns": 0,
+          "title": "卓球",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たつきゆう",
+            "page_image_free": "Ishikawa_and_Fukuhara_at_Table_Tennis_Pro_Tour_Grand_Finals_2011_(2).jpg",
+            "wikibase_item": "Q3930"
+          },
+          "terms": {
+            "description": [
+              "球技のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 15740,
+          "ns": 0,
+          "title": "西武ドーム",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せいふとおむ",
+            "page_image_free": "Seibu_Dome_feb_23_2021_various_16_59_23_418000.jpeg",
+            "wikibase_item": "Q1194822"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7685,
+              "lon": 139.4205,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県所沢市にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 122509,
+          "ns": 0,
+          "title": "ソーシャル・ネットワーキング・サービス",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "そおしやるねつとわあきんくさあひす",
+            "wikibase_item": "Q3220391"
+          },
+          "terms": {
+            "description": [
+              "インターネット上でユーザー同士がコミュニケーションをすることを可能にするサービス"
+            ]
+          }
+        },
+        {
+          "pageid": 519512,
+          "ns": 0,
+          "title": "ネットチェンジ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ねつとちえんし",
+            "wikibase_item": "Q11325439"
+          },
+          "terms": {
+            "description": [
+              "放送局が所属系列を変更すること"
+            ]
+          }
+        },
+        {
+          "pageid": 629344,
+          "ns": 0,
+          "title": "バックスクリーン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はつくすくりいん",
+            "page_image_free": "Detroit_3_Automakers_Homerun_Fountain_at_Comerica_Park_2009.JPG",
+            "wikibase_item": "Q4869718"
+          }
+        }
+      ]
+    }
+  }
+}

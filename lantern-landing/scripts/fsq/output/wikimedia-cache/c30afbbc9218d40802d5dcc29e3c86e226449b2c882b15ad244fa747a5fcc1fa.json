@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:37.526Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 27416,
+          "ns": 0,
+          "title": "甲州街道",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こうしゆうかいとう",
+            "kartographer_frames": "1",
+            "page_image_free": "100_views_edo_086.jpg",
+            "wikibase_item": "Q1156682"
+          },
+          "terms": {
+            "description": [
+              "江戸時代の五街道の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 60406,
+          "ns": 0,
+          "title": "玉川上水",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たまかわしようすい",
+            "page_image_free": "TamagawaJosui_fromMikageBridge.JPG",
+            "wikibase_item": "Q1014298"
+          },
+          "terms": {
+            "description": [
+              "江戸市中への飲料水が流れていた上水道"
+            ]
+          }
+        },
+        {
+          "pageid": 69460,
+          "ns": 0,
+          "title": "四谷",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "よつや",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q3108361"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 684440,
+          "ns": 0,
+          "title": "四谷大木戸",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "よつやおおきと",
+            "wikibase_item": "Q11420135"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6875,
+              "lon": 139.71583333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "江戸の四谷に設けられていた甲州街道の関所"
+            ]
+          }
+        },
+        {
+          "pageid": 829774,
+          "ns": 0,
+          "title": "内藤町",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ないとうまち",
+            "kartographer_frames": "1",
+            "page_image_free": "Shinjuku_Gyoen_National_Garden_-_sakura_3.JPG",
+            "wikibase_item": "Q11394538"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

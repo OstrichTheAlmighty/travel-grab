@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:42.032Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8731,
+          "ns": 0,
+          "title": "江戸",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "えと",
+            "wikibase_item": "Q215646"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸幕府の拠点都市"
+            ]
+          }
+        },
+        {
+          "pageid": 46751,
+          "ns": 0,
+          "title": "草加市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "そうかし",
+            "kartographer_frames": "1",
+            "page_image_free": "草加松原(黒松の並木).jpg",
+            "wikibase_item": "Q734442"
+          },
+          "coordinates": [
+            {
+              "lat": 35.82539,
+              "lon": 139.80533,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 61470,
+          "ns": 0,
+          "title": "水戸街道",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みとかいとう",
+            "kartographer_frames": "2",
+            "page_image_free": "水戸街道.png",
+            "wikibase_item": "Q3070330"
+          },
+          "terms": {
+            "description": [
+              "江戸と水戸をつなぐ江戸時代の街道"
+            ]
+          }
+        },
+        {
+          "pageid": 156993,
+          "ns": 0,
+          "title": "板橋宿",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いたはししゆく",
+            "page_image_free": "Kisokaido01_Itabashi.jpg",
+            "wikibase_item": "Q3155832"
+          },
+          "coordinates": [
+            {
+              "lat": 35.755074,
+              "lon": 139.709176,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "中山道六十九次のうち江戸・日本橋から数えて1番目の宿場"
+            ]
+          }
+        },
+        {
+          "pageid": 210415,
+          "ns": 0,
+          "title": "千住宿",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せんしゆしゆく",
+            "page_image_free": "Senju_in_the_Musachi_provimce.jpg",
+            "wikibase_item": "Q11405343"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75069,
+              "lon": 139.802313,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日光街道・奥州街道の宿場"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

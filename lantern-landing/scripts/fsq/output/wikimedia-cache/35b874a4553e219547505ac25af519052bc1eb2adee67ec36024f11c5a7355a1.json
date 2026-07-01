@@ -1,0 +1,83 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:02.517Z",
+  "value": {
+    "searchinfo": {
+      "search": "増上寺"
+    },
+    "search": [
+      {
+        "id": "Q249139",
+        "title": "Q249139",
+        "pageid": 241888,
+        "concepturi": "http://www.wikidata.org/entity/Q249139",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q249139",
+        "display": {
+          "label": {
+            "value": "Zōjō-ji Temple",
+            "language": "en"
+          },
+          "description": {
+            "value": "Buddhist temple in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Zōjō-ji Temple",
+        "description": "Buddhist temple in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "増上寺"
+        },
+        "aliases": [
+          "増上寺"
+        ]
+      },
+      {
+        "id": "Q11429124",
+        "title": "Q11429124",
+        "pageid": 12567898,
+        "concepturi": "http://www.wikidata.org/entity/Q11429124",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11429124",
+        "display": {
+          "label": {
+            "value": "Five-storied Pagoda, Zōjō-ji",
+            "language": "en"
+          }
+        },
+        "label": "Five-storied Pagoda, Zōjō-ji",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "増上寺五重塔"
+        },
+        "aliases": [
+          "増上寺五重塔"
+        ]
+      },
+      {
+        "id": "Q11429123",
+        "title": "Q11429123",
+        "pageid": 12567897,
+        "concepturi": "http://www.wikidata.org/entity/Q11429123",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11429123",
+        "display": {
+          "label": {
+            "value": "増上寺徳川将軍墓とその遺品・遺体",
+            "language": "ja"
+          }
+        },
+        "label": "増上寺徳川将軍墓とその遺品・遺体",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "増上寺徳川将軍墓とその遺品・遺体"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

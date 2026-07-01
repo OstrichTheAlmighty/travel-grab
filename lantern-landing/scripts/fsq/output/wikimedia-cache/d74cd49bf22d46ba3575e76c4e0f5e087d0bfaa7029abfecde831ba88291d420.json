@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:02.111Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 29311,
+          "ns": 0,
+          "title": "Subaru Forester",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Subaru_Forester_(SL)_e-BOXER_DSC_8811.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Compact crossover SUV",
+            "wikibase_item": "Q1324599"
+          },
+          "terms": {
+            "description": [
+              "car model"
+            ]
+          }
+        },
+        {
+          "pageid": 30873831,
+          "ns": 0,
+          "title": "Subaru Tribeca",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "2006-2007_Subaru_Tribeca_(B9_MY07)_R_Premium_Pack_wagon_(2011-11-17).jpg",
+            "wikibase-shortdesc": "Motor vehicle",
+            "wikibase_item": "Q1421437"
+          },
+          "terms": {
+            "description": [
+              "car model"
+            ]
+          }
+        },
+        {
+          "pageid": 55873904,
+          "ns": 0,
+          "title": "Subaru Ascent",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Subaru_Ascent_IMG_3632.jpg",
+            "wikibase-shortdesc": "Mid-size crossover SUV",
+            "wikibase_item": "Q48799438"
+          },
+          "terms": {
+            "description": [
+              "Midsize Subaru SUV"
+            ]
+          }
+        },
+        {
+          "pageid": 62007219,
+          "ns": 0,
+          "title": "Subaru Crosstrek",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Subaru_Crosstrek_2.0ie_Active_(III)_–_f_31052025.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Compact crossover SUV",
+            "wikibase_item": "Q2119417"
+          },
+          "terms": {
+            "description": [
+              "subcompact crossover SUV"
+            ]
+          }
+        },
+        {
+          "pageid": 67383198,
+          "ns": 0,
+          "title": "Toyota bZ4X",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Toyota_bZ4X_Automesse_Ludwigsburg_2022_1X7A5895.jpg",
+            "wikibase-shortdesc": "Battery electric crossover SUVs produced by Subaru and Toyota",
+            "wikibase_item": "Q106481505"
+          },
+          "terms": {
+            "description": [
+              "battery electric SUV model from Toyota"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

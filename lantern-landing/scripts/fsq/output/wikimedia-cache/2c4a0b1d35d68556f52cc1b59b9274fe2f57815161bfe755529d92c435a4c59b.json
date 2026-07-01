@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:24.789Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 357169,
+          "ns": 0,
+          "title": "名主",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みようしゆ",
+            "page_image_free": "Ichinoe_house_of_the_village_headman_edogawa_tokyo_2015.jpg",
+            "wikibase_item": "Q110095935"
+          },
+          "terms": {
+            "description": [
+              "日本の古代末期から中世にかけて、公領・荘園領主から名田の経営を請け負った階層"
+            ]
+          }
+        },
+        {
+          "pageid": 501104,
+          "ns": 0,
+          "title": "江戸川区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "えとかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "江戸川区花火大会・市川市民納涼花火大会2019.jpg",
+            "wikibase_item": "Q214056"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70664,
+              "lon": 139.86828,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 1116112,
+          "ns": 0,
+          "title": "春江町 (江戸川区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はるえちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Ichinoe_Nanushi_Yashiki_01.JPG",
+            "wikibase_item": "Q11513761"
+          },
+          "terms": {
+            "description": [
+              "東京都江戸川区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1447928,
+          "ns": 0,
+          "title": "南椿橋",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みなみつはきはし",
+            "page_image_free": "Minami-Tsubaki_bridge_as_seen_from_3chome_Haruecho_Edogawa_city_Tokyo_Japan_20220516_133213.jpg",
+            "wikibase_item": "Q11408002"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69727778,
+              "lon": 139.88558333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の橋"
+            ]
+          }
+        },
+        {
+          "pageid": 3212486,
+          "ns": 0,
+          "title": "一之江名主屋敷",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いちのえなぬしやしき",
+            "page_image_free": "Ichinoe_Nanushi_Yashiki_01.JPG",
+            "wikibase_item": "Q20043132"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69816667,
+              "lon": 139.88947222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "江戸川区にある史跡"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:19.169Z",
+  "value": {
+    "searchinfo": {
+      "search": "杉並アニメーションミュージアム"
+    },
+    "search": [
+      {
+        "id": "Q11095134",
+        "title": "Q11095134",
+        "pageid": 12303489,
+        "concepturi": "http://www.wikidata.org/entity/Q11095134",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11095134",
+        "display": {
+          "label": {
+            "value": "Suginami Animation Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum in Tokyo, JP",
+            "language": "en"
+          }
+        },
+        "label": "Suginami Animation Museum",
+        "description": "art museum in Tokyo, JP",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "杉並アニメーションミュージアム"
+        },
+        "aliases": [
+          "杉並アニメーションミュージアム"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

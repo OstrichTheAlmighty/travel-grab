@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:45:49.619Z",
+  "value": {
+    "searchinfo": {
+      "search": "teamLab Planets"
+    },
+    "search": [
+      {
+        "id": "Q97613610",
+        "title": "Q97613610",
+        "pageid": 95999013,
+        "concepturi": "http://www.wikidata.org/entity/Q97613610",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q97613610",
+        "display": {
+          "label": {
+            "value": "teamLab Planets TOKYO DMM.com",
+            "language": "en"
+          },
+          "description": {
+            "value": "art facility in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "teamLab Planets TOKYO DMM.com",
+        "description": "art facility in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "teamLab Planets TOKYO DMM.com"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

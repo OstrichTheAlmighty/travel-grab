@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:50.416Z",
+  "value": {
+    "searchinfo": {
+      "search": "展望デッキ"
+    },
+    "search": [
+      {
+        "id": "Q131597161",
+        "title": "Q131597161",
+        "pageid": 125507217,
+        "concepturi": "http://www.wikidata.org/entity/Q131597161",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q131597161",
+        "display": {
+          "label": {
+            "value": "Observation deck (Hotoginosato Ryokuchi)",
+            "language": "en"
+          }
+        },
+        "label": "Observation deck (Hotoginosato Ryokuchi)",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "展望デッキ"
+        },
+        "aliases": [
+          "展望デッキ"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

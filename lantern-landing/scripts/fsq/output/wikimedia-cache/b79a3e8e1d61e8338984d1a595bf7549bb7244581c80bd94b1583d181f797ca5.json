@@ -1,0 +1,86 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:27.807Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 214452,
+          "ns": 0,
+          "title": "日本大学の人物一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にほんたいかくのしんぶついちらん",
+            "wikibase_item": "Q11507832"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 332438,
+          "ns": 0,
+          "title": "立教大学の人物一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "りつきようたいかくのしんふついちらん",
+            "wikibase_item": "Q11597983"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 334640,
+          "ns": 0,
+          "title": "明治大学の人物一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "めいし",
+            "wikibase_item": "Q11512314"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 472739,
+          "ns": 0,
+          "title": "名古屋大学の人物一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "なこや",
+            "wikibase_item": "Q11414905"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3273734,
+          "ns": 0,
+          "title": "2017年のテレビ (日本)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "2017ねんのてれひ にほん",
+            "toc": "",
+            "wikibase_item": "Q22123387"
+          }
+        }
+      ]
+    }
+  }
+}

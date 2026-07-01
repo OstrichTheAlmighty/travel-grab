@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:00.720Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 16417,
+          "ns": 0,
+          "title": "千曲市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちくまし",
+            "kartographer_frames": "1",
+            "page_image_free": "Togura-Kamiyamada_Onsen_survey.jpg",
+            "wikibase_item": "Q179757"
+          },
+          "coordinates": [
+            {
+              "lat": 36.5306944,
+              "lon": 138.1149167,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長野県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 46852,
+          "ns": 0,
+          "title": "キッコーマン",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きつこおまん",
+            "page_image_free": "Kikkoman_headoffice_ac.jpg",
+            "wikibase_item": "Q1321815"
+          },
+          "terms": {
+            "description": [
+              "日本の千葉県野田市にある持株会社"
+            ]
+          }
+        },
+        {
+          "pageid": 407690,
+          "ns": 0,
+          "title": "デリシア (スーパーマーケット)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "てりしあ",
+            "page_image_free": "Delicia_Head_Office_and_Logistics_center_from_Matsumoto_Airport_2018.jpg",
+            "wikibase_item": "Q11283878"
+          },
+          "terms": {
+            "description": [
+              "長野県松本市にあるスーパーマーケットチェーン"
+            ]
+          }
+        },
+        {
+          "pageid": 658473,
+          "ns": 0,
+          "title": "松本市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "まつもとし",
+            "kartographer_frames": "1",
+            "page_image_free": "Matsumoto_Montage.jpg",
+            "wikibase_item": "Q213324"
+          },
+          "coordinates": [
+            {
+              "lat": 36.238,
+              "lon": 137.97197,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長野県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 3056173,
+          "ns": 0,
+          "title": "日本遺産",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんいさん",
+            "page_image_free": "260516_Kadocho_Yuasa_Wakayama_pref_Japan05s3.jpg",
+            "wikibase_item": "Q18382798"
+          },
+          "terms": {
+            "description": [
+              "文化庁の文化財保護制度。各地方の複数の文化財で構成される歴史・文化的ストーリーを文化庁が「日本遺産」として認定する。"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

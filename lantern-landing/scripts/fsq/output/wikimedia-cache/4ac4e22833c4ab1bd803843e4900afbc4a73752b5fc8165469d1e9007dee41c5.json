@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:11.770Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 21688,
+          "ns": 0,
+          "title": "三鷹市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みたかし",
+            "page_image_free": "Mitaka_Inokashira_Park_In_Spring_1.JPG",
+            "wikibase_item": "Q242885"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68356,
+              "lon": 139.55953,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の市"
+            ]
+          }
+        },
+        {
+          "pageid": 103083,
+          "ns": 0,
+          "title": "井の頭恩賜公園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いのかしらおんしこうえん",
+            "page_image_free": "Mitaka_Inokashira_Park_In_Spring_1.JPG",
+            "wikibase_item": "Q1200884"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70083333,
+              "lon": 139.57416667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 254451,
+          "ns": 0,
+          "title": "弁才天",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "へんさいてん",
+            "page_image_free": "Goddess_Saravati_(Japan).jpg",
+            "wikibase_item": "Q818468"
+          },
+          "terms": {
+            "description": [
+              "仏教の守護神である天部の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 1695786,
+          "ns": 0,
+          "title": "銭洗弁天",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せにあらいへんてん",
+            "wikibase_item": "Q11650281"
+          }
+        },
+        {
+          "pageid": 1838770,
+          "ns": 0,
+          "title": "大盛寺",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たいせいし",
+            "page_image_free": "Daisei-ji,_Mitaka.jpg",
+            "wikibase_item": "Q11438058"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69888889,
+              "lon": 139.57444444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都三鷹市井の頭にある天台宗の寺院"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:45.674Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 15350,
+          "ns": 0,
+          "title": "府中市 (東京都)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふちゆうし",
+            "kartographer_frames": "1",
+            "page_image_free": "東京競馬場_-_panoramio_(4).jpg",
+            "wikibase_item": "Q208818"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6694,
+              "lon": 139.4775,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の市"
+            ]
+          }
+        },
+        {
+          "pageid": 394183,
+          "ns": 0,
+          "title": "東京都水道局",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようとすいとうきよく",
+            "page_image_free": "Tokyo_Metropolitan_Government_Building_No.2_2009.jpg",
+            "wikibase_item": "Q7813954"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68919444,
+              "lon": 139.69163889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "水道事業を行う東京都の地方公営企業"
+            ]
+          }
+        },
+        {
+          "pageid": 500893,
+          "ns": 0,
+          "title": "東京都水の科学館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようとみすのかかくかん",
+            "page_image_free": "Tokyo_Science_Pavilion.jpg",
+            "wikibase_item": "Q11525336"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63080556,
+              "lon": 139.7855,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区有明にある東京都水道局が運営する水に関する科学館"
+            ]
+          }
+        },
+        {
+          "pageid": 1287762,
+          "ns": 0,
+          "title": "東京",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきよう",
+            "page_image_free": "Minato_City,_Tokyo,_Japan.jpg",
+            "wikibase_item": "Q7473516"
+          },
+          "terms": {
+            "description": [
+              "関東地方の南西部にある、日本の首都"
+            ]
+          }
+        },
+        {
+          "pageid": 1671724,
+          "ns": 0,
+          "title": "東京都水道歴史館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようとすいとうれきしかん",
+            "page_image_free": "Tokyo_Suidou_Rekisikann.jpg",
+            "wikibase_item": "Q11525339"
+          },
+          "coordinates": [
+            {
+              "lat": 35.703333,
+              "lon": 139.760444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある東京都水道局のPR施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

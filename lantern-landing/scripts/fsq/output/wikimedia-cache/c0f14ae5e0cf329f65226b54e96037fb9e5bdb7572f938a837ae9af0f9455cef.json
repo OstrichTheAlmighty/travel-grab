@@ -1,0 +1,94 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:59.336Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8777,
+          "ns": 0,
+          "title": "福澤諭吉",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふくさわ ゆきち",
+            "page_image_free": "Fukuzawa_Yukichi_1891.jpg",
+            "wikibase_item": "Q355447"
+          },
+          "terms": {
+            "description": [
+              "日本の教育者"
+            ]
+          }
+        },
+        {
+          "pageid": 11099,
+          "ns": 0,
+          "title": "徳川慶喜",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とくかわ よしのふ",
+            "page_image_free": "Tokugawa_Yoshinobu_as_Shogun.jpg",
+            "wikibase_item": "Q287657"
+          },
+          "terms": {
+            "description": [
+              "江戸幕府の第15代将軍、華族公爵、貴族院議員"
+            ]
+          }
+        },
+        {
+          "pageid": 23899,
+          "ns": 0,
+          "title": "西郷隆盛",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さいこう たかもり",
+            "page_image_free": "Takamori_Saigo.jpg",
+            "wikibase_item": "Q310462"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家・軍人 (1827-1877)"
+            ]
+          }
+        },
+        {
+          "pageid": 1234149,
+          "ns": 0,
+          "title": "板垣退助",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いたかき たいすけ",
+            "page_image_free": "ITAGAKI_Taisuke.jpg",
+            "wikibase_item": "Q456380"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家"
+            ]
+          }
+        },
+        {
+          "pageid": 4002741,
+          "ns": 0,
+          "title": "青天を衝け",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せいてんをつけ",
+            "wikibase_item": "Q67207191"
+          },
+          "terms": {
+            "description": [
+              "2021年NHK大河ドラマ第60作"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

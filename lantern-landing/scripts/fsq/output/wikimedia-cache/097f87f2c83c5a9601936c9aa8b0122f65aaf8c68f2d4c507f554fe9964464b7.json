@@ -1,0 +1,77 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:23.124Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 28219,
+          "ns": 0,
+          "title": "軽井沢",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かるいさわ",
+            "page_image_free": "Mikasa-Dori,_Karuizawa.jpg",
+            "wikibase_item": "Q8194546"
+          },
+          "terms": {
+            "description": [
+              "長野県東信地方の佐久地域を中心に見られる地名"
+            ]
+          }
+        },
+        {
+          "pageid": 104543,
+          "ns": 0,
+          "title": "国木田独歩",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "くにきた とつほ",
+            "page_image_free": "Doppo_Kunikida.jpg",
+            "wikibase_item": "Q374817"
+          },
+          "terms": {
+            "description": [
+              "作家、編集者 (1871-1908)"
+            ]
+          }
+        },
+        {
+          "pageid": 146774,
+          "ns": 0,
+          "title": "徳富蘇峰",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とくとみ そほう",
+            "page_image_free": "Soho_Tokutomi_1_cropped.jpg",
+            "wikibase_item": "Q708794"
+          },
+          "terms": {
+            "description": [
+              "ジャーナリスト (1863-1957)"
+            ]
+          }
+        },
+        {
+          "pageid": 5223965,
+          "ns": 0,
+          "title": "番町文人通り",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はんちようふんしんとおり",
+            "kartographer_frames": "2",
+            "kartographer_links": "2",
+            "page_image_free": "Oedo_Bancho_Kiriezu.jpg",
+            "wikibase_item": "Q138829229"
+          },
+          "terms": {
+            "description": [
+              "東京都千代田区の街路"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

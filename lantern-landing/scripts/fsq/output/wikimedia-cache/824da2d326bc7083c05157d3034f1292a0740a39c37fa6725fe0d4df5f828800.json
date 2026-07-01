@@ -1,0 +1,83 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:23.821Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 476206,
+          "ns": 0,
+          "title": "賀川豊彦",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かかわ とよひこ",
+            "page_image_free": "KAGAWA_Toyohiko_young.JPG",
+            "wikibase_item": "Q731925"
+          },
+          "terms": {
+            "description": [
+              "日本の社会活動家 (1888-1960)"
+            ]
+          }
+        },
+        {
+          "pageid": 1170789,
+          "ns": 0,
+          "title": "上北沢",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かみきたさわ",
+            "kartographer_frames": "1",
+            "page_image_free": "Rokkotsu01.jpg",
+            "wikibase_item": "Q11358523"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1340340,
+          "ns": 0,
+          "title": "キリスト新聞",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きりすとしんふん",
+            "wikibase_item": "Q11297716"
+          },
+          "terms": {
+            "description": [
+              "日本のキリスト教系専門紙"
+            ]
+          }
+        },
+        {
+          "pageid": 2038893,
+          "ns": 0,
+          "title": "科学映像館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かかくえいそうかん",
+            "wikibase_item": "Q11595935"
+          }
+        },
+        {
+          "pageid": 2226026,
+          "ns": 0,
+          "title": "セトルメント",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "せつるめんと",
+            "wikibase_item": "Q101224664"
+          }
+        }
+      ]
+    }
+  }
+}

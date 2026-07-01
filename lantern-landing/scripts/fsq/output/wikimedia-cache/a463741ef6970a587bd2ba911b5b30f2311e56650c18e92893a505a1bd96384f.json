@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:12.627Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 74674,
+          "ns": 0,
+          "title": "富井政章",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とみい まさあきら",
+            "page_image_free": "TOMII_Masaaki.jpg",
+            "wikibase_item": "Q3701454"
+          },
+          "terms": {
+            "description": [
+              "日本の法学者"
+            ]
+          }
+        },
+        {
+          "pageid": 91540,
+          "ns": 0,
+          "title": "中村雅俊",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なかむら まさとし",
+            "wikibase_item": "Q2817191"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優、歌手、タレント、司会者、ナレーター"
+            ]
+          }
+        },
+        {
+          "pageid": 146694,
+          "ns": 0,
+          "title": "嘉納治五郎",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かのう しころう",
+            "page_image_free": "Portrait_of_late_Mr._Kano.jpg",
+            "wikibase_item": "Q190141"
+          },
+          "terms": {
+            "description": [
+              "日本の柔道家、教育者"
+            ]
+          }
+        },
+        {
+          "pageid": 172163,
+          "ns": 0,
+          "title": "菅原文太",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "すかわら ふんた",
+            "wikibase_item": "Q1139492"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優 (1933-2014)"
+            ]
+          }
+        },
+        {
+          "pageid": 966234,
+          "ns": 0,
+          "title": "塩見俊二",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しおみ しゆんし",
+            "page_image_free": "Shunji_Shiomi.png",
+            "wikibase_item": "Q11428864"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

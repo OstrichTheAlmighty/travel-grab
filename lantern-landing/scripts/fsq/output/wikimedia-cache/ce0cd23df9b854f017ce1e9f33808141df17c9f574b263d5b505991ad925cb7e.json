@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:41.310Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 28918,
+          "ns": 0,
+          "title": "立教大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "りつきようたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Rikkyo_University_1.jpg",
+            "wikibase_item": "Q1143235"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7305,
+              "lon": 139.70394444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 99271,
+          "ns": 0,
+          "title": "ミッキー・カーチス",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かあちす みつきい",
+            "page_image_free": "ミッキー・カーチス.png",
+            "wikibase_item": "Q6838606"
+          },
+          "terms": {
+            "description": [
+              "日本のタレント、ロック歌手、俳優 (1938-)"
+            ]
+          }
+        },
+        {
+          "pageid": 114496,
+          "ns": 0,
+          "title": "ジェイアールバス関東",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しえいああるはすかんとう",
+            "page_image_free": "JR_BusKanto_TokyoBranch.jpeg",
+            "wikibase_item": "Q10851155"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都江東区にあるバス事業者"
+            ]
+          }
+        },
+        {
+          "pageid": 2659427,
+          "ns": 0,
+          "title": "千葉県の観光地",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちはけん",
+            "page_image_free": "Inou-tadataka-house,katori-city,japan.JPG",
+            "wikibase_item": "Q11406136"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 4680273,
+          "ns": 0,
+          "title": "Get Ready!",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "けつとれていい",
+            "wikibase_item": "Q114834749"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

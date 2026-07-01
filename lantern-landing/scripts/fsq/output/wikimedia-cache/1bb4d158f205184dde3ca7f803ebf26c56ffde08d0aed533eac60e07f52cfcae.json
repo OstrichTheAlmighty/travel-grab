@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:27.332Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 21566,
+          "ns": 0,
+          "title": "Noam Chomsky",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Chomsky, Noam",
+            "page_image_free": "Noam_Chomsky_portrait_2017_retouched.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "American linguist and activist (born 1928)",
+            "wikibase_item": "Q9049"
+          },
+          "terms": {
+            "description": [
+              "American linguist and activist (born 1928)"
+            ]
+          }
+        },
+        {
+          "pageid": 4429027,
+          "ns": 0,
+          "title": "Lamune",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Lamune (Visual Novel)",
+            "displaytitle": "<i>Lamune</i>",
+            "page_image": "Lamune.jpg",
+            "wikibase-shortdesc": "Japanese adult visual novel developed by Neko Neko Soft",
+            "wikibase_item": "Q2297793"
+          },
+          "terms": {
+            "description": [
+              "2004 video game"
+            ]
+          }
+        },
+        {
+          "pageid": 20330894,
+          "ns": 0,
+          "title": "Tomie (film series)",
+          "index": 1,
+          "pageprops": {
+            "displaytitle": "<i>Tomie</i> (film series)",
+            "page_image": "Tomie_series_collection.jpg",
+            "wikibase-shortdesc": "Japanese film",
+            "wikibase_item": "Q7818886"
+          },
+          "terms": {
+            "description": [
+              "Japanese horror film series"
+            ]
+          }
+        },
+        {
+          "pageid": 78404455,
+          "ns": 0,
+          "title": "List of unusual deaths in the 20th century",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Franz_Reichelt_(high_res).jpg",
+            "toc": "",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q131384803"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 79099052,
+          "ns": 0,
+          "title": "List of Delicious in Dungeon episodes",
+          "index": 4,
+          "pageprops": {
+            "displaytitle": "List of <i>Delicious in Dungeon</i> episodes",
+            "page_image": "Delicious_in_Dungeon_KV.jpg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q132339373"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

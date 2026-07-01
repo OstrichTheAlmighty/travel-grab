@@ -1,0 +1,94 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:28.745Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1045706,
+          "ns": 0,
+          "title": "神戸市立農業公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こうへしりつのうきようこうえん",
+            "page_image_free": "Kobecity_Agricultural_Park_No,8.JPG",
+            "wikibase_item": "Q11590095"
+          },
+          "coordinates": [
+            {
+              "lat": 34.7325,
+              "lon": 135.04027778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1169055,
+          "ns": 0,
+          "title": "まなみのりさ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "まなみのりさ",
+            "wikibase_item": "Q11278443"
+          },
+          "terms": {
+            "description": [
+              "日本のアイドルグループ"
+            ]
+          }
+        },
+        {
+          "pageid": 2506206,
+          "ns": 0,
+          "title": "13歳のハローワーク (テレビドラマ)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しゆうさんさいのはろおわあく",
+            "wikibase_item": "Q11056467"
+          },
+          "terms": {
+            "description": [
+              "2012年のテレビ朝日系列「金曜ナイトドラマ」枠のテレビドラマ"
+            ]
+          }
+        },
+        {
+          "pageid": 4154624,
+          "ns": 0,
+          "title": "田中沙耶",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たなか さや",
+            "wikibase_item": "Q96716192"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 4256082,
+          "ns": 0,
+          "title": "トロピカル〜ジュ!プリキュア",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とろひかるうしゆふりきゆあ",
+            "wikibase_item": "Q102368919"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビアニメ番組、メディアミックス作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

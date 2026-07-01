@@ -1,0 +1,84 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:11.630Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 20297,
+          "ns": 0,
+          "title": "西園寺公望",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さいおんし きんもち",
+            "page_image_free": "Kinmochi_Saionji_2.jpg",
+            "wikibase_item": "Q297628"
+          },
+          "terms": {
+            "description": [
+              "日本の公家、政治家、教育者（1849-1940）。12・14代内閣総理大臣、外務大臣、大蔵大臣。"
+            ]
+          }
+        },
+        {
+          "pageid": 140489,
+          "ns": 0,
+          "title": "民法典論争",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みんほうてんろんそう",
+            "page_image_free": "Gustave_Emile_Boissonade_de_Fontarabie.jpg",
+            "wikibase_item": "Q11547935"
+          }
+        },
+        {
+          "pageid": 411096,
+          "ns": 0,
+          "title": "毎日出版文化賞",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "まいにちしゆつはんふんかしよう",
+            "page_image_free": "Lit.jpg",
+            "wikibase_item": "Q1554156"
+          },
+          "terms": {
+            "description": [
+              "毎日新聞社が主催する文学・文化賞"
+            ]
+          }
+        },
+        {
+          "pageid": 1806640,
+          "ns": 0,
+          "title": "横田秀雄",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "よこた ひてお",
+            "page_image_free": "Yokota_Hideo.jpg",
+            "wikibase_item": "Q11543414"
+          },
+          "terms": {
+            "description": [
+              "日本の法律専門職 (1862-1938)"
+            ]
+          }
+        },
+        {
+          "pageid": 4233649,
+          "ns": 0,
+          "title": "FNSドラマ対抗 お宝映像アワード",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "えふえぬえすとらまたいこうおたからえいそうあわあと",
+            "wikibase_item": "Q105261313"
+          }
+        }
+      ]
+    }
+  }
+}

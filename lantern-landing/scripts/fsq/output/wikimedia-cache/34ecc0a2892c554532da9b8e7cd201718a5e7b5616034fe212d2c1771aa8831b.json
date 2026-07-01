@@ -1,0 +1,28 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:02.014Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 2803458,
+          "ns": 0,
+          "title": "下山千歳白菜",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しもやまちとせはくさい",
+            "page_image_free": "白菜の碑.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q17213750"
+          },
+          "terms": {
+            "description": [
+              "世田谷区で品種改良された白菜"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

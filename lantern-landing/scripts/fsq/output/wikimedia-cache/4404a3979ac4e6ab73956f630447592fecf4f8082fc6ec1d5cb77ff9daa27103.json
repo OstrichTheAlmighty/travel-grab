@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:53.711Z",
+  "value": {
+    "searchinfo": {
+      "search": "Hinokicho Park"
+    },
+    "search": [
+      {
+        "id": "Q11544635",
+        "title": "Q11544635",
+        "pageid": 12684572,
+        "concepturi": "http://www.wikidata.org/entity/Q11544635",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11544635",
+        "display": {
+          "label": {
+            "value": "Hinokichō Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Minato, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Hinokichō Park",
+        "description": "park in Minato, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Hinokichō Park"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

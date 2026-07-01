@@ -1,0 +1,178 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:08.577Z",
+  "value": {
+    "searchinfo": {
+      "search": "Daiichi Sankyo"
+    },
+    "search": [
+      {
+        "id": "Q669441",
+        "title": "Q669441",
+        "pageid": 630384,
+        "concepturi": "http://www.wikidata.org/entity/Q669441",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q669441",
+        "display": {
+          "label": {
+            "value": "Daiichi Sankyo",
+            "language": "en"
+          },
+          "description": {
+            "value": "Japanese pharmaceutical company",
+            "language": "en"
+          }
+        },
+        "label": "Daiichi Sankyo",
+        "description": "Japanese pharmaceutical company",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Daiichi Sankyo"
+        }
+      },
+      {
+        "id": "Q30287149",
+        "title": "Q30287149",
+        "pageid": 31899756,
+        "concepturi": "http://www.wikidata.org/entity/Q30287149",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q30287149",
+        "display": {
+          "label": {
+            "value": "Daiichi Sankyo (United States)",
+            "language": "en"
+          },
+          "description": {
+            "value": "company in Parsippany, United States",
+            "language": "en"
+          }
+        },
+        "label": "Daiichi Sankyo (United States)",
+        "description": "company in Parsippany, United States",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Daiichi Sankyo (United States)"
+        }
+      },
+      {
+        "id": "Q55454525",
+        "title": "Q55454525",
+        "pageid": 55470285,
+        "concepturi": "http://www.wikidata.org/entity/Q55454525",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q55454525",
+        "display": {
+          "label": {
+            "value": "Daiichi Sankyo (India)",
+            "language": "en"
+          },
+          "description": {
+            "value": "company in Gurgaon, India",
+            "language": "en"
+          }
+        },
+        "label": "Daiichi Sankyo (India)",
+        "description": "company in Gurgaon, India",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Daiichi Sankyo (India)"
+        }
+      },
+      {
+        "id": "Q56583360",
+        "title": "Q56583360",
+        "pageid": 56523657,
+        "concepturi": "http://www.wikidata.org/entity/Q56583360",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q56583360",
+        "display": {
+          "label": {
+            "value": "Daiichi-Sankyo (South Korea)",
+            "language": "en"
+          },
+          "description": {
+            "value": "company in Seoul, South Korea",
+            "language": "en"
+          }
+        },
+        "label": "Daiichi-Sankyo (South Korea)",
+        "description": "company in Seoul, South Korea",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Daiichi-Sankyo (South Korea)"
+        }
+      },
+      {
+        "id": "Q43896167",
+        "title": "Q43896167",
+        "pageid": 45101163,
+        "concepturi": "http://www.wikidata.org/entity/Q43896167",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q43896167",
+        "display": {
+          "label": {
+            "value": "Daiichi Sankyo (Germany)",
+            "language": "en"
+          },
+          "description": {
+            "value": "company in Munich, Germany",
+            "language": "en"
+          }
+        },
+        "label": "Daiichi Sankyo (Germany)",
+        "description": "company in Munich, Germany",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Daiichi Sankyo (Germany)"
+        }
+      },
+      {
+        "id": "Q11602014",
+        "title": "Q11602014",
+        "pageid": 12742301,
+        "concepturi": "http://www.wikidata.org/entity/Q11602014",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11602014",
+        "display": {
+          "label": {
+            "value": "Daiichi Sankyo Healthcare",
+            "language": "en"
+          }
+        },
+        "label": "Daiichi Sankyo Healthcare",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Daiichi Sankyo Healthcare"
+        }
+      },
+      {
+        "id": "Q17224188",
+        "title": "Q17224188",
+        "pageid": 18820922,
+        "concepturi": "http://www.wikidata.org/entity/Q17224188",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q17224188",
+        "display": {
+          "label": {
+            "value": "Daiichi Sankyo Kusuri Museum",
+            "language": "en"
+          }
+        },
+        "label": "Daiichi Sankyo Kusuri Museum",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Daiichi Sankyo Kusuri Museum"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

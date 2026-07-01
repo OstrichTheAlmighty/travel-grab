@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:16.370Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 37388,
+          "ns": 0,
+          "title": "大和市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "やまとし",
+            "kartographer_frames": "1",
+            "page_image_free": "大和駅周辺.jpg",
+            "wikibase_item": "Q386697"
+          },
+          "coordinates": [
+            {
+              "lat": 35.48753,
+              "lon": 139.45803,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 165248,
+          "ns": 0,
+          "title": "土曜ゴールデン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とようこおるてん",
+            "wikibase_item": "Q11423597"
+          },
+          "terms": {
+            "description": [
+              "テレビ東京の単発特別番組枠"
+            ]
+          }
+        },
+        {
+          "pageid": 863759,
+          "ns": 0,
+          "title": "桐生八木節まつり",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きりゆうやきふしまつり",
+            "page_image_free": "桐生八木節まつり,_Kiryu_Honcho_Street_in_the_Festival_-_panoramio.jpg",
+            "wikibase_item": "Q11537271"
+          }
+        },
+        {
+          "pageid": 1691666,
+          "ns": 0,
+          "title": "東京都の観光地",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようと",
+            "page_image_free": "東京都区部-観光地図-1.jpg",
+            "wikibase_item": "Q10860697"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1847020,
+          "ns": 0,
+          "title": "ほんとにあった! 呪いのビデオ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ほんとにあつたのろいのひてお",
+            "wikibase_item": "Q5897278"
+          },
+          "terms": {
+            "description": [
+              "日本のホラー・オリジナルビデオ・シリーズ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

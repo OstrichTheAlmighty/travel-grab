@@ -1,0 +1,94 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:09.184Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 106590,
+          "ns": 0,
+          "title": "木村太郎 (政治家)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きむら たろう",
+            "page_image_free": "Taro_Kimura_2012.jpg",
+            "wikibase_item": "Q11518790"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家（1965 - 2017）"
+            ]
+          }
+        },
+        {
+          "pageid": 134017,
+          "ns": 0,
+          "title": "農林水産大臣",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "のうりんすいさんたいしん",
+            "page_image_free": "農林水産省ロゴマーク.svg",
+            "wikibase_item": "Q8191055"
+          },
+          "terms": {
+            "description": [
+              "日本の国務大臣"
+            ]
+          }
+        },
+        {
+          "pageid": 194777,
+          "ns": 0,
+          "title": "木村健悟",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きむら けんこ",
+            "page_image_free": "Kengo_Kimura_(cropped).JPG",
+            "wikibase_item": "Q6389194"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家、元プロレスラー、元大相撲力士、元歌手 (1953-)"
+            ]
+          }
+        },
+        {
+          "pageid": 1165570,
+          "ns": 0,
+          "title": "木村小左衛門",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きむら こさえもん",
+            "page_image_free": "Kozaemon_Kimura.jpg",
+            "wikibase_item": "Q10855710"
+          },
+          "terms": {
+            "description": [
+              "日本の公務員、政治家 (1888-1952)"
+            ]
+          }
+        },
+        {
+          "pageid": 2549409,
+          "ns": 0,
+          "title": "木村武千代",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きむら たけちよ",
+            "wikibase_item": "Q11518967"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家 (1910-2000)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

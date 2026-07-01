@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:44.487Z",
+  "value": {
+    "searchinfo": {
+      "search": "荒川知水資料館"
+    },
+    "search": [
+      {
+        "id": "Q137374855",
+        "title": "Q137374855",
+        "pageid": 131056085,
+        "concepturi": "http://www.wikidata.org/entity/Q137374855",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q137374855",
+        "display": {
+          "label": {
+            "value": "Arakawa Museum of Aqua",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Kita, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Arakawa Museum of Aqua",
+        "description": "museum in Kita, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "荒川知水資料館"
+        },
+        "aliases": [
+          "荒川知水資料館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

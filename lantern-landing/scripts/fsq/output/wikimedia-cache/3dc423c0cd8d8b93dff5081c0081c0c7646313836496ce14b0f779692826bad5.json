@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:22.120Z",
+  "value": {
+    "searchinfo": {
+      "search": "松涛美術館"
+    },
+    "search": [
+      {
+        "id": "Q11561694",
+        "title": "Q11561694",
+        "pageid": 12701637,
+        "concepturi": "http://www.wikidata.org/entity/Q11561694",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11561694",
+        "display": {
+          "label": {
+            "value": "Shoto Museum of Art",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Shoto Museum of Art",
+        "description": "museum in Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "松涛美術館"
+        },
+        "aliases": [
+          "松涛美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:38.971Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 46276,
+          "ns": 0,
+          "title": "下水道",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "けすいとう",
+            "page_image_free": "Acropolis_Metro-Station.JPG",
+            "wikibase_item": "Q156849"
+          },
+          "terms": {
+            "description": [
+              "雨水・汚水を、地下水路などで集めた後に公共用水域へ排出するための施設・設備の集合体"
+            ]
+          }
+        },
+        {
+          "pageid": 407541,
+          "ns": 0,
+          "title": "東京都下水道局",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようとけすいとうきよく",
+            "page_image_free": "Tokyo_Metropolitan_Government_Building_No.2_2009.jpg",
+            "wikibase_item": "Q11525207"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68919444,
+              "lon": 139.69163889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 500893,
+          "ns": 0,
+          "title": "東京都水の科学館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようとみすのかかくかん",
+            "page_image_free": "Tokyo_Science_Pavilion.jpg",
+            "wikibase_item": "Q11525336"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63080556,
+              "lon": 139.7855,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区有明にある東京都水道局が運営する水に関する科学館"
+            ]
+          }
+        },
+        {
+          "pageid": 1741278,
+          "ns": 0,
+          "title": "相鉄グランドフレッサ東京ベイ有明",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "そうてつくらんとふれつさとうきようへいありあけ",
+            "kartographer_frames": "1",
+            "page_image_free": "Hotel_Sunroute_Ariake.JPG",
+            "wikibase_item": "Q11337870"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63205556,
+              "lon": 139.78944444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区のホテル"
+            ]
+          }
+        },
+        {
+          "pageid": 1745225,
+          "ns": 0,
+          "title": "東京都虹の下水道館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようとにしのけすいとうかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Sewerage_Museum_“Rainbow”_Koto-ku_Tokyo.jpg",
+            "wikibase_item": "Q11625416"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63316667,
+              "lon": 139.78380556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

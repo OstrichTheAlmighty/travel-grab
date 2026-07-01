@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:52.893Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 6841,
+          "ns": 0,
+          "title": "横浜みなとみらい21",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "よこはまみなとみらい21",
+            "page_image_free": "Minato_Mirai_In_Blue.jpg",
+            "wikibase_item": "Q1140617"
+          },
+          "coordinates": [
+            {
+              "lat": 35.458,
+              "lon": 139.632,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "横浜市の再開発地区"
+            ]
+          }
+        },
+        {
+          "pageid": 288451,
+          "ns": 0,
+          "title": "PlayStation Portableのゲームタイトル一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふれいすてえしよんほおたふるのけえむたいとるいちらん",
+            "notoc": "",
+            "wikibase_item": "Q1360880"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 506298,
+          "ns": 0,
+          "title": "TTM",
+          "index": 2,
+          "pageprops": {
+            "disambiguation": "",
+            "wikibase_item": "Q402742"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの曖昧さ回避ページ"
+            ]
+          }
+        },
+        {
+          "pageid": 1747694,
+          "ns": 0,
+          "title": "東京おもちゃ美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようおもちやひしゆつかん",
+            "page_image_free": "Entrance_of_Tokyo_Toy_Museum.jpg",
+            "wikibase_item": "Q11524018"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区四谷にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 4006749,
+          "ns": 0,
+          "title": "榊原優希",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さかきはら ゆうき",
+            "wikibase_item": "Q69635228"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

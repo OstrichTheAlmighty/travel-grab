@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:09.265Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 25901,
+          "ns": 0,
+          "title": "バリアフリー",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はりあふりい",
+            "page_image_free": "MUTCD_D9-6.svg",
+            "wikibase_item": "Q808926"
+          },
+          "terms": {
+            "description": [
+              "障害者や高齢者が社会生活を送る上で、障壁となるものを取り除くこと"
+            ]
+          }
+        },
+        {
+          "pageid": 35618,
+          "ns": 0,
+          "title": "新宿御苑",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しんしゆくきよえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Shinjuku_Gyoen_National_Garden_-_sakura_3.JPG",
+            "wikibase_item": "Q776863"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68527778,
+              "lon": 139.70972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都にある国民公園"
+            ]
+          }
+        },
+        {
+          "pageid": 62124,
+          "ns": 0,
+          "title": "明治神宮",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "めいししんくう",
+            "kartographer_frames": "1",
+            "page_image_free": "Courtyard_of_Meiji_Shrine_20190717.jpg",
+            "wikibase_item": "Q287165"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67611111,
+              "lon": 139.69916667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 169754,
+          "ns": 0,
+          "title": "小劇場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しようけきしよう",
+            "wikibase_item": "Q11459155"
+          }
+        },
+        {
+          "pageid": 1691666,
+          "ns": 0,
+          "title": "東京都の観光地",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようと",
+            "page_image_free": "東京都区部-観光地図-1.jpg",
+            "wikibase_item": "Q10860697"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:21.290Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 53597,
+          "ns": 0,
+          "title": "The Moon Is a Harsh Mistress",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Moon Is A Harsh Mistress, The",
+            "displaytitle": "<i>The Moon Is a Harsh Mistress</i>",
+            "page_image": "The_Moon_Is_A_Harsh_Mistress_(book).jpg",
+            "wikibase-shortdesc": "1966 science fiction novel by Robert A. Heinlein",
+            "wikibase_item": "Q1410482"
+          },
+          "terms": {
+            "description": [
+              "novel by Robert A. Heinlein"
+            ]
+          }
+        },
+        {
+          "pageid": 142528,
+          "ns": 0,
+          "title": "Jeff Bezos",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Bezos, Jeff",
+            "page_image_free": "260202-D-PM193-2205_SECWAR_Arsenal_of_Freedom_Tour_-_Florida_(3x4_cropped_on_Bezos_and_rotated).jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "American businessman (born 1964)",
+            "wikibase_item": "Q312556"
+          },
+          "terms": {
+            "description": [
+              "American business magnate (born 1964)"
+            ]
+          }
+        },
+        {
+          "pageid": 1780688,
+          "ns": 0,
+          "title": "National School Lunch Act",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "School Lunch Act",
+            "page_image_free": "InternationalSchoolMealsDayLaunchEvent.jpg",
+            "wikibase-shortdesc": "U.S. federal law passed in 1946",
+            "wikibase_item": "Q620475"
+          },
+          "terms": {
+            "description": [
+              "United States Law"
+            ]
+          }
+        },
+        {
+          "pageid": 5085392,
+          "ns": 0,
+          "title": "Farley's & Sathers Candy Company",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Farley's and Sathers Candy Company",
+            "wikibase-shortdesc": "Umbrella candy company",
+            "wikibase_item": "Q5435416"
+          },
+          "terms": {
+            "description": [
+              "candy and sweets umbrella type company"
+            ]
+          }
+        },
+        {
+          "pageid": 21494335,
+          "ns": 0,
+          "title": "Pann's",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Pann's_sign.jpg",
+            "wikibase-shortdesc": "Restaurant in Los Angeles, USA",
+            "wikibase_item": "Q7131356"
+          },
+          "coordinates": [
+            {
+              "lat": 33.978115,
+              "lon": -118.370566,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "restaurant in Los Angeles, USA"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

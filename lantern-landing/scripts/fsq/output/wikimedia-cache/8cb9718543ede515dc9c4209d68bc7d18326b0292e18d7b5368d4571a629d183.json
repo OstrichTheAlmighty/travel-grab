@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:28.235Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 7516,
+          "ns": 0,
+          "title": "米",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こめ",
+            "page_image_free": "Oryza_sativa_-_Köhler–s_Medizinal-Pflanzen-232.jpg",
+            "wikibase_item": "Q5090"
+          },
+          "terms": {
+            "description": [
+              "稲の果実である籾から外皮を取り去った粒状の穀物"
+            ]
+          }
+        },
+        {
+          "pageid": 51812,
+          "ns": 0,
+          "title": "鈴木善幸",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すすき せんこう",
+            "page_image_free": "Zenkō_Suzuki_19800717.jpg",
+            "wikibase_item": "Q315551"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家(1911-2004)。第70代内閣総理大臣 、農林大臣、厚生大臣、官房長官、郵政大臣。"
+            ]
+          }
+        },
+        {
+          "pageid": 109972,
+          "ns": 0,
+          "title": "東洋水産",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうようすいさん",
+            "page_image_free": "Toyo_Suisan_Kaisha_company_logo.svg",
+            "wikibase_item": "Q7830633"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62869444,
+              "lon": 139.74527778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある食品メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 331969,
+          "ns": 0,
+          "title": "堀之内久男",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ほりのうち ひさお",
+            "page_image_free": "Hisao_Horinouchi_portrait.jpg",
+            "wikibase_item": "Q1628120"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家"
+            ]
+          }
+        },
+        {
+          "pageid": 333745,
+          "ns": 0,
+          "title": "山田正彦 (政治家)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "やまた まさひこ",
+            "page_image_free": "Masahiko_Yamada.jpg",
+            "wikibase_item": "Q464164"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家、弁護士 (1942-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,186 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:40.948Z",
+  "value": {
+    "searchinfo": {
+      "search": "二子玉川"
+    },
+    "search": [
+      {
+        "id": "Q11371454",
+        "title": "Q11371454",
+        "pageid": 12509589,
+        "concepturi": "http://www.wikidata.org/entity/Q11371454",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11371454",
+        "display": {
+          "label": {
+            "value": "Futako-Tamagawa",
+            "language": "en"
+          },
+          "description": {
+            "value": "town located in Setagaya-ku, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Futako-Tamagawa",
+        "description": "town located in Setagaya-ku, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "二子玉川"
+        },
+        "aliases": [
+          "二子玉川"
+        ]
+      },
+      {
+        "id": "Q1042466",
+        "title": "Q1042466",
+        "pageid": 991594,
+        "concepturi": "http://www.wikidata.org/entity/Q1042466",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1042466",
+        "display": {
+          "label": {
+            "value": "Futako-Tamagawa Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "railway station in Setagaya, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Futako-Tamagawa Station",
+        "description": "railway station in Setagaya, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "二子玉川駅"
+        },
+        "aliases": [
+          "二子玉川駅"
+        ]
+      },
+      {
+        "id": "Q11371457",
+        "title": "Q11371457",
+        "pageid": 12509592,
+        "concepturi": "http://www.wikidata.org/entity/Q11371457",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11371457",
+        "display": {
+          "label": {
+            "value": "Futako-Tamagawa Rise",
+            "language": "en"
+          },
+          "description": {
+            "value": "building complex in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Futako-Tamagawa Rise",
+        "description": "building complex in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "二子玉川ライズ"
+        },
+        "aliases": [
+          "二子玉川ライズ"
+        ]
+      },
+      {
+        "id": "Q11371455",
+        "title": "Q11371455",
+        "pageid": 12509590,
+        "concepturi": "http://www.wikidata.org/entity/Q11371455",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11371455",
+        "display": {
+          "label": {
+            "value": "Futako-Tamagawa Times Park",
+            "language": "en"
+          }
+        },
+        "label": "Futako-Tamagawa Times Park",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "二子玉川タイムスパーク"
+        },
+        "aliases": [
+          "二子玉川タイムスパーク"
+        ]
+      },
+      {
+        "id": "Q11371458",
+        "title": "Q11371458",
+        "pageid": 12509593,
+        "concepturi": "http://www.wikidata.org/entity/Q11371458",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11371458",
+        "display": {
+          "label": {
+            "value": "Futako Tamagawa-en",
+            "language": "en"
+          }
+        },
+        "label": "Futako Tamagawa-en",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "二子玉川園"
+        },
+        "aliases": [
+          "二子玉川園"
+        ]
+      },
+      {
+        "id": "Q81916823",
+        "title": "Q81916823",
+        "pageid": 81274952,
+        "concepturi": "http://www.wikidata.org/entity/Q81916823",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q81916823",
+        "display": {
+          "label": {
+            "value": "二子玉川小学校",
+            "language": "ja"
+          }
+        },
+        "label": "二子玉川小学校",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "二子玉川小学校"
+        }
+      },
+      {
+        "id": "Q17212884",
+        "title": "Q17212884",
+        "pageid": 18807469,
+        "concepturi": "http://www.wikidata.org/entity/Q17212884",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q17212884",
+        "display": {
+          "label": {
+            "value": "Futako-Tamagawa Park",
+            "language": "en"
+          }
+        },
+        "label": "Futako-Tamagawa Park",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "二子玉川公園"
+        },
+        "aliases": [
+          "二子玉川公園"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

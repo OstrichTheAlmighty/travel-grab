@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:03.065Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 74045,
+          "ns": 0,
+          "title": "サンシャインシティ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さんしやいんしてい",
+            "kartographer_frames": "1",
+            "page_image_free": "Sunshine_City_2012.JPG",
+            "wikibase_item": "Q1186018"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72916667,
+              "lon": 139.71805556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区の複合施設"
+            ]
+          }
+        },
+        {
+          "pageid": 74143,
+          "ns": 0,
+          "title": "サンシャイン60",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さんしやいん60",
+            "page_image_free": "Sunshine_60.JPG",
+            "wikibase_item": "Q602942"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72916667,
+              "lon": 139.71805556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある超高層ビル"
+            ]
+          }
+        },
+        {
+          "pageid": 2651330,
+          "ns": 0,
+          "title": "ワンパンマン",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "わんはんまん",
+            "wikibase_item": "Q5102879"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 2696525,
+          "ns": 0,
+          "title": "2013年のラジオ (日本)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "2013ねんのらしお",
+            "wikibase_item": "Q11187087"
+          }
+        },
+        {
+          "pageid": 4755375,
+          "ns": 0,
+          "title": "劇場版 SPY×FAMILY CODE: White",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "すはいふあみりいこおとほわいと",
+            "page_image_free": "Spy_×_Family_Code_White_logo.svg",
+            "wikibase_item": "Q117305646"
+          },
+          "terms": {
+            "description": [
+              "2023年の日本のアニメ映画"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

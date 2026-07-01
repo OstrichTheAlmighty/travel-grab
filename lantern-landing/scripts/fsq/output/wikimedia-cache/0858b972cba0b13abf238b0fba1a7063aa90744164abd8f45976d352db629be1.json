@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:03.950Z",
+  "value": {
+    "searchinfo": {
+      "search": "大田区立郷土博物館"
+    },
+    "search": [
+      {
+        "id": "Q104708388",
+        "title": "Q104708388",
+        "pageid": 100136404,
+        "concepturi": "http://www.wikidata.org/entity/Q104708388",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q104708388",
+        "display": {
+          "label": {
+            "value": "Folk Museum of Ōta City",
+            "language": "en"
+          }
+        },
+        "label": "Folk Museum of Ōta City",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "大田区立郷土博物館"
+        },
+        "aliases": [
+          "大田区立郷土博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

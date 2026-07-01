@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:36.458Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 83393,
+          "ns": 0,
+          "title": "八重洲",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やえす",
+            "kartographer_frames": "1",
+            "page_image_free": "Yaesu_Street_from_Tokyo_Station_Yaesu_exit.jpg",
+            "wikibase_item": "Q1249041"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の町丁"
+            ]
+          }
+        },
+        {
+          "pageid": 84130,
+          "ns": 0,
+          "title": "ヤン・ヨーステン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "やん よおすてん",
+            "page_image_free": "Jan_Joosten_van_Lodensteyn,_Museum_Kuroshima.jpg",
+            "wikibase_item": "Q599058"
+          },
+          "terms": {
+            "description": [
+              "オランダの航海士、朱印船貿易家"
+            ]
+          }
+        },
+        {
+          "pageid": 93346,
+          "ns": 0,
+          "title": "ウィリアム・アダムス",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あたむす ういりあむ",
+            "page_image_free": "William-Adams-before-Shogun-Tokugawa-Ieyasu.png",
+            "wikibase_item": "Q313866"
+          },
+          "terms": {
+            "description": [
+              "「三浦按針」の名でも知られるイギリスの航海士、貿易家 (1564-1620)"
+            ]
+          }
+        },
+        {
+          "pageid": 128500,
+          "ns": 0,
+          "title": "お雇い外国人",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おやといかいこくしん",
+            "wikibase_item": "Q176968"
+          },
+          "terms": {
+            "description": [
+              "幕末から明治にかけて日本政府に雇用された外国人"
+            ]
+          }
+        },
+        {
+          "pageid": 1091845,
+          "ns": 0,
+          "title": "黒島 (大分県臼杵市)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "くろしま おおいたけんうすきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kuroshima_of_Oita.jpg",
+            "wikibase_item": "Q11678146"
+          },
+          "terms": {
+            "description": [
+              "大分県臼杵市の臼杵湾内にある島"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

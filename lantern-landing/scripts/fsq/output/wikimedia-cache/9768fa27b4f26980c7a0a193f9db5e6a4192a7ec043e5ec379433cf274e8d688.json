@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:31.228Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2802,
+          "ns": 0,
+          "title": "Akihabara",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Sotokanda,_Akihabara_Electric_Town_at_night_20231114.png",
+            "wikibase-shortdesc": "Shopping area in Chiyoda, Tokyo, Japan",
+            "wikibase_item": "Q418096"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69833333,
+              "lon": 139.77305556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "town located in Chiyoda, Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 390628,
+          "ns": 0,
+          "title": "Akihabara Station",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "3",
+            "page_image_free": "Akihabara_Station_-_February_2015.jpg",
+            "wikibase-shortdesc": "Railway and metro station in Tokyo, Japan",
+            "wikibase_item": "Q800374"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69833333,
+              "lon": 139.77305556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "railway station and metro station in Chiyoda, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 5834396,
+          "ns": 0,
+          "title": "Maid café",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Maid cafe",
+            "page_image_free": "Maid_cafe_4.jpg",
+            "wikibase-shortdesc": "Subcategory of cosplay restaurants",
+            "wikibase_item": "Q8657160"
+          },
+          "terms": {
+            "description": [
+              "restaurant in which waitresses perform as maids"
+            ]
+          }
+        },
+        {
+          "pageid": 17837296,
+          "ns": 0,
+          "title": "Akihabara massacre",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Akihabara massacre",
+            "page_image_free": "Akihabara_massacre_02.JPG",
+            "wikibase-shortdesc": "Civilian attack in Tokyo, Japan",
+            "wikibase_item": "Q925737"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69972222,
+              "lon": 139.77138889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "2008 mass murder in Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 45636372,
+          "ns": 0,
+          "title": "Akihabara Radio Kaikan",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Akihabara_Radio_Kaikan,_2010-03-06.jpg",
+            "wikibase-shortdesc": "Commercial building in Tokyo, Japan",
+            "wikibase_item": "Q5363328"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69777778,
+              "lon": 139.77166667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "building in Chiyoda-ku, Tokyo, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

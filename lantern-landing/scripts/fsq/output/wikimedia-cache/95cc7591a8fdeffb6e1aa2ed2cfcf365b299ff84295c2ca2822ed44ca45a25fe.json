@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:55.517Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 78292,
+          "ns": 0,
+          "title": "川端龍子",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かわはた りゆうし",
+            "page_image_free": "Kawabata_Ryushi.JPG",
+            "wikibase_item": "Q2113300"
+          },
+          "terms": {
+            "description": [
+              "日本の画家、俳人"
+            ]
+          }
+        },
+        {
+          "pageid": 820887,
+          "ns": 0,
+          "title": "中央 (大田区)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちゆうおう",
+            "kartographer_frames": "1",
+            "page_image_free": "Ootanomori.jpg",
+            "wikibase_item": "Q11363553"
+          },
+          "terms": {
+            "description": [
+              "東京都大田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1012911,
+          "ns": 0,
+          "title": "馬込文士村",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "まこめふんしむら",
+            "page_image": "Relief_of_residents_of_magome_writers_village_sanno_ota_2015.jpg",
+            "page_image_free": "Yukio_Mishima.jpg",
+            "wikibase_item": "Q11668083"
+          },
+          "terms": {
+            "description": [
+              "大正後期から昭和初期にかけて、現在の東京都大田区で多くの文士が暮らしていた地域"
+            ]
+          }
+        },
+        {
+          "pageid": 1213908,
+          "ns": 0,
+          "title": "大森 (大田区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおもり",
+            "kartographer_frames": "1",
+            "page_image_free": "JR_omori_station_west_entrance.JPG",
+            "wikibase_item": "Q6147936"
+          },
+          "coordinates": [
+            {
+              "lat": 35.57253,
+              "lon": 139.73381,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都大田区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 4844016,
+          "ns": 0,
+          "title": "龍子記念館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "りゆうしきねんかん",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q112192996"
+          },
+          "coordinates": [
+            {
+              "lat": 35.58240272,
+              "lon": 139.71536549,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

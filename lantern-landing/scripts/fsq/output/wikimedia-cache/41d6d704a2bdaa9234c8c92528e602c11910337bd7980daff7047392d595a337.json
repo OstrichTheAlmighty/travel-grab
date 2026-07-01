@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:46.780Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 179886,
+          "ns": 0,
+          "title": "稲荷神",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いなりのかみ",
+            "page_image_free": "Fushimiinari-taisha,_torii-2-1.jpg",
+            "wikibase_item": "Q719665"
+          },
+          "terms": {
+            "description": [
+              "日本の神"
+            ]
+          }
+        },
+        {
+          "pageid": 566874,
+          "ns": 0,
+          "title": "中村寅太",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なかむら とらた",
+            "page_image_free": "Torata_Nakamura1.jpg",
+            "wikibase_item": "Q17226015"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家"
+            ]
+          }
+        },
+        {
+          "pageid": 1575826,
+          "ns": 0,
+          "title": "穴守稲荷神社",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あなもりいなりしんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "穴守稲荷神社正面.jpg",
+            "wikibase_item": "Q11597221"
+          },
+          "coordinates": [
+            {
+              "lat": 35.550389,
+              "lon": 139.749639,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都大田区の神社"
+            ]
+          }
+        },
+        {
+          "pageid": 1888623,
+          "ns": 0,
+          "title": "ぎんぎつね",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きんきつね",
+            "wikibase_item": "Q11265297"
+          },
+          "terms": {
+            "description": [
+              "落合さよりによる日本の漫画作品およびそれを原作とするアニメ"
+            ]
+          }
+        },
+        {
+          "pageid": 3742375,
+          "ns": 0,
+          "title": "稲荷神社 (島田市柳町)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いなりしんしや しまたしやなきまち",
+            "page_image_free": "DSC_0027_trm.jpg",
+            "wikibase_item": "Q48764785"
+          },
+          "coordinates": [
+            {
+              "lat": 34.8345,
+              "lon": 138.177,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡県島田市柳町にある神社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:40.661Z",
+  "value": {
+    "searchinfo": {
+      "search": "Senso-ji Temple"
+    },
+    "search": [
+      {
+        "id": "Q615183",
+        "title": "Q615183",
+        "pageid": 579419,
+        "concepturi": "http://www.wikidata.org/entity/Q615183",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q615183",
+        "display": {
+          "label": {
+            "value": "Sensō-ji Temple",
+            "language": "en"
+          },
+          "description": {
+            "value": "Buddhist temple in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Sensō-ji Temple",
+        "description": "Buddhist temple in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Sensō-ji Temple"
+        }
+      },
+      {
+        "id": "Q11458439",
+        "title": "Q11458439",
+        "pageid": 12597918,
+        "concepturi": "http://www.wikidata.org/entity/Q11458439",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11458439",
+        "display": {
+          "label": {
+            "value": "Sensō-ji Temple",
+            "language": "en"
+          },
+          "description": {
+            "value": "temple in Ōita, Ōita",
+            "language": "en"
+          }
+        },
+        "label": "Sensō-ji Temple",
+        "description": "temple in Ōita, Ōita",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Sensō-ji Temple"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

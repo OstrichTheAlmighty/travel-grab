@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:43.557Z",
+  "value": {
+    "searchinfo": {
+      "search": "メインデッキ"
+    },
+    "search": [
+      {
+        "id": "Q208123",
+        "title": "Q208123",
+        "pageid": 204174,
+        "concepturi": "http://www.wikidata.org/entity/Q208123",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q208123",
+        "display": {
+          "label": {
+            "value": "deck",
+            "language": "en"
+          },
+          "description": {
+            "value": "part of a ship or boat",
+            "language": "en"
+          }
+        },
+        "label": "deck",
+        "description": "part of a ship or boat",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "メインデッキ"
+        },
+        "aliases": [
+          "メインデッキ"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:42.395Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1200944,
+          "ns": 0,
+          "title": "萩中",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はきなか",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q11620293"
+          },
+          "terms": {
+            "description": [
+              "東京都大田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1281134,
+          "ns": 0,
+          "title": "運動公園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "うんとうこうえん",
+            "wikibase_item": "Q16363669"
+          },
+          "terms": {
+            "description": [
+              "都市公園の一種で主に運動用"
+            ]
+          }
+        },
+        {
+          "pageid": 1691666,
+          "ns": 0,
+          "title": "東京都の観光地",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようと",
+            "page_image_free": "東京都区部-観光地図-1.jpg",
+            "wikibase_item": "Q10860697"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1778099,
+          "ns": 0,
+          "title": "大田区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-International-Airport_Satellite.jpg",
+            "wikibase_item": "Q217234"
+          },
+          "coordinates": [
+            {
+              "lat": 35.56128,
+              "lon": 139.71603,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 2259271,
+          "ns": 0,
+          "title": "東急設計コンサルタント",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきゆうせつけいこんさるたんと",
+            "wikibase_item": "Q11527026"
+          }
+        }
+      ]
+    }
+  }
+}

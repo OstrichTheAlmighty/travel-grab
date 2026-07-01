@@ -1,0 +1,88 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:53.296Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 75275,
+          "ns": 0,
+          "title": "内村鑑三",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "うちむら かんそう",
+            "page_image_free": "Uchimura_Kanzo.jpg",
+            "wikibase_item": "Q485247"
+          },
+          "terms": {
+            "description": [
+              "日本のキリスト教思想家 (1861-1930)"
+            ]
+          }
+        },
+        {
+          "pageid": 85140,
+          "ns": 0,
+          "title": "中川小十郎",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なかかわ こしゆうろう",
+            "page_image_free": "中川小十郎.JPG",
+            "wikibase_item": "Q11364808"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家 (1866-1944)"
+            ]
+          }
+        },
+        {
+          "pageid": 674945,
+          "ns": 0,
+          "title": "荒川豊蔵",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あらかわ とよそう",
+            "wikibase_item": "Q3536086"
+          },
+          "terms": {
+            "description": [
+              "美濃焼の陶芸家 (1894-1985)"
+            ]
+          }
+        },
+        {
+          "pageid": 1033869,
+          "ns": 0,
+          "title": "登録記念物",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうろくきねんふつ",
+            "page_image_free": "Sorakuen15st3200.jpg",
+            "wikibase_item": "Q7309389"
+          },
+          "terms": {
+            "description": [
+              "日本国指定の文化財の種類"
+            ]
+          }
+        },
+        {
+          "pageid": 1676482,
+          "ns": 0,
+          "title": "文吾捕物帳",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふんことりものちよう",
+            "wikibase_item": "Q11499898"
+          }
+        }
+      ]
+    }
+  }
+}

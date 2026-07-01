@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:34.288Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 38696,
+          "ns": 0,
+          "title": "工芸",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こうけい",
+            "page_image_free": "Ivory_carver_of_seal_of_Japan_(1915_by_Elstner_Hilton).jpg",
+            "wikibase_item": "Q2207288"
+          },
+          "terms": {
+            "description": [
+              "実用品に芸術的な意匠を施し、機能性と美術的な美しさを融合させた工作物"
+            ]
+          }
+        },
+        {
+          "pageid": 208010,
+          "ns": 0,
+          "title": "柳宗悦",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やなき むねよし",
+            "page_image_free": "Soetsu.JPG",
+            "wikibase_item": "Q904161"
+          },
+          "terms": {
+            "description": [
+              "日本の哲学者、美学者"
+            ]
+          }
+        },
+        {
+          "pageid": 314950,
+          "ns": 0,
+          "title": "劇団民藝",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "けきたんみんけい",
+            "page_image_free": "The_Mingei_Theatre_Company.jpg",
+            "wikibase_item": "Q11398212"
+          },
+          "coordinates": [
+            {
+              "lat": 35.61719444,
+              "lon": 139.47233333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 327511,
+          "ns": 0,
+          "title": "日本民藝館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんみんけいかん",
+            "page_image_free": "Nihon_mingeikan_meguro_2009.JPG",
+            "wikibase_item": "Q3789149"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6608,
+              "lon": 139.67925833,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都目黒区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 648571,
+          "ns": 0,
+          "title": "民藝運動",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みんけいうんとう",
+            "forcetoc": "",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q3314961"
+          },
+          "terms": {
+            "description": [
+              "手仕事によって生み出された日常づかいの雑器に美を見出そうとする運動"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

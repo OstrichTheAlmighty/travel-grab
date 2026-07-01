@@ -1,0 +1,209 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:29.251Z",
+  "value": {
+    "searchinfo": {
+      "search": "ヘリコプター"
+    },
+    "search": [
+      {
+        "id": "Q34486",
+        "title": "Q34486",
+        "pageid": 37235,
+        "concepturi": "http://www.wikidata.org/entity/Q34486",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q34486",
+        "display": {
+          "label": {
+            "value": "helicopter",
+            "language": "en"
+          },
+          "description": {
+            "value": "aerodyne using powered rotary wings for primary lift generation",
+            "language": "en"
+          }
+        },
+        "label": "helicopter",
+        "description": "aerodyne using powered rotary wings for primary lift generation",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ヘリコプター"
+        },
+        "aliases": [
+          "ヘリコプター"
+        ]
+      },
+      {
+        "id": "Q7895685",
+        "title": "Q7895685",
+        "pageid": 7833238,
+        "concepturi": "http://www.wikidata.org/entity/Q7895685",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q7895685",
+        "display": {
+          "label": {
+            "value": "University of Maryland Gamera Human Powered Helicopter",
+            "language": "en"
+          },
+          "description": {
+            "value": "type of aircraft",
+            "language": "en"
+          }
+        },
+        "label": "University of Maryland Gamera Human Powered Helicopter",
+        "description": "type of aircraft",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ヘリコプター"
+        },
+        "aliases": [
+          "ヘリコプター"
+        ]
+      },
+      {
+        "id": "Q534159",
+        "title": "Q534159",
+        "pageid": 502925,
+        "concepturi": "http://www.wikidata.org/entity/Q534159",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q534159",
+        "display": {
+          "label": {
+            "value": "helipad",
+            "language": "en"
+          },
+          "description": {
+            "value": "landing area for helicopters",
+            "language": "en"
+          }
+        },
+        "label": "helipad",
+        "description": "landing area for helicopters",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ヘリコプター発着場"
+        },
+        "aliases": [
+          "ヘリコプター発着場"
+        ]
+      },
+      {
+        "id": "Q763256",
+        "title": "Q763256",
+        "pageid": 717134,
+        "concepturi": "http://www.wikidata.org/entity/Q763256",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q763256",
+        "display": {
+          "label": {
+            "value": "air medical services",
+            "language": "en"
+          },
+          "description": {
+            "value": "use of aircraft to provide medical care",
+            "language": "en"
+          }
+        },
+        "label": "air medical services",
+        "description": "use of aircraft to provide medical care",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ヘリコプター救急"
+        },
+        "aliases": [
+          "ヘリコプター救急"
+        ]
+      },
+      {
+        "id": "Q622031",
+        "title": "Q622031",
+        "pageid": 585216,
+        "concepturi": "http://www.wikidata.org/entity/Q622031",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q622031",
+        "display": {
+          "label": {
+            "value": "flight deck",
+            "language": "en"
+          },
+          "description": {
+            "value": "landing/take off surface of an aircraft carrier",
+            "language": "en"
+          }
+        },
+        "label": "flight deck",
+        "description": "landing/take off surface of an aircraft carrier",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ヘリコプター甲板"
+        },
+        "aliases": [
+          "ヘリコプター甲板"
+        ]
+      },
+      {
+        "id": "Q869923",
+        "title": "Q869923",
+        "pageid": 821213,
+        "concepturi": "http://www.wikidata.org/entity/Q869923",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q869923",
+        "display": {
+          "label": {
+            "value": "helicopter carrier",
+            "language": "en"
+          },
+          "description": {
+            "value": "type of aircraft carrier",
+            "language": "en"
+          }
+        },
+        "label": "helicopter carrier",
+        "description": "type of aircraft carrier",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ヘリコプター巡洋艦"
+        },
+        "aliases": [
+          "ヘリコプター巡洋艦"
+        ]
+      },
+      {
+        "id": "Q20726593",
+        "title": "Q20726593",
+        "pageid": 22472259,
+        "concepturi": "http://www.wikidata.org/entity/Q20726593",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q20726593",
+        "display": {
+          "label": {
+            "value": "helicopter pilot",
+            "language": "en"
+          },
+          "description": {
+            "value": "aviator who can fly a helicopter",
+            "language": "en"
+          }
+        },
+        "label": "helicopter pilot",
+        "description": "aviator who can fly a helicopter",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ヘリコプター操縦士"
+        },
+        "aliases": [
+          "ヘリコプター操縦士"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

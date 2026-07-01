@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:00.820Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 379040,
+          "ns": 0,
+          "title": "糞",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふん",
+            "page_image_free": "Elephant_feces_in_the_wildlife.jpg",
+            "wikibase_item": "Q496"
+          },
+          "terms": {
+            "description": [
+              "動物の消化管から排出される固体状の排泄物"
+            ]
+          }
+        },
+        {
+          "pageid": 2546182,
+          "ns": 0,
+          "title": "ダイバーシティ東京",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たいはあしていとうきよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Diver-City_Tokyo_as_see_from_FCG_Building.jpg",
+            "wikibase_item": "Q11316944"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62516667,
+              "lon": 139.77536111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区の複合施設"
+            ]
+          }
+        },
+        {
+          "pageid": 3881920,
+          "ns": 0,
+          "title": "若杉凩",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "わかすき こからし",
+            "wikibase_item": "Q60452254"
+          },
+          "terms": {
+            "description": [
+              "日本の女優"
+            ]
+          }
+        },
+        {
+          "pageid": 3919644,
+          "ns": 0,
+          "title": "うんこミュージアム",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "うんこみゆうしあむ",
+            "wikibase_item": "Q65234016"
+          },
+          "terms": {
+            "description": [
+              "日本の娯楽施設"
+            ]
+          }
+        },
+        {
+          "pageid": 4219787,
+          "ns": 0,
+          "title": "何人も",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なんひとも",
+            "wikibase_item": "Q105352436"
+          }
+        }
+      ]
+    }
+  }
+}

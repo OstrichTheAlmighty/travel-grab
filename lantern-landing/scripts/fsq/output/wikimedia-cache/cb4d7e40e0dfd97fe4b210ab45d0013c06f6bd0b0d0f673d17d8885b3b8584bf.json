@@ -1,0 +1,119 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:22.988Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 149255,
+          "ns": 0,
+          "title": "国立代々木競技場",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こくりつよよききようきしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Yoyogi-National-First-Gymnasium-01.jpg",
+            "wikibase_item": "Q1069457"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66775,
+              "lon": 139.70013889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にあるスポーツ施設"
+            ]
+          }
+        },
+        {
+          "pageid": 247687,
+          "ns": 0,
+          "title": "国立霞ヶ丘競技場陸上競技場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こくりつかすみかおかきようきしようりくしようきようきしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Yamazaki-nabisco-Cup_final_2004.jpg",
+            "wikibase_item": "Q330033"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67806,
+              "lon": 139.71472,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて日本の東京都新宿区にあった陸上競技場"
+            ]
+          }
+        },
+        {
+          "pageid": 1089583,
+          "ns": 0,
+          "title": "スパチャラサイ国立競技場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "すはちやらさい",
+            "page_image_free": "Suphachalasai_Stadium_by_AsianFC.jpg",
+            "wikibase_item": "Q122834533"
+          },
+          "coordinates": [
+            {
+              "lat": 13.74555556,
+              "lon": 100.52555556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 2840513,
+          "ns": 0,
+          "title": "国立競技場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こくりつきようきしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Logo_mufgstadium.svg",
+            "wikibase_item": "Q14862239"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67805556,
+              "lon": 139.71472222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区にある競技場"
+            ]
+          }
+        },
+        {
+          "pageid": 4222874,
+          "ns": 0,
+          "title": "アラフェス2020 at 国立競技場",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あらふえすにいせろにいせろあつとなしよなるすたしあむ",
+            "wikibase_item": "Q109365772"
+          }
+        }
+      ]
+    }
+  }
+}

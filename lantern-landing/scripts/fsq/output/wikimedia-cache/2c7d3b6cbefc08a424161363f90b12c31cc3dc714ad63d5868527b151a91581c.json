@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:17.862Z",
+  "value": {
+    "searchinfo": {
+      "search": "三菱史料館"
+    },
+    "search": [
+      {
+        "id": "Q11357080",
+        "title": "Q11357080",
+        "pageid": 12494991,
+        "concepturi": "http://www.wikidata.org/entity/Q11357080",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11357080",
+        "display": {
+          "label": {
+            "value": "Mitsubishi Archives",
+            "language": "en"
+          }
+        },
+        "label": "Mitsubishi Archives",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "三菱史料館"
+        },
+        "aliases": [
+          "三菱史料館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

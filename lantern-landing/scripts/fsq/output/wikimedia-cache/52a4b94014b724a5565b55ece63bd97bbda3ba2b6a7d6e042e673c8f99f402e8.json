@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:45:53.265Z",
+  "value": {
+    "searchinfo": {
+      "search": "ぴょんぴょん"
+    },
+    "search": [
+      {
+        "id": "Q11276920",
+        "title": "Q11276920",
+        "pageid": 12418210,
+        "concepturi": "http://www.wikidata.org/entity/Q11276920",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11276920",
+        "display": {
+          "label": {
+            "value": "Pyon Pyon",
+            "language": "en"
+          }
+        },
+        "label": "Pyon Pyon",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ぴょんぴょん"
+        },
+        "aliases": [
+          "ぴょんぴょん"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:42.314Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 11474,
+          "ns": 0,
+          "title": "吉祥寺駅",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きちしようし",
+            "kartographer_frames": "1",
+            "page_image_free": "キラリナ京王吉祥寺・アトレ吉祥寺.jpg",
+            "wikibase_item": "Q801004"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70305556,
+              "lon": 139.58,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都武蔵野市吉祥寺南町にある東日本旅客鉄道・京王電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 53986,
+          "ns": 0,
+          "title": "武蔵野市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "むさしのし",
+            "kartographer_frames": "1",
+            "page_image_free": "Inokasira-sizen-bunkaen.jpg",
+            "wikibase_item": "Q210661"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71772,
+              "lon": 139.56606,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の市"
+            ]
+          }
+        },
+        {
+          "pageid": 55202,
+          "ns": 0,
+          "title": "大阪市立美術館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおさかしりつひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "20250827_大阪市立美術館.jpg",
+            "wikibase_item": "Q9004920"
+          },
+          "coordinates": [
+            {
+              "lat": 34.65011111,
+              "lon": 135.51052778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪市天王寺区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 565603,
+          "ns": 0,
+          "title": "吉祥寺",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きちしようし",
+            "page_image_free": "Kichijoji_N-gate_Square.JPG",
+            "wikibase_item": "Q287771"
+          },
+          "terms": {
+            "description": [
+              "東京都武蔵野市の広域地名"
+            ]
+          }
+        },
+        {
+          "pageid": 1909719,
+          "ns": 0,
+          "title": "F&Fビル",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えふえふひる",
+            "kartographer_frames": "1",
+            "page_image_free": "Coppice_Kichijoji_1.jpg",
+            "wikibase_item": "Q11198629"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70488889,
+              "lon": 139.57941667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都武蔵野市にある商業ビル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:49.823Z",
+  "value": {
+    "searchinfo": {
+      "search": "ブローフィッシュ・バルーンレース"
+    },
+    "search": [
+      {
+        "id": "Q6600319",
+        "title": "Q6600319",
+        "pageid": 6427083,
+        "concepturi": "http://www.wikidata.org/entity/Q6600319",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6600319",
+        "display": {
+          "label": {
+            "value": "list of Tokyo DisneySea attractions",
+            "language": "en"
+          },
+          "description": {
+            "value": "Wikimedia list article",
+            "language": "en"
+          }
+        },
+        "label": "list of Tokyo DisneySea attractions",
+        "description": "Wikimedia list article",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ブローフィッシュ・バルーンレース"
+        },
+        "aliases": [
+          "ブローフィッシュ・バルーンレース"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:17.385Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 60406,
+          "ns": 0,
+          "title": "玉川上水",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たまかわしようすい",
+            "page_image_free": "TamagawaJosui_fromMikageBridge.JPG",
+            "wikibase_item": "Q1014298"
+          },
+          "terms": {
+            "description": [
+              "江戸市中への飲料水が流れていた上水道"
+            ]
+          }
+        },
+        {
+          "pageid": 102619,
+          "ns": 0,
+          "title": "神田川 (東京都)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かんたかわ",
+            "kartographer_frames": "3",
+            "page_image_free": "Ochanomizu_hijiribashi01.jpg",
+            "wikibase_item": "Q3136772"
+          },
+          "terms": {
+            "description": [
+              "東京都内を井の頭池から荒川水系隅田川まで流れる河川"
+            ]
+          }
+        },
+        {
+          "pageid": 103444,
+          "ns": 0,
+          "title": "神田上水",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かんたしようすい",
+            "page_image_free": "神田上水碑文02.JPG",
+            "wikibase_item": "Q11590546"
+          }
+        },
+        {
+          "pageid": 3199645,
+          "ns": 0,
+          "title": "水道橋 (神田川)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "すいとうはし",
+            "wikibase_item": "Q20045068"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70205556,
+              "lon": 139.75530556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の橋"
+            ]
+          }
+        },
+        {
+          "pageid": 3953795,
+          "ns": 0,
+          "title": "神田上水懸樋",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かんたしようすいかけひ",
+            "page_image_free": "Edo_Meisho_Zue_01_Ochanomizu_Suidobashi.jpg",
+            "wikibase_item": "Q65276856"
+          }
+        }
+      ]
+    }
+  }
+}

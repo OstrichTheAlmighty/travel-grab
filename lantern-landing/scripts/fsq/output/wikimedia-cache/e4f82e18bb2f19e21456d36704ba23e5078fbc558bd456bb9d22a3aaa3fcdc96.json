@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:07.843Z",
+  "value": {
+    "searchinfo": {
+      "search": "山王草堂記念館"
+    },
+    "search": [
+      {
+        "id": "Q116564594",
+        "title": "Q116564594",
+        "pageid": 111329263,
+        "concepturi": "http://www.wikidata.org/entity/Q116564594",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q116564594",
+        "display": {
+          "label": {
+            "value": "Sannō Sōdō Memorial Museum",
+            "language": "en"
+          }
+        },
+        "label": "Sannō Sōdō Memorial Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "山王草堂記念館"
+        },
+        "aliases": [
+          "山王草堂記念館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

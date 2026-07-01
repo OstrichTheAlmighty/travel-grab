@@ -1,0 +1,133 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:47.051Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 30057,
+          "ns": 0,
+          "title": "Tokyo",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Capital and most populous city in Japan",
+            "wikibase_item": "Q1490"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68972222,
+              "lon": 139.69222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "capital and largest city of Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 148869,
+          "ns": 0,
+          "title": "Tokyo Tower",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Tower_2023.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "Communications and observation tower in Japan",
+            "wikibase_item": "Q183536"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65861111,
+              "lon": 139.74555556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "tower in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 2638104,
+          "ns": 0,
+          "title": "Tokyo Skytree",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Skytree_2014_Ⅲ.jpg",
+            "wikibase-shortdesc": "Broadcasting and observation tower in Japan",
+            "wikibase_item": "Q57965"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7101,
+              "lon": 139.8107,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "tower in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 9308424,
+          "ns": 0,
+          "title": "Tokyo Skytree Station",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "TokyoSkyTree_Station-Main_Entrance-20120420.jpg",
+            "wikibase-shortdesc": "Railway station in Tokyo, Japan",
+            "wikibase_item": "Q900250"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7099,
+              "lon": 139.8094,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "railway station in Sumida, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 39287882,
+          "ns": 0,
+          "title": "Tobu Skytree Line",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Tobu Skytree Line",
+            "page_image_free": "Tokyo_Skytree_&_Tobu_100_series_-_02.jpg",
+            "wikibase-shortdesc": "Section of the Tobu Isesaki Line in Japan",
+            "wikibase_item": "Q13360900"
+          },
+          "terms": {
+            "description": [
+              "official nickname for part of the Tobu Isesaki Line in Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

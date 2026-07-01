@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:13:52.039Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 136148,
+          "ns": 0,
+          "title": "Tokyo Disney Resort",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Disneyland_(1-1_crop).jpg",
+            "wikibase-shortdesc": "Theme park and vacation resort in Chiba, Japan",
+            "wikibase_item": "Q605492"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62972222,
+              "lon": 139.88277778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Disney resort in Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 1088528,
+          "ns": 0,
+          "title": "Tokyo Disneyland",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Disneyland_Cinderella_Castle_2023-07-02.jpg",
+            "wikibase-shortdesc": "Theme park in Chiba, Japan",
+            "wikibase_item": "Q843997"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63277778,
+              "lon": 139.88055556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "theme park in Japan, owned by The Oriental Land Company"
+            ]
+          }
+        },
+        {
+          "pageid": 11628782,
+          "ns": 0,
+          "title": "Tokyo Disneyland Hotel",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_DisneyLand_Hotel.jpg",
+            "wikibase-shortdesc": "Disney-themed hotel in Japan",
+            "wikibase_item": "Q195423"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63686111,
+              "lon": 139.87825,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "hotel"
+            ]
+          }
+        },
+        {
+          "pageid": 12996353,
+          "ns": 0,
+          "title": "Space Mountain (Tokyo Disneyland)",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "TDL_New_Space_Mountain.jpg",
+            "wikibase-shortdesc": "Roller coaster",
+            "wikibase_item": "Q7572428"
+          },
+          "terms": {
+            "description": [
+              "roller coaster at Tokyo Disneyland, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 23738176,
+          "ns": 0,
+          "title": "Tokyo DisneySea",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_DisneySea_logo.svg",
+            "wikibase-shortdesc": "Theme park in Chiba, Japan",
+            "wikibase_item": "Q1202341"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62666667,
+              "lon": 139.88805556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "theme park in Japan, owned by The Oriental Land Company"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

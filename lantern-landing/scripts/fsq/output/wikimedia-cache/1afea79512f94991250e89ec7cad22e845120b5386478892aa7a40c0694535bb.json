@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:22.960Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 469274,
+          "ns": 0,
+          "title": "東京聖栄大学",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようせいえい",
+            "page_image_free": "Tokyo-Seiei-Univ.JPG",
+            "wikibase_item": "Q7813984"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71783056,
+              "lon": 139.85669444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都葛飾区西新小岩に本部を置く私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 739599,
+          "ns": 0,
+          "title": "ダイアモンド☆ユカイ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たいあもんとゆかい",
+            "page_image_free": "Diamond_Yukai_from_\"Tokyo_Pop_4K_Digitally_Remastered_Version\"_at_Red_Carpet_of_the_Tokyo_International_Film_Festival_2023_(53348530810).jpg",
+            "wikibase_item": "Q3543450"
+          },
+          "terms": {
+            "description": [
+              "日本のミュージシャン、俳優 (1962-)"
+            ]
+          }
+        },
+        {
+          "pageid": 2012354,
+          "ns": 0,
+          "title": "田所哲太郎",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たところ てつたろう",
+            "wikibase_item": "Q11576785"
+          },
+          "terms": {
+            "description": [
+              "日本の農芸化学者"
+            ]
+          }
+        },
+        {
+          "pageid": 2074481,
+          "ns": 0,
+          "title": "田所貴司",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たところ たかし",
+            "wikibase_item": "Q11576803"
+          }
+        },
+        {
+          "pageid": 3779738,
+          "ns": 0,
+          "title": "トライ・インターナショナル",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とらいいんたあなしよなる",
+            "page_image_free": "World_Business_Garden.jpg",
+            "wikibase_item": "Q53309706"
+          }
+        }
+      ]
+    }
+  }
+}

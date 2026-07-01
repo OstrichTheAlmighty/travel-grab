@@ -1,0 +1,119 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:48.412Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 183994,
+          "ns": 0,
+          "title": "武州中川駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふしゆうなかかわ",
+            "kartographer_frames": "1",
+            "page_image_free": "Bushu-nakagawa_Station_Entrance_1.JPG",
+            "wikibase_item": "Q3701401"
+          },
+          "coordinates": [
+            {
+              "lat": 35.95845556,
+              "lon": 139.03522778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県秩父市荒川上田野にある秩父鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 201909,
+          "ns": 0,
+          "title": "地産地消",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ちさんちしよう",
+            "wikibase_item": "Q2674120"
+          },
+          "terms": {
+            "description": [
+              "その地域で生産されたものをその地域で消費すること"
+            ]
+          }
+        },
+        {
+          "pageid": 210318,
+          "ns": 0,
+          "title": "狩生駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かりう",
+            "kartographer_frames": "1",
+            "page_image_free": "Kariu_Station_20190103.jpg",
+            "wikibase_item": "Q5358631"
+          },
+          "coordinates": [
+            {
+              "lat": 33.01527222,
+              "lon": 131.90480833,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大分県佐伯市にある九州旅客鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 256307,
+          "ns": 0,
+          "title": "榛東村",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しんとうむら",
+            "page_image_free": "Ryutaku-ji_(Shinto,_Gunma)_Niomon.jpg",
+            "wikibase_item": "Q1203698"
+          },
+          "coordinates": [
+            {
+              "lat": 36.43856,
+              "lon": 138.96714,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "群馬県北群馬郡の村"
+            ]
+          }
+        },
+        {
+          "pageid": 2978873,
+          "ns": 0,
+          "title": "直接販売",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ちよくせつはんはい",
+            "wikibase_item": "Q5280224"
+          },
+          "terms": {
+            "description": [
+              "マーケティング用語"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

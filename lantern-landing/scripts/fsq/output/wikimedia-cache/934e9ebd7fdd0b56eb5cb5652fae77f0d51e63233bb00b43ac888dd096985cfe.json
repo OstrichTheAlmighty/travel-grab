@@ -1,0 +1,45 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:02.570Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1343540,
+          "ns": 0,
+          "title": "Shunsuke Kazama",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Kazama, Shunsuke",
+            "page_image_free": "Shunsuke_Kazama_2024.png",
+            "wikibase-shortdesc": "Japanese actor and television personality",
+            "wikibase_item": "Q873168"
+          },
+          "terms": {
+            "description": [
+              "Japanese singer and voice actor"
+            ]
+          }
+        },
+        {
+          "pageid": 77811661,
+          "ns": 0,
+          "title": "IHI Stage Around Tokyo",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "IHI_STAGE_AROUND_TOKYO.jpg",
+            "wikibase-shortdesc": "Building in Koto ward, Tokyo",
+            "wikibase_item": "Q48750542"
+          },
+          "terms": {
+            "description": [
+              "building in Koto ward, Tokyo"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

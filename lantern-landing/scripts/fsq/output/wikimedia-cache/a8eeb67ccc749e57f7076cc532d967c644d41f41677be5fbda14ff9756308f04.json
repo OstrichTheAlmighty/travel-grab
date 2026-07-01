@@ -1,0 +1,38 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:11.920Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1897626,
+          "ns": 0,
+          "title": "Dj yogurt",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ていいしえいよおくると",
+            "displaytitle": "dj yogurt",
+            "wikibase_item": "Q11196917"
+          }
+        },
+        {
+          "pageid": 3456025,
+          "ns": 0,
+          "title": "トリプルファイヤー",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とりふるふあいやあ",
+            "page_image_free": "Japanese_Rock_Band_TRIPLE_FIRE.jpg",
+            "wikibase_item": "Q28682320"
+          },
+          "terms": {
+            "description": [
+              "日本のバンド (2006-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

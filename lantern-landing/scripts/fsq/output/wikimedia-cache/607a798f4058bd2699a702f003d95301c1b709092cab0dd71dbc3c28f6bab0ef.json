@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:11.983Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 29104,
+          "ns": 0,
+          "title": "展望車",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "てんほうしや",
+            "wikibase_item": "Q1691845"
+          }
+        },
+        {
+          "pageid": 146552,
+          "ns": 0,
+          "title": "NEXT21 (新潟市)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ねくすとにしゆういち",
+            "kartographer_frames": "1",
+            "page_image_free": "Niigata-Furumachi-NEXT21-002.JPG",
+            "wikibase_item": "Q11234904"
+          },
+          "coordinates": [
+            {
+              "lat": 37.9225,
+              "lon": 139.04327778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "新潟市中央区にある高層ビル"
+            ]
+          }
+        },
+        {
+          "pageid": 179567,
+          "ns": 0,
+          "title": "大倉山ジャンプ競技場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおくらやましやんふきようきしよう",
+            "page_image_free": "Okurayama_August_2007.jpg",
+            "wikibase_item": "Q385351"
+          },
+          "coordinates": [
+            {
+              "lat": 43.051325,
+              "lon": 141.29,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "札幌市中央区にあるジャンプ競技場・展望台"
+            ]
+          }
+        },
+        {
+          "pageid": 1193647,
+          "ns": 0,
+          "title": "文京区役所",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふんきようくやくしよ",
+            "kartographer_frames": "1",
+            "page_image_free": "Bunkyo_Civic_Center_2009.jpg",
+            "wikibase_item": "Q2928236"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70787222,
+              "lon": 139.75242222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区の区役所"
+            ]
+          }
+        },
+        {
+          "pageid": 3418708,
+          "ns": 0,
+          "title": "おがさわら丸 (3代)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おかさわらまる3",
+            "page_image_free": "Ogasawara_Maru_3rd_JAPAN_at_Chichijima_20160918_at_pier.jpg",
+            "wikibase_item": "Q24859347"
+          },
+          "terms": {
+            "description": [
+              "2016年に就航した東京と小笠原を結ぶ貨客船"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

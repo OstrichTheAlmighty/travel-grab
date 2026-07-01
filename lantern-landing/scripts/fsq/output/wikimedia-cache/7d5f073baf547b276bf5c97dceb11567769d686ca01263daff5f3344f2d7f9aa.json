@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:12.273Z",
+  "value": {
+    "searchinfo": {
+      "search": "大隈重信像"
+    },
+    "search": [
+      {
+        "id": "Q11441788",
+        "title": "Q11441788",
+        "pageid": 12580673,
+        "concepturi": "http://www.wikidata.org/entity/Q11441788",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11441788",
+        "display": {
+          "label": {
+            "value": "Statues of Ōkuma Shigenobu",
+            "language": "en"
+          },
+          "description": {
+            "value": "Statue made in honor of Ōkuma Shigenobu",
+            "language": "en"
+          }
+        },
+        "label": "Statues of Ōkuma Shigenobu",
+        "description": "Statue made in honor of Ōkuma Shigenobu",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "大隈重信像"
+        },
+        "aliases": [
+          "大隈重信像"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

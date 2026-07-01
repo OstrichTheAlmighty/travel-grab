@@ -1,0 +1,77 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:54.738Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1175631,
+          "ns": 0,
+          "title": "志村 (板橋区)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しむら",
+            "kartographer_frames": "1",
+            "page_image_free": "Shimuraichirizuka.jpg",
+            "wikibase_item": "Q11490979"
+          },
+          "terms": {
+            "description": [
+              "東京都板橋区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1394461,
+          "ns": 0,
+          "title": "志村屋です。",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しむらやてす",
+            "wikibase_item": "Q11491010"
+          }
+        },
+        {
+          "pageid": 2760723,
+          "ns": 0,
+          "title": "志村だヨ!",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しむらたよ",
+            "wikibase_item": "Q11490992"
+          }
+        },
+        {
+          "pageid": 3589732,
+          "ns": 0,
+          "title": "志村の夜",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しむらのしかん",
+            "wikibase_item": "Q30930318"
+          }
+        }
+      ]
+    }
+  }
+}

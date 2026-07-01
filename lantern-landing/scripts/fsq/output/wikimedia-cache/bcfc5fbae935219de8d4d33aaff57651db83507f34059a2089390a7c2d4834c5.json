@@ -1,0 +1,201 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:30.735Z",
+  "value": {
+    "searchinfo": {
+      "search": "秋葉原"
+    },
+    "search": [
+      {
+        "id": "Q418096",
+        "title": "Q418096",
+        "pageid": 395435,
+        "concepturi": "http://www.wikidata.org/entity/Q418096",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q418096",
+        "display": {
+          "label": {
+            "value": "Akihabara",
+            "language": "en"
+          },
+          "description": {
+            "value": "town located in Chiyoda, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Akihabara",
+        "description": "town located in Chiyoda, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "秋葉原"
+        },
+        "aliases": [
+          "秋葉原"
+        ]
+      },
+      {
+        "id": "Q102416656",
+        "title": "Q102416656",
+        "pageid": 99184265,
+        "concepturi": "http://www.wikidata.org/entity/Q102416656",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q102416656",
+        "display": {
+          "label": {
+            "value": "Akihabara",
+            "language": "en"
+          },
+          "description": {
+            "value": "administrative division in Taitō-ku, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Akihabara",
+        "description": "administrative division in Taitō-ku, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "秋葉原"
+        },
+        "aliases": [
+          "秋葉原"
+        ]
+      },
+      {
+        "id": "Q11595821",
+        "title": "Q11595821",
+        "pageid": 12735934,
+        "concepturi": "http://www.wikidata.org/entity/Q11595821",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11595821",
+        "display": {
+          "label": {
+            "value": "秋葉原",
+            "language": "ja"
+          }
+        },
+        "label": "秋葉原",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "秋葉原"
+        }
+      },
+      {
+        "id": "Q51118",
+        "title": "Q51118",
+        "pageid": 53250,
+        "concepturi": "http://www.wikidata.org/entity/Q51118",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q51118",
+        "display": {
+          "label": {
+            "value": "AKB48",
+            "language": "en"
+          },
+          "description": {
+            "value": "Japanese female idol group",
+            "language": "en"
+          }
+        },
+        "label": "AKB48",
+        "description": "Japanese female idol group",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "秋葉原４８"
+        },
+        "aliases": [
+          "秋葉原４８"
+        ]
+      },
+      {
+        "id": "Q800374",
+        "title": "Q800374",
+        "pageid": 753295,
+        "concepturi": "http://www.wikidata.org/entity/Q800374",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q800374",
+        "display": {
+          "label": {
+            "value": "Akihabara Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "railway station and metro station in Chiyoda, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Akihabara Station",
+        "description": "railway station and metro station in Chiyoda, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "秋葉原駅"
+        },
+        "aliases": [
+          "秋葉原駅"
+        ]
+      },
+      {
+        "id": "Q925737",
+        "title": "Q925737",
+        "pageid": 876126,
+        "concepturi": "http://www.wikidata.org/entity/Q925737",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q925737",
+        "display": {
+          "label": {
+            "value": "Akihabara massacre",
+            "language": "en"
+          },
+          "description": {
+            "value": "2008 mass murder in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Akihabara massacre",
+        "description": "2008 mass murder in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "秋葉原通り魔事件"
+        },
+        "aliases": [
+          "秋葉原通り魔事件"
+        ]
+      },
+      {
+        "id": "Q2703754",
+        "title": "Q2703754",
+        "pageid": 2600961,
+        "concepturi": "http://www.wikidata.org/entity/Q2703754",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2703754",
+        "display": {
+          "label": {
+            "value": "Cyber Team in Akihabara",
+            "language": "en"
+          },
+          "description": {
+            "value": "Japanese anime television series",
+            "language": "en"
+          }
+        },
+        "label": "Cyber Team in Akihabara",
+        "description": "Japanese anime television series",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "秋葉原電脳組"
+        },
+        "aliases": [
+          "秋葉原電脳組"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

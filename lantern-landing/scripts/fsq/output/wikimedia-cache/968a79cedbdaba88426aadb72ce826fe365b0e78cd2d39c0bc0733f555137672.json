@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:18.228Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 39570,
+          "ns": 0,
+          "title": "堀辰雄",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほり たつお",
+            "page_image_free": "Photo-1935-HoriTatsuo.png",
+            "wikibase_item": "Q961645"
+          },
+          "terms": {
+            "description": [
+              "日本の作家 (1904-1953)"
+            ]
+          }
+        },
+        {
+          "pageid": 156999,
+          "ns": 0,
+          "title": "追分宿",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おいわけしゆく",
+            "page_image_free": "160730_Oiwake-shuku_Karuizawa_Nagano_pref_Japan01n.jpg",
+            "wikibase_item": "Q3349984"
+          },
+          "terms": {
+            "description": [
+              "中山道六十九次のうち江戸から数えて二十番目の宿場"
+            ]
+          }
+        },
+        {
+          "pageid": 240568,
+          "ns": 0,
+          "title": "立原道造",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たちはら みちそう",
+            "page_image_free": "Tachihara_Michizo_at_Ginza.jpg",
+            "wikibase_item": "Q6837958"
+          },
+          "terms": {
+            "description": [
+              "日本の詩人 (1914-1939)"
+            ]
+          }
+        },
+        {
+          "pageid": 388753,
+          "ns": 0,
+          "title": "杉浦明平",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すきうら みんへい",
+            "page_image_free": "Minpei-Sugiura-1.jpg",
+            "wikibase_item": "Q11522238"
+          },
+          "terms": {
+            "description": [
+              "日本の小説家 (1913-2001)"
+            ]
+          }
+        },
+        {
+          "pageid": 1341645,
+          "ns": 0,
+          "title": "弥生美術館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "やよいひしゆつかん",
+            "page_image_free": "Appearance-of-Yayoi-Yumeji-Museum.jpg",
+            "wikibase_item": "Q11487473"
+          },
+          "coordinates": [
+            {
+              "lat": 35.715,
+              "lon": 139.76333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

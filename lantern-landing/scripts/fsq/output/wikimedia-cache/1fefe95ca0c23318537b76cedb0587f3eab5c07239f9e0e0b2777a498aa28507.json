@@ -1,0 +1,85 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:45.328Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 284084,
+          "ns": 0,
+          "title": "佃 (東京都中央区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "つくた",
+            "kartographer_frames": "1",
+            "page_image_free": "中央区佃島民家.jpg",
+            "wikibase_item": "Q11381595"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 542023,
+          "ns": 0,
+          "title": "隅田川の渡し",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "すみたかわのわたし",
+            "page_image_free": "Sunset_across_the_Ryogoku_bridge_from_the_bank_of_the_Sumida_river_at_Onmagayashi.jpg",
+            "wikibase_item": "Q11658843"
+          },
+          "terms": {
+            "description": [
+              "隅田川にかつて存在した渡し船・渡船場の総称"
+            ]
+          }
+        },
+        {
+          "pageid": 1122085,
+          "ns": 0,
+          "title": "湊 (東京都中央区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みなと",
+            "kartographer_frames": "1",
+            "page_image_free": "Teppozu_Inari_Shrine_01.JPG",
+            "wikibase_item": "Q11563125"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 2150800,
+          "ns": 0,
+          "title": "田蓑神社",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たみのしんしや",
+            "page_image_free": "Taminojinja01.jpg",
+            "wikibase_item": "Q11577264"
+          },
+          "coordinates": [
+            {
+              "lat": 34.71861111,
+              "lon": 135.44833333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪市にある神社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

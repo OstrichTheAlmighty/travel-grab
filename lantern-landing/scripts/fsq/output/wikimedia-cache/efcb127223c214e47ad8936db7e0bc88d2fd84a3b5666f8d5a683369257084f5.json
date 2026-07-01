@@ -1,0 +1,82 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:12.315Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 179948,
+          "ns": 0,
+          "title": "駄洒落",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たしやれ",
+            "wikibase_item": "Q263668"
+          },
+          "terms": {
+            "description": [
+              "言葉遊びの一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 662891,
+          "ns": 0,
+          "title": "一心太助",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いつしんたすけ",
+            "page_image_free": "Ryūtarō_Ōtomo_1.jpg",
+            "wikibase_item": "Q3155712"
+          },
+          "terms": {
+            "description": [
+              "架空の人物"
+            ]
+          }
+        },
+        {
+          "pageid": 1098590,
+          "ns": 0,
+          "title": "ボクシング",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ほくしんく",
+            "page_image_free": "Asikainen-di_Giacomo.jpg",
+            "wikibase_item": "Q32112"
+          },
+          "terms": {
+            "description": [
+              "格闘競技スポーツ"
+            ]
+          }
+        },
+        {
+          "pageid": 1422690,
+          "ns": 0,
+          "title": "奥八兵衛",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おく はちへえ",
+            "wikibase_item": "Q11445610"
+          }
+        },
+        {
+          "pageid": 2268245,
+          "ns": 0,
+          "title": "日曜8時、笑っていただきます",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にちようはちしわらつていたたきます",
+            "wikibase_item": "Q11505411"
+          }
+        }
+      ]
+    }
+  }
+}

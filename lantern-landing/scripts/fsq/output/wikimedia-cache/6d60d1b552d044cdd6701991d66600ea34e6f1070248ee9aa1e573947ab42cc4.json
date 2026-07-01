@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:48.363Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8073,
+          "ns": 0,
+          "title": "新宿区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しんしゆくく",
+            "kartographer_frames": "1",
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "wikibase_item": "Q179645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69389,
+              "lon": 139.70342,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 120087,
+          "ns": 0,
+          "title": "東京都道405号外濠環状線",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようととう405",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q11103007"
+          },
+          "terms": {
+            "description": [
+              "東京都の道路"
+            ]
+          }
+        },
+        {
+          "pageid": 198962,
+          "ns": 0,
+          "title": "東京都道414号四谷角筈線",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "414",
+            "page_image_free": "Japan_Tokyo_Yamanote_loop_location_map.svg",
+            "wikibase_item": "Q11103014"
+          },
+          "terms": {
+            "description": [
+              "新宿区四谷から西新宿に至る東京都道"
+            ]
+          }
+        },
+        {
+          "pageid": 1086307,
+          "ns": 0,
+          "title": "告白の噴水広場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こくはくのふんすいひろは",
+            "wikibase_item": "Q781872"
+          },
+          "terms": {
+            "description": [
+              "Berryz工房のシングル (2007)"
+            ]
+          }
+        },
+        {
+          "pageid": 1281134,
+          "ns": 0,
+          "title": "運動公園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "うんとうこうえん",
+            "wikibase_item": "Q16363669"
+          },
+          "terms": {
+            "description": [
+              "都市公園の一種で主に運動用"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

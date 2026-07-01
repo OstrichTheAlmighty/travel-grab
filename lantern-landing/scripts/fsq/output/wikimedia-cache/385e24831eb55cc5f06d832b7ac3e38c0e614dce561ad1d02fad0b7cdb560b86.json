@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:33.003Z",
+  "value": {
+    "searchinfo": {
+      "search": "國學院大學博物館"
+    },
+    "search": [
+      {
+        "id": "Q81916990",
+        "title": "Q81916990",
+        "pageid": 81275122,
+        "concepturi": "http://www.wikidata.org/entity/Q81916990",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q81916990",
+        "display": {
+          "label": {
+            "value": "Kokugakuin University Museum",
+            "language": "en"
+          }
+        },
+        "label": "Kokugakuin University Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "國學院大學博物館"
+        },
+        "aliases": [
+          "國學院大學博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

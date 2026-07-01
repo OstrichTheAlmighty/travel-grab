@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:45.748Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 61230,
+          "ns": 0,
+          "title": "Candy",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Candy_in_Damascus.jpg",
+            "wikibase-shortdesc": "Sweet confection",
+            "wikibase_item": "Q185583"
+          },
+          "terms": {
+            "description": [
+              "confection made with sugar"
+            ]
+          }
+        },
+        {
+          "pageid": 977771,
+          "ns": 0,
+          "title": "Nerds (candy)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Nerds (Candy)",
+            "page_image_free": "Nerds-Candies.jpg",
+            "wikibase-shortdesc": "American confection launched in 1982",
+            "wikibase_item": "Q6996001"
+          },
+          "terms": {
+            "description": [
+              "brand of candy"
+            ]
+          }
+        },
+        {
+          "pageid": 1465454,
+          "ns": 0,
+          "title": "Candy Candy",
+          "index": 1,
+          "pageprops": {
+            "displaytitle": "<i>Candy Candy</i>",
+            "page_image": "Candy_c.jpg",
+            "wikibase-shortdesc": "Japanese novel and its adaptations",
+            "wikibase_item": "Q699643"
+          },
+          "terms": {
+            "description": [
+              "1975-1979 Japanese anime series, Japanese manga series"
+            ]
+          }
+        },
+        {
+          "pageid": 2511267,
+          "ns": 0,
+          "title": "Candy (2006 film)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Candy (2006 Film)",
+            "displaytitle": "<i>Candy</i> (2006 film)",
+            "page_image": "Candy_(2006).jpg",
+            "wikibase-shortdesc": "2006 Australian film",
+            "wikibase_item": "Q280928"
+          },
+          "terms": {
+            "description": [
+              "2006 film directed by Neil Armfield"
+            ]
+          }
+        },
+        {
+          "pageid": 4155895,
+          "ns": 0,
+          "title": "Nick Candy",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Candy, Nick",
+            "wikibase-shortdesc": "British luxury property developer and politician (born 1973)",
+            "wikibase_item": "Q41453559"
+          },
+          "terms": {
+            "description": [
+              "British luxury property developer"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

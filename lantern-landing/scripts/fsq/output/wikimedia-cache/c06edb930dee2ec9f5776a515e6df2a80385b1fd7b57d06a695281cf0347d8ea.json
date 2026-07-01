@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:12.400Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 47291,
+          "ns": 0,
+          "title": "三菱自動車工業",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みつひししとうしやこうきよう",
+            "page_image_free": "Mitsubishi_motors_new_logo.svg",
+            "wikibase_item": "Q36033"
+          },
+          "coordinates": [
+            {
+              "lat": 35.645,
+              "lon": 139.74944444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の自動車メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 104216,
+          "ns": 0,
+          "title": "三重交通",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みえこうつう",
+            "page_image_free": "Miekaikan.jpg",
+            "wikibase_item": "Q6843516"
+          },
+          "coordinates": [
+            {
+              "lat": 34.719,
+              "lon": 136.51016667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "三重県のバス事業者"
+            ]
+          }
+        },
+        {
+          "pageid": 114496,
+          "ns": 0,
+          "title": "ジェイアールバス関東",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しえいああるはすかんとう",
+            "page_image_free": "JR_BusKanto_TokyoBranch.jpeg",
+            "wikibase_item": "Q10851155"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都江東区にあるバス事業者"
+            ]
+          }
+        },
+        {
+          "pageid": 128894,
+          "ns": 0,
+          "title": "近鉄バス",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きんてつはす",
+            "page_image_free": "Kintetsu_Bus_Hibrid.jpg",
+            "wikibase_item": "Q18636319"
+          }
+        },
+        {
+          "pageid": 191766,
+          "ns": 0,
+          "title": "よろしくメカドック",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "よろしくめかとつく",
+            "wikibase_item": "Q3603018"
+          },
+          "terms": {
+            "description": [
+              "次原隆二による日本の漫画及びテレビアニメ作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

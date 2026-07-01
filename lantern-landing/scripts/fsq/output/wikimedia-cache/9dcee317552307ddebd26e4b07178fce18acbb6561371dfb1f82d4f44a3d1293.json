@@ -1,0 +1,67 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:22.940Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 42791,
+          "ns": 0,
+          "title": "大國魂神社",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おおくにたましんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Ōkunitama_Shrine2.jpg",
+            "wikibase_item": "Q611678"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66746389,
+              "lon": 139.47894167,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都府中市の神社"
+            ]
+          }
+        },
+        {
+          "pageid": 382544,
+          "ns": 0,
+          "title": "近代社格制度",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きんたいしやかくせいと",
+            "wikibase_item": "Q712534"
+          },
+          "terms": {
+            "description": [
+              "明治維新以降新たに神社を等級化した制度"
+            ]
+          }
+        },
+        {
+          "pageid": 1549586,
+          "ns": 0,
+          "title": "大阪府の神社一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおさかふのしんしやいちらん",
+            "notoc": "",
+            "wikibase_item": "Q11440930"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

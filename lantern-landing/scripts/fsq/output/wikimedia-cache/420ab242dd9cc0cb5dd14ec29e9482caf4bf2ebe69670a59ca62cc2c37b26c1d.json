@@ -1,0 +1,129 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:19.469Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 10742,
+          "ns": 0,
+          "title": "板橋区",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いたはしく",
+            "kartographer_frames": "1",
+            "page_image_free": "Itabashi-at-nakajuku.JPG",
+            "wikibase_item": "Q232635"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75119,
+              "lon": 139.70928,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 909781,
+          "ns": 0,
+          "title": "板橋区立美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いたはしくりつひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Itabashi_ku_ritsu_Bijutsukan_Gaikan_20200321.jpg",
+            "wikibase_item": "Q11532663"
+          },
+          "coordinates": [
+            {
+              "lat": 35.78421355,
+              "lon": 139.64449133,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都板橋区の美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 1156431,
+          "ns": 0,
+          "title": "練馬区立美術館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ねりまくりつひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Nerima_art_museum.JPG",
+            "wikibase_item": "Q11608069"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73711,
+              "lon": 139.63611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都練馬区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 1233667,
+          "ns": 0,
+          "title": "渋谷区立松濤美術館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しふやくりつしようとうひしゆつかん",
+            "page_image_free": "渋谷区立松濤美術館.jpg",
+            "wikibase_item": "Q11561694"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65866667,
+              "lon": 139.69177778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 1542064,
+          "ns": 0,
+          "title": "佐藤太清",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さとう たいせい",
+            "wikibase_item": "Q11383894"
+          },
+          "terms": {
+            "description": [
+              "日本の画家 (1913-2004)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

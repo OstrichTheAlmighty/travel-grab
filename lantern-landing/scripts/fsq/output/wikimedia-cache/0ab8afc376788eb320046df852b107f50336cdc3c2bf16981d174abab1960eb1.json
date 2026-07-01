@@ -1,0 +1,51 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:15.613Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 578770,
+          "ns": 0,
+          "title": "日本のスーパーマーケット一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんのすうはあまあけつといちらん",
+            "page_image_free": "Aeon_Makuhari.JPG",
+            "wikibase_item": "Q11505638"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3785106,
+          "ns": 0,
+          "title": "一之江境川親水公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いちのえさかいかわしんすいこうえん",
+            "page_image_free": "Ichinoe_Sakaigawa_Shinsui_Park,_-April_2007_a.jpg",
+            "wikibase_item": "Q55527860"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69080556,
+              "lon": 139.87658333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江戸川区にある親水公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

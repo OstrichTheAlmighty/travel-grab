@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:13.190Z",
+  "value": {
+    "searchinfo": {
+      "search": "寅さん記念館"
+    },
+    "search": [
+      {
+        "id": "Q21018928",
+        "title": "Q21018928",
+        "pageid": 23070380,
+        "concepturi": "http://www.wikidata.org/entity/Q21018928",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q21018928",
+        "display": {
+          "label": {
+            "value": "Katsushika Shibamata Tora-san Museum",
+            "language": "en"
+          }
+        },
+        "label": "Katsushika Shibamata Tora-san Museum",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "寅さん記念館"
+        },
+        "aliases": [
+          "寅さん記念館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:40.194Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1313851,
+          "ns": 0,
+          "title": "村井吉兵衛",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "むらい きちへえ",
+            "page_image_free": "Murai_Kichibei.jpg",
+            "wikibase_item": "Q11522973"
+          },
+          "terms": {
+            "description": [
+              "日本の実業家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

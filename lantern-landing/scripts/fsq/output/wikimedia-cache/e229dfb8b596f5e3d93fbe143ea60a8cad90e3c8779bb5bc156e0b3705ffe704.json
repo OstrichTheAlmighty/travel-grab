@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:20.679Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 63285,
+          "ns": 0,
+          "title": "日比谷公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひひやこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Hibiya_Park_summer.jpg",
+            "wikibase_item": "Q1378533"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67361111,
+              "lon": 139.75611111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 72241,
+          "ns": 0,
+          "title": "永田町",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "なかたちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Nagatacho_1_and_2_chome.jpg",
+            "wikibase_item": "Q1197269"
+          },
+          "terms": {
+            "description": [
+              "東京都千代田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 78744,
+          "ns": 0,
+          "title": "麹町",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こうしまち",
+            "kartographer_frames": "1",
+            "page_image_free": "Kojimachigakuen.jpg",
+            "wikibase_item": "Q1185069"
+          },
+          "terms": {
+            "description": [
+              "東京都千代田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 301265,
+          "ns": 0,
+          "title": "江戸城",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "えとしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Edo_Castle_1979.94.21P01B.jpg",
+            "wikibase_item": "Q865913"
+          },
+          "coordinates": [
+            {
+              "lat": 35.688325,
+              "lon": 139.75436667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にあった城（現・皇居）"
+            ]
+          }
+        },
+        {
+          "pageid": 922518,
+          "ns": 0,
+          "title": "外濠 (東京都)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "そとほり",
+            "page_image_free": "Edo_hori.png",
+            "wikibase_item": "Q11430499"
+          },
+          "terms": {
+            "description": [
+              "江戸城の外側の堀の総称"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

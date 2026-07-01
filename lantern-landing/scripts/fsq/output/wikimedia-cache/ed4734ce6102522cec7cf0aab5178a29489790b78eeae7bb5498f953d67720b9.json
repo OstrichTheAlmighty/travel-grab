@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:54.605Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 173276,
+          "ns": 0,
+          "title": "Bonsai",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Bonsai,_Kenshin_Toge.jpg",
+            "wikibase-shortdesc": "Japanese art of miniature trees",
+            "wikibase_item": "Q64365"
+          },
+          "terms": {
+            "description": [
+              "miniature tree"
+            ]
+          }
+        },
+        {
+          "pageid": 972534,
+          "ns": 0,
+          "title": "Bonsai Kitten",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "\"Canned_meats.\",_by_Stoddard,_Seneca_Ray,_1844-1917_,_1844-1917.jpg",
+            "wikibase-shortdesc": "Hoax website about raising kittens in jars",
+            "wikibase_item": "Q528824"
+          },
+          "terms": {
+            "description": [
+              "website"
+            ]
+          }
+        },
+        {
+          "pageid": 1568431,
+          "ns": 0,
+          "title": "Bonsai (disambiguation)",
+          "index": 3,
+          "pageprops": {
+            "disambiguation": "",
+            "wikibase-shortdesc": "Topics referred to by the same term",
+            "wikibase_item": "Q1172195"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        },
+        {
+          "pageid": 28917283,
+          "ns": 0,
+          "title": "Bonsai cultivation and care",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Trident_Maple_bonsai_202,_October_10,_2008.jpg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q3007386"
+          },
+          "terms": {
+            "description": [
+              "long-term cultivation of small trees in containers, called bonsai in the Japanese tradition of this art form"
+            ]
+          }
+        },
+        {
+          "pageid": 51682216,
+          "ns": 0,
+          "title": "History of bonsai",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Bonsai_United_States_National_Arboretum_7.JPG",
+            "wikibase-shortdesc": "History of the art of bonsai",
+            "wikibase_item": "Q28154159"
+          },
+          "terms": {
+            "description": [
+              "history of the art of bonsai"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

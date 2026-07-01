@@ -1,0 +1,129 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:44.883Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 69123,
+          "ns": 0,
+          "title": "Forbidden City",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "The_Forbidden_City_-_View_from_Coal_Hill.jpg",
+            "wikibase-shortdesc": "Imperial palace complex in Beijing, China",
+            "wikibase_item": "Q80290"
+          },
+          "coordinates": [
+            {
+              "lat": 39.91583333,
+              "lon": 116.39083333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Chinese imperial palace in Beijing"
+            ]
+          }
+        },
+        {
+          "pageid": 266152,
+          "ns": 0,
+          "title": "Tokyo Imperial Palace",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Seimon_Ishibashi.JPG",
+            "wikibase-shortdesc": "Main residence of the Emperor of Japan",
+            "wikibase_item": "Q500681"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6824,
+              "lon": 139.7527,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "main residence of the Emperor of Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 1326913,
+          "ns": 0,
+          "title": "Imperial palace",
+          "index": 4,
+          "pageprops": {
+            "disambiguation": "",
+            "toc": "",
+            "wikibase-shortdesc": "Topics referred to by the same term",
+            "wikibase_item": "Q1163941"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        },
+        {
+          "pageid": 1559855,
+          "ns": 0,
+          "title": "Kyoto Imperial Palace",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Kyoto-gosho_Kenreimon_(open).JPG",
+            "wikibase-shortdesc": "Former ruling palace of the Emperor of Japan",
+            "wikibase_item": "Q1202239"
+          },
+          "coordinates": [
+            {
+              "lat": 35.02527778,
+              "lon": 135.76222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "former imperial palace"
+            ]
+          }
+        },
+        {
+          "pageid": 16615604,
+          "ns": 0,
+          "title": "Winter Palace",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "RUS-2016-Aerial-SPB-Winter_Palace_(crop).jpg",
+            "wikibase-shortdesc": "Former imperial palace in Saint Petersburg, Russia",
+            "wikibase_item": "Q182147"
+          },
+          "coordinates": [
+            {
+              "lat": 59.9404,
+              "lon": 30.3139,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "former imperial palace in Saint Petersburg, Russia"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

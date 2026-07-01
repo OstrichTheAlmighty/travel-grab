@@ -1,0 +1,124 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:06.871Z",
+  "value": {
+    "searchinfo": {
+      "search": "虚空蔵菩薩"
+    },
+    "search": [
+      {
+        "id": "Q416174",
+        "title": "Q416174",
+        "pageid": 394018,
+        "concepturi": "http://www.wikidata.org/entity/Q416174",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q416174",
+        "display": {
+          "label": {
+            "value": "Ākāśagarbha",
+            "language": "en"
+          },
+          "description": {
+            "value": "bodhisattva in Chinese, Japanese and Korean Buddhism",
+            "language": "en"
+          }
+        },
+        "label": "Ākāśagarbha",
+        "description": "bodhisattva in Chinese, Japanese and Korean Buddhism",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "虚空蔵菩薩"
+        },
+        "aliases": [
+          "虚空蔵菩薩"
+        ]
+      },
+      {
+        "id": "Q28808904",
+        "title": "Q28808904",
+        "pageid": 30467695,
+        "concepturi": "http://www.wikidata.org/entity/Q28808904",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q28808904",
+        "display": {
+          "label": {
+            "value": "Kokuzo Bosatsu (Akasagarbha)",
+            "language": "en"
+          },
+          "description": {
+            "value": "painting by anonymous painter",
+            "language": "en"
+          }
+        },
+        "label": "Kokuzo Bosatsu (Akasagarbha)",
+        "description": "painting by anonymous painter",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "虚空蔵菩薩像"
+        },
+        "aliases": [
+          "虚空蔵菩薩像"
+        ]
+      },
+      {
+        "id": "Q134436985",
+        "title": "Q134436985",
+        "pageid": 128279673,
+        "concepturi": "http://www.wikidata.org/entity/Q134436985",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q134436985",
+        "display": {
+          "label": {
+            "value": "Ākāśagarbha Sūtra (Buddhayaśas translation)",
+            "language": "en"
+          },
+          "description": {
+            "value": "Chinese translation of the Ākāśagarbha Sūtra by Buddhayaśas",
+            "language": "en"
+          }
+        },
+        "label": "Ākāśagarbha Sūtra (Buddhayaśas translation)",
+        "description": "Chinese translation of the Ākāśagarbha Sūtra by Buddhayaśas",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "虚空蔵菩薩経"
+        },
+        "aliases": [
+          "虚空蔵菩薩経"
+        ]
+      },
+      {
+        "id": "Q18896487",
+        "title": "Q18896487",
+        "pageid": 20452492,
+        "concepturi": "http://www.wikidata.org/entity/Q18896487",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q18896487",
+        "display": {
+          "label": {
+            "value": "Ākāśagarbha Sūtra (Dharmamitra translation)",
+            "language": "en"
+          },
+          "description": {
+            "value": "Chinese translation of the Ākāśagarbha Sūtra by Dharmamitra",
+            "language": "en"
+          }
+        },
+        "label": "Ākāśagarbha Sūtra (Dharmamitra translation)",
+        "description": "Chinese translation of the Ākāśagarbha Sūtra by Dharmamitra",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "虚空蔵菩薩神呪経"
+        },
+        "aliases": [
+          "虚空蔵菩薩神呪経"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

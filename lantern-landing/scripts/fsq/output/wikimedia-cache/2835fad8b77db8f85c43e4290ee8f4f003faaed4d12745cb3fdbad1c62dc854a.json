@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:35.031Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京武道館"
+    },
+    "search": [
+      {
+        "id": "Q8193312",
+        "title": "Q8193312",
+        "pageid": 8145882,
+        "concepturi": "http://www.wikidata.org/entity/Q8193312",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q8193312",
+        "display": {
+          "label": {
+            "value": "Tokyo Budo-kan",
+            "language": "en"
+          },
+          "description": {
+            "value": "building in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Budo-kan",
+        "description": "building in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京武道館"
+        },
+        "aliases": [
+          "東京武道館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

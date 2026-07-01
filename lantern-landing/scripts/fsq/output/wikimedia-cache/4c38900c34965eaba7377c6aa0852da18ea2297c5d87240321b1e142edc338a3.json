@@ -1,0 +1,98 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:12.215Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 726807,
+          "ns": 0,
+          "title": "Disco 2",
+          "index": 2,
+          "pageprops": {
+            "displaytitle": "<i>Disco 2</i>",
+            "page_image": "Pet_Shop_Boys_-_Disco_2.png",
+            "wikibase-shortdesc": "1994 remix album by Pet Shop Boys",
+            "wikibase_item": "Q906107"
+          },
+          "terms": {
+            "description": [
+              "1994 remix album by Pet Shop Boys"
+            ]
+          }
+        },
+        {
+          "pageid": 733947,
+          "ns": 0,
+          "title": "Please (Pet Shop Boys album)",
+          "index": 4,
+          "pageprops": {
+            "displaytitle": "<i>Please</i> (Pet Shop Boys album)",
+            "page_image": "PetShopBoysPlease.jpg",
+            "wikibase-shortdesc": "1986 studio album by Pet Shop Boys",
+            "wikibase_item": "Q844791"
+          },
+          "terms": {
+            "description": [
+              "1986 debut studio album by Pet Shop Boys"
+            ]
+          }
+        },
+        {
+          "pageid": 750794,
+          "ns": 0,
+          "title": "Disco (Pet Shop Boys album)",
+          "index": 1,
+          "pageprops": {
+            "displaytitle": "<i>Disco</i> (Pet Shop Boys album)",
+            "page_image": "PetShopBoysDisco.jpg",
+            "wikibase-shortdesc": "1986 remix album by Pet Shop Boys",
+            "wikibase_item": "Q377347"
+          },
+          "terms": {
+            "description": [
+              "1986 remix album by the Pet Shop Boys"
+            ]
+          }
+        },
+        {
+          "pageid": 12648674,
+          "ns": 0,
+          "title": "Disco 4",
+          "index": 3,
+          "pageprops": {
+            "displaytitle": "<i>Disco 4</i>",
+            "page_image": "Disco4.jpg",
+            "wikibase-shortdesc": "2007 remix album by Pet Shop Boys",
+            "wikibase_item": "Q2303768"
+          },
+          "terms": {
+            "description": [
+              "2007 remix album by Pet Shop Boys"
+            ]
+          }
+        },
+        {
+          "pageid": 13228234,
+          "ns": 0,
+          "title": "Disco-Tex and the Sex-O-Lettes",
+          "index": 5,
+          "pageprops": {
+            "wikibase-shortdesc": "American disco group",
+            "wikibase_item": "Q1228443"
+          },
+          "terms": {
+            "description": [
+              "band"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

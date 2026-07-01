@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:08.158Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17819,
+          "ns": 0,
+          "title": "中野区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なかのく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tetsugakudo_Park(Philosophy_Hall_Park)_-_哲学堂公園_-_panoramio_(1).jpg",
+            "wikibase_item": "Q234087"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70728,
+              "lon": 139.66375,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 26220,
+          "ns": 0,
+          "title": "日本の寺院一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんのしいんいちらん",
+            "notoc": "",
+            "wikibase_item": "Q10311993"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 29795,
+          "ns": 0,
+          "title": "鳥取市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とつとりし",
+            "kartographer_frames": "1",
+            "page_image_free": "Tottori_montage.jpg",
+            "wikibase_item": "Q200731"
+          },
+          "coordinates": [
+            {
+              "lat": 35.49439,
+              "lon": 134.22161,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "鳥取県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 921916,
+          "ns": 0,
+          "title": "岐阜県指定文化財一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふんかさいいちらん",
+            "wikibase_item": "Q11471459"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 4139341,
+          "ns": 0,
+          "title": "保善寺",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ほせんし",
+            "page_image_free": "Hozen-ji_(Nakano,_Tokyo).JPG",
+            "wikibase_item": "Q97310648"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70872222,
+              "lon": 139.677,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都中野区にある寺院"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

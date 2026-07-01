@@ -1,0 +1,129 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:21.649Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 15740,
+          "ns": 0,
+          "title": "西武ドーム",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せいふとおむ",
+            "page_image_free": "Seibu_Dome_feb_23_2021_various_16_59_23_418000.jpeg",
+            "wikibase_item": "Q1194822"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7685,
+              "lon": 139.4205,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県所沢市にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 15945,
+          "ns": 0,
+          "title": "東京ドーム",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようとおむ",
+            "page_image_free": "Tokyo_Dome_2007-12.jpg",
+            "wikibase_item": "Q733748"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70583333,
+              "lon": 139.75194444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 40090,
+          "ns": 0,
+          "title": "横浜スタジアム",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "よこはますたしあむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Yokohama_stadium_2020_wing.jpg",
+            "wikibase_item": "Q1148681"
+          },
+          "coordinates": [
+            {
+              "lat": 35.443428,
+              "lon": 139.6401,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県横浜市中区にある野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 46197,
+          "ns": 0,
+          "title": "宮城球場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みやききゆうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Rakuten_Mobile_Park_Miyagi_Entrance.jpg",
+            "wikibase_item": "Q489699"
+          },
+          "coordinates": [
+            {
+              "lat": 38.25620556,
+              "lon": 140.9025,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "宮城県仙台市宮城野区にある野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 972359,
+          "ns": 0,
+          "title": "ビジター応援席",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひしたあおうえんせき",
+            "page_image_free": "Hanshin_Kosien_Stadium_outfield_seats_1.jpg",
+            "wikibase_item": "Q11330546"
+          },
+          "terms": {
+            "description": [
+              "対戦相手チームの応援席"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

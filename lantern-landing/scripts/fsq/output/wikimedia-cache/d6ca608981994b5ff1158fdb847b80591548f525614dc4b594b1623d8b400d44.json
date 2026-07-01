@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:08.475Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8874,
+          "ns": 0,
+          "title": "豊岡市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とよおかし",
+            "kartographer_frames": "1",
+            "page_image_free": "Toyooka_Montage.jpg",
+            "wikibase_item": "Q696388"
+          },
+          "coordinates": [
+            {
+              "lat": 35.5445,
+              "lon": 134.82019,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 22504,
+          "ns": 0,
+          "title": "学問のすゝめ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かくもんのすすめ",
+            "wikibase_item": "Q11448137"
+          },
+          "terms": {
+            "description": [
+              "福澤諭吉の著作による日本の書籍"
+            ]
+          }
+        },
+        {
+          "pageid": 106335,
+          "ns": 0,
+          "title": "草刈正雄",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "くさかり まさお",
+            "page_image_free": "Masao_Kusakari_IMG_9350-1_20191215.jpg",
+            "wikibase_item": "Q11618079"
+          },
+          "terms": {
+            "description": [
+              "日本のモデル、俳優、タレント"
+            ]
+          }
+        },
+        {
+          "pageid": 319551,
+          "ns": 0,
+          "title": "赤木正雄",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あかき まさお",
+            "page_image_free": "Masao_Akagi.jpg",
+            "wikibase_item": "Q11635642"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家。建設政務次官"
+            ]
+          }
+        },
+        {
+          "pageid": 1581400,
+          "ns": 0,
+          "title": "夏目漱石",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "なつめ そうせき",
+            "page_image_free": "Natsume_Soseki_photo.jpg",
+            "wikibase_item": "Q180903"
+          },
+          "terms": {
+            "description": [
+              "日本の小説家 (1867-1916)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:14.941Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 15196,
+          "ns": 0,
+          "title": "橋本治",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はしもと おさむ",
+            "wikibase_item": "Q11543987"
+          },
+          "terms": {
+            "description": [
+              "日本の作家 (1948-2019)"
+            ]
+          }
+        },
+        {
+          "pageid": 72374,
+          "ns": 0,
+          "title": "中野富士見町駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なかのふしみちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Nakano-fujimichō_Station_2011.jpg",
+            "wikibase_item": "Q1132601"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6905,
+              "lon": 139.66691667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都中野区弥生町にある東京地下鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 103191,
+          "ns": 0,
+          "title": "神楽坂",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かくらさか",
+            "kartographer_frames": "1",
+            "page_image_free": "Kagurazaka-1.jpg",
+            "wikibase_item": "Q3275957"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区の坂およびその町名"
+            ]
+          }
+        },
+        {
+          "pageid": 399996,
+          "ns": 0,
+          "title": "矢来能楽堂",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やらいのうかくとう",
+            "kartographer_frames": "1",
+            "page_image_free": "Yarai_Nohgakudo.jpg",
+            "wikibase_item": "Q11584141"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70286944,
+              "lon": 139.73246111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区矢来町の能楽堂"
+            ]
+          }
+        },
+        {
+          "pageid": 1237886,
+          "ns": 0,
+          "title": "山本東次郎",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "やまもと とうしろう",
+            "wikibase_item": "Q11469135"
+          }
+        }
+      ]
+    }
+  }
+}

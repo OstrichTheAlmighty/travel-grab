@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:34.681Z",
+  "value": {
+    "searchinfo": {
+      "search": "日本銀行金融研究所貨幣博物館"
+    },
+    "search": [
+      {
+        "id": "Q865607",
+        "title": "Q865607",
+        "pageid": 816983,
+        "concepturi": "http://www.wikidata.org/entity/Q865607",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q865607",
+        "display": {
+          "label": {
+            "value": "Currency Museum of the Bank of Japan",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum",
+            "language": "en"
+          }
+        },
+        "label": "Currency Museum of the Bank of Japan",
+        "description": "museum",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "日本銀行金融研究所貨幣博物館"
+        },
+        "aliases": [
+          "日本銀行金融研究所貨幣博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

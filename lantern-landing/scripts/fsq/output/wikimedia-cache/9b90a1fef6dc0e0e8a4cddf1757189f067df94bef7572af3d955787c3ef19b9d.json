@@ -1,0 +1,94 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:33.830Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 152644,
+          "ns": 0,
+          "title": "大日本印刷",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たいにつほんいんさつ",
+            "page_image_free": "Headquarters_building_of_Dai_Nippon_Printing_Co.jpg",
+            "wikibase_item": "Q1157511"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都新宿区にある印刷会社"
+            ]
+          }
+        },
+        {
+          "pageid": 158272,
+          "ns": 0,
+          "title": "仏教美術",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふつきようひしゆつ",
+            "page_image_free": "Gandhara_Buddha_(tnm).jpeg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q1001041"
+          },
+          "terms": {
+            "description": [
+              "仏教信仰に基づいた礼拝対象、あるいはそれら活動のための美術"
+            ]
+          }
+        },
+        {
+          "pageid": 220201,
+          "ns": 0,
+          "title": "印刷博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いんさつはくふつかん",
+            "page_image_free": "Printing-museum.jpg",
+            "wikibase_item": "Q994083"
+          },
+          "terms": {
+            "description": [
+              "東京都文京区にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 503384,
+          "ns": 0,
+          "title": "世界最古の一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せかいさいこ",
+            "wikibase_item": "Q11362395"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3473328,
+          "ns": 0,
+          "title": "金子眞吾",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かねこ しんこ",
+            "wikibase_item": "Q27150666"
+          },
+          "terms": {
+            "description": [
+              "埼玉県出身の実業家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

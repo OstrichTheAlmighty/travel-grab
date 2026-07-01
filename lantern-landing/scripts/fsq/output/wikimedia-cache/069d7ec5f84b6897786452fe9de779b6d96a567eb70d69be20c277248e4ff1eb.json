@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:29.478Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 13738,
+          "ns": 0,
+          "title": "福岡ドーム",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふくおかとおむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Mizuho_PayPay_dome_Fukuoka_2025.jpg",
+            "wikibase_item": "Q1365961"
+          },
+          "coordinates": [
+            {
+              "lat": 33.59545833,
+              "lon": 130.36211944,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福岡県福岡市中央区にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 15945,
+          "ns": 0,
+          "title": "東京ドーム",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようとおむ",
+            "page_image_free": "Tokyo_Dome_2007-12.jpg",
+            "wikibase_item": "Q733748"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70583333,
+              "lon": 139.75194444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 41570,
+          "ns": 0,
+          "title": "ナゴヤドーム",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "なこやとおむ",
+            "page_image_free": "Nagoya_Dome_-_3.jpg",
+            "wikibase_item": "Q929524"
+          },
+          "coordinates": [
+            {
+              "lat": 35.18597778,
+              "lon": 136.94731389,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県名古屋市東区にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 354025,
+          "ns": 0,
+          "title": "クリスタル・ガラス",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "くりすたるからす",
+            "page_image_free": "Crystbeads.jpg",
+            "wikibase_item": "Q392551"
+          }
+        },
+        {
+          "pageid": 684021,
+          "ns": 0,
+          "title": "ガラス工芸",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "からすこうけい",
+            "page_image_free": "Glass-Ball.jpg",
+            "wikibase_item": "Q5567091"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:48.936Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 28586,
+          "ns": 0,
+          "title": "北里柴三郎",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きたさと しはさふろう",
+            "page_image_free": "Shibasaburō_Kitasato_1910.jpg",
+            "wikibase_item": "Q442225"
+          },
+          "terms": {
+            "description": [
+              "日本の微生物学者、医師 (1853-1931)"
+            ]
+          }
+        },
+        {
+          "pageid": 430072,
+          "ns": 0,
+          "title": "尾崎士郎",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おさき しろう",
+            "page_image_free": "Ozaki_Shiro.JPG",
+            "wikibase_item": "Q11465191"
+          },
+          "terms": {
+            "description": [
+              "小説家 (1898-1964)"
+            ]
+          }
+        },
+        {
+          "pageid": 809756,
+          "ns": 0,
+          "title": "東京大学医科学研究所",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようたいかくいかかくけんきゆうしよ",
+            "page_image_free": "Institute_of_Medical_Science_First_building_4.jpg",
+            "wikibase_item": "Q4966421"
+          },
+          "terms": {
+            "description": [
+              "東京都港区にある研究所"
+            ]
+          }
+        },
+        {
+          "pageid": 1226264,
+          "ns": 0,
+          "title": "大阪市立大学",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおさかしりつたいかく",
+            "page_image_free": "Osaka_City_University_Main_Building_20190818.jpg",
+            "wikibase_item": "Q1143396"
+          },
+          "coordinates": [
+            {
+              "lat": 34.59273611,
+              "lon": 135.50753889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪府大阪市にある公立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 1457332,
+          "ns": 0,
+          "title": "立命館大学",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "りつめいかん",
+            "page_image_free": "Zonshinkan_Hall_at_Ritsumeikan_Univ.jpg",
+            "wikibase_item": "Q1152190"
+          },
+          "coordinates": [
+            {
+              "lat": 35.032579,
+              "lon": 135.724041,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都府京都市中京区にある私立大学"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

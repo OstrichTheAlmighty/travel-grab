@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:16.289Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 164868,
+          "ns": 0,
+          "title": "美術館の一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひしゆつかんのいちらん",
+            "toc": "",
+            "wikibase_item": "Q6606159"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 761504,
+          "ns": 0,
+          "title": "フェルメールの作品",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふえるめえるのさくひん",
+            "wikibase_item": "Q2235328"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1795418,
+          "ns": 0,
+          "title": "ロベール・ドアノー",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とあのお ろへえる",
+            "page_image_free": "Robert_Doisneau_photographed_by_Bracha_L._Ettinger_in_his_studio_in_Montrouge,_1992.jpg",
+            "wikibase_item": "Q154599"
+          },
+          "terms": {
+            "description": [
+              "1912-1994, フランスの写真家"
+            ]
+          }
+        },
+        {
+          "pageid": 2506456,
+          "ns": 0,
+          "title": "プラハ国立美術館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふらはこくりつ",
+            "page_image_free": "Entrée_du_Veletržní_palác,_Prague.jpg",
+            "wikibase_item": "Q1419555"
+          },
+          "coordinates": [
+            {
+              "lat": 50.08805556,
+              "lon": 14.42166667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "チェコの美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 3712646,
+          "ns": 0,
+          "title": "THE MUSEUM III",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みゆうしあむすりい",
+            "wikibase_item": "Q47006915"
+          },
+          "terms": {
+            "description": [
+              "水樹奈々のベストアルバム（2018年）"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

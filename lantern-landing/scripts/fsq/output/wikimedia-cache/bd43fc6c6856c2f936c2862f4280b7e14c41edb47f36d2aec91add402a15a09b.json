@@ -1,0 +1,86 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:33.859Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 202443,
+          "ns": 0,
+          "title": "メシャ碑文",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "めしやひふん",
+            "page_image_free": "P1120870_Louvre_stèle_de_Mésha_AO5066_rwk.JPG",
+            "wikibase_item": "Q724954"
+          }
+        },
+        {
+          "pageid": 889121,
+          "ns": 0,
+          "title": "津村俊夫",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "つむら としお",
+            "wikibase_item": "Q5240471"
+          },
+          "terms": {
+            "description": [
+              "日本の神学者、翻訳家 (1944-)"
+            ]
+          }
+        },
+        {
+          "pageid": 1825278,
+          "ns": 0,
+          "title": "アズベリー神学校",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あすへりいしんかつこう",
+            "wikibase_item": "Q2645880"
+          },
+          "terms": {
+            "description": [
+              "アメリカの神学校"
+            ]
+          }
+        },
+        {
+          "pageid": 2267140,
+          "ns": 0,
+          "title": "黒色オベリスク",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こくしよくおへりすく",
+            "page_image_free": "The_Black_Obelisk_of_Shalmaneser_III,_9th_century_BC,_from_Nimrud,_Iraq._The_British_Museum.jpg",
+            "wikibase_item": "Q1471650"
+          },
+          "coordinates": [
+            {
+              "lat": 36.09805556,
+              "lon": 43.32888889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 4268406,
+          "ns": 0,
+          "title": "立教大学大学院文学研究科・文学部",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "りつきようたいかくたいかくいんふんかくかくけんきゆうかふんかくふ",
+            "page_image_free": "All_Saints_Chapel_(諸聖徒礼拝堂)_in_Rikkyo_(St._Paul's)_University_(立教大学)_-_panoramio_-_phosphor.jpg",
+            "wikibase_item": "Q109365800"
+          }
+        }
+      ]
+    }
+  }
+}

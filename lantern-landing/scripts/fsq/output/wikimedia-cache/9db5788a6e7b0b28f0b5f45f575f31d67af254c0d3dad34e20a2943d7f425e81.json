@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:21.275Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 113193,
+          "ns": 0,
+          "title": "都ホテルズ&リゾーツ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みやこほてるすあんとりそおつ",
+            "wikibase_item": "Q11643456"
+          },
+          "terms": {
+            "description": [
+              "近鉄グループのホテルチェーン"
+            ]
+          }
+        },
+        {
+          "pageid": 519532,
+          "ns": 0,
+          "title": "屋上庭園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おくしようていえん",
+            "page_image_free": "Hanging_Gardens_of_Babylon.jpg",
+            "wikibase_item": "Q1156696"
+          },
+          "terms": {
+            "description": [
+              "建築物の屋上などに造られた植栽を伴う庭園"
+            ]
+          }
+        },
+        {
+          "pageid": 1155391,
+          "ns": 0,
+          "title": "シェラトン都ホテル東京",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しえらとんみやこほてるとうきよう",
+            "page_image_free": "Sheraton_Miyako_Hotel_Tokyo.JPG",
+            "wikibase_item": "Q11306977"
+          },
+          "terms": {
+            "description": [
+              "東京都港区にあるホテル"
+            ]
+          }
+        },
+        {
+          "pageid": 1155394,
+          "ns": 0,
+          "title": "シェラトン都ホテル大阪",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しえらとんみやこほてるおおさか",
+            "kartographer_frames": "1",
+            "page_image_free": "MIYAKO_HOTEL_OSAKA.jpg",
+            "wikibase_item": "Q11306976"
+          },
+          "coordinates": [
+            {
+              "lat": 34.66572222,
+              "lon": 135.52063889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪市天王寺区にあるホテル"
+            ]
+          }
+        },
+        {
+          "pageid": 1596036,
+          "ns": 0,
+          "title": "港区 (東京都)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みなとく",
+            "kartographer_frames": "1",
+            "page_image_free": "20110405-TokyoTower-Sakura01.jpg",
+            "wikibase_item": "Q190088"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65803,
+              "lon": 139.75153,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

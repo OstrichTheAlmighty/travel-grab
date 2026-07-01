@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:29.461Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 106381,
+          "ns": 0,
+          "title": "飯塚昭三",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いいつか しようそう",
+            "wikibase_item": "Q2423016"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優 (1933-2023)"
+            ]
+          }
+        },
+        {
+          "pageid": 1933158,
+          "ns": 0,
+          "title": "密室謎解きバラエティー 脱出ゲームDERO!",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みつしつなそときはらえていたつしゆつけえむてろ",
+            "displaytitle": "密室<span class=\"jis90font\">謎</span>解きバラエティー 脱出ゲームDERO!",
+            "wikibase_item": "Q5354439"
+          },
+          "terms": {
+            "description": [
+              "日本テレビ系列でかつて放送されていたクイズ・ゲームバラエティ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 1962963,
+          "ns": 0,
+          "title": "エンタの神様",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "えんたのかみさま",
+            "wikibase_item": "Q11291381"
+          },
+          "terms": {
+            "description": [
+              "日本テレビのお笑い・バラエティ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 2549661,
+          "ns": 0,
+          "title": "今際の国のアリス",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いまわのくにのありす",
+            "wikibase_item": "Q11377464"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 2856081,
+          "ns": 0,
+          "title": "サンバリュ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さんはりゆ",
+            "wikibase_item": "Q11304698"
+          },
+          "terms": {
+            "description": [
+              "日本テレビの単発特別番組枠 (2006-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

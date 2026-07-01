@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:26.975Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 125988,
+          "ns": 0,
+          "title": "宮城県出身の人物一覧",
+          "index": 3,
+          "pageprops": {
+            "wikibase_item": "Q11453668"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 174724,
+          "ns": 0,
+          "title": "猫ひろし",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ねこ ひろし",
+            "page_image_free": "Neko_Hiroshi,_Japanese_comedian.jpg",
+            "wikibase_item": "Q3337888"
+          },
+          "terms": {
+            "description": [
+              "日本出身のお笑いタレント、長距離走選手"
+            ]
+          }
+        },
+        {
+          "pageid": 2079474,
+          "ns": 0,
+          "title": "寺門ジモン",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "てらかと しもん",
+            "page_image_free": "Jimon_Terakado_DachouClub20150404.jpg",
+            "wikibase_item": "Q11458095"
+          },
+          "terms": {
+            "description": [
+              "日本のお笑い芸人、俳優、YouTuber"
+            ]
+          }
+        },
+        {
+          "pageid": 3223106,
+          "ns": 0,
+          "title": "初森ベマーズ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はつもりへまあす",
+            "wikibase_item": "Q20155622"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ"
+            ]
+          }
+        },
+        {
+          "pageid": 4051821,
+          "ns": 0,
+          "title": "遊☆戯☆王SEVENS",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ゆうきおうせふんす",
+            "wikibase_item": "Q79323117"
+          },
+          "terms": {
+            "description": [
+              "ブリッジ制作による日本のテレビアニメ作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

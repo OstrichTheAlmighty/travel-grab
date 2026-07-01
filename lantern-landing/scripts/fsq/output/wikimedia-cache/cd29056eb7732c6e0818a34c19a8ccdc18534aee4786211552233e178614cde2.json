@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:13.307Z",
+  "value": {
+    "searchinfo": {
+      "search": "翡翠原石館"
+    },
+    "search": [
+      {
+        "id": "Q136707259",
+        "title": "Q136707259",
+        "pageid": 130389001,
+        "concepturi": "http://www.wikidata.org/entity/Q136707259",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q136707259",
+        "display": {
+          "label": {
+            "value": "翡翠原石館",
+            "language": "ja"
+          }
+        },
+        "label": "翡翠原石館",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "翡翠原石館"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

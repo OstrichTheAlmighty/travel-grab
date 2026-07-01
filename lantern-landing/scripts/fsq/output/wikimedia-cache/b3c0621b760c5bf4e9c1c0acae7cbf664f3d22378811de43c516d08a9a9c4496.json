@@ -1,0 +1,41 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:13.459Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 68166,
+          "ns": 0,
+          "title": "あずきちゃん",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あすきちやん",
+            "wikibase_item": "Q705093"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画"
+            ]
+          }
+        },
+        {
+          "pageid": 4581402,
+          "ns": 0,
+          "title": "中﨑透",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "なかさき とおる",
+            "wikibase_item": "Q118696187"
+          },
+          "terms": {
+            "description": [
+              "日本のアーティスト"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

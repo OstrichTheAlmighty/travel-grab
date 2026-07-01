@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:45.808Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 68232,
+          "ns": 0,
+          "title": "Baldur's Gate",
+          "index": 2,
+          "pageprops": {
+            "displaytitle": "<i>Baldur's Gate</i>",
+            "page_image_free": "Baldurs_Gate_stacked_logo_circa_Enhanced_Edition.png",
+            "wikibase-shortdesc": "Franchise of fantasy role-playing video games",
+            "wikibase_item": "Q2640148"
+          },
+          "terms": {
+            "description": [
+              "franchise of fantasy role-playing video games"
+            ]
+          }
+        },
+        {
+          "pageid": 316061,
+          "ns": 0,
+          "title": "Sluice",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Ss_sluice2.jpg",
+            "wikibase-shortdesc": "Water channel controlled at its head by a gate",
+            "wikibase_item": "Q610559"
+          },
+          "terms": {
+            "description": [
+              "hydraulic structure"
+            ]
+          }
+        },
+        {
+          "pageid": 582837,
+          "ns": 0,
+          "title": "Ishtar Gate",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Berlín,_Museo_de_Pérgamo_05.jpg",
+            "wikibase-shortdesc": "Eighth gate to the capital city of Babylon",
+            "wikibase_item": "Q26082"
+          },
+          "coordinates": [
+            {
+              "lat": 32.54333333,
+              "lon": 44.42222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "eighth gate to the inner city of Babylon"
+            ]
+          }
+        },
+        {
+          "pageid": 11687034,
+          "ns": 0,
+          "title": "Panetolikos F.C.",
+          "index": 1,
+          "pageprops": {
+            "page_image": "Panetolikos_new_emblem.png",
+            "wikibase-shortdesc": "Greek association football club",
+            "wikibase_item": "Q1460053"
+          },
+          "terms": {
+            "description": [
+              "association football club based in Agrinio, Greece"
+            ]
+          }
+        },
+        {
+          "pageid": 60979422,
+          "ns": 0,
+          "title": "Baldur's Gate 3",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Baldur's Gate 3",
+            "displaytitle": "<i>Baldur's Gate 3</i>",
+            "page_image": "Baldur's_Gate_3_cover_art.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "2023 video game",
+            "wikibase_item": "Q64441774"
+          },
+          "terms": {
+            "description": [
+              "2023 role-playing video game developed by Larian Studios"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

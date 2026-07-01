@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:46.133Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 147739,
+          "ns": 0,
+          "title": "Shibuya",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Shibuya_skyline_from_Tokyu_Plaza_in_Omotesando,_Harajuku,_Tokyo,_2024_May.jpg",
+            "wikibase-shortdesc": "Special ward in Tokyo, Japan",
+            "wikibase_item": "Q193638"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65944444,
+              "lon": 139.70055556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "special ward in the Tokyo Metropolis in Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

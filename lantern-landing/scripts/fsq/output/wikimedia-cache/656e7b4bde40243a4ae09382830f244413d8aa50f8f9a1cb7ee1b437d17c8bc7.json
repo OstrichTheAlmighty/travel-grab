@@ -1,0 +1,108 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:31.267Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8546,
+          "ns": 0,
+          "title": "新橋駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しんはし",
+            "kartographer_frames": "1",
+            "page_image_free": "JR_Shimbashi_Station_(2019-05-04)_07.jpg",
+            "wikibase_item": "Q801436"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66638889,
+              "lon": 139.75805556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある駅"
+            ]
+          }
+        },
+        {
+          "pageid": 280880,
+          "ns": 0,
+          "title": "新橋演舞場",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しんはしえんふしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Shinbashi_Enbujo_Theatre_2010_05a.JPG",
+            "wikibase_item": "Q4410425"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66694444,
+              "lon": 139.76694444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の劇場"
+            ]
+          }
+        },
+        {
+          "pageid": 346480,
+          "ns": 0,
+          "title": "新橋 (東京都港区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しんはし",
+            "kartographer_frames": "1",
+            "page_image_free": "Shimbashi-STA_East-side.jpg",
+            "wikibase_item": "Q1347299"
+          },
+          "terms": {
+            "description": [
+              "東京都港区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 2013182,
+          "ns": 0,
+          "title": "新橋 (花街)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しんはし",
+            "page_image_free": "Shinbashi_Enbujo_Theatre_2010_05a.JPG",
+            "wikibase_item": "Q11502624"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区銀座にある花街"
+            ]
+          }
+        },
+        {
+          "pageid": 3090541,
+          "ns": 0,
+          "title": "新橋倶楽部事件",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しんはしくらふしけん",
+            "wikibase_item": "Q20045039"
+          }
+        }
+      ]
+    }
+  }
+}

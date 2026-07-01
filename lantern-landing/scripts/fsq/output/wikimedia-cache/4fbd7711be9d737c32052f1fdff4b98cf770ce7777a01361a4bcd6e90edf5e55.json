@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:14.870Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 47079,
+          "ns": 0,
+          "title": "8時だョ!全員集合",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はちしたよせんいんしゆうこう",
+            "wikibase_item": "Q11188427"
+          },
+          "terms": {
+            "description": [
+              "TBSテレビのバラエティ番組 (1969-1985)"
+            ]
+          }
+        },
+        {
+          "pageid": 470114,
+          "ns": 0,
+          "title": "つなぎ番組",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "つなきはんくみ",
+            "wikibase_item": "Q17232576"
+          },
+          "terms": {
+            "description": [
+              "複数のトピックが混合したウィキペディアの記事"
+            ]
+          }
+        },
+        {
+          "pageid": 725365,
+          "ns": 0,
+          "title": "つなぎ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "つなき",
+            "page_image_free": "Man_in_jumpsuit.jpg",
+            "wikibase_item": "Q16472452"
+          },
+          "terms": {
+            "description": [
+              "上衣と下衣が一体の外衣"
+            ]
+          }
+        },
+        {
+          "pageid": 1266954,
+          "ns": 0,
+          "title": "手をつなごう/愛を歌おう",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "てをつなこう あいをうたおう",
+            "wikibase_item": "Q1064822"
+          },
+          "terms": {
+            "description": [
+              "絢香のシングル (2008)"
+            ]
+          }
+        },
+        {
+          "pageid": 2222971,
+          "ns": 0,
+          "title": "映画 プリキュアオールスターズDX3 未来にとどけ! 世界をつなぐ☆虹色の花",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふりきゆあおおるすたあすてらつくす3みらいにととけせかいをつなくにしいろのはな",
+            "wikibase_item": "Q1085305"
+          },
+          "terms": {
+            "description": [
+              "2011年に公開された日本のアニメ映画"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

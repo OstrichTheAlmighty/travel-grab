@@ -1,0 +1,119 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:19.047Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 71291,
+          "ns": 0,
+          "title": "駒沢オリンピック公園総合運動場陸上競技場",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こまさわおりんひつくこうえんそうこううんとうしようりくしようきようきしよう",
+            "page_image_free": "Komazawa_Stadium2.JPG",
+            "wikibase_item": "Q4229116"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62559425,
+              "lon": 139.66365556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 149255,
+          "ns": 0,
+          "title": "国立代々木競技場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こくりつよよききようきしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Yoyogi-National-First-Gymnasium-01.jpg",
+            "wikibase_item": "Q1069457"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66775,
+              "lon": 139.70013889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にあるスポーツ施設"
+            ]
+          }
+        },
+        {
+          "pageid": 203655,
+          "ns": 0,
+          "title": "体育館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たいいくかん",
+            "page_image_free": "Hyogo_Prefectural_Tatsuno_Senior_High_School02n4272.jpg",
+            "wikibase_item": "Q14092"
+          },
+          "terms": {
+            "description": [
+              "屋内で行う様々なスポーツを行えるように設計されている施設"
+            ]
+          }
+        },
+        {
+          "pageid": 281451,
+          "ns": 0,
+          "title": "駒沢オリンピック公園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こまさわおりんひつくこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Komazawa_Gymnasium_&_Control_Tower_2009.jpg",
+            "wikibase_item": "Q2021485"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62580556,
+              "lon": 139.66161111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1308635,
+          "ns": 0,
+          "title": "駒沢オリンピック公園総合運動場体育館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こまさわおりんひつくこうえんそうこううんとうしようたいいくかん",
+            "page_image_free": "Komazawa_Gymnasium_2009.jpg",
+            "wikibase_item": "Q6428225"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62480556,
+              "lon": 139.66080556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

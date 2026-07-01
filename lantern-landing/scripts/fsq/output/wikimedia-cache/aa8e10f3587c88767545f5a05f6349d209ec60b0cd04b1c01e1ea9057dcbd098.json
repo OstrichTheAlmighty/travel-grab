@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:16.772Z",
+  "value": {
+    "searchinfo": {
+      "search": "市谷の杜 本と活字館"
+    },
+    "search": [
+      {
+        "id": "Q140025038",
+        "title": "Q140025038",
+        "pageid": 133469438,
+        "concepturi": "http://www.wikidata.org/entity/Q140025038",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q140025038",
+        "display": {
+          "label": {
+            "value": "Ichigaya Letterpress Factory",
+            "language": "en"
+          },
+          "description": {
+            "value": "facility in Shinjuku, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Ichigaya Letterpress Factory",
+        "description": "facility in Shinjuku, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "市谷の杜 本と活字館"
+        },
+        "aliases": [
+          "市谷の杜 本と活字館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

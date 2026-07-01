@@ -1,0 +1,83 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:32.946Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 107259,
+          "ns": 0,
+          "title": "古屋敬多",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふるや けいた",
+            "wikibase_item": "Q9116752"
+          }
+        },
+        {
+          "pageid": 3401444,
+          "ns": 0,
+          "title": "渋家",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しふはうす",
+            "page_image_free": "Shibuhouse-logo.png",
+            "wikibase_item": "Q24866096"
+          }
+        },
+        {
+          "pageid": 3563287,
+          "ns": 0,
+          "title": "ヤなことそっとミュート",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やなことそつとみゆうと",
+            "wikibase_item": "Q30923850"
+          },
+          "terms": {
+            "description": [
+              "日本の女性アイドルグループ"
+            ]
+          }
+        },
+        {
+          "pageid": 3811997,
+          "ns": 0,
+          "title": "上田慎一郎",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "うえた しんいちろう",
+            "page_image_free": "Ueda_Shinichiro_from_\"One_Cut_of_the_Dead\"_at_Opening_Ceremony_of_the_Tokyo_International_Film_Festival_2018_(44705569385).jpg",
+            "wikibase_item": "Q55447315"
+          },
+          "terms": {
+            "description": [
+              "日本の映画監督"
+            ]
+          }
+        },
+        {
+          "pageid": 4439230,
+          "ns": 0,
+          "title": "24時間テレビ40 愛は地球を救う",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "24しかんてれひ40あいはちきゆうをすくう",
+            "page_image_free": "Nippon_Budokan_2010.jpg",
+            "wikibase_item": "Q109598056"
+          },
+          "terms": {
+            "description": [
+              "日本テレビの番組（2017年）"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:18.471Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 7827,
+          "ns": 0,
+          "title": "品川区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しなかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "Gate_City_Osaki.jpg",
+            "wikibase_item": "Q233495"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60917,
+              "lon": 139.73017,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の1つ"
+            ]
+          }
+        },
+        {
+          "pageid": 17347,
+          "ns": 0,
+          "title": "天王洲アイル駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "てんのうすあいる",
+            "kartographer_frames": "1",
+            "page_image_free": "Tennozu_isle_sta_south.jpg",
+            "wikibase_item": "Q841425"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62319444,
+              "lon": 139.75047222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の鉄道駅"
+            ]
+          }
+        },
+        {
+          "pageid": 370115,
+          "ns": 0,
+          "title": "天王洲アイル",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "てんのうすあいる",
+            "page_image_free": "Terrada_warehouse_in_tennoz_2012.jpg",
+            "wikibase_item": "Q11443018"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62319444,
+              "lon": 139.75047222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区にある再開発街区"
+            ]
+          }
+        },
+        {
+          "pageid": 1105490,
+          "ns": 0,
+          "title": "港南 (東京都港区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こうなん",
+            "kartographer_frames": "1",
+            "page_image_free": "Shinagawa_inter_city.jpg",
+            "wikibase_item": "Q11563057"
+          },
+          "terms": {
+            "description": [
+              "東京都港区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 2260928,
+          "ns": 0,
+          "title": "梓設計",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あすさせつけい",
+            "wikibase_item": "Q11538717"
+          }
+        }
+      ]
+    }
+  }
+}

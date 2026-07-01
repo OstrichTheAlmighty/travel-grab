@@ -1,0 +1,139 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:16.723Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 7827,
+          "ns": 0,
+          "title": "品川区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しなかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "Gate_City_Osaki.jpg",
+            "wikibase_item": "Q233495"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60917,
+              "lon": 139.73017,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の1つ"
+            ]
+          }
+        },
+        {
+          "pageid": 47804,
+          "ns": 0,
+          "title": "お台場",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おたいは",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-Odaiba.jpg",
+            "wikibase_item": "Q211861"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63,
+              "lon": 139.775,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京臨海副都心のエリア"
+            ]
+          }
+        },
+        {
+          "pageid": 286659,
+          "ns": 0,
+          "title": "品川駅",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しなかわえき",
+            "kartographer_frames": "1",
+            "page_image_free": "Shinagawa_Station_-01.jpg",
+            "wikibase_item": "Q801442"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62822222,
+              "lon": 139.73869444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある駅"
+            ]
+          }
+        },
+        {
+          "pageid": 384938,
+          "ns": 0,
+          "title": "アクアパーク品川",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あくあはあくしなかわ",
+            "kartographer_frames": "1",
+            "page_image_free": "Avatar_The_Way_of_Water_Tokyo_Press_Conference_(52562513647).jpg",
+            "wikibase_item": "Q3055859"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62782889,
+              "lon": 139.73508694,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京の水族館"
+            ]
+          }
+        },
+        {
+          "pageid": 2019851,
+          "ns": 0,
+          "title": "品川区立品川歴史館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しなかわくりつしなかわれきしかん",
+            "page_image_free": "Shinagawa_historical_museum_2009.JPG",
+            "wikibase_item": "Q11418382"
+          },
+          "coordinates": [
+            {
+              "lat": 35.59681,
+              "lon": 139.73014,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:01.688Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 516502,
+          "ns": 0,
+          "title": "Raijin",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Raijin_in_Sanjūsangen-dō._Mid-13th_century.jpg",
+            "wikibase-shortdesc": "Japanese god of lightning",
+            "wikibase_item": "Q12808082"
+          },
+          "terms": {
+            "description": [
+              "god of lightning, thunder, and storms in Japanese mythology"
+            ]
+          }
+        },
+        {
+          "pageid": 871044,
+          "ns": 0,
+          "title": "Sensō-ji",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Senso-ji",
+            "kartographer_frames": "1",
+            "page_image_free": "Sensoji_2023.jpg",
+            "wikibase-shortdesc": "Buddhist temple in Tokyo, Japan",
+            "wikibase_item": "Q615183"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71472222,
+              "lon": 139.79675,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Buddhist temple in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 16184198,
+          "ns": 0,
+          "title": "Kaminarimon",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Day2-2_(40909714314).jpg",
+            "wikibase-shortdesc": "Gate entrance in Asakusa, Japan",
+            "wikibase_item": "Q2378708"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71111111,
+              "lon": 139.79638889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "the outer of two large entrance gates that ultimately leads to the Sensō-ji"
+            ]
+          }
+        },
+        {
+          "pageid": 16190759,
+          "ns": 0,
+          "title": "Hōzōmon",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Hozomon",
+            "page_image_free": "Hozomon_on_an_overcast_day_dllu.jpg",
+            "wikibase-shortdesc": "Main gate of Senso-ji, Tokyo",
+            "wikibase_item": "Q2378896"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71396111,
+              "lon": 139.79666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "main gate of Senso-ji, Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 28572825,
+          "ns": 0,
+          "title": "Niōmon",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Niomon",
+            "displaytitle": "<i>Niōmon</i>",
+            "page_image_free": "Niomon_Gate_Murouji01.jpg",
+            "wikibase-shortdesc": "Buddhist temple gate",
+            "wikibase_item": "Q3342330"
+          },
+          "terms": {
+            "description": [
+              "Buddhist temple gate"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

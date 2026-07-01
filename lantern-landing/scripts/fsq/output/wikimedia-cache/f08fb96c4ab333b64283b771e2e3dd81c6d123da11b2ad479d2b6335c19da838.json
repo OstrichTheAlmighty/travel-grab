@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:51.359Z",
+  "value": {
+    "searchinfo": {
+      "search": "秩父宮記念スポーツ博物館"
+    },
+    "search": [
+      {
+        "id": "Q11596124",
+        "title": "Q11596124",
+        "pageid": 12736241,
+        "concepturi": "http://www.wikidata.org/entity/Q11596124",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11596124",
+        "display": {
+          "label": {
+            "value": "Prince Chichibu Memorial Sports Museum",
+            "language": "en"
+          }
+        },
+        "label": "Prince Chichibu Memorial Sports Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "秩父宮記念スポーツ博物館"
+        },
+        "aliases": [
+          "秩父宮記念スポーツ博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:03.861Z",
+  "value": {
+    "searchinfo": {
+      "search": "漱石山房記念館"
+    },
+    "search": [
+      {
+        "id": "Q24862403",
+        "title": "Q24862403",
+        "pageid": 26823213,
+        "concepturi": "http://www.wikidata.org/entity/Q24862403",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q24862403",
+        "display": {
+          "label": {
+            "value": "Natsume Soseki Memorial Museum",
+            "language": "en"
+          }
+        },
+        "label": "Natsume Soseki Memorial Museum",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "漱石山房記念館"
+        },
+        "aliases": [
+          "漱石山房記念館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

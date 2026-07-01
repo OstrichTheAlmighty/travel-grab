@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:31.137Z",
+  "value": {
+    "searchinfo": {
+      "search": "Tokyo City View"
+    },
+    "search": [
+      {
+        "id": "Q126417093",
+        "title": "Q126417093",
+        "pageid": 120443029,
+        "concepturi": "http://www.wikidata.org/entity/Q126417093",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q126417093",
+        "display": {
+          "label": {
+            "value": "Tokyo City View",
+            "language": "en"
+          },
+          "description": {
+            "value": "indoor observation deck",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo City View",
+        "description": "indoor observation deck",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo City View"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

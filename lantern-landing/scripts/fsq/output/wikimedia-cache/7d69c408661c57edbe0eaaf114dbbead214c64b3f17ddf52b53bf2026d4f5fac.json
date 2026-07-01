@@ -1,0 +1,108 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:36.825Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 33889,
+          "ns": 0,
+          "title": "フィート",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふいいと",
+            "page_image_free": "Male_Right_Foot_1.jpg",
+            "wikibase_item": "Q3710"
+          },
+          "terms": {
+            "description": [
+              "ヤード・ポンド法における長さの単位"
+            ]
+          }
+        },
+        {
+          "pageid": 309582,
+          "ns": 0,
+          "title": "マリオット・インターナショナル",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "まりおつといんたあなしよなる",
+            "page_image_free": "Marriott_International_Headquarters_01.jpg",
+            "wikibase_item": "Q1141173"
+          },
+          "terms": {
+            "description": [
+              "アメリカのホテルチェーン"
+            ]
+          }
+        },
+        {
+          "pageid": 1165230,
+          "ns": 0,
+          "title": "コートヤード・マリオット銀座東武ホテル",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こおとやあとまりおつときんさとうふほてる",
+            "page_image_free": "Courtyard_by_Marriott_Tokyo_Ginza_Hotel.JPG",
+            "wikibase_item": "Q11303383"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6685,
+              "lon": 139.76486111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1567373,
+          "ns": 0,
+          "title": "ディズニー・アドベンチャー・ワールド",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ていすにいあとへんちやあわあると",
+            "wikibase_item": "Q764906"
+          },
+          "coordinates": [
+            {
+              "lat": 48.8673,
+              "lon": 2.77900833,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "ディズニーランド・パリの2番目のテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 1611077,
+          "ns": 0,
+          "title": "ディズニー・ハリウッド・スタジオ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ていすにいはりうつとすたしお",
+            "page_image_free": "The_Great_Movie_Ride_and_Chinese_Theater_at_Walt_Disney_World.jpg",
+            "wikibase_item": "Q1345090"
+          },
+          "coordinates": [
+            {
+              "lat": 28.357,
+              "lon": -81.5561,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

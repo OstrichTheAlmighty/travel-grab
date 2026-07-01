@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:04.170Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3204,
+          "ns": 0,
+          "title": "芥川龍之介",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あくたかわ りゆうのすけ",
+            "page_image_free": "AkutagawaRyunosuke.jpg",
+            "wikibase_item": "Q186326"
+          },
+          "terms": {
+            "description": [
+              "日本の作家 (1892-1927)"
+            ]
+          }
+        },
+        {
+          "pageid": 494177,
+          "ns": 0,
+          "title": "半藤末利子",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はんとう まりこ",
+            "wikibase_item": "Q11407118"
+          },
+          "terms": {
+            "description": [
+              "日本の女性随筆家 (1935-)"
+            ]
+          }
+        },
+        {
+          "pageid": 936512,
+          "ns": 0,
+          "title": "バショウ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はしよう",
+            "page_image_free": "Musa_basjoo_in_Heian_Shrine.JPG",
+            "wikibase_item": "Q33331"
+          },
+          "terms": {
+            "description": [
+              "バショウ科の多年草"
+            ]
+          }
+        },
+        {
+          "pageid": 1581400,
+          "ns": 0,
+          "title": "夏目漱石",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なつめ そうせき",
+            "page_image_free": "Natsume_Soseki_photo.jpg",
+            "wikibase_item": "Q180903"
+          },
+          "terms": {
+            "description": [
+              "日本の小説家 (1867-1916)"
+            ]
+          }
+        },
+        {
+          "pageid": 3422390,
+          "ns": 0,
+          "title": "新宿区立漱石山房記念館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しんしゆくくりつそうせきさんほうきねんかん",
+            "page_image_free": "Natsume_Soseki_Memorial_Museum_2017-10-08.jpg",
+            "wikibase_item": "Q24862403"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70391667,
+              "lon": 139.72547222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区が設置する夏目漱石の記念館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

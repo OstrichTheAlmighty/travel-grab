@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:23.098Z",
+  "value": {
+    "searchinfo": {
+      "search": "teamLab Borderless"
+    },
+    "search": [
+      {
+        "id": "Q104235671",
+        "title": "Q104235671",
+        "pageid": 99690015,
+        "concepturi": "http://www.wikidata.org/entity/Q104235671",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q104235671",
+        "display": {
+          "label": {
+            "value": "Mori Building Digital Art Museum: EPSON teamLab Borderless",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Odaiba, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Mori Building Digital Art Museum: EPSON teamLab Borderless",
+        "description": "museum in Odaiba, Tokyo",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "teamLab Borderless"
+        },
+        "aliases": [
+          "teamLab Borderless"
+        ]
+      },
+      {
+        "id": "Q131314431",
+        "title": "Q131314431",
+        "pageid": 125209766,
+        "concepturi": "http://www.wikidata.org/entity/Q131314431",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q131314431",
+        "display": {
+          "label": {
+            "value": "Mori Building Digital Art Museum: EPSON teamLab Borderless",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Azabudai, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Mori Building Digital Art Museum: EPSON teamLab Borderless",
+        "description": "museum in Azabudai, Tokyo",
+        "match": {
+          "type": "alias",
+          "language": "mul",
+          "text": "teamLab Borderless"
+        },
+        "aliases": [
+          "teamLab Borderless"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

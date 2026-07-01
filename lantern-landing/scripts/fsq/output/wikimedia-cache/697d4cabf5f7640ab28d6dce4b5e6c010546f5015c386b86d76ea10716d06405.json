@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:46:00.472Z",
+  "value": {
+    "searchinfo": {
+      "search": "カミツキガメ"
+    },
+    "search": [
+      {
+        "id": "Q289435",
+        "title": "Q289435",
+        "pageid": 279810,
+        "concepturi": "http://www.wikidata.org/entity/Q289435",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q289435",
+        "display": {
+          "label": {
+            "value": "common snapping turtle",
+            "language": "en"
+          },
+          "description": {
+            "value": "large freshwater turtle of the family Chelydridae",
+            "language": "en"
+          }
+        },
+        "label": "common snapping turtle",
+        "description": "large freshwater turtle of the family Chelydridae",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "カミツキガメ"
+        },
+        "aliases": [
+          "カミツキガメ"
+        ]
+      },
+      {
+        "id": "Q650212",
+        "title": "Q650212",
+        "pageid": 611950,
+        "concepturi": "http://www.wikidata.org/entity/Q650212",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q650212",
+        "display": {
+          "label": {
+            "value": "Chelydridae",
+            "language": "en"
+          },
+          "description": {
+            "value": "family of turtles",
+            "language": "en"
+          }
+        },
+        "label": "Chelydridae",
+        "description": "family of turtles",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "カミツキガメ科"
+        },
+        "aliases": [
+          "カミツキガメ科"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:11.518Z",
+  "value": {
+    "searchinfo": {
+      "search": "両国国技館"
+    },
+    "search": [
+      {
+        "id": "Q176821",
+        "title": "Q176821",
+        "pageid": 176498,
+        "concepturi": "http://www.wikidata.org/entity/Q176821",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q176821",
+        "display": {
+          "label": {
+            "value": "Ryōgoku Kokugikan",
+            "language": "en"
+          },
+          "description": {
+            "value": "sumo indoor arena located in Sumida-ku, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Ryōgoku Kokugikan",
+        "description": "sumo indoor arena located in Sumida-ku, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "両国国技館"
+        },
+        "aliases": [
+          "両国国技館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

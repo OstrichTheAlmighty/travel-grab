@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:36.585Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 28762,
+          "ns": 0,
+          "title": "神奈川区",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かなかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "YokohamaPortside_02.jpg",
+            "wikibase_item": "Q1143712"
+          },
+          "coordinates": [
+            {
+              "lat": 35.47705556,
+              "lon": 139.62927778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県横浜市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 83106,
+          "ns": 0,
+          "title": "中区 (横浜市)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Kanagawa_Prefectural_Museum_of_Cultural_History_2009.jpg",
+            "wikibase_item": "Q1141068"
+          },
+          "coordinates": [
+            {
+              "lat": 35.44472222,
+              "lon": 139.64213889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県横浜市の区"
+            ]
+          }
+        },
+        {
+          "pageid": 100241,
+          "ns": 0,
+          "title": "商店街",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しようてんかい",
+            "page_image_free": "千林商店街.jpg",
+            "wikibase_item": "Q96288394"
+          },
+          "terms": {
+            "description": [
+              "商店が集まっている場所"
+            ]
+          }
+        },
+        {
+          "pageid": 498812,
+          "ns": 0,
+          "title": "ブレーメンの音楽隊",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふれえめんのおんかくたい",
+            "page_image_free": "Bremer_Stadtmusikanten.jpg",
+            "wikibase_item": "Q112015"
+          },
+          "terms": {
+            "description": [
+              "グリム童話の物語"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

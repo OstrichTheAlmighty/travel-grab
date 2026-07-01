@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:42.369Z",
+  "value": {
+    "searchinfo": {
+      "search": "アドミュージアム東京"
+    },
+    "search": [
+      {
+        "id": "Q11284141",
+        "title": "Q11284141",
+        "pageid": 12425050,
+        "concepturi": "http://www.wikidata.org/entity/Q11284141",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11284141",
+        "display": {
+          "label": {
+            "value": "Ad Museum Tokyo",
+            "language": "en"
+          },
+          "description": {
+            "value": "library",
+            "language": "en"
+          }
+        },
+        "label": "Ad Museum Tokyo",
+        "description": "library",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "アドミュージアム東京"
+        },
+        "aliases": [
+          "アドミュージアム東京"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

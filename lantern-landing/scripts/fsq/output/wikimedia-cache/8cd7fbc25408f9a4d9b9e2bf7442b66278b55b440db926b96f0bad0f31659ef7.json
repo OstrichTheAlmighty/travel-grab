@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:08.467Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18792,
+          "ns": 0,
+          "title": "文京区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふんきようく",
+            "kartographer_frames": "1",
+            "page_image_free": "Akamon,_University_of_Tokyo_2019.jpg",
+            "wikibase_item": "Q212713"
+          },
+          "coordinates": [
+            {
+              "lat": 35.708,
+              "lon": 139.75225,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 130768,
+          "ns": 0,
+          "title": "小石川",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こいしかわ",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q2666269"
+          },
+          "terms": {
+            "description": [
+              "東京都文京区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 131326,
+          "ns": 0,
+          "title": "後楽",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こうらく",
+            "kartographer_frames": "1",
+            "page_image_free": "Koishikawa_Korakuen_(2008.09).JPG",
+            "wikibase_item": "Q11488350"
+          },
+          "terms": {
+            "description": [
+              "東京都文京区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 131329,
+          "ns": 0,
+          "title": "小石川後楽園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こいしかわこうらくえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Koishikawa_korakuen_-_Osensui_and_Horaijima.jpg",
+            "wikibase_item": "Q1778881"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70511111,
+              "lon": 139.74988889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都文京区にある庭園"
+            ]
+          }
+        },
+        {
+          "pageid": 367989,
+          "ns": 0,
+          "title": "小石川区",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こいしかわく",
+            "wikibase_item": "Q11463266"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70805556,
+              "lon": 139.74597222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて日本の東京府東京市にあった区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

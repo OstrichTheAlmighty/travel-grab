@@ -1,0 +1,194 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:22.625Z",
+  "value": {
+    "searchinfo": {
+      "search": "National Stadium"
+    },
+    "search": [
+      {
+        "id": "Q14862239",
+        "title": "Q14862239",
+        "pageid": 16531011,
+        "concepturi": "http://www.wikidata.org/entity/Q14862239",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q14862239",
+        "display": {
+          "label": {
+            "value": "Japan National Stadium",
+            "language": "en"
+          },
+          "description": {
+            "value": "stadium in Kasumigaoka, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Japan National Stadium",
+        "description": "stadium in Kasumigaoka, Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "National Stadium"
+        },
+        "aliases": [
+          "National Stadium"
+        ]
+      },
+      {
+        "id": "Q219047",
+        "title": "Q219047",
+        "pageid": 214019,
+        "concepturi": "http://www.wikidata.org/entity/Q219047",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q219047",
+        "display": {
+          "label": {
+            "value": "National Stadium",
+            "language": "en"
+          },
+          "description": {
+            "value": "sports complex in Bangkok, Thailand",
+            "language": "en"
+          }
+        },
+        "label": "National Stadium",
+        "description": "sports complex in Bangkok, Thailand",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "National Stadium"
+        }
+      },
+      {
+        "id": "Q1500479",
+        "title": "Q1500479",
+        "pageid": 1437986,
+        "concepturi": "http://www.wikidata.org/entity/Q1500479",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1500479",
+        "display": {
+          "label": {
+            "value": "National Stadium",
+            "language": "en"
+          },
+          "description": {
+            "value": "stadium in East Timor",
+            "language": "en"
+          }
+        },
+        "label": "National Stadium",
+        "description": "stadium in East Timor",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "National Stadium"
+        }
+      },
+      {
+        "id": "Q6634155",
+        "title": "Q6634155",
+        "pageid": 6463196,
+        "concepturi": "http://www.wikidata.org/entity/Q6634155",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6634155",
+        "display": {
+          "label": {
+            "value": "national stadium",
+            "language": "en"
+          },
+          "description": {
+            "value": "sport stadium, which typically serves as the primary or exclusive home for one or more of a country's national representative sports teams",
+            "language": "en"
+          }
+        },
+        "label": "national stadium",
+        "description": "sport stadium, which typically serves as the primary or exclusive home for one or more of a country's national representative sports teams",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "national stadium"
+        }
+      },
+      {
+        "id": "Q330033",
+        "title": "Q330033",
+        "pageid": 316545,
+        "concepturi": "http://www.wikidata.org/entity/Q330033",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q330033",
+        "display": {
+          "label": {
+            "value": "National Stadium in Tokyo",
+            "language": "en"
+          },
+          "description": {
+            "value": "defunct multi-purpose stadium in Shinjuku, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "National Stadium in Tokyo",
+        "description": "defunct multi-purpose stadium in Shinjuku, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "National Stadium in Tokyo"
+        }
+      },
+      {
+        "id": "Q179693",
+        "title": "Q179693",
+        "pageid": 178996,
+        "concepturi": "http://www.wikidata.org/entity/Q179693",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q179693",
+        "display": {
+          "label": {
+            "value": "Kazimierz Górski National Stadium",
+            "language": "en"
+          },
+          "description": {
+            "value": "football stadium located in Warsaw, Poland",
+            "language": "en"
+          }
+        },
+        "label": "Kazimierz Górski National Stadium",
+        "description": "football stadium located in Warsaw, Poland",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "National Stadium Warsaw"
+        },
+        "aliases": [
+          "National Stadium Warsaw"
+        ]
+      },
+      {
+        "id": "Q1638468",
+        "title": "Q1638468",
+        "pageid": 1572716,
+        "concepturi": "http://www.wikidata.org/entity/Q1638468",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1638468",
+        "display": {
+          "label": {
+            "value": "National Stadium",
+            "language": "en"
+          },
+          "description": {
+            "value": "multi-purpose sports stadium in Koror, Palau",
+            "language": "en"
+          }
+        },
+        "label": "National Stadium",
+        "description": "multi-purpose sports stadium in Koror, Palau",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "National Stadium"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

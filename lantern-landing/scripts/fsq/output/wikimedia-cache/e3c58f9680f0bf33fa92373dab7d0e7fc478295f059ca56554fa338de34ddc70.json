@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:42.842Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 7677,
+          "ns": 0,
+          "title": "藤沢市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふしさわし",
+            "kartographer_frames": "1",
+            "page_image_free": "Fujisawa_montage.jpg",
+            "wikibase_item": "Q386661"
+          },
+          "coordinates": [
+            {
+              "lat": 35.33878,
+              "lon": 139.49089,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 62779,
+          "ns": 0,
+          "title": "野川 (東京都)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "のかわ",
+            "kartographer_frames": "3",
+            "page_image_free": "調布市佐須町_野川、大橋_20260404.jpg",
+            "wikibase_item": "Q11645427"
+          },
+          "terms": {
+            "description": [
+              "東京都の川"
+            ]
+          }
+        },
+        {
+          "pageid": 667170,
+          "ns": 0,
+          "title": "第20回NHK紅白歌合戦",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "NHKこうはくうたかつせん20",
+            "page_image_free": "Tokyo_Takarazuka_Theater_in_Taisho_and_Pre-war_Showa_eras.JPG",
+            "wikibase_item": "Q11600519"
+          },
+          "terms": {
+            "description": [
+              "1969年のNHK紅白歌合戦"
+            ]
+          }
+        },
+        {
+          "pageid": 691347,
+          "ns": 0,
+          "title": "徳島市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とくしまし",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokushima_Montage2.jpg",
+            "wikibase_item": "Q207309"
+          },
+          "coordinates": [
+            {
+              "lat": 34.07028,
+              "lon": 134.55494,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "徳島県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 3447837,
+          "ns": 0,
+          "title": "ベリーグッドマン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "へりいくつとまん",
+            "wikibase_item": "Q28693296"
+          },
+          "terms": {
+            "description": [
+              "日本の音楽トリオ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

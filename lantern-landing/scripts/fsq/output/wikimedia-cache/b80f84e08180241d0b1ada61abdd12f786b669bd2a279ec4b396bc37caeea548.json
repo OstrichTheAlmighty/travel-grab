@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:11.310Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2012,
+          "ns": 0,
+          "title": "スキー場",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すきしよう",
+            "page_image_free": "Hyonosen02s1760.jpg",
+            "wikibase_item": "Q130003"
+          },
+          "terms": {
+            "description": [
+              "スキーなどで雪斜面を滑降する目的で山肌を切り開き整備されている雪面"
+            ]
+          }
+        },
+        {
+          "pageid": 492269,
+          "ns": 0,
+          "title": "東京ディズニーランドのサービス施設の一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいらんとのさあひすしせついちらん",
+            "wikibase_item": "Q11524282"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 493656,
+          "ns": 0,
+          "title": "東京ディズニーシーのサービス施設の一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいしいのさあひすしせついちらん",
+            "wikibase_item": "Q11524254"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2633227,
+          "ns": 0,
+          "title": "ニコニコ超会議",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にこにこちようかいき",
+            "page_image_free": "Makuhari_Messe,_North_hall_2.jpg",
+            "wikibase_item": "Q11324241"
+          },
+          "terms": {
+            "description": [
+              "ニコニコ動画主催の大型イベント"
+            ]
+          }
+        },
+        {
+          "pageid": 2752482,
+          "ns": 0,
+          "title": "フジロックフェスティバル",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふしろつくふえすていはる",
+            "page_image_free": "FujiGreenStage.jpg",
+            "wikibase_item": "Q1151186"
+          },
+          "terms": {
+            "description": [
+              "毎年夏季に日本で行われるロックフェスティバル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

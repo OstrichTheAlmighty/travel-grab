@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:06.919Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 32894,
+          "ns": 0,
+          "title": "阪急百貨店",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はんきゆうひやつかてん",
+            "page_image_free": "Mido-suji_Osaka01s4s3200.jpg",
+            "wikibase_item": "Q5648576"
+          },
+          "terms": {
+            "description": [
+              "日本の百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 32895,
+          "ns": 0,
+          "title": "阪神百貨店",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はんしんひやつかてん",
+            "page_image_free": "OSAKA_UMEDA_TWIN_TOWERS_SOUTH.jpg",
+            "wikibase_item": "Q5651113"
+          },
+          "terms": {
+            "description": [
+              "日本の百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 43875,
+          "ns": 0,
+          "title": "日清食品ホールディングス",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "につしんしよくひんほおるていんくす",
+            "page_image_free": "日清食品ホールディングス株式会社新宿六丁目東京本社ビルRIMG0076.JPG",
+            "wikibase_item": "Q18341667"
+          },
+          "terms": {
+            "description": [
+              "日清食品グループを統括する持株会社"
+            ]
+          }
+        },
+        {
+          "pageid": 943827,
+          "ns": 0,
+          "title": "マイヤ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "まいや",
+            "page_image_free": "MAIYA_Logo.svg",
+            "wikibase_item": "Q11339796"
+          },
+          "terms": {
+            "description": [
+              "スーパーマーケット"
+            ]
+          }
+        },
+        {
+          "pageid": 975019,
+          "ns": 0,
+          "title": "浜屋百貨店",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はまやひやつかてん",
+            "page_image_free": "Hamaya_Department_Store_ac_(2).jpg",
+            "wikibase_item": "Q11557647"
+          },
+          "coordinates": [
+            {
+              "lat": 32.74363889,
+              "lon": 129.87855556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長崎市の百貨店"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

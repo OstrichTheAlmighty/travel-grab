@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:24.584Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 97868,
+          "ns": 0,
+          "title": "下丸子駅",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しもまるこ",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyu_Shimomaruko_sta_001.jpg",
+            "wikibase_item": "Q7496927"
+          },
+          "coordinates": [
+            {
+              "lat": 35.57130556,
+              "lon": 139.68561111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都大田区下丸子にある東急電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 433938,
+          "ns": 0,
+          "title": "トリックの登場人物",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とりつくのとうしようしんふつ",
+            "wikibase_item": "Q11321965"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1425676,
+          "ns": 0,
+          "title": "下丸子",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しもまるこ",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Route_11_-02.jpg",
+            "wikibase_item": "Q11360584"
+          },
+          "terms": {
+            "description": [
+              "東京都大田区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 1778099,
+          "ns": 0,
+          "title": "大田区",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-International-Airport_Satellite.jpg",
+            "wikibase_item": "Q217234"
+          },
+          "coordinates": [
+            {
+              "lat": 35.56128,
+              "lon": 139.71603,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 2030249,
+          "ns": 0,
+          "title": "五十嵐健治",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いからし けんし",
+            "page_image_free": "Kenji_Igarashi.jpg",
+            "wikibase_item": "Q11372089"
+          },
+          "terms": {
+            "description": [
+              "日本の実業家、『白洋舍』創設者 (1877–1972)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

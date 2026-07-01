@@ -1,0 +1,90 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:24.655Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 262564,
+          "ns": 0,
+          "title": "小沢一敬",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おさわ かすひろ",
+            "wikibase_item": "Q11462351"
+          },
+          "terms": {
+            "description": [
+              "日本のお笑いタレント"
+            ]
+          }
+        },
+        {
+          "pageid": 388371,
+          "ns": 0,
+          "title": "道の駅一覧 ま行",
+          "index": 3,
+          "pageprops": {
+            "wikibase_item": "Q11641090"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 669726,
+          "ns": 0,
+          "title": "鈴木奈都",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すすき なつ",
+            "page_image_free": "Suzuki_Natsu_2016-02-23.jpg",
+            "wikibase_item": "Q11648726"
+          }
+        },
+        {
+          "pageid": 2088485,
+          "ns": 0,
+          "title": "角野友紀",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かとの ゆき",
+            "wikibase_item": "Q11630873"
+          }
+        },
+        {
+          "pageid": 3838047,
+          "ns": 0,
+          "title": "こまねこまつり",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こまねこまつり",
+            "page_image": "金刀比羅神社の絵付け狛猫--屋外美術--.jpeg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q56863439"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62102778,
+              "lon": 135.06116667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京丹後市峰山で民間主導で2016年にはじまったまちおこしイベント"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

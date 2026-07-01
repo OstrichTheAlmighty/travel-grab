@@ -1,0 +1,83 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:46.505Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3223,
+          "ns": 0,
+          "title": "青野武",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あおの たけし",
+            "page_image_free": "青野武.png",
+            "wikibase_item": "Q305233"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優、男性声優 (1936 - 2012)"
+            ]
+          }
+        },
+        {
+          "pageid": 1595775,
+          "ns": 0,
+          "title": "コンピュータアニメーション",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こんひゆうたあにめえしよん",
+            "page_image_free": "Activemarker2.PNG",
+            "wikibase_item": "Q1401416"
+          }
+        },
+        {
+          "pageid": 1906024,
+          "ns": 0,
+          "title": "空から日本を見てみよう",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "そらからにほんをみてみよう",
+            "wikibase_item": "Q11597289"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 2088960,
+          "ns": 0,
+          "title": "トイ・ストーリー3",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "といすとおりい3",
+            "page_image_free": "Toy_Story_3_logo.svg",
+            "wikibase_item": "Q187278"
+          },
+          "terms": {
+            "description": [
+              "2010年のピクサーによるアニメーション映画"
+            ]
+          }
+        },
+        {
+          "pageid": 4574131,
+          "ns": 0,
+          "title": "古賀英里奈",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こか えりな",
+            "wikibase_item": "Q112238424"
+          }
+        }
+      ]
+    }
+  }
+}

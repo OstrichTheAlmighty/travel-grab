@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:44.703Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 73084,
+          "ns": 0,
+          "title": "狛犬",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こまいぬ",
+            "page_image_free": "Osakejinja03_1024.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q20155846"
+          },
+          "terms": {
+            "description": [
+              "日本の想像上の生物"
+            ]
+          }
+        },
+        {
+          "pageid": 83836,
+          "ns": 0,
+          "title": "京都国立博物館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きようとこくりつはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Kyoto_National_Museum_2009.jpg",
+            "wikibase_item": "Q147286"
+          },
+          "coordinates": [
+            {
+              "lat": 34.98994444,
+              "lon": 135.77311111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市にある国立博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 220197,
+          "ns": 0,
+          "title": "九州国立博物館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きゆうしゆうこくりつはくふつかん",
+            "page_image_free": "Kyuhaku-approach_1.jpg",
+            "wikibase_item": "Q148543"
+          },
+          "coordinates": [
+            {
+              "lat": 33.51835556,
+              "lon": 130.53829722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福岡県大宰府市にある国立博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 958879,
+          "ns": 0,
+          "title": "高麗博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こうらいはくふつかん",
+            "wikibase_item": "Q6149067"
+          }
+        },
+        {
+          "pageid": 2798643,
+          "ns": 0,
+          "title": "朝鮮美術",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ちようせんひしゆつ",
+            "page_image_free": "Man_-_Anak_Tomb_No._3.jpg",
+            "wikibase_item": "Q929402"
+          }
+        }
+      ]
+    }
+  }
+}

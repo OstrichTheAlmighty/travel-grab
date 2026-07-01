@@ -1,0 +1,130 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:23.369Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 31504,
+          "ns": 0,
+          "title": "Taitō",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Taito, Tokyo",
+            "page_image_free": "Honkan,_Tokyo_National_Museum_–_Tokyo,_Japan_–_(2019-12-30).jpg",
+            "wikibase-shortdesc": "Special ward in Kantō, Japan",
+            "wikibase_item": "Q232641"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7125,
+              "lon": 139.78,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "special ward in the Tokyo Metropolis in Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 31094915,
+          "ns": 0,
+          "title": "Kiyosumi Garden",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Kiyosumi-1.JPG",
+            "wikibase-shortdesc": "Traditional Japanese stroll garden in Fukagawa, Tokyo, Japan",
+            "wikibase_item": "Q4388146"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68,
+              "lon": 139.79777778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "traditional Japanese stroll garden located in Fukagawa, Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 31106805,
+          "ns": 0,
+          "title": "Kyū-Iwasaki-tei Garden",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Former_Iwasaki_Family_House_and_Garden_2010.jpg",
+            "wikibase-shortdesc": "Historic estate in Taitō, Tokyo, Japan",
+            "wikibase_item": "Q1358767"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70972222,
+              "lon": 139.76777778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "park"
+            ]
+          }
+        },
+        {
+          "pageid": 32975252,
+          "ns": 0,
+          "title": "Kyū-Furukawa Gardens",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Kyu-Furukawa_Tei_(House)2.jpg",
+            "wikibase-shortdesc": "Park in Tokyo, Japan",
+            "wikibase_item": "Q3082256"
+          },
+          "coordinates": [
+            {
+              "lat": 35.74297222,
+              "lon": 139.74669444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "park in Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 77217439,
+          "ns": 0,
+          "title": "Hisaya Iwasaki",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Hisaya_Iwasaki.jpg",
+            "wikibase-shortdesc": "Japanese industrialist (1865–1955)",
+            "wikibase_item": "Q11474430"
+          },
+          "terms": {
+            "description": [
+              "Japanese industrialist (1865–1955)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:06.273Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 89802,
+          "ns": 0,
+          "title": "道玄坂",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうけんさか",
+            "kartographer_frames": "1",
+            "page_image_free": "Dōgenzaka_at_night_2024.JPG",
+            "wikibase_item": "Q11641777"
+          },
+          "terms": {
+            "description": [
+              "東京都渋谷区の坂"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

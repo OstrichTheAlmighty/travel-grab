@@ -1,0 +1,66 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:35.504Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1819,
+          "ns": 0,
+          "title": "宇多田ヒカル",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "うたた ひかる",
+            "page_image_free": "Utada_Hikaru.jpg",
+            "wikibase_item": "Q234598"
+          },
+          "terms": {
+            "description": [
+              "日本のシンガーソングライター"
+            ]
+          }
+        },
+        {
+          "pageid": 127667,
+          "ns": 0,
+          "title": "2004年の音楽",
+          "index": 2,
+          "pageprops": {
+            "wikibase_item": "Q2000381"
+          }
+        },
+        {
+          "pageid": 366745,
+          "ns": 0,
+          "title": "First Love (宇多田ヒカルのアルバム)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふあすとらう",
+            "wikibase_item": "Q645514"
+          },
+          "terms": {
+            "description": [
+              "宇多田ヒカルのスタジオ・アルバム"
+            ]
+          }
+        },
+        {
+          "pageid": 2200971,
+          "ns": 0,
+          "title": "尾崎裕哉",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おさき ひろや",
+            "wikibase_item": "Q11465257"
+          },
+          "terms": {
+            "description": [
+              "日本のシンガーソングライター"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

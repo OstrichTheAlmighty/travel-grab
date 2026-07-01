@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:38.228Z",
+  "value": {
+    "searchinfo": {
+      "search": "桃井原っぱ公園"
+    },
+    "search": [
+      {
+        "id": "Q21019735",
+        "title": "Q21019735",
+        "pageid": 23071181,
+        "concepturi": "http://www.wikidata.org/entity/Q21019735",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q21019735",
+        "display": {
+          "label": {
+            "value": "Momoi Harappa Park",
+            "language": "en"
+          }
+        },
+        "label": "Momoi Harappa Park",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "桃井原っぱ公園"
+        },
+        "aliases": [
+          "桃井原っぱ公園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

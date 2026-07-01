@@ -1,0 +1,69 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:25.790Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 3393,
+          "ns": 0,
+          "title": "三越",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みつこし",
+            "page_image_free": "Mitsukoshi_Nihonbashi_main_store_9.jpg",
+            "wikibase_item": "Q1065598"
+          },
+          "terms": {
+            "description": [
+              "日本の百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 32964,
+          "ns": 0,
+          "title": "伊勢丹",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いせたん",
+            "kartographer_frames": "1",
+            "page_image_free": "Isetan_Shinjuku_2018.jpg",
+            "wikibase_item": "Q3155239"
+          },
+          "terms": {
+            "description": [
+              "日本の百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 1731153,
+          "ns": 0,
+          "title": "東京タワー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようたわあ",
+            "kartographer_frames": "1",
+            "page_image_free": "日本電波塔（東京タワー）.jpg",
+            "wikibase_item": "Q183536"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65861111,
+              "lon": 139.74555556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある電波塔"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

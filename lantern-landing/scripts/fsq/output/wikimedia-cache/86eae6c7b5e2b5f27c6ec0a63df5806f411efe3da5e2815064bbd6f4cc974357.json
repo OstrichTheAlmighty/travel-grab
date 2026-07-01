@@ -1,0 +1,129 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:05.088Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 35773,
+          "ns": 0,
+          "title": "東山区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひかしやまく",
+            "kartographer_frames": "1",
+            "page_image_free": "Kiyomizu-dera,_Kyoto,_November_2016_-01.jpg",
+            "wikibase_item": "Q1203862"
+          },
+          "coordinates": [
+            {
+              "lat": 34.99694444,
+              "lon": 135.77638889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都府京都市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 37836,
+          "ns": 0,
+          "title": "藪塚本町",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やふつかほんまち",
+            "page_image_free": "Yabuzuka_Onsen.JPG",
+            "wikibase_item": "Q8046406"
+          },
+          "coordinates": [
+            {
+              "lat": 36.35842,
+              "lon": 139.29783,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の群馬県新田郡にあった町"
+            ]
+          }
+        },
+        {
+          "pageid": 217136,
+          "ns": 0,
+          "title": "灯籠",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうろう",
+            "page_image_free": "Kasuga-dōrō_parts.jpg",
+            "wikibase_item": "Q12012294"
+          },
+          "terms": {
+            "description": [
+              "漢字圏全体でみられる、石製の伝統的な照明器具の1つ"
+            ]
+          }
+        },
+        {
+          "pageid": 416716,
+          "ns": 0,
+          "title": "岩本寺",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いわもとし",
+            "kartographer_frames": "1",
+            "page_image_free": "Iwamotoji_20230117_1.jpg",
+            "wikibase_item": "Q11475095"
+          },
+          "coordinates": [
+            {
+              "lat": 33.20797222,
+              "lon": 133.13461111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "高知県高岡郡四万十町にある寺院、四国八十八箇所霊場の第三十七番札所"
+            ]
+          }
+        },
+        {
+          "pageid": 1047276,
+          "ns": 0,
+          "title": "神峯山寺",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かふさんし",
+            "page_image_free": "161126_Kabusanji_Takatsuki_Osaka_pref_Japan05s3.jpg",
+            "wikibase_item": "Q11589589"
+          },
+          "coordinates": [
+            {
+              "lat": 34.89761111,
+              "lon": 135.60883333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪府高槻市にある寺院"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

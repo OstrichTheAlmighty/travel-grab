@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:31.991Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 75105,
+          "ns": 0,
+          "title": "吉良町",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きらちよう",
+            "page_image_free": "Kirawaikikibeach.jpg",
+            "wikibase_item": "Q1154383"
+          },
+          "coordinates": [
+            {
+              "lat": 34.80317,
+              "lon": 137.0675,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の愛知県幡豆郡にあった町"
+            ]
+          }
+        },
+        {
+          "pageid": 113493,
+          "ns": 0,
+          "title": "文学館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふんかくかん",
+            "wikibase_item": "Q1865249"
+          },
+          "terms": {
+            "description": [
+              "作家や文学運動に関する品々を集めた博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 430072,
+          "ns": 0,
+          "title": "尾崎士郎",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おさき しろう",
+            "page_image_free": "Ozaki_Shiro.JPG",
+            "wikibase_item": "Q11465191"
+          },
+          "terms": {
+            "description": [
+              "小説家 (1898-1964)"
+            ]
+          }
+        },
+        {
+          "pageid": 3471916,
+          "ns": 0,
+          "title": "西尾市立吉良図書館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にしおしりつきらとしよかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Nishio_City_Kira_Library_exterior_ac_(1).jpg",
+            "wikibase_item": "Q48744277"
+          },
+          "coordinates": [
+            {
+              "lat": 34.80644444,
+              "lon": 137.06547222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県西尾市の公共図書館"
+            ]
+          }
+        },
+        {
+          "pageid": 3742142,
+          "ns": 0,
+          "title": "尾崎士郎記念館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おさきしろうきねんかん",
+            "disambiguation": "",
+            "page_image_free": "Nishio_City_Shiro_Ozaki_Memorial_Museum_exterior_ac_(1).jpg",
+            "wikibase_item": "Q56352436"
+          }
+        }
+      ]
+    }
+  }
+}

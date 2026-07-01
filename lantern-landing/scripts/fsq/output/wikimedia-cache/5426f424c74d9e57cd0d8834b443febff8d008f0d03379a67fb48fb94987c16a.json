@@ -1,0 +1,72 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:03.609Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2879733,
+          "ns": 0,
+          "title": "君の銀の庭",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きみのきんのにわ",
+            "wikibase_item": "Q15243216"
+          }
+        },
+        {
+          "pageid": 3038550,
+          "ns": 0,
+          "title": "春の庭",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はるのにわ",
+            "wikibase_item": "Q18338900"
+          }
+        },
+        {
+          "pageid": 3125742,
+          "ns": 0,
+          "title": "Aさんの庭",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えいさんのにわ",
+            "page_image_free": "A_house_of_A-san's_garden.JPG",
+            "wikibase_item": "Q18990855"
+          },
+          "terms": {
+            "description": [
+              "東京都杉並区にある公園"
+            ]
+          }
+        },
+        {
+          "pageid": 3329238,
+          "ns": 0,
+          "title": "長閑の庭",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "のとかのにわ",
+            "wikibase_item": "Q22125260"
+          }
+        },
+        {
+          "pageid": 4549836,
+          "ns": 0,
+          "title": "苔庭",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こけにわ",
+            "page_image_free": "Moosgarten_Kozanji.jpg",
+            "wikibase_item": "Q87597481"
+          }
+        }
+      ]
+    }
+  }
+}

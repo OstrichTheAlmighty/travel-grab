@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:14.243Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 55124,
+          "ns": 0,
+          "title": "渡辺崋山",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "わたなへ かさん",
+            "page_image_free": "Watanabe_Kazan.jpg",
+            "wikibase_item": "Q3130609"
+          },
+          "terms": {
+            "description": [
+              "江戸時代後期の武士、画家"
+            ]
+          }
+        },
+        {
+          "pageid": 80408,
+          "ns": 0,
+          "title": "野々村仁清",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ののむら にんせい",
+            "wikibase_item": "Q11644917"
+          },
+          "terms": {
+            "description": [
+              "日本の陶芸家"
+            ]
+          }
+        },
+        {
+          "pageid": 84385,
+          "ns": 0,
+          "title": "アーティゾン美術館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あていそんひしゆつかん",
+            "page_image_free": "Artizon_Museum_lobby_view_201912.jpg",
+            "wikibase_item": "Q913808"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区にある私立美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 84634,
+          "ns": 0,
+          "title": "静嘉堂文庫",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せいかとうふんこ",
+            "kartographer_frames": "1",
+            "page_image_free": "Seikado_Bunko_2009.jpg",
+            "wikibase_item": "Q3329573"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62280889,
+              "lon": 139.61929778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "世田谷区にある私立図書館"
+            ]
+          }
+        },
+        {
+          "pageid": 639258,
+          "ns": 0,
+          "title": "明治生命館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "めいしせいめいかん",
+            "page_image_free": "Meiji_Yasuda_Life_Insurance_Company_Head_Office_2009.jpg",
+            "wikibase_item": "Q3023897"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67896389,
+              "lon": 139.76146944,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある建築物"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

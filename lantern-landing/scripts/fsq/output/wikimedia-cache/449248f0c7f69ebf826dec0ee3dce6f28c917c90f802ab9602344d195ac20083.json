@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:24.472Z",
+  "value": {
+    "searchinfo": {
+      "search": "一之江名主屋敷"
+    },
+    "search": [
+      {
+        "id": "Q20043132",
+        "title": "Q20043132",
+        "pageid": 21713487,
+        "concepturi": "http://www.wikidata.org/entity/Q20043132",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q20043132",
+        "display": {
+          "label": {
+            "value": "Ichinoe Nanushi Yashiki",
+            "language": "en"
+          }
+        },
+        "label": "Ichinoe Nanushi Yashiki",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "一之江名主屋敷"
+        },
+        "aliases": [
+          "一之江名主屋敷"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

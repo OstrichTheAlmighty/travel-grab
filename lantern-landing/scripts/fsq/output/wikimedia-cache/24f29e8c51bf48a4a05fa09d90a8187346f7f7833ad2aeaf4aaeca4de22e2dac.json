@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:17:56.437Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 13241,
+          "ns": 0,
+          "title": "吾輩は猫である",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "わかはいはねこてある",
+            "page_image_free": "Ich_der_Kater_2.jpg",
+            "wikibase_item": "Q35690"
+          },
+          "terms": {
+            "description": [
+              "夏目漱石による日本の小説"
+            ]
+          }
+        },
+        {
+          "pageid": 18792,
+          "ns": 0,
+          "title": "文京区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふんきようく",
+            "kartographer_frames": "1",
+            "page_image_free": "Akamon,_University_of_Tokyo_2019.jpg",
+            "wikibase_item": "Q212713"
+          },
+          "coordinates": [
+            {
+              "lat": 35.708,
+              "lon": 139.75225,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 221608,
+          "ns": 0,
+          "title": "岩内町",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いわないちよう",
+            "page_image_free": "Katanagake_Rock.JPG",
+            "wikibase_item": "Q1354481"
+          },
+          "coordinates": [
+            {
+              "lat": 42.97978,
+              "lon": 140.51456,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道岩内郡の町"
+            ]
+          }
+        },
+        {
+          "pageid": 1581400,
+          "ns": 0,
+          "title": "夏目漱石",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "なつめ そうせき",
+            "page_image_free": "Natsume_Soseki_photo.jpg",
+            "wikibase_item": "Q180903"
+          },
+          "terms": {
+            "description": [
+              "日本の小説家 (1867-1916)"
+            ]
+          }
+        },
+        {
+          "pageid": 3362285,
+          "ns": 0,
+          "title": "夏目家どろぼう綺談",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なつめけとろほうきたん",
+            "wikibase_item": "Q22674804"
+          }
+        }
+      ]
+    }
+  }
+}

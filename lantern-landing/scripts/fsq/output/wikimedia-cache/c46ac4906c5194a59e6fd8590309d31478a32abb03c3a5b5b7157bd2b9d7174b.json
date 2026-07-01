@@ -1,0 +1,108 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:16.792Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 788698,
+          "ns": 0,
+          "title": "Hachikō",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Hachiko",
+            "page_image_free": "Hachiko.JPG",
+            "wikibase-shortdesc": "Akita dog known for his loyalty (1923–1935)",
+            "wikibase_item": "Q186486"
+          },
+          "terms": {
+            "description": [
+              "Akita"
+            ]
+          }
+        },
+        {
+          "pageid": 9948980,
+          "ns": 0,
+          "title": "Hidesaburō Ueno",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Ueno, Hidesaburo",
+            "page_image_free": "Hidesaburō_Ueno.jpg",
+            "wikibase-shortdesc": "Japanese agricultural scientist and owner of Hachikō (1872–1925)",
+            "wikibase_item": "Q933532"
+          },
+          "terms": {
+            "description": [
+              "Japanese agricultural scientist (1872-1925)"
+            ]
+          }
+        },
+        {
+          "pageid": 18571859,
+          "ns": 0,
+          "title": "Hachi: A Dog's Tale",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Hachi A Dog's Tale",
+            "displaytitle": "<i>Hachi: A Dog's Tale</i>",
+            "page_image": "Hachi_poster.jpg",
+            "wikibase-shortdesc": "2009 drama film directed by Lasse Hallström",
+            "wikibase_item": "Q59249"
+          },
+          "terms": {
+            "description": [
+              "2009 film directed by Lasse Hallström"
+            ]
+          }
+        },
+        {
+          "pageid": 62814677,
+          "ns": 0,
+          "title": "Statue of Hachikō",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "wikibase-shortdesc": "Statue in Tokyo, Japan",
+            "wikibase_item": "Q62124995"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65905556,
+              "lon": 139.70058333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "statue in Shibuya, Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 75220305,
+          "ns": 0,
+          "title": "Moyai statue",
+          "index": 5,
+          "pageprops": {
+            "displaytitle": "<i>Moyai</i> statue",
+            "page_image_free": "Moyai_road-Moai-20080331.jpg",
+            "wikibase-shortdesc": "Type of stone statue from Niijima, Japan",
+            "wikibase_item": "Q11344561"
+          },
+          "terms": {
+            "description": [
+              "Type of stone statue from Nījima, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

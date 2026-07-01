@@ -1,0 +1,124 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:15.739Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8073,
+          "ns": 0,
+          "title": "新宿区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しんしゆくく",
+            "kartographer_frames": "1",
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "wikibase_item": "Q179645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69389,
+              "lon": 139.70342,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 42407,
+          "ns": 0,
+          "title": "中央区 (福岡市)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちゆうおうく",
+            "page_image_free": "Fukuoka_City_-_Watanabe-dori_Avenue_-_01.JPG",
+            "wikibase_item": "Q1156273"
+          },
+          "coordinates": [
+            {
+              "lat": 33.58919,
+              "lon": 130.39281,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福岡県福岡市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 449068,
+          "ns": 0,
+          "title": "下落合 (新宿区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しもおちあい",
+            "kartographer_frames": "1",
+            "page_image_free": "Shimoochiai-Sta.JPG",
+            "wikibase_item": "Q11361307"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 933465,
+          "ns": 0,
+          "title": "落合公園 (春日井市)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おちあいこうえん かすかいし",
+            "page_image_free": "Map_of_Aichi_Prefecture_Ja.svg",
+            "wikibase_item": "Q11620571"
+          },
+          "coordinates": [
+            {
+              "lat": 35.27126667,
+              "lon": 136.98963333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県春日井市の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1630552,
+          "ns": 0,
+          "title": "落合中央公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おちあいちゆうおうこうえん",
+            "page_image_free": "Ochiaichuuoukouen.jpg",
+            "wikibase_item": "Q11620561"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7124,
+              "lon": 139.6932,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

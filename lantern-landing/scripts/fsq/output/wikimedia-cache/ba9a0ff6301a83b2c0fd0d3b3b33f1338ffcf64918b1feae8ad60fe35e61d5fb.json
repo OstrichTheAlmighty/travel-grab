@@ -1,0 +1,87 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:04.151Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 128154,
+          "ns": 0,
+          "title": "アンナミラーズ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あんなみらあす",
+            "page_image_free": "Anna_Miller's_Akasaka.jpg",
+            "wikibase_item": "Q4767352"
+          },
+          "terms": {
+            "description": [
+              "アメリカのレストランチェーン"
+            ]
+          }
+        },
+        {
+          "pageid": 209919,
+          "ns": 0,
+          "title": "愛の貧乏脱出大作戦",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あいのひんほうたつしゆつたいさくせん",
+            "wikibase_item": "Q11493355"
+          }
+        },
+        {
+          "pageid": 936631,
+          "ns": 0,
+          "title": "水曜どうでしょうの企画 (日本国内)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すいようとうてしようのきかく",
+            "wikibase_item": "Q11548695"
+          },
+          "terms": {
+            "description": [
+              "『水曜どうでしょう』で放送された企画の中から、1996年10月から2002年9月に日本国内で収録した企画の一覧"
+            ]
+          }
+        },
+        {
+          "pageid": 1916798,
+          "ns": 0,
+          "title": "矢口真里",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やくち まり",
+            "page_image_free": "ロンドンチャレンジ沖縄ツアー_矢口真里_mari_yaguchi_(7034074019)_(cropped).jpg",
+            "wikibase_item": "Q1142098"
+          },
+          "terms": {
+            "description": [
+              "日本の女性タレント、歌手"
+            ]
+          }
+        },
+        {
+          "pageid": 3859555,
+          "ns": 0,
+          "title": "有吉ぃぃeeeee!そうだ!今からお前んチでゲームしない?",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ありよしいいいいいそうたいまからおまえんちでけえむしない",
+            "wikibase_item": "Q60987028"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビeスポーツ・ゲーム情報バラエティ番組 (2018-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

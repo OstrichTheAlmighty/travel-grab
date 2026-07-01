@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:15.430Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 116759,
+          "ns": 0,
+          "title": "Salem, Massachusetts",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Federal_Street_District.jpg",
+            "wikibase-shortdesc": "City in Massachusetts, United States",
+            "wikibase_item": "Q54140"
+          },
+          "coordinates": [
+            {
+              "lat": 42.51944444,
+              "lon": -70.89722222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "city in Massachusetts, United States"
+            ]
+          }
+        },
+        {
+          "pageid": 250462,
+          "ns": 0,
+          "title": "San Francisco International Airport",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "San_Francisco_International_Airport_-_aerial_photo.jpg",
+            "wikibase-shortdesc": "International Airport serving San Francisco, California, United States",
+            "wikibase_item": "Q8688"
+          },
+          "coordinates": [
+            {
+              "lat": 37.61888889,
+              "lon": -122.375,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "international airport near San Francisco, California, U.S."
+            ]
+          }
+        },
+        {
+          "pageid": 832128,
+          "ns": 0,
+          "title": "Liquefied natural gas",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Liquefied Natural Gas",
+            "page_image_free": "Methanier_aspher_LNGRIVERS.jpg",
+            "wikibase-shortdesc": "Form of natural gas for easier storage and transport",
+            "wikibase_item": "Q358333"
+          },
+          "terms": {
+            "description": [
+              "natural gas converted to liquid form for storage or transport"
+            ]
+          }
+        },
+        {
+          "pageid": 69282017,
+          "ns": 0,
+          "title": "2021 Pacific Northwest floods",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Pacific Northwest floods, November 2021",
+            "page_image_free": "PNW_rainfall_totals.jpg",
+            "wikibase-shortdesc": "Natural disaster in Canada and the United States",
+            "wikibase_item": "Q109623540"
+          },
+          "terms": {
+            "description": [
+              "natural disaster"
+            ]
+          }
+        },
+        {
+          "pageid": 77600973,
+          "ns": 0,
+          "title": "Effects of Hurricane Katrina in the Southeastern United States",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Katrina_2005-08-29_1445Z.jpg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q130235562"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:32.470Z",
+  "value": {
+    "searchinfo": {
+      "search": "Paper Museum"
+    },
+    "search": [
+      {
+        "id": "Q26944999",
+        "title": "Q26944999",
+        "pageid": 28837100,
+        "concepturi": "http://www.wikidata.org/entity/Q26944999",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q26944999",
+        "display": {
+          "label": {
+            "value": "paper museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum specialising in the history of paper-making, paper use, or paper objects",
+            "language": "en"
+          }
+        },
+        "label": "paper museum",
+        "description": "museum specialising in the history of paper-making, paper use, or paper objects",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "paper museum"
+        }
+      },
+      {
+        "id": "Q11605492",
+        "title": "Q11605492",
+        "pageid": 12745805,
+        "concepturi": "http://www.wikidata.org/entity/Q11605492",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11605492",
+        "display": {
+          "label": {
+            "value": "Paper Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "Museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Paper Museum",
+        "description": "Museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Paper Museum"
+        }
+      },
+      {
+        "id": "Q20807898",
+        "title": "Q20807898",
+        "pageid": 22551896,
+        "concepturi": "http://www.wikidata.org/entity/Q20807898",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q20807898",
+        "display": {
+          "label": {
+            "value": "Paper Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "collection of Cassiano dal Pozzo",
+            "language": "en"
+          }
+        },
+        "label": "Paper Museum",
+        "description": "collection of Cassiano dal Pozzo",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Paper Museum"
+        }
+      },
+      {
+        "id": "Q16409390",
+        "title": "Q16409390",
+        "pageid": 18035726,
+        "concepturi": "http://www.wikidata.org/entity/Q16409390",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q16409390",
+        "display": {
+          "label": {
+            "value": "Paper museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Estonia",
+            "language": "en"
+          }
+        },
+        "label": "Paper museum",
+        "description": "museum in Estonia",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Paper museum"
+        }
+      },
+      {
+        "id": "Q76638575",
+        "title": "Q76638575",
+        "pageid": 76122467,
+        "concepturi": "http://www.wikidata.org/entity/Q76638575",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q76638575",
+        "display": {
+          "label": {
+            "value": "paper museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Weddersleben, Germany",
+            "language": "en"
+          }
+        },
+        "label": "paper museum",
+        "description": "museum in Weddersleben, Germany",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "paper museum"
+        }
+      },
+      {
+        "id": "Q55374929",
+        "title": "Q55374929",
+        "pageid": 55404419,
+        "concepturi": "http://www.wikidata.org/entity/Q55374929",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q55374929",
+        "display": {
+          "label": {
+            "value": "Paper Museum in Pescia",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Pescia, Italy",
+            "language": "en"
+          }
+        },
+        "label": "Paper Museum in Pescia",
+        "description": "museum in Pescia, Italy",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Paper Museum in Pescia"
+        }
+      },
+      {
+        "id": "Q112054735",
+        "title": "Q112054735",
+        "pageid": 106965376,
+        "concepturi": "http://www.wikidata.org/entity/Q112054735",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q112054735",
+        "display": {
+          "label": {
+            "value": "Paper Museums",
+            "language": "en"
+          },
+          "description": {
+            "value": "scientific article published on 29 May 2008",
+            "language": "en"
+          }
+        },
+        "label": "Paper Museums",
+        "description": "scientific article published on 29 May 2008",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Paper Museums"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

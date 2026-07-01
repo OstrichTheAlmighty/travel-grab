@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:49.518Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 28918,
+          "ns": 0,
+          "title": "立教大学",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "りつきようたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Rikkyo_University_1.jpg",
+            "wikibase_item": "Q1143235"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7305,
+              "lon": 139.70394444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 124978,
+          "ns": 0,
+          "title": "家弓家正",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かゆみ いえまさ",
+            "page_image_free": "家弓家正.png",
+            "wikibase_item": "Q1114341"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優、俳優 (1933-2014)"
+            ]
+          }
+        },
+        {
+          "pageid": 765071,
+          "ns": 0,
+          "title": "PlayStation (ゲーム機)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふれいすてえしよん",
+            "page_image_free": "Playstation_logo_colour.svg",
+            "wikibase_item": "Q10677"
+          },
+          "terms": {
+            "description": [
+              "かつてソニー・コンピュータエンタテインメントが製造販売した家庭用ゲーム機"
+            ]
+          }
+        },
+        {
+          "pageid": 862005,
+          "ns": 0,
+          "title": "勇者王ガオガイガーシリーズの登場メカ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ゆうしやおうかおかいかあしりいすのとうしようめか",
+            "wikibase_item": "Q11399996"
+          }
+        },
+        {
+          "pageid": 3467135,
+          "ns": 0,
+          "title": "ウルトラマン フュージョンファイト!",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "うるとらまんふゆうしよんふあいと",
+            "wikibase_item": "Q28683028"
+          }
+        }
+      ]
+    }
+  }
+}

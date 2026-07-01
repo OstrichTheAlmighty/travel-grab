@@ -1,0 +1,81 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:04.593Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 267996,
+          "ns": 0,
+          "title": "寄席",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "よせ",
+            "page_image_free": "Asakusa_no_Yose_-_historical_photo.jpg",
+            "wikibase_item": "Q4053792"
+          }
+        },
+        {
+          "pageid": 990762,
+          "ns": 0,
+          "title": "温泉関連の文化財一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おんせんかんれんのふんかさいいちらん",
+            "wikibase_item": "Q11562974"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1893070,
+          "ns": 0,
+          "title": "このはな綺譚",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "このはなていきたん",
+            "wikibase_item": "Q11545743"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画作品"
+            ]
+          }
+        },
+        {
+          "pageid": 3497665,
+          "ns": 0,
+          "title": "蛙亭",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かえるてい",
+            "wikibase_item": "Q28068417"
+          },
+          "terms": {
+            "description": [
+              "日本のお笑いコンビ"
+            ]
+          }
+        },
+        {
+          "pageid": 3747963,
+          "ns": 0,
+          "title": "結城友奈は勇者である 花結いのきらめき",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ゆうきゆうなはゆうしやてあるはなゆいのきらめき",
+            "wikibase_item": "Q55522152"
+          }
+        }
+      ]
+    }
+  }
+}

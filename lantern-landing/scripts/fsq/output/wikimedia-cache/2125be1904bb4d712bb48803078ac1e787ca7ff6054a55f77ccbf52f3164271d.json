@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:14.345Z",
+  "value": {
+    "searchinfo": {
+      "search": "長谷川町子美術館"
+    },
+    "search": [
+      {
+        "id": "Q3788646",
+        "title": "Q3788646",
+        "pageid": 3612625,
+        "concepturi": "http://www.wikidata.org/entity/Q3788646",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3788646",
+        "display": {
+          "label": {
+            "value": "Hasegawa Machiko Art Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Hasegawa Machiko Art Museum",
+        "description": "museum in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "長谷川町子美術館"
+        },
+        "aliases": [
+          "長谷川町子美術館"
+        ]
+      },
+      {
+        "id": "Q261870",
+        "title": "Q261870",
+        "pageid": 253997,
+        "concepturi": "http://www.wikidata.org/entity/Q261870",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q261870",
+        "display": {
+          "label": {
+            "value": "Sakura-Shinmachi Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "railway station in Setagaya, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Sakura-Shinmachi Station",
+        "description": "railway station in Setagaya, Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "長谷川町子美術館前"
+        },
+        "aliases": [
+          "長谷川町子美術館前"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

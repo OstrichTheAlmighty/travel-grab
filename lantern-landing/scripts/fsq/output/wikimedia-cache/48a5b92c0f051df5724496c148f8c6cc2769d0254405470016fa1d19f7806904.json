@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:32.781Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 11800,
+          "ns": 0,
+          "title": "川越市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かわこえし",
+            "kartographer_frames": "1",
+            "page_image_free": "TokiNoKane_Kawagoe_2013Feb.JPG",
+            "wikibase_item": "Q319740"
+          },
+          "coordinates": [
+            {
+              "lat": 35.92514,
+              "lon": 139.48578,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 75705,
+          "ns": 0,
+          "title": "練馬春日町駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ねりまかすかちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Nerimakasugacho-Sta-A2.JPG",
+            "wikibase_item": "Q275521"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75111111,
+              "lon": 139.64105556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都練馬区春日町にある東京都交通局の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 917495,
+          "ns": 0,
+          "title": "春日町 (練馬区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かすかちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Nerimakasugacho-Sta-A2.JPG",
+            "wikibase_item": "Q11513653"
+          },
+          "terms": {
+            "description": [
+              "東京都練馬区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1238095,
+          "ns": 0,
+          "title": "東京あおば農業協同組合",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようあおはのうきようきようとうくみあい",
+            "page_image_free": "JA_TokyoAoba.JPG",
+            "wikibase_item": "Q11524015"
+          },
+          "terms": {
+            "description": [
+              "東京都練馬区にある農業協同組合"
+            ]
+          }
+        },
+        {
+          "pageid": 2366980,
+          "ns": 0,
+          "title": "西武バス練馬営業所",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せいふはすねりまえいきようしよ",
+            "page_image_free": "西武バス練馬営業所(南田中車庫).JPG",
+            "wikibase_item": "Q11628889"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7314683,
+              "lon": 139.619195,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

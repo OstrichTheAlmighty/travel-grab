@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:25.873Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 49678,
+          "ns": 0,
+          "title": "葛飾北斎",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かつしか ほくさい",
+            "displaytitle": "<span class=\"jis2004font\">葛</span>飾北斎",
+            "page_image_free": "Hokusai_portrait.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q5586"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸時代の浮世絵師 (1760-1849)"
+            ]
+          }
+        },
+        {
+          "pageid": 51988,
+          "ns": 0,
+          "title": "曲亭馬琴",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きよくていはきん",
+            "page_image_free": "Kyokutei_Bakin.jpg",
+            "wikibase_item": "Q463142"
+          },
+          "terms": {
+            "description": [
+              "江戸時代後期の読本作者 (1767 - 1848)"
+            ]
+          }
+        },
+        {
+          "pageid": 1315652,
+          "ns": 0,
+          "title": "亀沢 (墨田区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かめさわ",
+            "kartographer_frames": "1",
+            "page_image_free": "Hokusai-museum.jpg",
+            "wikibase_item": "Q11370970"
+          },
+          "terms": {
+            "description": [
+              "東京都墨田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 2001520,
+          "ns": 0,
+          "title": "葛飾応為",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かつしか おうい",
+            "page_image_free": "Katsushika_ōi.jpg",
+            "wikibase_item": "Q11621076"
+          },
+          "terms": {
+            "description": [
+              "江戸時代後期の浮世絵師"
+            ]
+          }
+        },
+        {
+          "pageid": 2956587,
+          "ns": 0,
+          "title": "すみだ北斎美術館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "すみたほくさいひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "2018_Sumida_Hokusai_Museum_2.jpg",
+            "wikibase_item": "Q17220332"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69675,
+              "lon": 139.80038889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区にある公立美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

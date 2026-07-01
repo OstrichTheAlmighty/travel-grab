@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:41.647Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 369282,
+          "ns": 0,
+          "title": "水天宮 (東京都中央区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すいてんくう",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Suitengu_201604a.jpg",
+            "wikibase_item": "Q3503320"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68361111,
+              "lon": 139.785,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都中央区にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 527805,
+          "ns": 0,
+          "title": "秘密結社鷹の爪",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひみつけつしやたかのつめ",
+            "wikibase_item": "Q1458106"
+          },
+          "terms": {
+            "description": [
+              "日本のアニメ作品"
+            ]
+          }
+        },
+        {
+          "pageid": 1541400,
+          "ns": 0,
+          "title": "天満大自在天神",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "てんまんたいしさいてんしん",
+            "page_image_free": "Sugawara-no-Michizane-Praying-on-Tenpaizan-by-Kobayashi-Eitaku-1880.jpg",
+            "wikibase_item": "Q1753428"
+          },
+          "terms": {
+            "description": [
+              "菅原道真を神格化した呼称"
+            ]
+          }
+        },
+        {
+          "pageid": 2492242,
+          "ns": 0,
+          "title": "菅原道真",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "すかわら の みちさね",
+            "page_image_free": "束帯天神像.png",
+            "wikibase_item": "Q382005"
+          },
+          "terms": {
+            "description": [
+              "日本の公卿・学者・文人"
+            ]
+          }
+        },
+        {
+          "pageid": 4589754,
+          "ns": 0,
+          "title": "趣味どきっ!",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しゆみときつ",
+            "wikibase_item": "Q112076793"
+          }
+        }
+      ]
+    }
+  }
+}

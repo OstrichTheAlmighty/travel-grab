@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:54.780Z",
+  "value": {
+    "searchinfo": {
+      "search": "平和の森公園"
+    },
+    "search": [
+      {
+        "id": "Q11286180",
+        "title": "Q11286180",
+        "pageid": 12427035,
+        "concepturi": "http://www.wikidata.org/entity/Q11286180",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11286180",
+        "display": {
+          "label": {
+            "value": "Heiwa-no-Mori Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "town located in Ōta-ku, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Heiwa-no-Mori Park",
+        "description": "town located in Ōta-ku, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "平和の森公園"
+        },
+        "aliases": [
+          "平和の森公園"
+        ]
+      },
+      {
+        "id": "Q11482172",
+        "title": "Q11482172",
+        "pageid": 12621741,
+        "concepturi": "http://www.wikidata.org/entity/Q11482172",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11482172",
+        "display": {
+          "label": {
+            "value": "Heiwanomori Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Heiwanomori Park",
+        "description": "park in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "平和の森公園"
+        },
+        "aliases": [
+          "平和の森公園"
+        ]
+      },
+      {
+        "id": "Q11286175",
+        "title": "Q11286175",
+        "pageid": 12427029,
+        "concepturi": "http://www.wikidata.org/entity/Q11286175",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11286175",
+        "display": {
+          "label": {
+            "value": "平和の森公園",
+            "language": "ja"
+          },
+          "description": {
+            "value": "Wikimedia disambiguation page",
+            "language": "en"
+          }
+        },
+        "label": "平和の森公園",
+        "description": "Wikimedia disambiguation page",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "平和の森公園"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

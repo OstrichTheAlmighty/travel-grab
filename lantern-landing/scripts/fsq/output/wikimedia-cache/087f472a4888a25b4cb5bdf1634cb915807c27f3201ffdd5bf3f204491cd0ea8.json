@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:54.993Z",
+  "value": {
+    "searchinfo": {
+      "search": "hexaride"
+    },
+    "search": [
+      {
+        "id": "Q130397547",
+        "title": "Q130397547",
+        "pageid": 124367418,
+        "concepturi": "http://www.wikidata.org/entity/Q130397547",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q130397547",
+        "display": {
+          "label": {
+            "value": "limo services in Las Vegas",
+            "language": "en"
+          },
+          "description": {
+            "value": "Hexarides limo service in Las Vegas offers reliable, comfortable transportation for airport pickups, weddings, and city tours. With experienced drivers, it provides on-time service for both residents and visitors.",
+            "language": "en"
+          }
+        },
+        "label": "limo services in Las Vegas",
+        "description": "Hexarides limo service in Las Vegas offers reliable, comfortable transportation for airport pickups, weddings, and city tours. With experienced drivers, it provides on-time service for both residents and visitors.",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "Hexarides"
+        },
+        "aliases": [
+          "Hexarides"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

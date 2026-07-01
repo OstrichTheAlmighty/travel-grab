@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:30.151Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 2801629,
+          "ns": 0,
+          "title": "日笠陽子",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひかさ ようこ",
+            "wikibase_item": "Q50023"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優、歌手"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

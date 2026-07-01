@@ -1,0 +1,87 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:40.481Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 4253,
+          "ns": 0,
+          "title": "17世紀",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "17せいき",
+            "page_image_free": "Chateau_Versailles_Galerie_des_Glaces.jpg",
+            "wikibase_item": "Q7016"
+          },
+          "terms": {
+            "description": [
+              "西暦1601年から西暦1700年までの100年間"
+            ]
+          }
+        },
+        {
+          "pageid": 54055,
+          "ns": 0,
+          "title": "おしん",
+          "index": 2,
+          "pageprops": {
+            "wikibase_item": "Q714621"
+          },
+          "terms": {
+            "description": [
+              "1983年のNHK連続テレビ小説第31作"
+            ]
+          }
+        },
+        {
+          "pageid": 329961,
+          "ns": 0,
+          "title": "錦糸町",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きんしちよう",
+            "page_image_free": "Cityscape_from_Tokyo_Skytree_2014-09-09_04.jpg",
+            "wikibase_item": "Q11650537"
+          },
+          "terms": {
+            "description": [
+              "東京都墨田区の歓楽街"
+            ]
+          }
+        },
+        {
+          "pageid": 2785417,
+          "ns": 0,
+          "title": "大空直美",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおそら なおみ",
+            "wikibase_item": "Q15731362"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優 (1989-)"
+            ]
+          }
+        },
+        {
+          "pageid": 3083349,
+          "ns": 0,
+          "title": "はぐれ刑事純情派の登場人物",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はくれけいししゆんしようはのとうしようしんふつ",
+            "wikibase_item": "Q18455820"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

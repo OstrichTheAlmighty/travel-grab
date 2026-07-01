@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:17.748Z",
+  "value": {
+    "searchinfo": {
+      "search": "ワンダードロップ"
+    },
+    "search": [
+      {
+        "id": "Q11351558",
+        "title": "Q11351558",
+        "pageid": 12489421,
+        "concepturi": "http://www.wikidata.org/entity/Q11351558",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11351558",
+        "display": {
+          "label": {
+            "value": "ワンダードロップ",
+            "language": "ja"
+          }
+        },
+        "label": "ワンダードロップ",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ワンダードロップ"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

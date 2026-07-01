@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:24.566Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 79503,
+          "ns": 0,
+          "title": "竹久夢二",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たけひさ ゆめし",
+            "page_image_free": "Yumeji_Takehisa.JPG",
+            "wikibase_item": "Q1386248"
+          },
+          "terms": {
+            "description": [
+              "日本の画家、詩人、デザイナー (1884 - 1934)"
+            ]
+          }
+        },
+        {
+          "pageid": 164868,
+          "ns": 0,
+          "title": "美術館の一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひしゆつかんのいちらん",
+            "toc": "",
+            "wikibase_item": "Q6606159"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1341645,
+          "ns": 0,
+          "title": "弥生美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "やよいひしゆつかん",
+            "page_image_free": "Appearance-of-Yayoi-Yumeji-Museum.jpg",
+            "wikibase_item": "Q11487473"
+          },
+          "coordinates": [
+            {
+              "lat": 35.715,
+              "lon": 139.76333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 1635262,
+          "ns": 0,
+          "title": "弥生 (文京区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "やよい",
+            "kartographer_frames": "1",
+            "page_image_free": "Appearance-of-Yayoi-Yumeji-Museum.jpg",
+            "wikibase_item": "Q3117905"
+          },
+          "terms": {
+            "description": [
+              "東京都文京区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 2568668,
+          "ns": 0,
+          "title": "竹久夢二美術館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たけひさゆめしひしゆつかん",
+            "page_image_free": "Takehisa-Yumeji-Museum.jpg",
+            "wikibase_item": "Q11598754"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71473,
+              "lon": 139.76349,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:46.051Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4421769,
+          "ns": 0,
+          "title": "五位塚町",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こいつかちよう",
+            "kartographer_frames": "1",
+            "kartographer_links": "1",
+            "page_image_free": "Goizuka-chō-signal.jpg",
+            "wikibase_item": "Q109328980"
+          },
+          "terms": {
+            "description": [
+              "愛知県瀬戸市の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 4438120,
+          "ns": 0,
+          "title": "原山台 (瀬戸市)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はらやまたい",
+            "kartographer_frames": "1",
+            "kartographer_links": "1",
+            "page_image_free": "Harayamadai-Annaiban.jpg",
+            "wikibase_item": "Q108134136"
+          },
+          "terms": {
+            "description": [
+              "愛知県瀬戸市の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 4453854,
+          "ns": 0,
+          "title": "八幡台 (瀬戸市)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はちまんたい",
+            "kartographer_frames": "1",
+            "kartographer_links": "1",
+            "page_image_free": "Hachimandai-Information-Sign.jpg",
+            "wikibase_item": "Q108525196"
+          },
+          "terms": {
+            "description": [
+              "愛知県瀬戸市の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 4528401,
+          "ns": 0,
+          "title": "城ケ根町",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しろかねちよう",
+            "kartographer_frames": "1",
+            "kartographer_links": "1",
+            "page_image_free": "Shirogane-bridge.jpg",
+            "wikibase_item": "Q110322149"
+          },
+          "terms": {
+            "description": [
+              "愛知県瀬戸市の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 4710433,
+          "ns": 0,
+          "title": "窯町 (瀬戸市)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かままち",
+            "kartographer_frames": "1",
+            "kartographer_links": "1",
+            "page_image_free": "Higashiyama-2-meeting-place(Kama-machi).jpg",
+            "wikibase_item": "Q109655844"
+          },
+          "terms": {
+            "description": [
+              "愛知県瀬戸市の地名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

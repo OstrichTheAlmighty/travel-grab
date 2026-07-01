@@ -1,0 +1,89 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:30.508Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8589,
+          "ns": 0,
+          "title": "佐藤栄作",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さとう えいさく",
+            "page_image_free": "Eisaku_Sato_19641109.jpg",
+            "wikibase_item": "Q179871"
+          },
+          "terms": {
+            "description": [
+              "日本の官僚、政治家 (1901-1975)。第61・62・63代内閣総理大臣。ノーベル平和賞受賞者。"
+            ]
+          }
+        },
+        {
+          "pageid": 132716,
+          "ns": 0,
+          "title": "人生劇場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しんせいけきしよう",
+            "wikibase_item": "Q11376130"
+          }
+        },
+        {
+          "pageid": 245748,
+          "ns": 0,
+          "title": "栄養",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "えいよう",
+            "page_image_free": "Breastfeeding_infant.jpg",
+            "wikibase_item": "Q2138622"
+          },
+          "terms": {
+            "description": [
+              "生物が体外から物質を摂取し、それを体を構成したり生活活動を行ったりするのに役立たせる現象"
+            ]
+          }
+        },
+        {
+          "pageid": 1234149,
+          "ns": 0,
+          "title": "板垣退助",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いたかき たいすけ",
+            "page_image_free": "ITAGAKI_Taisuke.jpg",
+            "wikibase_item": "Q456380"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家"
+            ]
+          }
+        },
+        {
+          "pageid": 1874583,
+          "ns": 0,
+          "title": "長尾敬",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "なかお たかし",
+            "page_image_free": "Takashi_Nagao.jpg",
+            "wikibase_item": "Q11651845"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家 (1962-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

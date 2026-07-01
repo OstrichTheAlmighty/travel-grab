@@ -1,0 +1,118 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:15.057Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 66856,
+          "ns": 0,
+          "title": "徳之島",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とくのしま",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokunoshima_zenkei.jpg",
+            "wikibase_item": "Q701847"
+          },
+          "coordinates": [
+            {
+              "lat": 27.82,
+              "lon": 128.93222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "鹿児島県、奄美群島の島"
+            ]
+          }
+        },
+        {
+          "pageid": 118523,
+          "ns": 0,
+          "title": "ビートたけしのお笑いウルトラクイズ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひいとたけしのおわらいうるとらくいす",
+            "wikibase_item": "Q11331128"
+          },
+          "terms": {
+            "description": [
+              "日本の日本テレビで放送されていたお笑いクイズ特別番組、ビートたけしの冠番組"
+            ]
+          }
+        },
+        {
+          "pageid": 403016,
+          "ns": 0,
+          "title": "アニマックス",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あにまつくす",
+            "page_image_free": "Yebisu_Garden_Place_Tower_2012.jpg",
+            "wikibase_item": "Q161405"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64238889,
+              "lon": 139.71388889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本のアニメ専門BSチャンネル"
+            ]
+          }
+        },
+        {
+          "pageid": 578770,
+          "ns": 0,
+          "title": "日本のスーパーマーケット一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にほんのすうはあまあけつといちらん",
+            "page_image_free": "Aeon_Makuhari.JPG",
+            "wikibase_item": "Q11505638"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1100264,
+          "ns": 0,
+          "title": "キッズステーション",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きつすすてえしよん",
+            "wikibase_item": "Q2564885"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64238889,
+              "lon": 139.71388889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "AKメディア傘下の子供向けアニメ専門チャンネル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

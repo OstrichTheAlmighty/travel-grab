@@ -1,0 +1,89 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:02.606Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 545194,
+          "ns": 0,
+          "title": "カリーノグループ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かりいのくるうふ",
+            "page_image_free": "Carino_shimodori.JPG",
+            "wikibase_item": "Q11295063"
+          }
+        },
+        {
+          "pageid": 916519,
+          "ns": 0,
+          "title": "月丘夢路",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "つきおか ゆめし",
+            "page_image_free": "Sekai-Geino-Gaho-1954-April-1.png",
+            "wikibase_item": "Q3573210"
+          },
+          "terms": {
+            "description": [
+              "日本の女優 (1922-2017)"
+            ]
+          }
+        },
+        {
+          "pageid": 1219920,
+          "ns": 0,
+          "title": "森八",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "もりはち",
+            "page_image_free": "Morihachi.jpg",
+            "wikibase_item": "Q11539315"
+          },
+          "terms": {
+            "description": [
+              "和菓子製造・販売会社"
+            ]
+          }
+        },
+        {
+          "pageid": 2097544,
+          "ns": 0,
+          "title": "私立恵比寿中学",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しりつえひすちゆうかく",
+            "wikibase_item": "Q1336013"
+          },
+          "terms": {
+            "description": [
+              "日本の8人組ガールズグループ (2009-)"
+            ]
+          }
+        },
+        {
+          "pageid": 2306661,
+          "ns": 0,
+          "title": "EBiDAN",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "えひたん",
+            "page_image_free": "Gthumb.svg",
+            "wikibase_item": "Q11197470"
+          },
+          "terms": {
+            "description": [
+              "スターダストプロモーションに所属する男性タレントで構成されたアーティスト集団"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

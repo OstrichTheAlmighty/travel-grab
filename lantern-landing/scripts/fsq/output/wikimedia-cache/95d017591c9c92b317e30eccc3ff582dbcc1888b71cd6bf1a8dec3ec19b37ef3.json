@@ -1,0 +1,90 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:39.924Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17419,
+          "ns": 0,
+          "title": "東京都写真美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようとしやしんひしゆつかん",
+            "page_image_free": "Tokyo_Metropolitan_Museum_of_Photography_entrance_2011_January.jpg",
+            "wikibase_item": "Q862884"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6417,
+              "lon": 139.7132,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都目黒区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 380487,
+          "ns": 0,
+          "title": "山本悍右",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やまもと かんすけ",
+            "page_image_free": "KansukeYamamotoPicture.jpg",
+            "wikibase_item": "Q5102948"
+          },
+          "terms": {
+            "description": [
+              "日本の前衛芸術家・写真家・詩人・編集者・出版者（1914–1987）"
+            ]
+          }
+        },
+        {
+          "pageid": 1973713,
+          "ns": 0,
+          "title": "佐藤時啓",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さとう ときひろ",
+            "wikibase_item": "Q6352389"
+          },
+          "terms": {
+            "description": [
+              "1957-, 美術家、写真家。"
+            ]
+          }
+        },
+        {
+          "pageid": 2161172,
+          "ns": 0,
+          "title": "山田亘 (写真家)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "やまた こう",
+            "wikibase_item": "Q6455069"
+          }
+        },
+        {
+          "pageid": 2240797,
+          "ns": 0,
+          "title": "三田村光土里",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みたむら みとり",
+            "wikibase_item": "Q11356735"
+          }
+        }
+      ]
+    }
+  }
+}

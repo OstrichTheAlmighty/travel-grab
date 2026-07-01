@@ -1,0 +1,82 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:14.685Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4605,
+          "ns": 0,
+          "title": "ウンシュウミカン",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "うんしゆうみかん",
+            "page_image_free": "Citrus_unshiu_20101127_c.jpg",
+            "wikibase_item": "Q875262"
+          },
+          "terms": {
+            "description": [
+              "ムクロジ目ミカン科ミカン属の常緑低木"
+            ]
+          }
+        },
+        {
+          "pageid": 634964,
+          "ns": 0,
+          "title": "チチヤス",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ちちやす",
+            "page_image_free": "Chichiyasu_headquarters_20120505-1.JPG",
+            "wikibase_item": "Q11317946"
+          },
+          "terms": {
+            "description": [
+              "日本の広島県廿日市市にある乳業メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 767047,
+          "ns": 0,
+          "title": "瀬戸弘幸",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せと ひろゆき",
+            "wikibase_item": "Q11251469"
+          },
+          "terms": {
+            "description": [
+              "日本の政治活動家、ブロガー"
+            ]
+          }
+        },
+        {
+          "pageid": 4592527,
+          "ns": 0,
+          "title": "南沢又",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みなみさわまた",
+            "unexpectedUnconnectedPage": "0"
+          }
+        },
+        {
+          "pageid": 4637147,
+          "ns": 0,
+          "title": "笹木野 (福島市)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ささきの",
+            "unexpectedUnconnectedPage": "0"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:33.251Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 84282,
+          "ns": 0,
+          "title": "根津美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ねつひしゆつかん",
+            "page_image_free": "2018_Nezu_Museum_1.jpg",
+            "wikibase_item": "Q1047097"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66222222,
+              "lon": 139.71708333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 1750853,
+          "ns": 0,
+          "title": "ペーター・シュミット・グループ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "へえたあしゆみつとくるうふ",
+            "wikibase_item": "Q11337582"
+          }
+        },
+        {
+          "pageid": 2021919,
+          "ns": 0,
+          "title": "根津記念館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ねつきねんかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Nezu_Memorial_Museum_in_Yamanashi_City_Yamanashi_Pref.jpg",
+            "wikibase_item": "Q11536453"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67880556,
+              "lon": 138.66830556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "山梨県山梨市にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 2299846,
+          "ns": 0,
+          "title": "国宝絵画の一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こくほうかいかのいちらん",
+            "page_image_free": "Genji_emaki_azumaya.jpg",
+            "wikibase-badge-Q17506997": "",
+            "wikibase_item": "Q3245518"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 4231414,
+          "ns": 0,
+          "title": "燕子花図",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かきつはたす",
+            "page_image_free": "KORIN-Irises-L.jpg",
+            "wikibase_item": "Q31892412"
+          },
+          "terms": {
+            "description": [
+              "港区にある国宝（美術品）"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

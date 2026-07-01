@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:53.171Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 20307,
+          "ns": 0,
+          "title": "シナイ山",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しないさん",
+            "page_image_free": "Mount_Sinai_from_the_southwest.jpg",
+            "wikibase_item": "Q169924"
+          },
+          "coordinates": [
+            {
+              "lat": 28.5397,
+              "lon": 33.9733,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 124676,
+          "ns": 0,
+          "title": "切り裂きジャック",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きりさきしやつく",
+            "page_image_free": "JacktheRipper1888.jpg",
+            "wikibase_item": "Q43963"
+          },
+          "terms": {
+            "description": [
+              "1888年にイギリスで発生した連続殺人事件の犯人の名前"
+            ]
+          }
+        },
+        {
+          "pageid": 1325497,
+          "ns": 0,
+          "title": "ヘンリー・ローズ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ろおす へんりい",
+            "wikibase_item": "Q1349837"
+          }
+        },
+        {
+          "pageid": 2365644,
+          "ns": 0,
+          "title": "シッスル勲章",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しつするくんしよう",
+            "page_image_free": "Insignia_of_Knight_of_the_Thistle.png",
+            "wikibase_item": "Q721030"
+          },
+          "terms": {
+            "description": [
+              "スコットランドの最高勲章"
+            ]
+          }
+        },
+        {
+          "pageid": 3922244,
+          "ns": 0,
+          "title": "ホワイトチャペル殺人事件",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ほわいとちやへるさつしんしけん",
+            "page_image_free": "Jack-the-Ripper-The-Nemesis-of-Neglect-Punch-London-Charivari-cartoon-poem-1888-09-29.jpg",
+            "wikibase_item": "Q1062923"
+          },
+          "terms": {
+            "description": [
+              "1888年4月3日から1891年2月13日にかけてロンドンで発生した11件の殺人事件"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

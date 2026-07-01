@@ -1,0 +1,85 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:26.265Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1054016,
+          "ns": 0,
+          "title": "大当り三色娘",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おおあたりさんしよくむすめ",
+            "wikibase_item": "Q7091201"
+          }
+        },
+        {
+          "pageid": 1989077,
+          "ns": 0,
+          "title": "ひとりずもう (漫画)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひとりすもう",
+            "wikibase_item": "Q11276341"
+          }
+        },
+        {
+          "pageid": 2892979,
+          "ns": 0,
+          "title": "桂一雅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かつら かすまさ",
+            "wikibase_item": "Q16265242"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 3427275,
+          "ns": 0,
+          "title": "加藤未来",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かとう みく",
+            "wikibase_item": "Q24866441"
+          },
+          "terms": {
+            "description": [
+              "アナウンサー"
+            ]
+          }
+        },
+        {
+          "pageid": 4583117,
+          "ns": 0,
+          "title": "キネマ通り商店街 (伊東市)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きねまとおりしようてんかい",
+            "kartographer_frames": "1",
+            "page_image_free": "Kinema_Street_(Ito)_20240917_01.jpg",
+            "wikibase_item": "Q124377405"
+          },
+          "coordinates": [
+            {
+              "lat": 34.9722449,
+              "lon": 139.0944048,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

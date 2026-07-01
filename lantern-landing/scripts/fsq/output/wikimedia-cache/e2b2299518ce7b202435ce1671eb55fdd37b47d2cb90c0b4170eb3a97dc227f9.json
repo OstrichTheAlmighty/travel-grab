@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:44.252Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 12103,
+          "ns": 0,
+          "title": "Golden Gate Bridge",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Golden_Gate_Bridge_as_seen_from_Battery_East.jpg",
+            "wikibase-shortdesc": "Bridge in the San Francisco Bay Area",
+            "wikibase_item": "Q44440"
+          },
+          "coordinates": [
+            {
+              "lat": 37.81972222,
+              "lon": -122.47861111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "suspension bridge on the San Francisco Bay"
+            ]
+          }
+        },
+        {
+          "pageid": 129088,
+          "ns": 0,
+          "title": "Gates Mills, Ohio",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Gates_Mills_Methodist_Episcopal_Church_Joseph_Frost.jpg",
+            "wikibase-shortdesc": "Village in Ohio, United States",
+            "wikibase_item": "Q2666663"
+          },
+          "coordinates": [
+            {
+              "lat": 41.5325,
+              "lon": -81.41055556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "village in Cuyahoga County, Ohio, United States"
+            ]
+          }
+        },
+        {
+          "pageid": 9555284,
+          "ns": 0,
+          "title": "Gwanghwamun",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Gwanghwamun_20240413.jpg",
+            "wikibase-shortdesc": "Palace gate in Seoul, South Korea",
+            "wikibase_item": "Q485034"
+          },
+          "coordinates": [
+            {
+              "lat": 37.57604444,
+              "lon": 126.97701944,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "main gate of Geongbokgung Palace (also known as Kyŏngbokkung Palace)"
+            ]
+          }
+        },
+        {
+          "pageid": 55957582,
+          "ns": 0,
+          "title": "Oh Chong-song",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Oh, Chong-song",
+            "wikibase-shortdesc": "North Korean defector to South Korea",
+            "wikibase_item": "Q44639240"
+          },
+          "terms": {
+            "description": [
+              "former North Korean soldier who defected to South Korea in 2017"
+            ]
+          }
+        },
+        {
+          "pageid": 70295471,
+          "ns": 0,
+          "title": "Royal Television Society Programme Awards",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "RTS_AWARDS_120.jpg",
+            "wikibase-shortdesc": "Annual British Television Awards",
+            "wikibase_item": "Q112762807"
+          },
+          "terms": {
+            "description": [
+              "annual British television awards"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

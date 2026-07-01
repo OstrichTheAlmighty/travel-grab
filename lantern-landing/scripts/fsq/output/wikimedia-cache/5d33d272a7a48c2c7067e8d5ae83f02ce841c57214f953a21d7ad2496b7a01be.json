@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:08.191Z",
+  "value": {
+    "searchinfo": {
+      "search": "小石川後楽園"
+    },
+    "search": [
+      {
+        "id": "Q1778881",
+        "title": "Q1778881",
+        "pageid": 1710798,
+        "concepturi": "http://www.wikidata.org/entity/Q1778881",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1778881",
+        "display": {
+          "label": {
+            "value": "Koishikawa Kōrakuen Garden",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Bunkyo, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Koishikawa Kōrakuen Garden",
+        "description": "park in Bunkyo, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "小石川後楽園"
+        },
+        "aliases": [
+          "小石川後楽園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

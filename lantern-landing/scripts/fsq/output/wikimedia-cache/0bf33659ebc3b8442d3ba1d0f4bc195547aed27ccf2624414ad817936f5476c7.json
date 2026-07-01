@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:28.282Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2978,
+          "ns": 0,
+          "title": "池波正太郎",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いけなみ しようたろう",
+            "page_image_free": "Ikenami_Shotaro.jpg",
+            "wikibase_item": "Q2392807"
+          },
+          "terms": {
+            "description": [
+              "日本の作家 (1923-1990)"
+            ]
+          }
+        },
+        {
+          "pageid": 18792,
+          "ns": 0,
+          "title": "文京区",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふんきようく",
+            "kartographer_frames": "1",
+            "page_image_free": "Akamon,_University_of_Tokyo_2019.jpg",
+            "wikibase_item": "Q212713"
+          },
+          "coordinates": [
+            {
+              "lat": 35.708,
+              "lon": 139.75225,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 707493,
+          "ns": 0,
+          "title": "真田太平記",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さなたたいへいき",
+            "wikibase_item": "Q11583380"
+          },
+          "terms": {
+            "description": [
+              "池波正太郎による歴史小説"
+            ]
+          }
+        },
+        {
+          "pageid": 2753486,
+          "ns": 0,
+          "title": "台東区立図書館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たいとうくりつとしよかん",
+            "page_image_free": "Taito-Ku_Lifelong_Learning_Center.JPG",
+            "wikibase_item": "Q11411952"
+          },
+          "terms": {
+            "description": [
+              "東京都台東区にある公共図書館"
+            ]
+          }
+        },
+        {
+          "pageid": 2816876,
+          "ns": 0,
+          "title": "池波正太郎の江戸料理帳",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いけなみしようたろうのえとりようりちよう",
+            "wikibase_item": "Q17192883"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:03.142Z",
+  "value": {
+    "searchinfo": {
+      "search": "しながわ区民公園"
+    },
+    "search": [
+      {
+        "id": "Q11254389",
+        "title": "Q11254389",
+        "pageid": 12400139,
+        "concepturi": "http://www.wikidata.org/entity/Q11254389",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11254389",
+        "display": {
+          "label": {
+            "value": "Shinagawa Kumin Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Shinagawa, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Shinagawa Kumin Park",
+        "description": "park in Shinagawa, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "しながわ区民公園"
+        },
+        "aliases": [
+          "しながわ区民公園"
+        ]
+      },
+      {
+        "id": "Q48746607",
+        "title": "Q48746607",
+        "pageid": 49768100,
+        "concepturi": "http://www.wikidata.org/entity/Q48746607",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q48746607",
+        "display": {
+          "label": {
+            "value": "しながわ区民公園屋外プール",
+            "language": "ja"
+          }
+        },
+        "label": "しながわ区民公園屋外プール",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "しながわ区民公園屋外プール"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

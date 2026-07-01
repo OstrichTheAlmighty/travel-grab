@@ -1,0 +1,140 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:55.383Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 22509,
+          "ns": 0,
+          "title": "町田市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "まちたし",
+            "kartographer_frames": "1",
+            "page_image_free": "Machida_city.jpg",
+            "wikibase_item": "Q210628"
+          },
+          "coordinates": [
+            {
+              "lat": 35.5467,
+              "lon": 139.4386,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の市"
+            ]
+          }
+        },
+        {
+          "pageid": 57466,
+          "ns": 0,
+          "title": "専修大学",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せんしゆうたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Senshu_University_Kanda_Campus_1.jpg",
+            "wikibase_item": "Q1062568"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69683333,
+              "lon": 139.75383333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 137548,
+          "ns": 0,
+          "title": "東京農業大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようのうきようたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "TUA_university.jpg",
+            "wikibase_item": "Q909974"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64108333,
+              "lon": 139.63208333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 336218,
+          "ns": 0,
+          "title": "渋谷教育学園幕張中学校・高等学校",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しふやきよういくかくえんまくはり",
+            "kartographer_frames": "1",
+            "page_image_free": "Makuhari_Junior_and_Senior_High_School,_Chiba,_Japan.jpg",
+            "wikibase_item": "Q11561733"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65458333,
+              "lon": 140.04569444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県千葉市にある中高一貫校"
+            ]
+          }
+        },
+        {
+          "pageid": 1755099,
+          "ns": 0,
+          "title": "麻布中学校・高等学校",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あさふちゆうかつこう・こうとうかつこう",
+            "kartographer_frames": "1",
+            "page_image_free": "Azabu_Junior_&_Senior_High_School.jpg",
+            "wikibase_item": "Q4832009"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65438889,
+              "lon": 139.72733333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある私立中高一貫男子校"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

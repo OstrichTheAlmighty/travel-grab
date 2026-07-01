@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:59.466Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 5141159,
+          "ns": 0,
+          "title": "出川哲朗の充電させてもらえませんか?",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "てかわてつろうのしゆうてんさせてもらえませんか",
+            "wikibase_item": "Q22123195"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ東京の旅・バラエティ番組 (2017-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

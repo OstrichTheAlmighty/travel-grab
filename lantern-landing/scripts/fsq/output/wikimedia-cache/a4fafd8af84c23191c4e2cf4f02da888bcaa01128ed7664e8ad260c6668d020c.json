@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:43:05.705Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 70217,
+          "ns": 0,
+          "title": "高蔵寺ニュータウン",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こうそうしにゆたうん",
+            "page_image_free": "SUN_MARCHE_MINAMI-KAN_2016.JPG",
+            "wikibase_item": "Q11672779"
+          },
+          "coordinates": [
+            {
+              "lat": 35.28158333,
+              "lon": 137.04905556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県春日井市にあるニュータウン"
+            ]
+          }
+        },
+        {
+          "pageid": 80581,
+          "ns": 0,
+          "title": "キウイフルーツ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きういふるうつ",
+            "page_image_free": "Actinidia_fruits.jpg",
+            "wikibase_item": "Q13194"
+          },
+          "terms": {
+            "description": [
+              "ツツジ目マタタビ科マタタビ属の植物の実"
+            ]
+          }
+        },
+        {
+          "pageid": 651546,
+          "ns": 0,
+          "title": "ジューシィ・フルーツ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しゆうしいふるうつ",
+            "wikibase_item": "Q11310474"
+          },
+          "terms": {
+            "description": [
+              "日本のロックバンド"
+            ]
+          }
+        },
+        {
+          "pageid": 1175993,
+          "ns": 0,
+          "title": "道の駅神戸フルーツ・フラワーパーク大沢",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みちのえきこうへふるうつふらわあはあくおおそう",
+            "kartographer_frames": "1",
+            "page_image_free": "レッドクリフによるドローンショー「REDCLIFF_COUNTDOWN_DRONE_SHOW_2025」⑤.jpg",
+            "wikibase_item": "Q11589937"
+          },
+          "coordinates": [
+            {
+              "lat": 34.84888889,
+              "lon": 135.19111111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神戸市北区にある兵庫県道73号の道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 3710953,
+          "ns": 0,
+          "title": "フルーツワイン",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふるうつわいん",
+            "page_image_free": "Նռան_գինի.jpg",
+            "wikibase_item": "Q633625"
+          }
+        }
+      ]
+    }
+  }
+}

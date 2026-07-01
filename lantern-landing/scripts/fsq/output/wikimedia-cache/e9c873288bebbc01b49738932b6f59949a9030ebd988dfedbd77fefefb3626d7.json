@@ -1,0 +1,125 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:31.042Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 474616,
+          "ns": 0,
+          "title": "秋葉原UDX",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あきははらゆていえつくす",
+            "kartographer_frames": "1",
+            "page_image_free": "AkihabaraUDX_201311.JPG",
+            "wikibase_item": "Q9393080"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7005,
+              "lon": 139.7725,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区のビル"
+            ]
+          }
+        },
+        {
+          "pageid": 1581631,
+          "ns": 0,
+          "title": "秋葉原通り魔事件",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あきははらとおりましけん",
+            "page_image_free": "Akihabara_massacre_02.JPG",
+            "wikibase_item": "Q925737"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69972222,
+              "lon": 139.77138889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "2008年に東京都千代田区で発生した無差別通り魔殺傷事件"
+            ]
+          }
+        },
+        {
+          "pageid": 1725166,
+          "ns": 0,
+          "title": "秋葉原",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あきははら",
+            "kartographer_frames": "1",
+            "page_image_free": "電気街の夜明け_-_panoramio.jpg",
+            "wikibase_item": "Q418096"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69836,
+              "lon": 139.77313,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区と台東区にまたがる街"
+            ]
+          }
+        },
+        {
+          "pageid": 3311595,
+          "ns": 0,
+          "title": "秋葉原ディアステージ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あきははらていあすてえし",
+            "kartographer_frames": "2",
+            "page_image_free": "秋葉原ディアステージ店舗正面.jpg",
+            "wikibase_item": "Q21652333"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70102778,
+              "lon": 139.77086111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "モエ・ジャパンが運営するライブイベントスペース及びバー"
+            ]
+          }
+        },
+        {
+          "pageid": 3968825,
+          "ns": 0,
+          "title": "Twin Box AKIHABARA",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ついんほつくす あきははら",
+            "page_image_free": "Twin_Box_AKIHABARA.jpg",
+            "wikibase_item": "Q65232941"
+          }
+        }
+      ]
+    }
+  }
+}

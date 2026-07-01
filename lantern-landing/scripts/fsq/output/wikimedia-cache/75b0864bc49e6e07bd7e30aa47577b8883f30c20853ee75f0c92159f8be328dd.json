@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:07.643Z",
+  "value": {
+    "searchinfo": {
+      "search": "有明アリーナ"
+    },
+    "search": [
+      {
+        "id": "Q28068157",
+        "title": "Q28068157",
+        "pageid": 29769443,
+        "concepturi": "http://www.wikidata.org/entity/Q28068157",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q28068157",
+        "display": {
+          "label": {
+            "value": "Ariake Arena",
+            "language": "en"
+          },
+          "description": {
+            "value": "Venue of the 2020 Summer Olympics",
+            "language": "en"
+          }
+        },
+        "label": "Ariake Arena",
+        "description": "Venue of the 2020 Summer Olympics",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "有明アリーナ"
+        },
+        "aliases": [
+          "有明アリーナ"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

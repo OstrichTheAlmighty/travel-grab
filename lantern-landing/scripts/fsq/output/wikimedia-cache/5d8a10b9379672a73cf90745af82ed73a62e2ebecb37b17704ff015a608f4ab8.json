@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:22.902Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 44503,
+          "ns": 0,
+          "title": "山田洋次",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "やまた ようし",
+            "page_image_free": "Yamada_Yoji_from_\"Tora-san,_Wish_You_Were_Here\"_at_Opening_Ceremony_of_the_Tokyo_International_Film_Festival_2019_(49014012331).jpg",
+            "wikibase_item": "Q1261335"
+          },
+          "terms": {
+            "description": [
+              "日本の映画監督、脚本家"
+            ]
+          }
+        },
+        {
+          "pageid": 46394,
+          "ns": 0,
+          "title": "柴又駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しはまた",
+            "kartographer_frames": "1",
+            "page_image_free": "柴又駅_-_panoramio.jpg",
+            "wikibase_item": "Q7496017"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7565,
+              "lon": 139.87530556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の鉄道駅"
+            ]
+          }
+        },
+        {
+          "pageid": 349121,
+          "ns": 0,
+          "title": "幸福の黄色いハンカチ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しあわせのきいろいはんかち",
+            "page_image_free": "The_Yellow_Handkerchief_at_yubari.JPG",
+            "wikibase_item": "Q872112"
+          },
+          "terms": {
+            "description": [
+              "日本の映画作品、テレビドラマ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 3195490,
+          "ns": 0,
+          "title": "葛飾柴又寅さん記念館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かつしかしはまたとらさんきねんかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Tora-san_Museum.JPG",
+            "wikibase_item": "Q21018928"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75713889,
+              "lon": 139.88052778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都葛飾区にある記念館"
+            ]
+          }
+        },
+        {
+          "pageid": 3615048,
+          "ns": 0,
+          "title": "宮瀬富之",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みやせ とみゆき",
+            "wikibase_item": "Q30937489"
+          },
+          "terms": {
+            "description": [
+              "日本の彫刻家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

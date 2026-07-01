@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:18.089Z",
+  "value": {
+    "searchinfo": {
+      "search": "旧吉田屋酒店"
+    },
+    "search": [
+      {
+        "id": "Q59268117",
+        "title": "Q59268117",
+        "pageid": 59173015,
+        "concepturi": "http://www.wikidata.org/entity/Q59268117",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q59268117",
+        "display": {
+          "label": {
+            "value": "Shitamachi Museum Annex",
+            "language": "en"
+          }
+        },
+        "label": "Shitamachi Museum Annex",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "旧吉田屋酒店"
+        },
+        "aliases": [
+          "旧吉田屋酒店"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:08.427Z",
+  "value": {
+    "searchinfo": {
+      "search": "くすりミュージアム"
+    },
+    "search": [
+      {
+        "id": "Q17224188",
+        "title": "Q17224188",
+        "pageid": 18820922,
+        "concepturi": "http://www.wikidata.org/entity/Q17224188",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q17224188",
+        "display": {
+          "label": {
+            "value": "Daiichi Sankyo Kusuri Museum",
+            "language": "en"
+          }
+        },
+        "label": "Daiichi Sankyo Kusuri Museum",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "くすりミュージアム"
+        },
+        "aliases": [
+          "くすりミュージアム"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:36.673Z",
+  "value": {
+    "searchinfo": {
+      "search": "大田スタジアム"
+    },
+    "search": [
+      {
+        "id": "Q11437825",
+        "title": "Q11437825",
+        "pageid": 12576655,
+        "concepturi": "http://www.wikidata.org/entity/Q11437825",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11437825",
+        "display": {
+          "label": {
+            "value": "大田スタジアム",
+            "language": "ja"
+          }
+        },
+        "label": "大田スタジアム",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "大田スタジアム"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

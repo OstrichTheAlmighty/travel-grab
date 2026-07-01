@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:04.682Z",
+  "value": {
+    "searchinfo": {
+      "search": "サンダードルフィン"
+    },
+    "search": [
+      {
+        "id": "Q845812",
+        "title": "Q845812",
+        "pageid": 797869,
+        "concepturi": "http://www.wikidata.org/entity/Q845812",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q845812",
+        "display": {
+          "label": {
+            "value": "Thunder Dolphin",
+            "language": "en"
+          },
+          "description": {
+            "value": "steel roller coaster in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Thunder Dolphin",
+        "description": "steel roller coaster in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "サンダードルフィン"
+        },
+        "aliases": [
+          "サンダードルフィン"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

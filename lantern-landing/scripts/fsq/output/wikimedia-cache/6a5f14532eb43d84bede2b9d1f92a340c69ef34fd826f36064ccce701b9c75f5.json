@@ -1,0 +1,126 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:48.546Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 53996,
+          "ns": 0,
+          "title": "ホワイトハウス",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ほわいとはうす",
+            "kartographer_links": "1",
+            "page_image_free": "Whitehousetour_cropped.jpg",
+            "wikibase_item": "Q35525"
+          },
+          "coordinates": [
+            {
+              "lat": 38.89766667,
+              "lon": -77.03661111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "アメリカ合衆国大統領の公邸及び官邸"
+            ]
+          }
+        },
+        {
+          "pageid": 153138,
+          "ns": 0,
+          "title": "サンリオピューロランド",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さんりおひゆうろらんと",
+            "kartographer_frames": "1",
+            "page_image_free": "2024_Sanrio_Puroland_(1).jpg",
+            "wikibase_item": "Q1133851"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62461111,
+              "lon": 139.42913889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都多摩市にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 396344,
+          "ns": 0,
+          "title": "STUDIO COAST",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すたしおこおすと",
+            "kartographer_frames": "1",
+            "page_image_free": "STUDIO_COAST_(ageha).jpg",
+            "wikibase_item": "Q11244797"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64216667,
+              "lon": 139.8255,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1807211,
+          "ns": 0,
+          "title": "ユーストン駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ゆすとんえき",
+            "page_image_free": "Euston_station_main_entrance.jpg",
+            "wikibase_item": "Q800751"
+          },
+          "coordinates": [
+            {
+              "lat": 51.5284,
+              "lon": -0.1331,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "イングランドの鉄道駅"
+            ]
+          }
+        },
+        {
+          "pageid": 3387560,
+          "ns": 0,
+          "title": "フラッシング-メイン・ストリート駅 (IRTフラッシング線)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふらつしんくめいんすとりいと",
+            "kartographer_frames": "1",
+            "page_image_free": "NYC_Main_St_Flushing_station_2.jpg",
+            "wikibase_item": "Q1910673"
+          },
+          "terms": {
+            "description": [
+              "ニューヨーク市営地下鉄駅"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

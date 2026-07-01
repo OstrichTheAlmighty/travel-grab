@@ -1,0 +1,100 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:10.091Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 57555,
+          "ns": 0,
+          "title": "三重大学",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みえたいかく",
+            "page_image_free": "Mie_Univ._Main_Gate.jpg",
+            "wikibase_item": "Q1152942"
+          },
+          "coordinates": [
+            {
+              "lat": 34.74632778,
+              "lon": 136.52267778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "三重県津市にある国立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 103398,
+          "ns": 0,
+          "title": "日本の企業一覧 (食料品)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんのききよういちらん しよくりようひん",
+            "wikibase_item": "Q11505769"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 169469,
+          "ns": 0,
+          "title": "小野大輔",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おの たいすけ",
+            "wikibase_item": "Q718358"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優、歌手"
+            ]
+          }
+        },
+        {
+          "pageid": 440310,
+          "ns": 0,
+          "title": "佐賀記念",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さかきねん",
+            "wikibase_item": "Q11384882"
+          },
+          "terms": {
+            "description": [
+              "佐賀県競馬組合が主催する地方競馬の重賞競走"
+            ]
+          }
+        },
+        {
+          "pageid": 578770,
+          "ns": 0,
+          "title": "日本のスーパーマーケット一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんのすうはあまあけつといちらん",
+            "page_image_free": "Aeon_Makuhari.JPG",
+            "wikibase_item": "Q11505638"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

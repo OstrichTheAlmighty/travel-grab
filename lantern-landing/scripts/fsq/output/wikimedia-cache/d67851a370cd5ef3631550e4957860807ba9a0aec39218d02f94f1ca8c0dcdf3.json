@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:18.228Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 80016,
+          "ns": 0,
+          "title": "三菱電機",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みつひしてんき",
+            "page_image_free": "Tokyo_Building,_Marunouchi.jpg",
+            "wikibase_item": "Q53257"
+          },
+          "terms": {
+            "description": [
+              "東京都千代田区にある電機メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 98372,
+          "ns": 0,
+          "title": "岩崎弥太郎",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いわさき やたろう",
+            "page_image_free": "Yataro_Iwasaki_Portrait_Closeup_1874.png",
+            "wikibase_item": "Q380105"
+          },
+          "terms": {
+            "description": [
+              "日本の実業家、三菱財閥創設者 (1835-1885)"
+            ]
+          }
+        },
+        {
+          "pageid": 1072436,
+          "ns": 0,
+          "title": "三菱重工業長崎造船所",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みつひししゆうこうきようなかさきそうせんしよ",
+            "kartographer_frames": "1",
+            "page_image_free": "Mitsubishi_Heavy_Industries_Nagasaki_Shipyard_&_Machinery_Works_Full_View.jpg",
+            "toc": "",
+            "wikibase_item": "Q11357147"
+          },
+          "coordinates": [
+            {
+              "lat": 32.74219444,
+              "lon": 129.85852778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長崎市にある造船所"
+            ]
+          }
+        },
+        {
+          "pageid": 1955477,
+          "ns": 0,
+          "title": "三菱商業学校",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みつひししようきようかつこう",
+            "wikibase_item": "Q11357087"
+          },
+          "terms": {
+            "description": [
+              "三菱財閥の学校。慶応義塾大学の分校扱い。"
+            ]
+          }
+        },
+        {
+          "pageid": 2256912,
+          "ns": 0,
+          "title": "三菱史料館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みつひししりようかん",
+            "page_image_free": "Japan_Tokyo_Yamanote_loop_location_map.svg",
+            "wikibase_item": "Q11357080"
+          },
+          "coordinates": [
+            {
+              "lat": 35.709611,
+              "lon": 139.765944,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区湯島にある史料館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

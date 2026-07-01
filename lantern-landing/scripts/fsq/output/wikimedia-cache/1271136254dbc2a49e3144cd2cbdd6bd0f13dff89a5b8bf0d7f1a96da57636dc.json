@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:20.542Z",
+  "value": {
+    "searchinfo": {
+      "search": "浮世絵 太田記念美術館"
+    },
+    "search": [
+      {
+        "id": "Q3815442",
+        "title": "Q3815442",
+        "pageid": 3638805,
+        "concepturi": "http://www.wikidata.org/entity/Q3815442",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3815442",
+        "display": {
+          "label": {
+            "value": "Ōta Memorial Museum of Art",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum in Shibuya, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Ōta Memorial Museum of Art",
+        "description": "art museum in Shibuya, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "浮世絵 太田記念美術館"
+        },
+        "aliases": [
+          "浮世絵 太田記念美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

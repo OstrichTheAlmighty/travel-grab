@@ -1,0 +1,118 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:06.518Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8073,
+          "ns": 0,
+          "title": "新宿区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しんしゆくく",
+            "kartographer_frames": "1",
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "wikibase_item": "Q179645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69389,
+              "lon": 139.70342,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 33374,
+          "ns": 0,
+          "title": "新宿",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しんしゆく",
+            "kartographer_frames": "1",
+            "page_image_free": "Japan_Tokyo_Shinjuku_location_map.svg",
+            "wikibase_item": "Q836198"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区の町名・副都心"
+            ]
+          }
+        },
+        {
+          "pageid": 35618,
+          "ns": 0,
+          "title": "新宿御苑",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しんしゆくきよえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Shinjuku_Gyoen_National_Garden_-_sakura_3.JPG",
+            "wikibase_item": "Q776863"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68527778,
+              "lon": 139.70972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都にある国民公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1589012,
+          "ns": 0,
+          "title": "シアターサンモール",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しあたさんもる",
+            "kartographer_frames": "1",
+            "page_image_free": "Theater_Sun-mall_2021-05-02.jpg",
+            "wikibase_item": "Q11306883"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68955556,
+              "lon": 139.71288889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1735463,
+          "ns": 0,
+          "title": "新宿二丁目",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しんしゆくにちようめ",
+            "page_image_free": "新宿二丁目.jpg",
+            "wikibase_item": "Q1420043"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区新宿の二丁目"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

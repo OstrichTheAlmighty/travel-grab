@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:30.124Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 14403,
+          "ns": 0,
+          "title": "紀伊国",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きいのくに",
+            "page_image_free": "地図_令制国_紀伊国.svg",
+            "wikibase_item": "Q864053"
+          },
+          "terms": {
+            "description": [
+              "近国に属する令制国の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 29836,
+          "ns": 0,
+          "title": "五條市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こしようし",
+            "kartographer_frames": "1",
+            "page_image_free": "五條市近内町から金剛山を望む_Kongōsan_2011.4.29_-_panoramio.jpg",
+            "wikibase_item": "Q602571"
+          },
+          "coordinates": [
+            {
+              "lat": 34.35633,
+              "lon": 135.69558,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "奈良県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 69638,
+          "ns": 0,
+          "title": "下京区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しもきようく",
+            "kartographer_frames": "1",
+            "page_image_free": "170216_Nishi_Honganji_Kyoto_Japan03s4.jpg",
+            "wikibase_item": "Q1077022"
+          },
+          "coordinates": [
+            {
+              "lat": 34.9875,
+              "lon": 135.75555556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都府京都市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 1506915,
+          "ns": 0,
+          "title": "奈良県",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ならけん",
+            "kartographer_frames": "1",
+            "page_image_free": "Tōdai-ji_Kon-dō.jpg",
+            "wikibase_item": "Q131287"
+          },
+          "coordinates": [
+            {
+              "lat": 34.68519,
+              "lon": 135.83294,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の都道府県"
+            ]
+          }
+        },
+        {
+          "pageid": 1780713,
+          "ns": 0,
+          "title": "五條天神社 (台東区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こしようてんしんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Gojoten-Jinja.JPG",
+            "wikibase_item": "Q2115862"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71375,
+              "lon": 139.77211111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区の神社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

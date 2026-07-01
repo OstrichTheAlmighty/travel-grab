@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:11.974Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 121,
+          "ns": 0,
+          "title": "両国国技館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "りようこくこくきかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Ryogoku_Kokugikan_(taken_from_Kokugikan_Street).jpg",
+            "wikibase_item": "Q176821"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69691667,
+              "lon": 139.79352778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区にある大相撲の興行施設"
+            ]
+          }
+        },
+        {
+          "pageid": 1599339,
+          "ns": 0,
+          "title": "清水彩香",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しみす あやか",
+            "wikibase_item": "Q11254552"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 3000687,
+          "ns": 0,
+          "title": "Tokyo 7th シスターズ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようせふんすしすたあす",
+            "wikibase_item": "Q17219933"
+          },
+          "terms": {
+            "description": [
+              "日本のゲームタイトル、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 3114003,
+          "ns": 0,
+          "title": "山下まみ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やました まみ",
+            "page_image_free": "山下まみ.jpg",
+            "wikibase_item": "Q23948211"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 3915391,
+          "ns": 0,
+          "title": "天野聡美 (声優)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あまの さとみ",
+            "wikibase_item": "Q62023684"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

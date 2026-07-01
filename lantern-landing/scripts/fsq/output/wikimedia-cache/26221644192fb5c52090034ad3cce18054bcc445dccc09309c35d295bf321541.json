@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:49.392Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 330077,
+          "ns": 0,
+          "title": "Water park",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "WDW_Typhoon_Lagoon_Surf_Pool.JPG",
+            "wikibase-shortdesc": "Amusement park that features pools with water play areas",
+            "wikibase_item": "Q740326"
+          },
+          "terms": {
+            "description": [
+              "recreational facility featuring water attractions such as pools, slides, and fountains"
+            ]
+          }
+        },
+        {
+          "pageid": 43579833,
+          "ns": 0,
+          "title": "Playground",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Argos_playground.jpg",
+            "wikibase-shortdesc": "Place designed for children to be able to play there",
+            "wikibase_item": "Q11875349"
+          },
+          "terms": {
+            "description": [
+              "outdoor play space for children"
+            ]
+          }
+        },
+        {
+          "pageid": 51190878,
+          "ns": 0,
+          "title": "The Park (play)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Park",
+            "wikibase-shortdesc": "1983 play by Botho Strauß",
+            "wikibase_item": "Q107612168"
+          },
+          "terms": {
+            "description": [
+              "1983 play by the German writer Botho Strauß."
+            ]
+          }
+        },
+        {
+          "pageid": 63881911,
+          "ns": 0,
+          "title": "Park Ji-hyun (actress)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Park, Ji-hyun",
+            "page_image_free": "Park_Ji-hyun_at_Made_in_Korea_preview_event_on_15122025_(11).png",
+            "wikibase-shortdesc": "South Korean actress (born 1994)",
+            "wikibase_item": "Q55730087"
+          },
+          "terms": {
+            "description": [
+              "South Korean actress, born 1994"
+            ]
+          }
+        },
+        {
+          "pageid": 64659517,
+          "ns": 0,
+          "title": "Park Ju-hyun",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Park, Ju-hyun",
+            "page_image_free": "Park_Ju-hyun_for_Marie_Claire_Korea_on_171222_(1).png",
+            "wikibase-shortdesc": "South Korean actress (born 1994)",
+            "wikibase_item": "Q81226957"
+          },
+          "terms": {
+            "description": [
+              "South Korean actress, born 1994"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

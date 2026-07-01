@@ -1,0 +1,123 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:25.420Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1216,
+          "ns": 0,
+          "title": "Athens",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Monastiraki_Square_and_Acropolis_in_Athens_(44149181684).jpg",
+            "wikibase-shortdesc": "Capital and largest city of Greece",
+            "wikibase_item": "Q1524"
+          },
+          "coordinates": [
+            {
+              "lat": 37.98416667,
+              "lon": 23.72805556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "capital and largest city of Greece"
+            ]
+          }
+        },
+        {
+          "pageid": 4675,
+          "ns": 0,
+          "title": "British Museum",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "British_Museum_(aerial).jpg",
+            "wikibase-shortdesc": "National museum in London, England",
+            "wikibase_item": "Q6373"
+          },
+          "coordinates": [
+            {
+              "lat": 51.5194,
+              "lon": -0.1269,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "national museum in London, United Kingdom"
+            ]
+          }
+        },
+        {
+          "pageid": 30007,
+          "ns": 0,
+          "title": "The Matrix",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Matrix",
+            "displaytitle": "<i>The Matrix</i>",
+            "page_image": "The_Matrix.png",
+            "wikibase-shortdesc": "1999 film by the Wachowskis",
+            "wikibase_item": "Q83495"
+          },
+          "terms": {
+            "description": [
+              "1999 American science fiction action thriller film"
+            ]
+          }
+        },
+        {
+          "pageid": 53846,
+          "ns": 0,
+          "title": "Miami",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Villa_Vizcaya_20110228.jpg",
+            "wikibase-shortdesc": "City in Florida, United States",
+            "wikibase_item": "Q8652"
+          },
+          "coordinates": [
+            {
+              "lat": 25.77416667,
+              "lon": -80.19361111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "city in Miami-Dade County, Florida, United States"
+            ]
+          }
+        },
+        {
+          "pageid": 64719,
+          "ns": 0,
+          "title": "Paul Gauguin",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Gauguin, Paul",
+            "page_image_free": "Paul_Gauguin_1891.png",
+            "wikibase-shortdesc": "French artist (1848–1903)",
+            "wikibase_item": "Q37693"
+          },
+          "terms": {
+            "description": [
+              "French painter and printmaker (1848–1903)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

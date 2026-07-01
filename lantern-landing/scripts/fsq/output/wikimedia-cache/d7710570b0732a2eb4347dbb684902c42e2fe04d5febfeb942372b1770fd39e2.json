@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:52.255Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 63865,
+          "ns": 0,
+          "title": "築地市場",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "つきしいちは",
+            "page_image_free": "2018_Tsukiji_fish_market.jpg",
+            "wikibase_item": "Q859471"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66138889,
+              "lon": 139.76972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて東京都中央区築地に存在した公設卸売市場"
+            ]
+          }
+        },
+        {
+          "pageid": 922559,
+          "ns": 0,
+          "title": "豊洲市場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とよすししよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Toyosu_Market_Tokyo_2.jpg",
+            "wikibase_item": "Q11633916"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区豊洲に所在する公設卸売市場"
+            ]
+          }
+        },
+        {
+          "pageid": 1369874,
+          "ns": 0,
+          "title": "大阪府中央卸売市場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおさかふちゆうおうおろしうりししよう",
+            "wikibase_item": "Q11440936"
+          },
+          "terms": {
+            "description": [
+              "大阪府が開設する中央卸売市場"
+            ]
+          }
+        },
+        {
+          "pageid": 2091320,
+          "ns": 0,
+          "title": "札幌市中央卸売市場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さつほろしちゆうおうおろしうりししよう",
+            "wikibase_item": "Q11521201"
+          },
+          "coordinates": [
+            {
+              "lat": 43.07316667,
+              "lon": 141.32094444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道札幌市にある中央卸売市場"
+            ]
+          }
+        },
+        {
+          "pageid": 2471397,
+          "ns": 0,
+          "title": "横浜市中央卸売市場本場",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "よこはましちゆうおうおろしうりししようほんしよう",
+            "page_image_free": "Yokohama_City_Central_Wholesale_Market_(Kanagawa-ku)_-_Market_Center_building_2017-02.jpg",
+            "wikibase_item": "Q11542981"
+          },
+          "coordinates": [
+            {
+              "lat": 35.46719444,
+              "lon": 139.63441667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

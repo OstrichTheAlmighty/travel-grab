@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:24.067Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2759,
+          "ns": 0,
+          "title": "神道",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しんとう",
+            "page_image_free": "Geku_-_Ise_torii.svg",
+            "wikibase_item": "Q812767"
+          },
+          "terms": {
+            "description": [
+              "日本固有の自然や祖先を崇拝する信仰"
+            ]
+          }
+        },
+        {
+          "pageid": 50104,
+          "ns": 0,
+          "title": "鶴岡八幡宮",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "つるかおかはちまんくう",
+            "kartographer_frames": "1",
+            "page_image_free": "TsurugaokaHachimangu_by_ulysses_powers_in_Kamakura.jpg",
+            "wikibase_item": "Q701403"
+          },
+          "coordinates": [
+            {
+              "lat": 35.32608611,
+              "lon": 139.55643611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県鎌倉市にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 94646,
+          "ns": 0,
+          "title": "神社本庁",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しんしやほんちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Association_of_Shinto_Shrines_2010.jpg",
+            "wikibase_item": "Q908077"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67944444,
+              "lon": 139.70277778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都渋谷区にある、日本の神社を包括する宗教法人"
+            ]
+          }
+        },
+        {
+          "pageid": 173924,
+          "ns": 0,
+          "title": "別表神社",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "へつひようしんしや",
+            "wikibase_item": "Q10898274"
+          },
+          "terms": {
+            "description": [
+              "神社本庁が包括している一部の神社"
+            ]
+          }
+        },
+        {
+          "pageid": 1732524,
+          "ns": 0,
+          "title": "神社",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しんしや",
+            "page_image_free": "Yasaka_Shrine_-_Stone_torii.jpg",
+            "wikibase_item": "Q845945"
+          },
+          "terms": {
+            "description": [
+              "神道の信仰に基づく祭祀施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

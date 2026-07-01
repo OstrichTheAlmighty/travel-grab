@@ -1,0 +1,138 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:15.704Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 83618,
+          "ns": 0,
+          "title": "国立科学博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こくりつかかくはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "NMNC01s3200.jpg",
+            "wikibase_item": "Q74940"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71635833,
+              "lon": 139.77643333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある国立博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 524559,
+          "ns": 0,
+          "title": "小樽市総合博物館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おたるしそうこうはくふつかん",
+            "page_image_free": "Otaru_city_museum_main_entrance.jpg",
+            "wikibase_item": "Q11462160"
+          },
+          "coordinates": [
+            {
+              "lat": 43.21133333,
+              "lon": 141.00147222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道小樽市にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 2247429,
+          "ns": 0,
+          "title": "天沼弁天池公園 (杉並区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あまぬまへんてんいけこうえん",
+            "page_image_free": "Amanumabentenike_park_entrance_suginami.JPG",
+            "wikibase_item": "Q11442760"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70844444,
+              "lon": 139.62155556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都杉並区の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 3085438,
+          "ns": 0,
+          "title": "福井市自然史博物館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふくいししせんしはくふつかん",
+            "kartographer_frames": "2",
+            "page_image_free": "Fukui_city_museum_of_natural_history.jpg",
+            "wikibase_item": "Q21654393"
+          },
+          "coordinates": [
+            {
+              "lat": 36.05664167,
+              "lon": 136.20955278,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福井県福井市にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 3131924,
+          "ns": 0,
+          "title": "杉並区立郷土博物館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "すきなみくりつきようとはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Suginami_Historical_Museum_2024-12-22.jpg",
+            "wikibase_item": "Q20045092"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68591667,
+              "lon": 139.64541667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都杉並区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

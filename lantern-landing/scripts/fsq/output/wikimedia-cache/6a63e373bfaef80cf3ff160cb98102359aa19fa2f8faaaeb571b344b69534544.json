@@ -1,0 +1,75 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:11.154Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 82344,
+          "ns": 0,
+          "title": "西遊記 (1978年のテレビドラマ)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さいゆうき",
+            "wikibase_item": "Q6900702"
+          },
+          "terms": {
+            "description": [
+              "1978年制作の日本のテレビドラマ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 228827,
+          "ns": 0,
+          "title": "歌スタ!!",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "うたすた",
+            "wikibase_item": "Q11545071"
+          }
+        },
+        {
+          "pageid": 861660,
+          "ns": 0,
+          "title": "発掘!あるある大事典",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はつくつあるあるたいしてん",
+            "wikibase_item": "Q11579037"
+          },
+          "terms": {
+            "description": [
+              "フジテレビ系列局で放送されていたテレビ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 1896222,
+          "ns": 0,
+          "title": "ラジカントロプス2.0",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "らしかんとろふす2.0",
+            "wikibase_item": "Q11346933"
+          }
+        },
+        {
+          "pageid": 3424302,
+          "ns": 0,
+          "title": "東京芸術財団",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようけいしゆつさいたん",
+            "wikibase_item": "Q24864055"
+          }
+        }
+      ]
+    }
+  }
+}

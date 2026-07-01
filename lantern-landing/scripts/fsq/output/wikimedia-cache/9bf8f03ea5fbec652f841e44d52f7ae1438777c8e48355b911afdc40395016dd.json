@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:02.899Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 55,
+          "ns": 0,
+          "title": "台東区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たいとうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Asakusa_Senso-ji_2021-12_ac_(2).jpg",
+            "wikibase_item": "Q232641"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71261,
+              "lon": 139.77997,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 218399,
+          "ns": 0,
+          "title": "大隈重信像",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおくましけのふそう",
+            "wikibase_item": "Q11441788"
+          },
+          "terms": {
+            "description": [
+              "大隈重信を顕彰して作られた彫像"
+            ]
+          }
+        },
+        {
+          "pageid": 336639,
+          "ns": 0,
+          "title": "朝倉文夫",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あさくら ふみお",
+            "page_image_free": "Fumio_Asakura_by_Ken_Domon.jpg",
+            "wikibase_item": "Q1052330"
+          },
+          "terms": {
+            "description": [
+              "1883-1964, 彫刻家"
+            ]
+          }
+        },
+        {
+          "pageid": 338382,
+          "ns": 0,
+          "title": "朝倉彫塑館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あさくらちようそかん",
+            "page_image_free": "ASAKURA_Museum_of_Sculpture_2020-01-12.jpg",
+            "wikibase_item": "Q11517304"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72684722,
+              "lon": 139.76855,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある朝倉文夫のアトリエを改装した美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 1126049,
+          "ns": 0,
+          "title": "朝倉摂",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あさくら せつ",
+            "page_image_free": "Josei-Kyoyo-1957-March-1.jpg",
+            "wikibase_item": "Q11517308"
+          },
+          "terms": {
+            "description": [
+              "1922-2014, 舞台美術家、画家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

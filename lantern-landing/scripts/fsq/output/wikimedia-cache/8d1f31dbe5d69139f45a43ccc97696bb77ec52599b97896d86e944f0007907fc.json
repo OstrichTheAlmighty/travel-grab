@@ -1,0 +1,86 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:05.771Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 20031,
+          "ns": 0,
+          "title": "東京国立博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようこくりつはくふつかん",
+            "page_image_free": "Tokyo_National_Museum,_Honkan_2010.jpg",
+            "wikibase_item": "Q653433"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71905556,
+              "lon": 139.77666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある国立博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 79785,
+          "ns": 0,
+          "title": "狩野永徳",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かのう えいとく",
+            "wikibase_item": "Q536696"
+          },
+          "terms": {
+            "description": [
+              "日本の画家"
+            ]
+          }
+        },
+        {
+          "pageid": 1317352,
+          "ns": 0,
+          "title": "Infinix",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いんふいにつくす",
+            "wikibase_item": "Q11224788"
+          }
+        },
+        {
+          "pageid": 3756424,
+          "ns": 0,
+          "title": "KOCHO",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こちよう",
+            "wikibase_item": "Q55523443"
+          }
+        },
+        {
+          "pageid": 4213615,
+          "ns": 0,
+          "title": "岡田切吉房",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おかだきりよしふさ",
+            "page_image_free": "Tachi,_Fukuoka_Ichimonji_\"Okadagiri\"_Yoshifusa.jpg",
+            "wikibase_item": "Q107045184"
+          },
+          "terms": {
+            "description": [
+              "台東区にある国宝（美術品）"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

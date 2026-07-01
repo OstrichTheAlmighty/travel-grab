@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:05.801Z",
+  "value": {
+    "searchinfo": {
+      "search": "Hamarikyu Garden"
+    },
+    "search": [
+      {
+        "id": "Q1033333",
+        "title": "Q1033333",
+        "pageid": 982603,
+        "concepturi": "http://www.wikidata.org/entity/Q1033333",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1033333",
+        "display": {
+          "label": {
+            "value": "Hamarikyu Gardens",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Chuo, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Hamarikyu Gardens",
+        "description": "park in Chuo, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Hamarikyu Gardens"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

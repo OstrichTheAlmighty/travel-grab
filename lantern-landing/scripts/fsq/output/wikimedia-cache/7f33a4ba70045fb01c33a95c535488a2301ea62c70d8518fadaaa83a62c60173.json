@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:29.116Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 519092,
+          "ns": 0,
+          "title": "KochiKame: Tokyo Beat Cops",
+          "index": 1,
+          "pageprops": {
+            "displaytitle": "<i>KochiKame: Tokyo Beat Cops</i>",
+            "page_image": "Kochikame_vol1.jpg",
+            "wikibase-shortdesc": "Japanese media franchise",
+            "wikibase_item": "Q777791"
+          },
+          "terms": {
+            "description": [
+              "Japanese manga series"
+            ]
+          }
+        },
+        {
+          "pageid": 572605,
+          "ns": 0,
+          "title": "Goku",
+          "index": 5,
+          "pageprops": {
+            "page_image": "GokumangaToriyama.png",
+            "wikibase-shortdesc": "Fictional character and protagonist of the Dragon Ball series",
+            "wikibase_item": "Q2142"
+          },
+          "terms": {
+            "description": [
+              "protagonist of the Dragon Ball franchise"
+            ]
+          }
+        },
+        {
+          "pageid": 10813911,
+          "ns": 0,
+          "title": "Osamu Akimoto",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Akimoto, Osamu",
+            "wikibase-shortdesc": "Japanese manga artist (born 1952)",
+            "wikibase_item": "Q1321466"
+          },
+          "terms": {
+            "description": [
+              "Japanese manga artist (1952-)"
+            ]
+          }
+        },
+        {
+          "pageid": 11091078,
+          "ns": 0,
+          "title": "Dragon Ball",
+          "index": 3,
+          "pageprops": {
+            "displaytitle": "<i>Dragon Ball</i>",
+            "wikibase-shortdesc": "Japanese media franchise created by Akira Toriyama",
+            "wikibase_item": "Q2020"
+          },
+          "terms": {
+            "description": [
+              "Japanese media franchise"
+            ]
+          }
+        },
+        {
+          "pageid": 16510568,
+          "ns": 0,
+          "title": "List of KochiKame: Tokyo Beat Cops manga volumes",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "List of Kochira Katsushika-ku Kameari Koen-mae Hashutsujo manga volumes",
+            "displaytitle": "List of <i>KochiKame: Tokyo Beat Cops</i> manga volumes",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q6576163"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

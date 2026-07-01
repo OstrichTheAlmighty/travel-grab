@@ -1,0 +1,124 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:37.065Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 30057,
+          "ns": 0,
+          "title": "Tokyo",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Capital and most populous city in Japan",
+            "wikibase_item": "Q1490"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68972222,
+              "lon": 139.69222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "capital and largest city of Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 424445,
+          "ns": 0,
+          "title": "Odaiba",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Odaiba_close_up_-_2025_Jan_14_01-27PM.jpeg",
+            "wikibase-shortdesc": "Artificial island in Tokyo Bay, Japan",
+            "wikibase_item": "Q211861"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63,
+              "lon": 139.775,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "town located in Minato-ku, Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 12034009,
+          "ns": 0,
+          "title": "Odaiba-kaihinkōen Station",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Odaiba-kaihinkoen Station",
+            "kartographer_frames": "1",
+            "page_image_free": "Odaiba-kaihinkōen_Station_in_2008.jpg",
+            "wikibase-shortdesc": "Railway station in Tokyo, Japan",
+            "wikibase_item": "Q858883"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6298,
+              "lon": 139.7784,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "railway station in Minato, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 14306776,
+          "ns": 0,
+          "title": "Tokyo Cruise Ship",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Himiko_Cruise_Ship.jpg",
+            "wikibase-shortdesc": "Private Tokyo water bus company",
+            "wikibase_item": "Q7813864"
+          },
+          "terms": {
+            "description": [
+              "private Tokyo water bus company"
+            ]
+          }
+        },
+        {
+          "pageid": 17672775,
+          "ns": 0,
+          "title": "Itasha",
+          "index": 2,
+          "pageprops": {
+            "displaytitle": "<i>Itasha</i>",
+            "page_image_free": "Hinagiku_Katsura_itasha_side_front_20090726.jpg",
+            "wikibase-shortdesc": "Vehicle decorated with images of fictional characters",
+            "wikibase_item": "Q1072568"
+          },
+          "terms": {
+            "description": [
+              "vehicle decorated with images of fictional characters from anime, manga, or video games"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

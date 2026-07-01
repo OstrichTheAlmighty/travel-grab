@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:05.978Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 35323,
+          "ns": 0,
+          "title": "市川市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いちかわし",
+            "kartographer_frames": "1",
+            "page_image_free": "Ichikawa_montage.jpg",
+            "wikibase_item": "Q209785"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72192,
+              "lon": 139.93106,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 126814,
+          "ns": 0,
+          "title": "風間杜夫",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かさま もりお",
+            "page_image_free": "Morio_Kazama_20230512_1.jpg",
+            "wikibase_item": "Q6912282"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優"
+            ]
+          }
+        },
+        {
+          "pageid": 128802,
+          "ns": 0,
+          "title": "山本耕史",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "やまもと こうし",
+            "page_image_free": "Koji_Yamamoto_actor_IMG_7799r_R_20151025.JPG",
+            "wikibase_item": "Q4504011"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優"
+            ]
+          }
+        },
+        {
+          "pageid": 2124580,
+          "ns": 0,
+          "title": "みなとみらいセンタービル",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みなとみらいせんたあひる",
+            "page_image_free": "MM_Center_Building_2.jpg",
+            "wikibase_item": "Q11279144"
+          },
+          "coordinates": [
+            {
+              "lat": 35.45758333,
+              "lon": 139.63322222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "横浜市のビル"
+            ]
+          }
+        },
+        {
+          "pageid": 3561357,
+          "ns": 0,
+          "title": "異世界居酒屋「のぶ」",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "いせかいいさかやのふ",
+            "wikibase_item": "Q28127311"
+          },
+          "terms": {
+            "description": [
+              "日本のライトノベル作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

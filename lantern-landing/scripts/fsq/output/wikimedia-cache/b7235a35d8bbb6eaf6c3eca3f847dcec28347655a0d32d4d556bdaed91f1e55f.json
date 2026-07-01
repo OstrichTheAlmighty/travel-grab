@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:03.066Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 65198,
+          "ns": 0,
+          "title": "千住大橋駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せんしゆおおはし",
+            "kartographer_frames": "1",
+            "page_image_free": "Senjuohashi_Station.jpg",
+            "wikibase_item": "Q388969"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7425,
+              "lon": 139.79683333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都足立区千住橋戸町にある京成電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 485986,
+          "ns": 0,
+          "title": "茶釜",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちやかま",
+            "page_image_free": "Tea_kettle_with_Japanese_kerria_design,_Ashiya_ware,_Shinnari_type,_Japan,_Muromachi_period,_1400s_AD,_iron_-_Tokyo_National_Museum_-_Tokyo,_Japan_-_DSC08890.jpg",
+            "wikibase_item": "Q3847597"
+          },
+          "terms": {
+            "description": [
+              "茶に使用する湯を沸かすための釜"
+            ]
+          }
+        },
+        {
+          "pageid": 1092285,
+          "ns": 0,
+          "title": "千住橋戸町",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せんしゆはしとちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Ponteporta_Senju_20140421.jpg",
+            "wikibase_item": "Q28692767"
+          },
+          "terms": {
+            "description": [
+              "東京都足立区の町丁"
+            ]
+          }
+        },
+        {
+          "pageid": 1691666,
+          "ns": 0,
+          "title": "東京都の観光地",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようと",
+            "page_image_free": "東京都区部-観光地図-1.jpg",
+            "wikibase_item": "Q10860697"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2910379,
+          "ns": 0,
+          "title": "東京・ミュージアムぐるっとパス",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきょうみゆうしあむくるとはす",
+            "wikibase_item": "Q17219664"
+          }
+        }
+      ]
+    }
+  }
+}

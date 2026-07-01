@@ -1,0 +1,81 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:28.357Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 128911,
+          "ns": 0,
+          "title": "ベクターホールディングス",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "へくたあ",
+            "wikibase_item": "Q11245018"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都新宿区にある企業"
+            ]
+          }
+        },
+        {
+          "pageid": 242978,
+          "ns": 0,
+          "title": "諏訪道彦",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "すわ みちひこ",
+            "page_image_free": "Michihiko_Suwa_20081102_Chibi_Japan_Expo_01.jpg",
+            "wikibase_item": "Q11631947"
+          }
+        },
+        {
+          "pageid": 412439,
+          "ns": 0,
+          "title": "翔泳社",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しようえいしや",
+            "wikibase_item": "Q7500035"
+          },
+          "terms": {
+            "description": [
+              "日本の出版社"
+            ]
+          }
+        },
+        {
+          "pageid": 2758765,
+          "ns": 0,
+          "title": "須藤温子",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すとう あつこ",
+            "wikibase_item": "Q11664739"
+          },
+          "terms": {
+            "description": [
+              "日本の女優"
+            ]
+          }
+        },
+        {
+          "pageid": 3614478,
+          "ns": 0,
+          "title": "地方卸売市場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちほうおろしうりししよう",
+            "wikibase_item": "Q30937289"
+          }
+        }
+      ]
+    }
+  }
+}

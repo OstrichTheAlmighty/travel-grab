@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:09.699Z",
+  "value": {
+    "searchinfo": {
+      "search": "ニュージーズ・ノヴェルティー"
+    },
+    "search": [
+      {
+        "id": "Q11524256",
+        "title": "Q11524256",
+        "pageid": 12664126,
+        "concepturi": "http://www.wikidata.org/entity/Q11524256",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524256",
+        "display": {
+          "label": {
+            "value": "ニュージーズ・ノヴェルティ",
+            "language": "ja"
+          },
+          "description": {
+            "value": "Wikimedia list article",
+            "language": "en"
+          }
+        },
+        "label": "ニュージーズ・ノヴェルティ",
+        "description": "Wikimedia list article",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ニュージーズ・ノヴェルティ"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

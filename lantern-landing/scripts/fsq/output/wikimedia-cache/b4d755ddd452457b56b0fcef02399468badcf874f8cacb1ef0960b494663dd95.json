@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:42.928Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 55770,
+          "ns": 0,
+          "title": "おはようテレビ朝日",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おはようてれひあさひ",
+            "wikibase_item": "Q11262173"
+          }
+        },
+        {
+          "pageid": 204177,
+          "ns": 0,
+          "title": "川上貞奴",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かわかみ さたやつこ",
+            "page_image_free": "Sadayakko_Kawakami.jpg",
+            "wikibase_item": "Q2554845"
+          },
+          "terms": {
+            "description": [
+              "戦前の日本の女優"
+            ]
+          }
+        },
+        {
+          "pageid": 567526,
+          "ns": 0,
+          "title": "東京劇場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようけきしよう",
+            "page_image_free": "Tōkyō_Gekijō.jpg",
+            "wikibase_item": "Q564461"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66780556,
+              "lon": 139.76855556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1513440,
+          "ns": 0,
+          "title": "讃岐国分寺",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さぬきこくふんし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kokubunji20210416_1.jpg",
+            "wikibase_item": "Q1101226"
+          },
+          "coordinates": [
+            {
+              "lat": 34.30313889,
+              "lon": 133.94416667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "香川県高松市にある寺院、四国八十八箇所霊場の第八十番札所"
+            ]
+          }
+        },
+        {
+          "pageid": 2856833,
+          "ns": 0,
+          "title": "徳光和夫の名曲にっぽん 昭和歌謡人",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とくみつかすおのめいきよくにつほんしようわかようひと",
+            "wikibase_item": "Q17213605"
+          }
+        }
+      ]
+    }
+  }
+}

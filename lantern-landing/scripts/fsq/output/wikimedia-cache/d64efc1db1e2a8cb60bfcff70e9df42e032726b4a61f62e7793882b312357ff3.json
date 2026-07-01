@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:43.865Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 29104,
+          "ns": 0,
+          "title": "展望車",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "てんほうしや",
+            "wikibase_item": "Q1691845"
+          }
+        },
+        {
+          "pageid": 74143,
+          "ns": 0,
+          "title": "サンシャイン60",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さんしやいん60",
+            "page_image_free": "Sunshine_60.JPG",
+            "wikibase_item": "Q602942"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72916667,
+              "lon": 139.71805556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある超高層ビル"
+            ]
+          }
+        },
+        {
+          "pageid": 123713,
+          "ns": 0,
+          "title": "サウスゲートビルディング",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さうすけえとひるていんく",
+            "kartographer_frames": "1",
+            "page_image_free": "South_Gate_Building_Osaka_Japan01-r.jpg",
+            "wikibase_item": "Q11439969"
+          },
+          "coordinates": [
+            {
+              "lat": 34.70172222,
+              "lon": 135.49641667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪駅南側の駅ビル"
+            ]
+          }
+        },
+        {
+          "pageid": 307030,
+          "ns": 0,
+          "title": "八幡浜港",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やわたはまこう",
+            "kartographer_frames": "1",
+            "page_image_free": "Yawatahama_Port_-_panoramio_(1).jpg",
+            "wikibase_item": "Q9064619"
+          },
+          "coordinates": [
+            {
+              "lat": 33.45,
+              "lon": 132.42,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の愛媛県八幡浜市にある港湾"
+            ]
+          }
+        },
+        {
+          "pageid": 986755,
+          "ns": 0,
+          "title": "堺市役所",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さかいしやくしよ",
+            "page_image_free": "SakaiCityHall_2024_10.jpg",
+            "wikibase_item": "Q11428121"
+          },
+          "terms": {
+            "description": [
+              "大阪府堺市の行政機関"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

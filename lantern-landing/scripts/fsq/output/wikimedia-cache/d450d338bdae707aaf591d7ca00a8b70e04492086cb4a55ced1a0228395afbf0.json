@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:28.695Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 54850,
+          "ns": 0,
+          "title": "花王",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かおう",
+            "page_image_free": "Shibusawa_Building,_at_Nihonbashi-Kayabacho,_Chuo,_Tokyo_(2019-01-02)_05.jpg",
+            "wikibase_item": "Q902855"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都中央区にある化学メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 175259,
+          "ns": 0,
+          "title": "カネボウ化粧品",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かねほうけしようひん",
+            "page_image_free": "Shibusawa_Building,_at_Nihonbashi-Kayabacho,_Chuo,_Tokyo_(2019-01-02)_01.jpg",
+            "wikibase_item": "Q17225643"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68047222,
+              "lon": 139.78111111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の化粧品会社"
+            ]
+          }
+        },
+        {
+          "pageid": 458669,
+          "ns": 0,
+          "title": "花王和歌山工場",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かおうわかやまこうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Nankai_Wakayamakou_eki_2.jpg",
+            "wikibase_item": "Q11615553"
+          },
+          "coordinates": [
+            {
+              "lat": 34.213856,
+              "lon": 135.152805,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 2088364,
+          "ns": 0,
+          "title": "緑茶飲料",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "りよくちやいんりよう",
+            "wikibase_item": "Q11607864"
+          }
+        }
+      ]
+    }
+  }
+}

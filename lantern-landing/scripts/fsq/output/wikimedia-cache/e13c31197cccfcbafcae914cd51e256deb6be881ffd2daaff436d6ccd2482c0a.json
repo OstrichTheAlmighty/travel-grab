@@ -1,0 +1,80 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:40.393Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 131440,
+          "ns": 0,
+          "title": "灘五郷",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "なたここう",
+            "page_image_free": "KounanzukeMuseum02.jpg",
+            "wikibase_item": "Q6957369"
+          }
+        },
+        {
+          "pageid": 1088631,
+          "ns": 0,
+          "title": "竹本綱太夫",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たけもと つなたゆう",
+            "page_image_free": "抱き柏に隅立て四つ目.jpg",
+            "wikibase_item": "Q11599182"
+          }
+        },
+        {
+          "pageid": 1549874,
+          "ns": 0,
+          "title": "鶴澤清六",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "つるさわ せいろく",
+            "page_image_free": "清六紋.png",
+            "wikibase_item": "Q11676055"
+          }
+        },
+        {
+          "pageid": 1750489,
+          "ns": 0,
+          "title": "豊澤團平",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とよざわ だんぺい",
+            "page_image_free": "初代豊澤團平・二代目豊澤團平の墓（碑）.jpg",
+            "wikibase_item": "Q101475107"
+          },
+          "terms": {
+            "description": [
+              "義太夫節の三味線方の名跡"
+            ]
+          }
+        },
+        {
+          "pageid": 4230221,
+          "ns": 0,
+          "title": "鶴澤徳太郎",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "つるさわ とくたろう",
+            "page_image_free": "中陰蔦.jpg",
+            "wikibase_item": "Q109359799"
+          },
+          "terms": {
+            "description": [
+              "三味線奏者の名跡"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

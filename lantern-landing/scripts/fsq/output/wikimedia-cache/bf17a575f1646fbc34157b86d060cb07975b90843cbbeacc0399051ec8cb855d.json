@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:17.163Z",
+  "value": {
+    "searchinfo": {
+      "search": "武蔵野陸上競技場"
+    },
+    "search": [
+      {
+        "id": "Q6940180",
+        "title": "Q6940180",
+        "pageid": 6803407,
+        "concepturi": "http://www.wikidata.org/entity/Q6940180",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6940180",
+        "display": {
+          "label": {
+            "value": "Musashino Municipal Athletic Stadium",
+            "language": "en"
+          },
+          "description": {
+            "value": "building in Kichijoji-Kitamachi, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Musashino Municipal Athletic Stadium",
+        "description": "building in Kichijoji-Kitamachi, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "武蔵野陸上競技場"
+        },
+        "aliases": [
+          "武蔵野陸上競技場"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

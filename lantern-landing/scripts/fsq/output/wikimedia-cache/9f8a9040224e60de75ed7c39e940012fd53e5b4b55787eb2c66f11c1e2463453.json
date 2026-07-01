@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:22.122Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 29680,
+          "ns": 0,
+          "title": "Tambourine",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Pandeiro_new_30-09-07.jpg",
+            "wikibase-shortdesc": "Handheld drum with metal jingles",
+            "wikibase_item": "Q193666"
+          },
+          "terms": {
+            "description": [
+              "percussion instrument"
+            ]
+          }
+        },
+        {
+          "pageid": 159737,
+          "ns": 0,
+          "title": "Miloš Obilić",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Obilic, Milos",
+            "page_image_free": "Miloš_Obilić,_by_Aleksandar_Dobrić,_1861.jpg",
+            "wikibase-shortdesc": "Legendary Serbian knight",
+            "wikibase_item": "Q314075"
+          },
+          "terms": {
+            "description": [
+              "Serbian knight"
+            ]
+          }
+        },
+        {
+          "pageid": 297809,
+          "ns": 0,
+          "title": "Socialist Federal Republic of Yugoslavia",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Flag_of_Yugoslavia_(1946-1992).svg",
+            "wikibase-shortdesc": "Yugoslavia from 1945 to 1992",
+            "wikibase_item": "Q83286"
+          },
+          "coordinates": [
+            {
+              "lat": 44.82,
+              "lon": 20.4275,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Central and Southeast European socialist state (1945–1992)"
+            ]
+          }
+        },
+        {
+          "pageid": 3937586,
+          "ns": 0,
+          "title": "Dušan Matić",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Matić, Dušan",
+            "page_image": "MaticDusan.jpg",
+            "wikibase-shortdesc": "Serbian poet (1898–1980)",
+            "wikibase_item": "Q2177394"
+          },
+          "terms": {
+            "description": [
+              "Serbian writer (1898–1980)"
+            ]
+          }
+        },
+        {
+          "pageid": 40966270,
+          "ns": 0,
+          "title": "Kosovo Myth",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Ivan_Meštrović_Vidovdanski_hram.jpg",
+            "wikibase-shortdesc": "Serbian nation-building myth",
+            "wikibase_item": "Q1267597"
+          },
+          "terms": {
+            "description": [
+              "Serbian nation-building myth based on legends about events related to the Battle of Kosovo (1389)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

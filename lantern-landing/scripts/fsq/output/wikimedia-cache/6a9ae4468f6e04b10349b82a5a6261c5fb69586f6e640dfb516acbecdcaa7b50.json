@@ -1,0 +1,98 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:01.806Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 44706,
+          "ns": 0,
+          "title": "四輪駆動",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "よんりんくとう",
+            "page_image_free": "Mitsubishi_Jeep_J-55_001.JPG",
+            "wikibase_item": "Q214833"
+          }
+        },
+        {
+          "pageid": 47292,
+          "ns": 0,
+          "title": "SUBARU",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すはる",
+            "page_image_free": "Subaru_hq1.jpg",
+            "wikibase_item": "Q1051297"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64677778,
+              "lon": 139.71333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の重工業メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 51458,
+          "ns": 0,
+          "title": "セダン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せたん",
+            "page_image_free": "1928_Model_A_Ford.jpg",
+            "wikibase_item": "Q190578"
+          },
+          "terms": {
+            "description": [
+              "車体形状や使用形態により分類される乗用車の形態のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 62251,
+          "ns": 0,
+          "title": "ミニバン",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みにはん",
+            "page_image_free": "Toyota_ALPHARD_Z_(AGH40W).jpg",
+            "wikibase_item": "Q223189"
+          },
+          "terms": {
+            "description": [
+              "乗用車の形態のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 657398,
+          "ns": 0,
+          "title": "コンパクトカー",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こんはくとか",
+            "page_image_free": "Toyota_Yaris_2020_(XP210,_Japan)_front_view.jpg",
+            "wikibase_item": "Q946808"
+          },
+          "terms": {
+            "description": [
+              "全長4,400mm級未満の小型車"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

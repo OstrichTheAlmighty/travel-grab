@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:37:57.790Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 22121,
+          "ns": 0,
+          "title": "レイフ・ヴォーン・ウィリアムズ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "うおんういりあむす れいふ",
+            "page_image_free": "Ralph_Vaughan_Williams_1913.jpeg",
+            "wikibase_item": "Q207947"
+          },
+          "terms": {
+            "description": [
+              "イギリスの作曲家 (1872-1958)"
+            ]
+          }
+        },
+        {
+          "pageid": 28918,
+          "ns": 0,
+          "title": "立教大学",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "りつきようたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Rikkyo_University_1.jpg",
+            "wikibase_item": "Q1143235"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7305,
+              "lon": 139.70394444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 1912951,
+          "ns": 0,
+          "title": "チャニング・ウィリアムズ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ういりあむす ちやいにんく",
+            "page_image_free": "Channing_Moore_Williams_01.jpg",
+            "wikibase_item": "Q5072555"
+          },
+          "terms": {
+            "description": [
+              "米国聖公会のアメリカ人宣教師"
+            ]
+          }
+        },
+        {
+          "pageid": 2376343,
+          "ns": 0,
+          "title": "セント・ポール大聖堂",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せんとほおるたいせいとう",
+            "page_image_free": "St_Pauls_aerial.jpg",
+            "wikibase_item": "Q173882"
+          },
+          "coordinates": [
+            {
+              "lat": 51.51361111,
+              "lon": -0.09805556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "イングランドの大聖堂"
+            ]
+          }
+        },
+        {
+          "pageid": 4213409,
+          "ns": 0,
+          "title": "ヘンリー・セントジョージ・タッカー",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たつかあ へんり せんとしよし",
+            "page_image_free": "The_Rt._Rev._Henry_St._George_Tucker.jpg",
+            "wikibase_item": "Q3785003"
+          }
+        }
+      ]
+    }
+  }
+}

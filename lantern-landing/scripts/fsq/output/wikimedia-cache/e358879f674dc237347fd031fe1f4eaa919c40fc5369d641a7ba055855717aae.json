@@ -1,0 +1,204 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:44.651Z",
+  "value": {
+    "searchinfo": {
+      "search": "国立科学博物館"
+    },
+    "search": [
+      {
+        "id": "Q74940",
+        "title": "Q74940",
+        "pageid": 77607,
+        "concepturi": "http://www.wikidata.org/entity/Q74940",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q74940",
+        "display": {
+          "label": {
+            "value": "National Museum of Nature and Science",
+            "language": "en"
+          },
+          "description": {
+            "value": "National Science Museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "National Museum of Nature and Science",
+        "description": "National Science Museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "国立科学博物館"
+        },
+        "aliases": [
+          "国立科学博物館"
+        ]
+      },
+      {
+        "id": "Q21385901",
+        "title": "Q21385901",
+        "pageid": 23432101,
+        "concepturi": "http://www.wikidata.org/entity/Q21385901",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q21385901",
+        "display": {
+          "label": {
+            "value": "Bulletin of the National Museum of Nature and Science. Series A, Zoology",
+            "language": "en"
+          },
+          "description": {
+            "value": "scientific journal",
+            "language": "en"
+          }
+        },
+        "label": "Bulletin of the National Museum of Nature and Science. Series A, Zoology",
+        "description": "scientific journal",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "国立科学博物館研究報告A類（動物学）"
+        },
+        "aliases": [
+          "国立科学博物館研究報告A類（動物学）"
+        ]
+      },
+      {
+        "id": "Q3162410",
+        "title": "Q3162410",
+        "pageid": 3020747,
+        "concepturi": "http://www.wikidata.org/entity/Q3162410",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3162410",
+        "display": {
+          "label": {
+            "value": "Tsukuba Botanical Garden",
+            "language": "en"
+          },
+          "description": {
+            "value": "botanical garden located near the University of Tsukuba, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tsukuba Botanical Garden",
+        "description": "botanical garden located near the University of Tsukuba, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "国立科学博物館 筑波実験植物園"
+        },
+        "aliases": [
+          "国立科学博物館 筑波実験植物園"
+        ]
+      },
+      {
+        "id": "Q5557026",
+        "title": "Q5557026",
+        "pageid": 5317367,
+        "concepturi": "http://www.wikidata.org/entity/Q5557026",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5557026",
+        "display": {
+          "label": {
+            "value": "Institute for Nature Study",
+            "language": "en"
+          },
+          "description": {
+            "value": "nature preserve park in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Institute for Nature Study",
+        "description": "nature preserve park in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "国立科学博物館附属自然教育園"
+        },
+        "aliases": [
+          "国立科学博物館附属自然教育園"
+        ]
+      },
+      {
+        "id": "Q20013648",
+        "title": "Q20013648",
+        "pageid": 21684094,
+        "concepturi": "http://www.wikidata.org/entity/Q20013648",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q20013648",
+        "display": {
+          "label": {
+            "value": "Bulletin of the National Science Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "scientific journal (1949-1974)",
+            "language": "en"
+          }
+        },
+        "label": "Bulletin of the National Science Museum",
+        "description": "scientific journal (1949-1974)",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "国立科学博物館研究報告"
+        },
+        "aliases": [
+          "国立科学博物館研究報告"
+        ]
+      },
+      {
+        "id": "Q11514142",
+        "title": "Q11514142",
+        "pageid": 12653909,
+        "concepturi": "http://www.wikidata.org/entity/Q11514142",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11514142",
+        "display": {
+          "label": {
+            "value": "Showa Memorial Institute",
+            "language": "en"
+          }
+        },
+        "label": "Showa Memorial Institute",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "国立科学博物館 昭和記念筑波研究資料館"
+        },
+        "aliases": [
+          "国立科学博物館 昭和記念筑波研究資料館"
+        ]
+      },
+      {
+        "id": "Q27650438",
+        "title": "Q27650438",
+        "pageid": 29370718,
+        "concepturi": "http://www.wikidata.org/entity/Q27650438",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q27650438",
+        "display": {
+          "label": {
+            "value": "Bulletin of the National Museum of Nature and Science. Series B, Botany",
+            "language": "en"
+          },
+          "description": {
+            "value": "scientific journal",
+            "language": "en"
+          }
+        },
+        "label": "Bulletin of the National Museum of Nature and Science. Series B, Botany",
+        "description": "scientific journal",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "国立科学博物館研究報告B類（植物学）"
+        },
+        "aliases": [
+          "国立科学博物館研究報告B類（植物学）"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:00.768Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 142573,
+          "ns": 0,
+          "title": "日産・キャラバン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "につさんきやらはん",
+            "page_image_free": "Nissan_Caravan_(E26),_right-front,_2022.jpg",
+            "wikibase_item": "Q1993662"
+          },
+          "terms": {
+            "description": [
+              "日産自動車のバン型商用車および乗用車"
+            ]
+          }
+        },
+        {
+          "pageid": 219339,
+          "ns": 0,
+          "title": "ナガシマスパーランド",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なかしますはらんと",
+            "kartographer_frames": "1",
+            "page_image_free": "Nagashima_spa_land_skyview.jpg",
+            "wikibase_item": "Q2496699"
+          },
+          "coordinates": [
+            {
+              "lat": 35.02878333,
+              "lon": 136.73046944,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "三重県桑名市にある娯楽施設"
+            ]
+          }
+        },
+        {
+          "pageid": 1229144,
+          "ns": 0,
+          "title": "ザ・ベスト・オブU2 18シングルズ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "へすとおふゆうつう18しんくるす",
+            "wikibase_item": "Q1357277"
+          }
+        },
+        {
+          "pageid": 1741731,
+          "ns": 0,
+          "title": "銀座",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きんさ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ginza_area_at_dusk_from_Tokyo_Tower.jpg",
+            "wikibase_item": "Q746052"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 1996319,
+          "ns": 0,
+          "title": "サンゴバン",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さんこはん",
+            "page_image_free": "サンゴバン.jpg",
+            "wikibase_item": "Q678565"
+          },
+          "terms": {
+            "description": [
+              "フランスの建築材料メーカー"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

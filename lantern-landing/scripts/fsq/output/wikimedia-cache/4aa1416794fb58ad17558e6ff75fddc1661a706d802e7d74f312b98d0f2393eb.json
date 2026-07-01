@@ -1,0 +1,100 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:23.961Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 43145,
+          "ns": 0,
+          "title": "水野裕子",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みすの ゆうこ",
+            "wikibase_item": "Q11549467"
+          },
+          "terms": {
+            "description": [
+              "日本の女性タレント、女優 (1982-)"
+            ]
+          }
+        },
+        {
+          "pageid": 66856,
+          "ns": 0,
+          "title": "徳之島",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とくのしま",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokunoshima_zenkei.jpg",
+            "wikibase_item": "Q701847"
+          },
+          "coordinates": [
+            {
+              "lat": 27.82,
+              "lon": 128.93222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "鹿児島県、奄美群島の島"
+            ]
+          }
+        },
+        {
+          "pageid": 77010,
+          "ns": 0,
+          "title": "くるり",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "くるり",
+            "wikibase_item": "Q906339"
+          },
+          "terms": {
+            "description": [
+              "日本のロックバンド"
+            ]
+          }
+        },
+        {
+          "pageid": 172954,
+          "ns": 0,
+          "title": "六平直政",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "むさか なおまさ",
+            "wikibase_item": "Q11392338"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優 (1954-)"
+            ]
+          }
+        },
+        {
+          "pageid": 415697,
+          "ns": 0,
+          "title": "本田博太郎",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ほんた ひろたろう",
+            "wikibase_item": "Q11520572"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優、書家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:41.811Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 223699,
+          "ns": 0,
+          "title": "葵 徳川三代",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あおいとくかわさんたい",
+            "wikibase_item": "Q11621198"
+          },
+          "terms": {
+            "description": [
+              "2000年のNHK大河ドラマ第39作"
+            ]
+          }
+        },
+        {
+          "pageid": 259455,
+          "ns": 0,
+          "title": "築地魚河岸三代目",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "つきしうおかしさんたいめ",
+            "wikibase_item": "Q7850070"
+          }
+        },
+        {
+          "pageid": 707961,
+          "ns": 0,
+          "title": "三代目魚武濱田成夫",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さんたいめうおたけはまたしけお",
+            "wikibase_item": "Q11354367"
+          },
+          "terms": {
+            "description": [
+              "日本の詩人、芸術家、ミュージシャン、俳優 (1963-)"
+            ]
+          }
+        },
+        {
+          "pageid": 1047172,
+          "ns": 0,
+          "title": "市川團十郎 (13代目)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いちかわ たんしゆうろう13",
+            "page_image_free": "Ichikawa_Danjūrō_XIII,_formally_known_as_Ichikawa_Ebizō_XI.jpg",
+            "wikibase_item": "Q3147664"
+          },
+          "terms": {
+            "description": [
+              "日本の歌舞伎役者、俳優 (1977-)"
+            ]
+          }
+        },
+        {
+          "pageid": 3730726,
+          "ns": 0,
+          "title": "FUTURE (三代目 J Soul Brothers from EXILE TRIBEのアルバム)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふゆうちやあ",
+            "wikibase_item": "Q48760350"
+          }
+        }
+      ]
+    }
+  }
+}

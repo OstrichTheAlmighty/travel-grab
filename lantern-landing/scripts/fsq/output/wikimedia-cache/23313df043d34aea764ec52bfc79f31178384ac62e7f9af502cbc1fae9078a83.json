@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:30.827Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 90579,
+          "ns": 0,
+          "title": "世田谷美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せたかやひゆつかん",
+            "page_image_free": "Setagaya_Art_Museum.jpg",
+            "wikibase_item": "Q3892314"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63158889,
+              "lon": 139.62189722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区の砧公園にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 258785,
+          "ns": 0,
+          "title": "世田谷区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せたかやく",
+            "kartographer_frames": "1",
+            "page_image_free": "Seijo_namikimichi_231011.jpg",
+            "wikibase_item": "Q231645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64656,
+              "lon": 139.65322,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 272758,
+          "ns": 0,
+          "title": "個人美術館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こしんひしゆつかん",
+            "wikibase_item": "Q11387011"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 566932,
+          "ns": 0,
+          "title": "弦巻",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "つるまき",
+            "kartographer_frames": "1",
+            "page_image_free": "Setagaya_educational_center_tsurumaki_tokyo_2014.jpg",
+            "wikibase_item": "Q11487492"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1901747,
+          "ns": 0,
+          "title": "向井潤吉",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "むかい しゆんきち",
+            "page_image_free": "Junkichi_Mukai.jpg",
+            "wikibase_item": "Q11415898"
+          },
+          "terms": {
+            "description": [
+              "日本の画家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

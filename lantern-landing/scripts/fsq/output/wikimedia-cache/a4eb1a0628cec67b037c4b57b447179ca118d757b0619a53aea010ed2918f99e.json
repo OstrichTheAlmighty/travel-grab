@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:21.892Z",
+  "value": {
+    "searchinfo": {
+      "search": "Natural Harmony"
+    },
+    "search": [
+      {
+        "id": "Q120651619",
+        "title": "Q120651619",
+        "pageid": 115104137,
+        "concepturi": "http://www.wikidata.org/entity/Q120651619",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q120651619",
+        "display": {
+          "label": {
+            "value": "Natural harmony or man-made harmony? The review on the harmony from western economists",
+            "language": "en"
+          },
+          "description": {
+            "value": "scholarly article in Journal of Northwest University (Philosophy and Social Sciences Edition), no. 4, 2007",
+            "language": "en"
+          }
+        },
+        "label": "Natural harmony or man-made harmony? The review on the harmony from western economists",
+        "description": "scholarly article in Journal of Northwest University (Philosophy and Social Sciences Edition), no. 4, 2007",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Natural harmony or man-made harmony? The review on the harmony from western economists"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

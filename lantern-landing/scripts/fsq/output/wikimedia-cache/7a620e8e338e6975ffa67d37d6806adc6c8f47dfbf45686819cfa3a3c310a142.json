@@ -1,0 +1,119 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:26.623Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 40835,
+          "ns": 0,
+          "title": "大英博物館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たいえいはくふつかん",
+            "page_image_free": "British_Museum_(aerial).jpg",
+            "wikibase_item": "Q6373"
+          },
+          "coordinates": [
+            {
+              "lat": 51.5194,
+              "lon": -0.1269,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "イギリス・ロンドンにある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 83618,
+          "ns": 0,
+          "title": "国立科学博物館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こくりつかかくはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "NMNC01s3200.jpg",
+            "wikibase_item": "Q74940"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71635833,
+              "lon": 139.77643333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある国立博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 297341,
+          "ns": 0,
+          "title": "NHKラジオ第1放送",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "えぬえいちけいらしおたいいち",
+            "page_image_free": "NHK_Radio_1_2024.svg",
+            "wikibase_item": "Q843641"
+          },
+          "terms": {
+            "description": [
+              "日本放送協会のラジオ放送"
+            ]
+          }
+        },
+        {
+          "pageid": 703253,
+          "ns": 0,
+          "title": "NHK放送博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えぬえいちけいほうそうはくふつかん",
+            "page_image_free": "NHK_Museum.jpg",
+            "wikibase_item": "Q11235312"
+          },
+          "coordinates": [
+            {
+              "lat": 35.663778,
+              "lon": 139.748278,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本放送協会(NHK)が運営する放送に関する博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 3598124,
+          "ns": 0,
+          "title": "NHKアーカイブスポータル",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "えぬえいちけいああかいふすほおたる",
+            "wikibase_item": "Q30932565"
+          },
+          "terms": {
+            "description": [
+              "日本放送協会の番組アーカイブに関するウェブサイト"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

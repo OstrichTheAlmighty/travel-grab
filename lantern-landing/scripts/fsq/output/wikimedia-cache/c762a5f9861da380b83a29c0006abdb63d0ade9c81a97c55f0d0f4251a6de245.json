@@ -1,0 +1,137 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:08.613Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 71135,
+          "ns": 0,
+          "title": "ラフォーレ原宿",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "らふおおれはらしゆく",
+            "page_image_free": "Laforet-Harajuku-Tokyo-01.jpg",
+            "wikibase_item": "Q1770607"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66908333,
+              "lon": 139.7055,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都・表参道にあるファッションビル"
+            ]
+          }
+        },
+        {
+          "pageid": 701632,
+          "ns": 0,
+          "title": "おもちゃのまちバンダイミュージアム",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おもちやのまちはんたいみゆうしあむ",
+            "page_image_free": "Mibu_Bandai_Museum_Appearance_1.JPG",
+            "wikibase_item": "Q3329081"
+          },
+          "coordinates": [
+            {
+              "lat": 36.46544444,
+              "lon": 139.83816667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "栃木県壬生町にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 940984,
+          "ns": 0,
+          "title": "横浜アンパンマンこどもミュージアム",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "よこはまあんはんまんこともみゆうしあむ",
+            "page_image_free": "Yokohama_Anpanman_Children's_Museum_2019_-_03.jpg",
+            "wikibase_item": "Q2496472"
+          },
+          "coordinates": [
+            {
+              "lat": 35.46305556,
+              "lon": 139.62872222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県横浜市西区にある子ども向け博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 2165303,
+          "ns": 0,
+          "title": "下町風俗資料館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "したまちふうそくしりようかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Shitamachi-museum-ueno-japan.jpg",
+            "wikibase_item": "Q3915464"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7102,
+              "lon": 139.7726,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 2795302,
+          "ns": 0,
+          "title": "八代市立博物館・未来の森ミュージアム",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やつしろしりつはくふつかんみらいのもりみゆうしあむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Yatsushiro_Municipal_Museum.jpg",
+            "wikibase_item": "Q17222013"
+          },
+          "coordinates": [
+            {
+              "lat": 32.50825,
+              "lon": 130.59655556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "熊本県八代市にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

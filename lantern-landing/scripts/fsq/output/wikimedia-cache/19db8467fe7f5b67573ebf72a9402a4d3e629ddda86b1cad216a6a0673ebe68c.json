@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:11.354Z",
+  "value": {
+    "searchinfo": {
+      "search": "荒川ふるさと文化館"
+    },
+    "search": [
+      {
+        "id": "Q104698248",
+        "title": "Q104698248",
+        "pageid": 100126203,
+        "concepturi": "http://www.wikidata.org/entity/Q104698248",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q104698248",
+        "display": {
+          "label": {
+            "value": "Arakawa Furusato Museum",
+            "language": "en"
+          }
+        },
+        "label": "Arakawa Furusato Museum",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "荒川ふるさと文化館"
+        },
+        "aliases": [
+          "荒川ふるさと文化館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

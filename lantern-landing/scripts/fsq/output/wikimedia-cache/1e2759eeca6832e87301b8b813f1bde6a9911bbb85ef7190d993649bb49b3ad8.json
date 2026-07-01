@@ -1,0 +1,89 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:43:06.718Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 14383,
+          "ns": 0,
+          "title": "日本酒",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんしゆ",
+            "page_image_free": "Sake_set.jpg",
+            "wikibase_item": "Q170219"
+          },
+          "terms": {
+            "description": [
+              "日本を起源とする醸造酒のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 71136,
+          "ns": 0,
+          "title": "原宿",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はらしゆく",
+            "page_image_free": "Takeshita_st.jpg",
+            "wikibase_item": "Q746573"
+          },
+          "terms": {
+            "description": [
+              "東京都渋谷区の一地区"
+            ]
+          }
+        },
+        {
+          "pageid": 331586,
+          "ns": 0,
+          "title": "ベルク (企業)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "へるく",
+            "page_image_free": "Belc_Co.,Ltd_1.jpg",
+            "wikibase_item": "Q11337090"
+          },
+          "terms": {
+            "description": [
+              "日本の埼玉県を中心に展開するスーパーマーケットチェーン"
+            ]
+          }
+        },
+        {
+          "pageid": 1524512,
+          "ns": 0,
+          "title": "Jaaたけや",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しやあたけや",
+            "wikibase_item": "Q11226797"
+          }
+        },
+        {
+          "pageid": 2228882,
+          "ns": 0,
+          "title": "おにぎり",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おにきり",
+            "page_image_free": "Onigiri_002.jpg",
+            "wikibase_item": "Q13393"
+          },
+          "terms": {
+            "description": [
+              "ご飯を三角形などに加圧成型した食べ物"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

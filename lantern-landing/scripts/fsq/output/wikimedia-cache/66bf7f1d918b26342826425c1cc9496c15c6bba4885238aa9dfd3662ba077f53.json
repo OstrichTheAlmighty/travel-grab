@@ -1,0 +1,36 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:42.749Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 59515,
+          "ns": 0,
+          "title": "明治神宮前駅",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めいししんくうまえ",
+            "kartographer_frames": "1",
+            "page_image_free": "Meji-jingumae_Sta._Exit-7.JPG",
+            "wikibase_item": "Q80429"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66902778,
+              "lon": 139.70413889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある東京地下鉄の駅"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:44.781Z",
+  "value": {
+    "searchinfo": {
+      "search": "National Museum of Nature and Science"
+    },
+    "search": [
+      {
+        "id": "Q74940",
+        "title": "Q74940",
+        "pageid": 77607,
+        "concepturi": "http://www.wikidata.org/entity/Q74940",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q74940",
+        "display": {
+          "label": {
+            "value": "National Museum of Nature and Science",
+            "language": "en"
+          },
+          "description": {
+            "value": "National Science Museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "National Museum of Nature and Science",
+        "description": "National Science Museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "National Museum of Nature and Science"
+        }
+      },
+      {
+        "id": "Q55649658",
+        "title": "Q55649658",
+        "pageid": 55633575,
+        "concepturi": "http://www.wikidata.org/entity/Q55649658",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q55649658",
+        "display": {
+          "label": {
+            "value": "National Museum of Nature and Science Monographs",
+            "language": "en"
+          },
+          "description": {
+            "value": "journal",
+            "language": "en"
+          }
+        },
+        "label": "National Museum of Nature and Science Monographs",
+        "description": "journal",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "National Museum of Nature and Science Monographs"
+        }
+      },
+      {
+        "id": "Q122949512",
+        "title": "Q122949512",
+        "pageid": 117202878,
+        "concepturi": "http://www.wikidata.org/entity/Q122949512",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q122949512",
+        "display": {
+          "label": {
+            "value": "National Museum of Nature and Science Type Specimen Database",
+            "language": "en"
+          },
+          "description": {
+            "value": "database (Japan)",
+            "language": "en"
+          }
+        },
+        "label": "National Museum of Nature and Science Type Specimen Database",
+        "description": "database (Japan)",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "National Museum of Nature and Science Type Specimen Database"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

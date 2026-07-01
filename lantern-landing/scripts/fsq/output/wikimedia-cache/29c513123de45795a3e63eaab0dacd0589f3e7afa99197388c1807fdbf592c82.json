@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:42.538Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 142035,
+          "ns": 0,
+          "title": "美の巨人たち",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひのきよしんたち",
+            "wikibase_item": "Q11608713"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ東京の教養番組 (2000-)"
+            ]
+          }
+        },
+        {
+          "pageid": 146530,
+          "ns": 0,
+          "title": "月刊少年マガジン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "けつかんしようねんまかしん",
+            "page_image_free": "Gekkan_Shonen_Magazine.svg",
+            "wikibase_item": "Q909935"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画雑誌"
+            ]
+          }
+        },
+        {
+          "pageid": 164868,
+          "ns": 0,
+          "title": "美術館の一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひしゆつかんのいちらん",
+            "toc": "",
+            "wikibase_item": "Q6606159"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1167364,
+          "ns": 0,
+          "title": "昭和文化",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しようわふんか",
+            "page_image_free": "Shōwa.svg",
+            "wikibase_item": "Q11514076"
+          },
+          "terms": {
+            "description": [
+              "昭和時代の文化"
+            ]
+          }
+        },
+        {
+          "pageid": 2296820,
+          "ns": 0,
+          "title": "9番目のムサシ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きゆうはんめのむさし",
+            "wikibase_item": "Q3550841"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

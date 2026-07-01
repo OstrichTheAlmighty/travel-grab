@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:04.531Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 80018,
+          "ns": 0,
+          "title": "セイコーグループ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "せいこうくるうふ",
+            "page_image_free": "Ginza-WAKO_at_night.jpg",
+            "wikibase_item": "Q322601"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都中央区にある持株会社"
+            ]
+          }
+        },
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 365316,
+          "ns": 0,
+          "title": "81プロデュース",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "えいていわんふろてゆうす",
+            "wikibase_item": "Q1154833"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都渋谷区にある声優事務所"
+            ]
+          }
+        },
+        {
+          "pageid": 1741731,
+          "ns": 0,
+          "title": "銀座",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きんさ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ginza_area_at_dusk_from_Tokyo_Tower.jpg",
+            "wikibase_item": "Q746052"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 2778204,
+          "ns": 0,
+          "title": "服部金太郎",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はつとり きんたろう",
+            "page_image_free": "Kintarō_Hattori.jpg",
+            "wikibase_item": "Q3197218"
+          },
+          "terms": {
+            "description": [
+              "日本の実業家 (1860-1934)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

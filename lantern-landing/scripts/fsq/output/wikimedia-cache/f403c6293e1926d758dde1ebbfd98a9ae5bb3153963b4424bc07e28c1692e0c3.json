@@ -1,0 +1,80 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:22.126Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1287417,
+          "ns": 0,
+          "title": "日本武道館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "につほんふとうかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Nippon_Budokan_2010.jpg",
+            "wikibase_item": "Q386246"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69311111,
+              "lon": 139.74936111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある武道館"
+            ]
+          }
+        },
+        {
+          "pageid": 1952067,
+          "ns": 0,
+          "title": "NANA MIZUKI LIVEDOM-BIRTH- AT BUDOKAN",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ななみすきらいふとむはあすあつとふとうかん",
+            "wikibase_item": "Q3068560"
+          }
+        },
+        {
+          "pageid": 3082949,
+          "ns": 0,
+          "title": "DUM SPIRO SPERO AT NIPPON BUDOKAN",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうむすひいろうすへいろうあつとにつほんふとうかん",
+            "wikibase_item": "Q18455541"
+          }
+        },
+        {
+          "pageid": 3587420,
+          "ns": 0,
+          "title": "ARCHE AT NIPPON BUDOKAN",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あるけえあつとにつほんふとうかん",
+            "wikibase_item": "Q30929425"
+          }
+        },
+        {
+          "pageid": 4405440,
+          "ns": 0,
+          "title": "デビュー40周年 スペシャルコンサート at 日本武道館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "てひゆうよんしゆつしゆうねんすへしやるこんさあとあつとにつほんふとうかん",
+            "wikibase_item": "Q109595465"
+          }
+        }
+      ]
+    }
+  }
+}

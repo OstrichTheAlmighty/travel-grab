@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:39.796Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 149935,
+          "ns": 0,
+          "title": "積水ハウス",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せきすいはうす",
+            "page_image_free": "2018_Umeda_Sky_Building.jpg",
+            "wikibase_item": "Q1539141"
+          },
+          "terms": {
+            "description": [
+              "日本の住宅メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 179315,
+          "ns": 0,
+          "title": "札幌エスタ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さつほろえすた",
+            "kartographer_frames": "1",
+            "page_image_free": "ESTA_JR_Sapporo_Sta01n3200.jpg",
+            "wikibase_item": "Q7421091"
+          },
+          "coordinates": [
+            {
+              "lat": 43.0675,
+              "lon": 141.35277778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて札幌市中央区に存在した複合商業施設"
+            ]
+          }
+        },
+        {
+          "pageid": 519532,
+          "ns": 0,
+          "title": "屋上庭園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おくしようていえん",
+            "page_image_free": "Hanging_Gardens_of_Babylon.jpg",
+            "wikibase_item": "Q1156696"
+          },
+          "terms": {
+            "description": [
+              "建築物の屋上などに造られた植栽を伴う庭園"
+            ]
+          }
+        },
+        {
+          "pageid": 2134282,
+          "ns": 0,
+          "title": "TOKYO IDOL FESTIVAL",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようあいとるふえすていはる",
+            "page_image_free": "Wangan_Studio.jpg",
+            "wikibase_item": "Q11249715"
+          },
+          "terms": {
+            "description": [
+              "2010年より開催されている日本の音楽イベント"
+            ]
+          }
+        },
+        {
+          "pageid": 4099190,
+          "ns": 0,
+          "title": "西武の店舗一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せいふのてんほいちらん",
+            "kartographer_frames": "2",
+            "page_image_free": "Seibu_logo.svg",
+            "wikibase_item": "Q97311747"
+          },
+          "terms": {
+            "description": [
+              "ウィキペディアの一覧ページ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

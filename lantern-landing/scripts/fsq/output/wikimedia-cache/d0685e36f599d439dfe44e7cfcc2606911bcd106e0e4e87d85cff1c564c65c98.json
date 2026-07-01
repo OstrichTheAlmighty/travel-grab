@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:32.197Z",
+  "value": {
+    "searchinfo": {
+      "search": "紙の博物館"
+    },
+    "search": [
+      {
+        "id": "Q11605492",
+        "title": "Q11605492",
+        "pageid": 12745805,
+        "concepturi": "http://www.wikidata.org/entity/Q11605492",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11605492",
+        "display": {
+          "label": {
+            "value": "Paper Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "Museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Paper Museum",
+        "description": "Museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "紙の博物館"
+        },
+        "aliases": [
+          "紙の博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

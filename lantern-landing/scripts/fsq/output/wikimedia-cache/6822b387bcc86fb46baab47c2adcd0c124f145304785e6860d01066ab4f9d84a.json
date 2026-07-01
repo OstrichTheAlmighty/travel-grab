@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:10.439Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 7303,
+          "ns": 0,
+          "title": "サクラ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さくら",
+            "wikibase_item": "Q871991"
+          },
+          "terms": {
+            "description": [
+              "バラ目バラ科の樹木、およびその花"
+            ]
+          }
+        },
+        {
+          "pageid": 27340,
+          "ns": 0,
+          "title": "ソメイヨシノ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "そめいよしの",
+            "page_image_free": "2020-04-07_Prunus_×_yedoensis_Tambasasayama,Hyogo(丹波篠山市篠山川のソメイヨシノ)DSCF2986☆彡.jpg",
+            "wikibase_item": "Q163078"
+          },
+          "terms": {
+            "description": [
+              "エドヒガンとオオシマザクラの種間雑種 (Prunus × yedoensis)"
+            ]
+          }
+        },
+        {
+          "pageid": 299991,
+          "ns": 0,
+          "title": "ヤマザクラ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やまさくら",
+            "page_image_free": "Prunus_jamasakura1.jpg",
+            "wikibase_item": "Q5721717"
+          },
+          "terms": {
+            "description": [
+              "落葉高木のサクラの野生種 (Cerasus jamasakura)"
+            ]
+          }
+        },
+        {
+          "pageid": 442935,
+          "ns": 0,
+          "title": "染井霊園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "そめいれいえん",
+            "page_image_free": "Somei_Reien,_Tokyo.jpg",
+            "wikibase_item": "Q11533893"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73941667,
+              "lon": 139.73725,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の霊園"
+            ]
+          }
+        },
+        {
+          "pageid": 533836,
+          "ns": 0,
+          "title": "東高根森林公園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひかしたかねしんりんこうえん",
+            "page_image_free": "東高根森林公園､川崎市_-_panoramio.jpg",
+            "wikibase_item": "Q11528774"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60444444,
+              "lon": 139.58638889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県川崎市宮前区にある森林公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

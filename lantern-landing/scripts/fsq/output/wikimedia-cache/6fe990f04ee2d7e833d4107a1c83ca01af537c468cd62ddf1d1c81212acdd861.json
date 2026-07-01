@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:29.785Z",
+  "value": {
+    "searchinfo": {
+      "search": "旧安田庭園"
+    },
+    "search": [
+      {
+        "id": "Q11511031",
+        "title": "Q11511031",
+        "pageid": 12650763,
+        "concepturi": "http://www.wikidata.org/entity/Q11511031",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11511031",
+        "display": {
+          "label": {
+            "value": "Kyū Yasuda Garden",
+            "language": "en"
+          },
+          "description": {
+            "value": "garden in Sumida, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Kyū Yasuda Garden",
+        "description": "garden in Sumida, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "旧安田庭園"
+        },
+        "aliases": [
+          "旧安田庭園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

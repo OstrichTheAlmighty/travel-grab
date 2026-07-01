@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:44.480Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 13269,
+          "ns": 0,
+          "title": "太宰治",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たさい おさむ",
+            "page_image_free": "Osamu_Dazai.jpg",
+            "wikibase_item": "Q317685"
+          },
+          "terms": {
+            "description": [
+              "日本の作家 (1909-1948)"
+            ]
+          }
+        },
+        {
+          "pageid": 21688,
+          "ns": 0,
+          "title": "三鷹市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みたかし",
+            "page_image_free": "Mitaka_Inokashira_Park_In_Spring_1.JPG",
+            "wikibase_item": "Q242885"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68356,
+              "lon": 139.55953,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の市"
+            ]
+          }
+        },
+        {
+          "pageid": 159959,
+          "ns": 0,
+          "title": "人間失格",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にんけんしつかく",
+            "wikibase_item": "Q1147583"
+          },
+          "terms": {
+            "description": [
+              "日本の太宰治の小説"
+            ]
+          }
+        },
+        {
+          "pageid": 933736,
+          "ns": 0,
+          "title": "石井桃子",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いしい ももこ",
+            "page_image_free": "Momoko_Ishii.jpg",
+            "wikibase_item": "Q11584994"
+          },
+          "terms": {
+            "description": [
+              "日本の児童文学作家、翻訳家 (1907-2008)"
+            ]
+          }
+        },
+        {
+          "pageid": 4565307,
+          "ns": 0,
+          "title": "太宰治と自殺",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たさいおさむとしさつ",
+            "page_image_free": "Osamu_Dazai.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q111837924"
+          },
+          "terms": {
+            "description": [
+              "太宰治による複数回に亘る自殺企図"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

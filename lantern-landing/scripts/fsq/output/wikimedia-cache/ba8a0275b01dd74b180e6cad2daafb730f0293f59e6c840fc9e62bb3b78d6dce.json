@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:14.975Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 258785,
+          "ns": 0,
+          "title": "世田谷区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "せたかやく",
+            "kartographer_frames": "1",
+            "page_image_free": "Seijo_namikimichi_231011.jpg",
+            "wikibase_item": "Q231645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64656,
+              "lon": 139.65322,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 631582,
+          "ns": 0,
+          "title": "笹塚 (渋谷区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ささつか",
+            "kartographer_frames": "1",
+            "page_image_free": "笹塚-18.JPG",
+            "wikibase_item": "Q11602515"
+          },
+          "terms": {
+            "description": [
+              "東京都渋谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 715664,
+          "ns": 0,
+          "title": "代沢",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たいさわ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ikenoue_station.jpg",
+            "wikibase_item": "Q11378267"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1032352,
+          "ns": 0,
+          "title": "東京都の軍事遺跡一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようとのくんししせき",
+            "wikibase_item": "Q11525194"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3974511,
+          "ns": 0,
+          "title": "新道町 (豊川市)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しんみちちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Toyokawa_Technical_High_School_(from_school_gate).jpg",
+            "wikibase_item": "Q86727616"
+          },
+          "coordinates": [
+            {
+              "lat": 34.82371111,
+              "lon": 137.363875,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県豊川市の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

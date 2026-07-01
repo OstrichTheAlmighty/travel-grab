@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:41.732Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 22798,
+          "ns": 0,
+          "title": "ニンニク",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にんにく",
+            "page_image_free": "Allium_sativum_Woodwill_1793.jpg",
+            "wikibase_item": "Q23400"
+          },
+          "terms": {
+            "description": [
+              "キジカクシ目ヒガンバナ科の植物"
+            ]
+          }
+        },
+        {
+          "pageid": 23014,
+          "ns": 0,
+          "title": "ハクサイ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はくさい",
+            "page_image_free": "Starr_070730-7855_Brassica_rapa.jpg",
+            "wikibase_item": "Q13360268"
+          },
+          "terms": {
+            "description": [
+              "アブラナ科アブラナ属の二年生植物"
+            ]
+          }
+        },
+        {
+          "pageid": 82864,
+          "ns": 0,
+          "title": "結城市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ゆうきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Yushin_Tsumugi_Misegura.jpg",
+            "wikibase_item": "Q847569"
+          },
+          "coordinates": [
+            {
+              "lat": 36.289656,
+              "lon": 139.871531,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "茨城県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 774349,
+          "ns": 0,
+          "title": "茨城県",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いはらきけん",
+            "page_image_free": "Mount_Tsukuba_2.jpg",
+            "wikibase_item": "Q83273"
+          },
+          "coordinates": [
+            {
+              "lat": 36.34172,
+              "lon": 140.44683,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の都道府県"
+            ]
+          }
+        },
+        {
+          "pageid": 953038,
+          "ns": 0,
+          "title": "栽培",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さいはい",
+            "page_image_free": "Community_Garden,_Melbourne,_Australia.jpg",
+            "wikibase_item": "Q488798"
+          },
+          "terms": {
+            "description": [
+              "植物、特に野菜や果樹を植えて育てること"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

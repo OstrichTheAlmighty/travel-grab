@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:44.276Z",
+  "value": {
+    "searchinfo": {
+      "search": "上今井香取神社"
+    },
+    "search": [
+      {
+        "id": "Q97190927",
+        "title": "Q97190927",
+        "pageid": 95631545,
+        "concepturi": "http://www.wikidata.org/entity/Q97190927",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q97190927",
+        "display": {
+          "label": {
+            "value": "Kamiimai Katori Shrine",
+            "language": "en"
+          },
+          "description": {
+            "value": "Shinto shrine in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Kamiimai Katori Shrine",
+        "description": "Shinto shrine in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "上今井香取神社"
+        },
+        "aliases": [
+          "上今井香取神社"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

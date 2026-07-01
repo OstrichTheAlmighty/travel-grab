@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:10.184Z",
+  "value": {
+    "searchinfo": {
+      "search": "東洋文庫ミュージアム"
+    },
+    "search": [
+      {
+        "id": "Q1036261",
+        "title": "Q1036261",
+        "pageid": 985516,
+        "concepturi": "http://www.wikidata.org/entity/Q1036261",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1036261",
+        "display": {
+          "label": {
+            "value": "Tōyō Bunko",
+            "language": "en"
+          },
+          "description": {
+            "value": "library of orientalism in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tōyō Bunko",
+        "description": "library of orientalism in Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "東洋文庫ミュージアム"
+        },
+        "aliases": [
+          "東洋文庫ミュージアム"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

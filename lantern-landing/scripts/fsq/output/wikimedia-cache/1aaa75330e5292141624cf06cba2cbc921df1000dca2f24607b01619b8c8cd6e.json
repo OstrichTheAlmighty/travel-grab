@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:37.775Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 31589,
+          "ns": 0,
+          "title": "日本泳法",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんえいほう",
+            "wikibase_item": "Q1683358"
+          },
+          "terms": {
+            "description": [
+              "日本古来の泳ぎ方"
+            ]
+          }
+        },
+        {
+          "pageid": 43772,
+          "ns": 0,
+          "title": "オタワ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おたわ",
+            "kartographer_frames": "1",
+            "page_image_free": "Flag_of_Ottawa,_Ontario.svg",
+            "wikibase_item": "Q1930"
+          },
+          "terms": {
+            "description": [
+              "カナダの首都"
+            ]
+          }
+        },
+        {
+          "pageid": 124663,
+          "ns": 0,
+          "title": "住友林業",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "すみともりんきよう",
+            "page_image_free": "Keidanren_Kaikan.jpg",
+            "wikibase_item": "Q4050342"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都千代田区にある林業・木材建材・住宅事業・不動産事業などを行う企業"
+            ]
+          }
+        },
+        {
+          "pageid": 175263,
+          "ns": 0,
+          "title": "小松製作所",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こまつせいさくしよ",
+            "page_image_free": "KOMATSU_Buildng,_2017.jpg",
+            "wikibase_item": "Q162257"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都港区にある機械メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 287622,
+          "ns": 0,
+          "title": "多可町",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たかちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "ラベンダーパク多可4.jpg",
+            "wikibase_item": "Q1155253"
+          },
+          "coordinates": [
+            {
+              "lat": 35.05033,
+              "lon": 134.92336,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県多可郡の町"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

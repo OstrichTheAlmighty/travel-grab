@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:49.563Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 493656,
+          "ns": 0,
+          "title": "東京ディズニーシーのサービス施設の一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいしいのさあひすしせついちらん",
+            "wikibase_item": "Q11524254"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

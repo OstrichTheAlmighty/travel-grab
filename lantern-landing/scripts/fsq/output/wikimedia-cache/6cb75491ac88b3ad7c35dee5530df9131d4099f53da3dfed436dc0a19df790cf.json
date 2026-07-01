@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:10.204Z",
+  "value": {
+    "searchinfo": {
+      "search": "気象科学館"
+    },
+    "search": [
+      {
+        "id": "Q16872707",
+        "title": "Q16872707",
+        "pageid": 18473928,
+        "concepturi": "http://www.wikidata.org/entity/Q16872707",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q16872707",
+        "display": {
+          "label": {
+            "value": "Meteorological Science Museum",
+            "language": "en"
+          }
+        },
+        "label": "Meteorological Science Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "気象科学館"
+        },
+        "aliases": [
+          "気象科学館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

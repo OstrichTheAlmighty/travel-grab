@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:34.307Z",
+  "value": {
+    "searchinfo": {
+      "search": "五島美術館"
+    },
+    "search": [
+      {
+        "id": "Q2374140",
+        "title": "Q2374140",
+        "pageid": 2293647,
+        "concepturi": "http://www.wikidata.org/entity/Q2374140",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2374140",
+        "display": {
+          "label": {
+            "value": "Gotoh Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum in Kaminoge Setagaya Tokyo Japan",
+            "language": "en"
+          }
+        },
+        "label": "Gotoh Museum",
+        "description": "art museum in Kaminoge Setagaya Tokyo Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "五島美術館"
+        },
+        "aliases": [
+          "五島美術館"
+        ]
+      },
+      {
+        "id": "Q6357226",
+        "title": "Q6357226",
+        "pageid": 6167910,
+        "concepturi": "http://www.wikidata.org/entity/Q6357226",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6357226",
+        "display": {
+          "label": {
+            "value": "Kaminoge Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "railway station in Setagaya, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Kaminoge Station",
+        "description": "railway station in Setagaya, Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "五島美術館最寄駅"
+        },
+        "aliases": [
+          "五島美術館最寄駅"
+        ]
+      },
+      {
+        "id": "Q107045331",
+        "title": "Q107045331",
+        "pageid": 102297404,
+        "concepturi": "http://www.wikidata.org/entity/Q107045331",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q107045331",
+        "display": {
+          "label": {
+            "value": "The Murasaki Shikibu Diary Emaki",
+            "language": "en"
+          }
+        },
+        "label": "The Murasaki Shikibu Diary Emaki",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "五島美術館本紫式部日記絵巻"
+        },
+        "aliases": [
+          "五島美術館本紫式部日記絵巻"
+        ]
+      },
+      {
+        "id": "Q107045333",
+        "title": "Q107045333",
+        "pageid": 102297406,
+        "concepturi": "http://www.wikidata.org/entity/Q107045333",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q107045333",
+        "display": {
+          "label": {
+            "value": "Illustrated Handscroll of The Tale of Genji",
+            "language": "en"
+          }
+        },
+        "label": "Illustrated Handscroll of The Tale of Genji",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "五島美術館本源氏物語絵巻"
+        },
+        "aliases": [
+          "五島美術館本源氏物語絵巻"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

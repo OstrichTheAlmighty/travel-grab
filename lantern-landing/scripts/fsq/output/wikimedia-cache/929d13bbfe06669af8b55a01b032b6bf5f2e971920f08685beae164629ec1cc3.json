@@ -1,0 +1,86 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:39.223Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 84859,
+          "ns": 0,
+          "title": "友近",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ともちか",
+            "wikibase_item": "Q11410372"
+          },
+          "terms": {
+            "description": [
+              "日本のお笑いタレント"
+            ]
+          }
+        },
+        {
+          "pageid": 448748,
+          "ns": 0,
+          "title": "X-GUN",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はつくん",
+            "wikibase_item": "Q11254725"
+          },
+          "terms": {
+            "description": [
+              "日本のお笑いコンビ"
+            ]
+          }
+        },
+        {
+          "pageid": 1382376,
+          "ns": 0,
+          "title": "さんまの世界に一つだけの歌",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さんまのせかいにひとつたけのうた",
+            "wikibase_item": "Q11268586"
+          }
+        },
+        {
+          "pageid": 2734643,
+          "ns": 0,
+          "title": "絢香",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あやか",
+            "page_image_free": "Ayaka_perfoming_in_Matsuyama_during_her_2012_tour.tiff",
+            "wikibase_item": "Q239348"
+          },
+          "terms": {
+            "description": [
+              "日本の女性シンガーソングライター (1987-)"
+            ]
+          }
+        },
+        {
+          "pageid": 4078726,
+          "ns": 0,
+          "title": "D4DJ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ていいふおおていいしえい",
+            "wikibase_item": "Q86742785"
+          },
+          "terms": {
+            "description": [
+              "日本のメディアミックスプロジェクト"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

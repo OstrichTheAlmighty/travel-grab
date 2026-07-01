@@ -1,0 +1,76 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:33.404Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 8587,
+          "ns": 0,
+          "title": "名古屋市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "なこやし",
+            "kartographer_frames": "1",
+            "page_image_free": "View_of_Westward_from_Sky_Deck_MIRAI360,_Nishiki_Naka_Ward_Nagoya_2022.jpg",
+            "wikibase_item": "Q11751"
+          },
+          "coordinates": [
+            {
+              "lat": 35.1814,
+              "lon": 136.9064,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 58462,
+          "ns": 0,
+          "title": "蛭子能収",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "えひす よしかす",
+            "wikibase_item": "Q11625592"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画家、タレント"
+            ]
+          }
+        },
+        {
+          "pageid": 2726645,
+          "ns": 0,
+          "title": "HKT48のおでかけ!",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "えいちけえていいふおおていいえいとのおてかけ",
+            "wikibase_item": "Q6547475"
+          }
+        },
+        {
+          "pageid": 3619433,
+          "ns": 0,
+          "title": "二軒目どうする?〜ツマミのハナシ〜",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にけんめとうするつまみのはなし",
+            "wikibase_item": "Q48744460"
+          },
+          "terms": {
+            "description": [
+              "テレビ東京の深夜バラエティ (2017-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

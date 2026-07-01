@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:42.773Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 527805,
+          "ns": 0,
+          "title": "秘密結社鷹の爪",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひみつけつしやたかのつめ",
+            "wikibase_item": "Q1458106"
+          },
+          "terms": {
+            "description": [
+              "日本のアニメ作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:01.551Z",
+  "value": {
+    "searchinfo": {
+      "search": "コボちゃん"
+    },
+    "search": [
+      {
+        "id": "Q707964",
+        "title": "Q707964",
+        "pageid": 665895,
+        "concepturi": "http://www.wikidata.org/entity/Q707964",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q707964",
+        "display": {
+          "label": {
+            "value": "Kobo, the Li'l Rascal",
+            "language": "en"
+          },
+          "description": {
+            "value": "Japanese manga series",
+            "language": "en"
+          }
+        },
+        "label": "Kobo, the Li'l Rascal",
+        "description": "Japanese manga series",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "コボちゃん"
+        },
+        "aliases": [
+          "コボちゃん"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

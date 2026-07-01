@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:17.767Z",
+  "value": {
+    "searchinfo": {
+      "search": "小笠原伯爵邸"
+    },
+    "search": [
+      {
+        "id": "Q11463332",
+        "title": "Q11463332",
+        "pageid": 12602815,
+        "concepturi": "http://www.wikidata.org/entity/Q11463332",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11463332",
+        "display": {
+          "label": {
+            "value": "Ogasawara-Hakushaku-Tei",
+            "language": "en"
+          }
+        },
+        "label": "Ogasawara-Hakushaku-Tei",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "小笠原伯爵邸"
+        },
+        "aliases": [
+          "小笠原伯爵邸"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

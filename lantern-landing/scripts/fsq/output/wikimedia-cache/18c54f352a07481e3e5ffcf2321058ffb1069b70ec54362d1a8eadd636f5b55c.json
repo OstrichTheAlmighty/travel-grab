@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:25.579Z",
+  "value": {
+    "searchinfo": {
+      "search": "明治神宮野球場"
+    },
+    "search": [
+      {
+        "id": "Q944559",
+        "title": "Q944559",
+        "pageid": 894685,
+        "concepturi": "http://www.wikidata.org/entity/Q944559",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q944559",
+        "display": {
+          "label": {
+            "value": "Meiji Jingu Stadium",
+            "language": "en"
+          },
+          "description": {
+            "value": "baseball stadium in Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Meiji Jingu Stadium",
+        "description": "baseball stadium in Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "明治神宮野球場"
+        },
+        "aliases": [
+          "明治神宮野球場"
+        ]
+      },
+      {
+        "id": "Q75106555",
+        "title": "Q75106555",
+        "pageid": 74599202,
+        "concepturi": "http://www.wikidata.org/entity/Q75106555",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q75106555",
+        "display": {
+          "label": {
+            "value": "Category:Interior of Meiji Jingu Stadium",
+            "language": "en"
+          },
+          "description": {
+            "value": "Wikimedia category",
+            "language": "en"
+          }
+        },
+        "label": "Category:Interior of Meiji Jingu Stadium",
+        "description": "Wikimedia category",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "明治神宮野球場の内観"
+        },
+        "aliases": [
+          "明治神宮野球場の内観"
+        ]
+      },
+      {
+        "id": "Q123644446",
+        "title": "Q123644446",
+        "pageid": 117841281,
+        "concepturi": "http://www.wikidata.org/entity/Q123644446",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q123644446",
+        "display": {
+          "label": {
+            "value": "Baseball games at Meiji Jingu Stadium",
+            "language": "en"
+          }
+        },
+        "label": "Baseball games at Meiji Jingu Stadium",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "明治神宮野球場での野球の試合"
+        },
+        "aliases": [
+          "明治神宮野球場での野球の試合"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

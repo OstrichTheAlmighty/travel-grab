@@ -1,0 +1,140 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:15.738Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1275688,
+          "ns": 0,
+          "title": "観自在寺",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かんしさいし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kanzizaiji_01.jpg",
+            "wikibase_item": "Q3192685"
+          },
+          "coordinates": [
+            {
+              "lat": 32.96461111,
+              "lon": 132.56405556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛媛県南宇和郡愛南町にある寺院、四国八十八箇所霊場第四十番札所"
+            ]
+          }
+        },
+        {
+          "pageid": 1333779,
+          "ns": 0,
+          "title": "龍光寺 (宇和島市)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "りゆうこうし",
+            "kartographer_frames": "1",
+            "page_image_free": "Ryukouji01.jpg",
+            "wikibase_item": "Q11679196"
+          },
+          "coordinates": [
+            {
+              "lat": 33.29519444,
+              "lon": 132.5985,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛媛県宇和島市にある寺院、四国八十八箇所霊場の第四十一番札所"
+            ]
+          }
+        },
+        {
+          "pageid": 1333794,
+          "ns": 0,
+          "title": "佛木寺",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふつもくし",
+            "kartographer_frames": "1",
+            "page_image_free": "Butumokuji_20230221_1.jpg",
+            "wikibase_item": "Q11385315"
+          },
+          "coordinates": [
+            {
+              "lat": 33.31058333,
+              "lon": 132.58147222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛媛県宇和島市にある寺院、四国八十八箇所霊場の第四十二番札所"
+            ]
+          }
+        },
+        {
+          "pageid": 1513118,
+          "ns": 0,
+          "title": "西林寺 (松山市)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さいりんし まつやま",
+            "kartographer_frames": "1",
+            "page_image_free": "Sairinji20220312_1.jpg",
+            "wikibase_item": "Q11628773"
+          },
+          "coordinates": [
+            {
+              "lat": 33.79372222,
+              "lon": 132.81394444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛媛県松山市にある寺院、四国八十八箇所霊場の第四十八番札所"
+            ]
+          }
+        },
+        {
+          "pageid": 1624512,
+          "ns": 0,
+          "title": "大寶寺",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たいほうし",
+            "kartographer_frames": "1",
+            "page_image_free": "Daihouji_20201117_1.jpg",
+            "wikibase_item": "Q11434511"
+          },
+          "coordinates": [
+            {
+              "lat": 33.66088889,
+              "lon": 132.91208333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛媛県上浮穴郡久万高原町にある寺院で四国八十八箇所霊場の第四十四番札所"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

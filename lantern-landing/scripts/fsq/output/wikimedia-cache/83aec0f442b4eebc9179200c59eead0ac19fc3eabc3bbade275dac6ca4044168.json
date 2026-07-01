@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:50.556Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 566944,
+          "ns": 0,
+          "title": "経堂",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きようとう",
+            "kartographer_frames": "1",
+            "page_image_free": "小田急線「経堂」駅南口前_-_panoramio_(1).jpg",
+            "wikibase_item": "Q11606408"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1028576,
+          "ns": 0,
+          "title": "東京勤労者医療会",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようきんろうしやいりようかい",
+            "page_image_free": "Toukatsu_Hospital.JPG",
+            "wikibase_item": "Q11524567"
+          },
+          "terms": {
+            "description": [
+              "日本の医療法人財団"
+            ]
+          }
+        },
+        {
+          "pageid": 3055693,
+          "ns": 0,
+          "title": "福昌寺 (世田谷区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふくしようし せたかや",
+            "page_image_free": "Fukusyoji_temple_kyodo_setagaya.JPG",
+            "wikibase_item": "Q18339116"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65052778,
+              "lon": 139.63625,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "世田谷区にある曹洞宗の寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 3859555,
+          "ns": 0,
+          "title": "有吉ぃぃeeeee!そうだ!今からお前んチでゲームしない?",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ありよしいいいいいそうたいまからおまえんちでけえむしない",
+            "wikibase_item": "Q60987028"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビeスポーツ・ゲーム情報バラエティ番組 (2018-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

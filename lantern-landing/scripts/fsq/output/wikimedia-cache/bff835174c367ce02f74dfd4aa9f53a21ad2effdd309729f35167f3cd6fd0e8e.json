@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:07.214Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 72554,
+          "ns": 0,
+          "title": "上村松園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "うえむら しようえん",
+            "page_image_free": "Uemura_Shoen_1938.jpg",
+            "wikibase_item": "Q275018"
+          },
+          "terms": {
+            "description": [
+              "日本の女性画家"
+            ]
+          }
+        },
+        {
+          "pageid": 80591,
+          "ns": 0,
+          "title": "橋本雅邦",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はしもと かほう",
+            "page_image_free": "Hashimoto_Gahō.jpg",
+            "wikibase_item": "Q3128092"
+          },
+          "terms": {
+            "description": [
+              "日本の画家 (1835-1908)"
+            ]
+          }
+        },
+        {
+          "pageid": 158272,
+          "ns": 0,
+          "title": "仏教美術",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふつきようひしゆつ",
+            "page_image_free": "Gandhara_Buddha_(tnm).jpeg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q1001041"
+          },
+          "terms": {
+            "description": [
+              "仏教信仰に基づいた礼拝対象、あるいはそれら活動のための美術"
+            ]
+          }
+        },
+        {
+          "pageid": 164868,
+          "ns": 0,
+          "title": "美術館の一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひしゆつかんのいちらん",
+            "toc": "",
+            "wikibase_item": "Q6606159"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 184098,
+          "ns": 0,
+          "title": "東京芸術大学大学美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようけいしゆつたいかくひしゆつかん",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q11525123"
+          },
+          "coordinates": [
+            {
+              "lat": 35.88435095,
+              "lon": 140.11488121,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "茨城県取手市小文間および東京都台東区上野公園にある美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

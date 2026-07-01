@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:02.734Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 6636,
+          "ns": 0,
+          "title": "火の鳥 (漫画)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひのとり",
+            "wikibase_item": "Q1321785"
+          },
+          "terms": {
+            "description": [
+              "手塚治虫による日本の漫画シリーズ"
+            ]
+          }
+        },
+        {
+          "pageid": 38167,
+          "ns": 0,
+          "title": "大館駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おおたて",
+            "kartographer_frames": "1",
+            "page_image_free": "JR_East_Ōdate_Station_building_in_Odate_City,_Akita_Pref.jpg",
+            "wikibase_item": "Q8081437"
+          },
+          "coordinates": [
+            {
+              "lat": 40.28802222,
+              "lon": 140.55661389,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "秋田県大館市御成町にある東日本旅客鉄道・日本貨物鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 38683,
+          "ns": 0,
+          "title": "忠犬ハチ公",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ちゆうけんはちこう",
+            "page_image_free": "Faithful_Dog_Hachiko_Photo.png",
+            "wikibase_item": "Q186486"
+          },
+          "terms": {
+            "description": [
+              "東京の飼い犬"
+            ]
+          }
+        },
+        {
+          "pageid": 171897,
+          "ns": 0,
+          "title": "徳井優",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とくい ゆう",
+            "wikibase_item": "Q11235234"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優"
+            ]
+          }
+        },
+        {
+          "pageid": 2749387,
+          "ns": 0,
+          "title": "モテ福",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "もてふく",
+            "wikibase_item": "Q11344366"
+          }
+        }
+      ]
+    }
+  }
+}

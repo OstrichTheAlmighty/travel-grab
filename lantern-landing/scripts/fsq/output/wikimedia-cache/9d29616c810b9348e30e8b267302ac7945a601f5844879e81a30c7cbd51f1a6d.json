@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:07.184Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4956,
+          "ns": 0,
+          "title": "1月13日",
+          "index": 4,
+          "pageprops": {
+            "wikibase_item": "Q2255"
+          },
+          "terms": {
+            "description": [
+              "日付"
+            ]
+          }
+        },
+        {
+          "pageid": 6164,
+          "ns": 0,
+          "title": "日本の仏尊",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にほんのふつそん",
+            "page_image_free": "Buddhist_Pantheon.jpg",
+            "wikibase_item": "Q6158131"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 16256,
+          "ns": 0,
+          "title": "文殊菩薩",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "もんしゆほさつ",
+            "page_image_free": "Manjusri_Kumara_(bodhisattva_of_wisdom),_India,_Pala_dynesty,_9th_century,_stone,_Honolulu_Academy_of_Arts.jpg",
+            "wikibase_item": "Q471696"
+          },
+          "terms": {
+            "description": [
+              "菩薩"
+            ]
+          }
+        },
+        {
+          "pageid": 55681,
+          "ns": 0,
+          "title": "地蔵菩薩",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しそうほさつ",
+            "page_image_free": "Jizo_Bosatsu_Horyuji.JPG",
+            "wikibase_item": "Q604687"
+          },
+          "terms": {
+            "description": [
+              "仏教の信仰対象である菩薩の一尊"
+            ]
+          }
+        },
+        {
+          "pageid": 123765,
+          "ns": 0,
+          "title": "虚空蔵菩薩",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こくうそうほさつ",
+            "page_image_free": "Kokūzō_Bosatsu.jpg",
+            "wikibase_item": "Q416174"
+          },
+          "terms": {
+            "description": [
+              "仏教における信仰対象である菩薩の一尊"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

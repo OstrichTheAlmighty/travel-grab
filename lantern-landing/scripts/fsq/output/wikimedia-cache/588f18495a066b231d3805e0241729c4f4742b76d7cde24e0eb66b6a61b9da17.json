@@ -1,0 +1,139 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:41.876Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 31504,
+          "ns": 0,
+          "title": "Taitō",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Taito, Tokyo",
+            "page_image_free": "Honkan,_Tokyo_National_Museum_–_Tokyo,_Japan_–_(2019-12-30).jpg",
+            "wikibase-shortdesc": "Special ward in Kantō, Japan",
+            "wikibase_item": "Q232641"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7125,
+              "lon": 139.78,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "special ward in the Tokyo Metropolis in Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 390109,
+          "ns": 0,
+          "title": "Ueno Station",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "JRE-Ueno-STA.jpg",
+            "wikibase-shortdesc": "Major railway and metro station in Tokyo, Japan",
+            "wikibase_item": "Q801551"
+          },
+          "coordinates": [
+            {
+              "lat": 35.713434,
+              "lon": 139.776725,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "railway station and metro station in Taitō, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 626921,
+          "ns": 0,
+          "title": "Ueno Park",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Ueno_park.jpg",
+            "wikibase-shortdesc": "Park in Tokyo, Japan",
+            "wikibase_item": "Q746216"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71222222,
+              "lon": 139.77111111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "park in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 893290,
+          "ns": 0,
+          "title": "Ueno",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Ueno_park.jpg",
+            "wikibase-shortdesc": "District in Taitō ward, Tokyo, Japan",
+            "wikibase_item": "Q576781"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71547,
+              "lon": 139.77402,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "neighborhood in Taitō city, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 1015733,
+          "ns": 0,
+          "title": "Ueno Zoo",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Ueno_Zoo_2012.JPG",
+            "wikibase-shortdesc": "Zoo in Taitō, Tokyo, Japan",
+            "wikibase_item": "Q162722"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7175,
+              "lon": 139.77138889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "zoo in Tokyo, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

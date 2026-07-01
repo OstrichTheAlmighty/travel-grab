@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:20.462Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17338,
+          "ns": 0,
+          "title": "お台場海浜公園駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おたいはかいひんこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Odaibakaihinkoen-Sta.JPG",
+            "wikibase_item": "Q858883"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62988889,
+              "lon": 139.77877778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区台場にあるゆりかもめの駅"
+            ]
+          }
+        },
+        {
+          "pageid": 24788,
+          "ns": 0,
+          "title": "お台場海浜公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おたいはかいひんこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Odaiba_Seashore_Park.jpg",
+            "wikibase_item": "Q5368576"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63080556,
+              "lon": 139.77661111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 47804,
+          "ns": 0,
+          "title": "お台場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おたいは",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-Odaiba.jpg",
+            "wikibase_item": "Q211861"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63,
+              "lon": 139.775,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京臨海副都心のエリア"
+            ]
+          }
+        },
+        {
+          "pageid": 1055445,
+          "ns": 0,
+          "title": "お台場レインボー公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おたいはれいんほうこうえん",
+            "wikibase_item": "Q11262949"
+          },
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 2930475,
+          "ns": 0,
+          "title": "台場 (東京都港区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たいは",
+            "kartographer_frames": "1",
+            "page_image_free": "お台場_07.6.15.JPG",
+            "wikibase_item": "Q17224919"
+          },
+          "terms": {
+            "description": [
+              "東京都港区の地名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

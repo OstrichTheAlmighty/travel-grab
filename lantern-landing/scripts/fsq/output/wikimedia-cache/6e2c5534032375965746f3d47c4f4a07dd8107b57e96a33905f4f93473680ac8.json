@@ -1,0 +1,188 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:37:46.576Z",
+  "value": {
+    "searchinfo": {
+      "search": "Le Messager"
+    },
+    "search": [
+      {
+        "id": "Q3224515",
+        "title": "Q3224515",
+        "pageid": 3078329,
+        "concepturi": "http://www.wikidata.org/entity/Q3224515",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3224515",
+        "display": {
+          "label": {
+            "value": "Le Messager",
+            "language": "en"
+          },
+          "description": {
+            "value": "French newspaper",
+            "language": "en"
+          }
+        },
+        "label": "Le Messager",
+        "description": "French newspaper",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Le Messager"
+        }
+      },
+      {
+        "id": "Q6507270",
+        "title": "Q6507270",
+        "pageid": 6326161,
+        "concepturi": "http://www.wikidata.org/entity/Q6507270",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6507270",
+        "display": {
+          "label": {
+            "value": "Le Messager",
+            "language": "en"
+          },
+          "description": {
+            "value": "French Newspaper",
+            "language": "en"
+          }
+        },
+        "label": "Le Messager",
+        "description": "French Newspaper",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Le Messager"
+        }
+      },
+      {
+        "id": "Q16843090",
+        "title": "Q16843090",
+        "pageid": 18446568,
+        "concepturi": "http://www.wikidata.org/entity/Q16843090",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q16843090",
+        "display": {
+          "label": {
+            "value": "Le Messager Ngozi FC",
+            "language": "en"
+          },
+          "description": {
+            "value": "football club",
+            "language": "en"
+          }
+        },
+        "label": "Le Messager Ngozi FC",
+        "description": "football club",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Le Messager Ngozi FC"
+        }
+      },
+      {
+        "id": "Q3224518",
+        "title": "Q3224518",
+        "pageid": 3078332,
+        "concepturi": "http://www.wikidata.org/entity/Q3224518",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3224518",
+        "display": {
+          "label": {
+            "value": "Le Messager",
+            "language": "en"
+          },
+          "description": {
+            "value": "1937 French film directed by Raymond Rouleau",
+            "language": "en"
+          }
+        },
+        "label": "Le Messager",
+        "description": "1937 French film directed by Raymond Rouleau",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Le Messager"
+        }
+      },
+      {
+        "id": "Q3224516",
+        "title": "Q3224516",
+        "pageid": 3078330,
+        "concepturi": "http://www.wikidata.org/entity/Q3224516",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3224516",
+        "display": {
+          "label": {
+            "value": "Le Messager",
+            "language": "en"
+          },
+          "description": {
+            "value": "newspaper of Cameroon",
+            "language": "en"
+          }
+        },
+        "label": "Le Messager",
+        "description": "newspaper of Cameroon",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Le Messager"
+        }
+      },
+      {
+        "id": "Q123652356",
+        "title": "Q123652356",
+        "pageid": 117849113,
+        "concepturi": "http://www.wikidata.org/entity/Q123652356",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q123652356",
+        "display": {
+          "label": {
+            "value": "Le Messager",
+            "language": "en"
+          },
+          "description": {
+            "value": "periodical",
+            "language": "en"
+          }
+        },
+        "label": "Le Messager",
+        "description": "periodical",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Le Messager"
+        }
+      },
+      {
+        "id": "Q125935975",
+        "title": "Q125935975",
+        "pageid": 120019886,
+        "concepturi": "http://www.wikidata.org/entity/Q125935975",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q125935975",
+        "display": {
+          "label": {
+            "value": "Le Messager",
+            "language": "en"
+          },
+          "description": {
+            "value": "Beninese newspaper",
+            "language": "en"
+          }
+        },
+        "label": "Le Messager",
+        "description": "Beninese newspaper",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Le Messager"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

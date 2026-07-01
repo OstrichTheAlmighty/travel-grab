@@ -1,0 +1,76 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:47.879Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 87851,
+          "ns": 0,
+          "title": "FL",
+          "index": 5,
+          "pageprops": {
+            "disambiguation": "",
+            "toc": "",
+            "wikibase_item": "Q224805"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの曖昧さ回避ページ"
+            ]
+          }
+        },
+        {
+          "pageid": 253915,
+          "ns": 0,
+          "title": "白雪姫と七人のこびと",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しらゆきひめとしちにんのこひと",
+            "wikibase_item": "Q3487196"
+          }
+        },
+        {
+          "pageid": 253948,
+          "ns": 0,
+          "title": "ファンタジーランド",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふあんたしいらんと",
+            "wikibase_item": "Q2441096"
+          },
+          "terms": {
+            "description": [
+              "世界のディズニーパークにあるテーマランド"
+            ]
+          }
+        },
+        {
+          "pageid": 2778549,
+          "ns": 0,
+          "title": "ウォルト・ディズニー・ワールド鉄道",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "うおるとていすにわるとてつとう",
+            "wikibase_item": "Q3565647"
+          }
+        },
+        {
+          "pageid": 3993002,
+          "ns": 0,
+          "title": "リトル・マーメイド:アリエルのアンダーシー・アドベンチャー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "りとるまあめいとありえるのあんたあしいあとへんちやあ",
+            "wikibase_item": "Q3521602"
+          }
+        }
+      ]
+    }
+  }
+}

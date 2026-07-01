@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:21.774Z",
+  "value": {
+    "searchinfo": {
+      "search": "玉堤店"
+    },
+    "search": [
+      {
+        "id": "Q14056355",
+        "title": "Q14056355",
+        "pageid": 15720242,
+        "concepturi": "http://www.wikidata.org/entity/Q14056355",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q14056355",
+        "display": {
+          "label": {
+            "value": "玉堤店村",
+            "language": "gan"
+          },
+          "description": {
+            "value": "village in China",
+            "language": "en"
+          }
+        },
+        "label": "玉堤店村",
+        "description": "village in China",
+        "match": {
+          "type": "label",
+          "language": "gan",
+          "text": "玉堤店村"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:46.091Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 41796,
+          "ns": 0,
+          "title": "茨木市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いはらきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Ibaraki_Kasugaoka_Church_light_cross.jpg",
+            "wikibase_item": "Q502403"
+          },
+          "coordinates": [
+            {
+              "lat": 34.81636,
+              "lon": 135.56858,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪府の市"
+            ]
+          }
+        },
+        {
+          "pageid": 370115,
+          "ns": 0,
+          "title": "天王洲アイル",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "てんのうすあいる",
+            "page_image_free": "Terrada_warehouse_in_tennoz_2012.jpg",
+            "wikibase_item": "Q11443018"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62319444,
+              "lon": 139.75047222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区にある再開発街区"
+            ]
+          }
+        },
+        {
+          "pageid": 1043144,
+          "ns": 0,
+          "title": "潮風公園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しおかせこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Shiokaze_Park_4.jpg",
+            "wikibase_item": "Q6630204"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62394444,
+              "lon": 139.76875,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1131895,
+          "ns": 0,
+          "title": "静岡市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しすおかし",
+            "kartographer_frames": "1",
+            "page_image_free": "Higashi-Shizuoka_Panorama_02.jpg",
+            "wikibase_item": "Q174691"
+          },
+          "coordinates": [
+            {
+              "lat": 34.9756,
+              "lon": 138.3825,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 1341822,
+          "ns": 0,
+          "title": "BCS賞",
+          "index": 4,
+          "pageprops": {
+            "wikibase_item": "Q10854444"
+          },
+          "terms": {
+            "description": [
+              "日本建設業連合会による建築の賞"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

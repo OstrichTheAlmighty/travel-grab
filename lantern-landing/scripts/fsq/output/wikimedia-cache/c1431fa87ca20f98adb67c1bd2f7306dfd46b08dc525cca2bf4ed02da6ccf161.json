@@ -1,0 +1,62 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:41.374Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 37099,
+          "ns": 0,
+          "title": "松屋 (百貨店)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "まつや",
+            "kartographer_frames": "1",
+            "page_image_free": "Matsuya_Ginza_2012.jpg",
+            "wikibase_item": "Q3036957"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67213889,
+              "lon": 139.76663889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 2220467,
+          "ns": 0,
+          "title": "屋上遊園地",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おくじようゆうえんち",
+            "page_image_free": "丸広本店屋上遊園.jpg",
+            "wikibase_item": "Q11465636"
+          },
+          "terms": {
+            "description": [
+              "日本の百貨店の屋上にある遊戯施設"
+            ]
+          }
+        },
+        {
+          "pageid": 3846617,
+          "ns": 0,
+          "title": "KIS",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きす",
+            "wikibase_item": "Q60986311"
+          }
+        }
+      ]
+    }
+  }
+}

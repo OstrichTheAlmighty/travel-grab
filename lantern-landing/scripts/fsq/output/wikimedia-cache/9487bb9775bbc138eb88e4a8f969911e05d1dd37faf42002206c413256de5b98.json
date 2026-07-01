@@ -1,0 +1,81 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:13.675Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 131130,
+          "ns": 0,
+          "title": "榊原ゆい",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さかきはら ゆい",
+            "wikibase_item": "Q1074062"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優、シンガーソングライター、振付師"
+            ]
+          }
+        },
+        {
+          "pageid": 854582,
+          "ns": 0,
+          "title": "郷ちぐさ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こう ちくさ",
+            "wikibase_item": "Q11643375"
+          }
+        },
+        {
+          "pageid": 1628460,
+          "ns": 0,
+          "title": "宝塚歌劇団64期生",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たからつかかけきたん64きせい",
+            "wikibase_item": "Q11452469"
+          }
+        },
+        {
+          "pageid": 3625245,
+          "ns": 0,
+          "title": "荒ぶる季節の乙女どもよ。",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あらふるきせつのおとめともよ",
+            "wikibase_item": "Q38276544"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画作品"
+            ]
+          }
+        },
+        {
+          "pageid": 3973380,
+          "ns": 0,
+          "title": "眞栄田郷敦",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "まえた こうとん",
+            "page_image_free": "Maeda_Gordon_from_\"Lightning_Over_the_Beyond\"_at_Red_Carpet_of_the_Tokyo_International_Film_Festival_2022_(52461337594).jpg",
+            "wikibase_item": "Q66364971"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

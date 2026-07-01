@@ -1,0 +1,139 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:59.751Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 389187,
+          "ns": 0,
+          "title": "日比谷公会堂",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひひやこうかいとう",
+            "kartographer_frames": "1",
+            "page_image_free": "Hibiya_Public_Hall_(2018-05-04)_02.jpg",
+            "wikibase_item": "Q11509581"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67169444,
+              "lon": 139.75566667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の文化施設"
+            ]
+          }
+        },
+        {
+          "pageid": 486302,
+          "ns": 0,
+          "title": "美ヶ原高原美術館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "うつくしかはらこうけんひしゆつかん",
+            "page_image_free": "250426_Utsukushi-ga-hara_Open-Air_Museum_Ueda_Nagano_pref_Japan13s3.jpg",
+            "wikibase_item": "Q11608719"
+          },
+          "coordinates": [
+            {
+              "lat": 36.23055556,
+              "lon": 138.14036111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長野県上田市にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 606921,
+          "ns": 0,
+          "title": "名古屋市国際展示場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なこやしこくさいてんししよう",
+            "kartographer_frames": "1",
+            "page_image_free": "名古屋市港区金城ふ頭_20241012_1447-2.jpg",
+            "wikibase_item": "Q11414997"
+          },
+          "coordinates": [
+            {
+              "lat": 35.048558,
+              "lon": 136.844845,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県名古屋市にある多目的施設"
+            ]
+          }
+        },
+        {
+          "pageid": 1545114,
+          "ns": 0,
+          "title": "滋賀県立陶芸の森",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しかけんりつとうけいのもり",
+            "kartographer_frames": "1",
+            "page_image_free": "Shigaraki_Ceramic_Cultural_Park05s3872.jpg",
+            "wikibase_item": "Q11564689"
+          },
+          "coordinates": [
+            {
+              "lat": 34.88427778,
+              "lon": 136.05768611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "滋賀県甲賀市の信楽高原にある博物館研究施設"
+            ]
+          }
+        },
+        {
+          "pageid": 2151741,
+          "ns": 0,
+          "title": "緑と花と彫刻の博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みとりとはなとちようこくのはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "UBE_tokiwa_Museum.JPG",
+            "wikibase_item": "Q11607744"
+          },
+          "coordinates": [
+            {
+              "lat": 33.94855556,
+              "lon": 131.28175,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "山口県宇部市の博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

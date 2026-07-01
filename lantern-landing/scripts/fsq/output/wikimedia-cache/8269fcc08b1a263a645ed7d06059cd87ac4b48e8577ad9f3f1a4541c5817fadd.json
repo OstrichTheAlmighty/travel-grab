@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:45:51.550Z",
+  "value": {
+    "searchinfo": {
+      "search": "ダイヤと花の大観覧車"
+    },
+    "search": [
+      {
+        "id": "Q901219",
+        "title": "Q901219",
+        "pageid": 852004,
+        "concepturi": "http://www.wikidata.org/entity/Q901219",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q901219",
+        "display": {
+          "label": {
+            "value": "Diamond and Flower Ferris Wheel",
+            "language": "en"
+          },
+          "description": {
+            "value": "Ferris wheel in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Diamond and Flower Ferris Wheel",
+        "description": "Ferris wheel in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ダイヤと花の大観覧車"
+        },
+        "aliases": [
+          "ダイヤと花の大観覧車"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

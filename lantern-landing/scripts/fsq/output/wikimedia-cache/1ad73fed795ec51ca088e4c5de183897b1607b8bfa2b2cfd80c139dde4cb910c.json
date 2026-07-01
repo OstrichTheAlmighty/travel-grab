@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:23.814Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8073,
+          "ns": 0,
+          "title": "新宿区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しんしゆくく",
+            "kartographer_frames": "1",
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "wikibase_item": "Q179645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69389,
+              "lon": 139.70342,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 21295,
+          "ns": 0,
+          "title": "公園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こうえん",
+            "page_image_free": "Fountain_Yoyogipark.JPG",
+            "wikibase_item": "Q22698"
+          },
+          "terms": {
+            "description": [
+              "公衆の憩いや自然保存の目的に使われる公開された場所"
+            ]
+          }
+        },
+        {
+          "pageid": 33374,
+          "ns": 0,
+          "title": "新宿",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しんしゆく",
+            "kartographer_frames": "1",
+            "page_image_free": "Japan_Tokyo_Shinjuku_location_map.svg",
+            "wikibase_item": "Q836198"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区の町名・副都心"
+            ]
+          }
+        },
+        {
+          "pageid": 2303643,
+          "ns": 0,
+          "title": "新宿交通公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にいしゆくこうつうこうえん",
+            "page_image_free": "Niijuku_kotsu_park_20200716_155002.jpg",
+            "wikibase_item": "Q11501820"
+          },
+          "coordinates": [
+            {
+              "lat": 35.76088889,
+              "lon": 139.86497222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都葛飾区の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 3345903,
+          "ns": 0,
+          "title": "バスタ新宿",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はすたしんしゆく",
+            "kartographer_frames": "2",
+            "page_image_free": "Shinjuku_Expressway_Bus_Terminal_2020.JPG",
+            "wikibase_item": "Q22123549"
+          },
+          "terms": {
+            "description": [
+              "新宿駅南口地区にある交通ターミナル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

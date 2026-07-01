@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:46.202Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 10741,
+          "ns": 0,
+          "title": "練馬区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ねりまく",
+            "kartographer_frames": "1",
+            "page_image_free": "三宝寺池と厳島神社（2021年5月）.jpg",
+            "wikibase_item": "Q232655"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73553,
+              "lon": 139.65169,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 1870956,
+          "ns": 0,
+          "title": "順天堂大学医学部附属練馬病院",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しゆんてんとうたいかくいかくふふそくねりまひよういん",
+            "page_image_free": "Juntendo_University_Nerima_Hospital.JPG",
+            "wikibase_item": "Q11664446"
+          },
+          "terms": {
+            "description": [
+              "東京都練馬区にある医療機関"
+            ]
+          }
+        },
+        {
+          "pageid": 1900023,
+          "ns": 0,
+          "title": "日本大学医学部付属練馬光が丘病院",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にほんたいかくいかくふふそくねりまひかりかおかひよういん",
+            "page_image_free": "Nihon_univ_nerima_hikarigaoka_hospital.JPG",
+            "wikibase_item": "Q11507838"
+          },
+          "terms": {
+            "description": [
+              "日本の病院"
+            ]
+          }
+        },
+        {
+          "pageid": 2725565,
+          "ns": 0,
+          "title": "中田久美",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "なかた くみ",
+            "wikibase_item": "Q2444900"
+          },
+          "terms": {
+            "description": [
+              "日本の女性タレント、スポーツキャスター、バレーボール指導者、元選手 (1965-)"
+            ]
+          }
+        },
+        {
+          "pageid": 2912816,
+          "ns": 0,
+          "title": "プラッツ大泉",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふらつつおおいすみ",
+            "kartographer_frames": "1",
+            "page_image_free": "LIVINオズ大泉店.JPG",
+            "wikibase_item": "Q17214085"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75227778,
+              "lon": 139.59541667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都練馬区の商業施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

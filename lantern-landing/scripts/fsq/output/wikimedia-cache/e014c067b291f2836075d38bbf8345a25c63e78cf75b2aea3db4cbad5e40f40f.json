@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:35.451Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 164868,
+          "ns": 0,
+          "title": "美術館の一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひしゆつかんのいちらん",
+            "toc": "",
+            "wikibase_item": "Q6606159"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 874017,
+          "ns": 0,
+          "title": "ちひろ美術館・東京",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちひろひしゆつかんとうきよう",
+            "page_image_free": "Chihiro_Art_Museum_Tokyo_2024-12-29.jpg",
+            "wikibase_item": "Q11271822"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72865,
+              "lon": 139.60535,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都練馬区にある絵本美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 874020,
+          "ns": 0,
+          "title": "安曇野ちひろ美術館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あつみのちひろひしゆつかん",
+            "page_image_free": "150922_Chihiro_Art_Museum_Azumino_Japan01s3.jpg",
+            "wikibase_item": "Q11450770"
+          },
+          "coordinates": [
+            {
+              "lat": 36.41491667,
+              "lon": 137.84416667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長野県松川村にある絵本美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 952599,
+          "ns": 0,
+          "title": "いわさきちひろ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いわさき ちひろ",
+            "page_image_free": "Shinkan-Tenbo-1966-12-15-1.jpg",
+            "wikibase_item": "Q5097289"
+          },
+          "terms": {
+            "description": [
+              "日本の画家・絵本作家（1918−1974）"
+            ]
+          }
+        },
+        {
+          "pageid": 1308353,
+          "ns": 0,
+          "title": "いわさきちひろ記念事業団",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いわさきちひろきねんしきようたん",
+            "wikibase_item": "Q11260192"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72833333,
+              "lon": 139.605,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

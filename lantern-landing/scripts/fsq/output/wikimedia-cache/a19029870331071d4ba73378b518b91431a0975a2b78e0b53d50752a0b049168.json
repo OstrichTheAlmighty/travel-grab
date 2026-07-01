@@ -1,0 +1,124 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:07.691Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 66076,
+          "ns": 0,
+          "title": "Art museum",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Le_Louvre_-_Aile_Richelieu.jpg",
+            "wikibase-shortdesc": "Building or space for the exhibition of art",
+            "wikibase_item": "Q207694"
+          },
+          "terms": {
+            "description": [
+              "building or space for the exhibition of art (for institution, use Q3196771)"
+            ]
+          }
+        },
+        {
+          "pageid": 1487316,
+          "ns": 0,
+          "title": "Tokyo University of the Arts",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_geidai_logo.svg",
+            "wikibase-shortdesc": "Art university in Tokyo, Japan",
+            "wikibase_item": "Q1153515"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7195782,
+              "lon": 139.7726862,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "higher education institution in Tokyo Prefecture, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 8093724,
+          "ns": 0,
+          "title": "National Museum of Western Art",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "National Museum Of Western Art",
+            "kartographer_frames": "1",
+            "page_image_free": "National_museum_of_western_art05s3200.jpg",
+            "wikibase-shortdesc": "Art museum in Tokyo, Japan",
+            "wikibase_item": "Q1362629"
+          },
+          "terms": {
+            "description": [
+              "art museum in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 9808437,
+          "ns": 0,
+          "title": "Musashino Art University",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Musashino_Art_University.jpg",
+            "wikibase-shortdesc": "Art school in Kodaira, Japan",
+            "wikibase_item": "Q1326245"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72611111,
+              "lon": 139.4475,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "university in Kodaira, western Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 18168622,
+          "ns": 0,
+          "title": "Tama Art University",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tama_Art_University_(Hachioji_Library).jpg",
+            "wikibase-shortdesc": "Art school in Tokyo, Japan",
+            "wikibase_item": "Q1141980"
+          },
+          "coordinates": [
+            {
+              "lat": 35.61416667,
+              "lon": 139.63666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "university"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

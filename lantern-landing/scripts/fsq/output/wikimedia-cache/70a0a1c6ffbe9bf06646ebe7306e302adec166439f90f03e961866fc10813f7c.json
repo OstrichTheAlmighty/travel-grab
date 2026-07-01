@@ -1,0 +1,130 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:49.441Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 27367,
+          "ns": 0,
+          "title": "江戸川",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "えとかわ",
+            "kartographer_frames": "2",
+            "page_image_free": "EdoGawa2004.jpg",
+            "wikibase_item": "Q1194505"
+          },
+          "coordinates": [
+            {
+              "lat": 35.670687,
+              "lon": 139.950556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "関東地方を流れる河川"
+            ]
+          }
+        },
+        {
+          "pageid": 34637,
+          "ns": 0,
+          "title": "小岩駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こいわ",
+            "kartographer_frames": "1",
+            "page_image_free": "JR_Koiwa_sta_001.jpg",
+            "wikibase_item": "Q1067969"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73297222,
+              "lon": 139.88166667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江戸川区南小岩にある東日本旅客鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 289909,
+          "ns": 0,
+          "title": "京成バス東京・江戸川営業所",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "けいせいはすとうきようえとかわえいきようしよ",
+            "page_image_free": "Keiseibus-edogawa-dept.jpg",
+            "wikibase_item": "Q11374375"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6992827,
+              "lon": 139.9156973,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都江戸川区にある営業所"
+            ]
+          }
+        },
+        {
+          "pageid": 501104,
+          "ns": 0,
+          "title": "江戸川区",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "えとかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "江戸川区花火大会・市川市民納涼花火大会2019.jpg",
+            "wikibase_item": "Q214056"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70664,
+              "lon": 139.86828,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 4067369,
+          "ns": 0,
+          "title": "小岩菖蒲園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こいわしようふえん",
+            "page_image_free": "小岩菖蒲園20230603-IMG_7463.jpg",
+            "wikibase_item": "Q85879656"
+          },
+          "terms": {
+            "description": [
+              "東京都江戸川区にある菖蒲園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

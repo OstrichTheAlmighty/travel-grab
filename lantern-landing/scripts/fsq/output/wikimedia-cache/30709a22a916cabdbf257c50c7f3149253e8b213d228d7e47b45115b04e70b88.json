@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:50.975Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 49678,
+          "ns": 0,
+          "title": "葛飾北斎",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かつしか ほくさい",
+            "displaytitle": "<span class=\"jis2004font\">葛</span>飾北斎",
+            "page_image_free": "Hokusai_portrait.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q5586"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸時代の浮世絵師 (1760-1849)"
+            ]
+          }
+        },
+        {
+          "pageid": 84959,
+          "ns": 0,
+          "title": "東京都江戸東京博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようとえととうきようはくふつかん",
+            "page_image_free": "Logo_edo_tokyo_museum.svg",
+            "wikibase_item": "Q1191042"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69640278,
+              "lon": 139.79610278,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 147949,
+          "ns": 0,
+          "title": "江戸東京たてもの園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "えととうきようたてものえん",
+            "page_image_free": "Edo-Tokyo_Open_Air_Architectural_Museum_PB252276.jpg",
+            "wikibase_item": "Q1051229"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71582222,
+              "lon": 139.51261389,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都立小金井公園内にある野外博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 188753,
+          "ns": 0,
+          "title": "日本の文化",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんのふんか",
+            "page_image_free": "Rukujogosho_hanami.jpg",
+            "wikibase_item": "Q831454"
+          },
+          "terms": {
+            "description": [
+              "日本における文化"
+            ]
+          }
+        },
+        {
+          "pageid": 2099584,
+          "ns": 0,
+          "title": "鳥文斎栄之",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ちようふんさい えいし",
+            "page_image_free": "Itsutomi_LCCN2008660680.jpg",
+            "wikibase_item": "Q2972127"
+          },
+          "terms": {
+            "description": [
+              "江戸時代後期の浮世絵師"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

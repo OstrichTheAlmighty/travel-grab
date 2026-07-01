@@ -1,0 +1,27 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:18.161Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 3275585,
+          "ns": 0,
+          "title": "じゅん散歩",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しゆんさんほ",
+            "toc": "",
+            "wikibase_item": "Q22123635"
+          },
+          "terms": {
+            "description": [
+              "テレビ朝日系列の紀行番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

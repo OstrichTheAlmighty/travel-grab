@@ -1,0 +1,209 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:46:01.503Z",
+  "value": {
+    "searchinfo": {
+      "search": "ローラーコースター"
+    },
+    "search": [
+      {
+        "id": "Q204832",
+        "title": "Q204832",
+        "pageid": 201197,
+        "concepturi": "http://www.wikidata.org/entity/Q204832",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q204832",
+        "display": {
+          "label": {
+            "value": "roller coaster",
+            "language": "en"
+          },
+          "description": {
+            "value": "type of amusement ride found at amusement parks and carnivals",
+            "language": "en"
+          }
+        },
+        "label": "roller coaster",
+        "description": "type of amusement ride found at amusement parks and carnivals",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ローラーコースター"
+        },
+        "aliases": [
+          "ローラーコースター"
+        ]
+      },
+      {
+        "id": "Q15098103",
+        "title": "Q15098103",
+        "pageid": 16761232,
+        "concepturi": "http://www.wikidata.org/entity/Q15098103",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q15098103",
+        "display": {
+          "label": {
+            "value": "Fasten Your Seatbelt",
+            "language": "en"
+          },
+          "description": {
+            "value": "2013 South Korean comedy film directed by Ha Jung-woo",
+            "language": "en"
+          }
+        },
+        "label": "Fasten Your Seatbelt",
+        "description": "2013 South Korean comedy film directed by Ha Jung-woo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ローラーコースター"
+        },
+        "aliases": [
+          "ローラーコースター"
+        ]
+      },
+      {
+        "id": "Q7361091",
+        "title": "Q7361091",
+        "pageid": 7269268,
+        "concepturi": "http://www.wikidata.org/entity/Q7361091",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q7361091",
+        "display": {
+          "label": {
+            "value": "Rollercoaster",
+            "language": "en"
+          },
+          "description": {
+            "value": "song by Irish girl group B*Witched",
+            "language": "en"
+          }
+        },
+        "label": "Rollercoaster",
+        "description": "song by Irish girl group B*Witched",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ローラーコースター"
+        },
+        "aliases": [
+          "ローラーコースター"
+        ]
+      },
+      {
+        "id": "Q12594189",
+        "title": "Q12594189",
+        "pageid": 13889159,
+        "concepturi": "http://www.wikidata.org/entity/Q12594189",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q12594189",
+        "display": {
+          "label": {
+            "value": "Roller Coaster",
+            "language": "en"
+          },
+          "description": {
+            "value": "South Korean musical group",
+            "language": "en"
+          }
+        },
+        "label": "Roller Coaster",
+        "description": "South Korean musical group",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ローラーコースター"
+        },
+        "aliases": [
+          "ローラーコースター"
+        ]
+      },
+      {
+        "id": "Q828749",
+        "title": "Q828749",
+        "pageid": 781504,
+        "concepturi": "http://www.wikidata.org/entity/Q828749",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q828749",
+        "display": {
+          "label": {
+            "value": "RollerCoaster Tycoon",
+            "language": "en"
+          },
+          "description": {
+            "value": "tycoon game series",
+            "language": "en"
+          }
+        },
+        "label": "RollerCoaster Tycoon",
+        "description": "tycoon game series",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ローラーコースタータイクーン"
+        },
+        "aliases": [
+          "ローラーコースタータイクーン"
+        ]
+      },
+      {
+        "id": "Q443916",
+        "title": "Q443916",
+        "pageid": 418783,
+        "concepturi": "http://www.wikidata.org/entity/Q443916",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q443916",
+        "display": {
+          "label": {
+            "value": "roller coaster element",
+            "language": "en"
+          },
+          "description": {
+            "value": "component of a roller coaster part",
+            "language": "en"
+          }
+        },
+        "label": "roller coaster element",
+        "description": "component of a roller coaster part",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ローラーコースターの要素"
+        },
+        "aliases": [
+          "ローラーコースターの要素"
+        ]
+      },
+      {
+        "id": "Q1860828",
+        "title": "Q1860828",
+        "pageid": 1791272,
+        "concepturi": "http://www.wikidata.org/entity/Q1860828",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1860828",
+        "display": {
+          "label": {
+            "value": "list of roller coaster rankings",
+            "language": "en"
+          },
+          "description": {
+            "value": "Wikimedia list article",
+            "language": "en"
+          }
+        },
+        "label": "list of roller coaster rankings",
+        "description": "Wikimedia list article",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ローラーコースターの一覧"
+        },
+        "aliases": [
+          "ローラーコースターの一覧"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

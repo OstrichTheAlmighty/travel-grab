@@ -1,0 +1,62 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:48.836Z",
+  "value": {
+    "searchinfo": {
+      "search": "Tobu museum"
+    },
+    "search": [
+      {
+        "id": "Q3915461",
+        "title": "Q3915461",
+        "pageid": 3735257,
+        "concepturi": "http://www.wikidata.org/entity/Q3915461",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3915461",
+        "display": {
+          "label": {
+            "value": "Tobu Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "railway museum in Sumida, Tokyo Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tobu Museum",
+        "description": "railway museum in Sumida, Tokyo Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tobu Museum"
+        }
+      },
+      {
+        "id": "Q140230690",
+        "title": "Q140230690",
+        "pageid": 133668154,
+        "concepturi": "http://www.wikidata.org/entity/Q140230690",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q140230690",
+        "display": {
+          "label": {
+            "value": "Tōbu Museum of Art",
+            "language": "en"
+          },
+          "description": {
+            "value": "former art museum in Toshima, Tokyo, Japan (1992–2001)",
+            "language": "en"
+          }
+        },
+        "label": "Tōbu Museum of Art",
+        "description": "former art museum in Toshima, Tokyo, Japan (1992–2001)",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tōbu Museum of Art"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

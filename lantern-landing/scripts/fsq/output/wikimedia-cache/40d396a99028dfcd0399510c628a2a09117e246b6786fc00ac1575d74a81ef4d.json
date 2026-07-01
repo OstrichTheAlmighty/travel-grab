@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:27.936Z",
+  "value": {
+    "searchinfo": {
+      "search": "池波正太郎記念文庫"
+    },
+    "search": [
+      {
+        "id": "Q139814437",
+        "title": "Q139814437",
+        "pageid": 133267192,
+        "concepturi": "http://www.wikidata.org/entity/Q139814437",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q139814437",
+        "display": {
+          "label": {
+            "value": "Ikenami Shōtarō Memorial Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Taitō, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Ikenami Shōtarō Memorial Museum",
+        "description": "museum in Taitō, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "池波正太郎記念文庫"
+        },
+        "aliases": [
+          "池波正太郎記念文庫"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

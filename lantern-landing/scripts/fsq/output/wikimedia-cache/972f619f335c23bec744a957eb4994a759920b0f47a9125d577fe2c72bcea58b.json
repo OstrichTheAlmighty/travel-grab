@@ -1,0 +1,61 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:28.876Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 581845,
+          "ns": 0,
+          "title": "The Narrative of Arthur Gordon Pym of Nantucket",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Narrative Of Arthur Gordon Pym Of Nantucket, The",
+            "displaytitle": "<i>The Narrative of Arthur Gordon Pym of Nantucket</i>",
+            "page_image_free": "Pym_1838_book_title_page.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "1838 novel by Edgar Allan Poe",
+            "wikibase_item": "Q615383"
+          },
+          "terms": {
+            "description": [
+              "1838 novel by Edgar Allan Poe"
+            ]
+          }
+        },
+        {
+          "pageid": 42561927,
+          "ns": 0,
+          "title": "Krassimir Terziev",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Terziev, Krassimir",
+            "wikibase-shortdesc": "Bulgarian artist",
+            "wikibase_item": "Q12284032"
+          },
+          "terms": {
+            "description": [
+              "Bulgarian artist"
+            ]
+          }
+        },
+        {
+          "pageid": 68418779,
+          "ns": 0,
+          "title": "Animal as Bridegroom",
+          "index": 2,
+          "pageprops": {
+            "wikibase-shortdesc": "Typology of Beauty and the Beast",
+            "wikibase_item": "Q108179360"
+          },
+          "terms": {
+            "description": [
+              "group of folk and fairy tales about a human woman marrying or being betrothed to an animal"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:33.815Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 457723,
+          "ns": 0,
+          "title": "『このミステリーがすごい!』大賞",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "このみすてりいかすこいたいしよう",
+            "wikibase_item": "Q11256410"
+          }
+        },
+        {
+          "pageid": 1252488,
+          "ns": 0,
+          "title": "劉縯",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "りゆう えん",
+            "wikibase_item": "Q706804"
+          },
+          "terms": {
+            "description": [
+              "中国の新代の武将。荊州南陽郡蔡陽県の人。劉欽と樊嫺都の長男"
+            ]
+          }
+        },
+        {
+          "pageid": 2435080,
+          "ns": 0,
+          "title": "犬とハサミは使いよう",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いぬとはさみはつかいよう",
+            "wikibase_item": "Q3391085"
+          },
+          "terms": {
+            "description": [
+              "更伊俊介によるライトノベルシリーズ"
+            ]
+          }
+        },
+        {
+          "pageid": 2790889,
+          "ns": 0,
+          "title": "クリープハイプ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "くりいふはいふ",
+            "wikibase_item": "Q17231097"
+          },
+          "terms": {
+            "description": [
+              "日本のロックバンド"
+            ]
+          }
+        },
+        {
+          "pageid": 2806190,
+          "ns": 0,
+          "title": "KANA-BOON",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かなふうん",
+            "wikibase_item": "Q17225356"
+          },
+          "terms": {
+            "description": [
+              "日本のロックバンド"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

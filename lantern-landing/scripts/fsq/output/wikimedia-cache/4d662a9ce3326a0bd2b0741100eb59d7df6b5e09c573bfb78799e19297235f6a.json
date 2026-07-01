@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:46:01.826Z",
+  "value": {
+    "searchinfo": {
+      "search": "ディスク・オー"
+    },
+    "search": [
+      {
+        "id": "Q847400",
+        "title": "Q847400",
+        "pageid": 799401,
+        "concepturi": "http://www.wikidata.org/entity/Q847400",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q847400",
+        "display": {
+          "label": {
+            "value": "Disk'O",
+            "language": "en"
+          },
+          "description": {
+            "value": "type of flat ride manufactured by Zamperla",
+            "language": "en"
+          }
+        },
+        "label": "Disk'O",
+        "description": "type of flat ride manufactured by Zamperla",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ディスク・オー"
+        },
+        "aliases": [
+          "ディスク・オー"
+        ]
+      },
+      {
+        "id": "Q11320042",
+        "title": "Q11320042",
+        "pageid": 12458551,
+        "concepturi": "http://www.wikidata.org/entity/Q11320042",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11320042",
+        "display": {
+          "label": {
+            "value": "Disk Original Group",
+            "language": "en"
+          },
+          "description": {
+            "value": "Japanese video game software brand",
+            "language": "en"
+          }
+        },
+        "label": "Disk Original Group",
+        "description": "Japanese video game software brand",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ディスク・オリジナル・グループ"
+        },
+        "aliases": [
+          "ディスク・オリジナル・グループ"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

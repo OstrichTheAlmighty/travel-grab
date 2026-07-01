@@ -1,0 +1,43 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:27.977Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1470919,
+          "ns": 0,
+          "title": "西新宿",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にししんしゆく",
+            "kartographer_frames": "1",
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "wikibase_item": "Q430349"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1906024,
+          "ns": 0,
+          "title": "空から日本を見てみよう",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "そらからにほんをみてみよう",
+            "wikibase_item": "Q11597289"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

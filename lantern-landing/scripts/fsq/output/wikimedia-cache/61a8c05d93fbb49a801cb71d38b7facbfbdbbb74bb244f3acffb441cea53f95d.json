@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:50.843Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 335940,
+          "ns": 0,
+          "title": "Meguro",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Cherry_Blossoms_in_Meguro_River_Park_-_Lanterns_along_the_River_(40844860114).jpg",
+            "wikibase-shortdesc": "Special ward in Kantō, Japan",
+            "wikibase_item": "Q233903"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63333333,
+              "lon": 139.68333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "special ward in the Tokyo Metropolis in Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 30956140,
+          "ns": 0,
+          "title": "Ōhashi, Meguro, Tokyo",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Ohashi, Meguro, Tokyo",
+            "kartographer_frames": "1",
+            "page_image_free": "Meguro_Sky_Garden_20130506_003.jpg",
+            "wikibase-shortdesc": "Neighborhood in Meguro, Tokyo, Japan",
+            "wikibase_item": "Q3541528"
+          },
+          "coordinates": [
+            {
+              "lat": 35.652083,
+              "lon": 139.687417,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "neighborhood in Meguro-ku, Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 42114728,
+          "ns": 0,
+          "title": "Ōhashi Junction",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Ohashi_Junction.2019.11.jpg",
+            "wikibase-shortdesc": "Roof garden park in Ōhashi, Tokyo, Japan",
+            "wikibase_item": "Q11581649"
+          },
+          "terms": {
+            "description": [
+              "park in Meguro, Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 56877073,
+          "ns": 0,
+          "title": "Freeway lid",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Washington_State_Convention_Center_and_Freeway_Park_from_Columbia_Center.jpg",
+            "wikibase-shortdesc": "Deck bridge on top of a highway",
+            "wikibase_item": "Q55612041"
+          },
+          "terms": {
+            "description": [
+              "Deck bridge on top of a highway"
+            ]
+          }
+        },
+        {
+          "pageid": 59424304,
+          "ns": 0,
+          "title": "Sky garden",
+          "index": 3,
+          "pageprops": {
+            "disambiguation": "",
+            "wikibase-shortdesc": "Topics referred to by the same term",
+            "wikibase_item": "Q59826976"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

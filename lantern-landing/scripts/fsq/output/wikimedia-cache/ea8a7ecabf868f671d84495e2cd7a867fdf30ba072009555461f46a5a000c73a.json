@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:54.288Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 32935,
+          "ns": 0,
+          "title": "髙島屋",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たかしまや",
+            "page_image_free": "Namba_Station.JPG",
+            "wikibase_item": "Q2058024"
+          },
+          "terms": {
+            "description": [
+              "日本の百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 70376,
+          "ns": 0,
+          "title": "黒門市場",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "くろもんいちは",
+            "page_image_free": "黒門市場_2024(1).jpg",
+            "wikibase_item": "Q10855506"
+          },
+          "coordinates": [
+            {
+              "lat": 34.66527778,
+              "lon": 135.50694444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 80016,
+          "ns": 0,
+          "title": "三菱電機",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みつひしてんき",
+            "page_image_free": "Tokyo_Building,_Marunouchi.jpg",
+            "wikibase_item": "Q53257"
+          },
+          "terms": {
+            "description": [
+              "東京都千代田区にある電機メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 4502857,
+          "ns": 0,
+          "title": "タモリステーション",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たもりすていしよん",
+            "page_image_free": "Tamori_Station_logo.jpg",
+            "wikibase_item": "Q111283540"
+          },
+          "terms": {
+            "description": [
+              "テレビ朝日の報道特別番組、スポーツ・教養番組。タモリの冠番組（2022-）"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

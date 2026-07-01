@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:20.916Z",
+  "value": {
+    "searchinfo": {
+      "search": "海の森水上競技場"
+    },
+    "search": [
+      {
+        "id": "Q41795362",
+        "title": "Q41795362",
+        "pageid": 43106022,
+        "concepturi": "http://www.wikidata.org/entity/Q41795362",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q41795362",
+        "display": {
+          "label": {
+            "value": "Sea Forest Waterway",
+            "language": "en"
+          },
+          "description": {
+            "value": "rowing venue in Tokio, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Sea Forest Waterway",
+        "description": "rowing venue in Tokio, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "海の森水上競技場"
+        },
+        "aliases": [
+          "海の森水上競技場"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

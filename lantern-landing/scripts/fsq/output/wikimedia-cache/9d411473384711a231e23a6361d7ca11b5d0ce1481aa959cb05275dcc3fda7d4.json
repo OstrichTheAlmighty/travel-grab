@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:21.620Z",
+  "value": {
+    "searchinfo": {
+      "search": "向島百花園"
+    },
+    "search": [
+      {
+        "id": "Q7076776",
+        "title": "Q7076776",
+        "pageid": 6969638,
+        "concepturi": "http://www.wikidata.org/entity/Q7076776",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q7076776",
+        "display": {
+          "label": {
+            "value": "Mukōjima-Hyakkaen Garden",
+            "language": "en"
+          },
+          "description": {
+            "value": "flower garden located in Sumida, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Mukōjima-Hyakkaen Garden",
+        "description": "flower garden located in Sumida, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "向島百花園"
+        },
+        "aliases": [
+          "向島百花園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

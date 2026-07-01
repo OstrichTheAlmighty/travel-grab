@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:05.579Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 137471,
+          "ns": 0,
+          "title": "Roller coaster",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Roller Coaster",
+            "page_image_free": "Luna_Park_Melbourne_scenic_railway.jpg",
+            "wikibase-shortdesc": "Rail-based amusement park ride",
+            "wikibase_item": "Q204832"
+          },
+          "terms": {
+            "description": [
+              "type of amusement ride found at amusement parks and carnivals"
+            ]
+          }
+        },
+        {
+          "pageid": 2206312,
+          "ns": 0,
+          "title": "Hypercoaster",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Ohio_-_Cedar_Point_1.jpg",
+            "wikibase-shortdesc": "Height class for roller coasters",
+            "wikibase_item": "Q1640829"
+          },
+          "terms": {
+            "description": [
+              "Rollercoaster with a height or drop of at least 200 feet"
+            ]
+          }
+        },
+        {
+          "pageid": 2533444,
+          "ns": 0,
+          "title": "List of roller coaster rankings",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Roller Coaster Rankings, List Of",
+            "page_image_free": "TheSmiler2015(2).JPG",
+            "wikibase-badge-Q17506997": "",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q1860828"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 6722758,
+          "ns": 0,
+          "title": "Thunder Dolphin",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "LaQua02s3200.jpg",
+            "wikibase-shortdesc": "Steel roller coaster in Tokyo, Japan",
+            "wikibase_item": "Q845812"
+          },
+          "coordinates": [
+            {
+              "lat": 35.706336,
+              "lon": 139.753277,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "steel roller coaster in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 20217207,
+          "ns": 0,
+          "title": "Tokyo Dome City Attractions",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Sky-flower_from_Tokyodomecityattractions.jpg",
+            "wikibase-shortdesc": "Amusement park in Tokyo",
+            "wikibase_item": "Q564646"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70527778,
+              "lon": 139.75388889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "amusement park in Tokyo"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

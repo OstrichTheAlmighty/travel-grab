@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:30.718Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 34061,
+          "ns": 0,
+          "title": "Winter",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Winter_forest_silver.jpg",
+            "wikibase-shortdesc": "Coldest of the four temperate seasons",
+            "wikibase_item": "Q1311"
+          },
+          "terms": {
+            "description": [
+              "one of the Earth's four temperate seasons, occurring between autumn and spring; one of the 8 Sámi seasons"
+            ]
+          }
+        },
+        {
+          "pageid": 1680264,
+          "ns": 0,
+          "title": "Winter & Winter Records",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Winter and Winter",
+            "wikibase-shortdesc": "German record label",
+            "wikibase_item": "Q873677"
+          },
+          "terms": {
+            "description": [
+              "German record label"
+            ]
+          }
+        },
+        {
+          "pageid": 27795131,
+          "ns": 0,
+          "title": "The Winds of Winter",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Winds of Winter, The",
+            "displaytitle": "<i>The Winds of Winter</i>",
+            "wikibase-shortdesc": "Novel by George R. R. Martin",
+            "wikibase_item": "Q2712708"
+          },
+          "terms": {
+            "description": [
+              "novel by George R. R. Martin"
+            ]
+          }
+        },
+        {
+          "pageid": 65802108,
+          "ns": 0,
+          "title": "Winter (singer)",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Winter_at_Kilian_Paris_event_on_27012026_(4).png",
+            "wikibase-shortdesc": "South Korean singer and dancer (born 2001)",
+            "wikibase_item": "Q101161289"
+          },
+          "terms": {
+            "description": [
+              "South Korean singer (born 2001)"
+            ]
+          }
+        },
+        {
+          "pageid": 69213888,
+          "ns": 0,
+          "title": "If Not, Winter",
+          "index": 2,
+          "pageprops": {
+            "displaytitle": "<i>If Not, Winter</i>",
+            "wikibase-shortdesc": "2002 translation of Sappho by Anne Carson",
+            "wikibase_item": "Q109535642"
+          },
+          "terms": {
+            "description": [
+              "poetry collection by Anne Carson"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

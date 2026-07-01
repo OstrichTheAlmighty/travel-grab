@@ -1,0 +1,63 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:15.917Z",
+  "value": {
+    "searchinfo": {
+      "search": "ザ・ミュージアム"
+    },
+    "search": [
+      {
+        "id": "Q3132877",
+        "title": "Q3132877",
+        "pageid": 2993207,
+        "concepturi": "http://www.wikidata.org/entity/Q3132877",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3132877",
+        "display": {
+          "label": {
+            "value": "The Museum II",
+            "language": "en"
+          },
+          "description": {
+            "value": "album by Nana Mizuki",
+            "language": "en"
+          }
+        },
+        "label": "The Museum II",
+        "description": "album by Nana Mizuki",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ザ・ミュージアム・ツー"
+        },
+        "aliases": [
+          "ザ・ミュージアム・ツー"
+        ]
+      },
+      {
+        "id": "Q11337088",
+        "title": "Q11337088",
+        "pageid": 12475039,
+        "concepturi": "http://www.wikidata.org/entity/Q11337088",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11337088",
+        "display": {
+          "label": {
+            "value": "The Museum Matsushima",
+            "language": "en"
+          }
+        },
+        "label": "The Museum Matsushima",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ザ・ミュージアムMATSUSHIMA"
+        },
+        "aliases": [
+          "ザ・ミュージアムMATSUSHIMA"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

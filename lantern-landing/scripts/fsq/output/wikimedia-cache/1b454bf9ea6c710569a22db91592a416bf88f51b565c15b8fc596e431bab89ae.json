@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:19.599Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 161601,
+          "ns": 0,
+          "title": "大岡越前 (テレビドラマ)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおおかえちせん",
+            "wikibase_item": "Q8081674"
+          },
+          "terms": {
+            "description": [
+              "TBSで放送された日本のテレビドラマ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:40.977Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 85560,
+          "ns": 0,
+          "title": "東久留米駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひかしくるめ",
+            "kartographer_frames": "1",
+            "page_image_free": "Higashikurume-Sta-N.JPG",
+            "wikibase_item": "Q5753665"
+          },
+          "coordinates": [
+            {
+              "lat": 35.76031944,
+              "lon": 139.53393611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都東久留米市にある西武鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 110970,
+          "ns": 0,
+          "title": "浜松城",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はままつしよう",
+            "page_image_free": "Hamamatsu_Castle,_enkei-3.jpg",
+            "wikibase_item": "Q1152352"
+          },
+          "coordinates": [
+            {
+              "lat": 34.7118,
+              "lon": 137.725,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡県浜松市にある城"
+            ]
+          }
+        },
+        {
+          "pageid": 301265,
+          "ns": 0,
+          "title": "江戸城",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "えとしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Edo_Castle_1979.94.21P01B.jpg",
+            "wikibase_item": "Q865913"
+          },
+          "coordinates": [
+            {
+              "lat": 35.688325,
+              "lon": 139.75436667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にあった城（現・皇居）"
+            ]
+          }
+        },
+        {
+          "pageid": 572572,
+          "ns": 0,
+          "title": "皇居東御苑",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こうきよひかしきよえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Ōte-mon_gate,_Edo_Castle_Tokyo_Japan_by_Don_Ramey_Logan.jpg",
+            "wikibase_item": "Q6631907"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68638889,
+              "lon": 139.7575,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "皇居内の東地区にある皇居附属庭園"
+            ]
+          }
+        },
+        {
+          "pageid": 1663423,
+          "ns": 0,
+          "title": "櫓 (城郭)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "やくら",
+            "page_image_free": "Osaka_Castle_rampart_in_1865.jpg",
+            "wikibase_item": "Q603192"
+          },
+          "terms": {
+            "description": [
+              "城郭内に防御や物見のために建てられた建築物"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

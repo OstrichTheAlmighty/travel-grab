@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:00.518Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 113625,
+          "ns": 0,
+          "title": "ジェームス・カーティス・ヘボン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "へほん かていす しえむす",
+            "page_image_free": "James_Curtis_Hepburn.jpg",
+            "wikibase_item": "Q368162"
+          },
+          "terms": {
+            "description": [
+              "アメリカの宣教師、医師 (1815-1911)"
+            ]
+          }
+        },
+        {
+          "pageid": 209897,
+          "ns": 0,
+          "title": "明治学院大学",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "めいしかくいん",
+            "kartographer_frames": "1",
+            "page_image_free": "Meiji_gakuin_university.jpg",
+            "wikibase_item": "Q1539129"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6375,
+              "lon": 139.73125,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 565801,
+          "ns": 0,
+          "title": "明治学院中学校・明治学院東村山高等学校",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "めいしかくいんひかしむらやま",
+            "kartographer_frames": "1",
+            "page_image_free": "MeijiGakuin_UNIV_Higashimurayama_highschool.jpg",
+            "wikibase_item": "Q115134396"
+          },
+          "coordinates": [
+            {
+              "lat": 35.74080556,
+              "lon": 139.45755556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都東村山市にある中高一貫校"
+            ]
+          }
+        },
+        {
+          "pageid": 1075333,
+          "ns": 0,
+          "title": "日本語訳聖書",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんこやくせいしよ",
+            "page_image_free": "Bibles_in_japanese.png",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q4903185"
+          },
+          "terms": {
+            "description": [
+              "聖書を日本語に翻訳したもの"
+            ]
+          }
+        },
+        {
+          "pageid": 2003274,
+          "ns": 0,
+          "title": "成仏寺 (横浜市)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しようふつし",
+            "page_image_free": "Jobutsu-ji_(Yokohama).JPG",
+            "wikibase_item": "Q11495374"
+          },
+          "terms": {
+            "description": [
+              "横浜市神奈川区にある寺院"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

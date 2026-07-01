@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:26.348Z",
+  "value": {
+    "searchinfo": {
+      "search": "国立新美術館"
+    },
+    "search": [
+      {
+        "id": "Q1362638",
+        "title": "Q1362638",
+        "pageid": 1302194,
+        "concepturi": "http://www.wikidata.org/entity/Q1362638",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1362638",
+        "display": {
+          "label": {
+            "value": "National Art Center, Tokyo",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "National Art Center, Tokyo",
+        "description": "art museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "国立新美術館"
+        },
+        "aliases": [
+          "国立新美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

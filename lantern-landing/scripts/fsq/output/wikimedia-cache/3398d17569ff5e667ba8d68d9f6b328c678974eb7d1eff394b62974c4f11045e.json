@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:29.607Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 77225,
+          "ns": 0,
+          "title": "芝浦ふ頭駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しはうらふとう",
+            "kartographer_frames": "1",
+            "page_image_free": "Shibaurafuto-Sta.JPG",
+            "wikibase_item": "Q858865"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64175,
+              "lon": 139.75783333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区海岸にあるゆりかもめの駅"
+            ]
+          }
+        },
+        {
+          "pageid": 342477,
+          "ns": 0,
+          "title": "東京都立公園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようとりつこうえん",
+            "wikibase_item": "Q95977092"
+          },
+          "terms": {
+            "description": [
+              "東京都が所管する公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1042465,
+          "ns": 0,
+          "title": "青海南ふ頭公園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あおみみなみふとうこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "South_Aomi_Pier_Park.jpg",
+            "wikibase_item": "Q11662599"
+          },
+          "coordinates": [
+            {
+              "lat": 35.61422222,
+              "lon": 139.77727778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区青海二丁目にある海上公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1105469,
+          "ns": 0,
+          "title": "海岸 (東京都港区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かいかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Takeshiba-futo-park01s3200.jpg",
+            "wikibase_item": "Q11558878"
+          },
+          "terms": {
+            "description": [
+              "東京都港区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1105490,
+          "ns": 0,
+          "title": "港南 (東京都港区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こうなん",
+            "kartographer_frames": "1",
+            "page_image_free": "Shinagawa_inter_city.jpg",
+            "wikibase_item": "Q11563057"
+          },
+          "terms": {
+            "description": [
+              "東京都港区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

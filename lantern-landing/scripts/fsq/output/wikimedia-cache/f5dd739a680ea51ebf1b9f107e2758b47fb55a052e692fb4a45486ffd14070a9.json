@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:43.764Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 240912,
+          "ns": 0,
+          "title": "Neuschwanstein Castle",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Schloss_Neuschwanstein_2013.jpg",
+            "wikibase-shortdesc": "Palace in Bavaria, Germany",
+            "wikibase_item": "Q4152"
+          },
+          "coordinates": [
+            {
+              "lat": 47.5575,
+              "lon": 10.74944444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "castle in Bavaria, Germany, Europe"
+            ]
+          }
+        },
+        {
+          "pageid": 1165760,
+          "ns": 0,
+          "title": "Cinderella Castle",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Cinderella_Castle,_Magic_Kingdom_(2026).jpg",
+            "wikibase-shortdesc": "Fairy tale castle at two Disney parks",
+            "wikibase_item": "Q2742709"
+          },
+          "terms": {
+            "description": [
+              "Wikipedia article covering multiple topics"
+            ]
+          }
+        },
+        {
+          "pageid": 1299442,
+          "ns": 0,
+          "title": "Sleeping Beauty Castle",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Sleeping_Beauty_Castle_-_February_2024.png",
+            "wikibase-shortdesc": "Fairy tale castle from Disneyland",
+            "wikibase_item": "Q2746222"
+          },
+          "terms": {
+            "description": [
+              "castle at Disneyland"
+            ]
+          }
+        },
+        {
+          "pageid": 43722469,
+          "ns": 0,
+          "title": "Cinderella (franchise)",
+          "index": 3,
+          "pageprops": {
+            "displaytitle": "<i>Cinderella</i> (franchise)",
+            "wikibase-shortdesc": "Disney franchise",
+            "wikibase_item": "Q17984803"
+          },
+          "terms": {
+            "description": [
+              "Disney franchise"
+            ]
+          }
+        },
+        {
+          "pageid": 55721518,
+          "ns": 0,
+          "title": "Enchanted Storybook Castle",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Shanghai_disneyland_castle.jpg",
+            "wikibase-shortdesc": "Castle at Shanghai Disneyland",
+            "wikibase_item": "Q21512567"
+          },
+          "coordinates": [
+            {
+              "lat": 31.1455449,
+              "lon": 121.6556832,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "castle at Shanghai Disneyland"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

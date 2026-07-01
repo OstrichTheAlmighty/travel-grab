@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:04.289Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 287116,
+          "ns": 0,
+          "title": "富士塚",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふしつか",
+            "page_image_free": "Yamada-Fuji_山田富士_-_panoramio.jpg",
+            "wikibase_item": "Q5507555"
+          },
+          "terms": {
+            "description": [
+              "富士山に模して造営された人工の山や塚"
+            ]
+          }
+        },
+        {
+          "pageid": 608590,
+          "ns": 0,
+          "title": "江古田",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "えこた",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q11259193"
+          },
+          "terms": {
+            "description": [
+              "東京都中野区、練馬区に跨がる町"
+            ]
+          }
+        },
+        {
+          "pageid": 664222,
+          "ns": 0,
+          "title": "重要有形民俗文化財",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しゆうようゆうけいみんそくふんかさい",
+            "wikibase_item": "Q11644858"
+          },
+          "terms": {
+            "description": [
+              "日本の文化財保護法に基づいて指定された有形の民俗文化財"
+            ]
+          }
+        },
+        {
+          "pageid": 919028,
+          "ns": 0,
+          "title": "小竹町 (練馬区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こたけちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Kotake-Mukaihara_Exit_2.jpg",
+            "wikibase_item": "Q11463314"
+          },
+          "terms": {
+            "description": [
+              "東京都練馬区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 2768238,
+          "ns": 0,
+          "title": "浅間神社 (練馬区小竹町)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せんけんしんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Ekoda-sengen-jinjya_1.JPG",
+            "wikibase_item": "Q17210061"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73830556,
+              "lon": 139.67236111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都練馬区小竹町にある神社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

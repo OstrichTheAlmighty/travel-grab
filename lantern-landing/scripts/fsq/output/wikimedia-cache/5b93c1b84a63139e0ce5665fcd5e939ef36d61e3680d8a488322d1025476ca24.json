@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:06.032Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 50276542,
+          "ns": 0,
+          "title": "Criticism of Netflix",
+          "index": 1,
+          "pageprops": {
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q25245613"
+          },
+          "terms": {
+            "description": [
+              "overview about the criticism of Netflix"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

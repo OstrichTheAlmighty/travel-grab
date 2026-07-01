@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:34.456Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1358,
+          "ns": 0,
+          "title": "Anchor",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Kotwica_SS_Poznań.JPG",
+            "wikibase-shortdesc": "Device used to secure a vessel to the seabed",
+            "wikibase_item": "Q168432"
+          },
+          "terms": {
+            "description": [
+              "mooring device"
+            ]
+          }
+        },
+        {
+          "pageid": 751106,
+          "ns": 0,
+          "title": "Anchoring effect",
+          "index": 3,
+          "pageprops": {
+            "wikibase-shortdesc": "Tendency to base judgments on an irrelevant anchor",
+            "wikibase_item": "Q557151"
+          },
+          "terms": {
+            "description": [
+              "an effect where an individual depends too heavily on an initial piece of information when making decisions"
+            ]
+          }
+        },
+        {
+          "pageid": 7163587,
+          "ns": 0,
+          "title": "Anchor bolt",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Steel_To_Concrete_Base_Plate.png",
+            "wikibase-shortdesc": "Connection element that transfers forces to concrete",
+            "wikibase_item": "Q2997516"
+          },
+          "terms": {
+            "description": [
+              "device to connect elements to transfer loads and shear forces"
+            ]
+          }
+        },
+        {
+          "pageid": 10986023,
+          "ns": 0,
+          "title": "Naval Base Coronado",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Coronado_Naval_Base_-_leaving_San_Diego.jpg",
+            "wikibase-shortdesc": "Group of US Navy installations around San Diego, California",
+            "wikibase_item": "Q14683464"
+          },
+          "coordinates": [
+            {
+              "lat": 32.69916667,
+              "lon": -117.21527778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "group of US Navy installations around San Diego, California, United States"
+            ]
+          }
+        },
+        {
+          "pageid": 40296900,
+          "ns": 0,
+          "title": "Minimal important difference",
+          "index": 4,
+          "pageprops": {
+            "wikibase-shortdesc": "Medical statistic",
+            "wikibase_item": "Q17069312"
+          },
+          "terms": {
+            "description": [
+              "statistically significant minimum set of clinical outcomes that demonstrates a clinical benefit of an intervention or treatment"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

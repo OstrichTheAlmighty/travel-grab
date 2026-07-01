@@ -1,0 +1,81 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:16.691Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 53253,
+          "ns": 0,
+          "title": "シンザン",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しんさん",
+            "page_image_free": "Shinzan_in_Tanigawa_Farm.JPG",
+            "wikibase_item": "Q7497845"
+          },
+          "terms": {
+            "description": [
+              "日本の競走馬 (1961 - 1996)"
+            ]
+          }
+        },
+        {
+          "pageid": 245900,
+          "ns": 0,
+          "title": "トニービン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とにいひん",
+            "wikibase_item": "Q7821904"
+          }
+        },
+        {
+          "pageid": 486525,
+          "ns": 0,
+          "title": "東京ディズニーシーのスペシャルイベントの一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいしいのすへしやるいへんと",
+            "wikibase_item": "Q11524258"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2648584,
+          "ns": 0,
+          "title": "ミッキーとダッフィーのスプリングヴォヤッジ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みつきいとたつふいのすふりんくほやつし",
+            "wikibase_item": "Q11342180"
+          }
+        },
+        {
+          "pageid": 2684843,
+          "ns": 0,
+          "title": "東京ディズニーリゾート30周年“ザ・ハピネス・イヤー”",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいりそおと30しゆうねんさはひねすいやあ",
+            "wikibase_item": "Q11524292"
+          },
+          "terms": {
+            "description": [
+              "東京ディズニーリゾートの30周年イベント"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

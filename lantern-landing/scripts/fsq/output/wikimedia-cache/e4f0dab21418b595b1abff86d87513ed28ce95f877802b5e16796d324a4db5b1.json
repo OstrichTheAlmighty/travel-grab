@@ -1,0 +1,86 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:13.666Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 110588,
+          "ns": 0,
+          "title": "ウッチャンナンチャンの炎のチャレンジャー これができたら100万円!!",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "うつちやんなんちやんのほのおのちやれんしやあ",
+            "wikibase_item": "Q2312832"
+          },
+          "terms": {
+            "description": [
+              "テレビ朝日のバラエティ番組 (1995-2000)"
+            ]
+          }
+        },
+        {
+          "pageid": 164713,
+          "ns": 0,
+          "title": "部長刑事",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふちようけいし",
+            "wikibase_item": "Q11643277"
+          },
+          "terms": {
+            "description": [
+              "日本の朝日放送テレビで放送されていたテレビドラマシリーズ"
+            ]
+          }
+        },
+        {
+          "pageid": 176899,
+          "ns": 0,
+          "title": "吉川晃司",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きつかわ こうし",
+            "wikibase_item": "Q1114137"
+          },
+          "terms": {
+            "description": [
+              "日本のシンガーソングライター、俳優"
+            ]
+          }
+        },
+        {
+          "pageid": 565631,
+          "ns": 0,
+          "title": "博士と助手〜細かすぎて伝わらないモノマネ選手権〜",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はかせとしよしゆこまかすきてつたわらないものまねせんしゆけん",
+            "wikibase_item": "Q11408915"
+          },
+          "terms": {
+            "description": [
+              "日本のフジテレビ制作のテレビ番組『とんねるずのみなさんのおかげでした』内のコーナー"
+            ]
+          }
+        },
+        {
+          "pageid": 3483630,
+          "ns": 0,
+          "title": "2018年のテレビ (日本)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "2018ねんのてれひ にほん",
+            "toc": "",
+            "wikibase_item": "Q47057402"
+          }
+        }
+      ]
+    }
+  }
+}

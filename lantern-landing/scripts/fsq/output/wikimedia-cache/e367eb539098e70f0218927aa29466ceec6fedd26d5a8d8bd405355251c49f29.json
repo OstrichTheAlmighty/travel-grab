@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:28.943Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2480,
+          "ns": 0,
+          "title": "サンフランシスコ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さんふらんしすこ",
+            "page_image_free": "San_Francisco_Collage_Av9.jpg",
+            "wikibase_item": "Q62"
+          },
+          "terms": {
+            "description": [
+              "アメリカ合衆国カリフォルニア州の都市"
+            ]
+          }
+        },
+        {
+          "pageid": 19908,
+          "ns": 0,
+          "title": "国立西洋美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こくりつせいようひしゆつかん",
+            "page_image_free": "National_museum_of_western_art05s3200.jpg",
+            "wikibase_item": "Q1362629"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71555556,
+              "lon": 139.77583333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 33931,
+          "ns": 0,
+          "title": "彫刻",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちようこく",
+            "page_image_free": "Dying_gaul.jpg",
+            "wikibase_item": "Q11634"
+          },
+          "terms": {
+            "description": [
+              "立体形象を造形する視覚芸術の一分野"
+            ]
+          }
+        },
+        {
+          "pageid": 78265,
+          "ns": 0,
+          "title": "ピーテル・パウル・ルーベンス",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "るうへんす ひいてる",
+            "page_image_free": "Sir_Peter_Paul_Rubens_(Siegen_1577_-_Antwerp_1640)_-_A_Self-Portrait_-_RCIN_400156_-_Royal_Collection.jpg",
+            "wikibase_item": "Q5599"
+          },
+          "terms": {
+            "description": [
+              "バロック期のフランドルの画家、外交官 (1577-1640)"
+            ]
+          }
+        },
+        {
+          "pageid": 158272,
+          "ns": 0,
+          "title": "仏教美術",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふつきようひしゆつ",
+            "page_image_free": "Gandhara_Buddha_(tnm).jpeg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q1001041"
+          },
+          "terms": {
+            "description": [
+              "仏教信仰に基づいた礼拝対象、あるいはそれら活動のための美術"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

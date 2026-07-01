@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:38.054Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 37596,
+          "ns": 0,
+          "title": "佐世保市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "させほし",
+            "kartographer_frames": "1",
+            "page_image_free": "Sasebo_Montage.jpg",
+            "wikibase_item": "Q328000"
+          },
+          "coordinates": [
+            {
+              "lat": 33.18,
+              "lon": 129.715,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長崎県の都市"
+            ]
+          }
+        },
+        {
+          "pageid": 127867,
+          "ns": 0,
+          "title": "マスコットキャラクター一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ますこつときやらくたあいちらん",
+            "wikibase_item": "Q6627222"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 185089,
+          "ns": 0,
+          "title": "大日本プロレス",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たいにほんふろれす",
+            "page_image_free": "Eiji_Tosaka_2019.jpg",
+            "wikibase_item": "Q858952"
+          },
+          "terms": {
+            "description": [
+              "日本のプロレス団体"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1213908,
+          "ns": 0,
+          "title": "大森 (大田区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおもり",
+            "kartographer_frames": "1",
+            "page_image_free": "JR_omori_station_west_entrance.JPG",
+            "wikibase_item": "Q6147936"
+          },
+          "coordinates": [
+            {
+              "lat": 35.57253,
+              "lon": 139.73381,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都大田区の地名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

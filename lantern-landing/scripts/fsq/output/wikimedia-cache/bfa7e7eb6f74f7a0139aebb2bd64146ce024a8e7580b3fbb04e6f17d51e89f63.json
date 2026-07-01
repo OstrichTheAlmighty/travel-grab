@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:43:00.717Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 50268,
+          "ns": 0,
+          "title": "World's fair",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "International_Exhibition_Brussels_par_Privat-Livemont.jpg",
+            "wikibase-shortdesc": "Large international exhibition",
+            "wikibase_item": "Q172754"
+          },
+          "terms": {
+            "description": [
+              "series of international exhibitions initiated in 1851"
+            ]
+          }
+        },
+        {
+          "pageid": 504805,
+          "ns": 0,
+          "title": "Fair",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "2008Overview1.JPG",
+            "wikibase-shortdesc": "Gathering for entertainment or commerce",
+            "wikibase_item": "Q288514"
+          },
+          "terms": {
+            "description": [
+              "gathering of people for a variety of entertainment or commercial activities"
+            ]
+          }
+        },
+        {
+          "pageid": 27259739,
+          "ns": 0,
+          "title": "Lycoming County Fair",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Hughesville_Pennsylvania_Fair.jpg",
+            "wikibase-shortdesc": "Annual event in Hughesville, Pennsylvania, United States",
+            "wikibase_item": "Q6707333"
+          },
+          "terms": {
+            "description": [
+              "annual event in Hughesville, Pennsylvania, United States"
+            ]
+          }
+        },
+        {
+          "pageid": 36531032,
+          "ns": 0,
+          "title": "Nick Bilton",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Bilton, Nick",
+            "page_image_free": "Nick_Bilton_(15267480651)_(cropped).jpg",
+            "wikibase-shortdesc": "British-American journalist, author and filmmaker",
+            "wikibase_item": "Q7026784"
+          },
+          "terms": {
+            "description": [
+              "British-American journalist"
+            ]
+          }
+        },
+        {
+          "pageid": 81436724,
+          "ns": 0,
+          "title": "Special Intensive Revision",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "The_Chief_Election_Commissioner_(CEC)_of_India,_Shri_Gyanesh_Kumar_addressing_a_Press_Conference_by_Election_Commission_of_India_at_Vigyan_Bhawan,_in_New_Delhi_on_October_27,_2025_(1).jpg",
+            "wikibase-shortdesc": "Process of reorganizing electoral voter rolls in India",
+            "wikibase_item": "Q136735545"
+          },
+          "terms": {
+            "description": [
+              "exercise undertaken by the Election Commission of India"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

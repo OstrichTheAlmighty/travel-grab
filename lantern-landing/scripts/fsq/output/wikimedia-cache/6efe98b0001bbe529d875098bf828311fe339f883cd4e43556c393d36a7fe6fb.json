@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:34.926Z",
+  "value": {
+    "searchinfo": {
+      "search": "白山堀公園"
+    },
+    "search": [
+      {
+        "id": "Q42312454",
+        "title": "Q42312454",
+        "pageid": 43594689,
+        "concepturi": "http://www.wikidata.org/entity/Q42312454",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q42312454",
+        "display": {
+          "label": {
+            "value": "白山堀公園",
+            "language": "ja"
+          },
+          "description": {
+            "value": "park in Kita, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "白山堀公園",
+        "description": "park in Kita, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "白山堀公園"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

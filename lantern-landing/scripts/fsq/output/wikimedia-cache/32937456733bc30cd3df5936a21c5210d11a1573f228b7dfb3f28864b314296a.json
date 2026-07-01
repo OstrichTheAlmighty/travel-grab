@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:12.895Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 34552,
+          "ns": 0,
+          "title": "イオン (企業)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いおん",
+            "page_image_free": "Aeon_Tower_2(cropped).jpg",
+            "wikibase_item": "Q271413"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65127778,
+              "lon": 140.03830556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の小売業持株会社"
+            ]
+          }
+        },
+        {
+          "pageid": 696217,
+          "ns": 0,
+          "title": "浦山迅",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "うらやま しん",
+            "wikibase_item": "Q6201941"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優、男性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 1109838,
+          "ns": 0,
+          "title": "勝目梓",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かつめ あすさ",
+            "wikibase_item": "Q11400465"
+          },
+          "terms": {
+            "description": [
+              "1932-, 小説家。"
+            ]
+          }
+        },
+        {
+          "pageid": 1462817,
+          "ns": 0,
+          "title": "井上麻里奈",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "いのうえ まりな",
+            "wikibase_item": "Q1329906"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 2152154,
+          "ns": 0,
+          "title": "模型戦士ガンプラビルダーズ ビギニングG",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "もけいせんしかんふらひるたあすひきにんくしい",
+            "wikibase_item": "Q3129459"
+          },
+          "terms": {
+            "description": [
+              "日本のアニメ作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

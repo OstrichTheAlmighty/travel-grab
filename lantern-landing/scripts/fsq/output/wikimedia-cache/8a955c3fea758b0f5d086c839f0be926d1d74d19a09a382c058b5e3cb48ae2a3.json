@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:15.714Z",
+  "value": {
+    "searchinfo": {
+      "search": "旧因州池田屋敷表門"
+    },
+    "search": [
+      {
+        "id": "Q48807634",
+        "title": "Q48807634",
+        "pageid": 49825668,
+        "concepturi": "http://www.wikidata.org/entity/Q48807634",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q48807634",
+        "display": {
+          "label": {
+            "value": "Kuromon",
+            "language": "en"
+          },
+          "description": {
+            "value": "mon (Japanese gate) in Tokyo National Museum",
+            "language": "en"
+          }
+        },
+        "label": "Kuromon",
+        "description": "mon (Japanese gate) in Tokyo National Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "旧因州池田屋敷表門"
+        },
+        "aliases": [
+          "旧因州池田屋敷表門"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:20.048Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 43504,
+          "ns": 0,
+          "title": "幸田文",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こうた あや",
+            "page_image_free": "Kouda_Aya.jpg",
+            "wikibase_item": "Q276260"
+          },
+          "terms": {
+            "description": [
+              "日本の随筆家、小説家 (1904-1990)"
+            ]
+          }
+        },
+        {
+          "pageid": 113493,
+          "ns": 0,
+          "title": "文学館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふんかくかん",
+            "wikibase_item": "Q1865249"
+          },
+          "terms": {
+            "description": [
+              "作家や文学運動に関する品々を集めた博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 258785,
+          "ns": 0,
+          "title": "世田谷区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せたかやく",
+            "kartographer_frames": "1",
+            "page_image_free": "Seijo_namikimichi_231011.jpg",
+            "wikibase_item": "Q231645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64656,
+              "lon": 139.65322,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 835174,
+          "ns": 0,
+          "title": "菅野昭正",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かんの あきまさ",
+            "wikibase_item": "Q11619449"
+          },
+          "terms": {
+            "description": [
+              "日本のフランス文学者"
+            ]
+          }
+        },
+        {
+          "pageid": 2236610,
+          "ns": 0,
+          "title": "世田谷文学館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せたかやふんかくかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Setagaya_bungakukan_230113a.jpg",
+            "wikibase_item": "Q11362100"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66705556,
+              "lon": 139.60891667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

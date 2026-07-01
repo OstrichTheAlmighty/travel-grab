@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:12.335Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 66612,
+          "ns": 0,
+          "title": "亀有",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かめあり",
+            "kartographer_frames": "1",
+            "page_image_free": "JREast-Joban-line-JL20-Kameari-station-entrance-south-20170104-140203.jpg",
+            "wikibase_item": "Q11370958"
+          },
+          "terms": {
+            "description": [
+              "東京都葛飾区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 68021,
+          "ns": 0,
+          "title": "両津勘吉",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "りようつ かんきち",
+            "page_image": "Statue_of_Kankichi_Ryotsu.jpg",
+            "wikibase_item": "Q10891836"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画『こちら葛飾区亀有公園前派出所』の主人公たる架空の人物"
+            ]
+          }
+        },
+        {
+          "pageid": 427122,
+          "ns": 0,
+          "title": "こちら葛飾区亀有公園前派出所の登場人物",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こちらかつしかくかめありこうえんまえはしゆつしよ",
+            "wikibase_item": "Q6576159"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1097963,
+          "ns": 0,
+          "title": "西亀有",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にしかめあり",
+            "kartographer_frames": "1",
+            "page_image_free": "Nousan_High_School.JPG",
+            "wikibase_item": "Q11627166"
+          },
+          "terms": {
+            "description": [
+              "東京都葛飾区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 2121994,
+          "ns": 0,
+          "title": "亀青村",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かめあおむら",
+            "wikibase_item": "Q11371035"
+          },
+          "coordinates": [
+            {
+              "lat": 35.76006,
+              "lon": 139.85233,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京府南葛飾郡にあった村"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

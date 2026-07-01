@@ -1,0 +1,108 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:10.519Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18792,
+          "ns": 0,
+          "title": "文京区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふんきようく",
+            "kartographer_frames": "1",
+            "page_image_free": "Akamon,_University_of_Tokyo_2019.jpg",
+            "wikibase_item": "Q212713"
+          },
+          "coordinates": [
+            {
+              "lat": 35.708,
+              "lon": 139.75225,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 64832,
+          "ns": 0,
+          "title": "3月10日 (旧暦)",
+          "index": 3,
+          "pageprops": {
+            "wikibase_item": "Q839021"
+          },
+          "terms": {
+            "description": [
+              "旧暦の日付"
+            ]
+          }
+        },
+        {
+          "pageid": 102318,
+          "ns": 0,
+          "title": "湯島聖堂",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ゆしませいとう",
+            "page_image_free": "Yushima_Seido6.jpg",
+            "wikibase_item": "Q1760591"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70083,
+              "lon": 139.76639,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある史跡"
+            ]
+          }
+        },
+        {
+          "pageid": 123969,
+          "ns": 0,
+          "title": "昌平坂学問所",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しようへいさかかくもんしよ",
+            "wikibase_item": "Q4059219"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸幕府直轄の教学機関、施設"
+            ]
+          }
+        },
+        {
+          "pageid": 197916,
+          "ns": 0,
+          "title": "孔子廟",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こうしひよう",
+            "wikibase_item": "Q618618"
+          },
+          "terms": {
+            "description": [
+              "儒教の創始者である孔子を祀っている霊廟"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:54.782Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 73154,
+          "ns": 0,
+          "title": "牛込神楽坂駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "うしこめかくらさか",
+            "kartographer_frames": "1",
+            "page_image_free": "Ushigomekagurazaka_eki_1.jpg",
+            "wikibase_item": "Q246195"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70086111,
+              "lon": 139.73577778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区箪笥町にある東京都交通局の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 226885,
+          "ns": 0,
+          "title": "宮城道雄",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みやき みちお",
+            "page_image_free": "Michio_Miyagi.jpg",
+            "wikibase_item": "Q1940929"
+          },
+          "terms": {
+            "description": [
+              "日本の作曲家・箏曲家"
+            ]
+          }
+        },
+        {
+          "pageid": 607185,
+          "ns": 0,
+          "title": "青山学院大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あおやまかくいんたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "2024_Aoyama_Gakuin_University_-_Majima_Memorial_Hall_(4).jpg",
+            "wikibase_item": "Q616359"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66036111,
+              "lon": 139.70958333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 865201,
+          "ns": 0,
+          "title": "中町 (新宿区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なかちよう",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q11366788"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1202073,
+          "ns": 0,
+          "title": "吉川英史",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きつかわ えいし",
+            "wikibase_item": "Q11413084"
+          }
+        }
+      ]
+    }
+  }
+}

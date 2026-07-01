@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:35.329Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1679762,
+          "ns": 0,
+          "title": "Rivers of America (Disney)",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Rivers_of_America,_Disneyland.jpg",
+            "wikibase-shortdesc": "Artificial waterway inside Disney parks",
+            "wikibase_item": "Q661060"
+          },
+          "terms": {
+            "description": [
+              "artificial waterway inside multiple Disney Parks"
+            ]
+          }
+        },
+        {
+          "pageid": 1772971,
+          "ns": 0,
+          "title": "List of Tom Sawyer characters",
+          "index": 4,
+          "pageprops": {
+            "displaytitle": "List of <i>Tom Sawyer</i> characters",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q6600332"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 6079184,
+          "ns": 0,
+          "title": "Pirates of the Caribbean",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Pirates Of The Caribbean",
+            "displaytitle": "<i>Pirates of the Caribbean</i>",
+            "wikibase-shortdesc": "Disney media franchise",
+            "wikibase_item": "Q384426"
+          },
+          "terms": {
+            "description": [
+              "Disney amusement franchise"
+            ]
+          }
+        },
+        {
+          "pageid": 9620068,
+          "ns": 0,
+          "title": "Tom Sawyer Island",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Tom_Sawyer_Island,_Disneyland.jpg",
+            "wikibase-shortdesc": "Artificial island at Disney theme parks",
+            "wikibase_item": "Q3530881"
+          },
+          "terms": {
+            "description": [
+              "artificial island at Disney theme parks"
+            ]
+          }
+        },
+        {
+          "pageid": 29384054,
+          "ns": 0,
+          "title": "List of incidents at Disneyland Resort",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Incidents at Disneyland Resort",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q6014636"
+          },
+          "terms": {
+            "description": [
+              "amusement park incidents or accidents"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

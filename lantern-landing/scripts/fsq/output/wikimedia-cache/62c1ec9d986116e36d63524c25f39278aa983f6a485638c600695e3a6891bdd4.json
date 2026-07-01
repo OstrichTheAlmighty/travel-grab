@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:06.173Z",
+  "value": {
+    "searchinfo": {
+      "search": "六本木ミュージアム"
+    },
+    "search": [
+      {
+        "id": "Q115977950",
+        "title": "Q115977950",
+        "pageid": 110685492,
+        "concepturi": "http://www.wikidata.org/entity/Q115977950",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q115977950",
+        "display": {
+          "label": {
+            "value": "Roppongi Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Roppongi Museum",
+        "description": "museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "六本木ミュージアム"
+        },
+        "aliases": [
+          "六本木ミュージアム"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

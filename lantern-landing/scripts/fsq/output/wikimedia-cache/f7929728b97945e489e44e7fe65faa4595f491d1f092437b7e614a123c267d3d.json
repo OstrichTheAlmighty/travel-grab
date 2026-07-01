@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:48.729Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 372220,
+          "ns": 0,
+          "title": "ルスツリゾート",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "るすつりそおと",
+            "kartographer_frames": "1",
+            "page_image_free": "Rusutsu_Resort_Monument.jpg",
+            "wikibase_item": "Q7382688"
+          },
+          "coordinates": [
+            {
+              "lat": 42.7475,
+              "lon": 140.89638889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道虻田郡留寿都町にあるリゾート施設"
+            ]
+          }
+        },
+        {
+          "pageid": 388678,
+          "ns": 0,
+          "title": "片岡礼子",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かたおか れいこ",
+            "wikibase_item": "Q7310140"
+          },
+          "terms": {
+            "description": [
+              "日本の女優"
+            ]
+          }
+        },
+        {
+          "pageid": 1889009,
+          "ns": 0,
+          "title": "大竹しのぶ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおたけ しのふ",
+            "wikibase_item": "Q1054660"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優"
+            ]
+          }
+        },
+        {
+          "pageid": 2276989,
+          "ns": 0,
+          "title": "絶体絶命都市4Plus -Summer Memories-",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せつたいせつめいとし4ふらすさまあめもりいす",
+            "wikibase_item": "Q765963"
+          },
+          "terms": {
+            "description": [
+              "2018年の災害シミュレーターゲーム"
+            ]
+          }
+        },
+        {
+          "pageid": 4203857,
+          "ns": 0,
+          "title": "竹本織太夫 (6代目)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たけもと おりたゆう",
+            "page_image_free": "抱き柏に隅立て四つ目.jpg",
+            "wikibase_item": "Q98758000"
+          }
+        }
+      ]
+    }
+  }
+}

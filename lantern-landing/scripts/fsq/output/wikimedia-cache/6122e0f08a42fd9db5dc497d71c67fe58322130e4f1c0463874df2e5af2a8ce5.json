@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:08.374Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 38440,
+          "ns": 0,
+          "title": "神社建築",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しんしやけんちく",
+            "page_image_free": "Ujigami_jinja01_2816.jpg",
+            "wikibase_item": "Q3080012"
+          },
+          "terms": {
+            "description": [
+              "神社の建築様式"
+            ]
+          }
+        },
+        {
+          "pageid": 38442,
+          "ns": 0,
+          "title": "厳島神社",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いつくしましんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Itsukushima_Shrine_Torii_Gate_(13890465459).jpg",
+            "wikibase_item": "Q191763"
+          },
+          "coordinates": [
+            {
+              "lat": 34.29602222,
+              "lon": 132.31989444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "広島県廿日市市の厳島（宮島）にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 48589,
+          "ns": 0,
+          "title": "四天王寺",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "してんのうし",
+            "kartographer_frames": "1",
+            "page_image_free": "Shitennoji06s3200.jpg",
+            "wikibase_item": "Q339859"
+          },
+          "coordinates": [
+            {
+              "lat": 34.6539,
+              "lon": 135.51645,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪市天王寺区にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 87941,
+          "ns": 0,
+          "title": "増上寺",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "そうしようし",
+            "page_image_free": "Zojo-ji_sanmon.jpg",
+            "wikibase_item": "Q249139"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65741667,
+              "lon": 139.74827778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 521570,
+          "ns": 0,
+          "title": "長野県指定文化財一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふんかさいいちらん",
+            "wikibase_item": "Q11654318"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

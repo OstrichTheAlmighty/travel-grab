@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:23.501Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京スカイツリー天望デッキ"
+    },
+    "search": [
+      {
+        "id": "Q117066302",
+        "title": "Q117066302",
+        "pageid": 111857003,
+        "concepturi": "http://www.wikidata.org/entity/Q117066302",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q117066302",
+        "display": {
+          "label": {
+            "value": "Tokyo Skytree Tembo Deck",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Skytree Tembo Deck",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京スカイツリー天望デッキ"
+        },
+        "aliases": [
+          "東京スカイツリー天望デッキ"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

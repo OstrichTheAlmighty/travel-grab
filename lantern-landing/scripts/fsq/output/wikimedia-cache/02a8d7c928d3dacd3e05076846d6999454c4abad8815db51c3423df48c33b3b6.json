@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:48.942Z",
+  "value": {
+    "searchinfo": {
+      "search": "戸栗美術館"
+    },
+    "search": [
+      {
+        "id": "Q11496415",
+        "title": "Q11496415",
+        "pageid": 12636076,
+        "concepturi": "http://www.wikidata.org/entity/Q11496415",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11496415",
+        "display": {
+          "label": {
+            "value": "Toguri Museum of Art",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Toguri Museum of Art",
+        "description": "museum in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "戸栗美術館"
+        },
+        "aliases": [
+          "戸栗美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

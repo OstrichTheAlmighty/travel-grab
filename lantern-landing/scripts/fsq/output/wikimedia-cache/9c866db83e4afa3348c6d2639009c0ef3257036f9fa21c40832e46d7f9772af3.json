@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:26.139Z",
+  "value": {
+    "searchinfo": {
+      "search": "生放送中"
+    },
+    "search": [
+      {
+        "id": "Q73700151",
+        "title": "Q73700151",
+        "pageid": 73335651,
+        "concepturi": "http://www.wikidata.org/entity/Q73700151",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q73700151",
+        "display": {
+          "label": {
+            "value": "A Death During a Live Broadcast",
+            "language": "en"
+          },
+          "description": {
+            "value": "chapter 102 of Detective Conan manga",
+            "language": "en"
+          }
+        },
+        "label": "A Death During a Live Broadcast",
+        "description": "chapter 102 of Detective Conan manga",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "生放送中の死"
+        },
+        "aliases": [
+          "生放送中の死"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

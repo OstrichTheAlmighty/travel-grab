@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:00.170Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 773937,
+          "ns": 0,
+          "title": "Kanda, Tokyo",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "KandaMyojin.jpg",
+            "wikibase-shortdesc": "Area in Chiyoda-ku, Tokyo, Japan",
+            "wikibase_item": "Q338861"
+          },
+          "terms": {
+            "description": [
+              "area name in Chiyoda-ku, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 2729199,
+          "ns": 0,
+          "title": "Zenigata Heiji",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "KandaMyojinZenigataHeiji8801.jpg",
+            "wikibase-shortdesc": "Fictional character",
+            "wikibase_item": "Q8069094"
+          },
+          "terms": {
+            "description": [
+              "fictional character"
+            ]
+          }
+        },
+        {
+          "pageid": 15025481,
+          "ns": 0,
+          "title": "Festivals in Tokyo",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Festivals In Tokyo",
+            "page_image_free": "AsakusaFestival.jpg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q245753"
+          },
+          "terms": {
+            "description": [
+              "festivals that take place in Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 17453710,
+          "ns": 0,
+          "title": "Kanda Shrine",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Kanda-Myojin_2012.JPG",
+            "wikibase-shortdesc": "Shinto shrine in Tokyo, Japan",
+            "wikibase_item": "Q717682"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70194444,
+              "lon": 139.76777778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Shinto shrine in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 53188524,
+          "ns": 0,
+          "title": "Myōjin",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Hatajirushi3.png",
+            "wikibase-shortdesc": "Japanese Shinto deities",
+            "wikibase_item": "Q5369590"
+          },
+          "terms": {
+            "description": [
+              "Japanese Shinto deities"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

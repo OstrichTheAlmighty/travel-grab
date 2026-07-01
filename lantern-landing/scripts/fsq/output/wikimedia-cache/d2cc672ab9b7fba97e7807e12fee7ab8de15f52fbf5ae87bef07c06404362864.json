@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:20.825Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 266152,
+          "ns": 0,
+          "title": "Tokyo Imperial Palace",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Seimon_Ishibashi.JPG",
+            "wikibase-shortdesc": "Main residence of the Emperor of Japan",
+            "wikibase_item": "Q500681"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6824,
+              "lon": 139.7527,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "main residence of the Emperor of Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 617169,
+          "ns": 0,
+          "title": "Edo Castle",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Edo_P_detail.jpg",
+            "wikibase-shortdesc": "Historic 15th-century palace in Chiyoda, Tokyo, Japan",
+            "wikibase_item": "Q865913"
+          },
+          "coordinates": [
+            {
+              "lat": 35.688324,
+              "lon": 139.754389,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "castle in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 15025536,
+          "ns": 0,
+          "title": "List of parks and gardens in Tokyo",
+          "index": 5,
+          "pageprops": {
+            "wikibase-shortdesc": "Parks and gardens in Tokyo, Japan",
+            "wikibase_item": "Q5158875"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 17315877,
+          "ns": 0,
+          "title": "Kitanomaru Park",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Kitanomaru Koen",
+            "kartographer_frames": "1",
+            "page_image_free": "Kitanomaru_Park_2.jpg",
+            "wikibase-shortdesc": "Public park in Chiyoda, Tokyo, Japan",
+            "wikibase_item": "Q1075966"
+          },
+          "terms": {
+            "description": [
+              "town located in Chiyoda-ku, Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 68610591,
+          "ns": 0,
+          "title": "2022 in Japan",
+          "index": 2,
+          "pageprops": {
+            "toc": "",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q108381119"
+          },
+          "terms": {
+            "description": [
+              "overview of the events of 2022 in Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

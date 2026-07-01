@@ -1,0 +1,75 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:52.243Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 501104,
+          "ns": 0,
+          "title": "江戸川区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "えとかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "江戸川区花火大会・市川市民納涼花火大会2019.jpg",
+            "wikibase_item": "Q214056"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70664,
+              "lon": 139.86828,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 3785106,
+          "ns": 0,
+          "title": "一之江境川親水公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いちのえさかいかわしんすいこうえん",
+            "page_image_free": "Ichinoe_Sakaigawa_Shinsui_Park,_-April_2007_a.jpg",
+            "wikibase_item": "Q55527860"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69080556,
+              "lon": 139.87658333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江戸川区にある親水公園"
+            ]
+          }
+        },
+        {
+          "pageid": 4375106,
+          "ns": 0,
+          "title": "戸田芳樹風景計画",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とたよしきふうけいけいかく",
+            "wikibase_item": "Q107387823"
+          },
+          "terms": {
+            "description": [
+              "日本のランドスケープコンサルタント"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:41.012Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8452,
+          "ns": 0,
+          "title": "中山競馬場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "なかやまけいはしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "中山競馬場20240914-IMG_2264.jpg",
+            "wikibase_item": "Q1055536"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72591667,
+              "lon": 139.96241667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県船橋市にある競馬場"
+            ]
+          }
+        },
+        {
+          "pageid": 77814,
+          "ns": 0,
+          "title": "増田晶文",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ますた まさふみ",
+            "wikibase_item": "Q11429334"
+          },
+          "terms": {
+            "description": [
+              "日本の作家 (1960-)"
+            ]
+          }
+        },
+        {
+          "pageid": 1404556,
+          "ns": 0,
+          "title": "マルエイ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "まるえい",
+            "page_image_free": "Maruei_Logo.gif",
+            "wikibase_item": "Q11341195"
+          },
+          "terms": {
+            "description": [
+              "ジョイマートが展開する食品スーパーマーケット"
+            ]
+          }
+        },
+        {
+          "pageid": 2505780,
+          "ns": 0,
+          "title": "ネルソン・アトキンス美術館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ねるそんあときんすひしゆつかん",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q1976985"
+          },
+          "terms": {
+            "description": [
+              "カンザスシティにある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 3065906,
+          "ns": 0,
+          "title": "Fate/Grand Order",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふえいとくらんとおおたあ",
+            "page_image_free": "Fate_Grand_Order_logo_light_box_20180101.jpg",
+            "wikibase_item": "Q18339082"
+          },
+          "terms": {
+            "description": [
+              "日本のスマートフォンゲーム"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

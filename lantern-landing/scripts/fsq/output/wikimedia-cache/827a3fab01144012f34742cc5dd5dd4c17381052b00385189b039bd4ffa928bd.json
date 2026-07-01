@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:03.804Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 19385,
+          "ns": 0,
+          "title": "小樽市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おたるし",
+            "page_image_free": "Otaru_Montage.jpg",
+            "wikibase_item": "Q242108"
+          },
+          "coordinates": [
+            {
+              "lat": 43.19072,
+              "lon": 140.99436,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道の市"
+            ]
+          }
+        },
+        {
+          "pageid": 54192,
+          "ns": 0,
+          "title": "焼津市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やいつし",
+            "kartographer_frames": "1",
+            "page_image_free": "Port_of_Yaizu_2020-04_ac_(2).jpg",
+            "wikibase_item": "Q696783"
+          },
+          "coordinates": [
+            {
+              "lat": 34.86689,
+              "lon": 138.32325,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 103398,
+          "ns": 0,
+          "title": "日本の企業一覧 (食料品)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にほんのききよういちらん しよくりようひん",
+            "wikibase_item": "Q11505769"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 292483,
+          "ns": 0,
+          "title": "東彼杵町",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひかしそのきちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "龍頭泉_20150920_-_panoramio.jpg",
+            "wikibase_item": "Q942035"
+          },
+          "coordinates": [
+            {
+              "lat": 33.03697,
+              "lon": 129.91714,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長崎県東彼杵郡の町"
+            ]
+          }
+        },
+        {
+          "pageid": 4288738,
+          "ns": 0,
+          "title": "瀬戸の染飯",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せとのそめいい",
+            "page_image_free": "瀬戸の染飯（レプリカ）.jpg",
+            "wikibase_item": "Q106702187"
+          },
+          "terms": {
+            "description": [
+              "くちなしで黄色に染めたおこわ。静岡県藤枝市にあたる駿河国志太郡で戦国時代から販売されていた東海道の名物。"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

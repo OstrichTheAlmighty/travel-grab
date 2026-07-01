@@ -1,0 +1,83 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:28.306Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1958,
+          "ns": 0,
+          "title": "花札",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はなふた",
+            "page_image_free": "Hanafuda_Koi-Koi_Setup_1.jpg",
+            "wikibase_item": "Q697641"
+          },
+          "terms": {
+            "description": [
+              "日本のかるた"
+            ]
+          }
+        },
+        {
+          "pageid": 45655,
+          "ns": 0,
+          "title": "久坂玄瑞",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "くさか けんすい",
+            "page_image_free": "Genzui_Kusaka.jpg",
+            "wikibase_item": "Q5360999"
+          },
+          "terms": {
+            "description": [
+              "日本の志士 (1840-1864)"
+            ]
+          }
+        },
+        {
+          "pageid": 797539,
+          "ns": 0,
+          "title": "小袖曾我薊色縫",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こそてそかあさみのいろぬい",
+            "wikibase_item": "Q11463555"
+          }
+        },
+        {
+          "pageid": 1549468,
+          "ns": 0,
+          "title": "竹本津太夫",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たけもと つだゆう",
+            "page_image_free": "釜敷梅鉢.jpg",
+            "wikibase_item": "Q11599175"
+          }
+        },
+        {
+          "pageid": 3488474,
+          "ns": 0,
+          "title": "ウチのガヤがすみません!",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "うちのかやかすみません",
+            "wikibase_item": "Q28684376"
+          },
+          "terms": {
+            "description": [
+              "日本テレビ系列のバラエティ番組 (2017 - 2021)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

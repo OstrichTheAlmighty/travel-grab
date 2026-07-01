@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:22.586Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 63297,
+          "ns": 0,
+          "title": "狛江市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こまえし",
+            "page_image_free": "Tamagawa_Ikada_Race.jpg",
+            "wikibase_item": "Q86536"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63478,
+              "lon": 139.57869,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の市"
+            ]
+          }
+        },
+        {
+          "pageid": 114496,
+          "ns": 0,
+          "title": "ジェイアールバス関東",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しえいああるはすかんとう",
+            "page_image_free": "JR_BusKanto_TokyoBranch.jpeg",
+            "wikibase_item": "Q10851155"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都江東区にあるバス事業者"
+            ]
+          }
+        },
+        {
+          "pageid": 130379,
+          "ns": 0,
+          "title": "東急電鉄",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきゆうてんてつ",
+            "page_image_free": "渋谷ファーストプレイス.jpg",
+            "wikibase_item": "Q80229029"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65525,
+              "lon": 139.69377778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の鉄道会社"
+            ]
+          }
+        },
+        {
+          "pageid": 1637928,
+          "ns": 0,
+          "title": "Easy sports",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いいしいすほつ",
+            "displaytitle": "easy sports",
+            "wikibase_item": "Q11198167"
+          }
+        },
+        {
+          "pageid": 3016275,
+          "ns": 0,
+          "title": "羽田クロノゲート",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はねたくろのけえと",
+            "kartographer_frames": "1",
+            "page_image_free": "Haneda_chronogate,20140618.JPG",
+            "wikibase_item": "Q18338867"
+          },
+          "coordinates": [
+            {
+              "lat": 35.55327778,
+              "lon": 139.75083333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

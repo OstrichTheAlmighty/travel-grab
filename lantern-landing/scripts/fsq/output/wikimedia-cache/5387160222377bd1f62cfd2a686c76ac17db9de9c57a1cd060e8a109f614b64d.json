@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:05.513Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4206,
+          "ns": 0,
+          "title": "1890年",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "1890ねん",
+            "wikibase_item": "Q7832"
+          },
+          "terms": {
+            "description": [
+              "年"
+            ]
+          }
+        },
+        {
+          "pageid": 33752,
+          "ns": 0,
+          "title": "上野恩賜公園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "うえのおんしこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "上野公園航空写真1984.jpg",
+            "wikibase_item": "Q746216"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71222222,
+              "lon": 139.77111111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 57496,
+          "ns": 0,
+          "title": "東京芸術大学",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようけいしゆつたいかく",
+            "page_image_free": "Tokyo_geidai_logo.svg",
+            "wikibase_item": "Q1153515"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71944444,
+              "lon": 139.77222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある国立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 740703,
+          "ns": 0,
+          "title": "旧東京音楽学校奏楽堂",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きゆうとうきようおんかくかつこうそうかくとう",
+            "kartographer_frames": "1",
+            "page_image_free": "The_oldest_Tokyo_National_University_of_Fine_Arts_and_Music_Concert_Hall.jpg",
+            "wikibase_item": "Q3891225"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71803333,
+              "lon": 139.773125,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある歴史的建造物"
+            ]
+          }
+        },
+        {
+          "pageid": 1847466,
+          "ns": 0,
+          "title": "東京音楽学校 (旧制)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようおんかくかつこう",
+            "page_image_free": "Sogakudo1926.jpg",
+            "wikibase_item": "Q3577897"
+          },
+          "terms": {
+            "description": [
+              "東京府下谷区にあった官立音楽専門学校"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

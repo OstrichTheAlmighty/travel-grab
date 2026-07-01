@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:14.645Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 25360,
+          "ns": 0,
+          "title": "浅草寺",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せんそうし",
+            "page_image_free": "Asakusa_Senso-ji_2021-12_ac_(2).jpg",
+            "wikibase_item": "Q615183"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71472222,
+              "lon": 139.79675,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 33752,
+          "ns": 0,
+          "title": "上野恩賜公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "うえのおんしこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "上野公園航空写真1984.jpg",
+            "wikibase_item": "Q746216"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71222222,
+              "lon": 139.77111111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 257203,
+          "ns": 0,
+          "title": "寛永寺",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かんえいし",
+            "page_image_free": "Kaneiji_2012.JPG",
+            "wikibase_item": "Q3120766"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72138889,
+              "lon": 139.77430556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 638952,
+          "ns": 0,
+          "title": "五重塔",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こしゆうのとう",
+            "page_image_free": "Horyu-ji06s3200.jpg",
+            "wikibase_item": "Q11372713"
+          },
+          "terms": {
+            "description": [
+              "仏塔の形式の一つで層塔と呼ばれる楼閣形式の仏塔のうち、五重の屋根を持つもの"
+            ]
+          }
+        },
+        {
+          "pageid": 639490,
+          "ns": 0,
+          "title": "三重塔",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さんしゆうのとう",
+            "page_image_free": "Hokiji03ds1536.jpg",
+            "wikibase_item": "Q11357687"
+          },
+          "terms": {
+            "description": [
+              "釈迦の舎利（遺骨）をおさめる仏塔の形式"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

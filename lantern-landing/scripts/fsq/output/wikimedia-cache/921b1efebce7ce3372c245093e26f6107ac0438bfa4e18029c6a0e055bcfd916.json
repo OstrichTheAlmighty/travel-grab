@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:09.465Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 13823,
+          "ns": 0,
+          "title": "神戸市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こうへし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kobe_montage1.jpg",
+            "wikibase_item": "Q48320"
+          },
+          "coordinates": [
+            {
+              "lat": 34.69017,
+              "lon": 135.19544,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 107660,
+          "ns": 0,
+          "title": "バベルの塔",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はへるのとう",
+            "page_image_free": "Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_(Vienna)_-_Google_Art_Project_-_edited.jpg",
+            "toc": "",
+            "wikibase_item": "Q41213"
+          },
+          "terms": {
+            "description": [
+              "旧約聖書の「創世記」中に登場する巨大な塔"
+            ]
+          }
+        },
+        {
+          "pageid": 855876,
+          "ns": 0,
+          "title": "池田あきこ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いけた あきこ",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q2829035"
+          },
+          "terms": {
+            "description": [
+              "日本の著作家、小説家、随筆家、児童文学作家"
+            ]
+          }
+        },
+        {
+          "pageid": 888783,
+          "ns": 0,
+          "title": "彫刻庭園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ちようこくていえん",
+            "page_image_free": "Asago_Art_Village08n4272.jpg",
+            "wikibase_item": "Q1759852"
+          }
+        },
+        {
+          "pageid": 3816032,
+          "ns": 0,
+          "title": "東北大学大学院文学研究科・文学部",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうほくたいくくいんふんかくけんきゆうかふんかくふ",
+            "wikibase_item": "Q56346547"
+          },
+          "terms": {
+            "description": [
+              "東北大学に設置される大学院研究科・学部"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

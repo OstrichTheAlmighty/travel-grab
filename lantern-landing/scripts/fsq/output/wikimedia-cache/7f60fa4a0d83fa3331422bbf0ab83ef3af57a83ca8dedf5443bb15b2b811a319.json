@@ -1,0 +1,478 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:47:40.178Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1797141,
+          "ns": 6,
+          "title": "File:Akiba denkigai.jpg",
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "url": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Akiba_denkigai.jpg",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Akiba_denkigai.jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=1797141",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2007-03-17 08:50:08",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Akiba denkigai",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Taken with Panasonic Lumix DMC-LX2|CC-Zero|With trademark|Self-published work|Akihabara south-west blocks|2007 in Akihabara|Files with coordinates missing SDC location of creation|Akihabara Main Street in area E",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "GPSLatitude": {
+                  "value": "35.699672",
+                  "source": "commons-desc-page"
+                },
+                "GPSLongitude": {
+                  "value": "139.771289",
+                  "source": "commons-desc-page"
+                },
+                "GPSMapDatum": {
+                  "value": "WGS-84",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "<a href=\"https://en.wikipedia.org/wiki/Akihabara\" class=\"extiw\" title=\"en:Akihabara\">Akihabara Electric Town.</a>",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2007-03-17",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a href=\"//commons.wikimedia.org/wiki/User:Jmho\" title=\"User:Jmho\">Jmho</a>",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Zero, Public Domain Dedication",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "false",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "trademarked",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        {
+          "pageid": 6638244,
+          "ns": 6,
+          "title": "File:Ferris wheel at Kasai Rinkai Park.jpg",
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "url": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Ferris_wheel_at_Kasai_Rinkai_Park.jpg",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Ferris_wheel_at_Kasai_Rinkai_Park.jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=6638244",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2009-04-27 06:16:07",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Ferris wheel at Kasai Rinkai Park",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "GFDL|Diamond and Flower Ferris Wheel|License migration completed",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "Ferris wheel at Kasai Rinkai Park, Tokyo, Japan.",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2009-03-07",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "Self file",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Oos&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Oos (page does not exist)\">Oos</a> (<a href=\"//commons.wikimedia.org/wiki/User_talk:Oos\" title=\"User talk:Oos\"><span class=\"signature-talk\">talk</span></a>)",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY-SA 3.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution-Share Alike 3.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "http://creativecommons.org/licenses/by-sa/3.0/",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-sa-3.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        {
+          "pageid": 47811352,
+          "ns": 6,
+          "title": "File:ASAKURA Museum of Sculpture 20051002.jpg",
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "url": "https://upload.wikimedia.org/wikipedia/commons/a/a8/ASAKURA_Museum_of_Sculpture_20051002.jpg",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:ASAKURA_Museum_of_Sculpture_20051002.jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=47811352",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2016-03-28 05:26:17",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "ASAKURA Museum of Sculpture 20051002",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Asakura Museum of Sculpture|Files moved to Commons from ja.wikipedia|Self-published work|PD-self",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "朝倉彫塑館の玄関。",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2005-10-02",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<a href=\"https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Asakura_chosokan.jpg\" class=\"extiw\" title=\"ja:ファイル:Asakura chosokan.jpg\">ja:ファイル:Asakura chosokan.jpg</a>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a href=\"https://ja.wikipedia.org/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Jmho\" class=\"extiw\" title=\"ja:利用者:Jmho\">ja:利用者:Jmho</a>",
+                  "source": "commons-desc-page"
+                },
+                "Permission": {
+                  "value": "<table class=\"licensetpl\" style=\"display:none\">\n<tbody><tr>\n<td><span class=\"licensetpl_short\">Public domain</span><span class=\"licensetpl_long\">Public domain</span><span class=\"licensetpl_link_req\">false</span><span class=\"licensetpl_attr_req\">false</span>\n</td></tr></tbody></table>\n<table style=\"width: 100%; clear: both; margin: 0.5em auto; background-color: var(--background-color-progressive-subtle, #f7f8ff); color: var(--color-base, #202122); border: var(--border-subtle, 2px solid #8888aa); border-spacing: 8px; padding: 0px;\" dir=\"ltr\" class=\"layouttemplate\" lang=\"en\">\n<tbody><tr>\n<td><span typeof=\"mw:File\"><span title=\"Public domain\"><img alt=\"Public domain\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/PD-icon.svg/120px-PD-icon.svg.png\" decoding=\"async\" width=\"64\" height=\"64\" class=\"mw-file-element\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/PD-icon.svg/250px-PD-icon.svg.png 2x\" data-file-width=\"196\" data-file-height=\"196\"></span></span>\n</td>\n<td>This work has been released into the <b><a href=\"https://en.wikipedia.org/wiki/en:public_domain\" class=\"extiw\" title=\"w:en:public domain\">public domain</a></b> by its author, <b><a href=\"https://ja.wikipedia.org/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Jmho\" class=\"extiw\" title=\"ja:利用者:Jmho\">Jmho</a></b>. This applies worldwide.<br><small>In some countries this may not be legally possible; if so:</small><br><i><a href=\"https://ja.wikipedia.org/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Jmho\" class=\"extiw\" title=\"ja:利用者:Jmho\">Jmho</a> grants anyone the right to use this work <b>for any purpose</b>, without any conditions, unless such conditions are required by law.</i>\n</td></tr></tbody></table>",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseShortName": {
+                  "value": "Public domain",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Public domain",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "false",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Copyrighted": {
+                  "value": "False",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "pd",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        {
+          "pageid": 102129591,
+          "ns": 6,
+          "title": "File:Tokyo Goldfish exhibition (33039883398).jpg",
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Tokyo_Goldfish_exhibition_%2833039883398%29.jpg",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Tokyo_Goldfish_exhibition_(33039883398).jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=102129591",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2021-03-22 19:20:44",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Tokyo Goldfish exhibition (33039883398)",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Art Aquarium Museum|Uploads by Matlin|Files with coordinates missing SDC location of creation|2018 in Ginza|Flickr images reviewed by FlickreviewR 2|September 2018 in Tokyo|Photographs by Raita Futo",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "GPSLatitude": {
+                  "value": "35.687324",
+                  "source": "commons-desc-page"
+                },
+                "GPSLongitude": {
+                  "value": "139.774067",
+                  "source": "commons-desc-page"
+                },
+                "GPSMapDatum": {
+                  "value": "WGS-84",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "アートアクアリウム～金魚の美",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2018-09-24 14:32",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/photos/raita/33039883398/\">Tokyo Goldfish exhibition</a>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/128275472@N07\">Raita Futo</a> from Tokyo, Japan",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY 2.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution 2.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by/2.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-2.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        },
+        {
+          "pageid": 131764547,
+          "ns": 6,
+          "title": "File:Shinjuku-West Omoide-Yokocho.jpg",
+          "imagerepository": "local",
+          "imageinfo": [
+            {
+              "url": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Shinjuku-West_Omoide-Yokocho.jpg",
+              "descriptionurl": "https://commons.wikimedia.org/wiki/File:Shinjuku-West_Omoide-Yokocho.jpg",
+              "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=131764547",
+              "extmetadata": {
+                "DateTime": {
+                  "value": "2023-05-11 07:08:55",
+                  "source": "mediawiki-metadata",
+                  "hidden": ""
+                },
+                "ObjectName": {
+                  "value": "Shinjuku-West Omoide-Yokocho",
+                  "source": "mediawiki-metadata"
+                },
+                "CommonsMetadataExtension": {
+                  "value": 1.2,
+                  "source": "extension",
+                  "hidden": ""
+                },
+                "Categories": {
+                  "value": "Self-published work|May 2023 in Tokyo|2023 in Shinjuku|Japan photographs taken on 2023-05-02|Yanagi-dori, Omoide Yokocho",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "Assessments": {
+                  "value": "",
+                  "source": "commons-categories",
+                  "hidden": ""
+                },
+                "ImageDescription": {
+                  "value": "\"Omoide Yokocho\" located on the north side of Shinjuku Station West Exit",
+                  "source": "commons-desc-page"
+                },
+                "DateTimeOriginal": {
+                  "value": "2023-05-02",
+                  "source": "commons-desc-page"
+                },
+                "Credit": {
+                  "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+                  "source": "commons-desc-page"
+                },
+                "Artist": {
+                  "value": "<a href=\"//commons.wikimedia.org/wiki/User:MaedaAkihiko\" title=\"User:MaedaAkihiko\">MaedaAkihiko</a>",
+                  "source": "commons-desc-page"
+                },
+                "LicenseShortName": {
+                  "value": "CC BY-SA 4.0",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "UsageTerms": {
+                  "value": "Creative Commons Attribution-Share Alike 4.0",
+                  "source": "commons-desc-page"
+                },
+                "AttributionRequired": {
+                  "value": "true",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "LicenseUrl": {
+                  "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                  "source": "commons-desc-page"
+                },
+                "Copyrighted": {
+                  "value": "True",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "Restrictions": {
+                  "value": "",
+                  "source": "commons-desc-page",
+                  "hidden": ""
+                },
+                "License": {
+                  "value": "cc-by-sa-4.0",
+                  "source": "commons-templates",
+                  "hidden": ""
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

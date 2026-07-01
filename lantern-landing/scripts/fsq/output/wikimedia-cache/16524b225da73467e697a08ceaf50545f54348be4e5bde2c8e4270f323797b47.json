@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:10.545Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 27849,
+          "ns": 0,
+          "title": "ホルムアルデヒド",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほるむあるてひと",
+            "page_image_free": "Formaldehyde-3D-balls-A.png",
+            "wikibase_item": "Q161210"
+          },
+          "terms": {
+            "description": [
+              "有機化合物の一種であり、最も簡単なアルデヒド"
+            ]
+          }
+        },
+        {
+          "pageid": 817488,
+          "ns": 0,
+          "title": "関東農政局",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かんとうのうせいきよく",
+            "kartographer_frames": "1",
+            "page_image_free": "Saitama-Shintoshin_National_Government_Building_Tower-2.JPG",
+            "wikibase_item": "Q11656002"
+          },
+          "coordinates": [
+            {
+              "lat": 35.8911,
+              "lon": 139.6342,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の埼玉県さいたま市中央区にある農林水産省の地方支分部局"
+            ]
+          }
+        },
+        {
+          "pageid": 1538460,
+          "ns": 0,
+          "title": "大利根橋",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおとねはし",
+            "page_image_free": "大利根橋付近_-_panoramio.jpg",
+            "wikibase_item": "Q11433044"
+          },
+          "coordinates": [
+            {
+              "lat": 35.89055556,
+              "lon": 140.05583333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県我孫子市と茨城県取手市を結ぶ道路橋"
+            ]
+          }
+        },
+        {
+          "pageid": 1627650,
+          "ns": 0,
+          "title": "磯部せんべい",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いそへせんへい",
+            "page_image_free": "Isobe_Senbei_01.JPG",
+            "wikibase_item": "Q11588062"
+          },
+          "terms": {
+            "description": [
+              "群馬県の磯部温泉で製造販売される薄焼きせんべい"
+            ]
+          }
+        },
+        {
+          "pageid": 2074142,
+          "ns": 0,
+          "title": "群馬県",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "くんまけん",
+            "kartographer_frames": "1",
+            "page_image_free": "Mount_Haruna_view_from_Hokkitsu_Onsen_Tachibana_no_sato_Shiroyama_(cropped).jpg",
+            "wikibase_item": "Q129499"
+          },
+          "coordinates": [
+            {
+              "lat": 36.39,
+              "lon": 139.06,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の都道府県"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

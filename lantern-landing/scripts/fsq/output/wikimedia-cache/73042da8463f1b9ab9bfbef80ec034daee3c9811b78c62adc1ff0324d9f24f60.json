@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:25.850Z",
+  "value": {
+    "searchinfo": {
+      "search": "めぐろ歴史資料館"
+    },
+    "search": [
+      {
+        "id": "Q11279688",
+        "title": "Q11279688",
+        "pageid": 12420828,
+        "concepturi": "http://www.wikidata.org/entity/Q11279688",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11279688",
+        "display": {
+          "label": {
+            "value": "Meguro History Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "Museum located in Meguro Ward, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Meguro History Museum",
+        "description": "Museum located in Meguro Ward, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "めぐろ歴史資料館"
+        },
+        "aliases": [
+          "めぐろ歴史資料館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

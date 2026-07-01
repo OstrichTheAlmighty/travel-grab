@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:53.873Z",
+  "value": {
+    "searchinfo": {
+      "search": "ビジターチーム応援席"
+    },
+    "search": [
+      {
+        "id": "Q11330546",
+        "title": "Q11330546",
+        "pageid": 12468681,
+        "concepturi": "http://www.wikidata.org/entity/Q11330546",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11330546",
+        "display": {
+          "label": {
+            "value": "ビジターチーム応援席",
+            "language": "ja"
+          }
+        },
+        "label": "ビジターチーム応援席",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ビジターチーム応援席"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

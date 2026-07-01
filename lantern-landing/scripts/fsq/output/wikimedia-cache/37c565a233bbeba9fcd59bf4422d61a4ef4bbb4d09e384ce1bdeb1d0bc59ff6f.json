@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:37.683Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 53541,
+          "ns": 0,
+          "title": "坪内逍遥",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "つほうち しようよう",
+            "page_image_free": "Shoyo_Tsubouchi_cropped.jpg",
+            "wikibase_item": "Q706196"
+          },
+          "terms": {
+            "description": [
+              "日本の小説家、評論家、翻訳家、劇作家 (1859-1935)"
+            ]
+          }
+        },
+        {
+          "pageid": 771781,
+          "ns": 0,
+          "title": "早稲田大学",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "わせたたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Okuma_Auditorium.jpg",
+            "wikibase_item": "Q274486"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71027778,
+              "lon": 139.72172222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 1747724,
+          "ns": 0,
+          "title": "早稲田大学坪内博士記念演劇博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "わせたたいかくつほうちはかせきねんえんけきはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Tsubouchi_Memorial_Theatre_Museum.jpg",
+            "wikibase_item": "Q3951945"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区の博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 1974305,
+          "ns": 0,
+          "title": "早稲田大学坪内逍遙大賞",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "わせたたいかくつほうちしようようたいしよう",
+            "page_image_free": "Tsubouchi_Shyoyo_01.jpg",
+            "wikibase_item": "Q11511492"
+          },
+          "terms": {
+            "description": [
+              "早稲田大学が主催する賞"
+            ]
+          }
+        },
+        {
+          "pageid": 3616451,
+          "ns": 0,
+          "title": "早稲田大学會津八一記念博物館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "わせたたいかくあいつやいちきねんはくふつかん",
+            "page_image_free": "Japan_Tokyo_Yamanote_loop_location_map.svg",
+            "wikibase_item": "Q30938116"
+          },
+          "terms": {
+            "description": [
+              "早稲田キャンパス内にある大学博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

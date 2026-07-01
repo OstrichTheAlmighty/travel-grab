@@ -1,0 +1,43 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:25.089Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 23024,
+          "ns": 0,
+          "title": "野菜の一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やさいのいちらん",
+            "page_image_free": "West_Show_Jersey_July_2010_18.jpg",
+            "wikibase_item": "Q1127211"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 4563945,
+          "ns": 0,
+          "title": "スポンギフォルマ・スクァレパンツィ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すほんきふおるま すくあれはんつい",
+            "page_image_free": "Spongiforma_squarepantsii_151595.jpg",
+            "wikibase_item": "Q139759"
+          },
+          "terms": {
+            "description": [
+              "イグチ科に属する菌類の一種"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

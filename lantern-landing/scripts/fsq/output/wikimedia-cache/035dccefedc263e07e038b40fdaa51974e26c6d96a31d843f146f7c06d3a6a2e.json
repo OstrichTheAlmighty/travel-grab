@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:31.948Z",
+  "value": {
+    "searchinfo": {
+      "search": "在日韓人歴史資料館"
+    },
+    "search": [
+      {
+        "id": "Q122929555",
+        "title": "Q122929555",
+        "pageid": 117182814,
+        "concepturi": "http://www.wikidata.org/entity/Q122929555",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q122929555",
+        "display": {
+          "label": {
+            "value": "The History Museum of J-Koreans",
+            "language": "en"
+          },
+          "description": {
+            "value": "Korean history museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "The History Museum of J-Koreans",
+        "description": "Korean history museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "在日韓人歴史資料館"
+        },
+        "aliases": [
+          "在日韓人歴史資料館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

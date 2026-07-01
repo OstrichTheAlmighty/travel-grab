@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:06.454Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 71135,
+          "ns": 0,
+          "title": "ラフォーレ原宿",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "らふおおれはらしゆく",
+            "page_image_free": "Laforet-Harajuku-Tokyo-01.jpg",
+            "wikibase_item": "Q1770607"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66908333,
+              "lon": 139.7055,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都・表参道にあるファッションビル"
+            ]
+          }
+        },
+        {
+          "pageid": 71582,
+          "ns": 0,
+          "title": "六本木",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ろつほんき",
+            "kartographer_frames": "1",
+            "page_image_free": "Roppongi_(16168478591).jpg",
+            "wikibase_item": "Q265071"
+          },
+          "terms": {
+            "description": [
+              "東京都港区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 77121,
+          "ns": 0,
+          "title": "森美術館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "もりひしゆつかん",
+            "page_image_free": "Mori_Art_Museum_Entrance_2013.jpg",
+            "wikibase_item": "Q4410434"
+          },
+          "terms": {
+            "description": [
+              "東京都港区の六本木ヒルズにある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 3115471,
+          "ns": 0,
+          "title": "Zeppブルーシアター六本木",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せつふふるしあたろつほんき",
+            "page_image_free": "Zepp_Blue_Theater_Roppongi_-_Aerial.jpg",
+            "wikibase_item": "Q18457443"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65922222,
+              "lon": 139.73316667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて東京都港区にあった劇場"
+            ]
+          }
+        },
+        {
+          "pageid": 4714158,
+          "ns": 0,
+          "title": "六本木ミュージアム",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ろつほんきみゆうしあむ",
+            "page_image_free": "202403061630_IMG_6081.jpg",
+            "wikibase_item": "Q115977950"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65977375,
+              "lon": 139.73403773,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区六本木にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

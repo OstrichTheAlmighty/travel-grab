@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:17.635Z",
+  "value": {
+    "searchinfo": {
+      "search": "目黒区美術館"
+    },
+    "search": [
+      {
+        "id": "Q3815450",
+        "title": "Q3815450",
+        "pageid": 3638813,
+        "concepturi": "http://www.wikidata.org/entity/Q3815450",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3815450",
+        "display": {
+          "label": {
+            "value": "Meguro Museum of Art",
+            "language": "en"
+          },
+          "description": {
+            "value": "Art museum in Meguro, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Meguro Museum of Art",
+        "description": "Art museum in Meguro, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "目黒区美術館"
+        },
+        "aliases": [
+          "目黒区美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

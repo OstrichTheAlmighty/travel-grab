@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:53.941Z",
+  "value": {
+    "searchinfo": {
+      "search": "中川船番所資料館"
+    },
+    "search": [
+      {
+        "id": "Q11364944",
+        "title": "Q11364944",
+        "pageid": 12502978,
+        "concepturi": "http://www.wikidata.org/entity/Q11364944",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11364944",
+        "display": {
+          "label": {
+            "value": "Nakagawa Funabansho Museum",
+            "language": "en"
+          }
+        },
+        "label": "Nakagawa Funabansho Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "中川船番所資料館"
+        },
+        "aliases": [
+          "中川船番所資料館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

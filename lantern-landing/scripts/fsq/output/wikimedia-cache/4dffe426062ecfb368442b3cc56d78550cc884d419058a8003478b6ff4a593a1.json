@@ -1,0 +1,84 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:49:03.603Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4683,
+          "ns": 0,
+          "title": "アメリカ同時多発テロ事件",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あめりかとうしたはつてろしけん",
+            "page_image_free": "September_11_Photo_Montage.jpg",
+            "wikibase_item": "Q10806"
+          },
+          "terms": {
+            "description": [
+              "2001年にアメリカで発生した同時多発テロ攻撃事件"
+            ]
+          }
+        },
+        {
+          "pageid": 687301,
+          "ns": 0,
+          "title": "カメラセンター",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かめらせんたあ",
+            "wikibase_item": "Q11294826"
+          }
+        },
+        {
+          "pageid": 2071355,
+          "ns": 0,
+          "title": "CALIPSO",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "CALIPSO_-_Artist_Concept.jpg",
+            "wikibase_item": "Q35494"
+          },
+          "terms": {
+            "description": [
+              "地球観測衛星。NASAとCNESの共同事業"
+            ]
+          }
+        },
+        {
+          "pageid": 2792482,
+          "ns": 0,
+          "title": "広視野カメラ3",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こうしやかめら3",
+            "page_image_free": "Wide_Field_Camera_3.jpg",
+            "wikibase_item": "Q209981"
+          }
+        },
+        {
+          "pageid": 4188436,
+          "ns": 0,
+          "title": "IOS 5",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Ios 5",
+            "displaytitle": "iOS 5",
+            "page_image_free": "Ios5.jpg",
+            "wikibase_item": "Q3919641"
+          },
+          "terms": {
+            "description": [
+              "iOSシリーズの5番目のバージョン"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

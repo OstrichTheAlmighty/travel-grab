@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:36.017Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 37214,
+          "ns": 0,
+          "title": "科学館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かかくかん",
+            "page_image_free": "Akashi-Minicipal-Planetarium3387.JPG",
+            "wikibase_item": "Q588140"
+          },
+          "terms": {
+            "description": [
+              "自然科学に関連する展示を行う博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 249745,
+          "ns": 0,
+          "title": "明石市立天文科学館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あかししりつてんもんかかくかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Akashi_Minicipal_Planetarium.jpg",
+            "wikibase_item": "Q11512514"
+          },
+          "coordinates": [
+            {
+              "lat": 34.64939444,
+              "lon": 135.00147778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県明石市にある「時と宇宙」をテーマとした博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 287063,
+          "ns": 0,
+          "title": "長崎市科学館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なかさきしかかくかん",
+            "page_image_free": "Nagasaki_prefectural_gymnasium.JPG",
+            "wikibase_item": "Q11652469"
+          }
+        },
+        {
+          "pageid": 1722291,
+          "ns": 0,
+          "title": "仙台市科学館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せんたいしかかくかん",
+            "page_image_free": "Sendai_City_Science_Museum.jpg",
+            "wikibase_item": "Q11377856"
+          },
+          "coordinates": [
+            {
+              "lat": 38.298994,
+              "lon": 140.883104,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の宮城県仙台市青葉区にある科学館"
+            ]
+          }
+        },
+        {
+          "pageid": 1852391,
+          "ns": 0,
+          "title": "海洋漁業科学館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かいようきよきようかかくかん",
+            "page_image_free": "Map_of_Ishikawa_Prefecture_Ja.svg",
+            "wikibase_item": "Q11559002"
+          }
+        }
+      ]
+    }
+  }
+}

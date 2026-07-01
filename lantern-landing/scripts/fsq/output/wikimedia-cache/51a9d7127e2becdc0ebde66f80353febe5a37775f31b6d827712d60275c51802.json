@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:49:02.863Z",
+  "value": {
+    "searchinfo": {
+      "search": "カメラセンター"
+    },
+    "search": [
+      {
+        "id": "Q11294826",
+        "title": "Q11294826",
+        "pageid": 12434976,
+        "concepturi": "http://www.wikidata.org/entity/Q11294826",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11294826",
+        "display": {
+          "label": {
+            "value": "カメラセンター",
+            "language": "ja"
+          }
+        },
+        "label": "カメラセンター",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "カメラセンター"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

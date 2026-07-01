@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:18.243Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 67340,
+          "ns": 0,
+          "title": "笑福亭鶴瓶",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しようふくてい つるへ",
+            "page_image_free": "Tsurube_Shofukutei_IMG_9775r_R_20151122_(cropped).JPG",
+            "wikibase_item": "Q1056866"
+          },
+          "terms": {
+            "description": [
+              "日本の落語家、タレント"
+            ]
+          }
+        },
+        {
+          "pageid": 366126,
+          "ns": 0,
+          "title": "立川志らく",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たてかわ しらく",
+            "page_image_free": "丸に左三階松.png",
+            "wikibase_item": "Q11597914"
+          },
+          "terms": {
+            "description": [
+              "日本の落語家の名跡／日本の落語家 (1963-)"
+            ]
+          }
+        },
+        {
+          "pageid": 1494127,
+          "ns": 0,
+          "title": "さんま&くりぃむの芸能界(秘)個人情報グランプリ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さんまあんとくりいむのけいのうかいまるひこしんしようほうくらんふり",
+            "wikibase_item": "Q11268565"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビバラエティ特別番組"
+            ]
+          }
+        },
+        {
+          "pageid": 2282637,
+          "ns": 0,
+          "title": "TAROの塔",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たろうのとう",
+            "wikibase_item": "Q11248169"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ"
+            ]
+          }
+        },
+        {
+          "pageid": 4452983,
+          "ns": 0,
+          "title": "24時間テレビ23 愛は地球を救う",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "24しかんてれひ23あいはちきゆうをすくう",
+            "page_image_free": "Nippon_Budokan_2010.jpg",
+            "wikibase_item": "Q109602421"
+          },
+          "terms": {
+            "description": [
+              "日本テレビの番組（2000年）"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

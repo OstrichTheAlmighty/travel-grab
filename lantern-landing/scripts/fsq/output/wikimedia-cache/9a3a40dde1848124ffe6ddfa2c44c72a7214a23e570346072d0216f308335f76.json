@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:09.412Z",
+  "value": {
+    "searchinfo": {
+      "search": "松岡美術館"
+    },
+    "search": [
+      {
+        "id": "Q11530056",
+        "title": "Q11530056",
+        "pageid": 12669951,
+        "concepturi": "http://www.wikidata.org/entity/Q11530056",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11530056",
+        "display": {
+          "label": {
+            "value": "Matsuoka Museum of Art",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Matsuoka Museum of Art",
+        "description": "museum in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "松岡美術館"
+        },
+        "aliases": [
+          "松岡美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

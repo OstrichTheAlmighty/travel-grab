@@ -1,0 +1,139 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:02.455Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 55,
+          "ns": 0,
+          "title": "台東区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たいとうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Asakusa_Senso-ji_2021-12_ac_(2).jpg",
+            "wikibase_item": "Q232641"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71261,
+              "lon": 139.77997,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 12594,
+          "ns": 0,
+          "title": "墨田区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "すみたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Skytree_2014_Ⅲ.jpg",
+            "wikibase_item": "Q235135"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71069,
+              "lon": 139.8015,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 19887,
+          "ns": 0,
+          "title": "国立歴史民俗博物館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こくりつれきしみんそくはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "National_Museum_of_Japanese_History_2008(cropped).jpg",
+            "wikibase_item": "Q3330690"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72449722,
+              "lon": 140.21908056,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県佐倉市にある日本の歴史、民俗学、考古学について総合的に研究・展示する歴史博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 20031,
+          "ns": 0,
+          "title": "東京国立博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようこくりつはくふつかん",
+            "page_image_free": "Tokyo_National_Museum,_Honkan_2010.jpg",
+            "wikibase_item": "Q653433"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71905556,
+              "lon": 139.77666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある国立博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 1940592,
+          "ns": 0,
+          "title": "アミューズミュージアム",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あみゆうすみゆうしあむ",
+            "kartographer_frames": "1",
+            "page_image_free": "AM_view1.jpg",
+            "wikibase_item": "Q17230481"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7145,
+              "lon": 139.79788889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて存在した日本の美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

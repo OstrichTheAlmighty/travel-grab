@@ -1,0 +1,129 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:19.995Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 10741,
+          "ns": 0,
+          "title": "練馬区",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ねりまく",
+            "kartographer_frames": "1",
+            "page_image_free": "三宝寺池と厳島神社（2021年5月）.jpg",
+            "wikibase_item": "Q232655"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73553,
+              "lon": 139.65169,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 28918,
+          "ns": 0,
+          "title": "立教大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "りつきようたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Rikkyo_University_1.jpg",
+            "wikibase_item": "Q1143235"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7305,
+              "lon": 139.70394444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 57497,
+          "ns": 0,
+          "title": "学習院大学",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かくしゆういん",
+            "kartographer_frames": "1",
+            "page_image_free": "Gakushuin-seimon.JPG",
+            "wikibase_item": "Q1372362"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71836667,
+              "lon": 139.70905556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 105586,
+          "ns": 0,
+          "title": "日本の野球場一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのやきゆうしよういちらん",
+            "wikibase_item": "Q6607277"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 135679,
+          "ns": 0,
+          "title": "東京国際大学",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようこくさい",
+            "page_image_free": "Tokyo_International_University（Ikebukuro_Campus).jpg",
+            "wikibase_item": "Q7813901"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72833333,
+              "lon": 139.72166667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都豊島区にある私立大学"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

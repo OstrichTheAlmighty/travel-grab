@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:25.019Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 55,
+          "ns": 0,
+          "title": "台東区",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たいとうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Asakusa_Senso-ji_2021-12_ac_(2).jpg",
+            "wikibase_item": "Q232641"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71261,
+              "lon": 139.77997,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 8251,
+          "ns": 0,
+          "title": "江東区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こうとうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tomioka_Hachiman-gu_201708.jpg",
+            "wikibase_item": "Q215175"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67281,
+              "lon": 139.81728,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 233229,
+          "ns": 0,
+          "title": "亀戸",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かめいと",
+            "kartographer_frames": "1",
+            "page_image_free": "JR_Kameido_sta_001.jpg",
+            "wikibase_item": "Q11370950"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 976803,
+          "ns": 0,
+          "title": "亀戸中央公園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かめいとちゆうおうこうえん",
+            "page_image_free": "Kameido_chuo_park_entrance_koto_tokyo_2009.JPG",
+            "wikibase_item": "Q6631871"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70036111,
+              "lon": 139.83852778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 2823643,
+          "ns": 0,
+          "title": "亀戸駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かめいと",
+            "kartographer_frames": "1",
+            "page_image_free": "Kameido-STA_North.jpg",
+            "wikibase_item": "Q1036376"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69730556,
+              "lon": 139.82658333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区亀戸にある東日本旅客鉄道・東武鉄道の駅"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:22.534Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 840,
+          "ns": 0,
+          "title": "後藤久美子",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ことう くみこ",
+            "page_image_free": "Goto_Kumiko_from_\"Tora-san,_Wish_You_Were_Here\"_at_Opening_Ceremony_of_the_Tokyo_International_Film_Festival_2019_(49014206052).jpg",
+            "wikibase_item": "Q2480730"
+          },
+          "terms": {
+            "description": [
+              "日本の女性モデル、タレント、女優"
+            ]
+          }
+        },
+        {
+          "pageid": 101313,
+          "ns": 0,
+          "title": "コーセー",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こおせえ",
+            "page_image_free": "KOSÉ_company_logo.svg",
+            "wikibase_item": "Q18857532"
+          },
+          "terms": {
+            "description": [
+              "日本の化粧品メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 284453,
+          "ns": 0,
+          "title": "前田美波里",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "まえた ひはり",
+            "page_image_free": "Bibari-Maeda-1.jpg",
+            "wikibase_item": "Q11397709"
+          },
+          "terms": {
+            "description": [
+              "日本の女優 (1948-)"
+            ]
+          }
+        },
+        {
+          "pageid": 709677,
+          "ns": 0,
+          "title": "ポーラ (企業)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほおら",
+            "page_image_free": "Pola-logo.jpg",
+            "wikibase_item": "Q11339469"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67433333,
+              "lon": 139.76786111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都品川区にある化粧品メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 2801508,
+          "ns": 0,
+          "title": "資生堂",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しせいとう",
+            "page_image_free": "Shiodome_Tower_2024.jpg",
+            "wikibase_item": "Q728185"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66444444,
+              "lon": 139.76072222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都港区にある化粧品メーカー"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

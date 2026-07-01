@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:13.968Z",
+  "value": {
+    "searchinfo": {
+      "search": "JCII Camera Museum"
+    },
+    "search": [
+      {
+        "id": "Q21019310",
+        "title": "Q21019310",
+        "pageid": 23070757,
+        "concepturi": "http://www.wikidata.org/entity/Q21019310",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q21019310",
+        "display": {
+          "label": {
+            "value": "JCII Camera Museum",
+            "language": "en"
+          }
+        },
+        "label": "JCII Camera Museum",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "JCII Camera Museum"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

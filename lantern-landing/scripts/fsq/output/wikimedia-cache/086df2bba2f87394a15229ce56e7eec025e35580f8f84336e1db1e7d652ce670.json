@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:36.822Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 55,
+          "ns": 0,
+          "title": "台東区",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たいとうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Asakusa_Senso-ji_2021-12_ac_(2).jpg",
+            "wikibase_item": "Q232641"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71261,
+              "lon": 139.77997,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 25430,
+          "ns": 0,
+          "title": "樋口一葉",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひくち いちよう",
+            "page_image_free": "Higuchi_Ichiyou.png",
+            "wikibase_item": "Q237948"
+          },
+          "terms": {
+            "description": [
+              "小説家 (1872-1896)"
+            ]
+          }
+        },
+        {
+          "pageid": 425967,
+          "ns": 0,
+          "title": "柳澤孝彦",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やなきさわ たかひこ",
+            "wikibase_item": "Q11534458"
+          },
+          "terms": {
+            "description": [
+              "建築家"
+            ]
+          }
+        },
+        {
+          "pageid": 2099215,
+          "ns": 0,
+          "title": "野口英世記念館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "のくちひてよきねんかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Hideyo_Noguchi_Memorial_Hall.JPG",
+            "wikibase_item": "Q11645213"
+          },
+          "coordinates": [
+            {
+              "lat": 37.53611111,
+              "lon": 140.07361111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福島県猪苗代町にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 2166128,
+          "ns": 0,
+          "title": "一葉記念館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いちようきねんかん",
+            "page_image_free": "Ichiyo_Memorial_Museum.JPG",
+            "wikibase_item": "Q11353179"
+          },
+          "coordinates": [
+            {
+              "lat": 35.725556,
+              "lon": 139.792806,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある樋口一葉を称える文学館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

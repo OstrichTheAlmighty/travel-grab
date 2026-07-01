@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:22.122Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 20031,
+          "ns": 0,
+          "title": "東京国立博物館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようこくりつはくふつかん",
+            "page_image_free": "Tokyo_National_Museum,_Honkan_2010.jpg",
+            "wikibase_item": "Q653433"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71905556,
+              "lon": 139.77666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある国立博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 83842,
+          "ns": 0,
+          "title": "国立博物館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こくりつはくふつかん",
+            "page_image_free": "Tokyo_National_Museum,_Honkan_2010.jpg",
+            "wikibase_item": "Q11421232"
+          },
+          "terms": {
+            "description": [
+              "日本の独立行政法人"
+            ]
+          }
+        },
+        {
+          "pageid": 113220,
+          "ns": 0,
+          "title": "吉阪隆正",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "よしさか たかまさ",
+            "wikibase_item": "Q7677131"
+          },
+          "terms": {
+            "description": [
+              "建築家 (1917-1980)"
+            ]
+          }
+        },
+        {
+          "pageid": 1884292,
+          "ns": 0,
+          "title": "尾島俊雄",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おしま としお",
+            "wikibase_item": "Q11465152"
+          },
+          "terms": {
+            "description": [
+              "日本の建築家"
+            ]
+          }
+        },
+        {
+          "pageid": 3545316,
+          "ns": 0,
+          "title": "国立近現代建築資料館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こくりつきんけんたいけんちくしりようかん",
+            "page_image_free": "National_Archives_of_Modern_Architecture_in_Japan_1.jpg",
+            "wikibase_item": "Q28312009"
+          },
+          "terms": {
+            "description": [
+              "日本の文化庁が運営する資料館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

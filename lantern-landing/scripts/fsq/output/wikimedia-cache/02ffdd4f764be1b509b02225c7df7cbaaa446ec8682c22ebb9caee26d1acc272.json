@@ -1,0 +1,94 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:13.876Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3321,
+          "ns": 0,
+          "title": "漁業",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きよきよう",
+            "page_image_free": "Egyptian_fishery3.jpg",
+            "wikibase_item": "Q180538"
+          },
+          "terms": {
+            "description": [
+              "魚介類を捕獲したり養殖する産業"
+            ]
+          }
+        },
+        {
+          "pageid": 22865,
+          "ns": 0,
+          "title": "魚介類",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きよかいるい",
+            "page_image_free": "Pesce_al_mercato_1.JPG",
+            "wikibase_item": "Q107329976"
+          },
+          "terms": {
+            "description": [
+              "魚や貝など水産動物の総称"
+            ]
+          }
+        },
+        {
+          "pageid": 27442,
+          "ns": 0,
+          "title": "水産業",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "すいさんきよう",
+            "page_image_free": "Egyptian_fishery3.jpg",
+            "wikibase_item": "Q635139"
+          },
+          "terms": {
+            "description": [
+              "水産物を取り扱う業種の総称"
+            ]
+          }
+        },
+        {
+          "pageid": 201909,
+          "ns": 0,
+          "title": "地産地消",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ちさんちしよう",
+            "wikibase_item": "Q2674120"
+          },
+          "terms": {
+            "description": [
+              "その地域で生産されたものをその地域で消費すること"
+            ]
+          }
+        },
+        {
+          "pageid": 275592,
+          "ns": 0,
+          "title": "国際連合食糧農業機関",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こくさいれんこうしよくりようのうきようきかん",
+            "page_image_free": "FAO_logo.svg",
+            "wikibase_item": "Q82151"
+          },
+          "terms": {
+            "description": [
+              "国際連合の専門機関の一つ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

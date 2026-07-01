@@ -1,0 +1,53 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:06.844Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 11248,
+          "ns": 0,
+          "title": "成城学園前駅",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せいしようかくえんまええき",
+            "kartographer_frames": "1",
+            "page_image_free": "OER_Seijogakuen-Mae_Station_North.JPG",
+            "wikibase_item": "Q4448389"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64,
+              "lon": 139.59888889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区成城にある小田急電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 541597,
+          "ns": 0,
+          "title": "成城",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "せいしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Seijouniv2012055.jpg",
+            "wikibase_item": "Q11251371"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

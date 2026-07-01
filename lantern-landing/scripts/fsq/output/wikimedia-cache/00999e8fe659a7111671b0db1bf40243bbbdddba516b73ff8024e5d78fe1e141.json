@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:37.730Z",
+  "value": {
+    "searchinfo": {
+      "search": "スピアーズえどりくフィールド"
+    },
+    "search": [
+      {
+        "id": "Q5340173",
+        "title": "Q5340173",
+        "pageid": 5107395,
+        "concepturi": "http://www.wikidata.org/entity/Q5340173",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5340173",
+        "display": {
+          "label": {
+            "value": "Edogawa Stadium",
+            "language": "en"
+          },
+          "description": {
+            "value": "building in Seishincho, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Edogawa Stadium",
+        "description": "building in Seishincho, Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "スピアーズえどりくフィールド"
+        },
+        "aliases": [
+          "スピアーズえどりくフィールド"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

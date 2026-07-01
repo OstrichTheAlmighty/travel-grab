@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:05.365Z",
+  "value": {
+    "searchinfo": {
+      "search": "常陸宮邸"
+    },
+    "search": [
+      {
+        "id": "Q65266322",
+        "title": "Q65266322",
+        "pageid": 64906432,
+        "concepturi": "http://www.wikidata.org/entity/Q65266322",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q65266322",
+        "display": {
+          "label": {
+            "value": "Tokiwamatsu Imperial Villa",
+            "language": "en"
+          }
+        },
+        "label": "Tokiwamatsu Imperial Villa",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "常陸宮邸"
+        },
+        "aliases": [
+          "常陸宮邸"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

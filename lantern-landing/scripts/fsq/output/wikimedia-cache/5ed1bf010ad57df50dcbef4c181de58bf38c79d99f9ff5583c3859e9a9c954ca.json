@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:39.808Z",
+  "value": {
+    "searchinfo": {
+      "search": "半蔵門ミュージアム"
+    },
+    "search": [
+      {
+        "id": "Q130213553",
+        "title": "Q130213553",
+        "pageid": 124179537,
+        "concepturi": "http://www.wikidata.org/entity/Q130213553",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q130213553",
+        "display": {
+          "label": {
+            "value": "Hanzōmon Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Ichibancho, Chiyoda-ku",
+            "language": "en"
+          }
+        },
+        "label": "Hanzōmon Museum",
+        "description": "museum in Ichibancho, Chiyoda-ku",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "半蔵門ミュージアム"
+        },
+        "aliases": [
+          "半蔵門ミュージアム"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

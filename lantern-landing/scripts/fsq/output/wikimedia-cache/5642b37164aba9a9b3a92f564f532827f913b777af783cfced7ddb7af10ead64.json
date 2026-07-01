@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:21.835Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 367090,
+          "ns": 0,
+          "title": "あまいぞ!男吾",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あまいそたんこ",
+            "wikibase_item": "Q11258315"
+          },
+          "terms": {
+            "description": [
+              "1986年から1988年に連載された日本の漫画および派生作品"
+            ]
+          }
+        },
+        {
+          "pageid": 1135825,
+          "ns": 0,
+          "title": "神原大地",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かんはら たいち",
+            "wikibase_item": "Q8977305"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優 (1983-)"
+            ]
+          }
+        },
+        {
+          "pageid": 2444560,
+          "ns": 0,
+          "title": "鈴木大地 (野球)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すすき たいち",
+            "page_image_free": "Daichi_Suzuki_200916.jpg",
+            "wikibase_item": "Q11648710"
+          },
+          "terms": {
+            "description": [
+              "日本のプロ野球選手"
+            ]
+          }
+        },
+        {
+          "pageid": 3103034,
+          "ns": 0,
+          "title": "中村奨吾",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なかむら しようこ",
+            "page_image_free": "Sgnkmraaa.jpg",
+            "wikibase_item": "Q18621811"
+          },
+          "terms": {
+            "description": [
+              "日本のプロ野球選手"
+            ]
+          }
+        },
+        {
+          "pageid": 3207670,
+          "ns": 0,
+          "title": "矢野奨吾",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やの しようこ",
+            "wikibase_item": "Q24897980"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優、声優"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

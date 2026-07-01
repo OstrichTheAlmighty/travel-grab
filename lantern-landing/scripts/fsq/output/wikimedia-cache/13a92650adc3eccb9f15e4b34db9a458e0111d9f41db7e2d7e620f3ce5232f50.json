@@ -1,0 +1,86 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:33.415Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2405006,
+          "ns": 0,
+          "title": "潘めぐみ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はん めくみ",
+            "page_image_free": "Megumi_Han_(潘_めぐみ)_at_Anime_Expo_2013.jpg",
+            "wikibase_item": "Q8966502"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優、女優"
+            ]
+          }
+        },
+        {
+          "pageid": 3392062,
+          "ns": 0,
+          "title": "松田朋春",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "まつた ともはる",
+            "wikibase_item": "Q23928793"
+          },
+          "terms": {
+            "description": [
+              "日本のプランナー、詩人"
+            ]
+          }
+        },
+        {
+          "pageid": 3738767,
+          "ns": 0,
+          "title": "ガンダムビルドダイバーズ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かんたむひるとたいはあす",
+            "wikibase_item": "Q48539751"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビアニメ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 4159616,
+          "ns": 0,
+          "title": "ようこそ!ポケモンカフェ 〜まぜまぜパズル〜",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ようこそほけもんかふえませませはする",
+            "wikibase_item": "Q96406047"
+          }
+        },
+        {
+          "pageid": 4220426,
+          "ns": 0,
+          "title": "星野佑典",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほしの ゆうすけ",
+            "wikibase_item": "Q100454402"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:24.765Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 289577,
+          "ns": 0,
+          "title": "∞のギモン",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "むけんたいのきもん",
+            "wikibase_item": "Q11256172"
+          },
+          "terms": {
+            "description": [
+              "テレビ東京のバラエティ番組・関ジャニ∞の冠番組 (2005)"
+            ]
+          }
+        },
+        {
+          "pageid": 608421,
+          "ns": 0,
+          "title": "無限神刀流",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "むけんしんとうりゆう",
+            "wikibase_item": "Q11567585"
+          }
+        },
+        {
+          "pageid": 895902,
+          "ns": 0,
+          "title": "ヨシモト∞ホール大阪",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "よしもとむけんたいほおるおおさか",
+            "wikibase_item": "Q11346066"
+          }
+        },
+        {
+          "pageid": 1948788,
+          "ns": 0,
+          "title": "ムゲンノカナタヘ〜To infinity and beyond〜",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "むけんのかなたへ",
+            "wikibase_item": "Q11343079"
+          }
+        },
+        {
+          "pageid": 2384924,
+          "ns": 0,
+          "title": "五條真由美ボーカルベスト from ふたりはプリキュア",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こしようまゆみほかるへすとふろむふたりはふりきゆあ",
+            "wikibase_item": "Q11372516"
+          }
+        }
+      ]
+    }
+  }
+}

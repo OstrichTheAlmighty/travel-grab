@@ -1,0 +1,126 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:19.666Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 302861,
+          "ns": 0,
+          "title": "関西学院大学",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かんせいかくいん",
+            "page_image_free": "170311_Kwansei_Gakuin_University_Nishinomiya_Hyogo_pref_Japan08n.jpg",
+            "wikibase_item": "Q1036470"
+          },
+          "coordinates": [
+            {
+              "lat": 34.76794444,
+              "lon": 135.34655556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県西宮市にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 1034941,
+          "ns": 0,
+          "title": "法務省旧本館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ほうむしようきゆうほんかん",
+            "page_image_free": "Ministry_of_Justice_Japan01s3200.jpg",
+            "wikibase_item": "Q11244578"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67644444,
+              "lon": 139.75344444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区霞が関にある歴史的建造物"
+            ]
+          }
+        },
+        {
+          "pageid": 1109993,
+          "ns": 0,
+          "title": "明法寮",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "めいほうりよう",
+            "wikibase_item": "Q24895620"
+          },
+          "terms": {
+            "description": [
+              "司法省内に設置された法学教育機関"
+            ]
+          }
+        },
+        {
+          "pageid": 1777083,
+          "ns": 0,
+          "title": "東北大学",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうほくたいかく",
+            "page_image_free": "Aobayama_New_Campus,_Tohoku_University,_1st_Nov_2025②.jpg",
+            "wikibase_item": "Q1062129"
+          },
+          "coordinates": [
+            {
+              "lat": 38.25416667,
+              "lon": 140.87361111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "宮城県仙台市青葉区にある国立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 2640749,
+          "ns": 0,
+          "title": "獨協大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とつきようたいかく",
+            "page_image_free": "Dokkyo_University_East_Building.jpg",
+            "wikibase_item": "Q953446"
+          },
+          "coordinates": [
+            {
+              "lat": 35.83986111,
+              "lon": 139.79433333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県草加市の私立大学"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:30.766Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 257401,
+          "ns": 0,
+          "title": "勝鬨橋",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かちときはし",
+            "page_image_free": "Tsukiji_buildings.jpg",
+            "wikibase_item": "Q4844361"
+          },
+          "terms": {
+            "description": [
+              "東京都の橋"
+            ]
+          }
+        },
+        {
+          "pageid": 989169,
+          "ns": 0,
+          "title": "電気の史料館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "休てんきのしりようかん",
+            "page_image_free": "Tepco_2007_0303.JPG",
+            "wikibase_item": "Q11660383"
+          },
+          "coordinates": [
+            {
+              "lat": 35.533875,
+              "lon": 139.67302778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県横浜市にある東京電力の科学館"
+            ]
+          }
+        },
+        {
+          "pageid": 1058648,
+          "ns": 0,
+          "title": "産業観光",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さんきようかんこう",
+            "wikibase_item": "Q3534105"
+          },
+          "terms": {
+            "description": [
+              "工場や産業遺産に触れる観光"
+            ]
+          }
+        },
+        {
+          "pageid": 1246360,
+          "ns": 0,
+          "title": "海事博物館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かいしはくふつかん",
+            "page_image_free": "Wisconsin_museum.JPG",
+            "wikibase_item": "Q1863818"
+          },
+          "terms": {
+            "description": [
+              "海事に関する事柄の展示した博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

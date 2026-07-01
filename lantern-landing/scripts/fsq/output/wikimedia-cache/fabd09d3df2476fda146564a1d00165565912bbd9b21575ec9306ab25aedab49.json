@@ -1,0 +1,59 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:37:43.432Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 3393,
+          "ns": 0,
+          "title": "三越",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みつこし",
+            "page_image_free": "Mitsukoshi_Nihonbashi_main_store_9.jpg",
+            "wikibase_item": "Q1065598"
+          },
+          "terms": {
+            "description": [
+              "日本の百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 1174842,
+          "ns": 0,
+          "title": "東京むさし農業協同組合",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようむさしのうきようきようとうくみあい",
+            "page_image_free": "JA_Tokyo_Musashi.jpg",
+            "wikibase_item": "Q11524046"
+          },
+          "terms": {
+            "description": [
+              "東京都小金井市にある農業協同組合"
+            ]
+          }
+        },
+        {
+          "pageid": 2025891,
+          "ns": 0,
+          "title": "西久保",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にしくほ",
+            "page_image_free": "Musashino_postoffice.jpg",
+            "wikibase_item": "Q11627136"
+          },
+          "terms": {
+            "description": [
+              "東京都武蔵野市の地名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

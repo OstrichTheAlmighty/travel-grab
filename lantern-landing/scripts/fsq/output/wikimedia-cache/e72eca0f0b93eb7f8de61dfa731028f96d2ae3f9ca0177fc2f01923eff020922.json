@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:17:58.692Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17337,
+          "ns": 0,
+          "title": "徳冨蘆花",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とくとみ ろか",
+            "page_image_free": "Tokutomi_Roka.jpg",
+            "wikibase_item": "Q1396764"
+          },
+          "terms": {
+            "description": [
+              "日本の小説家 (1868-1927)"
+            ]
+          }
+        },
+        {
+          "pageid": 81138,
+          "ns": 0,
+          "title": "伊香保町",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "いかほまち",
+            "page_image_free": "Ikaho_Onsen_02.jpg",
+            "wikibase_item": "Q1658038"
+          },
+          "coordinates": [
+            {
+              "lat": 36.49997,
+              "lon": 138.91911,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の群馬県北群馬郡にあった町"
+            ]
+          }
+        },
+        {
+          "pageid": 113493,
+          "ns": 0,
+          "title": "文学館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふんかくかん",
+            "wikibase_item": "Q1865249"
+          },
+          "terms": {
+            "description": [
+              "作家や文学運動に関する品々を集めた博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 146774,
+          "ns": 0,
+          "title": "徳富蘇峰",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とくとみ そほう",
+            "page_image_free": "Soho_Tokutomi_1_cropped.jpg",
+            "wikibase_item": "Q708794"
+          },
+          "terms": {
+            "description": [
+              "ジャーナリスト (1863-1957)"
+            ]
+          }
+        },
+        {
+          "pageid": 284250,
+          "ns": 0,
+          "title": "蘆花恒春園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ろかこうしゆんえん",
+            "page_image_free": "Rokakosyunen.jpg",
+            "wikibase_item": "Q11625161"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66222222,
+              "lon": 139.61138889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

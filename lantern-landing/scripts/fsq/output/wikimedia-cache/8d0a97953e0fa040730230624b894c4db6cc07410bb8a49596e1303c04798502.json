@@ -1,0 +1,191 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:03.688Z",
+  "value": {
+    "searchinfo": {
+      "search": "Science Museum"
+    },
+    "search": [
+      {
+        "id": "Q588140",
+        "title": "Q588140",
+        "pageid": 553373,
+        "concepturi": "http://www.wikidata.org/entity/Q588140",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q588140",
+        "display": {
+          "label": {
+            "value": "science museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum devoted primarily to science",
+            "language": "en"
+          }
+        },
+        "label": "science museum",
+        "description": "museum devoted primarily to science",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "science museum"
+        }
+      },
+      {
+        "id": "Q674773",
+        "title": "Q674773",
+        "pageid": 635582,
+        "concepturi": "http://www.wikidata.org/entity/Q674773",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q674773",
+        "display": {
+          "label": {
+            "value": "Science Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "science museum in London, United Kingdom",
+            "language": "en"
+          }
+        },
+        "label": "Science Museum",
+        "description": "science museum in London, United Kingdom",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Science Museum"
+        }
+      },
+      {
+        "id": "Q10855424",
+        "title": "Q10855424",
+        "pageid": 12127667,
+        "concepturi": "http://www.wikidata.org/entity/Q10855424",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q10855424",
+        "display": {
+          "label": {
+            "value": "Science Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Chiyoda, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Science Museum",
+        "description": "museum in Chiyoda, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Science Museum"
+        }
+      },
+      {
+        "id": "Q7433571",
+        "title": "Q7433571",
+        "pageid": 7344449,
+        "concepturi": "http://www.wikidata.org/entity/Q7433571",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q7433571",
+        "display": {
+          "label": {
+            "value": "Science Museum Group",
+            "language": "en"
+          },
+          "description": {
+            "value": "group of science museums in the United Kingdom",
+            "language": "en"
+          }
+        },
+        "label": "Science Museum Group",
+        "description": "group of science museums in the United Kingdom",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Science Museum Group"
+        }
+      },
+      {
+        "id": "Q50815235",
+        "title": "Q50815235",
+        "pageid": 51754536,
+        "concepturi": "http://www.wikidata.org/entity/Q50815235",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q50815235",
+        "display": {
+          "label": {
+            "value": "Science Museum Group Journal",
+            "language": "en"
+          },
+          "description": {
+            "value": "Academic journal published by Science Museum, London, covering the subjects: General Works: History of scholarship and learning. The humanities | General Works: Museums. Collectors and collecting",
+            "language": "en"
+          }
+        },
+        "label": "Science Museum Group Journal",
+        "description": "Academic journal published by Science Museum, London, covering the subjects: General Works: History of scholarship and learning. The humanities | General Works: Museums. Collectors and collecting",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Science Museum Group Journal"
+        }
+      },
+      {
+        "id": "Q6125779",
+        "title": "Q6125779",
+        "pageid": 5918264,
+        "concepturi": "http://www.wikidata.org/entity/Q6125779",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6125779",
+        "display": {
+          "label": {
+            "value": "Science Museum Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "Shenzhen Metro station",
+            "language": "en"
+          }
+        },
+        "label": "Science Museum Station",
+        "description": "Shenzhen Metro station",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Science Museum Station"
+        }
+      },
+      {
+        "id": "Q130461632",
+        "title": "Q130461632",
+        "pageid": 124408086,
+        "concepturi": "http://www.wikidata.org/entity/Q130461632",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q130461632",
+        "display": {
+          "label": {
+            "value": "Science Centre metro station",
+            "language": "en"
+          },
+          "description": {
+            "value": "metro station in Mumbai, India",
+            "language": "en"
+          }
+        },
+        "label": "Science Centre metro station",
+        "description": "metro station in Mumbai, India",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "Science Museum"
+        },
+        "aliases": [
+          "Science Museum"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

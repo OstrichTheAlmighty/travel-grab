@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:47.475Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 63865,
+          "ns": 0,
+          "title": "築地市場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "つきしいちは",
+            "page_image_free": "2018_Tsukiji_fish_market.jpg",
+            "wikibase_item": "Q859471"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66138889,
+              "lon": 139.76972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて東京都中央区築地に存在した公設卸売市場"
+            ]
+          }
+        },
+        {
+          "pageid": 285386,
+          "ns": 0,
+          "title": "都営バス品川営業所",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とえいはすしなかわえいきようしよ",
+            "page_image_free": "Tobus_shinagawa-dept_office.jpg",
+            "wikibase_item": "Q11643505"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62327778,
+              "lon": 139.74072222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区にある東京都交通局のバス営業所"
+            ]
+          }
+        },
+        {
+          "pageid": 345871,
+          "ns": 0,
+          "title": "蒲田",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かまた",
+            "kartographer_frames": "1",
+            "page_image_free": "Kamata_Station.jpg",
+            "wikibase_item": "Q532302"
+          },
+          "terms": {
+            "description": [
+              "東京都大田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 929141,
+          "ns": 0,
+          "title": "東海 (大田区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうかい",
+            "kartographer_frames": "1",
+            "page_image_free": "西淡水池.JPG",
+            "wikibase_item": "Q11527752"
+          },
+          "terms": {
+            "description": [
+              "東京都大田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1778099,
+          "ns": 0,
+          "title": "大田区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-International-Airport_Satellite.jpg",
+            "wikibase_item": "Q217234"
+          },
+          "coordinates": [
+            {
+              "lat": 35.56128,
+              "lon": 139.71603,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

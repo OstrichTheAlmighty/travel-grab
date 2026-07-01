@@ -1,0 +1,85 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:18:04.275Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 289469,
+          "ns": 0,
+          "title": "浅草花やしき",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あさくさはなやしき",
+            "kartographer_frames": "1",
+            "page_image_free": "Asakusa_Hanayashiki_-01.jpg",
+            "wikibase_item": "Q863180"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71546111,
+              "lon": 139.79467778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区の遊園地"
+            ]
+          }
+        },
+        {
+          "pageid": 381368,
+          "ns": 0,
+          "title": "土曜一番!花やしき",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とよういちはんはなやしき",
+            "wikibase_item": "Q11423629"
+          },
+          "terms": {
+            "description": [
+              "フジテレビ系列の朝の情報番組 (1998-2000)"
+            ]
+          }
+        },
+        {
+          "pageid": 1087215,
+          "ns": 0,
+          "title": "花やしきアクターズスタジオ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はなやしきあくたすすたしお",
+            "wikibase_item": "Q11615086"
+          }
+        },
+        {
+          "pageid": 3920726,
+          "ns": 0,
+          "title": "浅草花やしきPresents ヤングシーザー杯 in 花やしき〜 act.2",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あさくさはなやしきPresentsやんくしいさあはいinはなやしきact.2",
+            "wikibase_item": "Q65272366"
+          }
+        },
+        {
+          "pageid": 3997221,
+          "ns": 0,
+          "title": "SHOOT BOXING 花やしき Extreme.1",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Shoot BoxingはなやしきExtreme.1",
+            "wikibase_item": "Q85867212"
+          }
+        }
+      ]
+    }
+  }
+}

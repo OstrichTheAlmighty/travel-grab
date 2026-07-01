@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:13.100Z",
+  "value": {
+    "searchinfo": {
+      "search": "平和祈念展示資料館"
+    },
+    "search": [
+      {
+        "id": "Q56025796",
+        "title": "Q56025796",
+        "pageid": 55975221,
+        "concepturi": "http://www.wikidata.org/entity/Q56025796",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q56025796",
+        "display": {
+          "label": {
+            "value": "Memorial Museum for Soldiers, Detainees in Siberia, and Postwar Repatriates",
+            "language": "en"
+          }
+        },
+        "label": "Memorial Museum for Soldiers, Detainees in Siberia, and Postwar Repatriates",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "平和祈念展示資料館"
+        },
+        "aliases": [
+          "平和祈念展示資料館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

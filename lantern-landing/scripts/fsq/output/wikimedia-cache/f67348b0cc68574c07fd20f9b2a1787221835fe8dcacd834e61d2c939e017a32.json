@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:13:53.547Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 249277,
+          "ns": 0,
+          "title": "東京ディズニーシー・ホテルミラコスタ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいしいほてるみらこすた",
+            "page_image_free": "Tokyo_disneysea_hotel_miracosta.jpg",
+            "wikibase_item": "Q195432"
+          },
+          "terms": {
+            "description": [
+              "千葉県浦安市の東京ディズニーリゾートにあるホテル"
+            ]
+          }
+        },
+        {
+          "pageid": 487449,
+          "ns": 0,
+          "title": "ドラマティック・ディズニーシー",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とらまていつくていすにいしい",
+            "wikibase_item": "Q11323140"
+          }
+        },
+        {
+          "pageid": 493656,
+          "ns": 0,
+          "title": "東京ディズニーシーのサービス施設の一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいしいのさあひすしせついちらん",
+            "wikibase_item": "Q11524254"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 610671,
+          "ns": 0,
+          "title": "Sea of Dreams 〜Tokyo DisneySea 5th Anniversary Theme Song〜",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しいおふとりいむすとうきようていすにいしいふいふすあにはあさりいてえまそんく",
+            "wikibase_item": "Q7440087"
+          },
+          "terms": {
+            "description": [
+              "MISIAの16枚目のシングル"
+            ]
+          }
+        },
+        {
+          "pageid": 943186,
+          "ns": 0,
+          "title": "東京ディズニーシー",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきよううていすにいしい",
+            "page_image_free": "Tokyo_DisneySea_logo.svg",
+            "wikibase_item": "Q1202341"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62666944,
+              "lon": 139.88806111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県浦安市にあるテーマパーク"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

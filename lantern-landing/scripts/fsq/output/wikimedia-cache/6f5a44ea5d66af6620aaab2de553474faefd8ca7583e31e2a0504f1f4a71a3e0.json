@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:39.005Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 27002,
+          "ns": 0,
+          "title": "Tobacco pipe",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Tobacco Pipe",
+            "page_image_free": "Peterson_System_Standard_Pipe.jpg",
+            "wikibase-shortdesc": "Instrument for smoking tobacco or other products",
+            "wikibase_item": "Q104526"
+          },
+          "terms": {
+            "description": [
+              "tool specifically made to smoke tobacco or other products"
+            ]
+          }
+        },
+        {
+          "pageid": 30942,
+          "ns": 0,
+          "title": "Tobacco",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "DunhillLightFlake.jpg",
+            "wikibase-shortdesc": "Agricultural product processed from the leaves of plants in the genus Nicotiana",
+            "wikibase_item": "Q1566"
+          },
+          "terms": {
+            "description": [
+              "agricultural product processed from the leaves of plants in genus nicotiana"
+            ]
+          }
+        },
+        {
+          "pageid": 521502,
+          "ns": 0,
+          "title": "Japan Tobacco",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Japan_Tobacco_logo.svg",
+            "wikibase-shortdesc": "Japanese cigarette manufacturing company",
+            "wikibase_item": "Q898568"
+          },
+          "terms": {
+            "description": [
+              "cigarette manufacturing company"
+            ]
+          }
+        },
+        {
+          "pageid": 65612437,
+          "ns": 0,
+          "title": "Jinnan, Shibuya",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Yoyogi_Gymnasium.jpg",
+            "wikibase-shortdesc": "District in Shibuya, Tokyo, Japan",
+            "wikibase_item": "Q11588784"
+          },
+          "terms": {
+            "description": [
+              "neighborhood in Shibuya-ku, Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 68834280,
+          "ns": 0,
+          "title": "Tobacco and Salt Museum",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tobacco_&_Salt_Museum_(Tokyo).JPG",
+            "wikibase-shortdesc": "Museum in Tokyo, Japan",
+            "wikibase_item": "Q11271253"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70580556,
+              "lon": 139.80852778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Museum in Tokyo, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

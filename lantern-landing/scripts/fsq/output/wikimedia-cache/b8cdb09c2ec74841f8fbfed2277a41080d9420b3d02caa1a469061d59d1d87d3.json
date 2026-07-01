@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:34.213Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18986,
+          "ns": 0,
+          "title": "荒川区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あらかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "Entsuji_(Arakawa)_08.jpg",
+            "wikibase_item": "Q232624"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73611,
+              "lon": 139.78339,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 346683,
+          "ns": 0,
+          "title": "田端 (東京都北区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たはた",
+            "kartographer_frames": "1",
+            "page_image_free": "TabataBunshimuraKinenkan20120109.jpg",
+            "wikibase_item": "Q3512734"
+          },
+          "terms": {
+            "description": [
+              "東京都北区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 949123,
+          "ns": 0,
+          "title": "あらかわ遊園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あらかわゆうえん",
+            "page_image_free": "Arakawa_yuen_wheel.jpg",
+            "wikibase_item": "Q17191904"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75361111,
+              "lon": 139.75861111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都荒川区の遊園地"
+            ]
+          }
+        },
+        {
+          "pageid": 1043955,
+          "ns": 0,
+          "title": "西日暮里",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にしにつほり",
+            "kartographer_frames": "1",
+            "page_image_free": "開成中学校高等学校.JPG",
+            "wikibase_item": "Q3342140"
+          },
+          "terms": {
+            "description": [
+              "東京都荒川区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1396646,
+          "ns": 0,
+          "title": "大井 (品川区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおい",
+            "kartographer_frames": "1",
+            "page_image_free": "Ooimachi-Sta.JPG",
+            "wikibase_item": "Q11432118"
+          },
+          "terms": {
+            "description": [
+              "東京都品川区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

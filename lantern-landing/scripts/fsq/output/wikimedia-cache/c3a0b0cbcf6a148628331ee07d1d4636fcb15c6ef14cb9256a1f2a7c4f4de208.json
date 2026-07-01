@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:46.769Z",
+  "value": {
+    "searchinfo": {
+      "search": "領土主権展示館"
+    },
+    "search": [
+      {
+        "id": "Q47495157",
+        "title": "Q47495157",
+        "pageid": 48538242,
+        "concepturi": "http://www.wikidata.org/entity/Q47495157",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q47495157",
+        "display": {
+          "label": {
+            "value": "National Museum of Territory and Sovereignty",
+            "language": "en"
+          },
+          "description": {
+            "value": "Official museum displaying maps and photos of Japan’s sovereign territory against territorial claims by its neighbours, China and South Korea",
+            "language": "en"
+          }
+        },
+        "label": "National Museum of Territory and Sovereignty",
+        "description": "Official museum displaying maps and photos of Japan’s sovereign territory against territorial claims by its neighbours, China and South Korea",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "領土主権展示館"
+        },
+        "aliases": [
+          "領土主権展示館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

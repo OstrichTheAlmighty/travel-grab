@@ -1,0 +1,76 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:43.620Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 492269,
+          "ns": 0,
+          "title": "東京ディズニーランドのサービス施設の一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいらんとのさあひすしせついちらん",
+            "wikibase_item": "Q11524282"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 493656,
+          "ns": 0,
+          "title": "東京ディズニーシーのサービス施設の一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいしいのさあひすしせついちらん",
+            "wikibase_item": "Q11524254"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1775463,
+          "ns": 0,
+          "title": "ススペ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "すすへ",
+            "page_image_free": "Marianas_Business_Plaza.JPG",
+            "wikibase_item": "Q5919781"
+          }
+        },
+        {
+          "pageid": 3563676,
+          "ns": 0,
+          "title": "桜MISSION〜プリキュアリレーション〜/君を呼ぶ場所",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さくらみつしよんふりきゆありれえしよんきみをよふはしよ",
+            "wikibase_item": "Q30924036"
+          }
+        },
+        {
+          "pageid": 4488827,
+          "ns": 0,
+          "title": "ムチャブリ! わたしが社長になるなんて",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "むちやふり わたしかしやちようになるなんて",
+            "wikibase_item": "Q110814299"
+          }
+        }
+      ]
+    }
+  }
+}

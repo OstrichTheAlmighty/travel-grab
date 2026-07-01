@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:32.121Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 496,
+          "ns": 0,
+          "title": "少女漫画",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しようしよまんか",
+            "wikibase_item": "Q242492"
+          },
+          "terms": {
+            "description": [
+              "10代の女性読者を対象とした漫画"
+            ]
+          }
+        },
+        {
+          "pageid": 8587,
+          "ns": 0,
+          "title": "名古屋市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "なこやし",
+            "kartographer_frames": "1",
+            "page_image_free": "View_of_Westward_from_Sky_Deck_MIRAI360,_Nishiki_Naka_Ward_Nagoya_2022.jpg",
+            "wikibase_item": "Q11751"
+          },
+          "coordinates": [
+            {
+              "lat": 35.1814,
+              "lon": 136.9064,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 124383,
+          "ns": 0,
+          "title": "今夜もドル箱",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こんやもとるはこ",
+            "wikibase_item": "Q11376841"
+          }
+        },
+        {
+          "pageid": 647767,
+          "ns": 0,
+          "title": "刑事吉永誠一 涙の事件簿",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "けいしよしなかせいいち なみたのしけんほ",
+            "wikibase_item": "Q11396333"
+          }
+        },
+        {
+          "pageid": 1543998,
+          "ns": 0,
+          "title": "阿澄佳奈",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あすみ かな",
+            "page_image_free": "Asumi_Kana_2021.png",
+            "wikibase_item": "Q49474"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

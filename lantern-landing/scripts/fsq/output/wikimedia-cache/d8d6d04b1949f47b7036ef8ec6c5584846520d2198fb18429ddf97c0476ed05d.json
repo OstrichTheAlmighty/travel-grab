@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:05.596Z",
+  "value": {
+    "searchinfo": {
+      "search": "宝莱山古墳"
+    },
+    "search": [
+      {
+        "id": "Q11452676",
+        "title": "Q11452676",
+        "pageid": 12592182,
+        "concepturi": "http://www.wikidata.org/entity/Q11452676",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11452676",
+        "display": {
+          "label": {
+            "value": "Hōraisan Kofun",
+            "language": "en"
+          }
+        },
+        "label": "Hōraisan Kofun",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "宝莱山古墳"
+        },
+        "aliases": [
+          "宝莱山古墳"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

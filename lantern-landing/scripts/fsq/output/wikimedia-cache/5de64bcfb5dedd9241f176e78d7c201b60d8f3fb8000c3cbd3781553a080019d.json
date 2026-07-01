@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:48.216Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 26473,
+          "ns": 0,
+          "title": "フランクフルト・アム・マイン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふらんくふるとあむまいん",
+            "kartographer_frames": "1",
+            "page_image_free": "Skyline_Frankfurt_am_Main_2015.jpg",
+            "wikibase_item": "Q1794"
+          },
+          "coordinates": [
+            {
+              "lat": 50.11055556,
+              "lon": 8.68222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "ドイツの都市"
+            ]
+          }
+        },
+        {
+          "pageid": 28918,
+          "ns": 0,
+          "title": "立教大学",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "りつきようたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Rikkyo_University_1.jpg",
+            "wikibase_item": "Q1143235"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7305,
+              "lon": 139.70394444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 37115,
+          "ns": 0,
+          "title": "多摩区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たまく",
+            "kartographer_frames": "1",
+            "page_image_free": "藤子・F・不二雄ミュージアム_-_panoramio.jpg",
+            "wikibase_item": "Q1076769"
+          },
+          "coordinates": [
+            {
+              "lat": 35.61952778,
+              "lon": 139.56211111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県川崎市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 64338,
+          "ns": 0,
+          "title": "トキワ荘",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ときわそう",
+            "kartographer_frames": "1",
+            "page_image": "Tokiwasou_Hanasaki_Park.JPG",
+            "page_image_free": "Modello_3D_Edificio_Tokiwa-sō_3.png",
+            "wikibase_item": "Q841272"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72408333,
+              "lon": 139.68830556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて日本の東京都豊島区にあったアパート"
+            ]
+          }
+        },
+        {
+          "pageid": 2378181,
+          "ns": 0,
+          "title": "キンシオ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きんしお",
+            "wikibase_item": "Q11297928"
+          },
+          "terms": {
+            "description": [
+              "テレビ神奈川制作のテレビ番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

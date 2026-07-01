@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:16.778Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 37585,
+          "ns": 0,
+          "title": "Museum",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Museo_Chileno_de_Arte_Precolombino_-_2020_-_10.jpg",
+            "wikibase-shortdesc": "Institution preserving and interpreting collections or heritage",
+            "wikibase_item": "Q33506"
+          },
+          "terms": {
+            "description": [
+              "institution that holds artifacts and other objects of scientific, artistic, cultural, historical, or other importance"
+            ]
+          }
+        },
+        {
+          "pageid": 4167411,
+          "ns": 0,
+          "title": "Night at the Museum",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Night At The Museum",
+            "displaytitle": "<i>Night at the Museum</i>",
+            "page_image": "Night_at_the_Museum_poster.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "2006 film directed by Shawn Levy",
+            "wikibase_item": "Q387601"
+          },
+          "terms": {
+            "description": [
+              "2006 film by Shawn Levy"
+            ]
+          }
+        },
+        {
+          "pageid": 13820394,
+          "ns": 0,
+          "title": "The Museum (album)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Museum, The",
+            "displaytitle": "<i>The Museum</i> (album)",
+            "page_image": "The_Museum_(Album_Cover).jpg",
+            "wikibase-shortdesc": "2007 greatest hits album by Nana Mizuki",
+            "wikibase_item": "Q3132668"
+          },
+          "terms": {
+            "description": [
+              "album by Nana Mizuki"
+            ]
+          }
+        },
+        {
+          "pageid": 16075790,
+          "ns": 0,
+          "title": "Museum (disambiguation)",
+          "index": 1,
+          "pageprops": {
+            "disambiguation": "",
+            "toc": "",
+            "wikibase-shortdesc": "Topics referred to by the same term",
+            "wikibase_item": "Q105944793"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        },
+        {
+          "pageid": 39773399,
+          "ns": 0,
+          "title": "The Museum of Innocence (museum)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Museum of Innocence (museum), The",
+            "kartographer_frames": "1",
+            "page_image_free": "The_Museum_of_Innocence.jpg",
+            "wikibase-shortdesc": "Specialized museum in Beyoğlu, Istanbul",
+            "wikibase_item": "Q15961492"
+          },
+          "coordinates": [
+            {
+              "lat": 41.030906,
+              "lon": 28.9797878,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "museum located in the district Çukurcuma in Beyoğlu district of Istanbul in Turkey"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

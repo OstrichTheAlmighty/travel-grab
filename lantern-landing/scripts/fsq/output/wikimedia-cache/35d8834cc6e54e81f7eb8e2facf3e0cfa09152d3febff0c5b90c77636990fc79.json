@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:13.349Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 10741,
+          "ns": 0,
+          "title": "練馬区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ねりまく",
+            "kartographer_frames": "1",
+            "page_image_free": "三宝寺池と厳島神社（2021年5月）.jpg",
+            "wikibase_item": "Q232655"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73553,
+              "lon": 139.65169,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 290071,
+          "ns": 0,
+          "title": "森山栄治",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "もりやま えいし",
+            "wikibase_item": "Q3546299"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優、声優"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3154821,
+          "ns": 0,
+          "title": "コサキン・天海の超発掘!ものまねバラエティー マネもの",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こさきんあまみのちようはつくつものまねはらえていまねもの",
+            "wikibase_item": "Q20038517"
+          }
+        },
+        {
+          "pageid": 3275585,
+          "ns": 0,
+          "title": "じゅん散歩",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しゆんさんほ",
+            "toc": "",
+            "wikibase_item": "Q22123635"
+          },
+          "terms": {
+            "description": [
+              "テレビ朝日系列の紀行番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:17.488Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 36572,
+          "ns": 0,
+          "title": "東京スタジアム (多目的スタジアム)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようすたしあむ",
+            "kartographer_links": "1",
+            "page_image_free": "AJINOMOTO_Studium_entrance_202509.jpg",
+            "wikibase_item": "Q412824"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66416667,
+              "lon": 139.52722222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都調布市にある多目的スタジアム"
+            ]
+          }
+        },
+        {
+          "pageid": 47221,
+          "ns": 0,
+          "title": "名古屋市瑞穂公園陸上競技場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なこやしみすほこうえんりくしようきようきしよう",
+            "page_image_free": "Mizuho_nigiwai202605.jpg",
+            "wikibase_item": "Q1190418"
+          },
+          "coordinates": [
+            {
+              "lat": 35.122375,
+              "lon": 136.94432222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県名古屋市瑞穂区の陸上競技場"
+            ]
+          }
+        },
+        {
+          "pageid": 67790,
+          "ns": 0,
+          "title": "日本のサッカー競技場一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんのさつかあきようきしよういちらん",
+            "wikibase_item": "Q16867545"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 136565,
+          "ns": 0,
+          "title": "武蔵野市立武蔵野陸上競技場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "むさしのしりつむさしのりくしようきようきしよう",
+            "page_image_free": "Musashino_Athretic_Stadium.JPG",
+            "wikibase_item": "Q6940180"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71785278,
+              "lon": 139.5676,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都武蔵野市の陸上競技場"
+            ]
+          }
+        },
+        {
+          "pageid": 149255,
+          "ns": 0,
+          "title": "国立代々木競技場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こくりつよよききようきしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Yoyogi-National-First-Gymnasium-01.jpg",
+            "wikibase_item": "Q1069457"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66775,
+              "lon": 139.70013889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にあるスポーツ施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

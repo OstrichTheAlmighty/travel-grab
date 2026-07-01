@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:12.263Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 994705,
+          "ns": 0,
+          "title": "地獄先生ぬ〜べ〜の登場人物",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しこくせんせいぬうへえのとうしようしんふつ",
+            "wikibase_item": "Q3266994"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3692831,
+          "ns": 0,
+          "title": "みんなのうた年度別放送楽曲一覧 (1960年代)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みんなのうたねんとへつほうそうかつきよくいちらん",
+            "wikibase_item": "Q48750306"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3900169,
+          "ns": 0,
+          "title": "抜きゲーみたいな島に住んでる貧乳はどうすりゃいいですか?",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ぬきけえみたいなしまにすんてるわたしはとうすりやいいてすか",
+            "page_image_free": "Nukitashi_Logo.png",
+            "wikibase_item": "Q65269040"
+          },
+          "terms": {
+            "description": [
+              "日本の成人向けノベルゲーム"
+            ]
+          }
+        },
+        {
+          "pageid": 4749888,
+          "ns": 0,
+          "title": "ちんちん山児童遊園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ちんちんやましとうゆうえん",
+            "page_image_free": "Chinchin-yama_Park.jpg",
+            "unexpectedUnconnectedPage": "0"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75936111,
+              "lon": 139.73177778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

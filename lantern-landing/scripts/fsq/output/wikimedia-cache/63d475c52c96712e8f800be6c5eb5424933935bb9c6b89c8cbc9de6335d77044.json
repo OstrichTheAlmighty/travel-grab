@@ -1,0 +1,129 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:51.283Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 10191,
+          "ns": 0,
+          "title": "Edo",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Location_TokyoJapan.jpg",
+            "wikibase-shortdesc": "Former city in Musashi, Japan",
+            "wikibase_item": "Q215646"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68388889,
+              "lon": 139.77444444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "former name of Tokyo, capital of Tokugawa Shogunate (1603-1868)"
+            ]
+          }
+        },
+        {
+          "pageid": 164945,
+          "ns": 0,
+          "title": "Edo period",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Edo Period",
+            "wikibase-shortdesc": "Japanese history from 1600 to 1868",
+            "wikibase_item": "Q184963"
+          },
+          "terms": {
+            "description": [
+              "period of Japanese history from 1600 to 1868, during the rule of the Tokugawa shogunate"
+            ]
+          }
+        },
+        {
+          "pageid": 2191770,
+          "ns": 0,
+          "title": "Edo-Tokyo Open Air Architectural Museum",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Edo-Tokyo_Open_Air_Architectural_Museum_PB252276.jpg",
+            "wikibase-shortdesc": "Architecture museum in Tokyo, Japan",
+            "wikibase_item": "Q1051229"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71582222,
+              "lon": 139.51261389,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "museum"
+            ]
+          }
+        },
+        {
+          "pageid": 8989934,
+          "ns": 0,
+          "title": "Edo-Tokyo Museum",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Edo-Tokyo_Museum.jpg",
+            "wikibase-shortdesc": "Historical museum in Tokyo, Japan",
+            "wikibase_item": "Q1191042"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69640278,
+              "lon": 139.79610278,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "museum in Sumida, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 63768187,
+          "ns": 0,
+          "title": "Fukagawa Edo Museum",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Fukagawa_Edo_Museum.JPG",
+            "wikibase-shortdesc": "Edo museum in Kōtō, Tokyo, Japan",
+            "wikibase_item": "Q3090685"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68103,
+              "lon": 139.80057,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "museum of local history in Tokyo, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

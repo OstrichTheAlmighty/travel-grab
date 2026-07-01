@@ -1,0 +1,57 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:01.602Z",
+  "value": {
+    "searchinfo": {
+      "search": "apollostation"
+    },
+    "search": [
+      {
+        "id": "Q114731101",
+        "title": "Q114731101",
+        "pageid": 109411538,
+        "concepturi": "http://www.wikidata.org/entity/Q114731101",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q114731101",
+        "display": {
+          "label": {
+            "value": "Apollostation",
+            "language": "en"
+          },
+          "description": {
+            "value": "Japanese gas station chain",
+            "language": "en"
+          }
+        },
+        "label": "Apollostation",
+        "description": "Japanese gas station chain",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Apollostation"
+        }
+      },
+      {
+        "id": "Q109359410",
+        "title": "Q109359410",
+        "pageid": 104522805,
+        "concepturi": "http://www.wikidata.org/entity/Q109359410",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q109359410",
+        "display": {
+          "label": {
+            "value": "Apollostation Drive Discovery PRESS",
+            "language": "ja"
+          }
+        },
+        "label": "Apollostation Drive Discovery PRESS",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "Apollostation Drive Discovery PRESS"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

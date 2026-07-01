@@ -1,0 +1,134 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:28.338Z",
+  "value": {
+    "searchinfo": {
+      "search": "国立西洋美術館"
+    },
+    "search": [
+      {
+        "id": "Q1362629",
+        "title": "Q1362629",
+        "pageid": 1302185,
+        "concepturi": "http://www.wikidata.org/entity/Q1362629",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1362629",
+        "display": {
+          "label": {
+            "value": "National Museum of Western Art",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "National Museum of Western Art",
+        "description": "art museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "国立西洋美術館"
+        },
+        "aliases": [
+          "国立西洋美術館"
+        ]
+      },
+      {
+        "id": "Q11421301",
+        "title": "Q11421301",
+        "pageid": 12560059,
+        "concepturi": "http://www.wikidata.org/entity/Q11421301",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11421301",
+        "display": {
+          "label": {
+            "value": "list of works in the National Museum of Western Art",
+            "language": "en"
+          },
+          "description": {
+            "value": "Wikimedia list article",
+            "language": "en"
+          }
+        },
+        "label": "list of works in the National Museum of Western Art",
+        "description": "Wikimedia list article",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "国立西洋美術館の収蔵作品一覧"
+        },
+        "aliases": [
+          "国立西洋美術館の収蔵作品一覧"
+        ]
+      },
+      {
+        "id": "Q113475838",
+        "title": "Q113475838",
+        "pageid": 108250628,
+        "concepturi": "http://www.wikidata.org/entity/Q113475838",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q113475838",
+        "display": {
+          "label": {
+            "value": "Annual bulletin of the National Museum of Western Art",
+            "language": "en"
+          }
+        },
+        "label": "Annual bulletin of the National Museum of Western Art",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "国立西洋美術館報"
+        },
+        "aliases": [
+          "国立西洋美術館報"
+        ]
+      },
+      {
+        "id": "Q111646479",
+        "title": "Q111646479",
+        "pageid": 106583555,
+        "concepturi": "http://www.wikidata.org/entity/Q111646479",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q111646479",
+        "display": {
+          "label": {
+            "value": "The National Museum of Western Art, Tokyo - Publications Repository",
+            "language": "en"
+          }
+        },
+        "label": "The National Museum of Western Art, Tokyo - Publications Repository",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "国立西洋美術館出版物リポジトリ"
+        },
+        "aliases": [
+          "国立西洋美術館出版物リポジトリ"
+        ]
+      },
+      {
+        "id": "Q113475754",
+        "title": "Q113475754",
+        "pageid": 108250546,
+        "concepturi": "http://www.wikidata.org/entity/Q113475754",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q113475754",
+        "display": {
+          "label": {
+            "value": "国立西洋美術館研究紀要",
+            "language": "ja"
+          }
+        },
+        "label": "国立西洋美術館研究紀要",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "国立西洋美術館研究紀要"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

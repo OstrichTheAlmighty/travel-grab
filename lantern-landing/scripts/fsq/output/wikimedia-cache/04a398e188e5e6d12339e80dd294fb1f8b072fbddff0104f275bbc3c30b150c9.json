@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:04.488Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 299672,
+          "ns": 0,
+          "title": "リラックマ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "りらつくま",
+            "page_image_free": "Rilakkuma.jpg",
+            "wikibase_item": "Q1137445"
+          },
+          "terms": {
+            "description": [
+              "サンエックスのキャラクター"
+            ]
+          }
+        },
+        {
+          "pageid": 988383,
+          "ns": 0,
+          "title": "ジュピター (ゲーム会社)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しゆひたあ",
+            "page_image_free": "Jupiter_logo.png",
+            "wikibase_item": "Q2613004"
+          },
+          "coordinates": [
+            {
+              "lat": 34.93255556,
+              "lon": 135.75825,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の京都府京都市にあるゲーム会社"
+            ]
+          }
+        },
+        {
+          "pageid": 1930847,
+          "ns": 0,
+          "title": "上坂すみれ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "うえさか すみれ",
+            "page_image_free": "Sumire_Uesaka_cropped_3_Sumire_Uesaka_and_Yoshio_Higuchi_20191006.jpg",
+            "wikibase_item": "Q874605"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優、タレント、歌手"
+            ]
+          }
+        },
+        {
+          "pageid": 3048861,
+          "ns": 0,
+          "title": "がっこうぐらし!",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かつこうくらし",
+            "wikibase_item": "Q17751436"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画・アニメ作品"
+            ]
+          }
+        },
+        {
+          "pageid": 3084848,
+          "ns": 0,
+          "title": "すみっコぐらし",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すみつこくらし",
+            "page_image_free": "Tmtp20201127.jpg",
+            "wikibase_item": "Q21073120"
+          },
+          "terms": {
+            "description": [
+              "サンエックスのキャラクター"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

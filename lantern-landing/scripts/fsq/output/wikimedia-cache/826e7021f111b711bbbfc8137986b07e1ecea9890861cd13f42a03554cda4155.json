@@ -1,0 +1,62 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:45.656Z",
+  "value": {
+    "searchinfo": {
+      "search": "Drum Museum"
+    },
+    "search": [
+      {
+        "id": "Q104698257",
+        "title": "Q104698257",
+        "pageid": 100126211,
+        "concepturi": "http://www.wikidata.org/entity/Q104698257",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q104698257",
+        "display": {
+          "label": {
+            "value": "Drum Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "Japanese drum museum",
+            "language": "en"
+          }
+        },
+        "label": "Drum Museum",
+        "description": "Japanese drum museum",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Drum Museum"
+        }
+      },
+      {
+        "id": "Q907065",
+        "title": "Q907065",
+        "pageid": 857767,
+        "concepturi": "http://www.wikidata.org/entity/Q907065",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q907065",
+        "display": {
+          "label": {
+            "value": "Drum Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Cegléd, Hungary",
+            "language": "en"
+          }
+        },
+        "label": "Drum Museum",
+        "description": "museum in Cegléd, Hungary",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Drum Museum"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:28.686Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8251,
+          "ns": 0,
+          "title": "江東区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こうとうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tomioka_Hachiman-gu_201708.jpg",
+            "wikibase_item": "Q215175"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67281,
+              "lon": 139.81728,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 75513,
+          "ns": 0,
+          "title": "船堀駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふなほり",
+            "kartographer_frames": "1",
+            "page_image_free": "Funabori_Station-2.jpg",
+            "wikibase_item": "Q1041252"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68380556,
+              "lon": 139.86430556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江戸川区船堀にある東京都交通局の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 1099800,
+          "ns": 0,
+          "title": "船堀",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふなほり",
+            "kartographer_frames": "1",
+            "page_image_free": "Funabori_Tower_and_Funabori_station.jpg",
+            "wikibase_item": "Q11614002"
+          },
+          "terms": {
+            "description": [
+              "東京都江戸川区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1691666,
+          "ns": 0,
+          "title": "東京都の観光地",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようと",
+            "page_image_free": "東京都区部-観光地図-1.jpg",
+            "wikibase_item": "Q10860697"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3973880,
+          "ns": 0,
+          "title": "タワーホール船堀",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たわあほおるふなほり",
+            "kartographer_frames": "1",
+            "page_image_free": "Funabori1.jpg",
+            "wikibase_item": "Q85872174"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68438889,
+              "lon": 139.86486111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江戸川区にある区立の複合文化施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

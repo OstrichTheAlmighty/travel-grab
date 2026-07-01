@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:20.095Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18873,
+          "ns": 0,
+          "title": "落語家",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "らくこか",
+            "page_image_free": "春風亭正太郎さん_2015_(23717025705).jpg",
+            "wikibase_item": "Q11620676"
+          },
+          "terms": {
+            "description": [
+              "落語を演じることを職業とする人"
+            ]
+          }
+        },
+        {
+          "pageid": 29201,
+          "ns": 0,
+          "title": "華道",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かとう",
+            "page_image_free": "Ikebana_enshu-way.jpg",
+            "wikibase_item": "Q178459"
+          },
+          "terms": {
+            "description": [
+              "植物のみや、植物を主にその他様々な材料を組み合わせて構成し、鑑賞する芸術"
+            ]
+          }
+        },
+        {
+          "pageid": 443919,
+          "ns": 0,
+          "title": "茶道",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さとう",
+            "page_image_free": "Outdoor_Tea_Ceremony.jpg",
+            "wikibase_item": "Q202298"
+          },
+          "terms": {
+            "description": [
+              "湯を沸かし、茶を点て、茶を振る舞う行為"
+            ]
+          }
+        },
+        {
+          "pageid": 3331690,
+          "ns": 0,
+          "title": "りゅうおうのおしごと!",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "りゆうおうのおしこと",
+            "wikibase_item": "Q24868819"
+          },
+          "terms": {
+            "description": [
+              "日本のライトノベル、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 3348337,
+          "ns": 0,
+          "title": "Ryuchell",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "りゆうちえる",
+            "displaytitle": "ryuchell",
+            "page_image_free": "Super!_C_CHANNEL_2019_Ryuchell_(48803952253).jpg",
+            "wikibase_item": "Q24260049"
+          },
+          "terms": {
+            "description": [
+              "日本の読者モデル、タレント、歌手 (1995-2023)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

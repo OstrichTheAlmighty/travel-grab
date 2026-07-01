@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:22.586Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 20328,
+          "ns": 0,
+          "title": "吉川英治",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "よしかわ えいし",
+            "page_image_free": "Eiji_Yoshikawa.jpg",
+            "wikibase_item": "Q221957"
+          },
+          "terms": {
+            "description": [
+              "小説家 (1892-1962)"
+            ]
+          }
+        },
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 236910,
+          "ns": 0,
+          "title": "横須賀造船所",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "よこすかそうせんしよ",
+            "page_image_free": "Yokosukazousen.jpg",
+            "wikibase_item": "Q10364786"
+          },
+          "terms": {
+            "description": [
+              "江戸幕府により横須賀市に開設された造船所"
+            ]
+          }
+        },
+        {
+          "pageid": 1149492,
+          "ns": 0,
+          "title": "エース (鞄)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "えす",
+            "wikibase_item": "Q11291542"
+          },
+          "terms": {
+            "description": [
+              "日本の鞄メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 1976940,
+          "ns": 0,
+          "title": "1月17日",
+          "index": 5,
+          "pageprops": {
+            "wikibase_item": "Q2264"
+          },
+          "terms": {
+            "description": [
+              "日付"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

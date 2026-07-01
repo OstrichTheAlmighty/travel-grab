@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:02.625Z",
+  "value": {
+    "searchinfo": {
+      "search": "物流博物館"
+    },
+    "search": [
+      {
+        "id": "Q21654524",
+        "title": "Q21654524",
+        "pageid": 23695015,
+        "concepturi": "http://www.wikidata.org/entity/Q21654524",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q21654524",
+        "display": {
+          "label": {
+            "value": "Museum of Logistics",
+            "language": "en"
+          }
+        },
+        "label": "Museum of Logistics",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "物流博物館"
+        },
+        "aliases": [
+          "物流博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

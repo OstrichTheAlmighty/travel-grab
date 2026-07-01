@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:52.019Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 247616,
+          "ns": 0,
+          "title": "Picnic",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Thomas_Cole's_\"The_Picnic\",_Brooklyn_Museum_IMG_3787.JPG",
+            "wikibase-shortdesc": "Excursion at which a meal is eaten outdoors",
+            "wikibase_item": "Q506294"
+          },
+          "terms": {
+            "description": [
+              "an excursion at which a meal is eaten outdoors"
+            ]
+          }
+        },
+        {
+          "pageid": 378297,
+          "ns": 0,
+          "title": "Rest area",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Bundesautobahn_24_-_Linumer_Bruch_Nord.JPG",
+            "wikibase-shortdesc": "Public area, usually adjacent to limited-access highway, used for rest from travel",
+            "wikibase_item": "Q786014"
+          },
+          "terms": {
+            "description": [
+              "public area, usually adjacent to limited-access highway, used for rest from travel"
+            ]
+          }
+        },
+        {
+          "pageid": 48061364,
+          "ns": 0,
+          "title": "Collier Springs Picnic Area",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Collier_Springs_Shelter.jpg",
+            "wikibase-shortdesc": "United States historic place",
+            "wikibase_item": "Q21197500"
+          },
+          "coordinates": [
+            {
+              "lat": 34.48361111,
+              "lon": -93.5925,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "mountain hut in Arkansas, United States of America"
+            ]
+          }
+        },
+        {
+          "pageid": 60951045,
+          "ns": 0,
+          "title": "Ekşisu Picnic Area",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Ehsiso Picnic Area",
+            "page_image_free": "Ekşisu..._-_panoramio.jpg",
+            "wikibase_item": "Q65043584"
+          },
+          "coordinates": [
+            {
+              "lat": 39.73361111,
+              "lon": 39.61472222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 81523157,
+          "ns": 0,
+          "title": "Cumberland Knob Picnic Area",
+          "index": 5,
+          "pageprops": {
+            "wikibase-shortdesc": "Blue Ridge Parkway Picnic Area",
+            "wikibase_item": "Q136871480"
+          },
+          "terms": {
+            "description": [
+              "blue Ridge Parkway Picnic Area"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

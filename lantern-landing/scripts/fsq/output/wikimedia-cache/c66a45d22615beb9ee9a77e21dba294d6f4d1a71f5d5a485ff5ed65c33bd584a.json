@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:37.409Z",
+  "value": {
+    "searchinfo": {
+      "search": "Meiji Memorial Picture Gallery"
+    },
+    "search": [
+      {
+        "id": "Q5153794",
+        "title": "Q5153794",
+        "pageid": 4925704,
+        "concepturi": "http://www.wikidata.org/entity/Q5153794",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5153794",
+        "display": {
+          "label": {
+            "value": "Meiji Memorial Picture Gallery",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Meiji Memorial Picture Gallery",
+        "description": "museum in Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Meiji Memorial Picture Gallery"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

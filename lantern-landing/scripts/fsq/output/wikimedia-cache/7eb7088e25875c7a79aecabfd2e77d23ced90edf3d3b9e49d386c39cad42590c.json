@@ -1,0 +1,74 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:13:54.904Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 121855,
+          "ns": 0,
+          "title": "ロンド・ベル",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ろんとへる",
+            "wikibase_item": "Q11350853"
+          },
+          "terms": {
+            "description": [
+              "ガンダムシリーズの登場組織"
+            ]
+          }
+        },
+        {
+          "pageid": 179919,
+          "ns": 0,
+          "title": "ジングルベル",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しんくるへる",
+            "page_image_free": "Jingle_Bells_refrain_vector.svg",
+            "wikibase_item": "Q406845"
+          }
+        },
+        {
+          "pageid": 900382,
+          "ns": 0,
+          "title": "ベル 412",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "へる412",
+            "page_image_free": "Elicottero_Bell_412_Elifly.jpg",
+            "wikibase_item": "Q815688"
+          }
+        },
+        {
+          "pageid": 1107140,
+          "ns": 0,
+          "title": "バディ・ベル",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "へる はてい",
+            "page_image_free": "Buddy_Bell_-_Cleveland_Indians.jpg",
+            "wikibase_item": "Q2927525"
+          }
+        },
+        {
+          "pageid": 2467583,
+          "ns": 0,
+          "title": "ベル&ハウエル",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "へるはうえる",
+            "page_image_free": "Zaprudercamera.jpg",
+            "wikibase_item": "Q815669"
+          }
+        }
+      ]
+    }
+  }
+}

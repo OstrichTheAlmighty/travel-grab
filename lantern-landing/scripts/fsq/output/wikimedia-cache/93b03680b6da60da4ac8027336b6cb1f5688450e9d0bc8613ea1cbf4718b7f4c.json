@@ -1,0 +1,109 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:23.512Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1391,
+          "ns": 0,
+          "title": "携帯電話",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "けいたいてんわ",
+            "page_image_free": "NTT_DoCoMo_FOMA_P706imu_open.jpg",
+            "wikibase_item": "Q17517"
+          },
+          "terms": {
+            "description": [
+              "電話機を携帯する形の移動体通信システム、およびその一部たる電話機"
+            ]
+          }
+        },
+        {
+          "pageid": 4495,
+          "ns": 0,
+          "title": "NTTドコモ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "えぬていていとこも",
+            "page_image_free": "Sanno-Park-Tower-01.jpg",
+            "wikibase_item": "Q853958"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67313889,
+              "lon": 139.74066667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都千代田区にある電気通信事業者"
+            ]
+          }
+        },
+        {
+          "pageid": 310124,
+          "ns": 0,
+          "title": "NTT",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "えぬていてい",
+            "page_image_free": "Otemachi_1st_Square.jpg",
+            "wikibase_item": "Q1054787"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68580556,
+              "lon": 139.76433333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の特殊会社。通信キャリア。"
+            ]
+          }
+        },
+        {
+          "pageid": 1588610,
+          "ns": 0,
+          "title": "ドコモ・モバイル",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とこももはいる",
+            "page_image_free": "Kokusaiakasaka.JPG",
+            "wikibase_item": "Q11322671"
+          }
+        },
+        {
+          "pageid": 1636493,
+          "ns": 0,
+          "title": "NTTドコモ墨田ビル",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えぬていていとこもすみたひる",
+            "page_image_free": "Docomo_sumida_2012.JPG",
+            "wikibase_item": "Q11236089"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69833333,
+              "lon": 139.79583333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

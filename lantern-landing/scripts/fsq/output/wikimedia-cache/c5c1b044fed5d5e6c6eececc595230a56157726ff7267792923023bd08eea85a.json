@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:00.986Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4168720,
+          "ns": 0,
+          "title": "San Giorgio Maggiore at Dusk",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "San Giorgio Maggiore at Dusk",
+            "displaytitle": "<i>San Giorgio Maggiore at Dusk</i>",
+            "page_image_free": "Amgueddfa_Cymru_-_San_Giorgio_Maggiore_yn_y_Gwyll_-_San_Giorgio_Maggiore,_Twilight_-_220983.jpeg",
+            "wikibase-shortdesc": "Painting by Claude Monet",
+            "wikibase_item": "Q3947218"
+          },
+          "terms": {
+            "description": [
+              "painting by Claude Monet, National Museum Cardiff"
+            ]
+          }
+        },
+        {
+          "pageid": 16810548,
+          "ns": 0,
+          "title": "Artizon Museum",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Artizon_Museum_Tokyo.jpg",
+            "wikibase-shortdesc": "Art museum in Tokyo, Japan",
+            "wikibase_item": "Q913808"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6789,
+              "lon": 139.7719,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "art museum in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 31858605,
+          "ns": 0,
+          "title": "Yoshimasa Hosoya",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Hosoya, Yoshimasa",
+            "page_image_free": "Hosokawa_Yoshimasa_from_\"Komada_-A_Whisky_Family-\"_at_Red_Carpet_of_the_Tokyo_International_Film_Festival_2023_(53348308018).jpg",
+            "wikibase-shortdesc": "Japanese voice actor and narrator (born 1982)",
+            "wikibase_item": "Q1139886"
+          },
+          "terms": {
+            "description": [
+              "Japanese voice actor"
+            ]
+          }
+        },
+        {
+          "pageid": 51981705,
+          "ns": 0,
+          "title": "Paul Hayes Tucker",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Tucker, Paul Hayes",
+            "page_image_free": "Paul_Hayes_Tucker.png",
+            "wikibase-shortdesc": "American art historian",
+            "wikibase_item": "Q15267111"
+          },
+          "terms": {
+            "description": [
+              "art historian"
+            ]
+          }
+        },
+        {
+          "pageid": 72044192,
+          "ns": 0,
+          "title": "On the Terrace at Sèvres",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "On the Terrace at Sèvres",
+            "displaytitle": "<i>On the Terrace at Sèvres</i>",
+            "page_image_free": "Bracquemond.sevres.jpg",
+            "wikibase-shortdesc": "Painting by Marie Bracquemond",
+            "wikibase_item": "Q15882518"
+          },
+          "terms": {
+            "description": [
+              "painting by Marie Bracquemond"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

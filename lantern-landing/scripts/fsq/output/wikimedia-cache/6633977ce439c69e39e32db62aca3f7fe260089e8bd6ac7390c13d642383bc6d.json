@@ -1,0 +1,36 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:18.157Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1778099,
+          "ns": 0,
+          "title": "大田区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-International-Airport_Satellite.jpg",
+            "wikibase_item": "Q217234"
+          },
+          "coordinates": [
+            {
+              "lat": 35.56128,
+              "lon": 139.71603,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

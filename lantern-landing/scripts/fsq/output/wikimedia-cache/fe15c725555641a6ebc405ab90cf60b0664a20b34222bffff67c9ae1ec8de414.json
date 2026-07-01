@@ -1,0 +1,98 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:39.813Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 34566,
+          "ns": 0,
+          "title": "浦和駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "うらわえき",
+            "kartographer_frames": "1",
+            "page_image_free": "JRE_Urawa-STA_West-atre.jpg",
+            "wikibase_item": "Q652141"
+          },
+          "coordinates": [
+            {
+              "lat": 35.85849167,
+              "lon": 139.65745278,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県さいたま市浦和区高砂にある東日本旅客鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 126031,
+          "ns": 0,
+          "title": "兵庫県出身の人物一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひようこけんしゆつしんのしんふつ",
+            "toc": "",
+            "wikibase_item": "Q11392879"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 173293,
+          "ns": 0,
+          "title": "日本最後の一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にほんさいこのいちらん",
+            "wikibase_item": "Q11508280"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 758933,
+          "ns": 0,
+          "title": "華屋与兵衛 (レストラン)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はなやよへい",
+            "page_image_free": "JR_Shinagawa_East_Bldg.jpg",
+            "wikibase_item": "Q11620063"
+          },
+          "terms": {
+            "description": [
+              "日本の和食ファミリーレストランチェーン"
+            ]
+          }
+        },
+        {
+          "pageid": 1662252,
+          "ns": 0,
+          "title": "類設計室",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "るいせつけいしつ",
+            "page_image_free": "南東面外観（Ｓ）.png",
+            "wikibase_item": "Q11665177"
+          }
+        }
+      ]
+    }
+  }
+}

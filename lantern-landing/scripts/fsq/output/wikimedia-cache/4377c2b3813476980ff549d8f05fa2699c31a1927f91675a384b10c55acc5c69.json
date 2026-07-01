@@ -1,0 +1,100 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:24.980Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 7624,
+          "ns": 0,
+          "title": "ヨハン・ヴォルフガング・フォン・ゲーテ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "けて よはん うおるふかんく",
+            "page_image_free": "Goethe_(Stieler_1828).jpg",
+            "wikibase_item": "Q5879"
+          },
+          "terms": {
+            "description": [
+              "ドイツの詩人、小説家、政治家、科学者 (1749–1832)"
+            ]
+          }
+        },
+        {
+          "pageid": 72141,
+          "ns": 0,
+          "title": "高松宮殿下記念世界文化賞",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たかまつのみやてんかきねんせかいふんかしよう",
+            "wikibase_item": "Q268670"
+          },
+          "terms": {
+            "description": [
+              "日本美術協会によって1988年に創設された賞"
+            ]
+          }
+        },
+        {
+          "pageid": 113493,
+          "ns": 0,
+          "title": "文学館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふんかくかん",
+            "wikibase_item": "Q1865249"
+          },
+          "terms": {
+            "description": [
+              "作家や文学運動に関する品々を集めた博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 196464,
+          "ns": 0,
+          "title": "高橋健二 (ドイツ文学者)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たかはし けんし",
+            "wikibase_item": "Q11671011"
+          },
+          "terms": {
+            "description": [
+              "日本のドイツ文学者、翻訳家 (1902-1998)"
+            ]
+          }
+        },
+        {
+          "pageid": 3109117,
+          "ns": 0,
+          "title": "東京ゲーテ記念館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようけてかいかん",
+            "page_image_free": "Goethe_Archive_Tokyo_Building.JPG",
+            "wikibase_item": "Q20041605"
+          },
+          "coordinates": [
+            {
+              "lat": 35.74619444,
+              "lon": 139.73955556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都北区にある私立図書館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

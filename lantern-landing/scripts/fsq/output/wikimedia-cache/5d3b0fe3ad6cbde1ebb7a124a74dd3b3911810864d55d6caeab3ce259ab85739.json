@@ -1,0 +1,130 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:34.788Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 13823,
+          "ns": 0,
+          "title": "神戸市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こうへし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kobe_montage1.jpg",
+            "wikibase_item": "Q48320"
+          },
+          "coordinates": [
+            {
+              "lat": 34.69017,
+              "lon": 135.19544,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 658605,
+          "ns": 0,
+          "title": "仙台市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せんたいし",
+            "kartographer_frames": "1",
+            "page_image_free": "Sendai_Tanabata_2023.jpg",
+            "wikibase_item": "Q46747"
+          },
+          "coordinates": [
+            {
+              "lat": 38.26822,
+              "lon": 140.86942,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "宮城県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 1050619,
+          "ns": 0,
+          "title": "すずめのお宿緑地公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すすめのおやとりよくちこうえん",
+            "page_image_free": "Suzume_no_oyado_ryokuchi_park_meguro.JPG",
+            "wikibase_item": "Q11269700"
+          },
+          "coordinates": [
+            {
+              "lat": 35.61788889,
+              "lon": 139.68466667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都目黒区の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1691666,
+          "ns": 0,
+          "title": "東京都の観光地",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようと",
+            "page_image_free": "東京都区部-観光地図-1.jpg",
+            "wikibase_item": "Q10860697"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1842138,
+          "ns": 0,
+          "title": "宇都宮市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "うつのみやし",
+            "kartographer_frames": "1",
+            "page_image_free": "Utsunomiya_montage.jpg",
+            "wikibase_item": "Q200589"
+          },
+          "coordinates": [
+            {
+              "lat": 36.55511,
+              "lon": 139.88256,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "栃木県庁所在地"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:46.281Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 5629,
+          "ns": 0,
+          "title": "8月21日",
+          "index": 2,
+          "pageprops": {
+            "wikibase_item": "Q2823"
+          },
+          "terms": {
+            "description": [
+              "日付"
+            ]
+          }
+        },
+        {
+          "pageid": 119515,
+          "ns": 0,
+          "title": "氷点",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひようてん",
+            "wikibase_item": "Q11549629"
+          },
+          "terms": {
+            "description": [
+              "三浦綾子の小説"
+            ]
+          }
+        },
+        {
+          "pageid": 129513,
+          "ns": 0,
+          "title": "長崎県出身の人物一覧",
+          "index": 5,
+          "pageprops": {
+            "toc": "",
+            "wikibase_item": "Q11652648"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1609069,
+          "ns": 0,
+          "title": "北村治禧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きたむら はるよし",
+            "wikibase_item": "Q11402006"
+          },
+          "terms": {
+            "description": [
+              "1915-2001, 彫刻家"
+            ]
+          }
+        },
+        {
+          "pageid": 1969743,
+          "ns": 0,
+          "title": "佐々木知子",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ささき ともこ",
+            "page_image_free": "Tomoko_Sasaki_2003.jpg",
+            "wikibase_item": "Q7820169"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:35.025Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 223707,
+          "ns": 0,
+          "title": "東京ディズニーランドのアトラクションの一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいらんとのあとらくしよん",
+            "wikibase_item": "Q6600320"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1566174,
+          "ns": 0,
+          "title": "フロンティアランド",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふろんていあらんと",
+            "wikibase_item": "Q11334159"
+          }
+        },
+        {
+          "pageid": 1650290,
+          "ns": 0,
+          "title": "トムソーヤ島",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とむそやとう",
+            "wikibase_item": "Q3530881"
+          },
+          "terms": {
+            "description": [
+              "ディズニーパークにある人工島"
+            ]
+          }
+        },
+        {
+          "pageid": 3446914,
+          "ns": 0,
+          "title": "ディズニーランドのアトラクション",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ていすにいらんとのあとらくしよん",
+            "wikibase_item": "Q6569067"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

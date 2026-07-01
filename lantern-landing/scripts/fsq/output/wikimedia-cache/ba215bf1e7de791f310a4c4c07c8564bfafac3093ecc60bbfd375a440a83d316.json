@@ -1,0 +1,81 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:15.941Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 26797,
+          "ns": 0,
+          "title": "はてな (企業)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はてな",
+            "page_image_free": "Hatena_top_page_Dec_2008.gif",
+            "wikibase_item": "Q848325"
+          },
+          "terms": {
+            "description": [
+              "日本のインターネットサービス会社"
+            ]
+          }
+        },
+        {
+          "pageid": 325107,
+          "ns": 0,
+          "title": "はてなをさがそう",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はてなをさかそう",
+            "wikibase_item": "Q11275648"
+          }
+        },
+        {
+          "pageid": 903111,
+          "ns": 0,
+          "title": "ブログ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふろく",
+            "page_image_free": "Internet_map_1024_-_transparent,_inverted.png",
+            "wikibase_item": "Q30849"
+          },
+          "terms": {
+            "description": [
+              "World Wide Web上のウェブページに、覚え書きや論評などを記すウェブサイト"
+            ]
+          }
+        },
+        {
+          "pageid": 1886388,
+          "ns": 0,
+          "title": "うごメモはてな",
+          "index": 5,
+          "pageprops": {
+            "wikibase_item": "Q11260325"
+          }
+        },
+        {
+          "pageid": 2692446,
+          "ns": 0,
+          "title": "はてなのサービス一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はてなのさあひすいちらん",
+            "wikibase_item": "Q11275646"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

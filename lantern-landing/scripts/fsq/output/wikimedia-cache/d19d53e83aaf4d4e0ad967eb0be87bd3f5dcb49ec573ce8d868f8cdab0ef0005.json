@@ -1,0 +1,119 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:13:55.920Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 296907,
+          "ns": 0,
+          "title": "フードテーマパーク",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふうとてえまはあく",
+            "page_image_free": "Shinyokohama_ramen_museum.jpg",
+            "wikibase_item": "Q5465533"
+          },
+          "terms": {
+            "description": [
+              "食を題材としたテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 338680,
+          "ns": 0,
+          "title": "ナンジャタウン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "なんしやたうん",
+            "wikibase_item": "Q5364305"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72861111,
+              "lon": 139.72,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京・池袋にある屋内型テーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 498800,
+          "ns": 0,
+          "title": "バンダイナムコアミューズメント",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はんたいなむこあみゆうすめんと",
+            "page_image_free": "Namco_HQ_at_Shibaura.jpg",
+            "wikibase_item": "Q111516144"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64541944,
+              "lon": 139.74856111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都港区にあるアミューズメント事業会社、バンダイナムコホールディングスの完全子会社"
+            ]
+          }
+        },
+        {
+          "pageid": 1541967,
+          "ns": 0,
+          "title": "橘田いずみ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きつた いすみ",
+            "page_image_free": "Izumi_Kitta.jpg",
+            "wikibase_item": "Q3391078"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 1842138,
+          "ns": 0,
+          "title": "宇都宮市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "うつのみやし",
+            "kartographer_frames": "1",
+            "page_image_free": "Utsunomiya_montage.jpg",
+            "wikibase_item": "Q200589"
+          },
+          "coordinates": [
+            {
+              "lat": 36.55511,
+              "lon": 139.88256,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "栃木県庁所在地"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

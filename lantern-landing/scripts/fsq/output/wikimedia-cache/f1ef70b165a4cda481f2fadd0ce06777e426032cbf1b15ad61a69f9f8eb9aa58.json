@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:33.033Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4055,
+          "ns": 0,
+          "title": "都営地下鉄三田線",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とえいちかてつみたせん",
+            "page_image_free": "Toei_Series6500-6510.jpg",
+            "wikibase_item": "Q1374506"
+          },
+          "terms": {
+            "description": [
+              "東京都交通局の鉄道路線"
+            ]
+          }
+        },
+        {
+          "pageid": 8591,
+          "ns": 0,
+          "title": "都営地下鉄浅草線",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とえいちかてつあさくさせん",
+            "page_image_free": "Asakusa-Line_Series5500-5503.jpg",
+            "wikibase_item": "Q720653"
+          },
+          "terms": {
+            "description": [
+              "東京都交通局の鉄道路線"
+            ]
+          }
+        },
+        {
+          "pageid": 8633,
+          "ns": 0,
+          "title": "都営地下鉄大江戸線",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とえいちかてつおおえとせん",
+            "page_image_free": "Toei_12-600(Batch_3)_69F.jpg",
+            "wikibase_item": "Q384862"
+          },
+          "terms": {
+            "description": [
+              "東京都交通局の鉄道路線"
+            ]
+          }
+        },
+        {
+          "pageid": 12184,
+          "ns": 0,
+          "title": "東京メトロ南北線",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようめとろなんほくせん",
+            "page_image_free": "Tokyo-Metro_Series9000R-9803.jpg",
+            "wikibase_item": "Q520772"
+          },
+          "terms": {
+            "description": [
+              "東京地下鉄の鉄道路線"
+            ]
+          }
+        },
+        {
+          "pageid": 1551524,
+          "ns": 0,
+          "title": "都営地下鉄新宿線",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とえいちかてつしんしゆくせん",
+            "page_image_free": "Shinjuku-Line_Series10-300_10-629.jpg",
+            "wikibase_item": "Q1374502"
+          },
+          "terms": {
+            "description": [
+              "東京都交通局の鉄道路線"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

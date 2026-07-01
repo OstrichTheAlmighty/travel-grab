@@ -1,0 +1,123 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:08.483Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2692048,
+          "ns": 0,
+          "title": "Nagatachō Station",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Nagatacho Station",
+            "page_image_free": "Nagatachō_Station_Entrance.JPG",
+            "wikibase-shortdesc": "Metro station in Chiyoda, Tokyo, Japan",
+            "wikibase_item": "Q1142211"
+          },
+          "coordinates": [
+            {
+              "lat": 35.678747,
+              "lon": 139.74026,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "metro station in Chiyoda, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 9139239,
+          "ns": 0,
+          "title": "Akasaka-mitsuke Station",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Akasaka-Mitsuke Station",
+            "page_image_free": "Akasakamitsuke-Sta-1and2.jpg",
+            "wikibase-shortdesc": "Metro station in Tokyo, Japan",
+            "wikibase_item": "Q602384"
+          },
+          "coordinates": [
+            {
+              "lat": 35.676821,
+              "lon": 139.737119,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "metro station in Minato, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 23212533,
+          "ns": 0,
+          "title": "Yamanote and Shitamachi",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Yamanote_Shitamachi.gif",
+            "wikibase-shortdesc": "Areas of Tokyo",
+            "wikibase_item": "Q67406560"
+          },
+          "terms": {
+            "description": [
+              "Areas of Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 39998095,
+          "ns": 0,
+          "title": "Toranomon Hills",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Toranomon_Hills_3_towers.jpg",
+            "wikibase-shortdesc": "Skyscraper complex in Tokyo, Japan",
+            "wikibase_item": "Q16724433"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66694444,
+              "lon": 139.74944444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "building in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 43707873,
+          "ns": 0,
+          "title": "Peter Marino",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Marino, Peter",
+            "page_image_free": "Peter-Marino-Architect.jpg",
+            "wikibase-shortdesc": "American architect (born 1949)",
+            "wikibase_item": "Q17745628"
+          },
+          "terms": {
+            "description": [
+              "American architect"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

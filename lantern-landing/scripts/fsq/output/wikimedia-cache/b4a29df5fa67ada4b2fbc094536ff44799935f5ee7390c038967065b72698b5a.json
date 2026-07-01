@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:17.846Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 41170,
+          "ns": 0,
+          "title": "立川市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たちかわし",
+            "kartographer_frames": "1",
+            "page_image_free": "Tama_Intercity_Monorail_viewed_from_Green_Springs.jpg",
+            "wikibase_item": "Q269634"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71394,
+              "lon": 139.40792,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の市"
+            ]
+          }
+        },
+        {
+          "pageid": 63150,
+          "ns": 0,
+          "title": "防災",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほうさい",
+            "page_image_free": "Blocks_-_Pantelleria,_Trapani,_Italy_-_August_15,_2016.jpg",
+            "wikibase_item": "Q1460420"
+          },
+          "terms": {
+            "description": [
+              "災害への備え"
+            ]
+          }
+        },
+        {
+          "pageid": 89336,
+          "ns": 0,
+          "title": "東京消防庁",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようしようほうちよう",
+            "page_image_free": "Fire_Mark_of_Tokyo_Fire_Department.svg",
+            "wikibase_item": "Q1162928"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68883333,
+              "lon": 139.76155556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の消防本部"
+            ]
+          }
+        },
+        {
+          "pageid": 329886,
+          "ns": 0,
+          "title": "自主防災組織",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ししゆほうさいそしき",
+            "wikibase_item": "Q11612591"
+          },
+          "terms": {
+            "description": [
+              "災害対策基本法第5条2において規定されている、地域住民による任意の防災組織"
+            ]
+          }
+        },
+        {
+          "pageid": 949056,
+          "ns": 0,
+          "title": "消防博物館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しようほうはくふつかん",
+            "page_image_free": "TED-museum.jpg",
+            "wikibase_item": "Q11559505"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区四谷にある東京消防庁に関する博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

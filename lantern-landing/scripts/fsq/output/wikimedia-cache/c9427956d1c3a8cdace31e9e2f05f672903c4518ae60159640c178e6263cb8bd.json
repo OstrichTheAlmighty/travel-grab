@@ -1,0 +1,194 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:01.048Z",
+  "value": {
+    "searchinfo": {
+      "search": "雷門"
+    },
+    "search": [
+      {
+        "id": "Q2378708",
+        "title": "Q2378708",
+        "pageid": 2298048,
+        "concepturi": "http://www.wikidata.org/entity/Q2378708",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2378708",
+        "display": {
+          "label": {
+            "value": "Kaminarimon",
+            "language": "en"
+          },
+          "description": {
+            "value": "the outer of two large entrance gates that ultimately leads to the Sensō-ji",
+            "language": "en"
+          }
+        },
+        "label": "Kaminarimon",
+        "description": "the outer of two large entrance gates that ultimately leads to the Sensō-ji",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "雷門"
+        },
+        "aliases": [
+          "雷門"
+        ]
+      },
+      {
+        "id": "Q11660197",
+        "title": "Q11660197",
+        "pageid": 12800237,
+        "concepturi": "http://www.wikidata.org/entity/Q11660197",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11660197",
+        "display": {
+          "label": {
+            "value": "Kaminarimon",
+            "language": "en"
+          },
+          "description": {
+            "value": "town located in Taitō-ku, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Kaminarimon",
+        "description": "town located in Taitō-ku, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "雷門"
+        },
+        "aliases": [
+          "雷門"
+        ]
+      },
+      {
+        "id": "Q38034088",
+        "title": "Q38034088",
+        "pageid": 39402738,
+        "concepturi": "http://www.wikidata.org/entity/Q38034088",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q38034088",
+        "display": {
+          "label": {
+            "value": "Raimon Junior High School",
+            "language": "en"
+          },
+          "description": {
+            "value": "fictional educational institution in the media franchise Inazuma Eleven",
+            "language": "en"
+          }
+        },
+        "label": "Raimon Junior High School",
+        "description": "fictional educational institution in the media franchise Inazuma Eleven",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "雷門中学校"
+        },
+        "aliases": [
+          "雷門中学校"
+        ]
+      },
+      {
+        "id": "Q38034276",
+        "title": "Q38034276",
+        "pageid": 39402923,
+        "concepturi": "http://www.wikidata.org/entity/Q38034276",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q38034276",
+        "display": {
+          "label": {
+            "value": "Raimon JHFC",
+            "language": "en"
+          }
+        },
+        "label": "Raimon JHFC",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "雷門中サッカー部"
+        },
+        "aliases": [
+          "雷門中サッカー部"
+        ]
+      },
+      {
+        "id": "Q11660199",
+        "title": "Q11660199",
+        "pageid": 12800239,
+        "concepturi": "http://www.wikidata.org/entity/Q11660199",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11660199",
+        "display": {
+          "label": {
+            "value": "Sukeroku Kaminarimon",
+            "language": "en"
+          }
+        },
+        "label": "Sukeroku Kaminarimon",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "雷門助六"
+        },
+        "aliases": [
+          "雷門助六"
+        ]
+      },
+      {
+        "id": "Q24876395",
+        "title": "Q24876395",
+        "pageid": 26837205,
+        "concepturi": "http://www.wikidata.org/entity/Q24876395",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q24876395",
+        "display": {
+          "label": {
+            "value": "Sansada",
+            "language": "en"
+          }
+        },
+        "label": "Sansada",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "雷門三定"
+        },
+        "aliases": [
+          "雷門三定"
+        ]
+      },
+      {
+        "id": "Q47509729",
+        "title": "Q47509729",
+        "pageid": 48552969,
+        "concepturi": "http://www.wikidata.org/entity/Q47509729",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q47509729",
+        "display": {
+          "label": {
+            "value": "Kaminarimon Street",
+            "language": "en"
+          },
+          "description": {
+            "value": "road in Taito, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Kaminarimon Street",
+        "description": "road in Taito, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "雷門通り"
+        },
+        "aliases": [
+          "雷門通り"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

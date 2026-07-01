@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:03.232Z",
+  "value": {
+    "searchinfo": {
+      "search": "GATE 15"
+    },
+    "search": [
+      {
+        "id": "Q27882407",
+        "title": "Q27882407",
+        "pageid": 29591110,
+        "concepturi": "http://www.wikidata.org/entity/Q27882407",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q27882407",
+        "display": {
+          "label": {
+            "value": "Gate 15: Black diagonal",
+            "language": "en"
+          },
+          "description": {
+            "value": "painting by Colin McCahon",
+            "language": "en"
+          }
+        },
+        "label": "Gate 15: Black diagonal",
+        "description": "painting by Colin McCahon",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Gate 15: Black diagonal"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

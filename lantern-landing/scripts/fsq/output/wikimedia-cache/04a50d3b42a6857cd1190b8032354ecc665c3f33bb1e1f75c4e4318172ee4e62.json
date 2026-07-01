@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:29.253Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 680412,
+          "ns": 0,
+          "title": "Tokyo Dome",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Dome_(52480559907).jpg",
+            "wikibase-shortdesc": "Indoor stadium in Bunkyo, Tokyo, Japan",
+            "wikibase_item": "Q733748"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7056,
+              "lon": 139.7519,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "indoor stadium in Bunkyō, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 2909407,
+          "ns": 0,
+          "title": "Tokyo Dome City",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "LaQua01s3872.jpg",
+            "wikibase-shortdesc": "Entertainment complex in Tokyo, Japan",
+            "wikibase_item": "Q564554"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70561944,
+              "lon": 139.75189444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "entertainment complex in Bunkyo, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 3644729,
+          "ns": 0,
+          "title": "January 4 Tokyo Dome Show",
+          "index": 5,
+          "pageprops": {
+            "wikibase-shortdesc": "New Japan Pro-Wrestling event series",
+            "wikibase_item": "Q864814"
+          },
+          "terms": {
+            "description": [
+              "professional wrestling supercard"
+            ]
+          }
+        },
+        {
+          "pageid": 45334713,
+          "ns": 0,
+          "title": "Tokyo Dome Live in Concert",
+          "index": 3,
+          "pageprops": {
+            "displaytitle": "<i>Tokyo Dome Live in Concert</i>",
+            "page_image": "Van_Halen_-_Tokyo_Dome_Live_in_Concert.jpg",
+            "wikibase-shortdesc": "2015 live album by Van Halen",
+            "wikibase_item": "Q19264012"
+          },
+          "terms": {
+            "description": [
+              "2015 live album by Van Halen"
+            ]
+          }
+        },
+        {
+          "pageid": 65840879,
+          "ns": 0,
+          "title": "In Your Area World Tour",
+          "index": 4,
+          "pageprops": {
+            "wikibase-shortdesc": "2018–2020 concert tour by Blackpink",
+            "wikibase_item": "Q59773557"
+          },
+          "terms": {
+            "description": [
+              "2019–2020 concert tour by Blackpink"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

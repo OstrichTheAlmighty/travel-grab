@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:53.056Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 112129,
+          "ns": 0,
+          "title": "東京都電車",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようとてんしや",
+            "page_image_free": "Toden8800_4colors_20101225.jpg",
+            "wikibase_item": "Q7814005"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都交通局が運営する路面電車路線"
+            ]
+          }
+        },
+        {
+          "pageid": 171841,
+          "ns": 0,
+          "title": "荒川車庫前停留場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あらかわしやこまえ",
+            "kartographer_frames": "1",
+            "page_image_free": "Toden-Arakawashakomae-Sta.jpg",
+            "wikibase_item": "Q11618624"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75086111,
+              "lon": 139.75275,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都荒川区西尾久にある都電荒川線の停留場"
+            ]
+          }
+        },
+        {
+          "pageid": 203357,
+          "ns": 0,
+          "title": "広場",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひろは",
+            "page_image_free": "Milano_galleria_piazza_duomo.jpg",
+            "wikibase_item": "Q174782"
+          },
+          "terms": {
+            "description": [
+              "都市において歩行者が集まる広く平らな公共の空間"
+            ]
+          }
+        },
+        {
+          "pageid": 766378,
+          "ns": 0,
+          "title": "荒川電車営業所",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あらかわてんしやえいきようしよ",
+            "page_image_free": "Toden-Arakawa-Branch-1.jpg",
+            "wikibase_item": "Q11618636"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75,
+              "lon": 139.75,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "都電荒川線の営業所"
+            ]
+          }
+        },
+        {
+          "pageid": 1029351,
+          "ns": 0,
+          "title": "都電荒川線",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とてんあらかわせん",
+            "page_image_free": "TodenArakawaline8800Asukayama2.jpg",
+            "wikibase_item": "Q1064795"
+          },
+          "terms": {
+            "description": [
+              "東京都荒川区から新宿区に至る東京都交通局の軌道路線"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

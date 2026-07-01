@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:18.491Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 252443,
+          "ns": 0,
+          "title": "ACNチャンピオンシップゴルフトーナメント",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ACNちやんひおんしつふこるふとおなめんと",
+            "wikibase_item": "Q5270770"
+          }
+        },
+        {
+          "pageid": 966117,
+          "ns": 0,
+          "title": "ジャックス (信販)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しやつくす",
+            "page_image_free": "Ebisu_Neonart,_at_Ebisu,_Shibuya,_Tokyo_(2019-05-04)_02.jpg",
+            "wikibase_item": "Q11309831"
+          },
+          "terms": {
+            "description": [
+              "日本の北海道函館市にある信販会社"
+            ]
+          }
+        },
+        {
+          "pageid": 1427824,
+          "ns": 0,
+          "title": "十六銀行",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しゆうろくきんこう",
+            "page_image_free": "Juroku_Bank_Head_Store.JPG",
+            "wikibase_item": "Q11404883"
+          },
+          "terms": {
+            "description": [
+              "岐阜県岐阜市にある地方銀行"
+            ]
+          }
+        },
+        {
+          "pageid": 1442029,
+          "ns": 0,
+          "title": "三菱UFJ銀行",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みつひしゆうえふしえいきんこう",
+            "page_image_free": "Industry_Club_of_Japan,_Mitsubishi_UFJ_Trust_and_Banking_Building.jpg",
+            "wikibase_item": "Q988284"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6785,
+              "lon": 139.76422222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の銀行"
+            ]
+          }
+        },
+        {
+          "pageid": 4055514,
+          "ns": 0,
+          "title": "景井ひな",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かけい ひな",
+            "page_image_free": "Tokyo-Game-Show-2024-Day4---2024-09-29_455.jpg",
+            "wikibase_item": "Q80117147"
+          },
+          "terms": {
+            "description": [
+              "日本のタレント、TikToker"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

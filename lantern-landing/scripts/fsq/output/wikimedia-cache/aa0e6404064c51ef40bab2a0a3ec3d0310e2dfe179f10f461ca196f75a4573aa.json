@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:56.483Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 769825,
+          "ns": 0,
+          "title": "篠田桃紅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しのた とうこう",
+            "page_image_free": "Tōkō_Shinoda.jpg",
+            "wikibase_item": "Q114709"
+          },
+          "terms": {
+            "description": [
+              "日本の美術家、エッセイスト (1913-2021)"
+            ]
+          }
+        },
+        {
+          "pageid": 1209408,
+          "ns": 0,
+          "title": "アオイスタジオ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あおいすたしお",
+            "page_image_free": "Aoi_studio.jpg",
+            "wikibase_item": "Q11282652"
+          }
+        },
+        {
+          "pageid": 1596036,
+          "ns": 0,
+          "title": "港区 (東京都)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みなとく",
+            "kartographer_frames": "1",
+            "page_image_free": "20110405-TokyoTower-Sakura01.jpg",
+            "wikibase_item": "Q190088"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65803,
+              "lon": 139.75153,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 3096178,
+          "ns": 0,
+          "title": "菊池寛実",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きくち ひろみ",
+            "wikibase_item": "Q18701147"
+          },
+          "terms": {
+            "description": [
+              "日本の実業家"
+            ]
+          }
+        },
+        {
+          "pageid": 3673919,
+          "ns": 0,
+          "title": "菊池寛実記念 智美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きくちかんしつきねんともみひしゆつかん",
+            "page_image_free": "Musée_Tomo_entrance_-_Tokyo,_Japan_-_DSC06677.JPG",
+            "wikibase_item": "Q19340630"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67,
+              "lon": 139.75,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある現代陶芸の美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

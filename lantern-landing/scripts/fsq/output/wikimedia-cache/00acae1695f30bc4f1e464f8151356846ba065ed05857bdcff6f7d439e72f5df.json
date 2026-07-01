@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:21.794Z",
+  "value": {
+    "searchinfo": {
+      "search": "国立近現代建築資料館"
+    },
+    "search": [
+      {
+        "id": "Q28312009",
+        "title": "Q28312009",
+        "pageid": 30009611,
+        "concepturi": "http://www.wikidata.org/entity/Q28312009",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q28312009",
+        "display": {
+          "label": {
+            "value": "National Archives of Modern Architecture",
+            "language": "en"
+          }
+        },
+        "label": "National Archives of Modern Architecture",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "国立近現代建築資料館"
+        },
+        "aliases": [
+          "国立近現代建築資料館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:52.165Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 61470,
+          "ns": 0,
+          "title": "水戸街道",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みとかいとう",
+            "kartographer_frames": "2",
+            "page_image_free": "水戸街道.png",
+            "wikibase_item": "Q3070330"
+          },
+          "terms": {
+            "description": [
+              "江戸と水戸をつなぐ江戸時代の街道"
+            ]
+          }
+        },
+        {
+          "pageid": 145410,
+          "ns": 0,
+          "title": "安岡正篤",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やすおか まさひろ",
+            "page_image_free": "1971安岡正篤.jpg",
+            "wikibase_item": "Q6782386"
+          },
+          "terms": {
+            "description": [
+              "日本の易学者、哲学者、思想家"
+            ]
+          }
+        },
+        {
+          "pageid": 1154739,
+          "ns": 0,
+          "title": "小金牧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こかねまき",
+            "page_image_free": "Chiba-ken_géolocalisation_relief.svg",
+            "wikibase_item": "Q11464347"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7975,
+              "lon": 139.98041667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "江戸幕府による馬の放牧場"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

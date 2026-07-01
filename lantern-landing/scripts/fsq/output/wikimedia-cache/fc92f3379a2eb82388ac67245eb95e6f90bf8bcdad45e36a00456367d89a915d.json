@@ -1,0 +1,204 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:16.047Z",
+  "value": {
+    "searchinfo": {
+      "search": "黒門"
+    },
+    "search": [
+      {
+        "id": "Q1995792",
+        "title": "Q1995792",
+        "pageid": 1924347,
+        "concepturi": "http://www.wikidata.org/entity/Q1995792",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1995792",
+        "display": {
+          "label": {
+            "value": "Morannon",
+            "language": "en"
+          },
+          "description": {
+            "value": "fictional gate in Middle-earth",
+            "language": "en"
+          }
+        },
+        "label": "Morannon",
+        "description": "fictional gate in Middle-earth",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "黒門"
+        },
+        "aliases": [
+          "黒門"
+        ]
+      },
+      {
+        "id": "Q113674117",
+        "title": "Q113674117",
+        "pageid": 108438048,
+        "concepturi": "http://www.wikidata.org/entity/Q113674117",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q113674117",
+        "display": {
+          "label": {
+            "value": "Kuromon",
+            "language": "en"
+          },
+          "description": {
+            "value": "neighborhood in Chūō-ku, Fukuoka City, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Kuromon",
+        "description": "neighborhood in Chūō-ku, Fukuoka City, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "黒門"
+        },
+        "aliases": [
+          "黒門"
+        ]
+      },
+      {
+        "id": "Q48807634",
+        "title": "Q48807634",
+        "pageid": 49825668,
+        "concepturi": "http://www.wikidata.org/entity/Q48807634",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q48807634",
+        "display": {
+          "label": {
+            "value": "Kuromon",
+            "language": "en"
+          },
+          "description": {
+            "value": "mon (Japanese gate) in Tokyo National Museum",
+            "language": "en"
+          }
+        },
+        "label": "Kuromon",
+        "description": "mon (Japanese gate) in Tokyo National Museum",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "黒門"
+        },
+        "aliases": [
+          "黒門"
+        ]
+      },
+      {
+        "id": "Q2070581",
+        "title": "Q2070581",
+        "pageid": 1997752,
+        "concepturi": "http://www.wikidata.org/entity/Q2070581",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2070581",
+        "display": {
+          "label": {
+            "value": "Battle of the Morannon",
+            "language": "en"
+          },
+          "description": {
+            "value": "Fictional battle in The Lord of the Rings by J. R. R. Tolkien",
+            "language": "en"
+          }
+        },
+        "label": "Battle of the Morannon",
+        "description": "Fictional battle in The Lord of the Rings by J. R. R. Tolkien",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "黒門の戦い"
+        },
+        "aliases": [
+          "黒門の戦い"
+        ]
+      },
+      {
+        "id": "Q11411963",
+        "title": "Q11411963",
+        "pageid": 12550667,
+        "concepturi": "http://www.wikidata.org/entity/Q11411963",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11411963",
+        "display": {
+          "label": {
+            "value": "Taito Municipal Kuromon Elementary School",
+            "language": "en"
+          },
+          "description": {
+            "value": "primary school",
+            "language": "en"
+          }
+        },
+        "label": "Taito Municipal Kuromon Elementary School",
+        "description": "primary school",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "黒門小学校"
+        },
+        "aliases": [
+          "黒門小学校"
+        ]
+      },
+      {
+        "id": "Q116181272",
+        "title": "Q116181272",
+        "pageid": 110891047,
+        "concepturi": "http://www.wikidata.org/entity/Q116181272",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q116181272",
+        "display": {
+          "label": {
+            "value": "Kuromon Gawa",
+            "language": "en"
+          },
+          "description": {
+            "value": "river in Chūō-ku, Fukuoka City, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Kuromon Gawa",
+        "description": "river in Chūō-ku, Fukuoka City, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "黒門川"
+        },
+        "aliases": [
+          "黒門川"
+        ]
+      },
+      {
+        "id": "Q10855506",
+        "title": "Q10855506",
+        "pageid": 12127749,
+        "concepturi": "http://www.wikidata.org/entity/Q10855506",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q10855506",
+        "display": {
+          "label": {
+            "value": "Kuromon Market",
+            "language": "en"
+          }
+        },
+        "label": "Kuromon Market",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "黒門市場"
+        },
+        "aliases": [
+          "黒門市場"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

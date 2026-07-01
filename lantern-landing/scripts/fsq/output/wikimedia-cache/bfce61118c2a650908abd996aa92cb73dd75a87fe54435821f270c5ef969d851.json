@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:30.536Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 3987142,
+          "ns": 0,
+          "title": "PRODUCE 101 JAPAN",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふろてゆうすわんおうわんしやはん",
+            "wikibase_item": "Q65233030"
+          },
+          "terms": {
+            "description": [
+              "日本のオーディション番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

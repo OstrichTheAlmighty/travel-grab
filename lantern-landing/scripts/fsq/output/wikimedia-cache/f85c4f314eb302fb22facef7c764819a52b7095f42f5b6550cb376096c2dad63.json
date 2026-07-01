@@ -1,0 +1,36 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:25.635Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 16600,
+          "ns": 0,
+          "title": "鹿児島市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かこしまし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kagoshima_Montage.jpg",
+            "wikibase_item": "Q15674"
+          },
+          "coordinates": [
+            {
+              "lat": 31.59681,
+              "lon": 130.55714,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "鹿児島県庁所在地"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

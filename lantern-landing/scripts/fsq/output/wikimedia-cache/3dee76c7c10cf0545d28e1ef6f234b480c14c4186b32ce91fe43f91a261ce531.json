@@ -1,0 +1,75 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:13.844Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 79537,
+          "ns": 0,
+          "title": "ガチャピン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かちやひん",
+            "wikibase_item": "Q5516180"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ番組に登場するキャラクター"
+            ]
+          }
+        },
+        {
+          "pageid": 121032,
+          "ns": 0,
+          "title": "ムック (キャラクター)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "むつく",
+            "wikibase_item": "Q11343119"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ番組に登場するキャラクター"
+            ]
+          }
+        },
+        {
+          "pageid": 1171915,
+          "ns": 0,
+          "title": "ガチャピンClub",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かちやひんくらふ",
+            "wikibase_item": "Q11296024"
+          }
+        },
+        {
+          "pageid": 1203153,
+          "ns": 0,
+          "title": "ガチャピン☆ボンバーマン",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かちやひんほんはあまん",
+            "wikibase_item": "Q11296025"
+          }
+        },
+        {
+          "pageid": 1612572,
+          "ns": 0,
+          "title": "ガチャピン・ムックのパジャマDEナイト",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かちやひんむつくのはしやまてないと",
+            "wikibase_item": "Q11296026"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:35.612Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4063,
+          "ns": 0,
+          "title": "テーマパーク",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "てえまはあく",
+            "page_image_free": "USJ_2018.09-24.jpg",
+            "wikibase_item": "Q2416723"
+          },
+          "terms": {
+            "description": [
+              "観光施設"
+            ]
+          }
+        },
+        {
+          "pageid": 573709,
+          "ns": 0,
+          "title": "アムラックス",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あむらつくす",
+            "page_image_free": "AMLUX_01.JPG",
+            "wikibase_item": "Q11284998"
+          }
+        },
+        {
+          "pageid": 2571650,
+          "ns": 0,
+          "title": "ちい散歩",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちいさんほ",
+            "wikibase_item": "Q11271685"
+          },
+          "terms": {
+            "description": [
+              "テレビ朝日系列の紀行番組 (2006 - 2012)"
+            ]
+          }
+        },
+        {
+          "pageid": 4289552,
+          "ns": 0,
+          "title": "小川龍成",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おかわ りゆうせい",
+            "page_image_free": "CHIBA_LOTTE_RYUSEI_OGAWA_20220423.jpg",
+            "wikibase_item": "Q105258584"
+          },
+          "terms": {
+            "description": [
+              "日本のプロ野球選手"
+            ]
+          }
+        },
+        {
+          "pageid": 4306877,
+          "ns": 0,
+          "title": "ちいかわ なんか小さくてかわいいやつ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちいかわなんかちいさくてかわいいやつ",
+            "wikibase_item": "Q106093778"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画、メディアミックス作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

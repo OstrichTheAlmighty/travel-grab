@@ -1,0 +1,127 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:37.160Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 97494,
+          "ns": 0,
+          "title": "つつじが岡公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "つつしかおかこうえん",
+            "page_image_free": "TsutsujiTatebayashi.jpg",
+            "wikibase_item": "Q11609605"
+          },
+          "coordinates": [
+            {
+              "lat": 36.24255556,
+              "lon": 139.55308333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "群馬県館林市の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 148401,
+          "ns": 0,
+          "title": "小金井公園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こかねいこうえん",
+            "page_image_free": "Western_Tokyo.svg",
+            "wikibase_item": "Q2856049"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71444444,
+              "lon": 139.51888889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 358336,
+          "ns": 0,
+          "title": "榴岡公園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "つつしかおかこうえん",
+            "page_image_free": "Tutujigaokakouen.JPG",
+            "wikibase_item": "Q11541912"
+          },
+          "coordinates": [
+            {
+              "lat": 38.26061111,
+              "lon": 140.89697222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "仙台市の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 982472,
+          "ns": 0,
+          "title": "神代植物公園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しんたいしよくふつこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Jindai_Botanical_Garden-2.jpg",
+            "wikibase_item": "Q606827"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67111111,
+              "lon": 139.54611111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の植物園"
+            ]
+          }
+        },
+        {
+          "pageid": 2620490,
+          "ns": 0,
+          "title": "群馬県道372号つつじが岡線",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Map_of_Gunma_Prefecture_Ja.svg",
+            "wikibase_item": "Q11609844"
+          },
+          "terms": {
+            "description": [
+              "日本の群馬県の道路"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

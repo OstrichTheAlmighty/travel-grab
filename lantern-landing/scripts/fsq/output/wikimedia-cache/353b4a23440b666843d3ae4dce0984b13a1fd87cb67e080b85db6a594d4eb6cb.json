@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:06.910Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 44270,
+          "ns": 0,
+          "title": "人工芝",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しんこうしは",
+            "page_image_free": "Kunstgress.JPG",
+            "wikibase_item": "Q311935"
+          },
+          "terms": {
+            "description": [
+              "自然の芝に似せた合成繊維による舗装"
+            ]
+          }
+        },
+        {
+          "pageid": 67790,
+          "ns": 0,
+          "title": "日本のサッカー競技場一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にほんのさつかあきようきしよういちらん",
+            "wikibase_item": "Q16867545"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 105586,
+          "ns": 0,
+          "title": "日本の野球場一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのやきゆうしよういちらん",
+            "wikibase_item": "Q6607277"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 480954,
+          "ns": 0,
+          "title": "江戸川区臨海球技場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "えとかわくりんかいきゆうきしよう",
+            "page_image_free": "Edogawa_Seaside_Football_Field.png",
+            "wikibase_item": "Q11551062"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64955556,
+              "lon": 139.85458333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1095388,
+          "ns": 0,
+          "title": "臨海町 (江戸川区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "りんかいちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Kasai-Rinkai-kōen_Station_20120219.jpg",
+            "wikibase_item": "Q11612550"
+          },
+          "terms": {
+            "description": [
+              "東京都江戸川区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:38.099Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8282,
+          "ns": 0,
+          "title": "ウルトラマン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "うるとらまん",
+            "page_image_free": "Ultraman_logo.svg",
+            "wikibase_item": "Q1058534"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ特撮ドラマ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 17851,
+          "ns": 0,
+          "title": "ウルトラマンA",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "うるとらまんええす",
+            "page_image": "ULTRAMAN_A_Sukagawa.JPG",
+            "wikibase_item": "Q582851"
+          },
+          "terms": {
+            "description": [
+              "日本の円谷プロ制作の特撮テレビ番組、およびその作品に登場する巨大変身ヒーローの名称"
+            ]
+          }
+        },
+        {
+          "pageid": 70358,
+          "ns": 0,
+          "title": "帰ってきたウルトラマン",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かえつてきたうるとらまん",
+            "page_image_free": "Return_of_ultraman_logo.svg",
+            "wikibase_item": "Q592745"
+          },
+          "terms": {
+            "description": [
+              "日本の円谷プロ制作の特撮テレビ番組（ウルトラシリーズ）"
+            ]
+          }
+        },
+        {
+          "pageid": 158084,
+          "ns": 0,
+          "title": "ウルトラマンVS仮面ライダー",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "うるとらまんふいえすかめんらいたあ",
+            "wikibase_item": "Q4388679"
+          },
+          "terms": {
+            "description": [
+              "日本のオリジナルビデオ"
+            ]
+          }
+        },
+        {
+          "pageid": 3209527,
+          "ns": 0,
+          "title": "ウルトラマンX",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "うるとらまんえつくす",
+            "wikibase_item": "Q20010305"
+          },
+          "terms": {
+            "description": [
+              "日本の円谷プロ制作の特撮テレビ番組、およびその作品に登場する巨大変身ヒーローの名称"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

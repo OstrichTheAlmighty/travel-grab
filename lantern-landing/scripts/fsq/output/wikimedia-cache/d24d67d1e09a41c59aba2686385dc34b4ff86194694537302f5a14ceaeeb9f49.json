@@ -1,0 +1,89 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:20.774Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 665493,
+          "ns": 0,
+          "title": "奥本大三郎",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おくもと たいさふろう",
+            "wikibase_item": "Q11445821"
+          },
+          "terms": {
+            "description": [
+              "日本の翻訳家、著作家 (1944-)"
+            ]
+          }
+        },
+        {
+          "pageid": 890006,
+          "ns": 0,
+          "title": "三木卓",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みき たく",
+            "wikibase_item": "Q553683"
+          },
+          "terms": {
+            "description": [
+              "日本の小説家、詩人 (1935-2023)"
+            ]
+          }
+        },
+        {
+          "pageid": 2027029,
+          "ns": 0,
+          "title": "千駄木",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せんたき",
+            "kartographer_frames": "1",
+            "page_image_free": "Mori_Ogai_Memorial_Museum_Sendagi_Bunkyo_Tokyo_Japan_2021.jpg",
+            "wikibase_item": "Q11406891"
+          },
+          "terms": {
+            "description": [
+              "東京都文京区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 2682423,
+          "ns": 0,
+          "title": "昆虫館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こんちゆうかん",
+            "page_image_free": "2010_07_19540_7229_Wenshan_District,_Taipei,_Zoo,_Insectarium,_Taiwan.JPG",
+            "wikibase_item": "Q133771"
+          }
+        },
+        {
+          "pageid": 4025640,
+          "ns": 0,
+          "title": "虫の音",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "むしのね",
+            "page_image_free": "Japanese_cicada_(Meimuna_opalifera).webm",
+            "wikibase_item": "Q72826745"
+          },
+          "terms": {
+            "description": [
+              "虫が発する声"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

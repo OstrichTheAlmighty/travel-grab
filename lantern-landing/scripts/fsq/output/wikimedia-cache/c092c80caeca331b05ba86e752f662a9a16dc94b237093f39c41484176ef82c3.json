@@ -1,0 +1,129 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:13.544Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 70501,
+          "ns": 0,
+          "title": "みんなの広場ふれあいホール",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みんなのひろはふれあいほおる",
+            "kartographer_frames": "1",
+            "page_image_free": "NHK_Fureai-hall_2.JPG",
+            "wikibase_item": "Q11279476"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66588889,
+              "lon": 139.69769444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京のNHK放送センターにある施設"
+            ]
+          }
+        },
+        {
+          "pageid": 70507,
+          "ns": 0,
+          "title": "NHKスタジオパーク",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "えぬえいちけいすたしおはあく",
+            "page_image_free": "Map_Tokyo_special_wards.svg",
+            "wikibase_item": "Q10854719"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66491389,
+              "lon": 139.69608056,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京のNHK放送センターにあった施設"
+            ]
+          }
+        },
+        {
+          "pageid": 76962,
+          "ns": 0,
+          "title": "脇本陣",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "わきほんしん",
+            "page_image_free": "Ohara-juku10s3200.jpg",
+            "wikibase_item": "Q11612146"
+          },
+          "terms": {
+            "description": [
+              "江戸時代の宿場に設置された本陣の予備的施設"
+            ]
+          }
+        },
+        {
+          "pageid": 165160,
+          "ns": 0,
+          "title": "バチカン美術館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はちかんひしゆつかん",
+            "page_image_free": "Vatican_Museums_Spiral_Staircase_2012.jpg",
+            "wikibase_item": "Q182955"
+          },
+          "coordinates": [
+            {
+              "lat": 41.90638889,
+              "lon": 12.45444444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "バチカン市国の国立博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 4640886,
+          "ns": 0,
+          "title": "定塚ギャラリー",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しようつかきやらりい",
+            "kartographer_frames": "1",
+            "page_image_free": "Gthumb.svg",
+            "wikibase_item": "Q113988296"
+          },
+          "coordinates": [
+            {
+              "lat": 36.74347222,
+              "lon": 137.01980556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "富山県高岡市にあるギャラリー"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

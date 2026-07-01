@@ -1,0 +1,29 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:25.751Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 13314,
+          "ns": 0,
+          "title": "三島由紀夫",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みしま ゆきお",
+            "page_image_free": "Yukio_Mishima,_1955_(cropped_850×950_px).jpg",
+            "toc": "",
+            "wikibase-badge-Q17437796": "",
+            "wikibase_item": "Q134456"
+          },
+          "terms": {
+            "description": [
+              "日本の作家 (1925-1970)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

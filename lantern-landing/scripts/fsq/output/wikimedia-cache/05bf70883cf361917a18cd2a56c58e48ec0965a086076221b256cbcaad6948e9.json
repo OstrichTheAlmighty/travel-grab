@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:22.402Z",
+  "value": {
+    "searchinfo": {
+      "search": "古代オリエント博物館"
+    },
+    "search": [
+      {
+        "id": "Q1048740",
+        "title": "Q1048740",
+        "pageid": 997774,
+        "concepturi": "http://www.wikidata.org/entity/Q1048740",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1048740",
+        "display": {
+          "label": {
+            "value": "Ancient Orient Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum",
+            "language": "en"
+          }
+        },
+        "label": "Ancient Orient Museum",
+        "description": "art museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "古代オリエント博物館"
+        },
+        "aliases": [
+          "古代オリエント博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

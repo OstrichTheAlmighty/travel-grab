@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:22.720Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 20031,
+          "ns": 0,
+          "title": "東京国立博物館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようこくりつはくふつかん",
+            "page_image_free": "Tokyo_National_Museum,_Honkan_2010.jpg",
+            "wikibase_item": "Q653433"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71905556,
+              "lon": 139.77666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある国立博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 122400,
+          "ns": 0,
+          "title": "奈良国立博物館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ならこくりつはくふつかん",
+            "page_image_free": "140927_Nara_National_Museum_Nara_Japan03bs5.jpg",
+            "wikibase_item": "Q147312"
+          },
+          "coordinates": [
+            {
+              "lat": 34.6837,
+              "lon": 135.8364,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "奈良市にある国立博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 361789,
+          "ns": 0,
+          "title": "古代オリエント",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こたいおりえんと",
+            "page_image_free": "Ancient_Orient.png",
+            "wikibase_item": "Q269678"
+          },
+          "terms": {
+            "description": [
+              "文明発祥の地である古代の中東地域"
+            ]
+          }
+        },
+        {
+          "pageid": 1391074,
+          "ns": 0,
+          "title": "岡山市立オリエント美術館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おかやましりつおりえんとひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "160319_Okayama_Orient_Museum_Okayama_Japan02n.jpg",
+            "wikibase_item": "Q4707582"
+          },
+          "terms": {
+            "description": [
+              "岡山市北区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 1812065,
+          "ns": 0,
+          "title": "古代オリエント博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こたいおりえんとはくふつかん",
+            "page_image_free": "CleopatraVIICoin.jpg",
+            "wikibase_item": "Q1048740"
+          },
+          "coordinates": [
+            {
+              "lat": 35.728534,
+              "lon": 139.720785,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区池袋のサンシャインシティにある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

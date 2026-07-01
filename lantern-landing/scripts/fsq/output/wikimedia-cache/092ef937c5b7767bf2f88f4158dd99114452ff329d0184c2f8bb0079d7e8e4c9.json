@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:33.006Z",
+  "value": {
+    "searchinfo": {
+      "search": "Mohri Garden"
+    },
+    "search": [
+      {
+        "id": "Q11547673",
+        "title": "Q11547673",
+        "pageid": 12687601,
+        "concepturi": "http://www.wikidata.org/entity/Q11547673",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11547673",
+        "display": {
+          "label": {
+            "value": "Mōri Kai-no-kami's Residence",
+            "language": "en"
+          }
+        },
+        "label": "Mōri Kai-no-kami's Residence",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "Mohri Garden"
+        },
+        "aliases": [
+          "Mohri Garden"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

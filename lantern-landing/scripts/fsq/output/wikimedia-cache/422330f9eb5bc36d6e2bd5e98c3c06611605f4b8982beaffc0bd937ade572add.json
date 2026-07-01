@@ -1,0 +1,36 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:03.389Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 5209325,
+          "ns": 0,
+          "title": "銚子市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ちようしし",
+            "kartographer_frames": "1",
+            "page_image_free": "Choshi_Montage_2.jpg",
+            "wikibase_item": "Q694317"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73463889,
+              "lon": 140.82677778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県の市"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

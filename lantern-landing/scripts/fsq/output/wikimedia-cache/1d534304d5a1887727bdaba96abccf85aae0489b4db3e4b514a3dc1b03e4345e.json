@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:27.603Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2436,
+          "ns": 0,
+          "title": "オートフォーカス",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおとふおおかす",
+            "wikibase_item": "Q210008"
+          },
+          "terms": {
+            "description": [
+              "カメラの焦点を、センサー・制御系・モーターなどを利用して自動的に合わせるシステム"
+            ]
+          }
+        },
+        {
+          "pageid": 66576,
+          "ns": 0,
+          "title": "ニコン",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にこん",
+            "page_image_free": "Nikon_Logo.svg",
+            "wikibase_item": "Q1218180"
+          },
+          "terms": {
+            "description": [
+              "日本の光学機器メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 1058648,
+          "ns": 0,
+          "title": "産業観光",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さんきようかんこう",
+            "wikibase_item": "Q3534105"
+          },
+          "terms": {
+            "description": [
+              "工場や産業遺産に触れる観光"
+            ]
+          }
+        },
+        {
+          "pageid": 3309254,
+          "ns": 0,
+          "title": "ニコンミュージアム",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にこんみゆうしあむ",
+            "page_image_free": "Entrane_of_Nikon_Museum_in_Shinagawa,_Tokyo_Nov_2025.jpg",
+            "wikibase_item": "Q21654020"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6027,
+              "lon": 139.7241,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区のニコン本社にある、同社の企業博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

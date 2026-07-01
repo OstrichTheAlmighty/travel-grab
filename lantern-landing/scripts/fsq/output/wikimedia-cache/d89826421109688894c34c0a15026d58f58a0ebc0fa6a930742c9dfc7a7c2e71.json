@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:14.617Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 102037,
+          "ns": 0,
+          "title": "代々木公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "よよきこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Mainstreet_Yoyogipark.JPG",
+            "wikibase_item": "Q1204253"
+          },
+          "coordinates": [
+            {
+              "lat": 35.671975,
+              "lon": 139.69768611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 262952,
+          "ns": 0,
+          "title": "京成フロンティア企画",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "けいせいふろんていあきかく",
+            "wikibase_item": "Q11501294"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都台東区にある広告代理店・ドッグラン運営企業"
+            ]
+          }
+        },
+        {
+          "pageid": 1139082,
+          "ns": 0,
+          "title": "ドッグラン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とつくらん",
+            "page_image_free": "230503_Blue_Ridge_Hotel_Kannabe_Highland_Toyooka_Hyogo_pref_Japan02s3.jpg",
+            "wikibase_item": "Q38516"
+          },
+          "terms": {
+            "description": [
+              "犬を自由に運動させるための専用施設"
+            ]
+          }
+        },
+        {
+          "pageid": 2302697,
+          "ns": 0,
+          "title": "老犬ホーム",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ろうけんほむ",
+            "wikibase_item": "Q11610659"
+          }
+        },
+        {
+          "pageid": 2771600,
+          "ns": 0,
+          "title": "レイクウッズガーデンひめはるの里",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "れいくうつすかあてんひめはるのさと",
+            "kartographer_frames": "1",
+            "page_image_free": "レイクウッズガーデン_ひめはるの里_-_panoramio.jpg",
+            "wikibase_item": "Q17214706"
+          },
+          "coordinates": [
+            {
+              "lat": 35.40116667,
+              "lon": 140.29441667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

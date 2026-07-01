@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:05.225Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 969324,
+          "ns": 0,
+          "title": "サンダードルフィン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さんたあとるふいん",
+            "page_image_free": "Thunder_Dolphin,_Tokyo_Dome_City_-_Nov_28,_2015.jpg",
+            "wikibase_item": "Q845812"
+          },
+          "coordinates": [
+            {
+              "lat": 35.706336,
+              "lon": 139.753277,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京ドームシティアトラクションズのローラーコースター"
+            ]
+          }
+        },
+        {
+          "pageid": 1234210,
+          "ns": 0,
+          "title": "ストームバード系",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "すとむはとけい",
+            "wikibase_item": "Q11312529"
+          }
+        },
+        {
+          "pageid": 1454503,
+          "ns": 0,
+          "title": "F-ZEROシリーズ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "えふせろ",
+            "wikibase_item": "Q6720878"
+          },
+          "terms": {
+            "description": [
+              "任天堂のコンピュータゲームシリーズ"
+            ]
+          }
+        },
+        {
+          "pageid": 2583899,
+          "ns": 0,
+          "title": "バーラム系",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はらむ",
+            "wikibase_item": "Q11328607"
+          }
+        },
+        {
+          "pageid": 4603866,
+          "ns": 0,
+          "title": "メガCDのゲームタイトル一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "めかしいていのけえむたいとるいちらん",
+            "notoc": "",
+            "page_image_free": "SEGA_MEGA_DRIVE_&_MEGA-CD.png",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q1851442"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

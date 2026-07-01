@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:10.978Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17323,
+          "ns": 0,
+          "title": "松山市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "まつやまし",
+            "kartographer_frames": "1",
+            "page_image_free": "Matsuyama_montage.jpg",
+            "wikibase_item": "Q200022"
+          },
+          "coordinates": [
+            {
+              "lat": 33.83917,
+              "lon": 132.76564,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛媛県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 32935,
+          "ns": 0,
+          "title": "髙島屋",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たかしまや",
+            "page_image_free": "Namba_Station.JPG",
+            "wikibase_item": "Q2058024"
+          },
+          "terms": {
+            "description": [
+              "日本の百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 41170,
+          "ns": 0,
+          "title": "立川市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たちかわし",
+            "kartographer_frames": "1",
+            "page_image_free": "Tama_Intercity_Monorail_viewed_from_Green_Springs.jpg",
+            "wikibase_item": "Q269634"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71394,
+              "lon": 139.40792,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の市"
+            ]
+          }
+        },
+        {
+          "pageid": 88500,
+          "ns": 0,
+          "title": "東急玉川線",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきゆうたまかわせん",
+            "page_image_free": "Tamaden_manaka_komazawa.jpg",
+            "wikibase_item": "Q11527017"
+          },
+          "terms": {
+            "description": [
+              "かつて東京都に存在した東急電鉄の路面電車"
+            ]
+          }
+        },
+        {
+          "pageid": 578984,
+          "ns": 0,
+          "title": "日本の百貨店",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にほんのひやつかてん",
+            "page_image_free": "Takashimaya_Nihonbashi_Store_2010.jpg",
+            "wikibase_item": "Q763438"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:50.709Z",
+  "value": {
+    "searchinfo": {
+      "search": "A 1"
+    },
+    "search": [
+      {
+        "id": "Q9006",
+        "title": "Q9006",
+        "pageid": 10358,
+        "concepturi": "http://www.wikidata.org/entity/Q9006",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q9006",
+        "display": {
+          "label": {
+            "value": "Bundesautobahn 1",
+            "language": "en"
+          },
+          "description": {
+            "value": "federal motorway in Germany",
+            "language": "en"
+          }
+        },
+        "label": "Bundesautobahn 1",
+        "description": "federal motorway in Germany",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "A 1"
+        },
+        "aliases": [
+          "A 1"
+        ]
+      },
+      {
+        "id": "Q56402015",
+        "title": "Q56402015",
+        "pageid": 56341124,
+        "concepturi": "http://www.wikidata.org/entity/Q56402015",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q56402015",
+        "display": {
+          "label": {
+            "value": "A-1",
+            "language": "en"
+          },
+          "description": {
+            "value": "Spanish submarine (1915)",
+            "language": "en"
+          }
+        },
+        "label": "A-1",
+        "description": "Spanish submarine (1915)",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "A-1"
+        }
+      },
+      {
+        "id": "Q131301572",
+        "title": "Q131301572",
+        "pageid": 125195622,
+        "concepturi": "http://www.wikidata.org/entity/Q131301572",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q131301572",
+        "display": {
+          "label": {
+            "value": "A-1",
+            "language": "en"
+          },
+          "description": {
+            "value": "American musical group",
+            "language": "en"
+          }
+        },
+        "label": "A-1",
+        "description": "American musical group",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "A-1"
+        }
+      },
+      {
+        "id": "Q266066",
+        "title": "Q266066",
+        "pageid": 257857,
+        "concepturi": "http://www.wikidata.org/entity/Q266066",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q266066",
+        "display": {
+          "label": {
+            "value": "Douglas Skyraider",
+            "language": "en"
+          },
+          "description": {
+            "value": "1945 attack aircraft family by the Douglas Aircraft Company",
+            "language": "en"
+          }
+        },
+        "label": "Douglas Skyraider",
+        "description": "1945 attack aircraft family by the Douglas Aircraft Company",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "A-1 Skyraider"
+        },
+        "aliases": [
+          "A-1 Skyraider"
+        ]
+      },
+      {
+        "id": "Q622437",
+        "title": "Q622437",
+        "pageid": 585514,
+        "concepturi": "http://www.wikidata.org/entity/Q622437",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q622437",
+        "display": {
+          "label": {
+            "value": "alpha-1-antitrypsin deficiency",
+            "language": "en"
+          },
+          "description": {
+            "value": "genetic disorder that may result in lung disease or liver disease",
+            "language": "en"
+          }
+        },
+        "label": "alpha-1-antitrypsin deficiency",
+        "description": "genetic disorder that may result in lung disease or liver disease",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "A-1ATD"
+        },
+        "aliases": [
+          "A-1ATD"
+        ]
+      },
+      {
+        "id": "Q295466",
+        "title": "Q295466",
+        "pageid": 285346,
+        "concepturi": "http://www.wikidata.org/entity/Q295466",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q295466",
+        "display": {
+          "label": {
+            "value": "AMX",
+            "language": "en"
+          },
+          "description": {
+            "value": "attack aircraft family by Aeritalia/Aermacchi/EMBRAER",
+            "language": "en"
+          }
+        },
+        "label": "AMX",
+        "description": "attack aircraft family by Aeritalia/Aermacchi/EMBRAER",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "A-1"
+        },
+        "aliases": [
+          "A-1"
+        ]
+      },
+      {
+        "id": "Q422585",
+        "title": "Q422585",
+        "pageid": 399195,
+        "concepturi": "http://www.wikidata.org/entity/Q422585",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q422585",
+        "display": {
+          "label": {
+            "value": "lopinavir",
+            "language": "en"
+          },
+          "description": {
+            "value": "chemical compound",
+            "language": "en"
+          }
+        },
+        "label": "lopinavir",
+        "description": "chemical compound",
+        "match": {
+          "type": "alias",
+          "language": "mul",
+          "text": "a-157378-0"
+        },
+        "aliases": [
+          "a-157378-0"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:21.740Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 30993,
+          "ns": 0,
+          "title": "井上和彦 (声優)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "いのうえ かすひこ",
+            "wikibase_item": "Q225654"
+          },
+          "terms": {
+            "description": [
+              "日本の声優"
+            ]
+          }
+        },
+        {
+          "pageid": 38238,
+          "ns": 0,
+          "title": "ちびまる子ちゃん",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちひまるこちやん",
+            "wikibase_item": "Q701050"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 139832,
+          "ns": 0,
+          "title": "ゴジラ (1954年の映画)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こしら",
+            "page_image_free": "Gojira_1954_Japanese_poster.jpg",
+            "wikibase_item": "Q860461"
+          },
+          "terms": {
+            "description": [
+              "1954年公開の本多猪四郎監督の日本映画"
+            ]
+          }
+        },
+        {
+          "pageid": 869472,
+          "ns": 0,
+          "title": "渋川清彦",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しふかわ きよひこ",
+            "page_image_free": "Shibukawa_Kiyohiko_from_\"Or_Utopia\"_at_Red_Carpet_of_the_Tokyo_International_Film_Festival_2024_(54577977878).jpg",
+            "wikibase_item": "Q11561586"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優、ファッションモデル"
+            ]
+          }
+        },
+        {
+          "pageid": 3859555,
+          "ns": 0,
+          "title": "有吉ぃぃeeeee!そうだ!今からお前んチでゲームしない?",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ありよしいいいいいそうたいまからおまえんちでけえむしない",
+            "wikibase_item": "Q60987028"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビeスポーツ・ゲーム情報バラエティ番組 (2018-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

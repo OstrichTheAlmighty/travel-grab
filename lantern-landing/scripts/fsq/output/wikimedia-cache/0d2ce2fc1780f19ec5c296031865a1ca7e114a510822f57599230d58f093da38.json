@@ -1,0 +1,98 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:21.962Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 38344,
+          "ns": 0,
+          "title": "六本木ヒルズ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ろつほんきひるす",
+            "page_image_free": "Roppongi_Hills_2013-12-01.jpg",
+            "wikibase_item": "Q1071084"
+          },
+          "terms": {
+            "description": [
+              "東京都港区の複合施設"
+            ]
+          }
+        },
+        {
+          "pageid": 71582,
+          "ns": 0,
+          "title": "六本木",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ろつほんき",
+            "kartographer_frames": "1",
+            "page_image_free": "Roppongi_(16168478591).jpg",
+            "wikibase_item": "Q265071"
+          },
+          "terms": {
+            "description": [
+              "東京都港区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 72195,
+          "ns": 0,
+          "title": "六本木ヒルズ森タワー",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ろつほんきひるすもりたわ",
+            "page_image_free": "Mori_Tower_-_Roppongi,_Tokyo,_Japan_-_DSC06760.JPG",
+            "wikibase_item": "Q1771772"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66039722,
+              "lon": 139.72923611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある超高層ビル"
+            ]
+          }
+        },
+        {
+          "pageid": 2970278,
+          "ns": 0,
+          "title": "鴻池朋子",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こうのいけ ともこ",
+            "wikibase_item": "Q7820157"
+          }
+        },
+        {
+          "pageid": 4738526,
+          "ns": 0,
+          "title": "森アーツセンター",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "もりああつせんたあ",
+            "page_image_free": "Mori_Tower_-_Roppongi,_Tokyo,_Japan_-_DSC06760.JPG",
+            "wikibase_item": "Q131313802"
+          },
+          "terms": {
+            "description": [
+              "東京都港区の六本木ヒルズにある複合文化施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

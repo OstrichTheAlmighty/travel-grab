@@ -1,0 +1,138 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:00.923Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 30057,
+          "ns": 0,
+          "title": "Tokyo",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Capital and most populous city in Japan",
+            "wikibase_item": "Q1490"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68972222,
+              "lon": 139.69222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "capital and largest city of Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 37652,
+          "ns": 0,
+          "title": "Kyoto",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Kiyomizu.jpg",
+            "wikibase-shortdesc": "City in the Kansai region of Japan",
+            "wikibase_item": "Q34600"
+          },
+          "coordinates": [
+            {
+              "lat": 35.01161,
+              "lon": 135.76811,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "city in the Kyōto Prefecture, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 294236,
+          "ns": 0,
+          "title": "Meiji Shrine",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Meiji_Jingu_2023-3.jpg",
+            "wikibase-shortdesc": "Shinto shrine in Tokyo, Japan",
+            "wikibase_item": "Q287165"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67611111,
+              "lon": 139.69916667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Shinto shrine in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 4160218,
+          "ns": 0,
+          "title": "Sendagaya",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Sendagaya_Shibuya_Tokyo_Japan.jpg",
+            "wikibase-shortdesc": "Area in Tokyo, Japan",
+            "wikibase_item": "Q263347"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67659,
+              "lon": 139.70793,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "neighborhood in Shibuya-ku, Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 17152262,
+          "ns": 0,
+          "title": "Meiji Shrine Inner Garden",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Meiji_Shrine_Inner_Garden.JPG",
+            "wikibase-shortdesc": "Public garden in Shibuya, Tokyo Japan",
+            "wikibase_item": "Q6810040"
+          },
+          "coordinates": [
+            {
+              "lat": 35.672791,
+              "lon": 139.700352,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "public garden in Shibuya, Tokyo Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

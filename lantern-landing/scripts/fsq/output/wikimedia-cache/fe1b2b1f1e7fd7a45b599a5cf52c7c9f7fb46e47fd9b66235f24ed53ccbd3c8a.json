@@ -1,0 +1,82 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:44.563Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 215152,
+          "ns": 0,
+          "title": "日本の合成地名一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こうせいちめい",
+            "wikibase_item": "Q11505813"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 852197,
+          "ns": 0,
+          "title": "香取神社",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かとりしんしや",
+            "wikibase_item": "Q11667187"
+          },
+          "terms": {
+            "description": [
+              "経津主神を祭神とする神社"
+            ]
+          }
+        },
+        {
+          "pageid": 4133820,
+          "ns": 0,
+          "title": "上今井香取神社",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かみいまいかとりしんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Kamiimai_Katori-jinja_(Edogawa,_Edogawa)_01.jpg",
+            "wikibase_item": "Q97190927"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68338889,
+              "lon": 139.89161111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江戸川区江戸川にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 4133827,
+          "ns": 0,
+          "title": "八雲神社 (江戸川区江戸川)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やくもしんしや えとかわく",
+            "page_image_free": "Yakumo-jinja_(Edogawa,_Edogawa)_01.jpg",
+            "wikibase_item": "Q95745381"
+          },
+          "terms": {
+            "description": [
+              "東京都江戸川区江戸川にある神社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

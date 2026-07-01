@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:52.372Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京おもちゃ美術館"
+    },
+    "search": [
+      {
+        "id": "Q11524018",
+        "title": "Q11524018",
+        "pageid": 12663888,
+        "concepturi": "http://www.wikidata.org/entity/Q11524018",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524018",
+        "display": {
+          "label": {
+            "value": "Tokyo Toy Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Toy Museum",
+        "description": "museum in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京おもちゃ美術館"
+        },
+        "aliases": [
+          "東京おもちゃ美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

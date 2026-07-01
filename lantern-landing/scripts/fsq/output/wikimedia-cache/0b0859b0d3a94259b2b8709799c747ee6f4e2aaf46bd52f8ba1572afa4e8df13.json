@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:01.294Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 13585,
+          "ns": 0,
+          "title": "尾道市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おのみちし",
+            "kartographer_frames": "1",
+            "page_image_free": "Onomichi_Jodoji_05.JPG",
+            "wikibase_item": "Q696694"
+          },
+          "coordinates": [
+            {
+              "lat": 34.40911,
+              "lon": 133.20544,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "広島県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 53986,
+          "ns": 0,
+          "title": "武蔵野市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "むさしのし",
+            "kartographer_frames": "1",
+            "page_image_free": "Inokasira-sizen-bunkaen.jpg",
+            "wikibase_item": "Q210661"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71772,
+              "lon": 139.56606,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の市"
+            ]
+          }
+        },
+        {
+          "pageid": 123551,
+          "ns": 0,
+          "title": "イリヤの空、UFOの夏",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いりやのそらゆうふおおのなつ",
+            "wikibase_item": "Q485111"
+          },
+          "terms": {
+            "description": [
+              "日本のライトノベル"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2024340,
+          "ns": 0,
+          "title": "緑町 (武蔵野市)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みとりちよう",
+            "page_image_free": "Cherry_blossoms_in_Musashino_2.jpg",
+            "wikibase_item": "Q11607853"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都武蔵野市の地名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:46.380Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 13313,
+          "ns": 0,
+          "title": "幕末",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はくまつ",
+            "wikibase_item": "Q804558"
+          },
+          "terms": {
+            "description": [
+              "江戸時代の末期"
+            ]
+          }
+        },
+        {
+          "pageid": 16735,
+          "ns": 0,
+          "title": "原稿用紙",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "けんこうようし",
+            "page_image_free": "Squared_manuscript_paper.pdf",
+            "wikibase_item": "Q1185703"
+          }
+        },
+        {
+          "pageid": 457387,
+          "ns": 0,
+          "title": "松陰神社",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しよういんしんしや",
+            "kartographer_frames": "2",
+            "wikibase_item": "Q11532416"
+          },
+          "terms": {
+            "description": [
+              "山口県萩市と東京都世田谷区にある神社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

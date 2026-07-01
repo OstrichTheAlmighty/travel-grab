@@ -1,0 +1,89 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:32.131Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 193769,
+          "ns": 0,
+          "title": "星野充昭",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほしの みつあき",
+            "wikibase_item": "Q305023"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優、男性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 934642,
+          "ns": 0,
+          "title": "東京ディズニーシー・スプリングカーニバル",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいしいすふりんくかあにはる",
+            "wikibase_item": "Q11524263"
+          }
+        },
+        {
+          "pageid": 943186,
+          "ns": 0,
+          "title": "東京ディズニーシー",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきよううていすにいしい",
+            "page_image_free": "Tokyo_DisneySea_logo.svg",
+            "wikibase_item": "Q1202341"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62666944,
+              "lon": 139.88806111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県浦安市にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 2584204,
+          "ns": 0,
+          "title": "海賊戦隊ゴーカイジャー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かいそくせんたいこおかいしやあ",
+            "wikibase_item": "Q1192644"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ番組、メディアミックス作品、その主人公たる架空のヒーローグループの名前"
+            ]
+          }
+        },
+        {
+          "pageid": 3193145,
+          "ns": 0,
+          "title": "なりきり!むーにゃん生きもの学園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "なりきりむにやんいきものかくえん",
+            "wikibase_item": "Q22127557"
+          }
+        }
+      ]
+    }
+  }
+}

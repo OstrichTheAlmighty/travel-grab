@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:39.348Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 34156,
+          "ns": 0,
+          "title": "都営バス",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とえいはす",
+            "page_image_free": "Toei-Bus_K-G774.jpg",
+            "wikibase_item": "Q859227"
+          },
+          "terms": {
+            "description": [
+              "東京都の公営バス"
+            ]
+          }
+        },
+        {
+          "pageid": 286847,
+          "ns": 0,
+          "title": "都営バス深川営業所",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とえいはすふかかわえいきようしよ",
+            "page_image_free": "Tobus_fukagawa-dept.jpg",
+            "wikibase_item": "Q11643515"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64383333,
+              "lon": 139.80266667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区にある東京都交通局のバス営業所"
+            ]
+          }
+        },
+        {
+          "pageid": 606343,
+          "ns": 0,
+          "title": "レインボータウンエフエム放送",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "れいんほおたうんえふえむ",
+            "wikibase_item": "Q11349397"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66783333,
+              "lon": 139.80419444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区の一部地域を放送区域としてFM放送をする特定地上基幹放送事業者"
+            ]
+          }
+        },
+        {
+          "pageid": 1299369,
+          "ns": 0,
+          "title": "潮見 (江東区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しおみ",
+            "kartographer_frames": "1",
+            "page_image_free": "ShiomiSt.jpg",
+            "wikibase_item": "Q11565732"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 3316330,
+          "ns": 0,
+          "title": "鈴木萌花",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すすき もえか",
+            "wikibase_item": "Q22129386"
+          },
+          "terms": {
+            "description": [
+              "日本のタレント、歌手"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

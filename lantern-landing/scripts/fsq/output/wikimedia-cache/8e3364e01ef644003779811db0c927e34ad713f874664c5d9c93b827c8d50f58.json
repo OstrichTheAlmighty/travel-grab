@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:10.580Z",
+  "value": {
+    "searchinfo": {
+      "search": "日暮里第二児童遊園"
+    },
+    "search": [
+      {
+        "id": "Q110265359",
+        "title": "Q110265359",
+        "pageid": 105334112,
+        "concepturi": "http://www.wikidata.org/entity/Q110265359",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q110265359",
+        "display": {
+          "label": {
+            "value": "Nippori dai2 jidō yūen",
+            "language": "en"
+          }
+        },
+        "label": "Nippori dai2 jidō yūen",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "日暮里第二児童遊園"
+        },
+        "aliases": [
+          "日暮里第二児童遊園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

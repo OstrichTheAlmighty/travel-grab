@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:31.186Z",
+  "value": {
+    "searchinfo": {
+      "search": "中村八幡神社"
+    },
+    "search": [
+      {
+        "id": "Q11365339",
+        "title": "Q11365339",
+        "pageid": 12503374,
+        "concepturi": "http://www.wikidata.org/entity/Q11365339",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11365339",
+        "display": {
+          "label": {
+            "value": "Nakamurayahata Shrine",
+            "language": "en"
+          },
+          "description": {
+            "value": "Shinto shrine in Hyōgo Prefecture, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Nakamurayahata Shrine",
+        "description": "Shinto shrine in Hyōgo Prefecture, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "中村八幡神社"
+        },
+        "aliases": [
+          "中村八幡神社"
+        ]
+      },
+      {
+        "id": "Q52728642",
+        "title": "Q52728642",
+        "pageid": 53536501,
+        "concepturi": "http://www.wikidata.org/entity/Q52728642",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q52728642",
+        "display": {
+          "label": {
+            "value": "Hachiman Shrine, Nakamura, Nerima",
+            "language": "en"
+          },
+          "description": {
+            "value": "Shinto shrine in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Hachiman Shrine, Nakamura, Nerima",
+        "description": "Shinto shrine in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "中村八幡神社 (練馬区)"
+        },
+        "aliases": [
+          "中村八幡神社 (練馬区)"
+        ]
+      },
+      {
+        "id": "Q55526619",
+        "title": "Q55526619",
+        "pageid": 55524720,
+        "concepturi": "http://www.wikidata.org/entity/Q55526619",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q55526619",
+        "display": {
+          "label": {
+            "value": "中村八幡神社",
+            "language": "ja"
+          },
+          "description": {
+            "value": "Wikimedia disambiguation page",
+            "language": "en"
+          }
+        },
+        "label": "中村八幡神社",
+        "description": "Wikimedia disambiguation page",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "中村八幡神社"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

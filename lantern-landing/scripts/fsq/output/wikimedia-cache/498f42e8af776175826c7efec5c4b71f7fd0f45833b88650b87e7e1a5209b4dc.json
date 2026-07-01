@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:07.944Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 69344,
+          "ns": 0,
+          "title": "明治法律学校",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "めいしほうりつかつこう",
+            "page_image_free": "Residenz_Fukôzu.jpg",
+            "wikibase_item": "Q11512379"
+          },
+          "terms": {
+            "description": [
+              "東京府に設立された私立法律学校"
+            ]
+          }
+        },
+        {
+          "pageid": 573614,
+          "ns": 0,
+          "title": "明治大学硬式野球部",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めいしたいかくこうしきやきゆうふ",
+            "page_image_free": "Meiji_University_Baseball_Club_players_in_1930.jpg",
+            "wikibase_item": "Q11512328"
+          },
+          "terms": {
+            "description": [
+              "日本の大学野球チーム"
+            ]
+          }
+        },
+        {
+          "pageid": 771781,
+          "ns": 0,
+          "title": "早稲田大学",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "わせたたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Okuma_Auditorium.jpg",
+            "wikibase_item": "Q274486"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71027778,
+              "lon": 139.72172222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 1568742,
+          "ns": 0,
+          "title": "日本大学",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんたいかく",
+            "page_image_free": "Nihon_university_logo.svg",
+            "wikibase_item": "Q1326230"
+          },
+          "coordinates": [
+            {
+              "lat": 35.691,
+              "lon": 139.73760833,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 2758569,
+          "ns": 0,
+          "title": "慶應義塾大学",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "けいおうきしゆくたいかく",
+            "page_image_free": "Old_Keio_University_Library_3.jpg",
+            "wikibase_item": "Q815432"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64894444,
+              "lon": 139.74291667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある私立大学"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

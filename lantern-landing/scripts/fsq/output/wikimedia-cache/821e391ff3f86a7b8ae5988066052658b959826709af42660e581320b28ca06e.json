@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:12.560Z",
+  "value": {
+    "searchinfo": {
+      "search": "Immersive Museum"
+    },
+    "search": [
+      {
+        "id": "Q128570786",
+        "title": "Q128570786",
+        "pageid": 122547831,
+        "concepturi": "http://www.wikidata.org/entity/Q128570786",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q128570786",
+        "display": {
+          "label": {
+            "value": "Immersive Museums in the Digital Age: Exploring the Impact of Virtual Reality on Visitor Satisfaction and Loyalty",
+            "language": "en"
+          },
+          "description": {
+            "value": "scholarly article",
+            "language": "en"
+          }
+        },
+        "label": "Immersive Museums in the Digital Age: Exploring the Impact of Virtual Reality on Visitor Satisfaction and Loyalty",
+        "description": "scholarly article",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Immersive Museums in the Digital Age: Exploring the Impact of Virtual Reality on Visitor Satisfaction and Loyalty"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

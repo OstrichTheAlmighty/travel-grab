@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:44.904Z",
+  "value": {
+    "searchinfo": {
+      "search": "足立区総合スポーツセンター"
+    },
+    "search": [
+      {
+        "id": "Q17227755",
+        "title": "Q17227755",
+        "pageid": 18825011,
+        "concepturi": "http://www.wikidata.org/entity/Q17227755",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q17227755",
+        "display": {
+          "label": {
+            "value": "足立区総合スポーツセンター",
+            "language": "ja"
+          }
+        },
+        "label": "足立区総合スポーツセンター",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "足立区総合スポーツセンター"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

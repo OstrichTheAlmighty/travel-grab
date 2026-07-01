@@ -1,0 +1,51 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:38.139Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 686258,
+          "ns": 0,
+          "title": "目黒寄生虫館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めくろきせいちゆうかん",
+            "page_image_free": "Meguro_parasitological_museum_shimomeguro_tokyo_2009.JPG",
+            "wikibase_item": "Q11581651"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6317,
+              "lon": 139.7067,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都目黒区にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 3196351,
+          "ns": 0,
+          "title": "山口左仲",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やまくち さちゆう",
+            "page_image_free": "Satyu_Yamaguti.jpg",
+            "wikibase_item": "Q19260321"
+          },
+          "terms": {
+            "description": [
+              "日本の寄生虫学者"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

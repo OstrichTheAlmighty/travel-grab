@@ -1,0 +1,30 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:54.921Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 273068,
+          "ns": 0,
+          "title": "西鉄バス筑豊",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にしてつはすちくほう",
+            "page_image_free": "Nishitetsu_logo_vector.svg",
+            "wikibase_item": "Q11629882"
+          },
+          "coordinates": [
+            {
+              "lat": 33.64458333,
+              "lon": 130.68413889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

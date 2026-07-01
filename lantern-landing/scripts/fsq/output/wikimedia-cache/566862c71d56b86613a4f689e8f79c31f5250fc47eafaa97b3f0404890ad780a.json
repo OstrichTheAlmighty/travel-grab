@@ -1,0 +1,98 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:25.169Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 69481,
+          "ns": 0,
+          "title": "東京教育大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようきよういく",
+            "page_image_free": "Tokyo_Bunkyo_School_Building,_Univ._of_Tsukuba.jpg",
+            "wikibase_item": "Q11524880"
+          },
+          "terms": {
+            "description": [
+              "かつて東京都文京区にあった国立大学 (1949-1978)"
+            ]
+          }
+        },
+        {
+          "pageid": 270447,
+          "ns": 0,
+          "title": "第一高等学校 (旧制)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たいいちこうとうかつこう",
+            "page_image_free": "University_of_Tokyo_-_Komaba_Campus_-_Building_1.JPG",
+            "wikibase_item": "Q5365568"
+          },
+          "terms": {
+            "description": [
+              "明治期初の高等教育機関"
+            ]
+          }
+        },
+        {
+          "pageid": 738016,
+          "ns": 0,
+          "title": "東京大学の建造物",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようたいかくのけんそうふつ",
+            "wikibase_item": "Q5028728"
+          },
+          "terms": {
+            "description": [
+              "東京大学の学内に存在する建造物"
+            ]
+          }
+        },
+        {
+          "pageid": 1518523,
+          "ns": 0,
+          "title": "大学博物館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たいかくはくふつかん",
+            "page_image_free": "Ashmolean_museum,_Oxford,_Entrance_Screen_And_Steps_Fronting_Beaumont_Street.jpg",
+            "wikibase_item": "Q866133"
+          }
+        },
+        {
+          "pageid": 1554242,
+          "ns": 0,
+          "title": "東京大学",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Yasuda_Auditorium_-_Tokyo_University_3.jpg",
+            "wikibase_item": "Q7842"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71333333,
+              "lon": 139.76222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある国立大学"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

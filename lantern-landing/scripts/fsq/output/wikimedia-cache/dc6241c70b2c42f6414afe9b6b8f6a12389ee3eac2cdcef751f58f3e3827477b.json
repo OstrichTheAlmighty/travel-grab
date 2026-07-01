@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:02.023Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 70287,
+          "ns": 0,
+          "title": "アメヤ横丁",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あめやよこちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Ameya-yokocho01s5s3200.jpg",
+            "wikibase_item": "Q864815"
+          },
+          "terms": {
+            "description": [
+              "東京都台東区の商店街"
+            ]
+          }
+        },
+        {
+          "pageid": 195019,
+          "ns": 0,
+          "title": "闇市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "やみいち",
+            "wikibase_item": "Q50851"
+          },
+          "terms": {
+            "description": [
+              "非合法の売買が行われる市場"
+            ]
+          }
+        },
+        {
+          "pageid": 273358,
+          "ns": 0,
+          "title": "MIYASHITA PARK",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みやしたはあく",
+            "page_image_free": "MIYASHITA_PARK_2025年1月22日の渋谷_202501221307_IMG_2538.jpg",
+            "wikibase_item": "Q99961928"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6612,
+              "lon": 139.7017,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある複合施設"
+            ]
+          }
+        },
+        {
+          "pageid": 2161631,
+          "ns": 0,
+          "title": "MOUNT FUJI ARCHITECTS STUDIO",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "まうんとふし",
+            "wikibase_item": "Q11232024"
+          }
+        },
+        {
+          "pageid": 4368966,
+          "ns": 0,
+          "title": "小田保",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おたやす",
+            "wikibase_item": "Q109603005"
+          }
+        }
+      ]
+    }
+  }
+}

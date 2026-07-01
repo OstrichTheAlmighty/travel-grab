@@ -1,0 +1,89 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:26.981Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 290401,
+          "ns": 0,
+          "title": "日本建築史",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にほんけんちくし",
+            "page_image_free": "Fushimiinari-taisha,_torii-2-1.jpg",
+            "wikibase_item": "Q130404173"
+          }
+        },
+        {
+          "pageid": 337088,
+          "ns": 0,
+          "title": "タウンハウス",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たうんはうす",
+            "page_image_free": "Morning_Light,_Beacon_Hill,_Boston.jpg",
+            "wikibase_item": "Q1202402"
+          },
+          "terms": {
+            "description": [
+              "集合住宅の種類のひとつ。長屋"
+            ]
+          }
+        },
+        {
+          "pageid": 577225,
+          "ns": 0,
+          "title": "看板建築",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かんはんけんちく",
+            "page_image_free": "Lily_Bell_Street_in_Kanda_Jinbocho_1931.jpg",
+            "wikibase_item": "Q11582596"
+          }
+        },
+        {
+          "pageid": 1439399,
+          "ns": 0,
+          "title": "チェックポイント・チャーリー",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちえつくほいんとちやありい",
+            "page_image_free": "Berlin-checkpoint-charlie.jpg",
+            "wikibase_item": "Q68689"
+          },
+          "coordinates": [
+            {
+              "lat": 52.5075,
+              "lon": 13.39027,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1620906,
+          "ns": 0,
+          "title": "町屋 (商家)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "まちや",
+            "page_image_free": "2016-08-05_Tokaido_Seki_Juku_Kameyama_City_Mie,東海道五十三次_関宿_DSCF6954☆彡.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q17222820"
+          },
+          "terms": {
+            "description": [
+              "町人の住む店舗併設の都市型住宅"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

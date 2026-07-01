@@ -1,0 +1,80 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:25.860Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1622005,
+          "ns": 0,
+          "title": "お台場オトナPARK",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おたいはおとなはく",
+            "wikibase_item": "Q11262946"
+          }
+        },
+        {
+          "pageid": 1660843,
+          "ns": 0,
+          "title": "HOT☆FANTASY ODAIBA",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ほつとふあんたしいおたいは",
+            "wikibase_item": "Q11222847"
+          }
+        },
+        {
+          "pageid": 1785184,
+          "ns": 0,
+          "title": "お台場合衆国",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おたいはかつしゆうこく",
+            "page_image_free": "Odaiba-Gasshukoku_2011.jpg",
+            "wikibase_item": "Q11262953"
+          }
+        },
+        {
+          "pageid": 2079645,
+          "ns": 0,
+          "title": "アイドリング!!! @はちたまライブ '09 SPRING",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あいとりんくあつとはちたまらいふにせんきゆうすふりんく",
+            "wikibase_item": "Q11282283"
+          }
+        },
+        {
+          "pageid": 2096020,
+          "ns": 0,
+          "title": "FCGビル",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えふしいしいひる",
+            "page_image_free": "2018_FCG_Headquarters_Building_2.jpg",
+            "wikibase_item": "Q10954019"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62694444,
+              "lon": 139.77444444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区のビル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

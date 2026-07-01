@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:36.642Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 33196,
+          "ns": 0,
+          "title": "山陽百貨店",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さんようひやつかてん",
+            "page_image_free": "170107_Sanyo_department_store_Himeji_Hyogo_pref_Japan01n.jpg",
+            "wikibase_item": "Q11471181"
+          },
+          "coordinates": [
+            {
+              "lat": 34.82880556,
+              "lon": 134.69011111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の兵庫県姫路市にある百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 408284,
+          "ns": 0,
+          "title": "チョコボの不思議なダンジョン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ちよこほのふしきなたんしよん",
+            "wikibase_item": "Q17214824"
+          },
+          "terms": {
+            "description": [
+              "1997年のスクウェアのロールプレイングゲーム"
+            ]
+          }
+        },
+        {
+          "pageid": 950754,
+          "ns": 0,
+          "title": "クレド岡山",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "えぬていていくれとおかやまひる",
+            "page_image_free": "Okayama_CRED.JPG",
+            "wikibase_item": "Q17219552"
+          },
+          "terms": {
+            "description": [
+              "岡山市北区のビル"
+            ]
+          }
+        },
+        {
+          "pageid": 2445574,
+          "ns": 0,
+          "title": "大阪マリオット都ホテル",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおさかまりおつとみやこほてる",
+            "page_image_free": "Abeno_Harukas_Osaka_Japan01-r.jpg",
+            "wikibase_item": "Q11439995"
+          }
+        },
+        {
+          "pageid": 3053796,
+          "ns": 0,
+          "title": "Geek sleep sheep",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きいくすりいふしいふ",
+            "displaytitle": "geek sleep sheep",
+            "wikibase_item": "Q18048263"
+          },
+          "terms": {
+            "description": [
+              "日本のロックバンド"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

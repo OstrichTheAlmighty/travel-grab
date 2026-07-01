@@ -1,0 +1,119 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:49.902Z",
+  "value": {
+    "searchinfo": {
+      "search": "新宿御苑"
+    },
+    "search": [
+      {
+        "id": "Q776863",
+        "title": "Q776863",
+        "pageid": 729906,
+        "concepturi": "http://www.wikidata.org/entity/Q776863",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q776863",
+        "display": {
+          "label": {
+            "value": "Shinjuku Gyoen",
+            "language": "en"
+          },
+          "description": {
+            "value": "park and garden in Shinjuku and Shibuya, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Shinjuku Gyoen",
+        "description": "park and garden in Shinjuku and Shibuya, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "新宿御苑"
+        },
+        "aliases": [
+          "新宿御苑"
+        ]
+      },
+      {
+        "id": "Q1132610",
+        "title": "Q1132610",
+        "pageid": 1079525,
+        "concepturi": "http://www.wikidata.org/entity/Q1132610",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1132610",
+        "display": {
+          "label": {
+            "value": "Shinjuku-gyoemmae Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "metro station in Shinjuku, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Shinjuku-gyoemmae Station",
+        "description": "metro station in Shinjuku, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "新宿御苑前駅"
+        },
+        "aliases": [
+          "新宿御苑前駅"
+        ]
+      },
+      {
+        "id": "Q84713925",
+        "title": "Q84713925",
+        "pageid": 84012816,
+        "concepturi": "http://www.wikidata.org/entity/Q84713925",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q84713925",
+        "display": {
+          "label": {
+            "value": "Shinjuku Gyo-en Greenhouse",
+            "language": "en"
+          },
+          "description": {
+            "value": "Greenhouse in Shinjuku, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Shinjuku Gyo-en Greenhouse",
+        "description": "Greenhouse in Shinjuku, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "新宿御苑大温室"
+        },
+        "aliases": [
+          "新宿御苑大温室"
+        ]
+      },
+      {
+        "id": "Q11501843",
+        "title": "Q11501843",
+        "pageid": 12641527,
+        "concepturi": "http://www.wikidata.org/entity/Q11501843",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11501843",
+        "display": {
+          "label": {
+            "value": "Shinjuku Gyoen Tunnel",
+            "language": "en"
+          }
+        },
+        "label": "Shinjuku Gyoen Tunnel",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "新宿御苑トンネル"
+        },
+        "aliases": [
+          "新宿御苑トンネル"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

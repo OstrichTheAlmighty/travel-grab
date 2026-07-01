@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:17.337Z",
+  "value": {
+    "searchinfo": {
+      "search": "消防博物館"
+    },
+    "search": [
+      {
+        "id": "Q11786880",
+        "title": "Q11786880",
+        "pageid": 12923611,
+        "concepturi": "http://www.wikidata.org/entity/Q11786880",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11786880",
+        "display": {
+          "label": {
+            "value": "firefighting museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "type of museum covering firefighting services",
+            "language": "en"
+          }
+        },
+        "label": "firefighting museum",
+        "description": "type of museum covering firefighting services",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "消防博物館"
+        },
+        "aliases": [
+          "消防博物館"
+        ]
+      },
+      {
+        "id": "Q11559505",
+        "title": "Q11559505",
+        "pageid": 12699416,
+        "concepturi": "http://www.wikidata.org/entity/Q11559505",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11559505",
+        "display": {
+          "label": {
+            "value": "Fire Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Fire Museum",
+        "description": "museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "消防博物館"
+        },
+        "aliases": [
+          "消防博物館"
+        ]
+      },
+      {
+        "id": "Q11151730",
+        "title": "Q11151730",
+        "pageid": 12339166,
+        "concepturi": "http://www.wikidata.org/entity/Q11151730",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11151730",
+        "display": {
+          "label": {
+            "value": "Fire Services Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Macau",
+            "language": "en"
+          }
+        },
+        "label": "Fire Services Museum",
+        "description": "museum in Macau",
+        "match": {
+          "type": "label",
+          "language": "zh",
+          "text": "消防博物館 (澳門)"
+        },
+        "aliases": [
+          "消防博物館 (澳門)"
+        ]
+      },
+      {
+        "id": "Q11151728",
+        "title": "Q11151728",
+        "pageid": 12339165,
+        "concepturi": "http://www.wikidata.org/entity/Q11151728",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11151728",
+        "display": {
+          "label": {
+            "value": "消防博物館",
+            "language": "zh"
+          },
+          "description": {
+            "value": "Wikimedia disambiguation page",
+            "language": "en"
+          }
+        },
+        "label": "消防博物館",
+        "description": "Wikimedia disambiguation page",
+        "match": {
+          "type": "label",
+          "language": "zh",
+          "text": "消防博物館"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

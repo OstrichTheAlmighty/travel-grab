@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:47.052Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 15740,
+          "ns": 0,
+          "title": "西武ドーム",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "せいふとおむ",
+            "page_image_free": "Seibu_Dome_feb_23_2021_various_16_59_23_418000.jpeg",
+            "wikibase_item": "Q1194822"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7685,
+              "lon": 139.4205,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県所沢市にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 93768,
+          "ns": 0,
+          "title": "シー・ティー・ワイ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しいていわい",
+            "wikibase_item": "Q11308955"
+          },
+          "coordinates": [
+            {
+              "lat": 34.96488889,
+              "lon": 136.62938889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1403979,
+          "ns": 0,
+          "title": "フォーミュラワン・パドッククラブ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふおみゆらわんはとくくらふ",
+            "page_image_free": "F1_Monaco_PL7.JPG",
+            "wikibase_item": "Q118592101"
+          }
+        },
+        {
+          "pageid": 3589148,
+          "ns": 0,
+          "title": "藤水咲桜",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふしみす さくら",
+            "wikibase_item": "Q30097638"
+          }
+        },
+        {
+          "pageid": 3896602,
+          "ns": 0,
+          "title": "2018年レッドブル・エアレース・ワールドシリーズ 千葉",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "れつとふるえあれえすわあるとしりいすちは2018",
+            "page_image_free": "RedBullAirRace2018Final4MattHall.jpg",
+            "wikibase_item": "Q59241469"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63972222,
+              "lon": 140.03194444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "2018年に千葉で開催されたレッドブル・エアレースの世界選手権"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

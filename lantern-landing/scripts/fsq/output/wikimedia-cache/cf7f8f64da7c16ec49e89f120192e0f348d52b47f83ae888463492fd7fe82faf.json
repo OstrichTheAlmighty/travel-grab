@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:41.657Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 156993,
+          "ns": 0,
+          "title": "板橋宿",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いたはししゆく",
+            "page_image_free": "Kisokaido01_Itabashi.jpg",
+            "wikibase_item": "Q3155832"
+          },
+          "coordinates": [
+            {
+              "lat": 35.755074,
+              "lon": 139.709176,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "中山道六十九次のうち江戸・日本橋から数えて1番目の宿場"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:22.291Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 93178,
+          "ns": 0,
+          "title": "ぴったんこカン・カン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひつたんこかんかん",
+            "wikibase_item": "Q11276909"
+          },
+          "terms": {
+            "description": [
+              "TBSテレビのバラエティ番組 (2003-2021)"
+            ]
+          }
+        },
+        {
+          "pageid": 2030055,
+          "ns": 0,
+          "title": "さんま&所の大河バラエティ!超近現代史!人間は相変わらずアホか!?",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さんまあんとところのたいかはらえていちようきんけんたいしにんけんはあいかわらすあほか",
+            "wikibase_item": "Q11268569"
+          }
+        },
+        {
+          "pageid": 2658970,
+          "ns": 0,
+          "title": "爆笑学園ナセバナ〜ル!",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はくしようかくえんなせはなある",
+            "wikibase_item": "Q11569388"
+          }
+        },
+        {
+          "pageid": 3052754,
+          "ns": 0,
+          "title": "不思議探求バラエティー ザ・世界ワンダーX",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふしきたんきゆうはらえてい さ せかいわんたあえつくす",
+            "wikibase_item": "Q18054709"
+          }
+        },
+        {
+          "pageid": 3054368,
+          "ns": 0,
+          "title": "所さんのニッポンの出番!",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ところさんのにつほんのてはん",
+            "wikibase_item": "Q18054481"
+          }
+        }
+      ]
+    }
+  }
+}

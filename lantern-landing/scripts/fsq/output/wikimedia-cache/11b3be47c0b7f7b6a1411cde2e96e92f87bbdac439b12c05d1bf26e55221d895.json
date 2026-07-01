@@ -1,0 +1,116 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:13.528Z",
+  "value": {
+    "searchinfo": {
+      "search": "森鷗外記念館"
+    },
+    "search": [
+      {
+        "id": "Q84836242",
+        "title": "Q84836242",
+        "pageid": 84137851,
+        "concepturi": "http://www.wikidata.org/entity/Q84836242",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q84836242",
+        "display": {
+          "label": {
+            "value": "Bunkyō City Mori Ōgai Memorial Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Bunkyō, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Bunkyō City Mori Ōgai Memorial Museum",
+        "description": "museum in Bunkyō, Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "森鷗外記念館"
+        },
+        "aliases": [
+          "森鷗外記念館"
+        ]
+      },
+      {
+        "id": "Q1441078",
+        "title": "Q1441078",
+        "pageid": 1379336,
+        "concepturi": "http://www.wikidata.org/entity/Q1441078",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1441078",
+        "display": {
+          "label": {
+            "value": "Mori-Ôgai-Gedenkstätte",
+            "language": "en"
+          }
+        },
+        "label": "Mori-Ôgai-Gedenkstätte",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "森鷗外記念館"
+        },
+        "aliases": [
+          "森鷗外記念館"
+        ]
+      },
+      {
+        "id": "Q120669454",
+        "title": "Q120669454",
+        "pageid": 115121358,
+        "concepturi": "http://www.wikidata.org/entity/Q120669454",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q120669454",
+        "display": {
+          "label": {
+            "value": "Mori Ōgai Memorial Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Tsuwano, Shimane, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Mori Ōgai Memorial Museum",
+        "description": "museum in Tsuwano, Shimane, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "森鷗外記念館"
+        },
+        "aliases": [
+          "森鷗外記念館"
+        ]
+      },
+      {
+        "id": "Q97376226",
+        "title": "Q97376226",
+        "pageid": 95799957,
+        "concepturi": "http://www.wikidata.org/entity/Q97376226",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q97376226",
+        "display": {
+          "label": {
+            "value": "森鷗外記念館",
+            "language": "ja"
+          },
+          "description": {
+            "value": "Wikimedia disambiguation page",
+            "language": "en"
+          }
+        },
+        "label": "森鷗外記念館",
+        "description": "Wikimedia disambiguation page",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "森鷗外記念館"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

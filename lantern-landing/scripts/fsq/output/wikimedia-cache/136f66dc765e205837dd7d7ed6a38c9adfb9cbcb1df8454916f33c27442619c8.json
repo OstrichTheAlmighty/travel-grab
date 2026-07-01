@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:07.779Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 153576,
+          "ns": 0,
+          "title": "川口町 (新潟県)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かわくちまち",
+            "page_image_free": "20180326_on_Niigata_Prefectural_Road_Route_71.jpg",
+            "wikibase_item": "Q1131506"
+          },
+          "coordinates": [
+            {
+              "lat": 37.27036,
+              "lon": 138.86117,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の新潟県北魚沼郡にあった町"
+            ]
+          }
+        },
+        {
+          "pageid": 1470860,
+          "ns": 0,
+          "title": "JAあぐりタウン げんきの郷",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しえいえいあくりたうんけんきのさと",
+            "kartographer_frames": "1",
+            "page_image_free": "Gennkinosato.jpg",
+            "wikibase_item": "Q11225413"
+          },
+          "coordinates": [
+            {
+              "lat": 34.9942,
+              "lon": 136.94265,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1583451,
+          "ns": 0,
+          "title": "さいさいきて屋",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さいさいきてや",
+            "page_image_free": "Saisaikiteya.jpg",
+            "wikibase_item": "Q11267365"
+          },
+          "coordinates": [
+            {
+              "lat": 34.03844444,
+              "lon": 132.99375,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 2458964,
+          "ns": 0,
+          "title": "アップルサイダー",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あつふるさいたあ",
+            "page_image_free": "Cider_and_apple_juice.jpg",
+            "wikibase_item": "Q5977438"
+          }
+        },
+        {
+          "pageid": 3505945,
+          "ns": 0,
+          "title": "なついろレシピ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "なついろれしひ",
+            "wikibase_item": "Q28685685"
+          }
+        }
+      ]
+    }
+  }
+}

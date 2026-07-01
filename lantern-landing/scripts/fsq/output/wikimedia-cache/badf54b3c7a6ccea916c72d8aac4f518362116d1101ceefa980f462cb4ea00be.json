@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:14.637Z",
+  "value": {
+    "searchinfo": {
+      "search": "杉並能楽堂"
+    },
+    "search": [
+      {
+        "id": "Q134587565",
+        "title": "Q134587565",
+        "pageid": 128418915,
+        "concepturi": "http://www.wikidata.org/entity/Q134587565",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q134587565",
+        "display": {
+          "label": {
+            "value": "Suginami Noh Theater",
+            "language": "en"
+          },
+          "description": {
+            "value": "facility in Suginami, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Suginami Noh Theater",
+        "description": "facility in Suginami, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "杉並能楽堂"
+        },
+        "aliases": [
+          "杉並能楽堂"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

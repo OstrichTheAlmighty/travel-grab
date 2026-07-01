@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:18.860Z",
+  "value": {
+    "searchinfo": {
+      "search": "板橋区立美術館"
+    },
+    "search": [
+      {
+        "id": "Q11532663",
+        "title": "Q11532663",
+        "pageid": 12672569,
+        "concepturi": "http://www.wikidata.org/entity/Q11532663",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11532663",
+        "display": {
+          "label": {
+            "value": "Itabashi Art Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Itabashi Ward, Tōkyō Metropolis, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Itabashi Art Museum",
+        "description": "museum in Itabashi Ward, Tōkyō Metropolis, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "板橋区立美術館"
+        },
+        "aliases": [
+          "板橋区立美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

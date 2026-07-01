@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:21.392Z",
+  "value": {
+    "searchinfo": {
+      "search": "久米美術館"
+    },
+    "search": [
+      {
+        "id": "Q11369635",
+        "title": "Q11369635",
+        "pageid": 12507753,
+        "concepturi": "http://www.wikidata.org/entity/Q11369635",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11369635",
+        "display": {
+          "label": {
+            "value": "Kume Museum of Art",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Kume Museum of Art",
+        "description": "museum in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "久米美術館"
+        },
+        "aliases": [
+          "久米美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

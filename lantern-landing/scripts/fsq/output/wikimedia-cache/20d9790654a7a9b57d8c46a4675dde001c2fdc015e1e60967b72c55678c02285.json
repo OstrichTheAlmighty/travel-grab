@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:14.607Z",
+  "value": {
+    "searchinfo": {
+      "search": "霞会館記念 学習院ミュージアム"
+    },
+    "search": [
+      {
+        "id": "Q132576457",
+        "title": "Q132576457",
+        "pageid": 126436036,
+        "concepturi": "http://www.wikidata.org/entity/Q132576457",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q132576457",
+        "display": {
+          "label": {
+            "value": "Kasumi Kaikan Memorial Gakushūin Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Toshima, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Kasumi Kaikan Memorial Gakushūin Museum",
+        "description": "museum in Toshima, Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "霞会館記念 学習院ミュージアム"
+        },
+        "aliases": [
+          "霞会館記念 学習院ミュージアム"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

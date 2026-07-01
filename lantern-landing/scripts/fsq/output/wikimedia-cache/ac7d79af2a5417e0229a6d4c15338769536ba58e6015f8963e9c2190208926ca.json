@@ -1,0 +1,98 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:48.098Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 175779,
+          "ns": 0,
+          "title": "浜離宮恩賜庭園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はまりきゆうおんしていえん",
+            "kartographer_frames": "1",
+            "page_image_free": "2018_Hama-rikyū_Garden_02.jpg",
+            "wikibase_item": "Q1033333"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66,
+              "lon": 139.76361111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都中央区の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 390534,
+          "ns": 0,
+          "title": "大嘗祭",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たいしようさい",
+            "page_image_free": "Dengai-omi-akusha_(Reiwa_Daijokyu).JPG",
+            "wikibase_item": "Q11433653"
+          },
+          "terms": {
+            "description": [
+              "新天皇の即位の年に行われる新嘗祭、日本の宮中祭祀のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 1593320,
+          "ns": 0,
+          "title": "日本の建築家一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にほんのけんちくかいちらん",
+            "notoc": "",
+            "wikibase_item": "Q3088146"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1625413,
+          "ns": 0,
+          "title": "明治天皇",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "めいしてんのう",
+            "page_image_free": "Emperor_Meiji_in_1873.jpg",
+            "wikibase_item": "Q174231"
+          },
+          "terms": {
+            "description": [
+              "日本の第122代天皇 (1852-1912)"
+            ]
+          }
+        },
+        {
+          "pageid": 2810493,
+          "ns": 0,
+          "title": "放香堂",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほうこうとう",
+            "wikibase_item": "Q17217032"
+          }
+        }
+      ]
+    }
+  }
+}

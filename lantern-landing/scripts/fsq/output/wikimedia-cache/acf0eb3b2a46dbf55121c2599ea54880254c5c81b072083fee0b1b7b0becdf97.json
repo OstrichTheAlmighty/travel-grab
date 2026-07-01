@@ -1,0 +1,139 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:43.931Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4083,
+          "ns": 0,
+          "title": "アドベンチャーワールド",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あとへんちやあわあると",
+            "kartographer_frames": "1",
+            "page_image_free": "Adventure_World,_Shirahama,_Wakayama_-_Apr_24,_2015.jpg",
+            "wikibase_item": "Q2587322"
+          },
+          "coordinates": [
+            {
+              "lat": 33.66671111,
+              "lon": 135.37291389,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "和歌山県西牟婁郡白浜町にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 182987,
+          "ns": 0,
+          "title": "よこはま動物園ズーラシア",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "よこはまとうふつえんすうらしあ",
+            "kartographer_frames": "1",
+            "page_image_free": "Zoorasia.jpg",
+            "wikibase_item": "Q3576063"
+          },
+          "coordinates": [
+            {
+              "lat": 35.49531944,
+              "lon": 139.52375,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県横浜市にある動物園"
+            ]
+          }
+        },
+        {
+          "pageid": 583842,
+          "ns": 0,
+          "title": "周南市徳山動物園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しゆうなんしとくやまとうふつえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokuyamazoo.jpg",
+            "wikibase_item": "Q11416862"
+          },
+          "coordinates": [
+            {
+              "lat": 34.06141667,
+              "lon": 131.81486111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "山口県周南市にある動物園"
+            ]
+          }
+        },
+        {
+          "pageid": 1111320,
+          "ns": 0,
+          "title": "道の駅南房パラダイス",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みちのえきなんほうはらたいす",
+            "kartographer_frames": "1",
+            "page_image_free": "Michinoeki_naboparadais_2.jpg",
+            "wikibase_item": "Q11641183"
+          },
+          "coordinates": [
+            {
+              "lat": 34.9397,
+              "lon": 139.8217,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県館山市にある千葉県道257号の道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 2260013,
+          "ns": 0,
+          "title": "岩手サファリパーク",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いわてさふありはあく",
+            "page_image_free": "Iwate_Safari_Park_1.jpg",
+            "wikibase_item": "Q11474596"
+          },
+          "coordinates": [
+            {
+              "lat": 38.80991667,
+              "lon": 141.25894444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "岩手県一関市にあるサファリパーク"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

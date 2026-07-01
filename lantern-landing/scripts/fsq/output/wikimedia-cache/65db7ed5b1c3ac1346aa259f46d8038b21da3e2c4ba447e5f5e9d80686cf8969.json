@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:45:49.740Z",
+  "value": {
+    "searchinfo": {
+      "search": "春花園BONSAI美術館"
+    },
+    "search": [
+      {
+        "id": "Q29570077",
+        "title": "Q29570077",
+        "pageid": 31215886,
+        "concepturi": "http://www.wikidata.org/entity/Q29570077",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q29570077",
+        "display": {
+          "label": {
+            "value": "Shunkaen Bonsai Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "Museum in Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Shunkaen Bonsai Museum",
+        "description": "Museum in Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "春花園BONSAI美術館"
+        },
+        "aliases": [
+          "春花園BONSAI美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

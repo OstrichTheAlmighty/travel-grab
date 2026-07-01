@@ -1,0 +1,197 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:13:52.981Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京ディズニーシー"
+    },
+    "search": [
+      {
+        "id": "Q1202341",
+        "title": "Q1202341",
+        "pageid": 1145200,
+        "concepturi": "http://www.wikidata.org/entity/Q1202341",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1202341",
+        "display": {
+          "label": {
+            "value": "Tokyo DisneySea",
+            "language": "en"
+          },
+          "description": {
+            "value": "theme park in Japan, owned by The Oriental Land Company",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo DisneySea",
+        "description": "theme park in Japan, owned by The Oriental Land Company",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ディズニーシー"
+        },
+        "aliases": [
+          "東京ディズニーシー"
+        ]
+      },
+      {
+        "id": "Q195432",
+        "title": "Q195432",
+        "pageid": 193290,
+        "concepturi": "http://www.wikidata.org/entity/Q195432",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q195432",
+        "display": {
+          "label": {
+            "value": "Tokyo DisneySea Hotel MiraCosta",
+            "language": "en"
+          },
+          "description": {
+            "value": "hotel",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo DisneySea Hotel MiraCosta",
+        "description": "hotel",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ディズニーシー・ホテルミラコスタ"
+        },
+        "aliases": [
+          "東京ディズニーシー・ホテルミラコスタ"
+        ]
+      },
+      {
+        "id": "Q5368690",
+        "title": "Q5368690",
+        "pageid": 5135035,
+        "concepturi": "http://www.wikidata.org/entity/Q5368690",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5368690",
+        "display": {
+          "label": {
+            "value": "Tokyo DisneySea Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "Disney Resort Line station in Urayasu, Chiba prefecture, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo DisneySea Station",
+        "description": "Disney Resort Line station in Urayasu, Chiba prefecture, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ディズニーシー・ステーション駅"
+        },
+        "aliases": [
+          "東京ディズニーシー・ステーション駅"
+        ]
+      },
+      {
+        "id": "Q11524246",
+        "title": "Q11524246",
+        "pageid": 12664116,
+        "concepturi": "http://www.wikidata.org/entity/Q11524246",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524246",
+        "display": {
+          "label": {
+            "value": "東京ディズニーシー ハーバーサイド・クリスマス2006",
+            "language": "ja"
+          },
+          "description": {
+            "value": "album by Tokyo DisneySea",
+            "language": "en"
+          }
+        },
+        "label": "東京ディズニーシー ハーバーサイド・クリスマス2006",
+        "description": "album by Tokyo DisneySea",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ディズニーシー ハーバーサイド・クリスマス2006"
+        }
+      },
+      {
+        "id": "Q11524245",
+        "title": "Q11524245",
+        "pageid": 12664115,
+        "concepturi": "http://www.wikidata.org/entity/Q11524245",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524245",
+        "display": {
+          "label": {
+            "value": "東京ディズニーシー オーバー・ザ・ウェイブ",
+            "language": "ja"
+          },
+          "description": {
+            "value": "album by Tokyo DisneySea",
+            "language": "en"
+          }
+        },
+        "label": "東京ディズニーシー オーバー・ザ・ウェイブ",
+        "description": "album by Tokyo DisneySea",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ディズニーシー オーバー・ザ・ウェイブ"
+        }
+      },
+      {
+        "id": "Q11524250",
+        "title": "Q11524250",
+        "pageid": 12664120,
+        "concepturi": "http://www.wikidata.org/entity/Q11524250",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524250",
+        "display": {
+          "label": {
+            "value": "東京ディズニーシー ブラヴィッシーモ!コンプリート",
+            "language": "ja"
+          },
+          "description": {
+            "value": "album by Tokyo DisneySea",
+            "language": "en"
+          }
+        },
+        "label": "東京ディズニーシー ブラヴィッシーモ!コンプリート",
+        "description": "album by Tokyo DisneySea",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ディズニーシー ブラヴィッシーモ!コンプリート"
+        }
+      },
+      {
+        "id": "Q11524248",
+        "title": "Q11524248",
+        "pageid": 12664118,
+        "concepturi": "http://www.wikidata.org/entity/Q11524248",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524248",
+        "display": {
+          "label": {
+            "value": "東京ディズニーシー ビッグバンドビート",
+            "language": "ja"
+          },
+          "description": {
+            "value": "album by Tokyo DisneySea",
+            "language": "en"
+          }
+        },
+        "label": "東京ディズニーシー ビッグバンドビート",
+        "description": "album by Tokyo DisneySea",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ディズニーシー ビッグバンドビート"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

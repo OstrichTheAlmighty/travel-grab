@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:13.488Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4343,
+          "ns": 0,
+          "title": "KDDI",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "けいでぃーでぃーあい",
+            "page_image_free": "The_Link_Pillar_2_N.jpg",
+            "wikibase_item": "Q971946"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都港区にある電気通信事業者"
+            ]
+          }
+        },
+        {
+          "pageid": 4495,
+          "ns": 0,
+          "title": "NTTドコモ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "えぬていていとこも",
+            "page_image_free": "Sanno-Park-Tower-01.jpg",
+            "wikibase_item": "Q853958"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67313889,
+              "lon": 139.74066667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都千代田区にある電気通信事業者"
+            ]
+          }
+        },
+        {
+          "pageid": 42225,
+          "ns": 0,
+          "title": "日本郵船",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "につほんゆうせん",
+            "page_image_free": "Yusen-Building-02.jpg",
+            "wikibase_item": "Q1478918"
+          },
+          "terms": {
+            "description": [
+              "日本の海運会社"
+            ]
+          }
+        },
+        {
+          "pageid": 244498,
+          "ns": 0,
+          "title": "アサヒペン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あさひへん",
+            "page_image_free": "Headquarters_of_Asahipen_Corporation.jpg",
+            "wikibase_item": "Q11283180"
+          },
+          "terms": {
+            "description": [
+              "日本の塗料メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 633566,
+          "ns": 0,
+          "title": "キッザニア東京",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きつさにあとうきよう",
+            "page_image_free": "KidZania_Tokyo.jpg",
+            "wikibase_item": "Q5363436"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65583333,
+              "lon": 139.79194444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区豊洲にある体験型商業施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

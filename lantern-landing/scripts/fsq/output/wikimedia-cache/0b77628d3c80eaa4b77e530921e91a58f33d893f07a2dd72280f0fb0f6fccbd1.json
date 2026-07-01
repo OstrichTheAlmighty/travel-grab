@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:33.994Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 84385,
+          "ns": 0,
+          "title": "アーティゾン美術館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あていそんひしゆつかん",
+            "page_image_free": "Artizon_Museum_lobby_view_201912.jpg",
+            "wikibase_item": "Q913808"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区にある私立美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 90988,
+          "ns": 0,
+          "title": "三井記念美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みついきねんひしゆつかん",
+            "page_image_free": "Mitsui_Main_Building.jpg",
+            "wikibase_item": "Q864700"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68633333,
+              "lon": 139.77277778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都中央区日本橋にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 3327607,
+          "ns": 0,
+          "title": "箱根西麓・三島大吊橋",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はこねせいろくみしまおおつりはし",
+            "kartographer_frames": "1",
+            "page_image_free": "三島スカイウォーク_-_panoramio_(4).jpg",
+            "wikibase_item": "Q22119967"
+          },
+          "terms": {
+            "description": [
+              "日本の静岡県三島市にある人道吊り橋"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

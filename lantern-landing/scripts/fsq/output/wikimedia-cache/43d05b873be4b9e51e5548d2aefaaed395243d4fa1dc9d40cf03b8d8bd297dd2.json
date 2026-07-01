@@ -1,0 +1,57 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:24.172Z",
+  "value": {
+    "searchinfo": {
+      "search": "The National Museum of Modern Art, Tokyo"
+    },
+    "search": [
+      {
+        "id": "Q1359908",
+        "title": "Q1359908",
+        "pageid": 1299491,
+        "concepturi": "http://www.wikidata.org/entity/Q1359908",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1359908",
+        "display": {
+          "label": {
+            "value": "The National Museum of Modern Art, Tokyo",
+            "language": "en"
+          },
+          "description": {
+            "value": "Art museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "The National Museum of Modern Art, Tokyo",
+        "description": "Art museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "The National Museum of Modern Art, Tokyo"
+        }
+      },
+      {
+        "id": "Q111646817",
+        "title": "Q111646817",
+        "pageid": 106583892,
+        "concepturi": "http://www.wikidata.org/entity/Q111646817",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q111646817",
+        "display": {
+          "label": {
+            "value": "The National Museum of Modern Art, Tokyo ? Repository",
+            "language": "en"
+          }
+        },
+        "label": "The National Museum of Modern Art, Tokyo ? Repository",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "The National Museum of Modern Art, Tokyo ? Repository"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

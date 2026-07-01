@@ -1,0 +1,90 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:27.161Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 22392,
+          "ns": 0,
+          "title": "建築家",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "けんちくか",
+            "page_image_free": "Architect.png",
+            "wikibase_item": "Q42973"
+          }
+        },
+        {
+          "pageid": 140780,
+          "ns": 0,
+          "title": "高級住宅街",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こうきゆうしゆうたくかい",
+            "wikibase_item": "Q105753682"
+          },
+          "terms": {
+            "description": [
+              "高額な住宅が集中的に分布していることを特徴とする特定の都市の地域"
+            ]
+          }
+        },
+        {
+          "pageid": 251977,
+          "ns": 0,
+          "title": "日本の住宅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しゆうたく",
+            "wikibase_item": "Q3088415"
+          }
+        },
+        {
+          "pageid": 1489092,
+          "ns": 0,
+          "title": "都市計画家",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "としけいかくか",
+            "wikibase_item": "Q131062"
+          },
+          "terms": {
+            "description": [
+              "都市計画の分野の計画家"
+            ]
+          }
+        },
+        {
+          "pageid": 2165724,
+          "ns": 0,
+          "title": "外交官の家",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かいこうかんのいえ",
+            "page_image_free": "Gaikoukan_no_ie.JPG",
+            "wikibase_item": "Q60985249"
+          },
+          "coordinates": [
+            {
+              "lat": 35.43662611,
+              "lon": 139.64340889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "内田定槌の邸宅として建てられた西洋館。国の重要文化財。"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

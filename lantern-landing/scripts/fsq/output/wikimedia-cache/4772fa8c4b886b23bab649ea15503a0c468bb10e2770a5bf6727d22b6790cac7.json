@@ -1,0 +1,191 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:15.459Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "geosearch": [
+        {
+          "pageid": 128418915,
+          "ns": 0,
+          "title": "Q134587565",
+          "lat": 35.693131,
+          "lon": 139.665823,
+          "dist": 17.1,
+          "primary": true
+        },
+        {
+          "pageid": 12653700,
+          "ns": 0,
+          "title": "Q11513936",
+          "lat": 35.691839,
+          "lon": 139.663387,
+          "dist": 245.7,
+          "primary": true
+        },
+        {
+          "pageid": 6095286,
+          "ns": 0,
+          "title": "Q6289561",
+          "lat": 35.693966,
+          "lon": 139.662894,
+          "dist": 269,
+          "primary": true
+        },
+        {
+          "pageid": 1079518,
+          "ns": 0,
+          "title": "Q1132601",
+          "lat": 35.690563888889,
+          "lon": 139.66703333333,
+          "dist": 304.1,
+          "primary": true
+        },
+        {
+          "pageid": 6095290,
+          "ns": 0,
+          "title": "Q6289566",
+          "lat": 35.69363889,
+          "lon": 139.66191667,
+          "dist": 343.7,
+          "primary": true
+        },
+        {
+          "pageid": 12523860,
+          "ns": 0,
+          "title": "Q11385448",
+          "lat": 35.689987,
+          "lon": 139.665103,
+          "dist": 345.2,
+          "primary": true
+        },
+        {
+          "pageid": 12665335,
+          "ns": 0,
+          "title": "Q11525460",
+          "lat": 35.689694,
+          "lon": 139.666972,
+          "dist": 392.6,
+          "primary": true
+        },
+        {
+          "pageid": 12793010,
+          "ns": 0,
+          "title": "Q11652980",
+          "lat": 35.693727,
+          "lon": 139.661099,
+          "dist": 418.1,
+          "primary": true
+        },
+        {
+          "pageid": 81274994,
+          "ns": 0,
+          "title": "Q81916864",
+          "lat": 35.694828,
+          "lon": 139.670135,
+          "dist": 449.8,
+          "primary": true
+        },
+        {
+          "pageid": 12512801,
+          "ns": 0,
+          "title": "Q11374605",
+          "lat": 35.690889,
+          "lon": 139.670083,
+          "dist": 467,
+          "primary": true
+        },
+        {
+          "pageid": 95640044,
+          "ns": 0,
+          "title": "Q97199424",
+          "lat": 35.694444,
+          "lon": 139.660556,
+          "dist": 485.6,
+          "primary": true
+        },
+        {
+          "pageid": 7746041,
+          "ns": 0,
+          "title": "Q7813841",
+          "lat": 35.6964,
+          "lon": 139.662,
+          "dist": 497,
+          "primary": true
+        },
+        {
+          "pageid": 81322055,
+          "ns": 0,
+          "title": "Q81964082",
+          "lat": 35.692249,
+          "lon": 139.671097,
+          "dist": 499.6,
+          "primary": true
+        },
+        {
+          "pageid": 18807000,
+          "ns": 0,
+          "title": "Q17212473",
+          "lat": 35.69675,
+          "lon": 139.6615,
+          "dist": 556.1,
+          "primary": true
+        },
+        {
+          "pageid": 18826886,
+          "ns": 0,
+          "title": "Q17229629",
+          "lat": 35.69675,
+          "lon": 139.6615,
+          "dist": 556.1,
+          "primary": true
+        },
+        {
+          "pageid": 12642426,
+          "ns": 0,
+          "title": "Q11502745",
+          "lat": 35.69675,
+          "lon": 139.6615,
+          "dist": 556.1,
+          "primary": true
+        },
+        {
+          "pageid": 1021669,
+          "ns": 0,
+          "title": "Q1073232",
+          "lat": 35.697469444444,
+          "lon": 139.66907222222,
+          "dist": 579.4,
+          "primary": true
+        },
+        {
+          "pageid": 12660533,
+          "ns": 0,
+          "title": "Q11520674",
+          "lat": 35.69524722222222,
+          "lon": 139.67192777777777,
+          "dist": 616.5,
+          "primary": true
+        },
+        {
+          "pageid": 31055068,
+          "ns": 0,
+          "title": "Q29407987",
+          "lat": 35.68938888888889,
+          "lon": 139.66036111111111,
+          "dist": 628.6,
+          "primary": true
+        },
+        {
+          "pageid": 38255968,
+          "ns": 0,
+          "title": "Q36874979",
+          "lat": 35.698792,
+          "lon": 139.66373,
+          "dist": 660.8,
+          "primary": true
+        }
+      ]
+    }
+  }
+}

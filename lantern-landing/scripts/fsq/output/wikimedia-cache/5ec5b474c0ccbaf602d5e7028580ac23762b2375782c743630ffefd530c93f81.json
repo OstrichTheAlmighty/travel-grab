@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:44.828Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 64430,
+          "ns": 0,
+          "title": "堀切菖蒲園駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほりきりしようふえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Keisei_Horikirishobuen_sta_003.jpg",
+            "wikibase_item": "Q5903250"
+          },
+          "coordinates": [
+            {
+              "lat": 35.74763889,
+              "lon": 139.8275,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都葛飾区堀切にある京成電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 207765,
+          "ns": 0,
+          "title": "堀切菖蒲園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ほりきりしようふえん",
+            "kartographer_frames": "1",
+            "page_image_free": "堀切菖蒲園_-_panoramio.jpg",
+            "wikibase_item": "Q11427321"
+          },
+          "coordinates": [
+            {
+              "lat": 35.74236111,
+              "lon": 139.82597222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都葛飾区の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 478617,
+          "ns": 0,
+          "title": "堀切 (葛飾区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ほりきり",
+            "kartographer_frames": "1",
+            "page_image_free": "Keisei_Horikirishobuen_sta_003.jpg",
+            "wikibase_item": "Q11427310"
+          },
+          "terms": {
+            "description": [
+              "東京都葛飾区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1831589,
+          "ns": 0,
+          "title": "堀切橋",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ほりきりはし",
+            "page_image_free": "Katsushika_Tokyo_Horikiri_Bridge_1.JPG",
+            "wikibase_item": "Q11427320"
+          },
+          "coordinates": [
+            {
+              "lat": 35.74583333,
+              "lon": 139.81916667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の橋"
+            ]
+          }
+        },
+        {
+          "pageid": 2053975,
+          "ns": 0,
+          "title": "堀切",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ほりきり",
+            "disambiguation": "",
+            "wikibase_item": "Q11427311"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの曖昧さ回避ページ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

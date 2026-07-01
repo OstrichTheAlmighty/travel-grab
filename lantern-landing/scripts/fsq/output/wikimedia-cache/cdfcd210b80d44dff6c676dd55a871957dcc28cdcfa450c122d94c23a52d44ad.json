@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:43.892Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 76807,
+          "ns": 0,
+          "title": "ネェル・アーガマ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ねえるああかま",
+            "wikibase_item": "Q11325229"
+          },
+          "terms": {
+            "description": [
+              "日本のアニメ『ガンダムシリーズ』に登場する架空の艦艇"
+            ]
+          }
+        },
+        {
+          "pageid": 119990,
+          "ns": 0,
+          "title": "ペデストリアンデッキ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "へてすとりあんてつき",
+            "page_image_free": "Kashiwa_Station_East_Exit_Plaza_20240520.jpg",
+            "wikibase_item": "Q135410137"
+          },
+          "terms": {
+            "description": [
+              "高架の歩道"
+            ]
+          }
+        },
+        {
+          "pageid": 593203,
+          "ns": 0,
+          "title": "遊☆戯☆王オフィシャルカードゲーム",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ゆうきおうおふいしやるかあとけえむ",
+            "wikibase_item": "Q546064"
+          },
+          "terms": {
+            "description": [
+              "コナミデジタルエンタテインメントが製作・販売する日本のトレーディングカードゲーム"
+            ]
+          }
+        },
+        {
+          "pageid": 2597030,
+          "ns": 0,
+          "title": "カードファイト!! ヴァンガード",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かあとふあいとうあんかあと",
+            "wikibase_item": "Q1188003"
+          },
+          "terms": {
+            "description": [
+              "日本のトレーディングカードゲーム"
+            ]
+          }
+        },
+        {
+          "pageid": 4112723,
+          "ns": 0,
+          "title": "遊☆戯☆王ラッシュデュエル",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ゆうきおうらつしゆてゆえる",
+            "wikibase_item": "Q97210868"
+          },
+          "terms": {
+            "description": [
+              "コナミデジタルエンタテインメントが製作・販売しているトレーディングカードゲーム"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

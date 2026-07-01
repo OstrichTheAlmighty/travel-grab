@@ -1,0 +1,77 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:14.544Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 334802,
+          "ns": 0,
+          "title": "岩下清周",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いわした きよちか",
+            "page_image_free": "Kiyochika_Iwashita.jpg",
+            "wikibase_item": "Q11474001"
+          },
+          "terms": {
+            "description": [
+              "日本の実業家"
+            ]
+          }
+        },
+        {
+          "pageid": 887698,
+          "ns": 0,
+          "title": "花嫁は厄年ッ!",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はなよめはやくとしつ",
+            "wikibase_item": "Q11082184"
+          }
+        },
+        {
+          "pageid": 1303086,
+          "ns": 0,
+          "title": "温泉 (秘) 大作戦",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おんせんまるひたいさくせん",
+            "wikibase_item": "Q11562919"
+          }
+        },
+        {
+          "pageid": 3462147,
+          "ns": 0,
+          "title": "約束のネバーランド",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やくそくのねはあらんと",
+            "page_image_free": "The-promised-neverland-logo.svg",
+            "wikibase_item": "Q28682687"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 3560312,
+          "ns": 0,
+          "title": "コノマチ☆リサーチ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "このまちりさあち",
+            "wikibase_item": "Q30923001"
+          }
+        }
+      ]
+    }
+  }
+}

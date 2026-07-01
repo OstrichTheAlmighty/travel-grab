@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:16.692Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8035,
+          "ns": 0,
+          "title": "目白駅",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "めしろ",
+            "kartographer_frames": "1",
+            "page_image_free": "Mejiro-Station-Building.jpg",
+            "wikibase_item": "Q375154"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72119444,
+              "lon": 139.70658333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある東日本旅客鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 300297,
+          "ns": 0,
+          "title": "池袋",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いけふくろ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ikebukuro2007.jpg",
+            "wikibase_item": "Q542366"
+          },
+          "terms": {
+            "description": [
+              "東京都豊島区の町名、または池袋駅の周辺地域を含む呼称"
+            ]
+          }
+        },
+        {
+          "pageid": 682261,
+          "ns": 0,
+          "title": "豊島氏",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "としまし",
+            "page_image_free": "Mitsukashiwa.png",
+            "wikibase_item": "Q2408600"
+          }
+        },
+        {
+          "pageid": 1635259,
+          "ns": 0,
+          "title": "豊島区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "としまく",
+            "kartographer_frames": "1",
+            "page_image_free": "Sunshine_60_1_Ikebukuro_Tokyo_21_May_2004.jpg",
+            "wikibase_item": "Q236680"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7261,
+              "lon": 139.7167,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 4506631,
+          "ns": 0,
+          "title": "豊島区立郷土資料館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "としまくりつきようとしりようかん",
+            "page_image_free": "Japan_Tokyo_Yamanote_loop_location_map.svg",
+            "wikibase_item": "Q104698258"
+          },
+          "coordinates": [
+            {
+              "lat": 35.727773,
+              "lon": 139.706728,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

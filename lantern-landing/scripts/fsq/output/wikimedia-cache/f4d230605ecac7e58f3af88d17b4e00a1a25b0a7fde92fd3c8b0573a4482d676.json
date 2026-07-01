@@ -1,0 +1,27 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:36.912Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 130713,
+          "ns": 0,
+          "title": "吉原遊廓",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "よしわらゆうかく",
+            "page_image_free": "82_Yoshiwara_Girls.jpg",
+            "wikibase_item": "Q10917048"
+          },
+          "terms": {
+            "description": [
+              "江戸時代、幕府によって公認された遊廓のひとつ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

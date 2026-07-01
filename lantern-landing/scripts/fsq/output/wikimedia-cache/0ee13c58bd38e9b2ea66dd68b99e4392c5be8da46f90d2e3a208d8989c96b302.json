@@ -1,0 +1,98 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:18.810Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3093394,
+          "ns": 0,
+          "title": "List of European advertising characters",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "European advertising characters",
+            "page_image_free": "Sign_for_Michelin_tyres.jpg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q6570359"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 4176308,
+          "ns": 0,
+          "title": "Michael McConnohie",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "McConnohie, Michael",
+            "page_image_free": "Michael_McConnohie_@_Retro_Con,_Oaks,_PA_9-12-15_(21360298516).jpg",
+            "wikibase-shortdesc": "American voice actor",
+            "wikibase_item": "Q3097943"
+          },
+          "terms": {
+            "description": [
+              "American voice actor"
+            ]
+          }
+        },
+        {
+          "pageid": 26286053,
+          "ns": 0,
+          "title": "List of German films of the 1990s",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "German Films",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q6571818"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 53068064,
+          "ns": 0,
+          "title": "Lara-Isabelle Rentinck",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Rentinck, Lara Isabelle",
+            "page_image_free": "2018-10-22_TV,_ARD,_Cast_-Rote_Rosen-_Staffel_16_IMG_1910_LR10_by_Stepro.jpg",
+            "wikibase-shortdesc": "German actress",
+            "wikibase_item": "Q100318"
+          },
+          "terms": {
+            "description": [
+              "German actress"
+            ]
+          }
+        },
+        {
+          "pageid": 75888413,
+          "ns": 0,
+          "title": "Hey Qween!",
+          "index": 3,
+          "pageprops": {
+            "displaytitle": "<i>Hey Qween!</i>",
+            "wikibase-shortdesc": "Talk show hosted by Jonny McGovern",
+            "wikibase_item": "Q102306351"
+          },
+          "terms": {
+            "description": [
+              "talk show hosted by Jonny McGovern"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

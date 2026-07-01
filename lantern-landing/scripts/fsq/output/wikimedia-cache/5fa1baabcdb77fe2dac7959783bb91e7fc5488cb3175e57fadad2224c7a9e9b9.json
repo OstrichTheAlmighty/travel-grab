@@ -1,0 +1,203 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:44.204Z",
+  "value": {
+    "searchinfo": {
+      "search": "Imperial Palace"
+    },
+    "search": [
+      {
+        "id": "Q80290",
+        "title": "Q80290",
+        "pageid": 82789,
+        "concepturi": "http://www.wikidata.org/entity/Q80290",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q80290",
+        "display": {
+          "label": {
+            "value": "Forbidden City",
+            "language": "en"
+          },
+          "description": {
+            "value": "Chinese imperial palace in Beijing",
+            "language": "en"
+          }
+        },
+        "label": "Forbidden City",
+        "description": "Chinese imperial palace in Beijing",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "Imperial Palace"
+        },
+        "aliases": [
+          "Imperial Palace"
+        ]
+      },
+      {
+        "id": "Q3361206",
+        "title": "Q3361206",
+        "pageid": 3203549,
+        "concepturi": "http://www.wikidata.org/entity/Q3361206",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3361206",
+        "display": {
+          "label": {
+            "value": "Paço Imperial",
+            "language": "en"
+          },
+          "description": {
+            "value": "building in Rio de Janeiro",
+            "language": "en"
+          }
+        },
+        "label": "Paço Imperial",
+        "description": "building in Rio de Janeiro",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "Imperial Palace"
+        },
+        "aliases": [
+          "Imperial Palace"
+        ]
+      },
+      {
+        "id": "Q838028",
+        "title": "Q838028",
+        "pageid": 790399,
+        "concepturi": "http://www.wikidata.org/entity/Q838028",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q838028",
+        "display": {
+          "label": {
+            "value": "Ming Palace",
+            "language": "en"
+          },
+          "description": {
+            "value": "palace",
+            "language": "en"
+          }
+        },
+        "label": "Ming Palace",
+        "description": "palace",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "Imperial Palace"
+        },
+        "aliases": [
+          "Imperial Palace"
+        ]
+      },
+      {
+        "id": "Q5353683",
+        "title": "Q5353683",
+        "pageid": 5120299,
+        "concepturi": "http://www.wikidata.org/entity/Q5353683",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5353683",
+        "display": {
+          "label": {
+            "value": "back palace",
+            "language": "en"
+          },
+          "description": {
+            "value": "Chinese harem palace",
+            "language": "en"
+          }
+        },
+        "label": "back palace",
+        "description": "Chinese harem palace",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "imperial palace"
+        },
+        "aliases": [
+          "imperial palace"
+        ]
+      },
+      {
+        "id": "Q3149534",
+        "title": "Q3149534",
+        "pageid": 3008763,
+        "concepturi": "http://www.wikidata.org/entity/Q3149534",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3149534",
+        "display": {
+          "label": {
+            "value": "Imperial Palace, Annecy",
+            "language": "en"
+          },
+          "description": {
+            "value": "hotel in Annecy, France",
+            "language": "en"
+          }
+        },
+        "label": "Imperial Palace, Annecy",
+        "description": "hotel in Annecy, France",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Imperial Palace, Annecy"
+        }
+      },
+      {
+        "id": "Q1887049",
+        "title": "Q1887049",
+        "pageid": 1817215,
+        "concepturi": "http://www.wikidata.org/entity/Q1887049",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1887049",
+        "display": {
+          "label": {
+            "value": "Imperial Museum of Brazil",
+            "language": "en"
+          },
+          "description": {
+            "value": "building in Petrópolis, Brazil",
+            "language": "en"
+          }
+        },
+        "label": "Imperial Museum of Brazil",
+        "description": "building in Petrópolis, Brazil",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "Imperial Palace, Petrópolis"
+        },
+        "aliases": [
+          "Imperial Palace, Petrópolis"
+        ]
+      },
+      {
+        "id": "Q131441258",
+        "title": "Q131441258",
+        "pageid": 125348906,
+        "concepturi": "http://www.wikidata.org/entity/Q131441258",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q131441258",
+        "display": {
+          "label": {
+            "value": "Imperial Palace",
+            "language": "en"
+          },
+          "description": {
+            "value": "former casino hotel in Las Vegas, Nevada",
+            "language": "en"
+          }
+        },
+        "label": "Imperial Palace",
+        "description": "former casino hotel in Las Vegas, Nevada",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Imperial Palace"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

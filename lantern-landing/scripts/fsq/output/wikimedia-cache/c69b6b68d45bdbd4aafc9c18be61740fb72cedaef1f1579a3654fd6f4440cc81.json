@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:50.647Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 9553,
+          "ns": 0,
+          "title": "セレーネー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せれえねえ",
+            "page_image_free": "Luna_statue.jpg",
+            "wikibase_item": "Q131585"
+          },
+          "terms": {
+            "description": [
+              "ギリシア神話の女神"
+            ]
+          }
+        },
+        {
+          "pageid": 96835,
+          "ns": 0,
+          "title": "越路吹雪",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こしし ふふき",
+            "page_image_free": "Fubuki_Koshiji_1956_IMG_20220409_0003.jpg",
+            "wikibase_item": "Q11636632"
+          },
+          "terms": {
+            "description": [
+              "日本の女性歌手、女優 (1924-1980)"
+            ]
+          }
+        },
+        {
+          "pageid": 273474,
+          "ns": 0,
+          "title": "リパブリック讃歌",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "りはふりつくさんか",
+            "page_image_free": "The_Battle_Hymn_of_the_Republic_-_Project_Gutenberg_eText_21566.png",
+            "wikibase_item": "Q583210"
+          },
+          "terms": {
+            "description": [
+              "南北戦争の北軍の行進曲"
+            ]
+          }
+        },
+        {
+          "pageid": 1722491,
+          "ns": 0,
+          "title": "ファイターズ讃歌",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふあいたあすさんか",
+            "wikibase_item": "Q11331846"
+          },
+          "terms": {
+            "description": [
+              "北海道日本ハムファイターズの球団歌"
+            ]
+          }
+        },
+        {
+          "pageid": 2244490,
+          "ns": 0,
+          "title": "川崎普照",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かわさき ひろてる",
+            "wikibase_item": "Q11478496"
+          },
+          "terms": {
+            "description": [
+              "日本の彫刻家 (1931-2024)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

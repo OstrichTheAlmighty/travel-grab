@@ -1,0 +1,28 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:01.552Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 94157,
+          "ns": 0,
+          "title": "回向院",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えこういん",
+            "kartographer_frames": "2",
+            "page_image_free": "100_views_edo_005.jpg",
+            "wikibase_item": "Q3049659"
+          },
+          "terms": {
+            "description": [
+              "東京都墨田区にある寺院"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

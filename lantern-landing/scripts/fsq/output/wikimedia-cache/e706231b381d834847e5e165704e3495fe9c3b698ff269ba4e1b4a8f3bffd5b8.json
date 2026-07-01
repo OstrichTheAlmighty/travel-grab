@@ -1,0 +1,209 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:36.915Z",
+  "value": {
+    "searchinfo": {
+      "search": "シート"
+    },
+    "search": [
+      {
+        "id": "Q116191",
+        "title": "Q116191",
+        "pageid": 118746,
+        "concepturi": "http://www.wikidata.org/entity/Q116191",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q116191",
+        "display": {
+          "label": {
+            "value": "toilet seat",
+            "language": "en"
+          },
+          "description": {
+            "value": "hinged unit consisting of a round or oval open seat, and usually a lid, which is bolted onto the bowl of a toilet",
+            "language": "en"
+          }
+        },
+        "label": "toilet seat",
+        "description": "hinged unit consisting of a round or oval open seat, and usually a lid, which is bolted onto the bowl of a toilet",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "シート"
+        },
+        "aliases": [
+          "シート"
+        ]
+      },
+      {
+        "id": "Q3130",
+        "title": "Q3130",
+        "pageid": 4119,
+        "concepturi": "http://www.wikidata.org/entity/Q3130",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3130",
+        "display": {
+          "label": {
+            "value": "Sydney",
+            "language": "en"
+          },
+          "description": {
+            "value": "capital city of New South Wales, Australia",
+            "language": "en"
+          }
+        },
+        "label": "Sydney",
+        "description": "capital city of New South Wales, Australia",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "シドニー"
+        },
+        "aliases": [
+          "シドニー"
+        ]
+      },
+      {
+        "id": "Q213670",
+        "title": "Q213670",
+        "pageid": 209099,
+        "concepturi": "http://www.wikidata.org/entity/Q213670",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q213670",
+        "display": {
+          "label": {
+            "value": "Sido",
+            "language": "en"
+          },
+          "description": {
+            "value": "German rapper",
+            "language": "en"
+          }
+        },
+        "label": "Sido",
+        "description": "German rapper",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "シド"
+        },
+        "aliases": [
+          "シド"
+        ]
+      },
+      {
+        "id": "Q8544",
+        "title": "Q8544",
+        "pageid": 9857,
+        "concepturi": "http://www.wikidata.org/entity/Q8544",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q8544",
+        "display": {
+          "label": {
+            "value": "2000 Summer Olympics",
+            "language": "en"
+          },
+          "description": {
+            "value": "Games of the XXVII Olympiad, in Sydney, Australia",
+            "language": "en"
+          }
+        },
+        "label": "2000 Summer Olympics",
+        "description": "Games of the XXVII Olympiad, in Sydney, Australia",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "シドニーオリンピック"
+        },
+        "aliases": [
+          "シドニーオリンピック"
+        ]
+      },
+      {
+        "id": "Q16281470",
+        "title": "Q16281470",
+        "pageid": 17908136,
+        "concepturi": "http://www.wikidata.org/entity/Q16281470",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q16281470",
+        "display": {
+          "label": {
+            "value": "Sid",
+            "language": "en"
+          },
+          "description": {
+            "value": "male given name",
+            "language": "en"
+          }
+        },
+        "label": "Sid",
+        "description": "male given name",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "シド"
+        },
+        "aliases": [
+          "シド"
+        ]
+      },
+      {
+        "id": "Q487556",
+        "title": "Q487556",
+        "pageid": 458910,
+        "concepturi": "http://www.wikidata.org/entity/Q487556",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q487556",
+        "display": {
+          "label": {
+            "value": "University of Sydney",
+            "language": "en"
+          },
+          "description": {
+            "value": "Australian university founded in 1850",
+            "language": "en"
+          }
+        },
+        "label": "University of Sydney",
+        "description": "Australian university founded in 1850",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "シドニー大学"
+        },
+        "aliases": [
+          "シドニー大学"
+        ]
+      },
+      {
+        "id": "Q166861",
+        "title": "Q166861",
+        "pageid": 167404,
+        "concepturi": "http://www.wikidata.org/entity/Q166861",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q166861",
+        "display": {
+          "label": {
+            "value": "Cistercians",
+            "language": "en"
+          },
+          "description": {
+            "value": "Roman Catholic order of the Benedictine reform in the tradition of the monastery of Citaux",
+            "language": "en"
+          }
+        },
+        "label": "Cistercians",
+        "description": "Roman Catholic order of the Benedictine reform in the tradition of the monastery of Citaux",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "シトー会"
+        },
+        "aliases": [
+          "シトー会"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

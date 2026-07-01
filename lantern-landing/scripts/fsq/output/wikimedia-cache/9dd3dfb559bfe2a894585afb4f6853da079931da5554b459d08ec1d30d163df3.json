@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:26.572Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 45613,
+          "ns": 0,
+          "title": "Jリーグカップ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Jりいくかつふ",
+            "page_image_free": "J_League_Cup_2003.jpg",
+            "wikibase_item": "Q601333"
+          },
+          "terms": {
+            "description": [
+              "Jリーグ主催の日本のサッカーのカップ戦"
+            ]
+          }
+        },
+        {
+          "pageid": 56713,
+          "ns": 0,
+          "title": "J SPORTS",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しえいすほつ",
+            "page_image_free": "Telecom_Center_Building.jpg",
+            "wikibase_item": "Q3156988"
+          },
+          "coordinates": [
+            {
+              "lat": 35.61708333,
+              "lon": 139.77988889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本のスポーツ専門チャンネル"
+            ]
+          }
+        },
+        {
+          "pageid": 185445,
+          "ns": 0,
+          "title": "生放送",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なまほうそう",
+            "wikibase_item": "Q431102"
+          },
+          "terms": {
+            "description": [
+              "ナレーション・演技・演奏・スポーツ中継といったコンテンツを、一旦録音・録画することなくリアルタイムに視聴者・聴取者に伝えるような放送手段"
+            ]
+          }
+        },
+        {
+          "pageid": 3354386,
+          "ns": 0,
+          "title": "J:COMチャンネル",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しえいこむちやんねる",
+            "wikibase_item": "Q24873382"
+          }
+        },
+        {
+          "pageid": 4254041,
+          "ns": 0,
+          "title": "JCOM BS",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しえいこむひいえす",
+            "page_image_free": "丸の内トラストタワーN館.JPG",
+            "wikibase_item": "Q109361420"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68319444,
+              "lon": 139.76980556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本のBSデジタル放送局"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:21.295Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 733616,
+          "ns": 0,
+          "title": "アトリエシリーズ (ザールブルグ)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あとりえしりいすさあるふるくのれんきんしゆつし",
+            "toc": "",
+            "wikibase_item": "Q11284014"
+          },
+          "terms": {
+            "description": [
+              "日本のゲームタイトルシリーズ"
+            ]
+          }
+        },
+        {
+          "pageid": 1181575,
+          "ns": 0,
+          "title": "SRX計画",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "SRXけいかく",
+            "wikibase_item": "Q11244335"
+          }
+        },
+        {
+          "pageid": 1267484,
+          "ns": 0,
+          "title": "週刊少年サンデー連載作品の一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しゆうかんしようねんさんてえれんさいさくひんのいちらん",
+            "wikibase_item": "Q2457799"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2281149,
+          "ns": 0,
+          "title": "TIGER & BUNNY",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たいかああんとはにい",
+            "wikibase_item": "Q1201022"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビアニメ番組、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 3555448,
+          "ns": 0,
+          "title": "シュヴァーバッハ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しゆうあはつは",
+            "kartographer_frames": "1",
+            "page_image_free": "DEU_Schwabach_COA.svg",
+            "wikibase_item": "Q14889"
+          },
+          "coordinates": [
+            {
+              "lat": 49.33,
+              "lon": 11.0225,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "ドイツの都市"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

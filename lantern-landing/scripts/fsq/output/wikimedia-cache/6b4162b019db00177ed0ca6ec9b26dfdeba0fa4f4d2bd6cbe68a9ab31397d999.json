@@ -1,0 +1,108 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:45.993Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 113841,
+          "ns": 0,
+          "title": "レッド吉田",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "れつとよした",
+            "page_image_free": "TIM_in_Tokyo_Daishoten_Day_at_Oi_racecourse_(31187474763).jpg",
+            "wikibase_item": "Q9027921"
+          }
+        },
+        {
+          "pageid": 139698,
+          "ns": 0,
+          "title": "日本看護協会",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんかんこきようかい",
+            "wikibase_item": "Q11508671"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66691667,
+              "lon": 139.70791667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 273358,
+          "ns": 0,
+          "title": "MIYASHITA PARK",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みやしたはあく",
+            "page_image_free": "MIYASHITA_PARK_2025年1月22日の渋谷_202501221307_IMG_2538.jpg",
+            "wikibase_item": "Q99961928"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6612,
+              "lon": 139.7017,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある複合施設"
+            ]
+          }
+        },
+        {
+          "pageid": 873612,
+          "ns": 0,
+          "title": "北参道駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きたさんとう",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-Metro-Kita-Sando-Sta-01.jpg",
+            "wikibase_item": "Q128322"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67816667,
+              "lon": 139.70569444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある東京地下鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 2288678,
+          "ns": 0,
+          "title": "田中香子",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たなか よしこ",
+            "wikibase_item": "Q11576053"
+          },
+          "terms": {
+            "description": [
+              "日本の女優"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

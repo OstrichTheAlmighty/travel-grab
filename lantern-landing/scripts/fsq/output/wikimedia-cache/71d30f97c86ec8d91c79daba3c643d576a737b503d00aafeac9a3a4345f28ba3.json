@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:33.825Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 99610,
+          "ns": 0,
+          "title": "大須 (名古屋市)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおす",
+            "page_image_free": "View_of_Osu_Intersection_&_Monzen-cho-Dori_St.,_Monzen-cho_Naka_Ward_Nagoya_2022.jpg",
+            "wikibase_item": "Q8081716"
+          },
+          "coordinates": [
+            {
+              "lat": 35.15885389,
+              "lon": 136.90374111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "名古屋市中区の繁華街"
+            ]
+          }
+        },
+        {
+          "pageid": 171382,
+          "ns": 0,
+          "title": "アベノ橋魔法☆商店街",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あへのはしまほうしようてんかい",
+            "wikibase_item": "Q2465820"
+          }
+        },
+        {
+          "pageid": 940350,
+          "ns": 0,
+          "title": "加藤勝信",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かとう かつのふ",
+            "page_image_free": "Katsunobu_Katō_20241001_(cropped).jpg",
+            "wikibase_item": "Q6378155"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家、官僚"
+            ]
+          }
+        },
+        {
+          "pageid": 1355002,
+          "ns": 0,
+          "title": "加藤鷹",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かとう たか",
+            "wikibase_item": "Q3111313"
+          },
+          "terms": {
+            "description": [
+              "日本のタレント、元AV男優"
+            ]
+          }
+        },
+        {
+          "pageid": 1502322,
+          "ns": 0,
+          "title": "加藤の乱",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かとうのらん",
+            "page_image_free": "Koichi_Kato_1985_(cropped).jpg",
+            "wikibase_item": "Q11398921"
+          },
+          "terms": {
+            "description": [
+              "2000年に日本の自由民主党内で発生した一連の倒閣運動"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

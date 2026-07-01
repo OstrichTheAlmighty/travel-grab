@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:22.401Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 13873,
+          "ns": 0,
+          "title": "柏市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かしわし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kashiwa_montage.jpg",
+            "wikibase_item": "Q319743"
+          },
+          "coordinates": [
+            {
+              "lat": 35.86758,
+              "lon": 139.97575,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 25245,
+          "ns": 0,
+          "title": "富士見市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふしみし",
+            "page_image_free": "Fujimi_Mizukokaiduka_Park_3.JPG",
+            "wikibase_item": "Q495809"
+          },
+          "coordinates": [
+            {
+              "lat": 35.85656,
+              "lon": 139.54917,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 105586,
+          "ns": 0,
+          "title": "日本の野球場一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのやきゆうしよういちらん",
+            "wikibase_item": "Q6607277"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 198818,
+          "ns": 0,
+          "title": "ふじみ野市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふしみのし",
+            "kartographer_frames": "1",
+            "page_image_free": "Fujinino_Hukuokakasikinenkan_1.jpg",
+            "wikibase_item": "Q873590"
+          },
+          "coordinates": [
+            {
+              "lat": 35.87953,
+              "lon": 139.51978,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 1311423,
+          "ns": 0,
+          "title": "石神井町",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しやくしいまち",
+            "kartographer_frames": "1",
+            "page_image_free": "石神井公園駅南口ロータリーその２.jpg",
+            "wikibase_item": "Q11587120"
+          },
+          "terms": {
+            "description": [
+              "東京都練馬区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

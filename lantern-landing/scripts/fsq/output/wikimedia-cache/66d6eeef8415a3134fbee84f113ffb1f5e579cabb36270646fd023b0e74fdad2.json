@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:37.578Z",
+  "value": {
+    "searchinfo": {
+      "search": "目黒寄生虫館"
+    },
+    "search": [
+      {
+        "id": "Q11581651",
+        "title": "Q11581651",
+        "pageid": 12721594,
+        "concepturi": "http://www.wikidata.org/entity/Q11581651",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11581651",
+        "display": {
+          "label": {
+            "value": "Meguro Parasitological Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Meguro Parasitological Museum",
+        "description": "museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "目黒寄生虫館"
+        },
+        "aliases": [
+          "目黒寄生虫館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

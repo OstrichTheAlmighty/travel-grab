@@ -1,0 +1,27 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:00.621Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 84385,
+          "ns": 0,
+          "title": "アーティゾン美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あていそんひしゆつかん",
+            "page_image_free": "Artizon_Museum_lobby_view_201912.jpg",
+            "wikibase_item": "Q913808"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区にある私立美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

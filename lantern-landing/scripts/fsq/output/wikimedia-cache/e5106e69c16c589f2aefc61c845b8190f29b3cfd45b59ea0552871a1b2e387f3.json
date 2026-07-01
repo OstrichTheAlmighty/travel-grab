@@ -1,0 +1,85 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:05.689Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1204864,
+          "ns": 0,
+          "title": "ライオンズゲート",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "らいおんすけえと",
+            "wikibase_item": "Q515869"
+          },
+          "terms": {
+            "description": [
+              "アメリカのエンターテインメント企業"
+            ]
+          }
+        },
+        {
+          "pageid": 1345168,
+          "ns": 0,
+          "title": "オープン・ザ・ツインゲート王座",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおふんさついんけえととういつたつくおうさ",
+            "wikibase_item": "Q3715051"
+          }
+        },
+        {
+          "pageid": 1620816,
+          "ns": 0,
+          "title": "ゲートシティ大崎",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "けえとしていおおさき",
+            "page_image_free": "Gate_City_Osaki.jpg",
+            "wikibase_item": "Q11301680"
+          },
+          "coordinates": [
+            {
+              "lat": 35.618972,
+              "lon": 139.731389,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区のビル群"
+            ]
+          }
+        },
+        {
+          "pageid": 1892935,
+          "ns": 0,
+          "title": "41型フリゲート",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "HMS_Jaguar_F37.jpg",
+            "wikibase_item": "Q3496124"
+          }
+        },
+        {
+          "pageid": 2361167,
+          "ns": 0,
+          "title": "マルチゲート素子",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "まるちけえとそし",
+            "page_image_free": "Multigate_models_1.PNG",
+            "wikibase_item": "Q6119749"
+          }
+        }
+      ]
+    }
+  }
+}

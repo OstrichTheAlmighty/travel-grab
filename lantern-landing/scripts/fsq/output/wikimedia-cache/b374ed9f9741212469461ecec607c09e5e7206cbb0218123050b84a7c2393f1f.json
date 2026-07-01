@@ -1,0 +1,94 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:37.314Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 9284,
+          "ns": 0,
+          "title": "大阪ドーム",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおさかとおむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Kyocera_Dome_Osaka1.jpg",
+            "wikibase_item": "Q128836"
+          },
+          "coordinates": [
+            {
+              "lat": 34.6693,
+              "lon": 135.47610278,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪府大阪市西区にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 9489,
+          "ns": 0,
+          "title": "卓球",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たつきゆう",
+            "page_image_free": "Ishikawa_and_Fukuhara_at_Table_Tennis_Pro_Tour_Grand_Finals_2011_(2).jpg",
+            "wikibase_item": "Q3930"
+          },
+          "terms": {
+            "description": [
+              "球技のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 170155,
+          "ns": 0,
+          "title": "ヤマハ・ジョグ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "やまはしよく",
+            "page_image_free": "Ymaha_Scooter_JOG_in_the_Honda_Collection_Hall..JPG",
+            "wikibase_item": "Q4993787"
+          }
+        },
+        {
+          "pageid": 929109,
+          "ns": 0,
+          "title": "ヤマハ・GT",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "やまはGT",
+            "page_image_free": "1972_Yamaha_GT50_in_the_Yamaha_Communication_Plaza.JPG",
+            "wikibase_item": "Q11345264"
+          }
+        },
+        {
+          "pageid": 3906188,
+          "ns": 0,
+          "title": "TREASURE (音楽グループ)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とれしやあ",
+            "page_image_free": "20230806_TREASURE_(트레저).jpg",
+            "wikibase_item": "Q61057550"
+          },
+          "terms": {
+            "description": [
+              "韓国の10人組男性アイドルグループ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:13.858Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 100176,
+          "ns": 0,
+          "title": "ポニーキャニオン",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ほにいきやにおん",
+            "page_image_free": "Izumi_Garden_Annex.jpg",
+            "wikibase_item": "Q513712"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66416667,
+              "lon": 139.74055556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都港区にある映像・音楽ソフトメーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 114686,
+          "ns": 0,
+          "title": "大塚芳忠",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおつか ほうちゆう",
+            "wikibase_item": "Q520669"
+          },
+          "terms": {
+            "description": [
+              "日本の声優、ナレーター"
+            ]
+          }
+        },
+        {
+          "pageid": 224652,
+          "ns": 0,
+          "title": "幸田夏穂",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こうた かほ",
+            "wikibase_item": "Q6347112"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 627480,
+          "ns": 0,
+          "title": "伊藤健太郎 (声優)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "いとう けんたろう",
+            "wikibase_item": "Q1371708"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優、舞台俳優"
+            ]
+          }
+        },
+        {
+          "pageid": 1501410,
+          "ns": 0,
+          "title": "2008年のMLBオールスターゲーム",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "MLBおおるすたあけえむ2008",
+            "page_image_free": "Field_of_Dreams.jpg",
+            "wikibase_item": "Q1162250"
+          }
+        }
+      ]
+    }
+  }
+}

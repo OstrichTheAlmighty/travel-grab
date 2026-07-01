@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:42.737Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 21208,
+          "ns": 0,
+          "title": "皇居",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こうきよ",
+            "kartographer_frames": "1",
+            "page_image_free": "Kokyo0057.jpg",
+            "wikibase_item": "Q500681"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6825,
+              "lon": 139.75277778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある天皇の住居"
+            ]
+          }
+        },
+        {
+          "pageid": 23905,
+          "ns": 0,
+          "title": "皇室",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こうしつ",
+            "page_image_free": "Imperial_Seal_of_Japan.svg",
+            "wikibase_item": "Q909452"
+          },
+          "terms": {
+            "description": [
+              "日本の天皇と皇族で構成される一族"
+            ]
+          }
+        },
+        {
+          "pageid": 212428,
+          "ns": 0,
+          "title": "大喪の礼",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たいそうのれい",
+            "page_image_free": "Funeral_of_the_Emperor_Showa.jpg",
+            "wikibase_item": "Q11433649"
+          },
+          "terms": {
+            "description": [
+              "日本の天皇又は上皇の葬儀、国事行為たる皇室儀礼"
+            ]
+          }
+        },
+        {
+          "pageid": 275464,
+          "ns": 0,
+          "title": "皇居三の丸尚蔵館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こうきよさんのまるしようそうかん",
+            "page_image_free": "三の丸尚蔵館.jpg",
+            "wikibase_item": "Q3076188"
+          },
+          "coordinates": [
+            {
+              "lat": 35.686302,
+              "lon": 139.759247,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区の皇居東御苑内にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 593094,
+          "ns": 0,
+          "title": "明治宮殿",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "めいしきゆうてん",
+            "page_image_free": "明治宮殿空中写真.jpg",
+            "wikibase_item": "Q11240365"
+          },
+          "terms": {
+            "description": [
+              "かつて宮城に存在した建物"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

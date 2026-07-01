@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:17.081Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 25360,
+          "ns": 0,
+          "title": "浅草寺",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せんそうし",
+            "page_image_free": "Asakusa_Senso-ji_2021-12_ac_(2).jpg",
+            "wikibase_item": "Q615183"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71472222,
+              "lon": 139.79675,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 42240,
+          "ns": 0,
+          "title": "羽子板",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はこいた",
+            "page_image_free": "Battledore_decoration,hagoita,katori-city,japan.JPG",
+            "wikibase_item": "Q508435"
+          },
+          "terms": {
+            "description": [
+              "長方形で柄のある板"
+            ]
+          }
+        },
+        {
+          "pageid": 2265329,
+          "ns": 0,
+          "title": "長谷川雪旦",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はせかわ せつたん",
+            "wikibase_item": "Q3128079"
+          },
+          "terms": {
+            "description": [
+              "日本の絵師"
+            ]
+          }
+        },
+        {
+          "pageid": 3741142,
+          "ns": 0,
+          "title": "石原舞子",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いしはら まいこ",
+            "wikibase_item": "Q48764213"
+          },
+          "terms": {
+            "description": [
+              "日本の女優"
+            ]
+          }
+        },
+        {
+          "pageid": 4978598,
+          "ns": 0,
+          "title": "江戸名所道戯尽",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "えとめいしよとうけつくし",
+            "page_image_free": "Edomeisyodouge_mokuroku.jpg",
+            "unexpectedUnconnectedPage": "0"
+          }
+        }
+      ]
+    }
+  }
+}

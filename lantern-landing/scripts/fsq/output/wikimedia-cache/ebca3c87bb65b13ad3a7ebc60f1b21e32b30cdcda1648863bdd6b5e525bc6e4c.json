@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:28.214Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 15976,
+          "ns": 0,
+          "title": "Japanese cuisine",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Oseti.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q234138"
+          },
+          "terms": {
+            "description": [
+              "culinary traditions of Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 37969,
+          "ns": 0,
+          "title": "Ramen",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Shoyu_Ramen（Tokyo_Ramen）_-_01.jpg",
+            "wikibase-shortdesc": "Japanese noodle dish",
+            "wikibase_item": "Q234646"
+          },
+          "terms": {
+            "description": [
+              "Japanese noodle soup of Chinese origin"
+            ]
+          }
+        },
+        {
+          "pageid": 10483547,
+          "ns": 0,
+          "title": "The Ramen Girl",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Ramen Girl, The",
+            "displaytitle": "<i>The Ramen Girl</i>",
+            "page_image": "The_Ramen_Girl_poster.jpg",
+            "wikibase-shortdesc": "2008 romantic comedy-drama film by Robert Allan Ackerman",
+            "wikibase_item": "Q2659907"
+          },
+          "terms": {
+            "description": [
+              "2008 film by Robert Allan Ackerman"
+            ]
+          }
+        },
+        {
+          "pageid": 53624193,
+          "ns": 0,
+          "title": "Ms. Koizumi Loves Ramen Noodles",
+          "index": 5,
+          "pageprops": {
+            "displaytitle": "<i>Ms. Koizumi Loves Ramen Noodles</i>",
+            "page_image": "Ramen_Daisuki_Koizumi-san_manga_volume_1.jpg",
+            "wikibase-shortdesc": "Japanese manga series",
+            "wikibase_item": "Q20631862"
+          },
+          "terms": {
+            "description": [
+              "Japanese manga series"
+            ]
+          }
+        },
+        {
+          "pageid": 54051556,
+          "ns": 0,
+          "title": "Ramen shop",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "東武らーめん20240512-P1042538.jpg",
+            "wikibase-shortdesc": "Type of Japanese noodle shop",
+            "wikibase_item": "Q23812032"
+          },
+          "terms": {
+            "description": [
+              "restaurant specializing in ramen"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

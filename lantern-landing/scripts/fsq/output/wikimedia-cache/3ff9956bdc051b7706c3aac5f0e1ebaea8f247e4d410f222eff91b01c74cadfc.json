@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:02.413Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 249277,
+          "ns": 0,
+          "title": "東京ディズニーシー・ホテルミラコスタ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいしいほてるみらこすた",
+            "page_image_free": "Tokyo_disneysea_hotel_miracosta.jpg",
+            "wikibase_item": "Q195432"
+          },
+          "terms": {
+            "description": [
+              "千葉県浦安市の東京ディズニーリゾートにあるホテル"
+            ]
+          }
+        },
+        {
+          "pageid": 410651,
+          "ns": 0,
+          "title": "アケダクト競馬場",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あけたくとけいは",
+            "page_image_free": "Aqueduct_Racetrack_Grandstand.jpg",
+            "wikibase_item": "Q4782852"
+          },
+          "terms": {
+            "description": [
+              "ニューヨークの競馬場"
+            ]
+          }
+        },
+        {
+          "pageid": 493656,
+          "ns": 0,
+          "title": "東京ディズニーシーのサービス施設の一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいしいのさあひすしせついちらん",
+            "wikibase_item": "Q11524254"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1859716,
+          "ns": 0,
+          "title": "フィンズベリー・パーク駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふいんすへりいはあく",
+            "page_image_free": "Finsbury_Park_tube_stn_entrance_Station_Place.JPG",
+            "wikibase_item": "Q536796"
+          },
+          "coordinates": [
+            {
+              "lat": 51.564653,
+              "lon": -0.106366,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "イングランドの鉄道駅"
+            ]
+          }
+        },
+        {
+          "pageid": 2123751,
+          "ns": 0,
+          "title": "ノースチャールストン (サウスカロライナ州)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "のおすちやあるすとん",
+            "page_image_free": "SCMap-doton-NorthCharleston.PNG",
+            "wikibase_item": "Q847538"
+          },
+          "terms": {
+            "description": [
+              "アメリカ合衆国サウスカロライナ州の都市"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

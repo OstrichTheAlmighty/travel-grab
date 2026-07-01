@@ -1,0 +1,85 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:24.556Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1283123,
+          "ns": 0,
+          "title": "きのしたゆうこ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きのした ゆうこ",
+            "wikibase_item": "Q11264917"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 1495360,
+          "ns": 0,
+          "title": "内田眞由美",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "うちた まゆみ",
+            "wikibase_item": "Q1189839"
+          },
+          "terms": {
+            "description": [
+              "日本の女性タレント、実業家、AKB48の元メンバー"
+            ]
+          }
+        },
+        {
+          "pageid": 1876169,
+          "ns": 0,
+          "title": "肉体女優殺し 五人の犯罪者",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にくたいしよゆうころし こにんのはんさいしや",
+            "wikibase_item": "Q7068336"
+          }
+        },
+        {
+          "pageid": 2779246,
+          "ns": 0,
+          "title": "福田彩乃",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふくた あやの",
+            "wikibase_item": "Q11594160"
+          },
+          "terms": {
+            "description": [
+              "日本の女性タレント"
+            ]
+          }
+        },
+        {
+          "pageid": 4347423,
+          "ns": 0,
+          "title": "エー・ピーホールディングス",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ええひいほおるていんくす",
+            "wikibase_item": "Q107412091"
+          },
+          "terms": {
+            "description": [
+              "日本の企業"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

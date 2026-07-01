@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:42.273Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 12721,
+          "ns": 0,
+          "title": "荻窪駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おきくほ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ogikubo-Sta-N.JPG",
+            "wikibase_item": "Q801294"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70463889,
+              "lon": 139.62,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都杉並区にある東日本旅客鉄道・東京メトロの駅"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1654144,
+          "ns": 0,
+          "title": "前橋市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "まえはしし",
+            "kartographer_frames": "1",
+            "page_image_free": "Maebashi_Montage.jpg",
+            "wikibase_item": "Q201613"
+          },
+          "coordinates": [
+            {
+              "lat": 36.3895,
+              "lon": 139.06344,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "群馬県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 1690273,
+          "ns": 0,
+          "title": "杉並区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すきなみく",
+            "kartographer_frames": "1",
+            "page_image_free": "2018_Kōenji.jpg",
+            "wikibase_item": "Q232631"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6995,
+              "lon": 139.63642,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 3606456,
+          "ns": 0,
+          "title": "荻窪教会通り商店街",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おきくほきようかいとおりしようてんかい",
+            "wikibase_item": "Q30935019"
+          }
+        }
+      ]
+    }
+  }
+}

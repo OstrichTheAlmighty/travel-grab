@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:16.531Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 137548,
+          "ns": 0,
+          "title": "東京農業大学",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようのうきようたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "TUA_university.jpg",
+            "wikibase_item": "Q909974"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64108333,
+              "lon": 139.63208333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 566120,
+          "ns": 0,
+          "title": "東京農業大学短期大学部",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようのうきようたいかくたんき",
+            "page_image_free": "Tokyonogyouniv.jpg",
+            "wikibase_item": "Q11525169"
+          },
+          "terms": {
+            "description": [
+              "廃止された大学"
+            ]
+          }
+        },
+        {
+          "pageid": 4137490,
+          "ns": 0,
+          "title": "黛卓郎",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "まゆすみ　たくろう",
+            "wikibase_item": "Q96273789"
+          },
+          "terms": {
+            "description": [
+              "日本の都市計画家 (1943-)"
+            ]
+          }
+        },
+        {
+          "pageid": 4137625,
+          "ns": 0,
+          "title": "枝吉茂種",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "えたよし しけたね",
+            "wikibase_item": "Q97188658"
+          }
+        },
+        {
+          "pageid": 4139673,
+          "ns": 0,
+          "title": "青島利浩",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あおしま としひろ",
+            "wikibase_item": "Q96273485"
+          },
+          "terms": {
+            "description": [
+              "日本のランドスケープアーキテクト"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

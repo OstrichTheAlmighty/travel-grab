@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:24.559Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 153968,
+          "ns": 0,
+          "title": "Poop deck",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Soleil-Royal_mp3h9369.jpg",
+            "wikibase-shortdesc": "Deck over a cabin at the rear of a ship",
+            "wikibase_item": "Q1758120"
+          },
+          "terms": {
+            "description": [
+              "deck that forms the roof of a cabin built in the aft part of the superstructure of a ship"
+            ]
+          }
+        },
+        {
+          "pageid": 264342,
+          "ns": 0,
+          "title": "Sky Tower (Auckland)",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "01_Auckland_New_Zealand-1000137.jpg",
+            "wikibase-shortdesc": "Observation and communication tower in Auckland, New Zealand",
+            "wikibase_item": "Q722125"
+          },
+          "coordinates": [
+            {
+              "lat": -36.84847,
+              "lon": 174.76231,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "observation and communication tower in Auckland, New Zealand"
+            ]
+          }
+        },
+        {
+          "pageid": 15627191,
+          "ns": 0,
+          "title": "The Suite Life on Deck",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Suite Life on Deck, The",
+            "displaytitle": "<i>The Suite Life on Deck</i>",
+            "page_image": "The_Suite_Life_on_Deck_logo.png",
+            "wikibase-shortdesc": "American teen sitcom (2008–2011)",
+            "wikibase_item": "Q139849"
+          },
+          "terms": {
+            "description": [
+              "American teen sitcom (2008-2011)"
+            ]
+          }
+        },
+        {
+          "pageid": 64010288,
+          "ns": 0,
+          "title": "SkyDeck",
+          "index": 1,
+          "pageprops": {
+            "disambiguation": "",
+            "wikibase-shortdesc": "Topics referred to by the same term",
+            "wikibase_item": "Q94922892"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        },
+        {
+          "pageid": 67833482,
+          "ns": 0,
+          "title": "Sky Pool, London",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Cmglee_London_Embassy_Gardens_pool.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "Swimming pool bridging two buildings",
+            "wikibase_item": "Q107272505"
+          },
+          "coordinates": [
+            {
+              "lat": 51.482,
+              "lon": -0.131,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "swimming pool in southwest London suspended 35m above the ground"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

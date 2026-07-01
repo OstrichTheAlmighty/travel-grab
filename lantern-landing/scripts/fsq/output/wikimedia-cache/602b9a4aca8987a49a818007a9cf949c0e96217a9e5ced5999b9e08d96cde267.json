@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:37.665Z",
+  "value": {
+    "searchinfo": {
+      "search": "切手の博物館"
+    },
+    "search": [
+      {
+        "id": "Q11396206",
+        "title": "Q11396206",
+        "pageid": 12534783,
+        "concepturi": "http://www.wikidata.org/entity/Q11396206",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11396206",
+        "display": {
+          "label": {
+            "value": "Philatelic Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "archive organization in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Philatelic Museum",
+        "description": "archive organization in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "切手の博物館"
+        },
+        "aliases": [
+          "切手の博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

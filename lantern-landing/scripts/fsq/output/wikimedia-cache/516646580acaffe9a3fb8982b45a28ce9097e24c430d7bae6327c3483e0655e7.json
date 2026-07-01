@@ -1,0 +1,203 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:50.879Z",
+  "value": {
+    "searchinfo": {
+      "search": "GATE 1"
+    },
+    "search": [
+      {
+        "id": "Q27876954",
+        "title": "Q27876954",
+        "pageid": 29585745,
+        "concepturi": "http://www.wikidata.org/entity/Q27876954",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q27876954",
+        "display": {
+          "label": {
+            "value": "Gate 1",
+            "language": "en"
+          },
+          "description": {
+            "value": "painting by Colin McCahon",
+            "language": "en"
+          }
+        },
+        "label": "Gate 1",
+        "description": "painting by Colin McCahon",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Gate 1"
+        }
+      },
+      {
+        "id": "Q18036490",
+        "title": "Q18036490",
+        "pageid": 19570361,
+        "concepturi": "http://www.wikidata.org/entity/Q18036490",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q18036490",
+        "display": {
+          "label": {
+            "value": "GABARAPL2",
+            "language": "en"
+          },
+          "description": {
+            "value": "protein-coding gene in the species Homo sapiens",
+            "language": "en"
+          }
+        },
+        "label": "GABARAPL2",
+        "description": "protein-coding gene in the species Homo sapiens",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "GATE-16"
+        },
+        "aliases": [
+          "GATE-16"
+        ]
+      },
+      {
+        "id": "Q21115128",
+        "title": "Q21115128",
+        "pageid": 23162484,
+        "concepturi": "http://www.wikidata.org/entity/Q21115128",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q21115128",
+        "display": {
+          "label": {
+            "value": "GABA type A receptor associated protein like 2",
+            "language": "en"
+          },
+          "description": {
+            "value": "mammalian protein found in Homo sapiens",
+            "language": "en"
+          }
+        },
+        "label": "GABA type A receptor associated protein like 2",
+        "description": "mammalian protein found in Homo sapiens",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "GATE-16"
+        },
+        "aliases": [
+          "GATE-16"
+        ]
+      },
+      {
+        "id": "Q50352720",
+        "title": "Q50352720",
+        "pageid": 51329808,
+        "concepturi": "http://www.wikidata.org/entity/Q50352720",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q50352720",
+        "display": {
+          "label": {
+            "value": "membrane fusion priming complex",
+            "language": "en"
+          },
+          "description": {
+            "value": "protein complex that primes vacuolar or vesicular membranes for fusion with other intracellular membranes, by promoting the dissociation of cis-SNARE complexes",
+            "language": "en"
+          }
+        },
+        "label": "membrane fusion priming complex",
+        "description": "protein complex that primes vacuolar or vesicular membranes for fusion with other intracellular membranes, by promoting the dissociation of cis-SNARE complexes",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "GATE-16 complex"
+        },
+        "aliases": [
+          "GATE-16 complex"
+        ]
+      },
+      {
+        "id": "Q21981105",
+        "title": "Q21981105",
+        "pageid": 24013062,
+        "concepturi": "http://www.wikidata.org/entity/Q21981105",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q21981105",
+        "display": {
+          "label": {
+            "value": "Gamma-aminobutyric acid (GABA) A receptor-associated protein-like 2",
+            "language": "en"
+          },
+          "description": {
+            "value": "mammalian protein found in Mus musculus",
+            "language": "en"
+          }
+        },
+        "label": "Gamma-aminobutyric acid (GABA) A receptor-associated protein-like 2",
+        "description": "mammalian protein found in Mus musculus",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "GATE-16"
+        },
+        "aliases": [
+          "GATE-16"
+        ]
+      },
+      {
+        "id": "Q18270190",
+        "title": "Q18270190",
+        "pageid": 19799395,
+        "concepturi": "http://www.wikidata.org/entity/Q18270190",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q18270190",
+        "display": {
+          "label": {
+            "value": "Gabarapl2",
+            "language": "en"
+          },
+          "description": {
+            "value": "protein-coding gene in the species Mus musculus",
+            "language": "en"
+          }
+        },
+        "label": "Gabarapl2",
+        "description": "protein-coding gene in the species Mus musculus",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "GATE-16"
+        },
+        "aliases": [
+          "GATE-16"
+        ]
+      },
+      {
+        "id": "Q3758831",
+        "title": "Q3758831",
+        "pageid": 3583754,
+        "concepturi": "http://www.wikidata.org/entity/Q3758831",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3758831",
+        "display": {
+          "label": {
+            "value": "Gate 13",
+            "language": "en"
+          },
+          "description": {
+            "value": "group of supporters of the Greek football club Panathinaikos",
+            "language": "en"
+          }
+        },
+        "label": "Gate 13",
+        "description": "group of supporters of the Greek football club Panathinaikos",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Gate 13"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

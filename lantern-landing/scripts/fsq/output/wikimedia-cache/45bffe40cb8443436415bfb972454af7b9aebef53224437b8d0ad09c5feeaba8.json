@@ -1,0 +1,133 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:18.056Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 6052,
+          "ns": 0,
+          "title": "鎌倉市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かまくらし",
+            "kartographer_frames": "1",
+            "page_image_free": "TsurugaokaHachiman-M8867.jpg",
+            "wikibase_item": "Q200267"
+          },
+          "coordinates": [
+            {
+              "lat": 35.3192,
+              "lon": 139.5472,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 8874,
+          "ns": 0,
+          "title": "豊岡市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とよおかし",
+            "kartographer_frames": "1",
+            "page_image_free": "Toyooka_Montage.jpg",
+            "wikibase_item": "Q696388"
+          },
+          "coordinates": [
+            {
+              "lat": 35.5445,
+              "lon": 134.82019,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 18336,
+          "ns": 0,
+          "title": "御嶽山",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おんたけさん",
+            "kartographer_frames": "1",
+            "page_image_free": "Ontake-air.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q1754806"
+          },
+          "coordinates": [
+            {
+              "lat": 35.89277778,
+              "lon": 137.48027778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長野県と岐阜県にまたがる山岳"
+            ]
+          }
+        },
+        {
+          "pageid": 27214,
+          "ns": 0,
+          "title": "銭湯",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せんとう",
+            "page_image_free": "Kodakara-yu.jpg",
+            "wikibase_item": "Q1046648"
+          },
+          "terms": {
+            "description": [
+              "日本の公衆浴場の一種"
+            ]
+          }
+        },
+        {
+          "pageid": 181452,
+          "ns": 0,
+          "title": "長府",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちようふ",
+            "kartographer_frames": "3",
+            "page_image_free": "Chofu_branch_office_in_Shimonoseki,_Yamaguchi.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q11652977"
+          },
+          "coordinates": [
+            {
+              "lat": 33.99888889,
+              "lon": 130.99083333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の山口県下関市の広域地名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

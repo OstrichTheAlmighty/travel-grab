@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:49.090Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 231,
+          "ns": 0,
+          "title": "コンピュータゲーム",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こんひゆうたけえむ",
+            "page_image_free": "Vg_icon.svg",
+            "wikibase_item": "Q7889"
+          },
+          "terms": {
+            "description": [
+              "コンピュータの処理を伴うゲーム"
+            ]
+          }
+        },
+        {
+          "pageid": 75688,
+          "ns": 0,
+          "title": "板橋本町駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いたはしほんちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Toei-subway-I19-Itabashihoncho-station-entrance-A3-20191220-130927.jpg",
+            "wikibase_item": "Q1073933"
+          },
+          "coordinates": [
+            {
+              "lat": 35.76133333,
+              "lon": 139.70555556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都板橋区にある東京都交通局の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 567755,
+          "ns": 0,
+          "title": "駄菓子屋",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たかしや",
+            "page_image_free": "A_Riot_of_Shapes_and_Colors_(22664782712).jpg",
+            "wikibase_item": "Q11668160"
+          },
+          "terms": {
+            "description": [
+              "駄菓子・玩具の小売販売店の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 623932,
+          "ns": 0,
+          "title": "カプコン",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かふこん",
+            "page_image_free": "CAPCOM本社.jpg",
+            "wikibase_item": "Q14428"
+          },
+          "coordinates": [
+            {
+              "lat": 34.68752778,
+              "lon": 135.51136111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の大阪府大阪市にあるゲーム開発会社"
+            ]
+          }
+        },
+        {
+          "pageid": 1179091,
+          "ns": 0,
+          "title": "宮本町 (板橋区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みやもとちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "S&BSpicecenter.jpg",
+            "wikibase_item": "Q11454886"
+          },
+          "terms": {
+            "description": [
+              "東京都板橋区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

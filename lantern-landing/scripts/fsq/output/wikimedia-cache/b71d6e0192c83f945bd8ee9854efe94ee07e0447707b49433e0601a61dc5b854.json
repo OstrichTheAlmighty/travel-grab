@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:17:57.586Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 50148,
+          "ns": 0,
+          "title": "東映",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうえい",
+            "page_image_free": "Kyobashi_Edogrand_2019.jpg",
+            "wikibase_item": "Q1066018"
+          },
+          "terms": {
+            "description": [
+              "日本の映画会社"
+            ]
+          }
+        },
+        {
+          "pageid": 61589,
+          "ns": 0,
+          "title": "松竹",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しようちく",
+            "page_image_free": "Shochiku_HQ.jpg",
+            "wikibase_item": "Q122549"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66766667,
+              "lon": 139.76866667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の映画・演劇会社"
+            ]
+          }
+        },
+        {
+          "pageid": 148424,
+          "ns": 0,
+          "title": "小山内薫",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おさない かおる",
+            "page_image_free": "Kaoru_Osanai.jpg",
+            "wikibase_item": "Q975606"
+          },
+          "terms": {
+            "description": [
+              "1881-1928, 明治末～大正・昭和初期の劇作家、演出家、批評家"
+            ]
+          }
+        },
+        {
+          "pageid": 570336,
+          "ns": 0,
+          "title": "松竹蒲田撮影所",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しようちく かまたさつえいしよ",
+            "page_image_free": "Nissei_aroma_square_kamata_2014.jpg",
+            "wikibase_item": "Q11532202"
+          }
+        },
+        {
+          "pageid": 1355605,
+          "ns": 0,
+          "title": "松竹キネマ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しようちくきねま",
+            "wikibase_item": "Q11532180"
+          }
+        }
+      ]
+    }
+  }
+}

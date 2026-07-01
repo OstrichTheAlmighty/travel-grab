@@ -1,0 +1,109 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:02.980Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 26604,
+          "ns": 0,
+          "title": "新居浜市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にいはまし",
+            "kartographer_frames": "1",
+            "page_image_free": "Niihamataikomatsuri001.jpg",
+            "wikibase_item": "Q386628"
+          },
+          "coordinates": [
+            {
+              "lat": 33.96033,
+              "lon": 133.28339,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛媛県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 29794,
+          "ns": 0,
+          "title": "境港市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さかいみなとし",
+            "kartographer_frames": "1",
+            "page_image": "Sakaiminato_Mizuki_Shigeru_Memorial_Hall_1.jpg",
+            "page_image_free": "Sakaiminato_city_office_1.jpg",
+            "wikibase_item": "Q496431"
+          },
+          "coordinates": [
+            {
+              "lat": 35.53961,
+              "lon": 133.23161,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "鳥取県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 100241,
+          "ns": 0,
+          "title": "商店街",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しようてんかい",
+            "page_image_free": "千林商店街.jpg",
+            "wikibase_item": "Q96288394"
+          },
+          "terms": {
+            "description": [
+              "商店が集まっている場所"
+            ]
+          }
+        },
+        {
+          "pageid": 556970,
+          "ns": 0,
+          "title": "山善",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "やません",
+            "page_image_free": "Headquarters_of_YAMAZEN_CORPORATION.JPG",
+            "wikibase_item": "Q11467670"
+          },
+          "terms": {
+            "description": [
+              "大阪府大阪市西区に本社を置く大手専門商社。工作機械・産業用機器・一般建材・家庭用機器などを取り扱う"
+            ]
+          }
+        },
+        {
+          "pageid": 604433,
+          "ns": 0,
+          "title": "京畿道 (日本統治時代)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "けいきとう",
+            "page_image_free": "Keiki_Prefecture_(August_15,_1945).png",
+            "wikibase_item": "Q10883222"
+          }
+        }
+      ]
+    }
+  }
+}

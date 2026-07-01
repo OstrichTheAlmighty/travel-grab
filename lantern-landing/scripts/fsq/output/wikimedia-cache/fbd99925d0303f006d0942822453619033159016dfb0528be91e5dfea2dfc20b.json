@@ -1,0 +1,203 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:16.047Z",
+  "value": {
+    "searchinfo": {
+      "search": "THE Museum"
+    },
+    "search": [
+      {
+        "id": "Q188740",
+        "title": "Q188740",
+        "pageid": 187361,
+        "concepturi": "http://www.wikidata.org/entity/Q188740",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q188740",
+        "display": {
+          "label": {
+            "value": "Museum of Modern Art",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum in Manhattan in New York City, New York, United States",
+            "language": "en"
+          }
+        },
+        "label": "Museum of Modern Art",
+        "description": "art museum in Manhattan in New York City, New York, United States",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "The Museum of Modern Art, New York"
+        },
+        "aliases": [
+          "The Museum of Modern Art, New York"
+        ]
+      },
+      {
+        "id": "Q1565911",
+        "title": "Q1565911",
+        "pageid": 1502044,
+        "concepturi": "http://www.wikidata.org/entity/Q1565911",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1565911",
+        "display": {
+          "label": {
+            "value": "Museum of Fine Arts, Houston",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum in Houston, Texas",
+            "language": "en"
+          }
+        },
+        "label": "Museum of Fine Arts, Houston",
+        "description": "art museum in Houston, Texas",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "The Museum of Fine Arts, Houston"
+        },
+        "aliases": [
+          "The Museum of Fine Arts, Houston"
+        ]
+      },
+      {
+        "id": "Q107404505",
+        "title": "Q107404505",
+        "pageid": 102684869,
+        "concepturi": "http://www.wikidata.org/entity/Q107404505",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q107404505",
+        "display": {
+          "label": {
+            "value": "The Museum System",
+            "language": "en"
+          },
+          "description": {
+            "value": "inventory management software",
+            "language": "en"
+          }
+        },
+        "label": "The Museum System",
+        "description": "inventory management software",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "The Museum System"
+        }
+      },
+      {
+        "id": "Q3086934",
+        "title": "Q3086934",
+        "pageid": 2950315,
+        "concepturi": "http://www.wikidata.org/entity/Q3086934",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3086934",
+        "display": {
+          "label": {
+            "value": "Musée des Beaux-Arts de Rouen",
+            "language": "en"
+          },
+          "description": {
+            "value": "Art museum in Rouen, France",
+            "language": "en"
+          }
+        },
+        "label": "Musée des Beaux-Arts de Rouen",
+        "description": "Art museum in Rouen, France",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "The Museum of Fine Arts, Rouen"
+        },
+        "aliases": [
+          "The Museum of Fine Arts, Rouen"
+        ]
+      },
+      {
+        "id": "Q8027060",
+        "title": "Q8027060",
+        "pageid": 7973357,
+        "concepturi": "http://www.wikidata.org/entity/Q8027060",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q8027060",
+        "display": {
+          "label": {
+            "value": "Wisbech and Fenland Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Cambridgeshire, England, United Kingdom",
+            "language": "en"
+          }
+        },
+        "label": "Wisbech and Fenland Museum",
+        "description": "museum in Cambridgeshire, England, United Kingdom",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "The Museum"
+        },
+        "aliases": [
+          "The Museum"
+        ]
+      },
+      {
+        "id": "Q6533194",
+        "title": "Q6533194",
+        "pageid": 6353552,
+        "concepturi": "http://www.wikidata.org/entity/Q6533194",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6533194",
+        "display": {
+          "label": {
+            "value": "Letchworth Museum & Art Gallery",
+            "language": "en"
+          },
+          "description": {
+            "value": "former museum",
+            "language": "en"
+          }
+        },
+        "label": "Letchworth Museum & Art Gallery",
+        "description": "former museum",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "The Museum"
+        },
+        "aliases": [
+          "The Museum"
+        ]
+      },
+      {
+        "id": "Q551569",
+        "title": "Q551569",
+        "pageid": 519713,
+        "concepturi": "http://www.wikidata.org/entity/Q551569",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q551569",
+        "display": {
+          "label": {
+            "value": "The Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "band",
+            "language": "en"
+          }
+        },
+        "label": "The Museum",
+        "description": "band",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "The Museum"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

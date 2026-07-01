@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:51.533Z",
+  "value": {
+    "searchinfo": {
+      "search": "大谷田公園"
+    },
+    "search": [
+      {
+        "id": "Q42312936",
+        "title": "Q42312936",
+        "pageid": 43595171,
+        "concepturi": "http://www.wikidata.org/entity/Q42312936",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q42312936",
+        "display": {
+          "label": {
+            "value": "大谷田公園",
+            "language": "ja"
+          },
+          "description": {
+            "value": "park in Adachi, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "大谷田公園",
+        "description": "park in Adachi, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "大谷田公園"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

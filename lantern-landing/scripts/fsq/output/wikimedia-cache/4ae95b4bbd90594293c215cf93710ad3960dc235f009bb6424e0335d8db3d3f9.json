@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:51.980Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 13693,
+          "ns": 0,
+          "title": "秦野市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はたのし",
+            "kartographer_frames": "1",
+            "page_image_free": "Nanohanadai_and_Mt.Fuji.jpg",
+            "wikibase_item": "Q460806"
+          },
+          "coordinates": [
+            {
+              "lat": 35.37472,
+              "lon": 139.22011,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 149505,
+          "ns": 0,
+          "title": "ツキノワグマ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "つきのわくま",
+            "page_image_free": "Ursus_thibetanus_3_(Wroclaw_zoo).JPG",
+            "wikibase_item": "Q124410"
+          },
+          "terms": {
+            "description": [
+              "クマ科クマ属のクマ"
+            ]
+          }
+        },
+        {
+          "pageid": 258785,
+          "ns": 0,
+          "title": "世田谷区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せたかやく",
+            "kartographer_frames": "1",
+            "page_image_free": "Seijo_namikimichi_231011.jpg",
+            "wikibase_item": "Q231645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64656,
+              "lon": 139.65322,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 583842,
+          "ns": 0,
+          "title": "周南市徳山動物園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しゆうなんしとくやまとうふつえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokuyamazoo.jpg",
+            "wikibase_item": "Q11416862"
+          },
+          "coordinates": [
+            {
+              "lat": 34.06141667,
+              "lon": 131.81486111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "山口県周南市にある動物園"
+            ]
+          }
+        },
+        {
+          "pageid": 691636,
+          "ns": 0,
+          "title": "品川翔英中学・高等学校",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しなかわしようえいちゆうかくこうとうかつこう",
+            "kartographer_frames": "1",
+            "page_image_free": "Ono_Gakuen_Girls'_Junior_&_Senior_High_School.JPG",
+            "wikibase_item": "Q11463984"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60191667,
+              "lon": 139.72630556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区にある中高一貫校"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

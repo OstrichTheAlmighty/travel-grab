@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:01.362Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 10742,
+          "ns": 0,
+          "title": "板橋区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いたはしく",
+            "kartographer_frames": "1",
+            "page_image_free": "Itabashi-at-nakajuku.JPG",
+            "wikibase_item": "Q232635"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75119,
+              "lon": 139.70928,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 37214,
+          "ns": 0,
+          "title": "科学館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かかくかん",
+            "page_image_free": "Akashi-Minicipal-Planetarium3387.JPG",
+            "wikibase_item": "Q588140"
+          },
+          "terms": {
+            "description": [
+              "自然科学に関連する展示を行う博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 946530,
+          "ns": 0,
+          "title": "板橋区立教育科学館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いたはしくりつきよういくかかくかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Itabashi_Science_and_Education_Hall.JPG",
+            "wikibase_item": "Q11532661"
+          },
+          "coordinates": [
+            {
+              "lat": 35.76340556,
+              "lon": 139.67957222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都板橋区にある科学館"
+            ]
+          }
+        },
+        {
+          "pageid": 946532,
+          "ns": 0,
+          "title": "ガスの科学館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かすのかかくかん",
+            "page_image_free": "Gas_Science_Museum_\"Gasutenani\",_at_Toyosu,_Koto,_Tokyo_(2019-01-01).jpg",
+            "wikibase_item": "Q11295937"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65223056,
+              "lon": 139.79252778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区にある東京ガスが運営する科学館"
+            ]
+          }
+        },
+        {
+          "pageid": 2008210,
+          "ns": 0,
+          "title": "杉並区立科学館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すきなみくりつかかくかん",
+            "page_image_free": "Suginami_science_center_shimizu_suginami_tokyo.JPG",
+            "wikibase_item": "Q11521694"
+          },
+          "terms": {
+            "description": [
+              "東京都杉並区にあった施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

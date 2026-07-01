@@ -1,0 +1,22 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:38.536Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 4761959,
+          "ns": 0,
+          "title": "アミューズメントカジノ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あみゆうすめんとかしの",
+            "index": "",
+            "unexpectedUnconnectedPage": "0"
+          }
+        }
+      ]
+    }
+  }
+}

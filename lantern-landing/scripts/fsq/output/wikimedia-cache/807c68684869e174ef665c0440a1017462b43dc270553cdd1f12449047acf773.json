@@ -1,0 +1,90 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:38.766Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 94119,
+          "ns": 0,
+          "title": "空から降る一億の星",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "そらからふるいちおくのほし",
+            "wikibase_item": "Q872766"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 374730,
+          "ns": 0,
+          "title": "土肥ポン太",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とひ ほんた",
+            "wikibase_item": "Q11423845"
+          },
+          "terms": {
+            "description": [
+              "日本のお笑い芸人"
+            ]
+          }
+        },
+        {
+          "pageid": 395858,
+          "ns": 0,
+          "title": "若者のすべて (テレビドラマ)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "わかもののすへて",
+            "wikibase_item": "Q11616690"
+          },
+          "terms": {
+            "description": [
+              "1994年の日本のテレビドラマ"
+            ]
+          }
+        },
+        {
+          "pageid": 1569917,
+          "ns": 0,
+          "title": "吉田恵 (キャスター)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "よした けい",
+            "wikibase_item": "Q11413797"
+          },
+          "terms": {
+            "description": [
+              "日本の女性アナウンサー"
+            ]
+          }
+        },
+        {
+          "pageid": 1576651,
+          "ns": 0,
+          "title": "2700 (お笑いコンビ)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にせんななひやく",
+            "wikibase_item": "Q11187347"
+          },
+          "terms": {
+            "description": [
+              "日本のお笑いコンビ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

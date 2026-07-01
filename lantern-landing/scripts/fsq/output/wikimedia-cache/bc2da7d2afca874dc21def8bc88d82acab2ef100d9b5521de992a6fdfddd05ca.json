@@ -1,0 +1,98 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:49.953Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 52711,
+          "ns": 0,
+          "title": "Leonardo DiCaprio",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Dicaprio, Leonardo",
+            "page_image_free": "LeoPTABFI191125-28_(cropped).jpg",
+            "wikibase-badge-Q17437796": "",
+            "wikibase-shortdesc": "American actor (born 1974)",
+            "wikibase_item": "Q38111"
+          },
+          "terms": {
+            "description": [
+              "American actor and producer (born 1974)"
+            ]
+          }
+        },
+        {
+          "pageid": 33585564,
+          "ns": 0,
+          "title": "Salvator Mundi (painting)",
+          "index": 3,
+          "pageprops": {
+            "displaytitle": "<i>Salvator Mundi</i> (painting)",
+            "page_image_free": "Leonardo_da_Vinci,_Salvator_Mundi,_c.1500,_oil_on_walnut,_45.4_×_65.6_cm.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Painting attributed to Leonardo da Vinci",
+            "wikibase_item": "Q1892745"
+          },
+          "terms": {
+            "description": [
+              "painting attributed to Leonardo da Vinci"
+            ]
+          }
+        },
+        {
+          "pageid": 43480683,
+          "ns": 0,
+          "title": "Leonardo's fighting vehicle",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Leonardo_tank.JPG",
+            "wikibase-shortdesc": "Tank concept designed by Leonardo da Vinci",
+            "wikibase_item": "Q1124226"
+          },
+          "terms": {
+            "description": [
+              "precursor to the tank invented by Leonardo da Vinci"
+            ]
+          }
+        },
+        {
+          "pageid": 54798038,
+          "ns": 0,
+          "title": "Fortress Explorations",
+          "index": 4,
+          "pageprops": {
+            "wikibase-shortdesc": "Walk-through attraction in Tokyo",
+            "wikibase_item": "Q11332978"
+          },
+          "terms": {
+            "description": [
+              "Walk-through attraction at Tokyo DisneySea"
+            ]
+          }
+        },
+        {
+          "pageid": 82888579,
+          "ns": 0,
+          "title": "Leonardo Maria Del Vecchio",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Del Vecchio, Leonardo Maria",
+            "wikibase-shortdesc": "Italian businessman",
+            "wikibase_item": "Q138953670"
+          },
+          "terms": {
+            "description": [
+              "Italian businessman"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

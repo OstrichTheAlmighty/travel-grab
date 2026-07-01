@@ -1,0 +1,100 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:07.567Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 403,
+          "ns": 0,
+          "title": "静岡県",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しすおかけん",
+            "kartographer_frames": "1",
+            "page_image_free": "Mt.Fuji-Osezaki.jpg",
+            "wikibase_item": "Q131320"
+          },
+          "coordinates": [
+            {
+              "lat": 34.97694,
+              "lon": 138.383,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の都道府県"
+            ]
+          }
+        },
+        {
+          "pageid": 2566,
+          "ns": 0,
+          "title": "1900年",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "1900ねん",
+            "wikibase_item": "Q2034"
+          },
+          "terms": {
+            "description": [
+              "年"
+            ]
+          }
+        },
+        {
+          "pageid": 142275,
+          "ns": 0,
+          "title": "徳島製粉",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とくしませいふん",
+            "wikibase_item": "Q11490223"
+          },
+          "terms": {
+            "description": [
+              "徳島市に本社を置く製粉業者・食品加工品業者"
+            ]
+          }
+        },
+        {
+          "pageid": 154776,
+          "ns": 0,
+          "title": "横山やすし・西川きよし",
+          "index": 5,
+          "pageprops": {
+            "wikibase_item": "Q11542479"
+          },
+          "terms": {
+            "description": [
+              "日本の漫才コンビ（1966-1989）"
+            ]
+          }
+        },
+        {
+          "pageid": 412122,
+          "ns": 0,
+          "title": "日清紡ホールディングス",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "につしんほうほるていんくす",
+            "page_image_free": "Nisshinbo_Industries,_Inc._(head_office).jpg",
+            "wikibase_item": "Q7041115"
+          },
+          "terms": {
+            "description": [
+              "日本の持株会社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

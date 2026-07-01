@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:04.267Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 30104,
+          "ns": 0,
+          "title": "海苔",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "のり",
+            "page_image_free": "Nori.jpg",
+            "wikibase_item": "Q201565"
+          },
+          "terms": {
+            "description": [
+              "食用とする藻類の総称"
+            ]
+          }
+        },
+        {
+          "pageid": 906782,
+          "ns": 0,
+          "title": "久が原",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "くかはら",
+            "kartographer_frames": "1",
+            "page_image_free": "Kugahara_4chome_ota.JPG",
+            "wikibase_item": "Q11368850"
+          },
+          "terms": {
+            "description": [
+              "東京都大田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1012911,
+          "ns": 0,
+          "title": "馬込文士村",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "まこめふんしむら",
+            "page_image": "Relief_of_residents_of_magome_writers_village_sanno_ota_2015.jpg",
+            "page_image_free": "Yukio_Mishima.jpg",
+            "wikibase_item": "Q11668083"
+          },
+          "terms": {
+            "description": [
+              "大正後期から昭和初期にかけて、現在の東京都大田区で多くの文士が暮らしていた地域"
+            ]
+          }
+        },
+        {
+          "pageid": 1778099,
+          "ns": 0,
+          "title": "大田区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おおたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-International-Airport_Satellite.jpg",
+            "wikibase_item": "Q217234"
+          },
+          "coordinates": [
+            {
+              "lat": 35.56128,
+              "lon": 139.71603,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 4521659,
+          "ns": 0,
+          "title": "大田区立郷土博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおたくりつきようとしりようかん",
+            "page_image_free": "Folk_Museum_of_Ota_City_20250713.jpg",
+            "wikibase_item": "Q104708388"
+          },
+          "coordinates": [
+            {
+              "lat": 35.58883333,
+              "lon": 139.7105,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都大田区にある郷土博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

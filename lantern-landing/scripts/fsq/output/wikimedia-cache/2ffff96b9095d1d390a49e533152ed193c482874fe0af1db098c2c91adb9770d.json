@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:20.243Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 345322,
+          "ns": 0,
+          "title": "大田区体育館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおたくたいいくかん",
+            "wikibase_item": "Q11437836"
+          },
+          "coordinates": [
+            {
+              "lat": 35.5645,
+              "lon": 139.72786111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都大田区東蒲田にかつて存在した体育館"
+            ]
+          }
+        },
+        {
+          "pageid": 1778099,
+          "ns": 0,
+          "title": "大田区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おおたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-International-Airport_Satellite.jpg",
+            "wikibase_item": "Q217234"
+          },
+          "coordinates": [
+            {
+              "lat": 35.56128,
+              "lon": 139.71603,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 2562769,
+          "ns": 0,
+          "title": "大田区総合体育館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおたくそうこうたいいくかん",
+            "page_image_free": "Ota_city_general_gymnasium.jpg",
+            "wikibase_item": "Q11437869"
+          },
+          "coordinates": [
+            {
+              "lat": 35.5645,
+              "lon": 139.72786111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都大田区にある屋内スポーツ施設"
+            ]
+          }
+        },
+        {
+          "pageid": 4459910,
+          "ns": 0,
+          "title": "WRESTLE PRINCESS 2",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "WRESTLE PRINCESS 2",
+            "wikibase_item": "Q109603342"
+          }
+        },
+        {
+          "pageid": 4648280,
+          "ns": 0,
+          "title": "WRESTLE PETER PAN 2022",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Wrestle Peter Pan 2022",
+            "wikibase_item": "Q112913056"
+          }
+        }
+      ]
+    }
+  }
+}

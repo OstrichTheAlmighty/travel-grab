@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:23.754Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 163373,
+          "ns": 0,
+          "title": "ドラバラ鈴井の巣",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とらはらすすいのす",
+            "wikibase_item": "Q11323090"
+          },
+          "terms": {
+            "description": [
+              "日本のドラマバラエティ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 253467,
+          "ns": 0,
+          "title": "Joshin",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しようしん",
+            "page_image_free": "Joshin_Denki_Headquater01.JPG",
+            "wikibase_item": "Q10867463"
+          },
+          "terms": {
+            "description": [
+              "日本の家電量販店"
+            ]
+          }
+        },
+        {
+          "pageid": 391187,
+          "ns": 0,
+          "title": "ホクレン農業協同組合連合会",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ほくれんほつかいとうのうきようきようとうくみあいれんこうかい",
+            "page_image_free": "JA-Hokkaido-Bldg-02.jpg",
+            "wikibase_item": "Q11337663"
+          },
+          "coordinates": [
+            {
+              "lat": 43.06694444,
+              "lon": 141.35416667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の北海道にある農業協同組合連合会"
+            ]
+          }
+        },
+        {
+          "pageid": 541597,
+          "ns": 0,
+          "title": "成城",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せいしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Seijouniv2012055.jpg",
+            "wikibase_item": "Q11251371"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 2116484,
+          "ns": 0,
+          "title": "ぼくのおばあちゃん",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ほくのおはあちやん",
+            "wikibase_item": "Q11277944"
+          }
+        }
+      ]
+    }
+  }
+}

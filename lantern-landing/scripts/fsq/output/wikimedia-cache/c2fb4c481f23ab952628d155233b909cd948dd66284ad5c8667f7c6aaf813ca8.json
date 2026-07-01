@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:14.038Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京都庁展望室"
+    },
+    "search": [
+      {
+        "id": "Q126417421",
+        "title": "Q126417421",
+        "pageid": 120443366,
+        "concepturi": "http://www.wikidata.org/entity/Q126417421",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q126417421",
+        "display": {
+          "label": {
+            "value": "TMG Observatories",
+            "language": "en"
+          }
+        },
+        "label": "TMG Observatories",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京都庁展望室"
+        },
+        "aliases": [
+          "東京都庁展望室"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

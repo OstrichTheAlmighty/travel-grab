@@ -1,0 +1,126 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:25.738Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 27930,
+          "ns": 0,
+          "title": "さいたまスーパーアリーナ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さいたますうはあありいな",
+            "kartographer_frames": "1",
+            "page_image_free": "Saitama_Super_Arena_02.jpg",
+            "wikibase_item": "Q1052149"
+          },
+          "coordinates": [
+            {
+              "lat": 35.89488889,
+              "lon": 139.63072222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "さいたま市中央区の多目的アリーナ"
+            ]
+          }
+        },
+        {
+          "pageid": 55461,
+          "ns": 0,
+          "title": "アリーナ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ありいな",
+            "page_image_free": "Marriott_Center_1.JPG",
+            "wikibase_item": "Q641226"
+          },
+          "terms": {
+            "description": [
+              "スポーツ競技や興行イベントなど多目的に使用される屋内施設"
+            ]
+          }
+        },
+        {
+          "pageid": 446497,
+          "ns": 0,
+          "title": "川崎市とどろきアリーナ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かわさきしととろきありいな",
+            "kartographer_frames": "1",
+            "page_image_free": "Todoroki_Arena.jpg",
+            "wikibase_item": "Q7812855"
+          },
+          "coordinates": [
+            {
+              "lat": 35.58728611,
+              "lon": 139.64735556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県川崎市にあるアリーナ"
+            ]
+          }
+        },
+        {
+          "pageid": 1116494,
+          "ns": 0,
+          "title": "鹿児島アリーナ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かこしまありいな",
+            "kartographer_frames": "1",
+            "page_image_free": "KagoshimaArena-01-001.jpg",
+            "wikibase_item": "Q11676476"
+          },
+          "coordinates": [
+            {
+              "lat": 31.60147222,
+              "lon": 130.53547222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 3483788,
+          "ns": 0,
+          "title": "有明アリーナ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ありあけありいな",
+            "kartographer_frames": "1",
+            "page_image_free": "有明アリーナ_2024年12月16日の東京_202412161406_IMG_4936.jpg",
+            "wikibase_item": "Q28068157"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64355556,
+              "lon": 139.79425,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区にある競技施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

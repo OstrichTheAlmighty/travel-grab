@@ -1,0 +1,80 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:47.084Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 301131,
+          "ns": 0,
+          "title": "風景式庭園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふうけいしき",
+            "disambiguation": "",
+            "wikibase_item": "Q24887393"
+          }
+        },
+        {
+          "pageid": 537856,
+          "ns": 0,
+          "title": "フランス式庭園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふらんすしきていえん",
+            "page_image_free": "Vaux-le-Vicomte_Garten.jpg",
+            "wikibase_item": "Q12774"
+          }
+        },
+        {
+          "pageid": 537938,
+          "ns": 0,
+          "title": "イギリス式庭園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いきりすしきていえん",
+            "page_image_free": "Muskauer-Park-Rehderbrücke-2.jpg",
+            "wikibase_item": "Q12783"
+          },
+          "terms": {
+            "description": [
+              "庭園の様式"
+            ]
+          }
+        },
+        {
+          "pageid": 1849027,
+          "ns": 0,
+          "title": "庭園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ていえん",
+            "page_image_free": "Adachi_Museum_of_Art04st3200.jpg",
+            "wikibase_item": "Q1107656"
+          },
+          "terms": {
+            "description": [
+              "見て歩くために樹木、噴水、花壇などが人工的に整備された施設"
+            ]
+          }
+        },
+        {
+          "pageid": 3911296,
+          "ns": 0,
+          "title": "フランス風景式庭園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふらんすふうけいしきていえん",
+            "page_image_free": "Chateau_de_versailles33.jpg",
+            "wikibase_item": "Q5502281"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:41.764Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1192,
+          "ns": 0,
+          "title": "声優",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せいゆう",
+            "page_image_free": "Scene_from_a_Radio_Broadcast_of_a_Drama_of_Family_Life.jpg",
+            "wikibase_item": "Q622807"
+          },
+          "terms": {
+            "description": [
+              "声だけで出演する俳優"
+            ]
+          }
+        },
+        {
+          "pageid": 119759,
+          "ns": 0,
+          "title": "青二プロダクション",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あおにふろたくしよん",
+            "wikibase_item": "Q1359479"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都港区にある声優事務所"
+            ]
+          }
+        },
+        {
+          "pageid": 365316,
+          "ns": 0,
+          "title": "81プロデュース",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "えいていわんふろてゆうす",
+            "wikibase_item": "Q1154833"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都渋谷区にある声優事務所"
+            ]
+          }
+        },
+        {
+          "pageid": 1940592,
+          "ns": 0,
+          "title": "アミューズミュージアム",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あみゆうすみゆうしあむ",
+            "kartographer_frames": "1",
+            "page_image_free": "AM_view1.jpg",
+            "wikibase_item": "Q17230481"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7145,
+              "lon": 139.79788889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて存在した日本の美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 3112256,
+          "ns": 0,
+          "title": "それが声優!",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "それかせいゆう",
+            "wikibase_item": "Q18711417"
+          },
+          "terms": {
+            "description": [
+              "あさのますみと畑健二郎の同人誌、Webで公開の漫画"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

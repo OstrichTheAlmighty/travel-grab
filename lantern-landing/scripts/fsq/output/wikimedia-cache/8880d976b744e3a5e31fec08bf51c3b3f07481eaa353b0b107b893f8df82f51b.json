@@ -1,0 +1,83 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:16.385Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 292645,
+          "ns": 0,
+          "title": "赤穂事件",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あこうしけん",
+            "page_image_free": "Ohiroma_Honmaru_Edo_Castle_4.JPG",
+            "wikibase_item": "Q822472"
+          },
+          "terms": {
+            "description": [
+              "1701年に日本の江戸で発生した刃傷・切腹事件"
+            ]
+          }
+        },
+        {
+          "pageid": 1130382,
+          "ns": 0,
+          "title": "明日のよいち!",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あすのよいち",
+            "wikibase_item": "Q752373"
+          }
+        },
+        {
+          "pageid": 1226760,
+          "ns": 0,
+          "title": "蒲生邸事件",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かもうていしけん",
+            "wikibase_item": "Q11621361"
+          }
+        },
+        {
+          "pageid": 2647115,
+          "ns": 0,
+          "title": "毛利邸",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "もうりてい",
+            "kartographer_frames": "2",
+            "wikibase_item": "Q11547697"
+          },
+          "terms": {
+            "description": [
+              "山口県防府市にある毛利宗家の本邸"
+            ]
+          }
+        },
+        {
+          "pageid": 3012422,
+          "ns": 0,
+          "title": "小林さんちのメイドラゴン",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こはやしさんちのめいとらこん",
+            "page_image_free": "Miss_Kobayashi's_Dragon_Maid_manga_logo.svg",
+            "wikibase_item": "Q17991408"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

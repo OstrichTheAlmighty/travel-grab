@@ -1,0 +1,109 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:08.572Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 583180,
+          "ns": 0,
+          "title": "うえのドイツ文化村",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "うえのといつふんかむら",
+            "page_image_free": "Uenodoitsubunkamura.jpg",
+            "wikibase_item": "Q10947551"
+          },
+          "coordinates": [
+            {
+              "lat": 24.71933333,
+              "lon": 125.32263889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "沖縄県宮古島市上野にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 820647,
+          "ns": 0,
+          "title": "リンゴ並木 (札幌市)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "りんこなみき さつほろ",
+            "page_image_free": "Kanjou_dohri.jpg",
+            "wikibase_item": "Q11348644"
+          },
+          "coordinates": [
+            {
+              "lat": 43.037529,
+              "lon": 141.386992,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1102367,
+          "ns": 0,
+          "title": "雁木造",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かんきつくり",
+            "page_image_free": "Escapement_street_of_Takada.jpg",
+            "wikibase_item": "Q139694700"
+          },
+          "terms": {
+            "description": [
+              "雪や雨を防ぐための軒先つきの通路"
+            ]
+          }
+        },
+        {
+          "pageid": 1645834,
+          "ns": 0,
+          "title": "いずみ緑道",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "いすみりよくとう",
+            "page_image_free": "Izumi_Green_Path_in_Oizumi.JPG",
+            "wikibase_item": "Q11259386"
+          }
+        },
+        {
+          "pageid": 2399257,
+          "ns": 0,
+          "title": "湯沢城",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ゆさわしよう",
+            "page_image_free": "Sign_of_Yuzawa_Castle.jpg",
+            "wikibase_item": "Q17225760"
+          },
+          "coordinates": [
+            {
+              "lat": 39.16316667,
+              "lon": 140.49555556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の秋田県湯沢市に所在した城。湯沢市指定史跡"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

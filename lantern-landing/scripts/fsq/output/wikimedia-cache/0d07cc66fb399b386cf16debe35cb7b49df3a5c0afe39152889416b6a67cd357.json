@@ -1,0 +1,57 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:20.126Z",
+  "value": {
+    "searchinfo": {
+      "search": "お台場レインボー公園"
+    },
+    "search": [
+      {
+        "id": "Q11262949",
+        "title": "Q11262949",
+        "pageid": 12406933,
+        "concepturi": "http://www.wikidata.org/entity/Q11262949",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11262949",
+        "display": {
+          "label": {
+            "value": "お台場レインボー公園",
+            "language": "ja"
+          }
+        },
+        "label": "お台場レインボー公園",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "お台場レインボー公園"
+        }
+      },
+      {
+        "id": "Q42311557",
+        "title": "Q42311557",
+        "pageid": 43593794,
+        "concepturi": "http://www.wikidata.org/entity/Q42311557",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q42311557",
+        "display": {
+          "label": {
+            "value": "お台場レインボー公園",
+            "language": "ja"
+          },
+          "description": {
+            "value": "park in Minato, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "お台場レインボー公園",
+        "description": "park in Minato, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "お台場レインボー公園"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

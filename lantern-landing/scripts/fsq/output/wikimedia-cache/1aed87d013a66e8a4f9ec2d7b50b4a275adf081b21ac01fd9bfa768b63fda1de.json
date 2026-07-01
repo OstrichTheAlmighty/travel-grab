@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:33.620Z",
+  "value": {
+    "searchinfo": {
+      "search": "the anchor base"
+    },
+    "search": [
+      {
+        "id": "Q39017811",
+        "title": "Q39017811",
+        "pageid": 40376853,
+        "concepturi": "http://www.wikidata.org/entity/Q39017811",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q39017811",
+        "display": {
+          "label": {
+            "value": "The anchor-based minimal important change, based on receiver operating characteristic analysis or predictive modeling, may need to be adjusted for the proportion of improved patients",
+            "language": "en"
+          },
+          "description": {
+            "value": "scientific article published on 13 January 2017",
+            "language": "en"
+          }
+        },
+        "label": "The anchor-based minimal important change, based on receiver operating characteristic analysis or predictive modeling, may need to be adjusted for the proportion of improved patients",
+        "description": "scientific article published on 13 January 2017",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "The anchor-based minimal important change, based on receiver operating characteristic analysis or predictive modeling, may need to be adjusted for the proportion of improved patients"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

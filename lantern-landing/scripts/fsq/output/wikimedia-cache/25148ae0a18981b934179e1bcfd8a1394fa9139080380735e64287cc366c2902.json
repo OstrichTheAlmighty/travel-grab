@@ -1,0 +1,100 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:37:47.240Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 28308069,
+          "ns": 0,
+          "title": "Le Messager",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Messager",
+            "displaytitle": "<i>Le Messager</i>",
+            "wikibase_item": "Q2311089"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        },
+        {
+          "pageid": 29948319,
+          "ns": 0,
+          "title": "Le Messager (Maine)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Messager",
+            "displaytitle": "<i>Le Messager</i> (Maine)",
+            "page_image_free": "Le_Messager,_12_Novembre_1952.jpg",
+            "wikibase-shortdesc": "French Newspaper",
+            "wikibase_item": "Q6507270"
+          },
+          "terms": {
+            "description": [
+              "French Newspaper"
+            ]
+          }
+        },
+        {
+          "pageid": 41679404,
+          "ns": 0,
+          "title": "Le Messager Ngozi FC",
+          "index": 3,
+          "pageprops": {
+            "wikibase-shortdesc": "Burundi professional association football club",
+            "wikibase_item": "Q16843090"
+          },
+          "terms": {
+            "description": [
+              "football club"
+            ]
+          }
+        },
+        {
+          "pageid": 51623982,
+          "ns": 0,
+          "title": "The Messenger (1937 film)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Messenger (1937 film), The",
+            "displaytitle": "<i>The Messenger</i> (1937 film)",
+            "page_image": "The_Messenger_(1937_film).jpg",
+            "wikibase-shortdesc": "1937 film",
+            "wikibase_item": "Q3224518"
+          },
+          "terms": {
+            "description": [
+              "1937 French film directed by Raymond Rouleau"
+            ]
+          }
+        },
+        {
+          "pageid": 64268420,
+          "ns": 0,
+          "title": "Le Message",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Message",
+            "displaytitle": "<i>Le Message</i>",
+            "page_image_free": "BalzacMessage.jpg",
+            "wikibase-shortdesc": "Short story by Honoré de Balzac",
+            "wikibase_item": "Q513017"
+          },
+          "terms": {
+            "description": [
+              "short story by Honoré de Balzac"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

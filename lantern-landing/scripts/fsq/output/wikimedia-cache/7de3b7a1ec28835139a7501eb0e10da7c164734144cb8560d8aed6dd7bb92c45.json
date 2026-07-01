@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:31.496Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3538,
+          "ns": 0,
+          "title": "東日本旅客鉄道",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひかしにほんりよかくてつとう",
+            "page_image_free": "Logo_JR_East.svg",
+            "wikibase_item": "Q499071"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68727778,
+              "lon": 139.70002778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区に本社を置く鉄道会社"
+            ]
+          }
+        },
+        {
+          "pageid": 563583,
+          "ns": 0,
+          "title": "桜田通",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さくらた とおり",
+            "wikibase_item": "Q1154288"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優"
+            ]
+          }
+        },
+        {
+          "pageid": 1433069,
+          "ns": 0,
+          "title": "アイドリング!!! (アイドルグループ)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あいとりんく",
+            "page_image_free": "Windows_Media_Center_TV_Pack.jpg",
+            "wikibase_item": "Q1330629"
+          },
+          "terms": {
+            "description": [
+              "かつての日本の女性アイドルグループ"
+            ]
+          }
+        },
+        {
+          "pageid": 1877604,
+          "ns": 0,
+          "title": "東京都の超高層建築物・構築物の一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようとのちようこうそうけんちくふつこうちくふつのいちらん",
+            "page_image_free": "東京都2.png",
+            "wikibase-badge-Q17506997": "",
+            "wikibase_item": "Q2460405"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2715691,
+          "ns": 0,
+          "title": "JUJU",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しゆしゆ",
+            "wikibase_item": "Q24098"
+          },
+          "terms": {
+            "description": [
+              "日本の女性歌手"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

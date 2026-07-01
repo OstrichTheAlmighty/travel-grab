@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:45:56.490Z",
+  "value": {
+    "searchinfo": {
+      "search": "高円寺純情商店街"
+    },
+    "search": [
+      {
+        "id": "Q11668855",
+        "title": "Q11668855",
+        "pageid": 12808924,
+        "concepturi": "http://www.wikidata.org/entity/Q11668855",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11668855",
+        "display": {
+          "label": {
+            "value": "Kōenji Junjō Shōtengai",
+            "language": "en"
+          },
+          "description": {
+            "value": "1986 novel by Nejime Shōichi",
+            "language": "en"
+          }
+        },
+        "label": "Kōenji Junjō Shōtengai",
+        "description": "1986 novel by Nejime Shōichi",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "高円寺純情商店街"
+        },
+        "aliases": [
+          "高円寺純情商店街"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

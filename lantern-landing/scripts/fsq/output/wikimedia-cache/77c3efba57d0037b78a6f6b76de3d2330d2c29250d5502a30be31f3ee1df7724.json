@@ -1,0 +1,165 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:41.465Z",
+  "value": {
+    "searchinfo": {
+      "search": "Ueno Park"
+    },
+    "search": [
+      {
+        "id": "Q746216",
+        "title": "Q746216",
+        "pageid": 702066,
+        "concepturi": "http://www.wikidata.org/entity/Q746216",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q746216",
+        "display": {
+          "label": {
+            "value": "Ueno Imperial Grant Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Ueno Imperial Grant Park",
+        "description": "park in Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "Ueno Park"
+        },
+        "aliases": [
+          "Ueno Park"
+        ]
+      },
+      {
+        "id": "Q10868296",
+        "title": "Q10868296",
+        "pageid": 12140327,
+        "concepturi": "http://www.wikidata.org/entity/Q10868296",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q10868296",
+        "display": {
+          "label": {
+            "value": "Ueno parking area",
+            "language": "en"
+          },
+          "description": {
+            "value": "rest area in Maniwa, Okayama prefecture, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Ueno parking area",
+        "description": "rest area in Maniwa, Okayama prefecture, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Ueno parking area"
+        }
+      },
+      {
+        "id": "Q77998001",
+        "title": "Q77998001",
+        "pageid": 77456004,
+        "concepturi": "http://www.wikidata.org/entity/Q77998001",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q77998001",
+        "display": {
+          "label": {
+            "value": "Ueno Park (Spring Scene)",
+            "language": "en"
+          },
+          "description": {
+            "value": "painting by Japanese",
+            "language": "en"
+          }
+        },
+        "label": "Ueno Park (Spring Scene)",
+        "description": "painting by Japanese",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Ueno Park (Spring Scene)"
+        }
+      },
+      {
+        "id": "Q11485833",
+        "title": "Q11485833",
+        "pageid": 12625412,
+        "concepturi": "http://www.wikidata.org/entity/Q11485833",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11485833",
+        "display": {
+          "label": {
+            "value": "Ueno Park (Shobara)",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Ueno Park (Shobara)",
+        "description": "park in Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Ueno Park (Shobara)"
+        }
+      },
+      {
+        "id": "Q47509787",
+        "title": "Q47509787",
+        "pageid": 48553029,
+        "concepturi": "http://www.wikidata.org/entity/Q47509787",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q47509787",
+        "display": {
+          "label": {
+            "value": "Ueno Park Street",
+            "language": "en"
+          },
+          "description": {
+            "value": "road in Taito, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Ueno Park Street",
+        "description": "road in Taito, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Ueno Park Street"
+        }
+      },
+      {
+        "id": "Q128813340",
+        "title": "Q128813340",
+        "pageid": 122788836,
+        "concepturi": "http://www.wikidata.org/entity/Q128813340",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q128813340",
+        "display": {
+          "label": {
+            "value": "Ueno Park during Meiji Times – a Mirror of its Time: Discursive Space and Symbolic Representation of Modernity",
+            "language": "en"
+          },
+          "description": {
+            "value": "scholarly article",
+            "language": "en"
+          }
+        },
+        "label": "Ueno Park during Meiji Times – a Mirror of its Time: Discursive Space and Symbolic Representation of Modernity",
+        "description": "scholarly article",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Ueno Park during Meiji Times – a Mirror of its Time: Discursive Space and Symbolic Representation of Modernity"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

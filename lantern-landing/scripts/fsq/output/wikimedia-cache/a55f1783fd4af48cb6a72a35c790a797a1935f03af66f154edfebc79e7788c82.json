@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:29.439Z",
+  "value": {
+    "searchinfo": {
+      "search": "相撲博物館"
+    },
+    "search": [
+      {
+        "id": "Q11582043",
+        "title": "Q11582043",
+        "pageid": 12721988,
+        "concepturi": "http://www.wikidata.org/entity/Q11582043",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11582043",
+        "display": {
+          "label": {
+            "value": "Sumo Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Sumo Museum",
+        "description": "museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "相撲博物館"
+        },
+        "aliases": [
+          "相撲博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

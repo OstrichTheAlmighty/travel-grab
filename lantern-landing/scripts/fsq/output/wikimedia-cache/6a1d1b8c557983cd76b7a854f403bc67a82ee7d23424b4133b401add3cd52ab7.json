@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:54.319Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 268416,
+          "ns": 0,
+          "title": "Suntory",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Suntory_headquarters01s3200.jpg",
+            "wikibase-shortdesc": "Japanese beverage company",
+            "wikibase_item": "Q1345267"
+          },
+          "terms": {
+            "description": [
+              "Japanese beverage company"
+            ]
+          }
+        },
+        {
+          "pageid": 2662839,
+          "ns": 0,
+          "title": "Tokyo Midtown",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Midtown.2.JPG",
+            "wikibase-shortdesc": "Mixed-use development in Japan",
+            "wikibase_item": "Q1364393"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66583333,
+              "lon": 139.73111111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "buildings complex in Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 21318086,
+          "ns": 0,
+          "title": "Japanese armour",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Japanese Armour",
+            "page_image_free": "Samurai-armor-costume-2019-1-4.webm",
+            "wikibase-shortdesc": "Armor originating from Japan",
+            "wikibase_item": "Q3671179"
+          },
+          "terms": {
+            "description": [
+              "armor originating from Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 49187363,
+          "ns": 0,
+          "title": "Suntory Museum of Art",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-Midtown-Suntory-Museum-of-Art-01.jpg",
+            "wikibase-shortdesc": "Art museum in Tokyo, Japan",
+            "wikibase_item": "Q11249110"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6664,
+              "lon": 139.7303,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "art museum in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 69163162,
+          "ns": 0,
+          "title": "Taishō Roman",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Taisho Roman",
+            "wikibase-shortdesc": "Culture of the Taisho period in Japan",
+            "wikibase_item": "Q10936092"
+          },
+          "terms": {
+            "description": [
+              "culture of the Taisho period in Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

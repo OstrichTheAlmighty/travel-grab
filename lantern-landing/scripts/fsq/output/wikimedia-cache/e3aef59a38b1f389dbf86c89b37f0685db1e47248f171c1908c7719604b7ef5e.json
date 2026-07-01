@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:12.586Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 26090,
+          "ns": 0,
+          "title": "大隈重信",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おおくま しけのふ",
+            "page_image_free": "Shigenobu_Okuma_5.jpg",
+            "wikibase_item": "Q243141"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家、教育者。第8・17代内閣総理大臣、外務大臣、農商大臣、内務大臣。早稲田大学創立者。"
+            ]
+          }
+        },
+        {
+          "pageid": 152073,
+          "ns": 0,
+          "title": "大隈講堂",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおくまこうとう",
+            "kartographer_frames": "1",
+            "page_image_free": "Okuma_Auditorium.jpg",
+            "wikibase_item": "Q2870807"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70893333,
+              "lon": 139.72155278,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "早稲田キャンパス内にある講堂"
+            ]
+          }
+        },
+        {
+          "pageid": 218399,
+          "ns": 0,
+          "title": "大隈重信像",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおくましけのふそう",
+            "wikibase_item": "Q11441788"
+          },
+          "terms": {
+            "description": [
+              "大隈重信を顕彰して作られた彫像"
+            ]
+          }
+        },
+        {
+          "pageid": 771781,
+          "ns": 0,
+          "title": "早稲田大学",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "わせたたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Okuma_Auditorium.jpg",
+            "wikibase_item": "Q274486"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71027778,
+              "lon": 139.72172222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 3935870,
+          "ns": 0,
+          "title": "大隈庭園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおくまていえん",
+            "page_image_free": "Okuma1.jpg",
+            "wikibase_item": "Q3594031"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70944444,
+              "lon": 139.72194444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区にある日本庭園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

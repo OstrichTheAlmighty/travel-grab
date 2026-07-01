@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:28.729Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 14222,
+          "ns": 0,
+          "title": "神社一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しんしやいちらん",
+            "notoc": "",
+            "wikibase_item": "Q2517815"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 89297,
+          "ns": 0,
+          "title": "太田道灌",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおた とうかん",
+            "page_image_free": "Outa_Doukan.jpg",
+            "wikibase_item": "Q386144"
+          },
+          "terms": {
+            "description": [
+              "日本の武将"
+            ]
+          }
+        },
+        {
+          "pageid": 179886,
+          "ns": 0,
+          "title": "稲荷神",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いなりのかみ",
+            "page_image_free": "Fushimiinari-taisha,_torii-2-1.jpg",
+            "wikibase_item": "Q719665"
+          },
+          "terms": {
+            "description": [
+              "日本の神"
+            ]
+          }
+        },
+        {
+          "pageid": 193933,
+          "ns": 0,
+          "title": "伏見稲荷大社",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふしみいなりたいしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Fushimiinari-taisha,_gehaiden-1.jpg",
+            "wikibase_item": "Q714828"
+          },
+          "coordinates": [
+            {
+              "lat": 34.96694444,
+              "lon": 135.77305556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市伏見区にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 1844570,
+          "ns": 0,
+          "title": "太田姫稲荷神社",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおたひめいなりしんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Ota_Hime_Inari-jinja_entrance_2023-05-18.jpg",
+            "wikibase_item": "Q11444172"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69638889,
+              "lon": 139.76305556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある神社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:44.996Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 29371,
+          "ns": 0,
+          "title": "大津市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおつし",
+            "kartographer_frames": "1",
+            "page_image_free": "Skyline_of_Otsu_City20210828.jpg",
+            "wikibase_item": "Q202907"
+          },
+          "coordinates": [
+            {
+              "lat": 35.0177852,
+              "lon": 135.8548122,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "滋賀県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 570143,
+          "ns": 0,
+          "title": "秋田県立美術館 平野政吉コレクション",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あきたけんりつひしゆつかんひらのまさきちこれくしよん",
+            "page_image_free": "Akita_Museum_of_Art_20130826.jpg",
+            "wikibase_item": "Q11483668"
+          },
+          "coordinates": [
+            {
+              "lat": 39.71742778,
+              "lon": 140.1215,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "秋田県秋田市のエリアなかいち内にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 1596036,
+          "ns": 0,
+          "title": "港区 (東京都)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みなとく",
+            "kartographer_frames": "1",
+            "page_image_free": "20110405-TokyoTower-Sakura01.jpg",
+            "wikibase_item": "Q190088"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65803,
+              "lon": 139.75153,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 2224393,
+          "ns": 0,
+          "title": "滋賀県の観光地",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しかけん",
+            "page_image_free": "Enryakuji_Konponchudo04n4272.jpg",
+            "wikibase_item": "Q11564592"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2278975,
+          "ns": 0,
+          "title": "日本国外の日本庭園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にほんこくかいのにほんていえん",
+            "page_image_free": "Portland_Japanese_garden_dry_garden.jpg",
+            "wikibase_item": "Q11507581"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:21.942Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京都美術館"
+    },
+    "search": [
+      {
+        "id": "Q864957",
+        "title": "Q864957",
+        "pageid": 816350,
+        "concepturi": "http://www.wikidata.org/entity/Q864957",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q864957",
+        "display": {
+          "label": {
+            "value": "Tokyo Metropolitan Art Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Metropolitan Art Museum",
+        "description": "museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京都美術館"
+        },
+        "aliases": [
+          "東京都美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

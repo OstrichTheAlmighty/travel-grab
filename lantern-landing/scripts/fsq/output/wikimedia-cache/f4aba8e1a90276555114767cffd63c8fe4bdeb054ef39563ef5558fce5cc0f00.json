@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:27.288Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 2457243,
+          "ns": 0,
+          "title": "小泉軍治",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こいすみ くんし",
+            "wikibase_item": "Q5618841"
+          },
+          "terms": {
+            "description": [
+              "日本の柔道家 (1885-1965)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:04.389Z",
+  "value": {
+    "searchinfo": {
+      "search": "牧野記念庭園"
+    },
+    "search": [
+      {
+        "id": "Q5158903",
+        "title": "Q5158903",
+        "pageid": 4930621,
+        "concepturi": "http://www.wikidata.org/entity/Q5158903",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5158903",
+        "display": {
+          "label": {
+            "value": "Makino Memorial Garden",
+            "language": "en"
+          },
+          "description": {
+            "value": "memorial garden in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Makino Memorial Garden",
+        "description": "memorial garden in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "牧野記念庭園"
+        },
+        "aliases": [
+          "牧野記念庭園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

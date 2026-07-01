@@ -1,0 +1,209 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:42.834Z",
+  "value": {
+    "searchinfo": {
+      "search": "一般社団法人"
+    },
+    "search": [
+      {
+        "id": "Q22130673",
+        "title": "Q22130673",
+        "pageid": 24160981,
+        "concepturi": "http://www.wikidata.org/entity/Q22130673",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q22130673",
+        "display": {
+          "label": {
+            "value": "general incorporated association",
+            "language": "en"
+          },
+          "description": {
+            "value": "legal form in Japan",
+            "language": "en"
+          }
+        },
+        "label": "general incorporated association",
+        "description": "legal form in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "一般社団法人"
+        },
+        "aliases": [
+          "一般社団法人"
+        ]
+      },
+      {
+        "id": "Q1146127",
+        "title": "Q1146127",
+        "pageid": 1092712,
+        "concepturi": "http://www.wikidata.org/entity/Q1146127",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1146127",
+        "display": {
+          "label": {
+            "value": "Nippon Professional Baseball",
+            "language": "en"
+          },
+          "description": {
+            "value": "baseball league representing the highest level of professional baseball in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Nippon Professional Baseball",
+        "description": "baseball league representing the highest level of professional baseball in Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "一般社団法人日本野球機構"
+        },
+        "aliases": [
+          "一般社団法人日本野球機構"
+        ]
+      },
+      {
+        "id": "Q11395717",
+        "title": "Q11395717",
+        "pageid": 12534296,
+        "concepturi": "http://www.wikidata.org/entity/Q11395717",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11395717",
+        "display": {
+          "label": {
+            "value": "Shuppan Azusakai",
+            "language": "en"
+          },
+          "description": {
+            "value": "association of publishers in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Shuppan Azusakai",
+        "description": "association of publishers in Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "一般社団法人出版梓会"
+        },
+        "aliases": [
+          "一般社団法人出版梓会"
+        ]
+      },
+      {
+        "id": "Q1194476",
+        "title": "Q1194476",
+        "pageid": 1138363,
+        "concepturi": "http://www.wikidata.org/entity/Q1194476",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1194476",
+        "display": {
+          "label": {
+            "value": "Recording Industry Association of Japan",
+            "language": "en"
+          },
+          "description": {
+            "value": "organization in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Recording Industry Association of Japan",
+        "description": "organization in Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "一般社団法人日本レコード協会"
+        },
+        "aliases": [
+          "一般社団法人日本レコード協会"
+        ]
+      },
+      {
+        "id": "Q774842",
+        "title": "Q774842",
+        "pageid": 727972,
+        "concepturi": "http://www.wikidata.org/entity/Q774842",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q774842",
+        "display": {
+          "label": {
+            "value": "JASRAC",
+            "language": "en"
+          },
+          "description": {
+            "value": "Japanese rights society",
+            "language": "en"
+          }
+        },
+        "label": "JASRAC",
+        "description": "Japanese rights society",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "一般社団法人日本音楽著作権協会"
+        },
+        "aliases": [
+          "一般社団法人日本音楽著作権協会"
+        ]
+      },
+      {
+        "id": "Q1023380",
+        "title": "Q1023380",
+        "pageid": 972727,
+        "concepturi": "http://www.wikidata.org/entity/Q1023380",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1023380",
+        "display": {
+          "label": {
+            "value": "Computer Entertainment Supplier's Association",
+            "language": "en"
+          },
+          "description": {
+            "value": "computer entertainment industry organization",
+            "language": "en"
+          }
+        },
+        "label": "Computer Entertainment Supplier's Association",
+        "description": "computer entertainment industry organization",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "一般社団法人コンピュータエンターテインメント協会"
+        },
+        "aliases": [
+          "一般社団法人コンピュータエンターテインメント協会"
+        ]
+      },
+      {
+        "id": "Q556694",
+        "title": "Q556694",
+        "pageid": 524512,
+        "concepturi": "http://www.wikidata.org/entity/Q556694",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q556694",
+        "display": {
+          "label": {
+            "value": "The Association of Japanese Animations",
+            "language": "en"
+          },
+          "description": {
+            "value": "industry group of animation production companies",
+            "language": "en"
+          }
+        },
+        "label": "The Association of Japanese Animations",
+        "description": "industry group of animation production companies",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "一般社団法人日本動画協会"
+        },
+        "aliases": [
+          "一般社団法人日本動画協会"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

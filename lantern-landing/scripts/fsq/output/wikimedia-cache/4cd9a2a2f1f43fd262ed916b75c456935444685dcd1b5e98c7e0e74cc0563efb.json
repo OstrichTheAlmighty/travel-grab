@@ -1,0 +1,85 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:11.152Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 228284,
+          "ns": 0,
+          "title": "内藤國雄",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ないとう くにお",
+            "page_image_free": "KunioNaitou2009.jpg",
+            "wikibase_item": "Q11394491"
+          },
+          "terms": {
+            "description": [
+              "日本の将棋棋士"
+            ]
+          }
+        },
+        {
+          "pageid": 1635446,
+          "ns": 0,
+          "title": "トリオ・ザ・パンチ (お笑い)",
+          "index": 1,
+          "pageprops": {
+            "wikibase_item": "Q11321932"
+          },
+          "terms": {
+            "description": [
+              "日本のお笑いトリオ"
+            ]
+          }
+        },
+        {
+          "pageid": 1764735,
+          "ns": 0,
+          "title": "内藤武宣",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ないとう たけのふ",
+            "wikibase_item": "Q11394525"
+          }
+        },
+        {
+          "pageid": 2126178,
+          "ns": 0,
+          "title": "神様のカルテ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かみさまのかるて",
+            "wikibase_item": "Q1055785"
+          },
+          "terms": {
+            "description": [
+              "日本の小説シリーズ、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 3610519,
+          "ns": 0,
+          "title": "羊の木",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひつしのき",
+            "wikibase_item": "Q30935994"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画、映画"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:50.572Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18986,
+          "ns": 0,
+          "title": "荒川区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あらかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "Entsuji_(Arakawa)_08.jpg",
+            "wikibase_item": "Q232624"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73611,
+              "lon": 139.78339,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 522532,
+          "ns": 0,
+          "title": "井の頭自然文化園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いのかしらしせんふんかえん",
+            "page_image_free": "Inokashira-Park-Zoo_Maingate.jpg",
+            "wikibase_item": "Q10860225"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70083333,
+              "lon": 139.57275,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の動物園"
+            ]
+          }
+        },
+        {
+          "pageid": 3241728,
+          "ns": 0,
+          "title": "鬼畜系",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きちくけい",
+            "page_image_free": "Hyakurō_Murasaki.jpg",
+            "wikibase_item": "Q28693072"
+          }
+        },
+        {
+          "pageid": 4020450,
+          "ns": 0,
+          "title": "玉川上水緑道",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たまかわしようすいりよくち",
+            "page_image_free": "Western_Tokyo.svg",
+            "wikibase_item": "Q85882353"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68019444,
+              "lon": 139.52591667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 4251963,
+          "ns": 0,
+          "title": "SAKAMOTO DAYS",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さかもとていす",
+            "wikibase_item": "Q105087026"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画、メディアミックス作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

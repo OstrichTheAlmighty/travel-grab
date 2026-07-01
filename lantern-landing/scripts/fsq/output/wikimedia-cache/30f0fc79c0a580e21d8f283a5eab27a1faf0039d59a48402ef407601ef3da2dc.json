@@ -1,0 +1,36 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:03.212Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 16500,
+          "ns": 0,
+          "title": "明治神宮野球場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めいししんくうやきゆうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "明治神宮野球場_2025年2月8日の東京_202502081229_IMG_5901.jpg",
+            "wikibase_item": "Q944559"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67457222,
+              "lon": 139.71713611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区にある野球場"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:08.059Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 20311,
+          "ns": 0,
+          "title": "日立柏サッカー場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひたちかしわさつかあしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Kashiwa20120311-4_(cropped).jpg",
+            "wikibase_item": "Q1366075"
+          },
+          "coordinates": [
+            {
+              "lat": 35.84848333,
+              "lon": 139.97517222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県柏市にあるサッカー場"
+            ]
+          }
+        },
+        {
+          "pageid": 41569,
+          "ns": 0,
+          "title": "ヤマハスタジアム",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "やまはすたしあむ",
+            "page_image_free": "ヤマハスタジアム1.jpg",
+            "wikibase_item": "Q1369275"
+          },
+          "coordinates": [
+            {
+              "lat": 34.72521667,
+              "lon": 137.87500556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡県磐田市にある球技場"
+            ]
+          }
+        },
+        {
+          "pageid": 45955,
+          "ns": 0,
+          "title": "茨城県立カシマサッカースタジアム",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "いはらきけんりつかしまさつかあすたしあむ",
+            "page_image_free": "Kashima_Stadium_1.JPG",
+            "wikibase_item": "Q494769"
+          },
+          "coordinates": [
+            {
+              "lat": 35.99173611,
+              "lon": 140.64053333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "茨城県鹿嶋市にあるサッカー専用競技場"
+            ]
+          }
+        },
+        {
+          "pageid": 134185,
+          "ns": 0,
+          "title": "徳島県鳴門総合運動公園陸上競技場",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とくしまけんなるとそうこううんとうこうえんりくしようきようきしよう",
+            "page_image_free": "Naruto_Athletic_Stadium_2010-05-22.jpg",
+            "wikibase_item": "Q7206284"
+          },
+          "coordinates": [
+            {
+              "lat": 34.167855,
+              "lon": 134.617857,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "徳島県鳴門市にある陸上競技場"
+            ]
+          }
+        },
+        {
+          "pageid": 312265,
+          "ns": 0,
+          "title": "ソウルオリンピック主競技場",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "そうるおりんひつくしゆきようきしよう",
+            "page_image_free": "View_from_COEX_Tower.jpg",
+            "wikibase_item": "Q392086"
+          },
+          "coordinates": [
+            {
+              "lat": 37.51588889,
+              "lon": 127.07275,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

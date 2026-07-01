@@ -1,0 +1,98 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:33.465Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 499482,
+          "ns": 0,
+          "title": "STS-47",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "STS-47_payloadbay.jpg",
+            "wikibase-shortdesc": "1992 American crewed spaceflight",
+            "wikibase_item": "Q845385"
+          },
+          "terms": {
+            "description": [
+              "human spaceflight"
+            ]
+          }
+        },
+        {
+          "pageid": 4203400,
+          "ns": 0,
+          "title": "Life simulation game",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Tamagotchi_0124_ubt.jpeg",
+            "wikibase-shortdesc": "Subgenre of simulation video games",
+            "wikibase_item": "Q1199309"
+          },
+          "terms": {
+            "description": [
+              "subgenre of simulation video games"
+            ]
+          }
+        },
+        {
+          "pageid": 6882582,
+          "ns": 0,
+          "title": "Viktor & Rolf",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Viktor and Rolf",
+            "page_image_free": "Viktor_&_Rolf_HQ.jpg",
+            "wikibase-shortdesc": "Dutch fashion house",
+            "wikibase_item": "Q2707765"
+          },
+          "terms": {
+            "description": [
+              "Dutch fashion house"
+            ]
+          }
+        },
+        {
+          "pageid": 12778553,
+          "ns": 0,
+          "title": "Nobusuke Takatsukasa",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Takatsukasa, Nobusuke",
+            "page_image_free": "Takatsukasa_Nobusuke.jpg",
+            "wikibase-shortdesc": "Japanese nobleman and politician",
+            "wikibase_item": "Q3073348"
+          },
+          "terms": {
+            "description": [
+              "Japanese politician, ornithologist"
+            ]
+          }
+        },
+        {
+          "pageid": 74495788,
+          "ns": 0,
+          "title": "S. Kiyotaka & Omega Tribe",
+          "index": 2,
+          "pageprops": {
+            "page_image": "S._Kiyotaka_&_Omega_Tribe.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Japanese city pop band",
+            "wikibase_item": "Q123027637"
+          },
+          "terms": {
+            "description": [
+              "Japanese city pop band"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

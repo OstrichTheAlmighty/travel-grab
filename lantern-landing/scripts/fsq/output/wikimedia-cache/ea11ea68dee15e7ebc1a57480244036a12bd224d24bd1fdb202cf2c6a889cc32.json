@@ -1,0 +1,79 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:09.496Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 16770,
+          "ns": 0,
+          "title": "U",
+          "index": 4,
+          "pageprops": {
+            "wikibase_item": "Q9747"
+          },
+          "terms": {
+            "description": [
+              "ラテン文字の21番目の文字"
+            ]
+          }
+        },
+        {
+          "pageid": 74526,
+          "ns": 0,
+          "title": "チルダ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ちるた",
+            "wikibase_item": "Q11167"
+          }
+        },
+        {
+          "pageid": 147375,
+          "ns": 0,
+          "title": "ドット符号",
+          "index": 5,
+          "pageprops": {
+            "wikibase_item": "Q669057"
+          },
+          "terms": {
+            "description": [
+              "ラテン文字のダイアクリティカルマーク"
+            ]
+          }
+        },
+        {
+          "pageid": 2347823,
+          "ns": 0,
+          "title": "ニンテンドーeショップ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にんてんとういいしよつふ",
+            "wikibase_item": "Q3070866"
+          }
+        },
+        {
+          "pageid": 2369993,
+          "ns": 0,
+          "title": "Wii U",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ういいゆう",
+            "page_image_free": "Wii_U_Console_and_Gamepad.png",
+            "wikibase_item": "Q56942"
+          },
+          "terms": {
+            "description": [
+              "かつて任天堂が製造販売した家庭用ゲーム機"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

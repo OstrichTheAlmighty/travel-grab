@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:42.846Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 10422,
+          "ns": 0,
+          "title": "東急大井町線",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきゆうおおいまちせん",
+            "page_image_free": "Tokyu-Oimachi-Line_Series9000-9009.jpg",
+            "wikibase_item": "Q384995"
+          },
+          "terms": {
+            "description": [
+              "東急電鉄の鉄道路線"
+            ]
+          }
+        },
+        {
+          "pageid": 24634,
+          "ns": 0,
+          "title": "九品仏駅",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "くほんふつえき",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyu_Kuhombutsu_sta_001.jpg",
+            "wikibase_item": "Q6442177"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60541667,
+              "lon": 139.661,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区奥沢にある東急電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 110570,
+          "ns": 0,
+          "title": "大阪城公園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおさかしようこうえん",
+            "page_image_free": "Osaka_Castle_Park_20071230.jpg",
+            "wikibase_item": "Q150118"
+          },
+          "coordinates": [
+            {
+              "lat": 34.68197222,
+              "lon": 135.53105556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪市の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 324240,
+          "ns": 0,
+          "title": "自由が丘",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しゆうかおか",
+            "kartographer_frames": "1",
+            "page_image_free": "マリクレール通り_-_panoramio.jpg",
+            "wikibase_item": "Q1187503"
+          },
+          "terms": {
+            "description": [
+              "東京都目黒区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 521987,
+          "ns": 0,
+          "title": "玉川地域",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たまかわちいき",
+            "page_image_free": "Tamagawa_General_Branch_Office_Building,_Setagaya_City,_Tokyo,_Japan.jpg",
+            "wikibase_item": "Q11572556"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60855278,
+              "lon": 139.64851111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区の5地域の一つ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

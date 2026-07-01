@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:13.935Z",
+  "value": {
+    "searchinfo": {
+      "search": "静嘉堂文庫美術館"
+    },
+    "search": [
+      {
+        "id": "Q120767881",
+        "title": "Q120767881",
+        "pageid": 115217855,
+        "concepturi": "http://www.wikidata.org/entity/Q120767881",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q120767881",
+        "display": {
+          "label": {
+            "value": "Seikadō Bunko Art Museum",
+            "language": "en"
+          }
+        },
+        "label": "Seikadō Bunko Art Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "静嘉堂文庫美術館"
+        },
+        "aliases": [
+          "静嘉堂文庫美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

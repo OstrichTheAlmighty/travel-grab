@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:34.957Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4163,
+          "ns": 0,
+          "title": "花とゆめ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はなとゆめ",
+            "wikibase_item": "Q1033470"
+          },
+          "terms": {
+            "description": [
+              "白泉社が発行する日本の少女漫画雑誌"
+            ]
+          }
+        },
+        {
+          "pageid": 86660,
+          "ns": 0,
+          "title": "ゆめりあ",
+          "index": 2,
+          "pageprops": {
+            "wikibase_item": "Q1761260"
+          }
+        },
+        {
+          "pageid": 175825,
+          "ns": 0,
+          "title": "Planetarian 〜ちいさなほしのゆめ〜",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふらねたりあんちいさなほしのゆめ",
+            "displaytitle": "planetarian 〜ちいさなほしのゆめ〜",
+            "wikibase_item": "Q614121"
+          },
+          "terms": {
+            "description": [
+              "Keyによる日本のコンピューターゲーム"
+            ]
+          }
+        },
+        {
+          "pageid": 342236,
+          "ns": 0,
+          "title": "ゆめ太カンパニー",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ゆめたかんはにい",
+            "page_image_free": "Yokoyama_Building_Kiyose.jpg",
+            "wikibase_item": "Q7672604"
+          },
+          "coordinates": [
+            {
+              "lat": 35.76777778,
+              "lon": 139.51622222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都清瀬市にあるアニメ制作会社"
+            ]
+          }
+        },
+        {
+          "pageid": 3867002,
+          "ns": 0,
+          "title": "白戸ゆめの",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しらと ゆめの",
+            "page_image_free": "IMG_5769.jpeg",
+            "wikibase_item": "Q77810617"
+          },
+          "terms": {
+            "description": [
+              "日本の女性アナウンサー、グラビアアイドル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

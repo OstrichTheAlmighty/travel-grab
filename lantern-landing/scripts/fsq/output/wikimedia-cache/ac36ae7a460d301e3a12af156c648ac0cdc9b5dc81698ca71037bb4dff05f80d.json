@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:17.262Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 33746,
+          "ns": 0,
+          "title": "笠智衆",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "りゆう ちしゆう",
+            "page_image_free": "Chishu_Ryu_1940_IMG_20201231_0001_(grayscale).jpg",
+            "wikibase_item": "Q958714"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優"
+            ]
+          }
+        },
+        {
+          "pageid": 39864,
+          "ns": 0,
+          "title": "坂本龍馬",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さかもと りようま",
+            "page_image_free": "Sakamoto_Ryoma.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q378450"
+          },
+          "terms": {
+            "description": [
+              "日本の志士"
+            ]
+          }
+        },
+        {
+          "pageid": 57999,
+          "ns": 0,
+          "title": "武市瑞山",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たけち すいさん",
+            "page_image_free": "Maru_ni_kakinohana.png",
+            "wikibase_item": "Q1074298"
+          },
+          "terms": {
+            "description": [
+              "日本の尊攘派志士"
+            ]
+          }
+        },
+        {
+          "pageid": 109972,
+          "ns": 0,
+          "title": "東洋水産",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうようすいさん",
+            "page_image_free": "Toyo_Suisan_Kaisha_company_logo.svg",
+            "wikibase_item": "Q7830633"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62869444,
+              "lon": 139.74527778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある食品メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 2192747,
+          "ns": 0,
+          "title": "棲息分布",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "せいそくふんふ",
+            "wikibase_item": "Q11540461"
+          },
+          "terms": {
+            "description": [
+              "松本清張の小説"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

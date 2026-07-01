@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:31.316Z",
+  "value": {
+    "searchinfo": {
+      "search": "民主主義博物館"
+    },
+    "search": [
+      {
+        "id": "Q135085261",
+        "title": "Q135085261",
+        "pageid": 128903067,
+        "concepturi": "http://www.wikidata.org/entity/Q135085261",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q135085261",
+        "display": {
+          "label": {
+            "value": "Democracy Museum",
+            "language": "en"
+          }
+        },
+        "label": "Democracy Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "民主主義博物館"
+        },
+        "aliases": [
+          "民主主義博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:30.270Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 83393,
+          "ns": 0,
+          "title": "八重洲",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "やえす",
+            "kartographer_frames": "1",
+            "page_image_free": "Yaesu_Street_from_Tokyo_Station_Yaesu_exit.jpg",
+            "wikibase_item": "Q1249041"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の町丁"
+            ]
+          }
+        },
+        {
+          "pageid": 1957531,
+          "ns": 0,
+          "title": "田中長兵衛 (2代目)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たなか ちようへえ 2",
+            "page_image_free": "Tanaka_Choubee_2.jpg",
+            "wikibase_item": "Q11576007"
+          },
+          "terms": {
+            "description": [
+              "2代目田中長兵衛"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

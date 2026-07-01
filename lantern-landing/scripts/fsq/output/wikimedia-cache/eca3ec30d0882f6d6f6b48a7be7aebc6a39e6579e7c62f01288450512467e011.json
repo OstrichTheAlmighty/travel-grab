@@ -1,0 +1,60 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:30.520Z",
+  "value": {
+    "searchinfo": {
+      "search": "Miraikan"
+    },
+    "search": [
+      {
+        "id": "Q656957",
+        "title": "Q656957",
+        "pageid": 618327,
+        "concepturi": "http://www.wikidata.org/entity/Q656957",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q656957",
+        "display": {
+          "label": {
+            "value": "Miraikan",
+            "language": "en"
+          },
+          "description": {
+            "value": "building",
+            "language": "en"
+          }
+        },
+        "label": "Miraikan",
+        "description": "building",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Miraikan"
+        }
+      },
+      {
+        "id": "Q48750957",
+        "title": "Q48750957",
+        "pageid": 49772416,
+        "concepturi": "http://www.wikidata.org/entity/Q48750957",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q48750957",
+        "display": {
+          "label": {
+            "value": "Tokyo Garbage War History　Miraikan Museum",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Garbage War History　Miraikan Museum",
+        "match": {
+          "type": "label",
+          "language": "tr",
+          "text": "Miraikan Müzesi"
+        },
+        "aliases": [
+          "Miraikan Müzesi"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

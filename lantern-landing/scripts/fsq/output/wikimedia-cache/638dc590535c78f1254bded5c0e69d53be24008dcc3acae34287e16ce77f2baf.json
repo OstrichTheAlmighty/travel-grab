@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:31.944Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 30057,
+          "ns": 0,
+          "title": "Tokyo",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Capital and most populous city in Japan",
+            "wikibase_item": "Q1490"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68972222,
+              "lon": 139.69222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "capital and largest city of Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 3532842,
+          "ns": 0,
+          "title": "List of tallest structures in Tokyo",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "List Of Tallest Structures In Tokyo",
+            "page_image_free": "Tokyo_Skyline20210123.jpg",
+            "wikibase-badge-Q17506997": "",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q2460405"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 5550757,
+          "ns": 0,
+          "title": "Sunshine City, Tokyo",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Sunshine_City_2012.JPG",
+            "wikibase-shortdesc": "Building in Tokyo",
+            "wikibase_item": "Q1186018"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72916667,
+              "lon": 139.71805556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "buildings complex in Ikebukuro, Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 43327118,
+          "ns": 0,
+          "title": "Demographics of Tokyo",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Demography Of Tokyo",
+            "page_image_free": "Tokyo_prefecture_population_pyramid_in_2020.svg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q124313324"
+          }
+        },
+        {
+          "pageid": 47775599,
+          "ns": 0,
+          "title": "Tokyo: A View of the City",
+          "index": 1,
+          "pageprops": {
+            "displaytitle": "<i>Tokyo: A View of the City</i>",
+            "page_image": "Tokyo_book_cover.JPG",
+            "wikibase_item": "Q23044795"
+          },
+          "terms": {
+            "description": [
+              "book by Donald Richie"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

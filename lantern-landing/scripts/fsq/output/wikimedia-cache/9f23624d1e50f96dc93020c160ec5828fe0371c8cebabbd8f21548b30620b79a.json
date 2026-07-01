@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:07.870Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 161762,
+          "ns": 0,
+          "title": "歌川国芳",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "うたかわ くによし",
+            "page_image_free": "Utagawa-Kuniyoshi,_Self-Portrait,_Shunga_album,_1839.jpg",
+            "wikibase_item": "Q317736"
+          },
+          "terms": {
+            "description": [
+              "江戸後期の浮世絵師"
+            ]
+          }
+        },
+        {
+          "pageid": 909467,
+          "ns": 0,
+          "title": "三重県指定文化財一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふんかさいいちらん",
+            "wikibase_item": "Q11357743"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3773387,
+          "ns": 0,
+          "title": "於竹大日如来",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おたけたいにちによらい",
+            "page_image_free": "Otakedainichi_grave001_whole.jpg",
+            "wikibase_item": "Q52083745"
+          },
+          "terms": {
+            "description": [
+              "江戸時代に庶民から信仰された女性"
+            ]
+          }
+        },
+        {
+          "pageid": 4529340,
+          "ns": 0,
+          "title": "佐渡島の金山",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さとのきんさん",
+            "displaytitle": "佐渡島の金山",
+            "kartographer_frames": "1",
+            "page_image_free": "Sadokinzan-doyunowareto_01.JPG",
+            "wikibase_item": "Q11248197"
+          },
+          "terms": {
+            "description": [
+              "新潟県佐渡市にある世界遺産"
+            ]
+          }
+        },
+        {
+          "pageid": 5010254,
+          "ns": 0,
+          "title": "志津川 (南三陸町)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しつかわ",
+            "kartographer_frames": "1",
+            "page_image_free": "Shizugawa,_Minamisanriku.jpg",
+            "wikibase_item": "Q131983824"
+          },
+          "coordinates": [
+            {
+              "lat": 38.68044889,
+              "lon": 141.46249889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "宮城県本吉郡南三陸町の大字"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

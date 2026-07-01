@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:34.619Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 40090,
+          "ns": 0,
+          "title": "横浜スタジアム",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "よこはますたしあむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Yokohama_stadium_2020_wing.jpg",
+            "wikibase_item": "Q1148681"
+          },
+          "coordinates": [
+            {
+              "lat": 35.443428,
+              "lon": 139.6401,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県横浜市中区にある野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 912016,
+          "ns": 0,
+          "title": "新川 (東京都中央区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しんかわ",
+            "kartographer_frames": "1",
+            "page_image_free": "Shinkawa_Park.jpg",
+            "wikibase_item": "Q11502056"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 3909211,
+          "ns": 0,
+          "title": "ミライon図書館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みらいおんとしよかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Nagasaki_Pref._&_Omura_City_Library_1F_ac_(1).jpg",
+            "wikibase_item": "Q65242955"
+          },
+          "coordinates": [
+            {
+              "lat": 32.90951389,
+              "lon": 129.96138889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長崎県大村市にある図書館"
+            ]
+          }
+        },
+        {
+          "pageid": 3924507,
+          "ns": 0,
+          "title": "刈谷市歴史博物館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かりやしれきしはくふつかん",
+            "kartographer_frames": "2",
+            "page_image_free": "Kariya_city_Museum_of_History_exterior_ac_(2).jpg",
+            "wikibase_item": "Q63435512"
+          },
+          "coordinates": [
+            {
+              "lat": 34.992127,
+              "lon": 136.985223,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県刈谷市にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

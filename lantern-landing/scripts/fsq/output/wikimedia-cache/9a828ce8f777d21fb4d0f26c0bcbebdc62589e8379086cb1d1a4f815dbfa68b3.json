@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:34.323Z",
+  "value": {
+    "searchinfo": {
+      "search": "Bicycle Culture Center"
+    },
+    "search": [
+      {
+        "id": "Q104698204",
+        "title": "Q104698204",
+        "pageid": 100126164,
+        "concepturi": "http://www.wikidata.org/entity/Q104698204",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q104698204",
+        "display": {
+          "label": {
+            "value": "Bicycle Culture Center",
+            "language": "en"
+          }
+        },
+        "label": "Bicycle Culture Center",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Bicycle Culture Center"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

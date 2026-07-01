@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:08.048Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18837,
+          "ns": 0,
+          "title": "宇部市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "うへし",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokiwa_park.jpg",
+            "wikibase_item": "Q468765"
+          },
+          "coordinates": [
+            {
+              "lat": 33.95158,
+              "lon": 131.24672,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "山口県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 29791,
+          "ns": 0,
+          "title": "米子市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "よなこし",
+            "kartographer_frames": "1",
+            "page_image_free": "Yonago_montage_2017.jpg",
+            "wikibase_item": "Q320964"
+          },
+          "coordinates": [
+            {
+              "lat": 35.42817,
+              "lon": 133.33089,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "鳥取県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 54819,
+          "ns": 0,
+          "title": "安田善次郎",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やすた せんしろう",
+            "page_image_free": "Zenjiro_Yasuda.jpg",
+            "wikibase_item": "Q3571972"
+          },
+          "terms": {
+            "description": [
+              "日本の実業家"
+            ]
+          }
+        },
+        {
+          "pageid": 143706,
+          "ns": 0,
+          "title": "女川町",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おなかわちよう",
+            "page_image_free": "Seapal-Pier_Onagawa.jpg",
+            "wikibase_item": "Q1011185"
+          },
+          "coordinates": [
+            {
+              "lat": 38.44522,
+              "lon": 141.443,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "宮城県牡鹿郡の町"
+            ]
+          }
+        },
+        {
+          "pageid": 257197,
+          "ns": 0,
+          "title": "大久保 (新宿区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおくほ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ōkubo_(Tokyo).jpg",
+            "wikibase_item": "Q10429485"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

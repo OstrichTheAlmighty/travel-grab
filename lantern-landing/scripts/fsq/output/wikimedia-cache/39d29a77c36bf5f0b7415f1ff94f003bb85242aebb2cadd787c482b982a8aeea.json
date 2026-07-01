@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:13.437Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 11071,
+          "ns": 0,
+          "title": "本地垂迹",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほんちすいしやく",
+            "page_image_free": "Tokaosan-Yakuouin.jpg",
+            "wikibase_item": "Q3080781"
+          },
+          "terms": {
+            "description": [
+              "神仏習合思想のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 353060,
+          "ns": 0,
+          "title": "供養",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "くよう",
+            "page_image_free": "人形供養祭.JPG",
+            "wikibase_item": "Q1029407"
+          },
+          "terms": {
+            "description": [
+              "仏、菩薩、諸天などに香、華、燈明、飲食などの供物を真心から捧げること"
+            ]
+          }
+        },
+        {
+          "pageid": 1430114,
+          "ns": 0,
+          "title": "白石神社 (札幌市)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しろいししんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Shiroishi_Jinja_Shrine_Sapporo.jpg",
+            "wikibase_item": "Q11580219"
+          },
+          "coordinates": [
+            {
+              "lat": 43.04042,
+              "lon": 141.42819,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "札幌市にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 3015204,
+          "ns": 0,
+          "title": "平方領領家",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひらかたりようりようけ",
+            "page_image_free": "Map_of_Saitama_Prefecture_Ja.svg",
+            "wikibase_item": "Q18339030"
+          },
+          "terms": {
+            "description": [
+              "埼玉県上尾市および同県さいたま市西区の大字"
+            ]
+          }
+        },
+        {
+          "pageid": 4028033,
+          "ns": 0,
+          "title": "土支田八幡宮",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "としたはちまんくう",
+            "kartographer_frames": "1",
+            "page_image_free": "Doshida_hachimangu_nerima_tokyo_2015.jpg",
+            "wikibase_item": "Q85878086"
+          },
+          "coordinates": [
+            {
+              "lat": 35.76805556,
+              "lon": 139.61333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都練馬区土支田にある神社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

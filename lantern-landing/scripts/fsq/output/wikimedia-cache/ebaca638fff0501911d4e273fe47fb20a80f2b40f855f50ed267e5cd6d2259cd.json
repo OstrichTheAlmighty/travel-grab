@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:54.494Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 28023,
+          "ns": 0,
+          "title": "靖国神社",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "やすくにしんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "2018_Haiden_(Yasukuni_Shrine).jpg",
+            "wikibase_item": "Q242803"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69395833,
+              "lon": 139.74269167,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区の神社"
+            ]
+          }
+        },
+        {
+          "pageid": 133425,
+          "ns": 0,
+          "title": "湊川神社",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みなとかわしんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Minatogawa_Shrine_Haiden.jpg",
+            "wikibase_item": "Q713188"
+          },
+          "coordinates": [
+            {
+              "lat": 34.68135806,
+              "lon": 135.17543806,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神戸市中央区にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 217136,
+          "ns": 0,
+          "title": "灯籠",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうろう",
+            "page_image_free": "Kasuga-dōrō_parts.jpg",
+            "wikibase_item": "Q12012294"
+          },
+          "terms": {
+            "description": [
+              "漢字圏全体でみられる、石製の伝統的な照明器具の1つ"
+            ]
+          }
+        },
+        {
+          "pageid": 1219075,
+          "ns": 0,
+          "title": "九段",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "くたん",
+            "page_image_free": "Kudanzaka_Jinbocho_Nickolai_Cathedral.jpg",
+            "wikibase_item": "Q11370414"
+          },
+          "terms": {
+            "description": [
+              "東京都千代田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1732524,
+          "ns": 0,
+          "title": "神社",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しんしや",
+            "page_image_free": "Yasaka_Shrine_-_Stone_torii.jpg",
+            "wikibase_item": "Q845945"
+          },
+          "terms": {
+            "description": [
+              "神道の信仰に基づく祭祀施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,424 @@
+{
+  "city": "Tokyo",
+  "country": "JP",
+  "release": "2026-06-17.0",
+  "executionMs": 554114,
+  "totalRawPlaces": 459216,
+  "retainedPlaces": 1534,
+  "removedPlaces": 457681,
+  "duplicateCount": 1,
+  "byCategory": {
+    "food": 485,
+    "culture": 1049
+  },
+  "withCoordinates": 1534,
+  "withWebsites": 907,
+  "withAltNames": 0,
+  "withImages": 0,
+  "withRatings": 0,
+  "top50": [
+    {
+      "id": "4f4e2b67-4ded-46da-b175-82b5bcb18650",
+      "name": "TOMIZ 富澤商店",
+      "category": "food / food_and_drink",
+      "score": 70,
+      "lat": 35.5327205657959,
+      "lng": 139.69646453857422
+    },
+    {
+      "id": "63cb78fa-5de7-47c9-8a3b-16c7c95a8b27",
+      "name": "おつけもの慶　川崎アゼリア店",
+      "category": "food / food_and_drink",
+      "score": 70,
+      "lat": 35.53003120422363,
+      "lng": 139.69779205322266
+    },
+    {
+      "id": "a7c0f609-d981-4eda-8f10-c55d5b38bbcc",
+      "name": "大田文化の森　多目的室スペース虹",
+      "category": "culture / arts_and_entertainment",
+      "score": 70,
+      "lat": 35.57955741882324,
+      "lng": 139.72026824951172
+    },
+    {
+      "id": "abeb9a19-a95e-47df-9912-306f54a8bfef",
+      "name": "天然酵母パンの店 サンセリテ 北の小麦",
+      "category": "food / food_and_drink",
+      "score": 70,
+      "lat": 35.644460678100586,
+      "lng": 139.64720916748047
+    },
+    {
+      "id": "882433ea-4814-41d1-8b9c-0d15fb41842f",
+      "name": "煎茶堂東京",
+      "category": "food / food_and_drink",
+      "score": 70,
+      "lat": 35.63929557800293,
+      "lng": 139.6700210571289
+    },
+    {
+      "id": "a1ecfa97-32a6-4cd5-b6ae-42909aa94cb6",
+      "name": "ジラソーレ",
+      "category": "food / food_and_drink",
+      "score": 70,
+      "lat": 35.64545822143555,
+      "lng": 139.69893646240234
+    },
+    {
+      "id": "25aa3919-2e74-4fc8-8b61-55b24124f4b4",
+      "name": "サウンドスタジオノア恵比寿店",
+      "category": "culture / arts_and_entertainment",
+      "score": 70,
+      "lat": 35.64523124694824,
+      "lng": 139.71150970458984
+    },
+    {
+      "id": "066828b8-dadd-448c-8d6a-1b58516cd184",
+      "name": "ノアスタジオ学芸大店",
+      "category": "culture / arts_and_entertainment",
+      "score": 70,
+      "lat": 35.62354278564453,
+      "lng": 139.67947387695312
+    },
+    {
+      "id": "4114a9ec-774f-4275-8578-94ca4565408a",
+      "name": "ロマーノ　麻布十番",
+      "category": "food / food_and_drink",
+      "score": 70,
+      "lat": 35.65203666687012,
+      "lng": 139.7353744506836
+    },
+    {
+      "id": "806db4e1-7307-4c69-8590-01b8e05855a3",
+      "name": "スタジオノア　野方",
+      "category": "culture / arts_and_entertainment",
+      "score": 70,
+      "lat": 35.719398498535156,
+      "lng": 139.65398406982422
+    },
+    {
+      "id": "cf9cef80-e79f-4fbd-82c7-33efff8c6031",
+      "name": "サウンドスタジオ　ノア　中野店",
+      "category": "culture / arts_and_entertainment",
+      "score": 70,
+      "lat": 35.70621681213379,
+      "lng": 139.66255950927734
+    },
+    {
+      "id": "13cf6297-fe99-48a2-97cf-486d85c3af45",
+      "name": "松濤スタジオ",
+      "category": "culture / arts_and_entertainment",
+      "score": 70,
+      "lat": 35.66605186462402,
+      "lng": 139.69274139404297
+    },
+    {
+      "id": "8a842840-0dd4-4d0d-ad12-3e1ee7afe2fb",
+      "name": "マーチャオζ新宿店",
+      "category": "culture / arts_and_entertainment",
+      "score": 70,
+      "lat": 35.69291877746582,
+      "lng": 139.69844818115234
+    },
+    {
+      "id": "0438b50c-35c1-42a0-881e-9a3cd16c7535",
+      "name": "Loft Plus One",
+      "category": "culture / arts_and_entertainment",
+      "score": 70,
+      "lat": 35.69464111328125,
+      "lng": 139.70220184326172
+    },
+    {
+      "id": "8e2d9db2-3028-4f13-88ed-2b977592728b",
+      "name": "カレイド",
+      "category": "culture / arts_and_entertainment",
+      "score": 70,
+      "lat": 35.69402503967285,
+      "lng": 139.69928741455078
+    },
+    {
+      "id": "d0cc33bf-216f-4103-b0c0-85f326f351aa",
+      "name": "いけばな草月流　Ikebana Sogetsu",
+      "category": "culture / arts_and_entertainment",
+      "score": 70,
+      "lat": 35.67413520812988,
+      "lng": 139.72930145263672
+    },
+    {
+      "id": "815cb513-7985-49d4-b109-cb63355b3b34",
+      "name": "味ノマチダヤ",
+      "category": "food / food_and_drink",
+      "score": 70,
+      "lat": 35.71244239807129,
+      "lng": 139.67498016357422
+    },
+    {
+      "id": "826d6b92-e1bd-4b54-a646-28f5920372e4",
+      "name": "神楽坂銘茶楽山飯田橋ラムラ店",
+      "category": "food / food_and_drink",
+      "score": 70,
+      "lat": 35.70089340209961,
+      "lng": 139.74373626708984
+    },
+    {
+      "id": "0bd71eb8-d3a4-4b75-b60e-20e60dfa0661",
+      "name": "池坊東京会館（ikebana ikenobo）",
+      "category": "culture / arts_and_entertainment",
+      "score": 70,
+      "lat": 35.70108222961426,
+      "lng": 139.7600326538086
+    },
+    {
+      "id": "353b64db-c291-425e-8b7b-5e8030af1ece",
+      "name": "梶原いろは亭",
+      "category": "culture / arts_and_entertainment",
+      "score": 70,
+      "lat": 35.74914360046387,
+      "lng": 139.74808502197266
+    },
+    {
+      "id": "0cc42970-4cdc-4e75-aa35-bb99218e10e0",
+      "name": "北区文化芸術活動拠点 ココキタ",
+      "category": "culture / arts_and_entertainment",
+      "score": 70,
+      "lat": 35.76500701904297,
+      "lng": 139.75010681152344
+    },
+    {
+      "id": "37bfe5bc-bea7-40fc-97c6-eac28f23d171",
+      "name": "GINZA Kabukiza【木挽町広場】",
+      "category": "culture / arts_and_entertainment",
+      "score": 70,
+      "lat": 35.66945457458496,
+      "lng": 139.76782989501953
+    },
+    {
+      "id": "b4d301a5-54fb-4027-a268-13c15352a2ee",
+      "name": "箱根駅伝大手町発着点",
+      "category": "culture / arts_and_entertainment",
+      "score": 70,
+      "lat": 35.68743324279785,
+      "lng": 139.76496124267578
+    },
+    {
+      "id": "aa684d68-9892-4147-9bde-0a63efc0493c",
+      "name": "クロサワバイオリンお茶の水店",
+      "category": "culture / arts_and_entertainment",
+      "score": 70,
+      "lat": 35.69956970214844,
+      "lng": 139.76360321044922
+    },
+    {
+      "id": "ba9492ac-b679-462e-8694-8cc3b5984067",
+      "name": "おりがみ会館",
+      "category": "culture / arts_and_entertainment",
+      "score": 70,
+      "lat": 35.702884674072266,
+      "lng": 139.76549530029297
+    },
+    {
+      "id": "741a5acd-6b8b-48d3-adfa-8356d319f355",
+      "name": "下町焼きそば 銀ちゃん 上野広小路店",
+      "category": "food / food_and_drink",
+      "score": 70,
+      "lat": 35.70769500732422,
+      "lng": 139.7737808227539
+    },
+    {
+      "id": "090dca71-28dc-4ef7-be82-1724453be5f3",
+      "name": "アリックス",
+      "category": "food / food_and_drink",
+      "score": 70,
+      "lat": 35.67806816101074,
+      "lng": 139.78981018066406
+    },
+    {
+      "id": "8d09cdb1-a92b-41a9-9f60-7c5e9c1f0f5d",
+      "name": "カゴメ株式会社東京",
+      "category": "food / food_and_drink",
+      "score": 70,
+      "lat": 35.68535232543945,
+      "lng": 139.78878021240234
+    },
+    {
+      "id": "ce238039-a447-4c38-be73-bb67a276a59b",
+      "name": "ジェイズスタジオ浦安店",
+      "category": "culture / arts_and_entertainment",
+      "score": 70,
+      "lat": 35.66660499572754,
+      "lng": 139.8927230834961
+    },
+    {
+      "id": "a4792887-b3d1-4075-a2bf-90f959d06f62",
+      "name": "How House West",
+      "category": "culture / arts_and_entertainment",
+      "score": 70,
+      "lat": 35.72569465637207,
+      "lng": 139.76496124267578
+    },
+    {
+      "id": "fb02a6c2-6403-415b-a80d-d004b57b2060",
+      "name": "Lindt",
+      "category": "food / food_and_drink",
+      "score": 70,
+      "lat": 35.75024223327637,
+      "lng": 139.8048553466797
+    },
+    {
+      "id": "4581f7b3-48c1-4a54-b01d-bedea310cb0c",
+      "name": "和なり屋",
+      "category": "culture / arts_and_entertainment",
+      "score": 70,
+      "lat": 35.718427658081055,
+      "lng": 139.79103088378906
+    },
+    {
+      "id": "93276c00-ddc5-4a8e-8996-619722a9f11d",
+      "name": "ギャラクシティ（こども未来創造館・西新井文化ホール）",
+      "category": "culture / arts_and_entertainment",
+      "score": 70,
+      "lat": 35.77980613708496,
+      "lng": 139.7904815673828
+    },
+    {
+      "id": "d5a0e186-e6c8-425a-912f-42a696dc2fbe",
+      "name": "キユーピー ショップ",
+      "category": "food / food_and_drink",
+      "score": 69,
+      "lat": 35.661394119262695,
+      "lng": 139.58096313476562
+    },
+    {
+      "id": "02fb3466-7f10-4a30-b243-4e4cd3eb765b",
+      "name": "川風のガーデン",
+      "category": "culture / arts_and_entertainment",
+      "score": 69,
+      "lat": 35.621360778808594,
+      "lng": 139.57177734375
+    },
+    {
+      "id": "c5fa2286-7c15-4b5c-95db-b0fe3eb5dec1",
+      "name": "だし道楽自動販売機",
+      "category": "food / food_and_drink",
+      "score": 69,
+      "lat": 35.53218650817871,
+      "lng": 139.69374084472656
+    },
+    {
+      "id": "53090466-5378-4500-bca9-9e9b7ceb558a",
+      "name": "PIA川崎ダイス",
+      "category": "culture / arts_and_entertainment",
+      "score": 69,
+      "lat": 35.531354904174805,
+      "lng": 139.70023345947266
+    },
+    {
+      "id": "4f1b2cda-5a68-4e70-bf09-b1a8f241b86f",
+      "name": "美尻ハイサワー商店",
+      "category": "food / food_and_drink",
+      "score": 69,
+      "lat": 35.62135887145996,
+      "lng": 139.69733428955078
+    },
+    {
+      "id": "7b96f9d6-2d03-42c2-829f-e522fba3779e",
+      "name": "浩智庵",
+      "category": "food / food_and_drink",
+      "score": 69,
+      "lat": 35.57144355773926,
+      "lng": 139.69171905517578
+    },
+    {
+      "id": "86612633-bfe7-41c3-9344-9a5a4a27acbd",
+      "name": "伝寿丸",
+      "category": "culture / arts_and_entertainment",
+      "score": 69,
+      "lat": 35.545000076293945,
+      "lng": 139.74895477294922
+    },
+    {
+      "id": "1898da21-bf09-40a3-a785-d0aeafc4e8bf",
+      "name": "カイトバル",
+      "category": "food / food_and_drink",
+      "score": 69,
+      "lat": 35.64809226989746,
+      "lng": 139.70831298828125
+    },
+    {
+      "id": "052d2c91-506f-4679-8e66-1751f868bc4b",
+      "name": "アトリエ・エビス クロッキー会（東京/恵比寿）",
+      "category": "culture / arts_and_entertainment",
+      "score": 69,
+      "lat": 35.645761489868164,
+      "lng": 139.70995330810547
+    },
+    {
+      "id": "6af2f1e6-4c85-4c27-9b2d-5ffaadd1d9ad",
+      "name": "ドミノ・ピザ目黒本町店",
+      "category": "food / food_and_drink",
+      "score": 69,
+      "lat": 35.62579154968262,
+      "lng": 139.6948699951172
+    },
+    {
+      "id": "d07f4d8e-360d-426e-b351-f418b4b0678d",
+      "name": "ガイア経堂店",
+      "category": "culture / arts_and_entertainment",
+      "score": 69,
+      "lat": 35.65199661254883,
+      "lng": 139.63591766357422
+    },
+    {
+      "id": "b65f5d18-9cd0-43a5-93c6-d44aeecabf71",
+      "name": "代官山 T-Site Garden Gallery",
+      "category": "culture / arts_and_entertainment",
+      "score": 69,
+      "lat": 35.64938545227051,
+      "lng": 139.7002944946289
+    },
+    {
+      "id": "f7fe732a-00b5-4eaa-92d4-ad15ab1c8ab7",
+      "name": "恵比寿スタジオーｊ",
+      "category": "culture / arts_and_entertainment",
+      "score": 69,
+      "lat": 35.64978218078613,
+      "lng": 139.7088851928711
+    },
+    {
+      "id": "f7ae5150-d55c-4813-83f2-c05f16fcab47",
+      "name": "株式会社浅井企画",
+      "category": "culture / arts_and_entertainment",
+      "score": 69,
+      "lat": 35.62787628173828,
+      "lng": 139.7248306274414
+    },
+    {
+      "id": "f413bf27-d7fd-402b-92b8-3f9d3e906fd6",
+      "name": "Small Worlds Miniature Museum",
+      "category": "culture / arts_and_entertainment",
+      "score": 69,
+      "lat": 35.63778305053711,
+      "lng": 139.78824615478516
+    },
+    {
+      "id": "5dbc7728-78e0-4040-b8ef-3fbdc05d8e02",
+      "name": "高州中央公園",
+      "category": "culture / arts_and_entertainment",
+      "score": 69,
+      "lat": 35.63637733459473,
+      "lng": 139.9150161743164
+    },
+    {
+      "id": "922fd17c-2141-4efb-ad7c-576517298a89",
+      "name": "中央公園",
+      "category": "culture / arts_and_entertainment",
+      "score": 69,
+      "lat": 35.64461326599121,
+      "lng": 139.89930725097656
+    }
+  ],
+  "estimatedApiCostUsd": 0,
+  "outputFile": null,
+  "dryRun": true
+}

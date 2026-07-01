@@ -1,0 +1,108 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:22.455Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 112554,
+          "ns": 0,
+          "title": "New Harmony, Indiana",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Downtown_new_harmony_indiana.jpg",
+            "wikibase-shortdesc": "American town founded in 1814",
+            "wikibase_item": "Q1002432"
+          },
+          "coordinates": [
+            {
+              "lat": 38.12888889,
+              "lon": -87.93027778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "human settlement in Posey County, Indiana, United States of America"
+            ]
+          }
+        },
+        {
+          "pageid": 1849011,
+          "ns": 0,
+          "title": "The Notorious Byrd Brothers",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Notorious Byrd Brothers, The",
+            "displaytitle": "<i>The Notorious Byrd Brothers</i>",
+            "page_image": "NotoriousByrdBrothers.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "1968 studio album by the Byrds",
+            "wikibase_item": "Q1077979"
+          },
+          "terms": {
+            "description": [
+              "album by The Byrds"
+            ]
+          }
+        },
+        {
+          "pageid": 3840115,
+          "ns": 0,
+          "title": "Harmonic minor scale",
+          "index": 2,
+          "pageprops": {
+            "wikibase-shortdesc": "Musical scale",
+            "wikibase_item": "Q2621436"
+          },
+          "terms": {
+            "description": [
+              "describes a type of minor scale"
+            ]
+          }
+        },
+        {
+          "pageid": 3973671,
+          "ns": 0,
+          "title": "The Hireling Shepherd",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Hireling Shepherd",
+            "displaytitle": "<i>The Hireling Shepherd</i>",
+            "page_image_free": "William_Holman_Hunt_-_The_Hireling_Shepherd.jpg",
+            "wikibase-shortdesc": "Painting by William Holman Hunt",
+            "wikibase_item": "Q7739744"
+          },
+          "terms": {
+            "description": [
+              "painting by William Holman Hunt"
+            ]
+          }
+        },
+        {
+          "pageid": 33544044,
+          "ns": 0,
+          "title": "Druidry (modern)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Druidism",
+            "page_image_free": "Druidess.png",
+            "wikibase-shortdesc": "Modern nature-based spiritual movement",
+            "wikibase_item": "Q1541838"
+          },
+          "terms": {
+            "description": [
+              "modern spiritual or religious movement that promotes connection and reverence for the natural world"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

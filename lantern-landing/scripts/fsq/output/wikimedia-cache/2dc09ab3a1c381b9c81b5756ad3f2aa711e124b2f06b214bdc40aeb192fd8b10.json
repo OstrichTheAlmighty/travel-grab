@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:47.181Z",
+  "value": {
+    "searchinfo": {
+      "search": "下高井戸おおぞら公園"
+    },
+    "search": [
+      {
+        "id": "Q11525916",
+        "title": "Q11525916",
+        "pageid": 12665794,
+        "concepturi": "http://www.wikidata.org/entity/Q11525916",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11525916",
+        "display": {
+          "label": {
+            "value": "Shimotakaido Ōzora Park",
+            "language": "en"
+          }
+        },
+        "label": "Shimotakaido Ōzora Park",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "下高井戸おおぞら公園"
+        },
+        "aliases": [
+          "下高井戸おおぞら公園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

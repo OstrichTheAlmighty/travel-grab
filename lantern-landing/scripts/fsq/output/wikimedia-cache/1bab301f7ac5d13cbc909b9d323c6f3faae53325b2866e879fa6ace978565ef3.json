@@ -1,0 +1,63 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:13.250Z",
+  "value": {
+    "searchinfo": {
+      "search": "馬頭観世音"
+    },
+    "search": [
+      {
+        "id": "Q17004306",
+        "title": "Q17004306",
+        "pageid": 18608982,
+        "concepturi": "http://www.wikidata.org/entity/Q17004306",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q17004306",
+        "display": {
+          "label": {
+            "value": "Hayagriva",
+            "language": "en"
+          },
+          "description": {
+            "value": "a Wisdom King of Vajrayana Buddhism, often considered a form of Avalokiteśvara",
+            "language": "en"
+          }
+        },
+        "label": "Hayagriva",
+        "description": "a Wisdom King of Vajrayana Buddhism, often considered a form of Avalokiteśvara",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "馬頭観世音"
+        },
+        "aliases": [
+          "馬頭観世音"
+        ]
+      },
+      {
+        "id": "Q119033729",
+        "title": "Q119033729",
+        "pageid": 113538158,
+        "concepturi": "http://www.wikidata.org/entity/Q119033729",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q119033729",
+        "display": {
+          "label": {
+            "value": "Batō Kanzenon Bosatsu",
+            "language": "en"
+          }
+        },
+        "label": "Batō Kanzenon Bosatsu",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "馬頭観世音菩薩"
+        },
+        "aliases": [
+          "馬頭観世音菩薩"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

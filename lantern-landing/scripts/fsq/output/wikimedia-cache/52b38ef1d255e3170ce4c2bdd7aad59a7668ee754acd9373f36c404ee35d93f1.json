@@ -1,0 +1,82 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:48.819Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1549431,
+          "ns": 0,
+          "title": "平将門",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たいら の まさかと",
+            "page_image_free": "Taira_no_Masakado_01.jpg",
+            "wikibase_item": "Q1207652"
+          },
+          "terms": {
+            "description": [
+              "日本の平安時代の豪族"
+            ]
+          }
+        },
+        {
+          "pageid": 3076494,
+          "ns": 0,
+          "title": "東京都の重要文化財一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しゆうようふんかさい",
+            "wikibase_item": "Q18337052"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 5127239,
+          "ns": 0,
+          "title": "ゲゲゲの鬼太郎の登場キャラクター",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "けけけのきたろう",
+            "wikibase_item": "Q11301534"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 5209325,
+          "ns": 0,
+          "title": "銚子市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちようしし",
+            "kartographer_frames": "1",
+            "page_image_free": "Choshi_Montage_2.jpg",
+            "wikibase_item": "Q694317"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73463889,
+              "lon": 140.82677778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県の市"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

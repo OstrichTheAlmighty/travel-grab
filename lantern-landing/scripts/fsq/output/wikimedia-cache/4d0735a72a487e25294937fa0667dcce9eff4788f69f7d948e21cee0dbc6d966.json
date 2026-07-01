@@ -1,0 +1,36 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:13.191Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 3198077,
+          "ns": 0,
+          "title": "ランドスケープコンサルタンツ協会",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "らんとすけえふこんさるたんつきようかい",
+            "wikibase_item": "Q65247493"
+          },
+          "terms": {
+            "description": [
+              "景観の調査・計画・設計を行うコンサルタント企業の業界団体"
+            ]
+          }
+        },
+        {
+          "pageid": 4134906,
+          "ns": 0,
+          "title": "都市公園等コンクール",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "としこうえんとう",
+            "wikibase_item": "Q97193515"
+          }
+        }
+      ]
+    }
+  }
+}

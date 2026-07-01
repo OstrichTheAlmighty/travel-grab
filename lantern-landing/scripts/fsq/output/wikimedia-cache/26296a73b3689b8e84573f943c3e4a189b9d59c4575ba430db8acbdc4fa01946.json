@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:46:03.380Z",
+  "value": {
+    "searchinfo": {
+      "search": "ビックリハウス"
+    },
+    "search": [
+      {
+        "id": "Q11330686",
+        "title": "Q11330686",
+        "pageid": 12468822,
+        "concepturi": "http://www.wikidata.org/entity/Q11330686",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11330686",
+        "display": {
+          "label": {
+            "value": "ビックリハウス",
+            "language": "ja"
+          }
+        },
+        "label": "ビックリハウス",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ビックリハウス"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:36.001Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 214341,
+          "ns": 0,
+          "title": "葛西",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かさい",
+            "wikibase_item": "Q13530387"
+          },
+          "terms": {
+            "description": [
+              "東京都東部の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 501104,
+          "ns": 0,
+          "title": "江戸川区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "えとかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "江戸川区花火大会・市川市民納涼花火大会2019.jpg",
+            "wikibase_item": "Q214056"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70664,
+              "lon": 139.86828,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 957277,
+          "ns": 0,
+          "title": "荒川中川橋梁 (東京メトロ東西線)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あらかわなかかわきようりよう",
+            "page_image_free": "Arakawa-Nakagawa_bridge_TokyoMetro_20180102_143314.jpg",
+            "wikibase_item": "Q11618518"
+          },
+          "terms": {
+            "description": [
+              "東京都の鉄道橋"
+            ]
+          }
+        },
+        {
+          "pageid": 1105604,
+          "ns": 0,
+          "title": "松島 (江戸川区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "まつしま",
+            "kartographer_frames": "1",
+            "page_image_free": "GREEN_PALACE,_Edogawa.jpg",
+            "wikibase_item": "Q11530092"
+          },
+          "terms": {
+            "description": [
+              "東京都江戸川区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 4527077,
+          "ns": 0,
+          "title": "江戸川区郷土資料室",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えとかわくきようとしりようしつ",
+            "page_image_free": "GREEN_PALACE,_Edogawa.jpg",
+            "wikibase_item": "Q117424691"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70577778,
+              "lon": 139.86630556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江戸川区にある区立博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

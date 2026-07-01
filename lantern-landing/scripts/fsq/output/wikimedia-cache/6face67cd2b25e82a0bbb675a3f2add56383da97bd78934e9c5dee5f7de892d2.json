@@ -1,0 +1,62 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:38.550Z",
+  "value": {
+    "searchinfo": {
+      "search": "Ghibli Museum"
+    },
+    "search": [
+      {
+        "id": "Q947907",
+        "title": "Q947907",
+        "pageid": 897972,
+        "concepturi": "http://www.wikidata.org/entity/Q947907",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q947907",
+        "display": {
+          "label": {
+            "value": "Ghibli Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum in Mitaka, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Ghibli Museum",
+        "description": "art museum in Mitaka, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Ghibli Museum"
+        }
+      },
+      {
+        "id": "Q936841",
+        "title": "Q936841",
+        "pageid": 887072,
+        "concepturi": "http://www.wikidata.org/entity/Q936841",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q936841",
+        "display": {
+          "label": {
+            "value": "Ghibli Museum Library",
+            "language": "en"
+          },
+          "description": {
+            "value": "collection of works by Studio Ghibli",
+            "language": "en"
+          }
+        },
+        "label": "Ghibli Museum Library",
+        "description": "collection of works by Studio Ghibli",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Ghibli Museum Library"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

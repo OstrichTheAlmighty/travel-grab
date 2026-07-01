@@ -1,0 +1,42 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:31.547Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3712094,
+          "ns": 0,
+          "title": "邪神ちゃんドロップキック",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しやしんちやんとろつふきつく",
+            "page_image_free": "Jashin-chanDropkick01.svg",
+            "wikibase_item": "Q44939441"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画、メディアミックス作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

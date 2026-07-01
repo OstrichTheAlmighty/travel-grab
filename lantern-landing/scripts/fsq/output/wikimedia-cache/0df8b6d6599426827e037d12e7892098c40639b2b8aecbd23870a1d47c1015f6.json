@@ -1,0 +1,41 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:08.911Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 480726,
+          "ns": 0,
+          "title": "東京ディズニーシーのショップの一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいしいのしよつふ",
+            "wikibase_item": "Q11524256"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 572149,
+          "ns": 0,
+          "title": "ロストリバーデルタ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ろすとりはあてるた",
+            "wikibase_item": "Q11350364"
+          },
+          "terms": {
+            "description": [
+              "東京ディズニーシーのテーマポート"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

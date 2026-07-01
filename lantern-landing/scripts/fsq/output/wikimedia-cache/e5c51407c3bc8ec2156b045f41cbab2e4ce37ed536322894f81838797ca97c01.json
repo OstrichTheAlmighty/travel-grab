@@ -1,0 +1,89 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:46.912Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 35618,
+          "ns": 0,
+          "title": "新宿御苑",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しんしゆくきよえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Shinjuku_Gyoen_National_Garden_-_sakura_3.JPG",
+            "wikibase_item": "Q776863"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68527778,
+              "lon": 139.70972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都にある国民公園"
+            ]
+          }
+        },
+        {
+          "pageid": 301091,
+          "ns": 0,
+          "title": "平面幾何学式庭園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "へいめんきかかくしきていえん",
+            "page_image_free": "Orangerie.jpg",
+            "wikibase_item": "Q26878911"
+          }
+        },
+        {
+          "pageid": 537906,
+          "ns": 0,
+          "title": "イタリア式庭園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "いたりあしきていえん",
+            "page_image_free": "Quadrato_at_Villa_Lante_(Bagnaia).jpg",
+            "wikibase_item": "Q3244939"
+          }
+        },
+        {
+          "pageid": 1812660,
+          "ns": 0,
+          "title": "尾道市因島フラワーセンター",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おのみちしいんのしまふらわあせんたあ",
+            "page_image_free": "Onomichi_Innoshima_Flower_Center04.JPG",
+            "wikibase_item": "Q11465466"
+          }
+        },
+        {
+          "pageid": 1849027,
+          "ns": 0,
+          "title": "庭園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ていえん",
+            "page_image_free": "Adachi_Museum_of_Art04st3200.jpg",
+            "wikibase_item": "Q1107656"
+          },
+          "terms": {
+            "description": [
+              "見て歩くために樹木、噴水、花壇などが人工的に整備された施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:35.527Z",
+  "value": {
+    "searchinfo": {
+      "search": "夢の島熱帯植物館"
+    },
+    "search": [
+      {
+        "id": "Q4388023",
+        "title": "Q4388023",
+        "pageid": 4191443,
+        "concepturi": "http://www.wikidata.org/entity/Q4388023",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q4388023",
+        "display": {
+          "label": {
+            "value": "Yumenoshima Tropical Greenhouse Dome",
+            "language": "en"
+          },
+          "description": {
+            "value": "botanical garden in Koto City, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Yumenoshima Tropical Greenhouse Dome",
+        "description": "botanical garden in Koto City, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "夢の島熱帯植物館"
+        },
+        "aliases": [
+          "夢の島熱帯植物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:20.364Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 7827,
+          "ns": 0,
+          "title": "品川区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しなかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "Gate_City_Osaki.jpg",
+            "wikibase_item": "Q233495"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60917,
+              "lon": 139.73017,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の1つ"
+            ]
+          }
+        },
+        {
+          "pageid": 1426231,
+          "ns": 0,
+          "title": "近代化産業遺産",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きんたいかさんきよういさん",
+            "page_image_free": "Heritage_of_Industrial_Modernization_of_Japan.svg",
+            "wikibase_item": "Q11638384"
+          },
+          "terms": {
+            "description": [
+              "経済産業省が認定している文化遺産の分類"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

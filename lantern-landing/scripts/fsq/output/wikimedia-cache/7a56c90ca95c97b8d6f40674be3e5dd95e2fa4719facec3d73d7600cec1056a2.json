@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:52.768Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 113493,
+          "ns": 0,
+          "title": "文学館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふんかくかん",
+            "wikibase_item": "Q1865249"
+          },
+          "terms": {
+            "description": [
+              "作家や文学運動に関する品々を集めた博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 384652,
+          "ns": 0,
+          "title": "土佐坊昌俊",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とさのほう しようしゆん",
+            "page_image_free": "Musashibo_Benkei_Brings_the_Captured_Tosabo_Shoshun_to_Yoshitsune_in_the_Play_Horikawa_Youchi_no_Zu_Uki-e_Nimaitsuzuki.png",
+            "wikibase_item": "Q11423011"
+          },
+          "terms": {
+            "description": [
+              "日本の平安時代の僧、武将"
+            ]
+          }
+        },
+        {
+          "pageid": 745858,
+          "ns": 0,
+          "title": "東 (渋谷区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひかし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kokugakuin_Shibuya_Higashi_campus.jpg",
+            "wikibase_item": "Q11523778"
+          },
+          "terms": {
+            "description": [
+              "東京都渋谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1911129,
+          "ns": 0,
+          "title": "渋谷区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しふやく",
+            "kartographer_frames": "1",
+            "page_image_free": "2018_Shibuya_Crossing.jpg",
+            "wikibase_item": "Q193638"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66367,
+              "lon": 139.69772,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 3240044,
+          "ns": 0,
+          "title": "白根記念渋谷区郷土博物館・文学館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しらねきねんしふやくきょうとはくふつかん・ふんかくかん",
+            "page_image_free": "Shirane_Memorial_Museum1.JPG",
+            "wikibase_item": "Q21019078"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65638889,
+              "lon": 139.71255,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある博物館・文学館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

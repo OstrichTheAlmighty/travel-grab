@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:23.582Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17338,
+          "ns": 0,
+          "title": "お台場海浜公園駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おたいはかいひんこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Odaibakaihinkoen-Sta.JPG",
+            "wikibase_item": "Q858883"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62988889,
+              "lon": 139.77877778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区台場にあるゆりかもめの駅"
+            ]
+          }
+        },
+        {
+          "pageid": 58237,
+          "ns": 0,
+          "title": "東山・おかでんミュージアム駅停留場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひかしやまおかてんみゆうしあむえき",
+            "page_image_free": "Okaden_Higashiyama_01.jpg",
+            "wikibase_item": "Q11526756"
+          },
+          "terms": {
+            "description": [
+              "岡山市中区にある岡山電気軌道の停留場"
+            ]
+          }
+        },
+        {
+          "pageid": 143283,
+          "ns": 0,
+          "title": "八日市駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ようかいち",
+            "kartographer_frames": "1",
+            "page_image_free": "Ohmi_Railway_Yokaichi_Station_ac.jpg",
+            "wikibase_item": "Q8062651"
+          },
+          "coordinates": [
+            {
+              "lat": 35.1145,
+              "lon": 136.19483333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "滋賀県東近江市にある近江鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 1871043,
+          "ns": 0,
+          "title": "藤子・F・不二雄ミュージアム",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふしこえふふしおみゆうしあむ",
+            "page_image_free": "Fujiko･F･Fujio_Museum_-01.jpg",
+            "wikibase_item": "Q11623792"
+          },
+          "coordinates": [
+            {
+              "lat": 35.61,
+              "lon": 139.57361111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県川崎市の漫画博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 3193145,
+          "ns": 0,
+          "title": "なりきり!むーにゃん生きもの学園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "なりきりむにやんいきものかくえん",
+            "wikibase_item": "Q22127557"
+          }
+        }
+      ]
+    }
+  }
+}

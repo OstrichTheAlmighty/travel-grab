@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:31.534Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2552,
+          "ns": 0,
+          "title": "1943年",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "1943ねん",
+            "wikibase_item": "Q18623"
+          },
+          "terms": {
+            "description": [
+              "年"
+            ]
+          }
+        },
+        {
+          "pageid": 28918,
+          "ns": 0,
+          "title": "立教大学",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "りつきようたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Rikkyo_University_1.jpg",
+            "wikibase_item": "Q1143235"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7305,
+              "lon": 139.70394444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 293980,
+          "ns": 0,
+          "title": "スクール☆ウォーズ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "すくうるうおおす",
+            "wikibase_item": "Q7432317"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ、映画"
+            ]
+          }
+        },
+        {
+          "pageid": 407722,
+          "ns": 0,
+          "title": "夢対決!とんねるずのスポーツ王は俺だ!スペシャル",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ゆめたいけつとんねるすのすほおつおうはおれたすへしやる",
+            "wikibase_item": "Q11431612"
+          },
+          "terms": {
+            "description": [
+              "テレビ朝日のスポーツバラエティ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 3275585,
+          "ns": 0,
+          "title": "じゅん散歩",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しゆんさんほ",
+            "toc": "",
+            "wikibase_item": "Q22123635"
+          },
+          "terms": {
+            "description": [
+              "テレビ朝日系列の紀行番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

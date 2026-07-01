@@ -1,0 +1,87 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:38.645Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 223707,
+          "ns": 0,
+          "title": "東京ディズニーランドのアトラクションの一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいらんとのあとらくしよん",
+            "wikibase_item": "Q6600320"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 253949,
+          "ns": 0,
+          "title": "トゥーンタウン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とううんたうん",
+            "wikibase_item": "Q2916668"
+          }
+        },
+        {
+          "pageid": 492269,
+          "ns": 0,
+          "title": "東京ディズニーランドのサービス施設の一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいらんとのさあひすしせついちらん",
+            "wikibase_item": "Q11524282"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 500899,
+          "ns": 0,
+          "title": "サスカトゥーン",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さすかとううん",
+            "kartographer_frames": "1",
+            "page_image_free": "Saskatoon_from_the_air_(5675494299).jpg",
+            "wikibase_item": "Q10566"
+          },
+          "terms": {
+            "description": [
+              "カナダの都市"
+            ]
+          }
+        },
+        {
+          "pageid": 3446914,
+          "ns": 0,
+          "title": "ディズニーランドのアトラクション",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ていすにいらんとのあとらくしよん",
+            "wikibase_item": "Q6569067"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

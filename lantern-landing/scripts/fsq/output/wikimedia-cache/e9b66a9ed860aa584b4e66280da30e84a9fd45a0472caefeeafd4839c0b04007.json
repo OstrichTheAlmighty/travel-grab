@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:37.434Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 49678,
+          "ns": 0,
+          "title": "葛飾北斎",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かつしか ほくさい",
+            "displaytitle": "<span class=\"jis2004font\">葛</span>飾北斎",
+            "page_image_free": "Hokusai_portrait.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q5586"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸時代の浮世絵師 (1760-1849)"
+            ]
+          }
+        },
+        {
+          "pageid": 161754,
+          "ns": 0,
+          "title": "小布施町",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おふせまち",
+            "kartographer_frames": "1",
+            "page_image_free": "Hokusai_Museum.jpg",
+            "wikibase_item": "Q1348977"
+          },
+          "coordinates": [
+            {
+              "lat": 36.6975,
+              "lon": 138.31211,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長野県上高井郡の町"
+            ]
+          }
+        },
+        {
+          "pageid": 291476,
+          "ns": 0,
+          "title": "妹島和世",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せしま かすよ",
+            "page_image_free": "Kazuyo_Sejima_mg_5000.jpg",
+            "wikibase_item": "Q253350"
+          },
+          "terms": {
+            "description": [
+              "日本の建築家 (1956-)"
+            ]
+          }
+        },
+        {
+          "pageid": 1341822,
+          "ns": 0,
+          "title": "BCS賞",
+          "index": 3,
+          "pageprops": {
+            "wikibase_item": "Q10854444"
+          },
+          "terms": {
+            "description": [
+              "日本建設業連合会による建築の賞"
+            ]
+          }
+        },
+        {
+          "pageid": 2956587,
+          "ns": 0,
+          "title": "すみだ北斎美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すみたほくさいひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "2018_Sumida_Hokusai_Museum_2.jpg",
+            "wikibase_item": "Q17220332"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69675,
+              "lon": 139.80038889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区にある公立美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

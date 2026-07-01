@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:07.378Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 21208,
+          "ns": 0,
+          "title": "皇居",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こうきよ",
+            "kartographer_frames": "1",
+            "page_image_free": "Kokyo0057.jpg",
+            "wikibase_item": "Q500681"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6825,
+              "lon": 139.75277778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある天皇の住居"
+            ]
+          }
+        },
+        {
+          "pageid": 301989,
+          "ns": 0,
+          "title": "東京都道404号皇居前東京停車場線",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようととう404",
+            "page_image_free": "Emperor's_visit_street,chiyoda-city,japan.JPG",
+            "wikibase_item": "Q11103006"
+          },
+          "terms": {
+            "description": [
+              "東京都の道路"
+            ]
+          }
+        },
+        {
+          "pageid": 358880,
+          "ns": 0,
+          "title": "北の丸公園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きたのまるこうえん",
+            "kartographer_frames": "2",
+            "wikibase_item": "Q1075966"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69152806,
+              "lon": 139.75105889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある町名・公園"
+            ]
+          }
+        },
+        {
+          "pageid": 572145,
+          "ns": 0,
+          "title": "皇居外苑",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こうきよかいえん",
+            "page_image_free": "北の丸公園入り口_-_panoramio_(1).jpg",
+            "wikibase_item": "Q844963"
+          },
+          "terms": {
+            "description": [
+              "東京都千代田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1725020,
+          "ns": 0,
+          "title": "皇居外苑汚物散布事件",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こうきよかいえんおふつさんふしけん",
+            "wikibase_item": "Q11581052"
+          }
+        }
+      ]
+    }
+  }
+}

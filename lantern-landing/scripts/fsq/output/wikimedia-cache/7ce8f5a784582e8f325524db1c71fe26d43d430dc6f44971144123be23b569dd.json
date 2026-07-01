@@ -1,0 +1,86 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:32.292Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 11737,
+          "ns": 0,
+          "title": "在日韓国・朝鮮人",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さいにちかんこくちようせんしん",
+            "wikibase_item": "Q533312"
+          },
+          "terms": {
+            "description": [
+              "日本に居留する韓国・朝鮮籍者"
+            ]
+          }
+        },
+        {
+          "pageid": 395855,
+          "ns": 0,
+          "title": "姜徳相",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かん とくさん",
+            "wikibase_item": "Q10855117"
+          }
+        },
+        {
+          "pageid": 1916750,
+          "ns": 0,
+          "title": "在日本大韓民国民団",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さいにほんたいかんみこくみんたん",
+            "page_image_free": "Flag_of_Mindan.svg",
+            "wikibase_item": "Q485973"
+          },
+          "terms": {
+            "description": [
+              "北朝鮮よりも韓国を支持する在日韓国系居留民が結成した親韓団体"
+            ]
+          }
+        },
+        {
+          "pageid": 2598040,
+          "ns": 0,
+          "title": "朴慶植",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はく きよんしく",
+            "wikibase_item": "Q124961934"
+          },
+          "terms": {
+            "description": [
+              "在日朝鮮人の在野歴史研究者"
+            ]
+          }
+        },
+        {
+          "pageid": 2948976,
+          "ns": 0,
+          "title": "李成市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "り そんし",
+            "wikibase_item": "Q17213129"
+          },
+          "terms": {
+            "description": [
+              "日本の歴史家 (1952-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

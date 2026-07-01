@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:05.329Z",
+  "value": {
+    "searchinfo": {
+      "search": "横山大観記念館"
+    },
+    "search": [
+      {
+        "id": "Q30925115",
+        "title": "Q30925115",
+        "pageid": 32534418,
+        "concepturi": "http://www.wikidata.org/entity/Q30925115",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q30925115",
+        "display": {
+          "label": {
+            "value": "Yokoyama Taikan Memorial Hall",
+            "language": "en"
+          },
+          "description": {
+            "value": "Memorial site in Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Yokoyama Taikan Memorial Hall",
+        "description": "Memorial site in Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "横山大観記念館"
+        },
+        "aliases": [
+          "横山大観記念館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

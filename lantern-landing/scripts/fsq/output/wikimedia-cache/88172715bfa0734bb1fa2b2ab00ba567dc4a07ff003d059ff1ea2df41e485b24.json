@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:35.587Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 72807,
+          "ns": 0,
+          "title": "NHK放送センター",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "えぬえいちけいほうそうせんたあ",
+            "page_image_free": "NHK_Broadcasting_Center_20200607-2.jpg",
+            "wikibase_item": "Q1070546"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66474,
+              "lon": 139.69594,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にあるNHKの本部放送拠点施設"
+            ]
+          }
+        },
+        {
+          "pageid": 413511,
+          "ns": 0,
+          "title": "シフトレバーの配置",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しふとれはあのはいち",
+            "wikibase_item": "Q17992803"
+          }
+        },
+        {
+          "pageid": 957267,
+          "ns": 0,
+          "title": "フロアボール",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふろあほおる",
+            "page_image_free": "Floorball_game.jpg",
+            "wikibase_item": "Q206763"
+          },
+          "terms": {
+            "description": [
+              "室内で行う団体球技の一種"
+            ]
+          }
+        },
+        {
+          "pageid": 2593793,
+          "ns": 0,
+          "title": "日産・NV350キャラバン",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "につさんNV350きやらはん",
+            "page_image_free": "Nissan_NV350_Caravan_VR2E26_Small_size_transport_vehicle.jpg",
+            "wikibase_item": "Q1623152"
+          }
+        },
+        {
+          "pageid": 3878482,
+          "ns": 0,
+          "title": "ルイージマンション3",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "るいいしまんしよん3",
+            "page_image_free": "Luigi's_mansion_3_logo.jpg",
+            "wikibase_item": "Q56641109"
+          },
+          "terms": {
+            "description": [
+              "『ルイージマンション』シリーズ3作目"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

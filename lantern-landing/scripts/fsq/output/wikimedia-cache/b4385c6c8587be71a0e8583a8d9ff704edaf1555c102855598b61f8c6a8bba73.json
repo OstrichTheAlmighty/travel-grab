@@ -1,0 +1,117 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:19.501Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 672929,
+          "ns": 0,
+          "title": "味付け海苔",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あしつけのり",
+            "page_image_free": "民宿_五利左_(41881269100).jpg",
+            "wikibase_item": "Q11417012"
+          },
+          "terms": {
+            "description": [
+              "醤油や砂糖で味付けした海苔"
+            ]
+          }
+        },
+        {
+          "pageid": 994725,
+          "ns": 0,
+          "title": "大森ふるさとの浜辺公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおもりふるさとのはまへこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "OomoriFurusatonoHamabePark-khoshi3-01.jpg",
+            "wikibase_item": "Q11436301"
+          },
+          "coordinates": [
+            {
+              "lat": 35.57305556,
+              "lon": 139.74166667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都大田区の公園、また町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1213908,
+          "ns": 0,
+          "title": "大森 (大田区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおもり",
+            "kartographer_frames": "1",
+            "page_image_free": "JR_omori_station_west_entrance.JPG",
+            "wikibase_item": "Q6147936"
+          },
+          "coordinates": [
+            {
+              "lat": 35.57253,
+              "lon": 139.73381,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都大田区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 2228882,
+          "ns": 0,
+          "title": "おにぎり",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おにきり",
+            "page_image_free": "Onigiri_002.jpg",
+            "wikibase_item": "Q13393"
+          },
+          "terms": {
+            "description": [
+              "ご飯を三角形などに加圧成型した食べ物"
+            ]
+          }
+        },
+        {
+          "pageid": 3256258,
+          "ns": 0,
+          "title": "大森海苔のふるさと館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおもりのりのふるさとかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Omori_Nori_Museum1.JPG",
+            "wikibase_item": "Q20748918"
+          },
+          "coordinates": [
+            {
+              "lat": 35.57711667,
+              "lon": 139.74274722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

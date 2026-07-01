@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:45:49.363Z",
+  "value": {
+    "searchinfo": {
+      "search": "都電おもいで広場"
+    },
+    "search": [
+      {
+        "id": "Q11618636",
+        "title": "Q11618636",
+        "pageid": 12759037,
+        "concepturi": "http://www.wikidata.org/entity/Q11618636",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11618636",
+        "display": {
+          "label": {
+            "value": "Arakawa Tram Depot",
+            "language": "en"
+          }
+        },
+        "label": "Arakawa Tram Depot",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "都電おもいで広場"
+        },
+        "aliases": [
+          "都電おもいで広場"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

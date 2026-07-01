@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:01.220Z",
+  "value": {
+    "searchinfo": {
+      "search": "供養塔"
+    },
+    "search": [
+      {
+        "id": "Q97819928",
+        "title": "Q97819928",
+        "pageid": 96171874,
+        "concepturi": "http://www.wikidata.org/entity/Q97819928",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q97819928",
+        "display": {
+          "label": {
+            "value": "Kuyō-tō",
+            "language": "en"
+          }
+        },
+        "label": "Kuyō-tō",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "供養塔"
+        },
+        "aliases": [
+          "供養塔"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

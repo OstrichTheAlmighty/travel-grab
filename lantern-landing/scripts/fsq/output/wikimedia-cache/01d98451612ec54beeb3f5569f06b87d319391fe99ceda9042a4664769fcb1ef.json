@@ -1,0 +1,116 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:49.290Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 20563,
+          "ns": 0,
+          "title": "二条城",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にしようしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "二条城_唐門_2025.jpg",
+            "wikibase_item": "Q1013399"
+          },
+          "coordinates": [
+            {
+              "lat": 35.01415556,
+              "lon": 135.7475,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市にある城郭及び元皇室関連施設"
+            ]
+          }
+        },
+        {
+          "pageid": 107596,
+          "ns": 0,
+          "title": "桂離宮",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かつらりきゆう",
+            "kartographer_frames": "1",
+            "page_image_free": "Katsura6.jpg",
+            "wikibase_item": "Q1736808"
+          },
+          "coordinates": [
+            {
+              "lat": 34.984,
+              "lon": 135.70955556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市の離宮(皇室関連施設)"
+            ]
+          }
+        },
+        {
+          "pageid": 572572,
+          "ns": 0,
+          "title": "皇居東御苑",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こうきよひかしきよえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Ōte-mon_gate,_Edo_Castle_Tokyo_Japan_by_Don_Ramey_Logan.jpg",
+            "wikibase_item": "Q6631907"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68638889,
+              "lon": 139.7575,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "皇居内の東地区にある皇居附属庭園"
+            ]
+          }
+        },
+        {
+          "pageid": 1382284,
+          "ns": 0,
+          "title": "ヒーリングタイム&ヘッドラインニュース",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひいりんくたいむ",
+            "wikibase_item": "Q11223134"
+          }
+        },
+        {
+          "pageid": 1691666,
+          "ns": 0,
+          "title": "東京都の観光地",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようと",
+            "page_image_free": "東京都区部-観光地図-1.jpg",
+            "wikibase_item": "Q10860697"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

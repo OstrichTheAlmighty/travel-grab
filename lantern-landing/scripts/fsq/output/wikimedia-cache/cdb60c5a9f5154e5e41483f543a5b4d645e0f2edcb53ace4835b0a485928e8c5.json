@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:43.321Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 178378,
+          "ns": 0,
+          "title": "電車とバスの博物館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "てんしやとはすのはくふつかん",
+            "page_image_free": "Tokyu_Train_and_Bus_Museum.jpg",
+            "wikibase_item": "Q11660619"
+          },
+          "terms": {
+            "description": [
+              "神奈川県川崎市宮前区にある鉄道保存展示施設"
+            ]
+          }
+        },
+        {
+          "pageid": 254920,
+          "ns": 0,
+          "title": "葛飾区郷土と天文の博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かつしかくきようととてんもんのはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Katsushika_City_Museum.JPG",
+            "wikibase_item": "Q11621071"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75291667,
+              "lon": 139.84344722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都葛飾区白鳥三丁目にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 1060918,
+          "ns": 0,
+          "title": "鉄道博物館 (さいたま市)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "てつとうはくふつかん",
+            "page_image_free": "Logo_of_Railway_museum(Saitama).svg",
+            "wikibase_item": "Q846106"
+          },
+          "coordinates": [
+            {
+              "lat": 35.920556,
+              "lon": 139.618333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県さいたま市大宮区にある鉄道博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 2897912,
+          "ns": 0,
+          "title": "京都鉄道博物館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きようとてつとうはくふつかん",
+            "page_image_free": "KYOTO_RAILWAY_MUSEUM_Entrance_20160321.JPG",
+            "wikibase_item": "Q24014029"
+          },
+          "coordinates": [
+            {
+              "lat": 34.9872,
+              "lon": 135.7425,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都府京都市下京区にある鉄道博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

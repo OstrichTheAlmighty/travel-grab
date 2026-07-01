@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:42.088Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1884709,
+          "ns": 0,
+          "title": "佐和誠",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さわ まこと",
+            "wikibase_item": "Q11383090"
+          },
+          "terms": {
+            "description": [
+              "日本の翻訳家"
+            ]
+          }
+        },
+        {
+          "pageid": 4013085,
+          "ns": 0,
+          "title": "ナウムブルク市電",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "なうむふるくしてん",
+            "page_image_free": "Strassenbahn-nmb-tw36undtw51_depot.jpg",
+            "wikibase_item": "Q876113"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:29.567Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 146530,
+          "ns": 0,
+          "title": "月刊少年マガジン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "けつかんしようねんまかしん",
+            "page_image_free": "Gekkan_Shonen_Magazine.svg",
+            "wikibase_item": "Q909935"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画雑誌"
+            ]
+          }
+        },
+        {
+          "pageid": 321564,
+          "ns": 0,
+          "title": "鈴木裕樹",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すすき ひろき",
+            "wikibase_item": "Q3234563"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優"
+            ]
+          }
+        },
+        {
+          "pageid": 505920,
+          "ns": 0,
+          "title": "渡辺弘基",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "わたなへ ひろき",
+            "wikibase_item": "Q11562251"
+          },
+          "terms": {
+            "description": [
+              "日本のプロ野球選手 (1947-)"
+            ]
+          }
+        },
+        {
+          "pageid": 816196,
+          "ns": 0,
+          "title": "チャンピオンRED いちご",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ちやんひおんれつといちこ",
+            "wikibase_item": "Q11318245"
+          },
+          "terms": {
+            "description": [
+              "日本の雑誌"
+            ]
+          }
+        },
+        {
+          "pageid": 2273037,
+          "ns": 0,
+          "title": "あばれる君",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あはれるくん",
+            "page_image_free": "Abarerukun.jpg",
+            "wikibase_item": "Q11258197"
+          },
+          "terms": {
+            "description": [
+              "日本のお笑いタレント"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

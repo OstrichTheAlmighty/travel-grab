@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:33:20.573Z",
+  "value": {
+    "searchinfo": {
+      "search": "ビッグオー"
+    },
+    "search": [
+      {
+        "id": "Q5728424",
+        "title": "Q5728424",
+        "pageid": 5494709,
+        "concepturi": "http://www.wikidata.org/entity/Q5728424",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5728424",
+        "display": {
+          "label": {
+            "value": "Big Order",
+            "language": "en"
+          },
+          "description": {
+            "value": "Japanese manga series",
+            "language": "en"
+          }
+        },
+        "label": "Big Order",
+        "description": "Japanese manga series",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ビッグオーダー"
+        },
+        "aliases": [
+          "ビッグオーダー"
+        ]
+      },
+      {
+        "id": "Q4086916",
+        "title": "Q4086916",
+        "pageid": 3895150,
+        "concepturi": "http://www.wikidata.org/entity/Q4086916",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q4086916",
+        "display": {
+          "label": {
+            "value": "Pickover stalk",
+            "language": "en"
+          },
+          "description": {
+            "value": "details found in the Mandelbrot set by Clifford Pickover",
+            "language": "en"
+          }
+        },
+        "label": "Pickover stalk",
+        "description": "details found in the Mandelbrot set by Clifford Pickover",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ピックオーバー軸"
+        },
+        "aliases": [
+          "ピックオーバー軸"
+        ]
+      },
+      {
+        "id": "Q344385",
+        "title": "Q344385",
+        "pageid": 329751,
+        "concepturi": "http://www.wikidata.org/entity/Q344385",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q344385",
+        "display": {
+          "label": {
+            "value": "Big O",
+            "language": "en"
+          },
+          "description": {
+            "value": "Wikimedia disambiguation page",
+            "language": "en"
+          }
+        },
+        "label": "Big O",
+        "description": "Wikimedia disambiguation page",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ビッグオー"
+        },
+        "aliases": [
+          "ビッグオー"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

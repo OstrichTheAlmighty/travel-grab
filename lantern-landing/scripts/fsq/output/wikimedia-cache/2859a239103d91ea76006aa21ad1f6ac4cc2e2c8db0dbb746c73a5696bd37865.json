@@ -1,0 +1,133 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:23.449Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 594462,
+          "ns": 0,
+          "title": "Bukit Jalil National Stadium",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Malaysia_-_Bukit_Jalil_Stadium_by_Bartosz_Sakwerda_(cropped).jpg",
+            "wikibase-shortdesc": "Stadium in Kuala Lumpur, Malaysia",
+            "wikibase_item": "Q635363"
+          },
+          "coordinates": [
+            {
+              "lat": 3.05466667,
+              "lon": 101.69116667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "football stadium in Malaysia"
+            ]
+          }
+        },
+        {
+          "pageid": 919728,
+          "ns": 0,
+          "title": "List of national stadiums",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "National stadiums",
+            "page_image_free": "Hernando_Siles_Stadium_-_La_Paz.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q6634155"
+          },
+          "terms": {
+            "description": [
+              "sport stadium, which typically serves as the primary or exclusive home for one or more of a country's national representative sports teams"
+            ]
+          }
+        },
+        {
+          "pageid": 1999326,
+          "ns": 0,
+          "title": "National Stadium, Singapore",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Singapore_Singapore-Sports-Hub-with-National-Stadium-01.jpg",
+            "wikibase-shortdesc": "Multi-purpose stadium in Singapore",
+            "wikibase_item": "Q4201688"
+          },
+          "coordinates": [
+            {
+              "lat": 1.3044,
+              "lon": 103.8743,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "stadium in Singapore"
+            ]
+          }
+        },
+        {
+          "pageid": 29855090,
+          "ns": 0,
+          "title": "Lusail Stadium",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Brésil_vs_Serbie.jpg",
+            "wikibase-shortdesc": "Stadium in Lusail, Qatar",
+            "wikibase_item": "Q1186333"
+          },
+          "coordinates": [
+            {
+              "lat": 25.42086111,
+              "lon": 51.49038889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "football stadium in Lusail, Qatar"
+            ]
+          }
+        },
+        {
+          "pageid": 52764427,
+          "ns": 0,
+          "title": "Japan National Stadium",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Japan_National_Stadium_C-gate_on_2021_July_28.jpg",
+            "wikibase-shortdesc": "Multi-purpose stadium in Tokyo",
+            "wikibase_item": "Q14862239"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67819444,
+              "lon": 139.71458333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "stadium in Kasumigaoka, Tokyo, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

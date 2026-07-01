@@ -1,0 +1,89 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:13.876Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 28727,
+          "ns": 0,
+          "title": "森鷗外",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "もり おうかい",
+            "page_image_free": "Mori_Ogai_in_the_atelier_of_Sculptor_Takeishi_Kozaburo_in_1916.jpg",
+            "wikibase_item": "Q356960"
+          },
+          "terms": {
+            "description": [
+              "日本の作家、陸軍軍医 (1862-1922)"
+            ]
+          }
+        },
+        {
+          "pageid": 126054,
+          "ns": 0,
+          "title": "舞姫 (森鷗外)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "まいひめ",
+            "wikibase_item": "Q7728837"
+          },
+          "terms": {
+            "description": [
+              "森鴎外の短編小説"
+            ]
+          }
+        },
+        {
+          "pageid": 2143375,
+          "ns": 0,
+          "title": "両像・森鷗外",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "りようそうもりおうかい",
+            "page_image_free": "Jyomyo-ji_Tsutiyama.JPG",
+            "wikibase_item": "Q11362606"
+          },
+          "terms": {
+            "description": [
+              "松本清張による評伝"
+            ]
+          }
+        },
+        {
+          "pageid": 2307239,
+          "ns": 0,
+          "title": "陶器二三雄",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうき ふみお",
+            "page_image_free": "National_Library_Kansai.jpg",
+            "wikibase_item": "Q11658435"
+          },
+          "terms": {
+            "description": [
+              "建築家"
+            ]
+          }
+        },
+        {
+          "pageid": 4064360,
+          "ns": 0,
+          "title": "森鷗外記念館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "もりおうかいきねんかん",
+            "disambiguation": "",
+            "wikibase_item": "Q97376226"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:45.719Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 102796,
+          "ns": 0,
+          "title": "Dodger Stadium",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Dodger_Stadium_and_Chavez_Ravine_far_view,_Chicago_Cubs_at_Los_Angeles_Dodgers,_(April_12,_2025).jpg",
+            "wikibase-shortdesc": "Baseball park in Los Angeles, California",
+            "wikibase_item": "Q247420"
+          },
+          "coordinates": [
+            {
+              "lat": 34.07361111,
+              "lon": -118.24,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Baseball park in Los Angeles, US"
+            ]
+          }
+        },
+        {
+          "pageid": 1139039,
+          "ns": 0,
+          "title": "Takashi Murakami",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Murakami, Takashi",
+            "page_image_free": "Takashi_Murakami_at_Versailles_Sept._2010_(crop).jpg",
+            "wikibase-shortdesc": "Japanese artist (born 1962)",
+            "wikibase_item": "Q352437"
+          },
+          "terms": {
+            "description": [
+              "Japanese contemporary artist, film director (born 1962)"
+            ]
+          }
+        },
+        {
+          "pageid": 69213495,
+          "ns": 0,
+          "title": "Chiikawa",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Chiikawa",
+            "displaytitle": "<i>Chiikawa</i>",
+            "page_image": "Chiikawa_volume_1_cover.jpg",
+            "wikibase-shortdesc": "Japanese manga series",
+            "wikibase_item": "Q106093778"
+          },
+          "terms": {
+            "description": [
+              "Japanese manga series"
+            ]
+          }
+        },
+        {
+          "pageid": 77585155,
+          "ns": 0,
+          "title": "2025 Los Angeles Dodgers season",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "2025 Los Angeles Dodgers season",
+            "page_image_free": "LA_Dodgers.svg",
+            "wikibase-shortdesc": "Season for the Major League Baseball team the Los Angeles Dodgers",
+            "wikibase_item": "Q130780371"
+          },
+          "terms": {
+            "description": [
+              "136th season of Major League Baseball franchise"
+            ]
+          }
+        },
+        {
+          "pageid": 79389840,
+          "ns": 0,
+          "title": "MLB Tokyo Series 2025",
+          "index": 1,
+          "pageprops": {
+            "page_image": "MLB_Tokyo_Series_2025_logo.png",
+            "wikibase-shortdesc": "Baseball event in Japan",
+            "wikibase_item": "Q130485965"
+          },
+          "terms": {
+            "description": [
+              "baseball event in Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

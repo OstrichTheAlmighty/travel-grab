@@ -1,0 +1,89 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:18.883Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 67672,
+          "ns": 0,
+          "title": "テレビショッピング",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "てれひしよつひんく",
+            "wikibase_item": "Q137944304"
+          }
+        },
+        {
+          "pageid": 369825,
+          "ns": 0,
+          "title": "ダイエー",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たいええ",
+            "page_image_free": "Daiei_logo.svg",
+            "wikibase_item": "Q3543891"
+          },
+          "terms": {
+            "description": [
+              "日本のスーパーマーケットを運営する企業"
+            ]
+          }
+        },
+        {
+          "pageid": 784866,
+          "ns": 0,
+          "title": "サンプラザ (スーパーマーケット・大阪府)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さんふらさ",
+            "page_image_free": "Mikkaichicho-Station_Bus-Terminal.jpg",
+            "wikibase_item": "Q11305947"
+          },
+          "terms": {
+            "description": [
+              "スーパーマーケット・大阪府"
+            ]
+          }
+        },
+        {
+          "pageid": 1154403,
+          "ns": 0,
+          "title": "駐日外国公館の一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちゆうにちかいこくこうかんのいちらん",
+            "page_image_free": "Diplomatic_missions_in_Japan.png",
+            "wikibase_item": "Q5360217"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2282358,
+          "ns": 0,
+          "title": "イオン (店舗ブランド)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いおん",
+            "page_image_free": "Aeon_Makuhari.JPG",
+            "wikibase_item": "Q11285951"
+          },
+          "terms": {
+            "description": [
+              "イオングループが展開する総合スーパーなどの店舗ブランド"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

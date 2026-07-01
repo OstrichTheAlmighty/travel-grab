@@ -1,0 +1,129 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:31.179Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 10937,
+          "ns": 0,
+          "title": "国立国会図書館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こくりつこつかいとしよかん",
+            "kartographer_frames": "1",
+            "page_image_free": "National_diet_library_2009.jpg",
+            "wikibase_item": "Q477675"
+          },
+          "coordinates": [
+            {
+              "lat": 35.678376,
+              "lon": 139.744203,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の国立図書館"
+            ]
+          }
+        },
+        {
+          "pageid": 226616,
+          "ns": 0,
+          "title": "国立公文書館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こくりつこうふんしよかん",
+            "kartographer_frames": "1",
+            "page_image_free": "National_Archives_of_Japan_2.jpg",
+            "wikibase_item": "Q1072875"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69022222,
+              "lon": 139.75383333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の行政執行法人"
+            ]
+          }
+        },
+        {
+          "pageid": 245199,
+          "ns": 0,
+          "title": "公文書館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こうふんしよかん",
+            "wikibase_item": "Q27031009"
+          },
+          "terms": {
+            "description": [
+              "歴史的な史料としての公文書を保管し、公開する機関・施設"
+            ]
+          }
+        },
+        {
+          "pageid": 591045,
+          "ns": 0,
+          "title": "アメリカ国立公文書記録管理局",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あめりかこくりつこうふんしよきろくかんりきよく",
+            "page_image_free": "Seal_of_the_United_States_National_Archives_and_Records_Administration.svg",
+            "wikibase_item": "Q518155"
+          },
+          "coordinates": [
+            {
+              "lat": 38.89278056,
+              "lon": -77.022975,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "アメリカ合衆国政府の書類と歴史的価値のある資料を保存する公文書館、及び連邦政府下の独立機関"
+            ]
+          }
+        },
+        {
+          "pageid": 2705043,
+          "ns": 0,
+          "title": "イギリス国立公文書館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いきりすこくりつこうふんしよかん",
+            "kartographer_frames": "1",
+            "page_image_free": "National_Archives_2007_02_03.JPG",
+            "wikibase_item": "Q392703"
+          },
+          "coordinates": [
+            {
+              "lat": 51.48111111,
+              "lon": -0.27944444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "イギリス政府の文書保管機関"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

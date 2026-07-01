@@ -1,0 +1,90 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:17.192Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 156128,
+          "ns": 0,
+          "title": "ど根性ガエル",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とこんしようかえる",
+            "wikibase_item": "Q4388674"
+          },
+          "terms": {
+            "description": [
+              "吉沢やすみによる日本の連載漫画"
+            ]
+          }
+        },
+        {
+          "pageid": 161601,
+          "ns": 0,
+          "title": "大岡越前 (テレビドラマ)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおおかえちせん",
+            "wikibase_item": "Q8081674"
+          },
+          "terms": {
+            "description": [
+              "TBSで放送された日本のテレビドラマ"
+            ]
+          }
+        },
+        {
+          "pageid": 165248,
+          "ns": 0,
+          "title": "土曜ゴールデン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とようこおるてん",
+            "wikibase_item": "Q11423597"
+          },
+          "terms": {
+            "description": [
+              "テレビ東京の単発特別番組枠"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3378351,
+          "ns": 0,
+          "title": "土屋礼央 レオなるど",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "つちやれおれおなると",
+            "wikibase_item": "Q24870206"
+          },
+          "terms": {
+            "description": [
+              "ニッポン放送のラジオ番組（2016-2019）"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

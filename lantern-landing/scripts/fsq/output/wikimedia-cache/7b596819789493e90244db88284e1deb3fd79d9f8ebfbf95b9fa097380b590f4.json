@@ -1,0 +1,134 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:47.885Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 186349,
+          "ns": 0,
+          "title": "Science Museum Group",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Smg-logo.svg",
+            "wikibase-shortdesc": "Group of British museums",
+            "wikibase_item": "Q7433571"
+          },
+          "terms": {
+            "description": [
+              "group of science museums in the United Kingdom"
+            ]
+          }
+        },
+        {
+          "pageid": 893290,
+          "ns": 0,
+          "title": "Ueno",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Ueno_park.jpg",
+            "wikibase-shortdesc": "District in Taitō ward, Tokyo, Japan",
+            "wikibase_item": "Q576781"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71547,
+              "lon": 139.77402,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "neighborhood in Taitō city, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 2646870,
+          "ns": 0,
+          "title": "National Museum of Nature and Science",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "National Museum Of Nature And Science",
+            "kartographer_frames": "1",
+            "page_image_free": "NMNC01s3200.jpg",
+            "wikibase-shortdesc": "Museum in Tokyo, Japan",
+            "wikibase_item": "Q74940"
+          },
+          "coordinates": [
+            {
+              "lat": 35.715939,
+              "lon": 139.776527,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "National Science Museum in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 2983589,
+          "ns": 0,
+          "title": "Denver Museum of Nature and Science",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Denver_Museum_of_Nature_and_Science_View_from_north_west.jpg",
+            "wikibase-shortdesc": "Museum in Denver, Colorado, U.S.",
+            "wikibase_item": "Q3330052"
+          },
+          "coordinates": [
+            {
+              "lat": 39.7475,
+              "lon": -104.9425,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "non-profit organization in the USA"
+            ]
+          }
+        },
+        {
+          "pageid": 20185878,
+          "ns": 0,
+          "title": "Perot Museum of Nature and Science",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Perot Museum Of Nature and Science",
+            "kartographer_frames": "1",
+            "page_image": "Perot_museum_logo.png",
+            "wikibase-shortdesc": "Science museum, natural history museum in Texas, United States",
+            "wikibase_item": "Q7169478"
+          },
+          "coordinates": [
+            {
+              "lat": 32.78689,
+              "lon": -96.80665,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "nature and science museum in Dallas, Texas"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:41.954Z",
+  "value": {
+    "searchinfo": {
+      "search": "武蔵野市立吉祥寺美術館"
+    },
+    "search": [
+      {
+        "id": "Q124943865",
+        "title": "Q124943865",
+        "pageid": 119119828,
+        "concepturi": "http://www.wikidata.org/entity/Q124943865",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q124943865",
+        "display": {
+          "label": {
+            "value": "Musashino City Kichijoji Art Museum",
+            "language": "en"
+          }
+        },
+        "label": "Musashino City Kichijoji Art Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "武蔵野市立吉祥寺美術館"
+        },
+        "aliases": [
+          "武蔵野市立吉祥寺美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

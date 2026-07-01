@@ -1,0 +1,123 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:04.490Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 50346,
+          "ns": 0,
+          "title": "Museum of Science and Industry (Chicago)",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Museum_of_Science_and_Industry_(Chicago).jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Science and technology museum in Chicago, Illinois",
+            "wikibase_item": "Q1414079"
+          },
+          "coordinates": [
+            {
+              "lat": 41.79055556,
+              "lon": -87.58277778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "museum in Chicago, Illinois, United States"
+            ]
+          }
+        },
+        {
+          "pageid": 69870,
+          "ns": 0,
+          "title": "Science museum",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Science Museum",
+            "page_image_free": "Science_Museum_of_Virginia_20070916.jpg",
+            "wikibase-shortdesc": "Museum focused on science topics",
+            "wikibase_item": "Q588140"
+          },
+          "terms": {
+            "description": [
+              "museum devoted primarily to science"
+            ]
+          }
+        },
+        {
+          "pageid": 152951,
+          "ns": 0,
+          "title": "Science Museum, London",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Science_Museum,_Exhibition_Road_(cropped).jpg",
+            "wikibase-shortdesc": "Museum in Kensington, London",
+            "wikibase_item": "Q674773"
+          },
+          "coordinates": [
+            {
+              "lat": 51.4975,
+              "lon": -0.17472222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "science museum in London, United Kingdom"
+            ]
+          }
+        },
+        {
+          "pageid": 2323711,
+          "ns": 0,
+          "title": "California Science Center",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "California_Science_Center.jpg",
+            "wikibase-shortdesc": "Science museum in Los Angeles, California, USA",
+            "wikibase_item": "Q1067376"
+          },
+          "coordinates": [
+            {
+              "lat": 34.01555556,
+              "lon": -118.28583333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "museum"
+            ]
+          }
+        },
+        {
+          "pageid": 34566959,
+          "ns": 0,
+          "title": "Science Museum",
+          "index": 2,
+          "pageprops": {
+            "disambiguation": "",
+            "wikibase-shortdesc": "Topics referred to by the same term",
+            "wikibase_item": "Q7433573"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

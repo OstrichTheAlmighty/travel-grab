@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:19.645Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 130379,
+          "ns": 0,
+          "title": "東急電鉄",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきゆうてんてつ",
+            "page_image_free": "渋谷ファーストプレイス.jpg",
+            "wikibase_item": "Q80229029"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65525,
+              "lon": 139.69377778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の鉄道会社"
+            ]
+          }
+        },
+        {
+          "pageid": 227240,
+          "ns": 0,
+          "title": "ROOKIES",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "るうきいす",
+            "wikibase_item": "Q54553362"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画作品"
+            ]
+          }
+        },
+        {
+          "pageid": 654243,
+          "ns": 0,
+          "title": "東京一極集中",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきよういつきよくしゆうちゆう",
+            "page_image_free": "Blue_Hour_over_Tokyo_(11753289395).jpg",
+            "wikibase_item": "Q11102932"
+          },
+          "terms": {
+            "description": [
+              "日本において、政治・経済・文化・人口などが東京都および首都圏に集中している状況"
+            ]
+          }
+        },
+        {
+          "pageid": 1855049,
+          "ns": 0,
+          "title": "渋谷駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しふやえき",
+            "kartographer_frames": "1",
+            "page_image_free": "Shibuya_Station_North_2026.jpg",
+            "wikibase_item": "Q428811"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65861111,
+              "lon": 139.70111111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある駅"
+            ]
+          }
+        },
+        {
+          "pageid": 2858000,
+          "ns": 0,
+          "title": "路線バスで寄り道の旅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ろせんはすてよりみちのたひ",
+            "wikibase_item": "Q17215794"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ紀行番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

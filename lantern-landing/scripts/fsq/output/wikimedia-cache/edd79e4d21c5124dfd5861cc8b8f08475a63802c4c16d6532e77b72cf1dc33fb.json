@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:44.435Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 268324,
+          "ns": 0,
+          "title": "A.N.S.W.E.R.",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Pro_Palestine_rally_at_Embarcadero_Center_San_Francisco.jpg",
+            "wikibase-shortdesc": "U.S. anti-war, civil rights coalition",
+            "wikibase_item": "Q595548"
+          },
+          "terms": {
+            "description": [
+              "protest umbrella group"
+            ]
+          }
+        },
+        {
+          "pageid": 846788,
+          "ns": 0,
+          "title": "Answer song",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Answer Song",
+            "wikibase-shortdesc": "Song made in response to another song",
+            "wikibase_item": "Q4770819"
+          },
+          "terms": {
+            "description": [
+              "song made in answer to a previous song, normally by another artist"
+            ]
+          }
+        },
+        {
+          "pageid": 1063385,
+          "ns": 0,
+          "title": "Phrases from The Hitchhiker's Guide to the Galaxy",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Phrases From The Hitchhiker's Guide To The Galaxy",
+            "displaytitle": "Phrases from <i>The Hitchhiker's Guide to the Galaxy</i>",
+            "wikibase-shortdesc": "Glossary of Douglas Adams' phrases",
+            "wikibase_item": "Q1879872"
+          },
+          "terms": {
+            "description": [
+              "explanation of phrases from the book by Douglas Adams"
+            ]
+          }
+        },
+        {
+          "pageid": 1462185,
+          "ns": 0,
+          "title": "Answers.com",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Answers.Com",
+            "wikibase-shortdesc": "Q&A site founded in 1999",
+            "wikibase_item": "Q2915210"
+          },
+          "terms": {
+            "description": [
+              "question-and-answer website"
+            ]
+          }
+        },
+        {
+          "pageid": 21549597,
+          "ns": 0,
+          "title": "Answer",
+          "index": 1,
+          "pageprops": {
+            "disambiguation": "",
+            "wikibase-shortdesc": "Topics referred to by the same term",
+            "wikibase_item": "Q570443"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

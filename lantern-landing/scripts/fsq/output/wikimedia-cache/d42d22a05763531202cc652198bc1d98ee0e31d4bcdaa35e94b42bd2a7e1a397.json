@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:00.024Z",
+  "value": {
+    "searchinfo": {
+      "search": "木材・合板博物館"
+    },
+    "search": [
+      {
+        "id": "Q11518627",
+        "title": "Q11518627",
+        "pageid": 12658472,
+        "concepturi": "http://www.wikidata.org/entity/Q11518627",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11518627",
+        "display": {
+          "label": {
+            "value": "Wood & Plywood Museum",
+            "language": "en"
+          }
+        },
+        "label": "Wood & Plywood Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "木材・合板博物館"
+        },
+        "aliases": [
+          "木材・合板博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

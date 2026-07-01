@@ -1,0 +1,167 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:41.229Z",
+  "value": {
+    "searchinfo": {
+      "search": "庚申塔道標"
+    },
+    "search": [
+      {
+        "id": "Q83460278",
+        "title": "Q83460278",
+        "pageid": 82776309,
+        "concepturi": "http://www.wikidata.org/entity/Q83460278",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q83460278",
+        "display": {
+          "label": {
+            "value": "Kōshin-tō Dōhyō (Goryo-jinja)",
+            "language": "en"
+          }
+        },
+        "label": "Kōshin-tō Dōhyō (Goryo-jinja)",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "庚申塔道標（御霊神社）"
+        },
+        "aliases": [
+          "庚申塔道標（御霊神社）"
+        ]
+      },
+      {
+        "id": "Q85175736",
+        "title": "Q85175736",
+        "pageid": 84465801,
+        "concepturi": "http://www.wikidata.org/entity/Q85175736",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q85175736",
+        "display": {
+          "label": {
+            "value": "Kōshin-tō-Dōhyō (Saba-jinja)",
+            "language": "en"
+          }
+        },
+        "label": "Kōshin-tō-Dōhyō (Saba-jinja)",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "庚申塔道標（左馬神社）"
+        },
+        "aliases": [
+          "庚申塔道標（左馬神社）"
+        ]
+      },
+      {
+        "id": "Q81947026",
+        "title": "Q81947026",
+        "pageid": 81305065,
+        "concepturi": "http://www.wikidata.org/entity/Q81947026",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q81947026",
+        "display": {
+          "label": {
+            "value": "Kōshin-tō Dōhyō (Kosugaya, Sakae-ku, Yokohama)",
+            "language": "en"
+          }
+        },
+        "label": "Kōshin-tō Dōhyō (Kosugaya, Sakae-ku, Yokohama)",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "庚申塔道標（横浜市栄区小菅ケ谷）"
+        },
+        "aliases": [
+          "庚申塔道標（横浜市栄区小菅ケ谷）"
+        ]
+      },
+      {
+        "id": "Q83267754",
+        "title": "Q83267754",
+        "pageid": 82592242,
+        "concepturi": "http://www.wikidata.org/entity/Q83267754",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q83267754",
+        "display": {
+          "label": {
+            "value": "Kōshin-tō Dōhyō (Iriya-higashi, Zama)",
+            "language": "en"
+          }
+        },
+        "label": "Kōshin-tō Dōhyō (Iriya-higashi, Zama)",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "庚申塔道標（座間市入谷東）"
+        },
+        "aliases": [
+          "庚申塔道標（座間市入谷東）"
+        ]
+      },
+      {
+        "id": "Q98918689",
+        "title": "Q98918689",
+        "pageid": 97055046,
+        "concepturi": "http://www.wikidata.org/entity/Q98918689",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q98918689",
+        "display": {
+          "label": {
+            "value": "庚申塔道標(横浜市港北区大倉山)",
+            "language": "ja"
+          }
+        },
+        "label": "庚申塔道標(横浜市港北区大倉山)",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "庚申塔道標(横浜市港北区大倉山)"
+        }
+      },
+      {
+        "id": "Q91968249",
+        "title": "Q91968249",
+        "pageid": 91145211,
+        "concepturi": "http://www.wikidata.org/entity/Q91968249",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q91968249",
+        "display": {
+          "label": {
+            "value": "Kōshin-tō Dōhyō (Imjuku-Minami-cho, Asahi-ku, Yokohama)",
+            "language": "en"
+          }
+        },
+        "label": "Kōshin-tō Dōhyō (Imjuku-Minami-cho, Asahi-ku, Yokohama)",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "庚申塔道標（横浜市旭区今宿南町）"
+        },
+        "aliases": [
+          "庚申塔道標（横浜市旭区今宿南町）"
+        ]
+      },
+      {
+        "id": "Q104774507",
+        "title": "Q104774507",
+        "pageid": 100195353,
+        "concepturi": "http://www.wikidata.org/entity/Q104774507",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q104774507",
+        "display": {
+          "label": {
+            "value": "庚申塔道標（横浜市旭区万騎が原）",
+            "language": "ja"
+          }
+        },
+        "label": "庚申塔道標（横浜市旭区万騎が原）",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "庚申塔道標（横浜市旭区万騎が原）"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

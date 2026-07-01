@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:46.661Z",
+  "value": {
+    "searchinfo": {
+      "search": "トゥーンタウン"
+    },
+    "search": [
+      {
+        "id": "Q2916668",
+        "title": "Q2916668",
+        "pageid": 2790964,
+        "concepturi": "http://www.wikidata.org/entity/Q2916668",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2916668",
+        "display": {
+          "label": {
+            "value": "Mickey's Toontown",
+            "language": "en"
+          },
+          "description": {
+            "value": "Themed area in Disney theme parks.",
+            "language": "en"
+          }
+        },
+        "label": "Mickey's Toontown",
+        "description": "Themed area in Disney theme parks.",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "トゥーンタウン"
+        },
+        "aliases": [
+          "トゥーンタウン"
+        ]
+      },
+      {
+        "id": "Q2441260",
+        "title": "Q2441260",
+        "pageid": 2358005,
+        "concepturi": "http://www.wikidata.org/entity/Q2441260",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2441260",
+        "display": {
+          "label": {
+            "value": "Toontown Online",
+            "language": "en"
+          },
+          "description": {
+            "value": "2003 video game",
+            "language": "en"
+          }
+        },
+        "label": "Toontown Online",
+        "description": "2003 video game",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "トゥーンタウン・オンライン"
+        },
+        "aliases": [
+          "トゥーンタウン・オンライン"
+        ]
+      },
+      {
+        "id": "Q7824157",
+        "title": "Q7824157",
+        "pageid": 7757083,
+        "concepturi": "http://www.wikidata.org/entity/Q7824157",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q7824157",
+        "display": {
+          "label": {
+            "value": "Toontown",
+            "language": "en"
+          },
+          "description": {
+            "value": "Wikimedia disambiguation page",
+            "language": "en"
+          }
+        },
+        "label": "Toontown",
+        "description": "Wikimedia disambiguation page",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "トゥーンタウン"
+        },
+        "aliases": [
+          "トゥーンタウン"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

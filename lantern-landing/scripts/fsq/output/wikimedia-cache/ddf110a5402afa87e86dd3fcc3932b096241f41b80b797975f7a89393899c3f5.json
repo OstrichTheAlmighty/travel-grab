@@ -1,0 +1,87 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:05.324Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1433406,
+          "ns": 0,
+          "title": "レッスルキングダム (プロレス興行)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "れつするきんくたむ",
+            "wikibase_item": "Q123347712"
+          },
+          "terms": {
+            "description": [
+              "新日本プロレスが毎年開催するプロレス興行"
+            ]
+          }
+        },
+        {
+          "pageid": 1937362,
+          "ns": 0,
+          "title": "ローズキングダム",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ろおすきんくたむ",
+            "page_image_free": "Rose-Kingdom20100418.jpg",
+            "wikibase_item": "Q11350927"
+          },
+          "terms": {
+            "description": [
+              "日本の競走馬"
+            ]
+          }
+        },
+        {
+          "pageid": 2012315,
+          "ns": 0,
+          "title": "キングダム ハーツの登場キャラクター",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きんくたむはあつのとうしようきやらくたあ",
+            "wikibase_item": "Q2312991"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3005950,
+          "ns": 0,
+          "title": "ワンス・アポン・ア・タイム (ディズニーパーク)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "わんすあほんあたいむ",
+            "wikibase_item": "Q20983102"
+          }
+        },
+        {
+          "pageid": 4572151,
+          "ns": 0,
+          "title": "ワールド・オブ・フローズン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "わああるとおふふろおすん",
+            "page_image_free": "World_of_Frozen,_Hong_Kong_Disneyland_2023.jpg",
+            "wikibase_item": "Q65044325"
+          },
+          "terms": {
+            "description": [
+              "世界のディスニーパークのテーマランド"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

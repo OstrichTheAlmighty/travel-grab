@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:46:00.726Z",
+  "value": {
+    "searchinfo": {
+      "search": "ミシシッピニオイガメ"
+    },
+    "search": [
+      {
+        "id": "Q674891",
+        "title": "Q674891",
+        "pageid": 635697,
+        "concepturi": "http://www.wikidata.org/entity/Q674891",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q674891",
+        "display": {
+          "label": {
+            "value": "Sternotherus odoratus",
+            "language": "en"
+          },
+          "description": {
+            "value": "species of reptile",
+            "language": "en"
+          }
+        },
+        "label": "Sternotherus odoratus",
+        "description": "species of reptile",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ミシシッピニオイガメ"
+        },
+        "aliases": [
+          "ミシシッピニオイガメ"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:52.525Z",
+  "value": {
+    "searchinfo": {
+      "search": "Tokyo Toy Museum"
+    },
+    "search": [
+      {
+        "id": "Q11524018",
+        "title": "Q11524018",
+        "pageid": 12663888,
+        "concepturi": "http://www.wikidata.org/entity/Q11524018",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524018",
+        "display": {
+          "label": {
+            "value": "Tokyo Toy Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Toy Museum",
+        "description": "museum in Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Toy Museum"
+        }
+      },
+      {
+        "id": "Q112027981",
+        "title": "Q112027981",
+        "pageid": 106939268,
+        "concepturi": "http://www.wikidata.org/entity/Q112027981",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q112027981",
+        "display": {
+          "label": {
+            "value": "Tokyo Toy Museum′s Activities for Understanding the Benefits and Significance of Wood-in-lifestyle with Relation to the Development of a Sound Material-Cycle Society",
+            "language": "en"
+          },
+          "description": {
+            "value": "scientific article published on 15 January 2019",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Toy Museum′s Activities for Understanding the Benefits and Significance of Wood-in-lifestyle with Relation to the Development of a Sound Material-Cycle Society",
+        "description": "scientific article published on 15 January 2019",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Toy Museum′s Activities for Understanding the Benefits and Significance of Wood-in-lifestyle with Relation to the Development of a Sound Material-Cycle Society"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

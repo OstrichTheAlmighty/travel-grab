@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:14.615Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 499887,
+          "ns": 0,
+          "title": "Pentax",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "PENTAX_head_office_tokyo_2009.JPG",
+            "wikibase-shortdesc": "Japanese optics company and brand owned by Ricoh",
+            "wikibase_item": "Q503673"
+          },
+          "terms": {
+            "description": [
+              "company"
+            ]
+          }
+        },
+        {
+          "pageid": 2152331,
+          "ns": 0,
+          "title": "Bronica",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Zenza_Bronica_ETRS_with_Bronica_Zenzanon_75mm_f2.8_EII_lens_-_(1).jpg",
+            "wikibase-shortdesc": "Japanese camera manufacturer",
+            "wikibase_item": "Q191313"
+          },
+          "terms": {
+            "description": [
+              "Japanese camera manufacturer"
+            ]
+          }
+        },
+        {
+          "pageid": 3193137,
+          "ns": 0,
+          "title": "History of the single-lens reflex camera",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "History Of The Single-Lens Reflex Camera",
+            "page_image_free": "SLR_cross_section.svg",
+            "wikibase-shortdesc": "Aspect of photography history",
+            "wikibase_item": "Q5870918"
+          },
+          "terms": {
+            "description": [
+              "aspect of history"
+            ]
+          }
+        },
+        {
+          "pageid": 18782297,
+          "ns": 0,
+          "title": "Instax",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Fuji_instax_Wide_300.jpg",
+            "wikibase-shortdesc": "Brand of instant cameras by Fujifilm",
+            "wikibase_item": "Q11287394"
+          },
+          "terms": {
+            "description": [
+              "brand of instant still cameras"
+            ]
+          }
+        },
+        {
+          "pageid": 71962689,
+          "ns": 0,
+          "title": "List of photographic film formats",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Film Format",
+            "page_image_free": "Sizes_of_common_film_formats.svg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q115519494"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

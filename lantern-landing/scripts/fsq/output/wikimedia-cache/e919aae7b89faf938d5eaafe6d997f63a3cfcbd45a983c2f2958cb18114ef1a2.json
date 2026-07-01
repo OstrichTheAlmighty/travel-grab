@@ -1,0 +1,88 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:41.331Z",
+  "value": {
+    "searchinfo": {
+      "search": "上野恩賜公園"
+    },
+    "search": [
+      {
+        "id": "Q746216",
+        "title": "Q746216",
+        "pageid": 702066,
+        "concepturi": "http://www.wikidata.org/entity/Q746216",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q746216",
+        "display": {
+          "label": {
+            "value": "Ueno Imperial Grant Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Ueno Imperial Grant Park",
+        "description": "park in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "上野恩賜公園"
+        },
+        "aliases": [
+          "上野恩賜公園"
+        ]
+      },
+      {
+        "id": "Q49573001",
+        "title": "Q49573001",
+        "pageid": 50575271,
+        "concepturi": "http://www.wikidata.org/entity/Q49573001",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q49573001",
+        "display": {
+          "label": {
+            "value": "Ueno Onshi Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Ueno Onshi Park",
+        "description": "park in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "上野恩賜公園"
+        },
+        "aliases": [
+          "上野恩賜公園"
+        ]
+      },
+      {
+        "id": "Q27477386",
+        "title": "Q27477386",
+        "pageid": 29200636,
+        "concepturi": "http://www.wikidata.org/entity/Q27477386",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q27477386",
+        "display": {
+          "label": {
+            "value": "上野恩賜公園管理所",
+            "language": "ja"
+          }
+        },
+        "label": "上野恩賜公園管理所",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "上野恩賜公園管理所"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

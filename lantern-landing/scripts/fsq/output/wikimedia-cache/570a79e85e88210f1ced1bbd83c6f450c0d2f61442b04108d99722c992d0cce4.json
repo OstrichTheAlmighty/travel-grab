@@ -1,0 +1,132 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:13:53.144Z",
+  "value": {
+    "searchinfo": {
+      "search": "Tokyo DisneySea"
+    },
+    "search": [
+      {
+        "id": "Q1202341",
+        "title": "Q1202341",
+        "pageid": 1145200,
+        "concepturi": "http://www.wikidata.org/entity/Q1202341",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1202341",
+        "display": {
+          "label": {
+            "value": "Tokyo DisneySea",
+            "language": "en"
+          },
+          "description": {
+            "value": "theme park in Japan, owned by The Oriental Land Company",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo DisneySea",
+        "description": "theme park in Japan, owned by The Oriental Land Company",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo DisneySea"
+        }
+      },
+      {
+        "id": "Q5368690",
+        "title": "Q5368690",
+        "pageid": 5135035,
+        "concepturi": "http://www.wikidata.org/entity/Q5368690",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5368690",
+        "display": {
+          "label": {
+            "value": "Tokyo DisneySea Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "Disney Resort Line station in Urayasu, Chiba prefecture, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo DisneySea Station",
+        "description": "Disney Resort Line station in Urayasu, Chiba prefecture, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo DisneySea Station"
+        }
+      },
+      {
+        "id": "Q195432",
+        "title": "Q195432",
+        "pageid": 193290,
+        "concepturi": "http://www.wikidata.org/entity/Q195432",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q195432",
+        "display": {
+          "label": {
+            "value": "Tokyo DisneySea Hotel MiraCosta",
+            "language": "en"
+          },
+          "description": {
+            "value": "hotel",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo DisneySea Hotel MiraCosta",
+        "description": "hotel",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo DisneySea Hotel MiraCosta"
+        }
+      },
+      {
+        "id": "Q22117667",
+        "title": "Q22117667",
+        "pageid": 24148177,
+        "concepturi": "http://www.wikidata.org/entity/Q22117667",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q22117667",
+        "display": {
+          "label": {
+            "value": "Tokyo DisneySea 15th Anniversary \"The Year of Wishes\"",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo DisneySea 15th Anniversary \"The Year of Wishes\"",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo DisneySea 15th Anniversary \"The Year of Wishes\""
+        }
+      },
+      {
+        "id": "Q135829148",
+        "title": "Q135829148",
+        "pageid": 129561579,
+        "concepturi": "http://www.wikidata.org/entity/Q135829148",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q135829148",
+        "display": {
+          "label": {
+            "value": "Tokyo DisneySea - Soccer Player Mickey Mouse [Num384773]",
+            "language": "en"
+          },
+          "description": {
+            "value": "Souvenir medallions › Elongated coins - Roller milled - Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo DisneySea - Soccer Player Mickey Mouse [Num384773]",
+        "description": "Souvenir medallions › Elongated coins - Roller milled - Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo DisneySea - Soccer Player Mickey Mouse [Num384773]"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:25.988Z",
+  "value": {
+    "searchinfo": {
+      "search": "NHK放送博物館"
+    },
+    "search": [
+      {
+        "id": "Q11235312",
+        "title": "Q11235312",
+        "pageid": 12384996,
+        "concepturi": "http://www.wikidata.org/entity/Q11235312",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11235312",
+        "display": {
+          "label": {
+            "value": "NHK Museum of Broadcasting",
+            "language": "en"
+          }
+        },
+        "label": "NHK Museum of Broadcasting",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "NHK放送博物館"
+        },
+        "aliases": [
+          "NHK放送博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

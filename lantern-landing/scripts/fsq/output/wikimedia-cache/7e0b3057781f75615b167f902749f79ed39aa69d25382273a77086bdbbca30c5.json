@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:26.099Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 25508,
+          "ns": 0,
+          "title": "沼津港",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ぬまつこう",
+            "kartographer_frames": "1",
+            "page_image_free": "Aerial_photograph_of_port_of_Numazu.jpg",
+            "wikibase_item": "Q11554534"
+          },
+          "coordinates": [
+            {
+              "lat": 35.08189,
+              "lon": 138.85631,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡県沼津市の港"
+            ]
+          }
+        },
+        {
+          "pageid": 25603,
+          "ns": 0,
+          "title": "刺身",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さしみ",
+            "page_image_free": "241109_Shigaraki_ware_Koga_Shiga_pref_Japan01s3.jpg",
+            "wikibase_item": "Q190715"
+          },
+          "terms": {
+            "description": [
+              "生食料理"
+            ]
+          }
+        },
+        {
+          "pageid": 316913,
+          "ns": 0,
+          "title": "誠文堂新光社",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "せいふんとうしんこうしや",
+            "wikibase_item": "Q11631551"
+          },
+          "terms": {
+            "description": [
+              "東京都文京区に本社を置く日本の出版社"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3968950,
+          "ns": 0,
+          "title": "宮沢賢治の食卓",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みやさわけんしのしよくたく",
+            "wikibase_item": "Q65262109"
+          }
+        }
+      ]
+    }
+  }
+}

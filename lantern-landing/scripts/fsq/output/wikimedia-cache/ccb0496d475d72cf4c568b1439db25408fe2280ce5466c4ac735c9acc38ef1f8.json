@@ -1,0 +1,130 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:03.347Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 22528,
+          "ns": 0,
+          "title": "伏見城",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふしみしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "FushimiCastle.JPG",
+            "wikibase_item": "Q1196273"
+          },
+          "coordinates": [
+            {
+              "lat": 34.939501,
+              "lon": 135.77686,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の城"
+            ]
+          }
+        },
+        {
+          "pageid": 22636,
+          "ns": 0,
+          "title": "名古屋城",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "なこやしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Nagoya_Castle_7.jpg",
+            "wikibase_item": "Q648629"
+          },
+          "coordinates": [
+            {
+              "lat": 35.18549167,
+              "lon": 136.89908611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県の城"
+            ]
+          }
+        },
+        {
+          "pageid": 154451,
+          "ns": 0,
+          "title": "福山城 (備後国)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふくやましよう ひんこ",
+            "page_image_free": "Fukuyamajyou7055.JPG",
+            "wikibase_item": "Q1071869"
+          },
+          "coordinates": [
+            {
+              "lat": 34.49103889,
+              "lon": 133.36112222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "広島県福山市にあった城"
+            ]
+          }
+        },
+        {
+          "pageid": 343086,
+          "ns": 0,
+          "title": "和歌山城",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "わかやましよう",
+            "kartographer_frames": "1",
+            "page_image_free": "和歌山城_天守閣（2024年）.jpg",
+            "wikibase_item": "Q1151269"
+          },
+          "coordinates": [
+            {
+              "lat": 34.22762778,
+              "lon": 135.17162222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "和歌山市の城"
+            ]
+          }
+        },
+        {
+          "pageid": 1221617,
+          "ns": 0,
+          "title": "立花宗茂",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たちはな むねしけ",
+            "page_image_free": "Tachibana_Muneshige.jpg",
+            "wikibase_item": "Q1071770"
+          },
+          "terms": {
+            "description": [
+              "日本の安土桃山～江戸時代の武将、大名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

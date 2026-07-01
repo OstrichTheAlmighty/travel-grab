@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:37.621Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 22444,
+          "ns": 0,
+          "title": "自由の女神像",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しゆうのめかみそう",
+            "page_image_free": "The_small_Statue_of_Liberty_on_the_river_Seine_in_Paris,_June_2002.jpg",
+            "wikibase_item": "Q2714997"
+          },
+          "terms": {
+            "description": [
+              "ローマ神話の自由の女神リベルタスをかたどった立像"
+            ]
+          }
+        },
+        {
+          "pageid": 153269,
+          "ns": 0,
+          "title": "自由の女神像 (ニューヨーク)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しゆうのめかみそう",
+            "page_image_free": "Front_view_of_Statue_of_Liberty_(cropped).jpg",
+            "wikibase_item": "Q9202"
+          },
+          "coordinates": [
+            {
+              "lat": 40.68916667,
+              "lon": -74.04444444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "ニューヨークのリバティ島にある像"
+            ]
+          }
+        },
+        {
+          "pageid": 217480,
+          "ns": 0,
+          "title": "○×クイズ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "まるはつくいす",
+            "wikibase_item": "Q11256192"
+          },
+          "terms": {
+            "description": [
+              "二者択一のクイズの形式"
+            ]
+          }
+        },
+        {
+          "pageid": 507175,
+          "ns": 0,
+          "title": "ニューヨーク",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にゆうよおく",
+            "page_image_free": "NYC_Montage_2011.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q60"
+          },
+          "terms": {
+            "description": [
+              "アメリカ合衆国ニューヨーク州の都市"
+            ]
+          }
+        },
+        {
+          "pageid": 1057745,
+          "ns": 0,
+          "title": "リバティ島",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "りはていとう",
+            "kartographer_frames": "1",
+            "page_image_free": "Liberty_Island.jpg",
+            "wikibase_item": "Q319821"
+          },
+          "coordinates": [
+            {
+              "lat": 40.68888889,
+              "lon": -74.04444444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "ニューヨークの島"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

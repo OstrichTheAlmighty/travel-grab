@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:31.869Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 14222,
+          "ns": 0,
+          "title": "神社一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しんしやいちらん",
+            "notoc": "",
+            "wikibase_item": "Q2517815"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 16031,
+          "ns": 0,
+          "title": "中村区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "なかむらく",
+            "page_image_free": "Nagoya_Station_at_night01.jpg",
+            "wikibase_item": "Q780521"
+          },
+          "coordinates": [
+            {
+              "lat": 35.17666667,
+              "lon": 136.86805556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県名古屋市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 71124,
+          "ns": 0,
+          "title": "八幡市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "やわたし",
+            "kartographer_frames": "1",
+            "page_image_free": "Iwashimizu_hachimangu02s3200.jpg",
+            "wikibase_item": "Q260923"
+          },
+          "coordinates": [
+            {
+              "lat": 34.87556,
+              "lon": 135.70761,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都府の市"
+            ]
+          }
+        },
+        {
+          "pageid": 175451,
+          "ns": 0,
+          "title": "八幡宮",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はちまんくう",
+            "page_image_free": "Usa_Shrine_Nanchu_Romon.JPG",
+            "wikibase_item": "Q11390939"
+          },
+          "terms": {
+            "description": [
+              "日本の八幡神を祭神とする神社"
+            ]
+          }
+        },
+        {
+          "pageid": 3781270,
+          "ns": 0,
+          "title": "中村八幡神社",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "なかむらはちまんしんしや",
+            "disambiguation": "",
+            "wikibase_item": "Q55526619"
+          }
+        }
+      ]
+    }
+  }
+}

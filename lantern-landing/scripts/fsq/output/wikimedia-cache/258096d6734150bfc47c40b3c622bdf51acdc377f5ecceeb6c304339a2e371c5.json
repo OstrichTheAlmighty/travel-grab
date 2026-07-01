@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:16.303Z",
+  "value": {
+    "searchinfo": {
+      "search": "品川歴史館"
+    },
+    "search": [
+      {
+        "id": "Q11418382",
+        "title": "Q11418382",
+        "pageid": 12557139,
+        "concepturi": "http://www.wikidata.org/entity/Q11418382",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11418382",
+        "display": {
+          "label": {
+            "value": "Shinagawa Historical Museum",
+            "language": "en"
+          }
+        },
+        "label": "Shinagawa Historical Museum",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "品川歴史館"
+        },
+        "aliases": [
+          "品川歴史館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

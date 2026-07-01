@@ -1,0 +1,124 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:27.703Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 175317,
+          "ns": 0,
+          "title": "Forty-seven rōnin",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Forty-seven rōnin",
+            "displaytitle": "Forty-seven <i>rōnin</i>",
+            "kartographer_frames": "1",
+            "page_image_free": "Reward_for_47_Ronin_by_Yasuda_Raishu_(Homma_Museum_of_Art).jpg",
+            "wikibase-shortdesc": "Samurai battle on 31 January 1703",
+            "wikibase_item": "Q822472"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69333333,
+              "lon": 139.79430556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "18th century samurai battle"
+            ]
+          }
+        },
+        {
+          "pageid": 376979,
+          "ns": 0,
+          "title": "Yamanote Line",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Yamanote-Line-E235.jpg",
+            "wikibase-shortdesc": "Railway loop line in Tokyo, Japan",
+            "wikibase_item": "Q693036"
+          },
+          "terms": {
+            "description": [
+              "railway loop line in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 15761679,
+          "ns": 0,
+          "title": "Tōgū Palace",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Togu Palace",
+            "kartographer_frames": "1",
+            "wikibase-shortdesc": "Any residence of the imperial crown prince of Japan",
+            "wikibase_item": "Q1036008"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67805556,
+              "lon": 139.72472222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "any residence of the Imperial Crown prince of Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 40359504,
+          "ns": 0,
+          "title": "Hanawa Hokiichi",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Hanawa, Hokiichi",
+            "page_image_free": "Hanawa_Hokiichi_(Iwaki).jpg",
+            "wikibase-shortdesc": "Japanese philosopher",
+            "wikibase_item": "Q6537362"
+          },
+          "terms": {
+            "description": [
+              "Japanese philosopher (1746-1821)"
+            ]
+          }
+        },
+        {
+          "pageid": 81299882,
+          "ns": 0,
+          "title": "MoN Takanawa",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "wikibase-shortdesc": "Museum in Minato, Tokyo, Japan",
+            "wikibase_item": "Q136463408"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63969,
+              "lon": 139.741829,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "museum in Minato, Tokyo, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

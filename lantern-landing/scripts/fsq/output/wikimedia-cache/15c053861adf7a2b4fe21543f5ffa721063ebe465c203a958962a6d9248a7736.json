@@ -1,0 +1,108 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:41.196Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1954564,
+          "ns": 0,
+          "title": "Mako Komuro",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Komuro, Mako",
+            "page_image_free": "Mako_Komuro,_formely_Princess_Mako_of_Akishino_(cropped).jpg",
+            "wikibase-shortdesc": "Former Japanese princess (born 1991)",
+            "wikibase_item": "Q509565"
+          },
+          "terms": {
+            "description": [
+              "Japanese princess; eldest child of Fumihito, Crown Prince of Japan, and Kiko, Crown Princess of Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 1958732,
+          "ns": 0,
+          "title": "Ghibli Museum",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Ghibli_Museum_2024.JPG",
+            "wikibase-shortdesc": "Art museum in Mitaka, Tokyo, Japan",
+            "wikibase_item": "Q947907"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69623333,
+              "lon": 139.57043056,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "art museum in Mitaka, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 13523392,
+          "ns": 0,
+          "title": "Teikō Shiotani",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Shiotani, Teiko",
+            "page_image_free": "Portrait_of_Teikō_Shiotani.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "Japanese photographer (1899–1988)",
+            "wikibase_item": "Q5620694"
+          },
+          "terms": {
+            "description": [
+              "Japanese photographer (1899–1988)"
+            ]
+          }
+        },
+        {
+          "pageid": 15656347,
+          "ns": 0,
+          "title": "Cristina García Rodero",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Garcia Rodero, Cristina",
+            "page_image_free": "Cristina_García_Rodero.jpg",
+            "wikibase-shortdesc": "Spanish photographer",
+            "wikibase_item": "Q2423760"
+          },
+          "terms": {
+            "description": [
+              "Spanish photographer (1949- )"
+            ]
+          }
+        },
+        {
+          "pageid": 47408245,
+          "ns": 0,
+          "title": "Shōzō Uchii",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Uchii Shozo",
+            "wikibase-shortdesc": "Japanese architect (1933–2002)",
+            "wikibase_item": "Q11393855"
+          },
+          "terms": {
+            "description": [
+              "Japanese architect (1933-2002)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

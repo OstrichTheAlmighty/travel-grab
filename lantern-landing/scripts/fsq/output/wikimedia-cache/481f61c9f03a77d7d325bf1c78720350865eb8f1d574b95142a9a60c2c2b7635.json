@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:24.883Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 37114,
+          "ns": 0,
+          "title": "多摩市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たまし",
+            "kartographer_frames": "1",
+            "page_image_free": "2024_Sanrio_Puroland_(1).jpg",
+            "wikibase_item": "Q213263"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63694,
+              "lon": 139.44628,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の市"
+            ]
+          }
+        },
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 251981,
+          "ns": 0,
+          "title": "同潤会アパート",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうしゆんかいあはあと",
+            "page_image_free": "Aoyama_Dojunkai_Apartment_building.JPG",
+            "wikibase_item": "Q11414670"
+          },
+          "terms": {
+            "description": [
+              "かつての日本の集合住宅"
+            ]
+          }
+        },
+        {
+          "pageid": 259137,
+          "ns": 0,
+          "title": "同潤会",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうしゆんかい",
+            "wikibase_item": "Q5321256"
+          },
+          "terms": {
+            "description": [
+              "かつての日本の財団法人"
+            ]
+          }
+        },
+        {
+          "pageid": 1746573,
+          "ns": 0,
+          "title": "晴海団地",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はるみたんち",
+            "page_image_free": "Harumi_Apartment_2_-_UR_Museum_of_Urban_and_Lifestyle_Design.jpg",
+            "wikibase_item": "Q11514740"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区にあった団地"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

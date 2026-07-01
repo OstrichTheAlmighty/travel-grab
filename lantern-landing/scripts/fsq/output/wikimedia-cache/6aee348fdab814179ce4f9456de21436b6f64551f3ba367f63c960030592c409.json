@@ -1,0 +1,65 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:03.339Z",
+  "value": {
+    "searchinfo": {
+      "search": "ファンタジースプリングス"
+    },
+    "search": [
+      {
+        "id": "Q65046459",
+        "title": "Q65046459",
+        "pageid": 64688155,
+        "concepturi": "http://www.wikidata.org/entity/Q65046459",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q65046459",
+        "display": {
+          "label": {
+            "value": "Fantasy Springs",
+            "language": "en"
+          },
+          "description": {
+            "value": "part of Tokyo DisneySea, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Fantasy Springs",
+        "description": "part of Tokyo DisneySea, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ファンタジースプリングス"
+        },
+        "aliases": [
+          "ファンタジースプリングス"
+        ]
+      },
+      {
+        "id": "Q79726179",
+        "title": "Q79726179",
+        "pageid": 79138852,
+        "concepturi": "http://www.wikidata.org/entity/Q79726179",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q79726179",
+        "display": {
+          "label": {
+            "value": "ファンタジースプリングス",
+            "language": "ja"
+          },
+          "description": {
+            "value": "Wikimedia disambiguation page",
+            "language": "en"
+          }
+        },
+        "label": "ファンタジースプリングス",
+        "description": "Wikimedia disambiguation page",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ファンタジースプリングス"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

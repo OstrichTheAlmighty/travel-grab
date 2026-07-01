@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:30.397Z",
+  "value": {
+    "searchinfo": {
+      "search": "思い出横丁"
+    },
+    "search": [
+      {
+        "id": "Q11501868",
+        "title": "Q11501868",
+        "pageid": 12641552,
+        "concepturi": "http://www.wikidata.org/entity/Q11501868",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11501868",
+        "display": {
+          "label": {
+            "value": "Omoide Yokochō",
+            "language": "en"
+          }
+        },
+        "label": "Omoide Yokochō",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "思い出横丁"
+        },
+        "aliases": [
+          "思い出横丁"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

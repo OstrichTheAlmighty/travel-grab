@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:35.078Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 154416,
+          "ns": 0,
+          "title": "ジョヴァンニ・バッティスタ・シドッティ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しとつてい しよはんに はつていすた",
+            "page_image_free": "Bild_von_Sidotti-Denkmal.jpg",
+            "wikibase_item": "Q326973"
+          },
+          "terms": {
+            "description": [
+              "イタリア人のカトリック司祭"
+            ]
+          }
+        },
+        {
+          "pageid": 563289,
+          "ns": 0,
+          "title": "ジュゼッペ・キアラ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きあら しゆせつへ",
+            "wikibase_item": "Q11310330"
+          },
+          "terms": {
+            "description": [
+              "イタリア出身のイエズス会宣教師"
+            ]
+          }
+        },
+        {
+          "pageid": 3318164,
+          "ns": 0,
+          "title": "切支丹屋敷",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きりしたんやしき",
+            "page_image_free": "Edo-Kirishitansaka-1771.jpg",
+            "wikibase_item": "Q24867269"
+          },
+          "terms": {
+            "description": [
+              "江戸小石川にあったキリシタンを収容する屋敷"
+            ]
+          }
+        },
+        {
+          "pageid": 3380462,
+          "ns": 0,
+          "title": "文京区立茗台中学校",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふんきようくりつめいたいちゆう",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q23985627"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71324,
+              "lon": 139.74089,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある中学校"
+            ]
+          }
+        },
+        {
+          "pageid": 3387490,
+          "ns": 0,
+          "title": "クロドヴェオ・タシナリ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "くろとへお たしなり",
+            "wikibase_item": "Q24844789"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:33.289Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 30057,
+          "ns": 0,
+          "title": "Tokyo",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Capital and most populous city in Japan",
+            "wikibase_item": "Q1490"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68972222,
+              "lon": 139.69222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "capital and largest city of Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 1743486,
+          "ns": 0,
+          "title": "Tokyo National Museum",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_National_Museum,_Honkan_2010.jpg",
+            "wikibase-shortdesc": "Art museum in Tokyo, Japan",
+            "wikibase_item": "Q653433"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7189,
+              "lon": 139.7764,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "art museum in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 2646870,
+          "ns": 0,
+          "title": "National Museum of Nature and Science",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "National Museum Of Nature And Science",
+            "kartographer_frames": "1",
+            "page_image_free": "NMNC01s3200.jpg",
+            "wikibase-shortdesc": "Museum in Tokyo, Japan",
+            "wikibase_item": "Q74940"
+          },
+          "coordinates": [
+            {
+              "lat": 35.715939,
+              "lon": 139.776527,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "National Science Museum in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 8093724,
+          "ns": 0,
+          "title": "National Museum of Western Art",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "National Museum Of Western Art",
+            "kartographer_frames": "1",
+            "page_image_free": "National_museum_of_western_art05s3200.jpg",
+            "wikibase-shortdesc": "Art museum in Tokyo, Japan",
+            "wikibase_item": "Q1362629"
+          },
+          "terms": {
+            "description": [
+              "art museum in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 15025584,
+          "ns": 0,
+          "title": "List of museums in Tokyo",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Ad_Museum_Tokyo.JPG",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q3735824"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

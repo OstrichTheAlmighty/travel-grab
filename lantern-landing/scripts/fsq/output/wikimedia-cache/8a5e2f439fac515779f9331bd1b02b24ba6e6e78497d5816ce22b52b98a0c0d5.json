@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:51.146Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 15740,
+          "ns": 0,
+          "title": "西武ドーム",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せいふとおむ",
+            "page_image_free": "Seibu_Dome_feb_23_2021_various_16_59_23_418000.jpeg",
+            "wikibase_item": "Q1194822"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7685,
+              "lon": 139.4205,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県所沢市にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 15945,
+          "ns": 0,
+          "title": "東京ドーム",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようとおむ",
+            "page_image_free": "Tokyo_Dome_2007-12.jpg",
+            "wikibase_item": "Q733748"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70583333,
+              "lon": 139.75194444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 20311,
+          "ns": 0,
+          "title": "日立柏サッカー場",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひたちかしわさつかあしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Kashiwa20120311-4_(cropped).jpg",
+            "wikibase_item": "Q1366075"
+          },
+          "coordinates": [
+            {
+              "lat": 35.84848333,
+              "lon": 139.97517222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県柏市にあるサッカー場"
+            ]
+          }
+        },
+        {
+          "pageid": 45629,
+          "ns": 0,
+          "title": "京都競馬場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きようとけいはしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "KyotoRacecourse_Hall.jpg",
+            "wikibase_item": "Q6452200"
+          },
+          "terms": {
+            "description": [
+              "京都市にある競馬場"
+            ]
+          }
+        },
+        {
+          "pageid": 74779,
+          "ns": 0,
+          "title": "自動券売機",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しとうけんはいき",
+            "page_image_free": "StroudTicketMachine.jpg",
+            "wikibase_item": "Q657345"
+          },
+          "terms": {
+            "description": [
+              "チケットを販売する自動販売機"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:14.964Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 54937,
+          "ns": 0,
+          "title": "明治神宮野球大会",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "めいししんくうやきゆうたいかい",
+            "page_image_free": "Japan_Student_Baseball_211120a.jpg",
+            "wikibase_item": "Q11512393"
+          },
+          "terms": {
+            "description": [
+              "11月に行われる秋の高校と大学の日本一決定戦"
+            ]
+          }
+        },
+        {
+          "pageid": 62124,
+          "ns": 0,
+          "title": "明治神宮",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "めいししんくう",
+            "kartographer_frames": "1",
+            "page_image_free": "Courtyard_of_Meiji_Shrine_20190717.jpg",
+            "wikibase_item": "Q287165"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67611111,
+              "lon": 139.69916667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 88138,
+          "ns": 0,
+          "title": "橿原神宮",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かしはらしんくう",
+            "kartographer_frames": "1",
+            "page_image_free": "251206_Kashihara_Shrine_Kashihara_Nara_pref_Japan05s3.jpg",
+            "wikibase_item": "Q710333"
+          },
+          "coordinates": [
+            {
+              "lat": 34.48833333,
+              "lon": 135.78611111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "奈良県橿原市に所在する神社"
+            ]
+          }
+        },
+        {
+          "pageid": 247687,
+          "ns": 0,
+          "title": "国立霞ヶ丘競技場陸上競技場",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こくりつかすみかおかきようきしようりくしようきようきしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Yamazaki-nabisco-Cup_final_2004.jpg",
+            "wikibase_item": "Q330033"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67806,
+              "lon": 139.71472,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて日本の東京都新宿区にあった陸上競技場"
+            ]
+          }
+        },
+        {
+          "pageid": 253338,
+          "ns": 0,
+          "title": "明治神宮外苑",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めいししんくうかいえん",
+            "page_image_free": "Jingu_gaien_air.jpg",
+            "wikibase_item": "Q6631448"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区・港区にある洋風庭園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

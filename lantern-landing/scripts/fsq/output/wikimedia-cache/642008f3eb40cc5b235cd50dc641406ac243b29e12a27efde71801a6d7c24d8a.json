@@ -1,0 +1,58 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:08.895Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 27323,
+          "ns": 0,
+          "title": "山陰放送",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さんいんほうそう",
+            "page_image_free": "BSS-Sanin.png",
+            "wikibase_item": "Q843770"
+          },
+          "terms": {
+            "description": [
+              "鳥取県・島根県のTBSテレビ系列局、およびJRN・NRN系列ラジオ局"
+            ]
+          }
+        },
+        {
+          "pageid": 145289,
+          "ns": 0,
+          "title": "横光利一",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "よこみつ りいち",
+            "page_image_free": "Yokomitsu_Riichi.JPG",
+            "wikibase_item": "Q908573"
+          },
+          "terms": {
+            "description": [
+              "日本の小説家 (1898-1947)"
+            ]
+          }
+        },
+        {
+          "pageid": 3499143,
+          "ns": 0,
+          "title": "激レアさんを連れてきた。",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "けきれあさんをつれてきた",
+            "wikibase_item": "Q28685173"
+          },
+          "terms": {
+            "description": [
+              "テレビ朝日系列のバラエティ番組 (2016 - )"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

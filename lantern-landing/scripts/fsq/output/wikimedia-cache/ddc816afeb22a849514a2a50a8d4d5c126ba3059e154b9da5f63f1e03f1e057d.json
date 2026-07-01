@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:26.106Z",
+  "value": {
+    "searchinfo": {
+      "search": "Museum of Contemporary Art Tokyo"
+    },
+    "search": [
+      {
+        "id": "Q1649688",
+        "title": "Q1649688",
+        "pageid": 1583535,
+        "concepturi": "http://www.wikidata.org/entity/Q1649688",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1649688",
+        "display": {
+          "label": {
+            "value": "Museum of Contemporary Art Tokyo",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Museum of Contemporary Art Tokyo",
+        "description": "museum in Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Museum of Contemporary Art Tokyo"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

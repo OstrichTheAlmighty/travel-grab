@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:32.846Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 578984,
+          "ns": 0,
+          "title": "日本の百貨店",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんのひやつかてん",
+            "page_image_free": "Takashimaya_Nihonbashi_Store_2010.jpg",
+            "wikibase_item": "Q763438"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 706235,
+          "ns": 0,
+          "title": "西武福井店",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せいふふくいてん",
+            "kartographer_frames": "1",
+            "page_image_free": "Seibu_Fukui_01.jpg",
+            "wikibase_item": "Q11628927"
+          },
+          "coordinates": [
+            {
+              "lat": 36.06194444,
+              "lon": 136.21916667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福井県福井市にある百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 809169,
+          "ns": 0,
+          "title": "魚喜",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "うおき",
+            "wikibase_item": "Q11673956"
+          }
+        },
+        {
+          "pageid": 2032921,
+          "ns": 0,
+          "title": "デュラララ!!",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "てゆららら",
+            "wikibase_item": "Q495094"
+          },
+          "terms": {
+            "description": [
+              "成田良悟による日本のライトノベルおよびそれを原作とするアニメ、漫画等の作品群"
+            ]
+          }
+        },
+        {
+          "pageid": 4513793,
+          "ns": 0,
+          "title": "池袋演劇祭",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "いけふくろえんけきさい",
+            "unexpectedUnconnectedPage": "0"
+          }
+        }
+      ]
+    }
+  }
+}

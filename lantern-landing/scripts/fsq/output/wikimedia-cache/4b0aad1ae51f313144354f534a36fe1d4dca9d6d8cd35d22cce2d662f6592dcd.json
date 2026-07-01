@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:58.879Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 72807,
+          "ns": 0,
+          "title": "NHK放送センター",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "えぬえいちけいほうそうせんたあ",
+            "page_image_free": "NHK_Broadcasting_Center_20200607-2.jpg",
+            "wikibase_item": "Q1070546"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66474,
+              "lon": 139.69594,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にあるNHKの本部放送拠点施設"
+            ]
+          }
+        },
+        {
+          "pageid": 639091,
+          "ns": 0,
+          "title": "民主音楽協会",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みんしゆおんかくきようかい",
+            "page_image_free": "Min-On_Music_Museum.JPG",
+            "wikibase_item": "Q6634542"
+          },
+          "terms": {
+            "description": [
+              "日本の一般財団法人"
+            ]
+          }
+        },
+        {
+          "pageid": 988558,
+          "ns": 0,
+          "title": "文化放送",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふんかほうそう",
+            "page_image_free": "JOQR_Media_Plus_20060525.jpg",
+            "wikibase_item": "Q917203"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65692778,
+              "lon": 139.75716111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の放送事業者、NRN系列基幹局。フジサンケイグループの一社"
+            ]
+          }
+        },
+        {
+          "pageid": 2392448,
+          "ns": 0,
+          "title": "朝鮮の文化",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ちようせんのふんか",
+            "page_image_free": "Gyeongbokgung-05.jpg",
+            "wikibase_item": "Q599979"
+          },
+          "terms": {
+            "description": [
+              "朝鮮およびその民族に関連する人間活動の様式と象徴性"
+            ]
+          }
+        },
+        {
+          "pageid": 3951283,
+          "ns": 0,
+          "title": "民音音楽博物館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みんおんおんかくはくふつかん",
+            "page_image_free": "Min-On_Music_Museum.JPG",
+            "wikibase_item": "Q65272034"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6823,
+              "lon": 139.71927,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

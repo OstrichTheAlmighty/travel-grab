@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:30.113Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17064,
+          "ns": 0,
+          "title": "荒川 (関東)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あらかわ",
+            "kartographer_frames": "2",
+            "page_image_free": "ArakawaKako.jpg",
+            "wikibase_item": "Q625465"
+          },
+          "terms": {
+            "description": [
+              "埼玉県・東京都を流れる河川"
+            ]
+          }
+        },
+        {
+          "pageid": 254920,
+          "ns": 0,
+          "title": "葛飾区郷土と天文の博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かつしかくきようととてんもんのはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Katsushika_City_Museum.JPG",
+            "wikibase_item": "Q11621071"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75291667,
+              "lon": 139.84344722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都葛飾区白鳥三丁目にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 1097583,
+          "ns": 0,
+          "title": "水元",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みすもと",
+            "kartographer_frames": "1",
+            "page_image_free": "Katsushika_Waste_Incineration_Plant.jpg",
+            "wikibase_item": "Q11548282"
+          },
+          "terms": {
+            "description": [
+              "東京都葛飾区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1838135,
+          "ns": 0,
+          "title": "旧制小学校",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きゆうせいしようかつこう",
+            "wikibase_item": "Q11510987"
+          },
+          "terms": {
+            "description": [
+              "1886年に定められた初等教育の学校"
+            ]
+          }
+        },
+        {
+          "pageid": 4200029,
+          "ns": 0,
+          "title": "葛飾区立水元小学校",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かつしかくりつみすもとしようかつこう",
+            "kartographer_frames": "1",
+            "page_image_free": "葛飾区立水元小学校_正門.jpg",
+            "wikibase_item": "Q81917425"
+          },
+          "coordinates": [
+            {
+              "lat": 35.78775,
+              "lon": 139.86355556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都葛飾区にある小学校"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

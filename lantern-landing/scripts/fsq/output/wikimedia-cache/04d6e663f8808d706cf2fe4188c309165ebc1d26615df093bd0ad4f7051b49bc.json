@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:36.112Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 139847,
+          "ns": 0,
+          "title": "オカムラ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おかむら",
+            "page_image_free": "Yokohama_Tenri_BLDG.JPG",
+            "wikibase_item": "Q11473333"
+          },
+          "coordinates": [
+            {
+              "lat": 35.46722222,
+              "lon": 139.61955556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1058648,
+          "ns": 0,
+          "title": "産業観光",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さんきようかんこう",
+            "wikibase_item": "Q3534105"
+          },
+          "terms": {
+            "description": [
+              "工場や産業遺産に触れる観光"
+            ]
+          }
+        },
+        {
+          "pageid": 2817849,
+          "ns": 0,
+          "title": "オカムラいすの博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おかむらいすのはくふつかん",
+            "page_image_free": "Japan_Tokyo_Yamanote_loop_location_map.svg",
+            "wikibase_item": "Q17224098"
+          },
+          "terms": {
+            "description": [
+              "東京都千代田区にある企業博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 2956599,
+          "ns": 0,
+          "title": "ミカサ (自動車)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みかさ",
+            "page_image_free": "Okamura_Mikasa_-_IMG_5258.JPG",
+            "wikibase_item": "Q23689851"
+          }
+        }
+      ]
+    }
+  }
+}

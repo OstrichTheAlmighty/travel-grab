@@ -1,0 +1,60 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:18:02.022Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京ジョイポリス"
+    },
+    "search": [
+      {
+        "id": "Q11310533",
+        "title": "Q11310533",
+        "pageid": 12449396,
+        "concepturi": "http://www.wikidata.org/entity/Q11310533",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11310533",
+        "display": {
+          "label": {
+            "value": "Joypolis",
+            "language": "en"
+          },
+          "description": {
+            "value": "indoor amusement park chain",
+            "language": "en"
+          }
+        },
+        "label": "Joypolis",
+        "description": "indoor amusement park chain",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "東京ジョイポリス"
+        },
+        "aliases": [
+          "東京ジョイポリス"
+        ]
+      },
+      {
+        "id": "Q21019217",
+        "title": "Q21019217",
+        "pageid": 23070665,
+        "concepturi": "http://www.wikidata.org/entity/Q21019217",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q21019217",
+        "display": {
+          "label": {
+            "value": "東京ジョイポリス転落死亡事故",
+            "language": "ja"
+          }
+        },
+        "label": "東京ジョイポリス転落死亡事故",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ジョイポリス転落死亡事故"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

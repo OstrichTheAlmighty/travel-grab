@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:51.054Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 208466,
+          "ns": 0,
+          "title": "無形文化遺産",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "むけいふんかいさん",
+            "page_image_free": "Cové2.jpg",
+            "wikibase_item": "Q84036549"
+          },
+          "terms": {
+            "description": [
+              "UNESCOの遺産登録事業の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 1906024,
+          "ns": 0,
+          "title": "空から日本を見てみよう",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "そらからにほんをみてみよう",
+            "wikibase_item": "Q11597289"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 2378181,
+          "ns": 0,
+          "title": "キンシオ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きんしお",
+            "wikibase_item": "Q11297928"
+          },
+          "terms": {
+            "description": [
+              "テレビ神奈川制作のテレビ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 3197942,
+          "ns": 0,
+          "title": "ごはんジャパン",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こはんしやはん",
+            "wikibase_item": "Q20044374"
+          },
+          "terms": {
+            "description": [
+              "テレビ朝日系列の料理トーク番組 (2015 - 2022)"
+            ]
+          }
+        },
+        {
+          "pageid": 5141159,
+          "ns": 0,
+          "title": "出川哲朗の充電させてもらえませんか?",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "てかわてつろうのしゆうてんさせてもらえませんか",
+            "wikibase_item": "Q22123195"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ東京の旅・バラエティ番組 (2017-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

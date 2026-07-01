@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:32.904Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 431026,
+          "ns": 0,
+          "title": "大江戸捜査網",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおえとそうさもう",
+            "wikibase_item": "Q8081449"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ時代劇番組シリーズ"
+            ]
+          }
+        },
+        {
+          "pageid": 1071699,
+          "ns": 0,
+          "title": "登別伊達時代村",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "のほりへつたてしたいむら",
+            "kartographer_frames": "1",
+            "page_image_free": "Noboribetsu_Date_Jidaimura.jpg",
+            "wikibase_item": "Q11579107"
+          },
+          "terms": {
+            "description": [
+              "北海道登別市にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 1630523,
+          "ns": 0,
+          "title": "肥前夢街道",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひせんゆめかいとう",
+            "page_image_free": "HIZENYUMEKAIDOU-1.JPG",
+            "wikibase_item": "Q11611531"
+          },
+          "coordinates": [
+            {
+              "lat": 33.09588889,
+              "lon": 129.99152778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "佐賀県嬉野市にある忍者村テーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 1825969,
+          "ns": 0,
+          "title": "天誅 (ゲーム)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "てんちゆう",
+            "wikibase_item": "Q2094159"
+          },
+          "terms": {
+            "description": [
+              "コンピュータゲームシリーズ"
+            ]
+          }
+        },
+        {
+          "pageid": 4040046,
+          "ns": 0,
+          "title": "ONE PIECEの登場人物一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "わんひいすのとうしようしんふつ",
+            "wikibase_item": "Q83490"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

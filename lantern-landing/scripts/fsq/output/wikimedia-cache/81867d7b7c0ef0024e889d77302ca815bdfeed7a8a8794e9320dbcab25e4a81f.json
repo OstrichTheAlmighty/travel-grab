@@ -1,0 +1,63 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:35.057Z",
+  "value": {
+    "searchinfo": {
+      "search": "ちひろ美術館"
+    },
+    "search": [
+      {
+        "id": "Q11260192",
+        "title": "Q11260192",
+        "pageid": 12404764,
+        "concepturi": "http://www.wikidata.org/entity/Q11260192",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11260192",
+        "display": {
+          "label": {
+            "value": "Chihiro Iwasaki Memorial Foundation",
+            "language": "en"
+          }
+        },
+        "label": "Chihiro Iwasaki Memorial Foundation",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ちひろ美術館"
+        },
+        "aliases": [
+          "ちひろ美術館"
+        ]
+      },
+      {
+        "id": "Q11271822",
+        "title": "Q11271822",
+        "pageid": 12413949,
+        "concepturi": "http://www.wikidata.org/entity/Q11271822",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11271822",
+        "display": {
+          "label": {
+            "value": "Chihiro Art Museum Tokyo",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Chihiro Art Museum Tokyo",
+        "description": "museum in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ちひろ美術館・東京"
+        },
+        "aliases": [
+          "ちひろ美術館・東京"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

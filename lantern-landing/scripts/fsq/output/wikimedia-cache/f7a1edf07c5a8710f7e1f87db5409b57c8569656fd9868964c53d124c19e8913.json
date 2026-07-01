@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:21.221Z",
+  "value": {
+    "searchinfo": {
+      "search": "滝野川公園"
+    },
+    "search": [
+      {
+        "id": "Q42312437",
+        "title": "Q42312437",
+        "pageid": 43594672,
+        "concepturi": "http://www.wikidata.org/entity/Q42312437",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q42312437",
+        "display": {
+          "label": {
+            "value": "滝野川公園",
+            "language": "ja"
+          },
+          "description": {
+            "value": "park in Kita, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "滝野川公園",
+        "description": "park in Kita, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "滝野川公園"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

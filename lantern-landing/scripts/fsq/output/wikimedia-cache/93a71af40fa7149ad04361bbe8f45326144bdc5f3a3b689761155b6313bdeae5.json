@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:27.289Z",
+  "value": {
+    "searchinfo": {
+      "search": "ニコンミュージアム"
+    },
+    "search": [
+      {
+        "id": "Q21654020",
+        "title": "Q21654020",
+        "pageid": 23694511,
+        "concepturi": "http://www.wikidata.org/entity/Q21654020",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q21654020",
+        "display": {
+          "label": {
+            "value": "Nikon Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "industrial Museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Nikon Museum",
+        "description": "industrial Museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ニコンミュージアム"
+        },
+        "aliases": [
+          "ニコンミュージアム"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

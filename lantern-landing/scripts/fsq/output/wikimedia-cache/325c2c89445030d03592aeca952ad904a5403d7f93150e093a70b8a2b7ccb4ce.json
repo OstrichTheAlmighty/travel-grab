@@ -1,0 +1,60 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:10.509Z",
+  "value": {
+    "searchinfo": {
+      "search": "野球殿堂博物館"
+    },
+    "search": [
+      {
+        "id": "Q1134380",
+        "title": "Q1134380",
+        "pageid": 1081215,
+        "concepturi": "http://www.wikidata.org/entity/Q1134380",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1134380",
+        "display": {
+          "label": {
+            "value": "Baseball Hall of Fame and Museum",
+            "language": "en"
+          }
+        },
+        "label": "Baseball Hall of Fame and Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "野球殿堂博物館"
+        },
+        "aliases": [
+          "野球殿堂博物館"
+        ]
+      },
+      {
+        "id": "Q120332944",
+        "title": "Q120332944",
+        "pageid": 114788273,
+        "concepturi": "http://www.wikidata.org/entity/Q120332944",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q120332944",
+        "display": {
+          "label": {
+            "value": "野球殿堂博物館",
+            "language": "ja"
+          },
+          "description": {
+            "value": "Wikimedia disambiguation page",
+            "language": "en"
+          }
+        },
+        "label": "野球殿堂博物館",
+        "description": "Wikimedia disambiguation page",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "野球殿堂博物館"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

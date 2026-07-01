@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:23.649Z",
+  "value": {
+    "searchinfo": {
+      "search": "しょうけい館"
+    },
+    "search": [
+      {
+        "id": "Q11269143",
+        "title": "Q11269143",
+        "pageid": 12411809,
+        "concepturi": "http://www.wikidata.org/entity/Q11269143",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11269143",
+        "display": {
+          "label": {
+            "value": "Shokei-kan",
+            "language": "en"
+          }
+        },
+        "label": "Shokei-kan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "しょうけい館"
+        },
+        "aliases": [
+          "しょうけい館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

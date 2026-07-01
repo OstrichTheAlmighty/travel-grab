@@ -1,0 +1,204 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:49.796Z",
+  "value": {
+    "searchinfo": {
+      "search": "渋谷"
+    },
+    "search": [
+      {
+        "id": "Q102220888",
+        "title": "Q102220888",
+        "pageid": 99005367,
+        "concepturi": "http://www.wikidata.org/entity/Q102220888",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q102220888",
+        "display": {
+          "label": {
+            "value": "Shibuya",
+            "language": "en"
+          }
+        },
+        "label": "Shibuya",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "渋谷"
+        },
+        "aliases": [
+          "渋谷"
+        ]
+      },
+      {
+        "id": "Q595153",
+        "title": "Q595153",
+        "pageid": 560065,
+        "concepturi": "http://www.wikidata.org/entity/Q595153",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q595153",
+        "display": {
+          "label": {
+            "value": "Shibuya",
+            "language": "en"
+          },
+          "description": {
+            "value": "neighborhood in Shibuya, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Shibuya",
+        "description": "neighborhood in Shibuya, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "渋谷"
+        },
+        "aliases": [
+          "渋谷"
+        ]
+      },
+      {
+        "id": "Q24091125",
+        "title": "Q24091125",
+        "pageid": 26081911,
+        "concepturi": "http://www.wikidata.org/entity/Q24091125",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q24091125",
+        "display": {
+          "label": {
+            "value": "Shibuya",
+            "language": "en"
+          },
+          "description": {
+            "value": "Japanese family name (渋谷)",
+            "language": "en"
+          }
+        },
+        "label": "Shibuya",
+        "description": "Japanese family name (渋谷)",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "渋谷"
+        },
+        "aliases": [
+          "渋谷"
+        ]
+      },
+      {
+        "id": "Q121888272",
+        "title": "Q121888272",
+        "pageid": 116221326,
+        "concepturi": "http://www.wikidata.org/entity/Q121888272",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q121888272",
+        "display": {
+          "label": {
+            "value": "Shibuya",
+            "language": "en"
+          },
+          "description": {
+            "value": "town located in Yamato, Kanagawa, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Shibuya",
+        "description": "town located in Yamato, Kanagawa, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "渋谷"
+        },
+        "aliases": [
+          "渋谷"
+        ]
+      },
+      {
+        "id": "Q86735664",
+        "title": "Q86735664",
+        "pageid": 85980987,
+        "concepturi": "http://www.wikidata.org/entity/Q86735664",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q86735664",
+        "display": {
+          "label": {
+            "value": "Shibutani",
+            "language": "en"
+          },
+          "description": {
+            "value": "neighborhood in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Shibutani",
+        "description": "neighborhood in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "渋谷"
+        },
+        "aliases": [
+          "渋谷"
+        ]
+      },
+      {
+        "id": "Q134370464",
+        "title": "Q134370464",
+        "pageid": 128218757,
+        "concepturi": "http://www.wikidata.org/entity/Q134370464",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q134370464",
+        "display": {
+          "label": {
+            "value": "Shibutani",
+            "language": "en"
+          },
+          "description": {
+            "value": "Japanese family name (渋谷)",
+            "language": "en"
+          }
+        },
+        "label": "Shibutani",
+        "description": "Japanese family name (渋谷)",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "渋谷"
+        },
+        "aliases": [
+          "渋谷"
+        ]
+      },
+      {
+        "id": "Q193638",
+        "title": "Q193638",
+        "pageid": 191650,
+        "concepturi": "http://www.wikidata.org/entity/Q193638",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q193638",
+        "display": {
+          "label": {
+            "value": "Shibuya",
+            "language": "en"
+          },
+          "description": {
+            "value": "special ward in the Tokyo Metropolis in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Shibuya",
+        "description": "special ward in the Tokyo Metropolis in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "渋谷区"
+        },
+        "aliases": [
+          "渋谷区"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:01.565Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8210,
+          "ns": 0,
+          "title": "川崎市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かわさきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kawasaki_Daishi_Main_Hall.jpg",
+            "wikibase_item": "Q164234"
+          },
+          "coordinates": [
+            {
+              "lat": 35.53089,
+              "lon": 139.703,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 8587,
+          "ns": 0,
+          "title": "名古屋市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "なこやし",
+            "kartographer_frames": "1",
+            "page_image_free": "View_of_Westward_from_Sky_Deck_MIRAI360,_Nishiki_Naka_Ward_Nagoya_2022.jpg",
+            "wikibase_item": "Q11751"
+          },
+          "coordinates": [
+            {
+              "lat": 35.1814,
+              "lon": 136.9064,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 17387,
+          "ns": 0,
+          "title": "成田市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なりたし",
+            "kartographer_frames": "1",
+            "page_image_free": "Narita_montage2.jpg",
+            "wikibase_item": "Q273798"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7767,
+              "lon": 140.3183,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 41920,
+          "ns": 0,
+          "title": "広島市民球場 (初代)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひろしましみんきゆうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Hiroshima_Municipal_Baseball_Stadium_2008.JPG",
+            "wikibase_item": "Q8012748"
+          },
+          "coordinates": [
+            {
+              "lat": 34.39694444,
+              "lon": 132.455,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて広島市中区にあった野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 53460,
+          "ns": 0,
+          "title": "中央区 (札幌市)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちゆうおうくさつほろし",
+            "page_image_free": "Hokkaido_Prefectural_Office02s5s4272.jpg",
+            "wikibase_item": "Q1079635"
+          },
+          "terms": {
+            "description": [
+              "北海道札幌市の行政区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

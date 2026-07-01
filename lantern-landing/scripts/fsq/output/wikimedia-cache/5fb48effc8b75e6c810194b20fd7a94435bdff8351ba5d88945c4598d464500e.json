@@ -1,0 +1,117 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:21.625Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 35617,
+          "ns": 0,
+          "title": "二子玉川駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふたこたまかわえき",
+            "kartographer_frames": "1",
+            "page_image_free": "Futakotamagawa_rise-20150807.jpg",
+            "wikibase_item": "Q1042466"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6115,
+              "lon": 139.62661111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区玉川にある東急電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 105187,
+          "ns": 0,
+          "title": "砧地域",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きぬたちいき",
+            "page_image_free": "Tokyo-to_géolocalisation.svg",
+            "wikibase_item": "Q11587575"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64124444,
+              "lon": 139.60058333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 354413,
+          "ns": 0,
+          "title": "岡本 (世田谷区)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おかもと",
+            "kartographer_frames": "1",
+            "page_image_free": "世田谷区立静嘉堂緑地_-_panoramio.jpg",
+            "wikibase_item": "Q11473041"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 556887,
+          "ns": 0,
+          "title": "生田緑地",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いくたりよくち",
+            "kartographer_frames": "1",
+            "page_image_free": "Ikutaryokuchi_06b8426q.jpg",
+            "wikibase_item": "Q11574811"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60944444,
+              "lon": 139.55805556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県川崎市の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 3056252,
+          "ns": 0,
+          "title": "岡本公園 (世田谷区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おかもとこうえん",
+            "page_image_free": "Okamoto_koen_minkaen_entrance_setagaya_2014.jpg",
+            "wikibase_item": "Q18338628"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区にある公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

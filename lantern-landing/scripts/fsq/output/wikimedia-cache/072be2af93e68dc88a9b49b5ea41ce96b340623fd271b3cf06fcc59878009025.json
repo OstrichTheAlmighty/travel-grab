@@ -1,0 +1,124 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:41.389Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 428,
+          "ns": 0,
+          "title": "広島県",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひろしまけん",
+            "kartographer_frames": "1",
+            "page_image_free": "Montages_of_Hiroshima_prefecture.jpg",
+            "wikibase_item": "Q617375"
+          },
+          "coordinates": [
+            {
+              "lat": 34.3964,
+              "lon": 132.4597,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の中国地方にある県"
+            ]
+          }
+        },
+        {
+          "pageid": 8034,
+          "ns": 0,
+          "title": "高田馬場駅",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たかたのはは",
+            "kartographer_frames": "1",
+            "page_image_free": "Takadanobaba_Sta._Bldg._2026.jpg",
+            "wikibase_item": "Q801506"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71222222,
+              "lon": 139.70375,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の鉄道駅"
+            ]
+          }
+        },
+        {
+          "pageid": 417333,
+          "ns": 0,
+          "title": "甲斐善光寺",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かいせんこうし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kai-Zenkoji-temple_Kofu-city_Yamanashi_Japan.JPG",
+            "wikibase_item": "Q6446634"
+          },
+          "coordinates": [
+            {
+              "lat": 35.666,
+              "lon": 138.59291667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "山梨県甲府市にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 804212,
+          "ns": 0,
+          "title": "大阪くらしの今昔館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおさかくらしのこんしやくかん",
+            "page_image_free": "Tenjimbashi6_on_Tenjimbashisuji-Mall.JPG",
+            "wikibase_item": "Q11439926"
+          },
+          "coordinates": [
+            {
+              "lat": 34.710306,
+              "lon": 135.511694,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1092335,
+          "ns": 0,
+          "title": "房総の魅力500選",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほうそうのみりよくこひやくせん",
+            "wikibase_item": "Q11496691"
+          },
+          "terms": {
+            "description": [
+              "千葉県のふるさと再発見の考えのもと選ばれた名所、名物など"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

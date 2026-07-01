@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:19.927Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 77121,
+          "ns": 0,
+          "title": "森美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "もりひしゆつかん",
+            "page_image_free": "Mori_Art_Museum_Entrance_2013.jpg",
+            "wikibase_item": "Q4410434"
+          },
+          "terms": {
+            "description": [
+              "東京都港区の六本木ヒルズにある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 502186,
+          "ns": 0,
+          "title": "MAM",
+          "index": 5,
+          "pageprops": {
+            "disambiguation": "",
+            "wikibase_item": "Q292058"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの曖昧さ回避ページ"
+            ]
+          }
+        },
+        {
+          "pageid": 995852,
+          "ns": 0,
+          "title": "森万里子",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "もり まりこ",
+            "page_image_free": "Mori_Mariko_at_the_Japan_Society_Panel_on_Art_&_Nature_2010.jpg",
+            "wikibase_item": "Q438703"
+          },
+          "terms": {
+            "description": [
+              "現代美術家（日本）"
+            ]
+          }
+        },
+        {
+          "pageid": 1776842,
+          "ns": 0,
+          "title": "塩田千春",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しおた ちはる",
+            "wikibase_item": "Q2071137"
+          },
+          "terms": {
+            "description": [
+              "日本の現代美術家（1972-）"
+            ]
+          }
+        },
+        {
+          "pageid": 3468786,
+          "ns": 0,
+          "title": "秋水美術館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しゆうすいひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Mori_Shuhei_Museum_of_Art.jpg",
+            "wikibase_item": "Q26424152"
+          },
+          "coordinates": [
+            {
+              "lat": 36.68736111,
+              "lon": 137.21166667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "富山県富山市にある刀剣に関する美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

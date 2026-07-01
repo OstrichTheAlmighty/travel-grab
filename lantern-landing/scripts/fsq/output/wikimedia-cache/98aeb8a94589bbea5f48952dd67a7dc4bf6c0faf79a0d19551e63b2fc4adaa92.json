@@ -1,0 +1,81 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:52.358Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 516102,
+          "ns": 0,
+          "title": "日経スペシャル カンブリア宮殿",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "につけいすへしやる かんふりあきゆうてん",
+            "wikibase_item": "Q11510183"
+          },
+          "terms": {
+            "description": [
+              "テレビ東京制作のテレビ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 4413892,
+          "ns": 0,
+          "title": "U字工事の旅!発見",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ゆうしこうしのたひはつけん",
+            "wikibase_item": "Q109596743"
+          },
+          "terms": {
+            "description": [
+              "とちぎテレビが制作するテレビシリーズ（旅番組）"
+            ]
+          }
+        },
+        {
+          "pageid": 5141159,
+          "ns": 0,
+          "title": "出川哲朗の充電させてもらえませんか?",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "てかわてつろうのしゆうてんさせてもらえませんか",
+            "wikibase_item": "Q22123195"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ東京の旅・バラエティ番組 (2017-)"
+            ]
+          }
+        },
+        {
+          "pageid": 5209325,
+          "ns": 0,
+          "title": "銚子市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ちようしし",
+            "kartographer_frames": "1",
+            "page_image_free": "Choshi_Montage_2.jpg",
+            "wikibase_item": "Q694317"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73463889,
+              "lon": 140.82677778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県の市"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

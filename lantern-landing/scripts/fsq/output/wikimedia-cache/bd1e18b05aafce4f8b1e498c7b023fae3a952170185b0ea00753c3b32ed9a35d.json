@@ -1,0 +1,86 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:07.653Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 31928,
+          "ns": 0,
+          "title": "ボックスコーポレーション",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ほつくすこおほれえしよん",
+            "wikibase_item": "Q11338649"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都港区にある芸能事務所"
+            ]
+          }
+        },
+        {
+          "pageid": 1130215,
+          "ns": 0,
+          "title": "ZAK THE QUEEN",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さつくさくくいん",
+            "wikibase_item": "Q11255667"
+          }
+        },
+        {
+          "pageid": 1404849,
+          "ns": 0,
+          "title": "オスカープロモーション",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おすかあふろもおしよん",
+            "page_image_free": "Oscar_Promotion_Logo.png",
+            "wikibase_item": "Q11291953"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都港区にある芸能事務所"
+            ]
+          }
+        },
+        {
+          "pageid": 2888956,
+          "ns": 0,
+          "title": "1914年の宝塚歌劇公演一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たからつかかけきこうえんいちらん1914",
+            "wikibase_item": "Q16139377"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2888979,
+          "ns": 0,
+          "title": "1925年の宝塚歌劇公演一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たからつかかけきこうえんいちらん1925",
+            "wikibase_item": "Q16139470"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

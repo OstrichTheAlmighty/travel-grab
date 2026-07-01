@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:17:55.294Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 125916,
+          "ns": 0,
+          "title": "吉原 (東京都)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "よしわら",
+            "page_image_free": "Tokyo_Yoshiwara_Taisho_Era_postcard.jpg",
+            "wikibase_item": "Q1859550"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72361111,
+              "lon": 139.795,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京の地域名"
+            ]
+          }
+        },
+        {
+          "pageid": 1287252,
+          "ns": 0,
+          "title": "千束",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せんそく",
+            "kartographer_frames": "1",
+            "page_image_free": "Yoshiwara.JPG",
+            "wikibase_item": "Q11405606"
+          },
+          "terms": {
+            "description": [
+              "東京都台東区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1411006,
+          "ns": 0,
+          "title": "七福神",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しちふくしん",
+            "page_image_free": "Kuniyoshi_Utagawa,_The_seven_goods_of_good_fortune.jpg",
+            "wikibase_item": "Q846858"
+          },
+          "terms": {
+            "description": [
+              "福をもたらすとして日本で信仰されている七柱の神"
+            ]
+          }
+        },
+        {
+          "pageid": 2444121,
+          "ns": 0,
+          "title": "西大寺 (学区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さいたいし",
+            "wikibase_item": "Q11627548"
+          }
+        },
+        {
+          "pageid": 4278631,
+          "ns": 0,
+          "title": "吉原神社",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "よしわらしんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "吉原神社_-_panoramio.jpg",
+            "wikibase_item": "Q106852454"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72283333,
+              "lon": 139.79330556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区の神社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:38.626Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 364629,
+          "ns": 0,
+          "title": "桃井",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ももい",
+            "kartographer_frames": "1",
+            "page_image_free": "杉並区桃井原っぱ公園_-_panoramio.jpg",
+            "wikibase_item": "Q11536941"
+          },
+          "terms": {
+            "description": [
+              "東京都杉並区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 496198,
+          "ns": 0,
+          "title": "防災まちづくり",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ほうさいまちつくり",
+            "wikibase_item": "Q11657033"
+          }
+        },
+        {
+          "pageid": 1690273,
+          "ns": 0,
+          "title": "杉並区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すきなみく",
+            "kartographer_frames": "1",
+            "page_image_free": "2018_Kōenji.jpg",
+            "wikibase_item": "Q232631"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6995,
+              "lon": 139.63642,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 3138061,
+          "ns": 0,
+          "title": "桃井原っぱ公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ももいはらつはこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Momoi_harappa_park_suginami_2015.jpg",
+            "wikibase_item": "Q21019735"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71366667,
+              "lon": 139.60738889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都杉並区にある区立公園"
+            ]
+          }
+        },
+        {
+          "pageid": 4394597,
+          "ns": 0,
+          "title": "内田秀五郎",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "うちた ひてころう",
+            "wikibase_item": "Q108111008"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家 (1876-1975)。井荻村長・井荻町長、東京府議会議員、東京市会議員、東京府会副議長、東京都議会議員・議長"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

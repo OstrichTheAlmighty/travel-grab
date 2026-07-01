@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:47.475Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 12594,
+          "ns": 0,
+          "title": "墨田区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すみたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Skytree_2014_Ⅲ.jpg",
+            "wikibase_item": "Q235135"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71069,
+              "lon": 139.8015,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 382164,
+          "ns": 0,
+          "title": "大阪府",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおさかふ",
+            "kartographer_frames": "1",
+            "page_image_free": "Osaka_Castle_03bs3200.jpg",
+            "wikibase_item": "Q122723"
+          },
+          "coordinates": [
+            {
+              "lat": 34.68633,
+              "lon": 135.51986,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の都道府県"
+            ]
+          }
+        },
+        {
+          "pageid": 599324,
+          "ns": 0,
+          "title": "熱川バナナワニ園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あたがわばななわにえん",
+            "kartographer_frames": "1",
+            "page_image_free": "ATAGAWA_TROPICAL_&_ALLIGATOR_GARDEN.JPG",
+            "wikibase_item": "Q4812638"
+          },
+          "coordinates": [
+            {
+              "lat": 34.81611111,
+              "lon": 139.06777778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡県東伊豆町にある動植物園"
+            ]
+          }
+        },
+        {
+          "pageid": 1314460,
+          "ns": 0,
+          "title": "立花 (墨田区)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たちはな",
+            "kartographer_frames": "1",
+            "page_image_free": "Tobu_Higashiazuma_sta_001.jpg",
+            "wikibase_item": "Q11598120"
+          },
+          "terms": {
+            "description": [
+              "東京都墨田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 4612010,
+          "ns": 0,
+          "title": "立花大正民家園 旧小山家住宅",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たちはなたいしようみんかえんきゆうこやまけしゆうたく",
+            "page_image_free": "立花大正民家園_旧小山家住宅.jpg",
+            "wikibase_item": "Q29570254"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70983333,
+              "lon": 139.83811111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "墨田区にある東京大空襲の災害もまぬがれた住宅"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

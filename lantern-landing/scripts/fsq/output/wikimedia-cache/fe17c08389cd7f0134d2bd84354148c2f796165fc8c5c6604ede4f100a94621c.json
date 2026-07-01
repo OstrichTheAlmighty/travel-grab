@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:30.738Z",
+  "value": {
+    "searchinfo": {
+      "search": "渋谷駅前スクランブル交差点"
+    },
+    "search": [
+      {
+        "id": "Q21083961",
+        "title": "Q21083961",
+        "pageid": 23130848,
+        "concepturi": "http://www.wikidata.org/entity/Q21083961",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q21083961",
+        "display": {
+          "label": {
+            "value": "Shibuya scramble crossing",
+            "language": "en"
+          },
+          "description": {
+            "value": "scramble crossing in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Shibuya scramble crossing",
+        "description": "scramble crossing in Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "渋谷駅前スクランブル交差点"
+        },
+        "aliases": [
+          "渋谷駅前スクランブル交差点"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

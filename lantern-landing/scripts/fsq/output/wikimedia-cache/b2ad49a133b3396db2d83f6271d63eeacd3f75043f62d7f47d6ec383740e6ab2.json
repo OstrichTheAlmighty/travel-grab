@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:57.666Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 25699,
+          "ns": 0,
+          "title": "福沢一郎",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふくさわ いちろう",
+            "page_image_free": "Fukuzawa_Ichiro.jpg",
+            "wikibase_item": "Q11593950"
+          },
+          "terms": {
+            "description": [
+              "1898-1992, 洋画家"
+            ]
+          }
+        },
+        {
+          "pageid": 78429,
+          "ns": 0,
+          "title": "佐伯祐三",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さえき ゆうそう",
+            "page_image_free": "Photo-Saeki_Yūzō.png",
+            "wikibase_item": "Q3573312"
+          },
+          "terms": {
+            "description": [
+              "日本の画家 (1898-1928)"
+            ]
+          }
+        },
+        {
+          "pageid": 759357,
+          "ns": 0,
+          "title": "中落合 (新宿区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なかおちあい",
+            "kartographer_frames": "1",
+            "page_image_free": "International_Catholic_Hospital_1.JPG",
+            "wikibase_item": "Q11366974"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1278119,
+          "ns": 0,
+          "title": "目白文化村",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "めしろふんかむら",
+            "wikibase_item": "Q11581581"
+          },
+          "terms": {
+            "description": [
+              "大正から昭和にかけて、現在の東京都新宿区にあった住宅地"
+            ]
+          }
+        },
+        {
+          "pageid": 2296472,
+          "ns": 0,
+          "title": "佐伯祐三アトリエ記念館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さえきゆうそうあとりえきねんかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Saeki_Yuzo_Atelier_Memorial_Hall_2023-03-12.jpg",
+            "wikibase_item": "Q11382880"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

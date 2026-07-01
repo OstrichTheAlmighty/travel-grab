@@ -1,0 +1,27 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:53.309Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 619499,
+          "ns": 0,
+          "title": "花澤香菜",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はなさわ かな",
+            "page_image_free": "240211_Kana_Hanazawa.jpg",
+            "wikibase_item": "Q49524"
+          },
+          "terms": {
+            "description": [
+              "日本の声優、女優、歌手 (1989-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

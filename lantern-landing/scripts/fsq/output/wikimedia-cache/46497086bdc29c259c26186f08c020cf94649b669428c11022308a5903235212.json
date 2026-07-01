@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:10.261Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3204,
+          "ns": 0,
+          "title": "芥川龍之介",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あくたかわ りゆうのすけ",
+            "page_image_free": "AkutagawaRyunosuke.jpg",
+            "wikibase_item": "Q186326"
+          },
+          "terms": {
+            "description": [
+              "日本の作家 (1892-1927)"
+            ]
+          }
+        },
+        {
+          "pageid": 13269,
+          "ns": 0,
+          "title": "太宰治",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たさい おさむ",
+            "page_image_free": "Osamu_Dazai.jpg",
+            "wikibase_item": "Q317685"
+          },
+          "terms": {
+            "description": [
+              "日本の作家 (1909-1948)"
+            ]
+          }
+        },
+        {
+          "pageid": 66051,
+          "ns": 0,
+          "title": "志賀直哉",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しか なおや",
+            "page_image_free": "Shiga_Naoya_1938.jpg",
+            "wikibase_item": "Q957997"
+          },
+          "terms": {
+            "description": [
+              "日本の小説家 (1883-1971)"
+            ]
+          }
+        },
+        {
+          "pageid": 74996,
+          "ns": 0,
+          "title": "谷崎潤一郎",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たにさき しゆんいちろう",
+            "page_image_free": "Portrait_of_Tanizaki_Jun'ichirō_-_Atami_-_1950_-_Kimura_Ihei.png",
+            "wikibase_item": "Q316213"
+          },
+          "terms": {
+            "description": [
+              "日本の小説家 (1886-1965)"
+            ]
+          }
+        },
+        {
+          "pageid": 1735463,
+          "ns": 0,
+          "title": "新宿二丁目",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しんしゆくにちようめ",
+            "page_image_free": "新宿二丁目.jpg",
+            "wikibase_item": "Q1420043"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区新宿の二丁目"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

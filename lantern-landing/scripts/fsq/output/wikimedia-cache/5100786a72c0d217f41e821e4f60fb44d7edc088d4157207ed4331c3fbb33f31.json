@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:15.155Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 13999,
+          "ns": 0,
+          "title": "丹下健三",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たんけ けんそう",
+            "page_image_free": "Kenzo_Tange_1981.jpg",
+            "wikibase_item": "Q151794"
+          },
+          "terms": {
+            "description": [
+              "建築家 (1913-2005)"
+            ]
+          }
+        },
+        {
+          "pageid": 16602,
+          "ns": 0,
+          "title": "茅ヶ崎市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ちかさきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Southern_Beach_Chigasaki01.jpg",
+            "wikibase_item": "Q633911"
+          },
+          "coordinates": [
+            {
+              "lat": 35.33386,
+              "lon": 139.40472,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 37388,
+          "ns": 0,
+          "title": "大和市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "やまとし",
+            "kartographer_frames": "1",
+            "page_image_free": "大和駅周辺.jpg",
+            "wikibase_item": "Q386697"
+          },
+          "coordinates": [
+            {
+              "lat": 35.48753,
+              "lon": 139.45803,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 43064,
+          "ns": 0,
+          "title": "美浜区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みはまく",
+            "page_image_free": "View_of_Makuhari-Messe_from_Nakase_2-chome_crossing(cropped).jpg",
+            "wikibase_item": "Q1075859"
+          },
+          "terms": {
+            "description": [
+              "千葉県千葉市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 110570,
+          "ns": 0,
+          "title": "大阪城公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおさかしようこうえん",
+            "page_image_free": "Osaka_Castle_Park_20071230.jpg",
+            "wikibase_item": "Q150118"
+          },
+          "coordinates": [
+            {
+              "lat": 34.68197222,
+              "lon": 135.53105556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪市の公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

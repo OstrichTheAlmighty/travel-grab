@@ -1,0 +1,132 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:16.146Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 43841,
+          "ns": 0,
+          "title": "葛飾区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かつしかく",
+            "displaytitle": "葛飾区",
+            "kartographer_frames": "1",
+            "page_image_free": "Shibamata_Taishakuten_March_11_2021_various_20_44_16_882000.jpeg",
+            "wikibase_item": "Q232628"
+          },
+          "coordinates": [
+            {
+              "lat": 35.74344,
+              "lon": 139.84717,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 63079,
+          "ns": 0,
+          "title": "京成立石駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "けいせいたていし",
+            "page_image_free": "Keisei-railway-KS49-Keisei-tateishi-station-entrance-20170104-151154.jpg",
+            "wikibase_item": "Q5366765"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73827778,
+              "lon": 139.84861111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都葛飾区立石にある京成電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 241964,
+          "ns": 0,
+          "title": "立石 (葛飾区)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たていし",
+            "graph-data-sources": "inline:22",
+            "kartographer_frames": "1",
+            "page_image_free": "Tateishi_2006.jpg",
+            "wikibase_item": "Q3117901"
+          },
+          "terms": {
+            "description": [
+              "東京都葛飾区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 469274,
+          "ns": 0,
+          "title": "東京聖栄大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようせいえい",
+            "page_image_free": "Tokyo-Seiei-Univ.JPG",
+            "wikibase_item": "Q7813984"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71783056,
+              "lon": 139.85669444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都葛飾区西新小岩に本部を置く私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 4117430,
+          "ns": 0,
+          "title": "香取神社 (葛飾区亀有)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かとりしんしや かつしかくかめあり",
+            "kartographer_frames": "1",
+            "page_image_free": "Katori_Jinja_(Kameari,_Katsushika).JPG",
+            "wikibase_item": "Q95746360"
+          },
+          "coordinates": [
+            {
+              "lat": 35.76577778,
+              "lon": 139.85119444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "葛飾区亀有にある神社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

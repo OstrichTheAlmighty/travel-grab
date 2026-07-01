@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:27.007Z",
+  "value": {
+    "searchinfo": {
+      "search": "黒田記念館"
+    },
+    "search": [
+      {
+        "id": "Q123195608",
+        "title": "Q123195608",
+        "pageid": 117439676,
+        "concepturi": "http://www.wikidata.org/entity/Q123195608",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q123195608",
+        "display": {
+          "label": {
+            "value": "Kuroda Memorial Hall",
+            "language": "en"
+          }
+        },
+        "label": "Kuroda Memorial Hall",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "黒田記念館"
+        },
+        "aliases": [
+          "黒田記念館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:34.768Z",
+  "value": {
+    "searchinfo": {
+      "search": "切支丹屋敷跡"
+    },
+    "search": [
+      {
+        "id": "Q24867269",
+        "title": "Q24867269",
+        "pageid": 26828083,
+        "concepturi": "http://www.wikidata.org/entity/Q24867269",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q24867269",
+        "display": {
+          "label": {
+            "value": "Kirishitan Yashiki",
+            "language": "en"
+          }
+        },
+        "label": "Kirishitan Yashiki",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "切支丹屋敷跡"
+        },
+        "aliases": [
+          "切支丹屋敷跡"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

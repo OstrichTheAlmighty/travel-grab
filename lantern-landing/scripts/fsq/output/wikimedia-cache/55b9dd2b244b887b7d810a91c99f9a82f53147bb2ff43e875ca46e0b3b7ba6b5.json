@@ -1,0 +1,129 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:13.989Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18507284,
+          "ns": 0,
+          "title": "Haneda Airport Terminal 2 Station",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Haneda-Airport-T2-STA_Monorail-Gate.jpg",
+            "wikibase-shortdesc": "Monorail station in Tokyo, Japan",
+            "wikibase_item": "Q5647754"
+          },
+          "coordinates": [
+            {
+              "lat": 35.550849,
+              "lon": 139.78825,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "railway station in Ota-ku, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 24071884,
+          "ns": 0,
+          "title": "Haneda Airport",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "All_haneda.jpg",
+            "wikibase-shortdesc": "Major international airport serving Tokyo, Japan",
+            "wikibase_item": "Q204853"
+          },
+          "coordinates": [
+            {
+              "lat": 35.55333333,
+              "lon": 139.78111111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "international airport serving Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 45491125,
+          "ns": 0,
+          "title": "Haneda, Ōta, Tokyo",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Haneda",
+            "page_image_free": "Clam_digging_in_Haneda_1937.jpg",
+            "wikibase-shortdesc": "District of Ōta, Tokyo, Japan",
+            "wikibase_item": "Q1494212"
+          },
+          "coordinates": [
+            {
+              "lat": 35.5487,
+              "lon": 139.7471,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "district of Ōta, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 73698839,
+          "ns": 0,
+          "title": "Sumiko Haneda",
+          "index": 5,
+          "pageprops": {
+            "wikibase_item": "Q11610317"
+          },
+          "terms": {
+            "description": [
+              "Japanese film director"
+            ]
+          }
+        },
+        {
+          "pageid": 75701611,
+          "ns": 0,
+          "title": "2024 Haneda Airport runway collision",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Haneda Airport runway collision, 2024",
+            "kartographer_frames": "1",
+            "page_image_free": "Japan_Airlines_Airbus_A350-941_JA13XJ_(SN_538)_JAL517_Tokyo_Int'l_-_Haneda_(RJTT_HND)_17.Dec.2023.jpg",
+            "wikibase-shortdesc": "Aircraft accident in Japan",
+            "wikibase_item": "Q124078312"
+          },
+          "coordinates": [
+            {
+              "lat": 35.54722222,
+              "lon": 139.79972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "aviation accident in Tokyo, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

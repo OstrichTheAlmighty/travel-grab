@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:24.528Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 203655,
+          "ns": 0,
+          "title": "体育館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たいいくかん",
+            "page_image_free": "Hyogo_Prefectural_Tatsuno_Senior_High_School02n4272.jpg",
+            "wikibase_item": "Q14092"
+          },
+          "terms": {
+            "description": [
+              "屋内で行う様々なスポーツを行えるように設計されている施設"
+            ]
+          }
+        },
+        {
+          "pageid": 446497,
+          "ns": 0,
+          "title": "川崎市とどろきアリーナ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かわさきしととろきありいな",
+            "kartographer_frames": "1",
+            "page_image_free": "Todoroki_Arena.jpg",
+            "wikibase_item": "Q7812855"
+          },
+          "coordinates": [
+            {
+              "lat": 35.58728611,
+              "lon": 139.64735556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県川崎市にあるアリーナ"
+            ]
+          }
+        },
+        {
+          "pageid": 745131,
+          "ns": 0,
+          "title": "大阪市中央体育館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおさかしちゆうおうたいいくかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Osaka_Municipal_Central_Gymnasium,_2008.jpg",
+            "wikibase_item": "Q7105585"
+          },
+          "coordinates": [
+            {
+              "lat": 34.65944444,
+              "lon": 135.44475,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪市港区にある体育館"
+            ]
+          }
+        },
+        {
+          "pageid": 970443,
+          "ns": 0,
+          "title": "宮城県総合運動公園総合体育館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みやきけんそうこううんとうこうえんそうこうたいいくかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Sekisui_Heim_Super_Arena_viewed_from_the_southeast_cropped.jpg",
+            "wikibase_item": "Q7447209"
+          },
+          "terms": {
+            "description": [
+              "宮城県宮城郡にある多目的施設"
+            ]
+          }
+        },
+        {
+          "pageid": 3272245,
+          "ns": 0,
+          "title": "武蔵野の森総合スポーツプラザ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "むさしののもりそうこうすほおつふらさ",
+            "page_image_free": "EASL_2025-26_season_Group_C_アルバルク東京_vs_Хасын_Хүлэгүүд_京王アリーナTOKYO_2025年10月8日の東京都_202510081716_IMG_6143.jpg",
+            "wikibase_item": "Q21019690"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66483333,
+              "lon": 139.524,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都調布市にあるアリーナ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

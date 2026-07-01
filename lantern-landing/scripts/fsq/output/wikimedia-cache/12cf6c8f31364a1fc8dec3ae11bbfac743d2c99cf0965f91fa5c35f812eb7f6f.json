@@ -1,0 +1,109 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:02.089Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 12103,
+          "ns": 0,
+          "title": "Golden Gate Bridge",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Golden_Gate_Bridge_as_seen_from_Battery_East.jpg",
+            "wikibase-shortdesc": "Bridge in the San Francisco Bay Area",
+            "wikibase_item": "Q44440"
+          },
+          "coordinates": [
+            {
+              "lat": 37.81972222,
+              "lon": -122.47861111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "suspension bridge on the San Francisco Bay"
+            ]
+          }
+        },
+        {
+          "pageid": 20663238,
+          "ns": 0,
+          "title": "Heaven's Gate (religious group)",
+          "index": 5,
+          "pageprops": {
+            "page_image": "Heavensgatelogo.jpg",
+            "wikibase-shortdesc": "American UFO religion (1974–1997)",
+            "wikibase_item": "Q46788"
+          },
+          "terms": {
+            "description": [
+              "American UFO religion, whose members committed mass suicide in 1997"
+            ]
+          }
+        },
+        {
+          "pageid": 60979422,
+          "ns": 0,
+          "title": "Baldur's Gate 3",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Baldur's Gate 3",
+            "displaytitle": "<i>Baldur's Gate 3</i>",
+            "page_image": "Baldur's_Gate_3_cover_art.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "2023 video game",
+            "wikibase_item": "Q64441774"
+          },
+          "terms": {
+            "description": [
+              "2023 role-playing video game developed by Larian Studios"
+            ]
+          }
+        },
+        {
+          "pageid": 65570746,
+          "ns": 0,
+          "title": "IPhone 12 Pro",
+          "index": 4,
+          "pageprops": {
+            "displaytitle": "iPhone 12 Pro",
+            "page_image_free": "IPhone_12_Pro_Gold.svg",
+            "wikibase-shortdesc": "2020 smartphone by Apple",
+            "wikibase_item": "Q100319367"
+          },
+          "terms": {
+            "description": [
+              "smartphones released by Apple Inc. in 2020 as part of their fourteenth-generation iPhone lineup"
+            ]
+          }
+        },
+        {
+          "pageid": 78462844,
+          "ns": 0,
+          "title": "The Tragedy of Gate 12",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Lapuerta12-1968.jpg",
+            "wikibase-shortdesc": "Stampede at River Plate Stadium in Buenos Aires, Argentina",
+            "wikibase_item": "Q6151502"
+          },
+          "terms": {
+            "description": [
+              "stampede at River Plate Stadium in Buenos Aires, Argentina"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

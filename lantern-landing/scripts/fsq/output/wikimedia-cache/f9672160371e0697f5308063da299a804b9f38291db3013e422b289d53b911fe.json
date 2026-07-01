@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:38.106Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 67790,
+          "ns": 0,
+          "title": "日本のサッカー競技場一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんのさつかあきようきしよういちらん",
+            "wikibase_item": "Q16867545"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 132602,
+          "ns": 0,
+          "title": "江戸川区陸上競技場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えとかわくりくしようきようきしよう",
+            "page_image_free": "Edogawa_Stadium_1.JPG",
+            "wikibase_item": "Q5340173"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65517222,
+              "lon": 139.85243333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江戸川区の陸上競技場"
+            ]
+          }
+        },
+        {
+          "pageid": 645246,
+          "ns": 0,
+          "title": "クボタスピアーズ船橋・東京ベイ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "くほたすひあすふなはしとうきようへい",
+            "wikibase_item": "Q6441306"
+          },
+          "terms": {
+            "description": [
+              "日本のラグビーチーム"
+            ]
+          }
+        },
+        {
+          "pageid": 1857126,
+          "ns": 0,
+          "title": "全国ジュニア・ラグビーフットボール大会",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せんこくしゆにあらくひふつとほるたいかい",
+            "wikibase_item": "Q17228942"
+          }
+        },
+        {
+          "pageid": 2281863,
+          "ns": 0,
+          "title": "スフィーダ世田谷FC",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すふいいたせたかやえふしい",
+            "wikibase_item": "Q724507"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63647222,
+              "lon": 139.60722222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の女子サッカークラブ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

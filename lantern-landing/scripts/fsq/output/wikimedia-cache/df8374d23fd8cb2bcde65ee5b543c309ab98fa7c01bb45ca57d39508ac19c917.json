@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:13:59.380Z",
+  "value": {
+    "searchinfo": {
+      "search": "神田明神"
+    },
+    "search": [
+      {
+        "id": "Q717682",
+        "title": "Q717682",
+        "pageid": 674857,
+        "concepturi": "http://www.wikidata.org/entity/Q717682",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q717682",
+        "display": {
+          "label": {
+            "value": "Kanda-myōjin",
+            "language": "en"
+          },
+          "description": {
+            "value": "Shinto shrine in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Kanda-myōjin",
+        "description": "Shinto shrine in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "神田明神"
+        },
+        "aliases": [
+          "神田明神"
+        ]
+      },
+      {
+        "id": "Q218646",
+        "title": "Q218646",
+        "pageid": 213640,
+        "concepturi": "http://www.wikidata.org/entity/Q218646",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q218646",
+        "display": {
+          "label": {
+            "value": "Kanda Matsuri",
+            "language": "en"
+          },
+          "description": {
+            "value": "Japanese festival that takes place in Kanda, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Kanda Matsuri",
+        "description": "Japanese festival that takes place in Kanda, Tokyo",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "神田明神祭"
+        },
+        "aliases": [
+          "神田明神祭"
+        ]
+      },
+      {
+        "id": "Q11512581",
+        "title": "Q11512581",
+        "pageid": 12652327,
+        "concepturi": "http://www.wikidata.org/entity/Q11512581",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11512581",
+        "display": {
+          "label": {
+            "value": "Mount Myojin",
+            "language": "en"
+          },
+          "description": {
+            "value": "mountaiin in Shitara and Toei, Aichi, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Mount Myojin",
+        "description": "mountaiin in Shitara and Toei, Aichi, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "神田明神山"
+        },
+        "aliases": [
+          "神田明神山"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

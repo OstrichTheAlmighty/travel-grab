@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:06.492Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 4655701,
+          "ns": 0,
+          "title": "ライトノベルの漫画化作品一覧 (2020年代 前半)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "らいとのへるのまんかかさくひんいちらん2020ねんたいせんはん",
+            "wikibase_item": "Q113995074"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

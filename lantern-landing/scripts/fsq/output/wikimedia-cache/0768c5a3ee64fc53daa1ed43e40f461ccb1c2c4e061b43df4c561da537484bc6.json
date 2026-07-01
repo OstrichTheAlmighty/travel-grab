@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:41.589Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18784,
+          "ns": 0,
+          "title": "鳥取地震",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とつとりししん",
+            "page_image_free": "1943_Tottori_earthquake_Scan10029-2.JPG",
+            "wikibase_item": "Q4565280"
+          },
+          "coordinates": [
+            {
+              "lat": 35.47166667,
+              "lon": 134.18333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "1943年に鳥取県東部で発生した地震"
+            ]
+          }
+        },
+        {
+          "pageid": 63285,
+          "ns": 0,
+          "title": "日比谷公園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひひやこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Hibiya_Park_summer.jpg",
+            "wikibase_item": "Q1378533"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67361111,
+              "lon": 139.75611111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1623064,
+          "ns": 0,
+          "title": "慶應義塾",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かつこうほうしんけいおうきしゆく",
+            "page_image_free": "慶應義塾之目的1896.png",
+            "wikibase_item": "Q6420636"
+          },
+          "terms": {
+            "description": [
+              "日本の学校法人"
+            ]
+          }
+        },
+        {
+          "pageid": 2315451,
+          "ns": 0,
+          "title": "東日本大震災",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひかしにほんたいしんさい",
+            "page_image_free": "Distant_view_of_Rikuzentakata.jpg",
+            "wikibase_item": "Q1136168"
+          },
+          "terms": {
+            "description": [
+              "2011年に発生した東北地方太平洋沖地震による災害"
+            ]
+          }
+        },
+        {
+          "pageid": 2758569,
+          "ns": 0,
+          "title": "慶應義塾大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "けいおうきしゆくたいかく",
+            "page_image_free": "Old_Keio_University_Library_3.jpg",
+            "wikibase_item": "Q815432"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64894444,
+              "lon": 139.74291667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある私立大学"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

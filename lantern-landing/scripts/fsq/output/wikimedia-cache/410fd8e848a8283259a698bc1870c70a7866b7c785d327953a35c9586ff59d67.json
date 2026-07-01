@@ -1,0 +1,109 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:10.860Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 27271,
+          "ns": 0,
+          "title": "バラ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はら",
+            "page_image_free": "Mrs._Herbert_Stevens_May_2008.jpg",
+            "wikibase_item": "Q64140922"
+          },
+          "terms": {
+            "description": [
+              "バラ科バラ属の植物"
+            ]
+          }
+        },
+        {
+          "pageid": 333082,
+          "ns": 0,
+          "title": "ぎふワールド・ローズガーデン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きふわるとろすかてん",
+            "page_image_free": "Flower_Festival_Commemorative_Park_(1),_Seta_Kani_City_2017.jpg",
+            "wikibase_item": "Q109357387"
+          },
+          "coordinates": [
+            {
+              "lat": 35.42091667,
+              "lon": 137.09570833,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "岐阜県可児市にある公園"
+            ]
+          }
+        },
+        {
+          "pageid": 464494,
+          "ns": 0,
+          "title": "京王フローラルガーデンANGE",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "けいおうふろおらるかあてんあんしえ",
+            "wikibase_item": "Q11374609"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64514,
+              "lon": 139.53592,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて東京都調布市にあった植物園"
+            ]
+          }
+        },
+        {
+          "pageid": 925268,
+          "ns": 0,
+          "title": "ローズ・ガーデン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ろおすかあてん",
+            "disambiguation": "",
+            "wikibase_item": "Q365436"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの曖昧さ回避ページ"
+            ]
+          }
+        },
+        {
+          "pageid": 958965,
+          "ns": 0,
+          "title": "Yes!プリキュア5",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いえすふりきゆあふあいふ",
+            "wikibase_item": "Q1193595"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビアニメ番組、メディアミックス作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

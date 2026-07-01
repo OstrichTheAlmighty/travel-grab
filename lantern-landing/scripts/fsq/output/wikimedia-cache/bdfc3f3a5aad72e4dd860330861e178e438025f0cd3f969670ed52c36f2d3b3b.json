@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:53.249Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 146618,
+          "ns": 0,
+          "title": "ペトロナスツインタワー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "へとろなすついんたわ",
+            "kartographer_frames": "1",
+            "page_image_free": "Location_map_Kuala_Lumpur_central.png",
+            "wikibase_item": "Q83063"
+          },
+          "coordinates": [
+            {
+              "lat": 3.15783333,
+              "lon": 101.71163889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "マレーシア・クアラルンプールの超高層ビル"
+            ]
+          }
+        },
+        {
+          "pageid": 418014,
+          "ns": 0,
+          "title": "タワー・オブ・パワー",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たわあおふはわあ",
+            "page_image_free": "TOP_Buffalo.jpg",
+            "wikibase_item": "Q1569899"
+          }
+        },
+        {
+          "pageid": 1731153,
+          "ns": 0,
+          "title": "東京タワー",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようたわあ",
+            "kartographer_frames": "1",
+            "page_image_free": "日本電波塔（東京タワー）.jpg",
+            "wikibase_item": "Q183536"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65861111,
+              "lon": 139.74555556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある電波塔"
+            ]
+          }
+        },
+        {
+          "pageid": 3035147,
+          "ns": 0,
+          "title": "三菱パワー",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みつひしはわあ",
+            "page_image_free": "Marunouchi_Nijūbashi_Building.jpg",
+            "wikibase_item": "Q17493862"
+          },
+          "terms": {
+            "description": [
+              "発電設備事業を行う三菱重工業の子会社"
+            ]
+          }
+        },
+        {
+          "pageid": 4136343,
+          "ns": 0,
+          "title": "パワーレンジャー・ダイノフューリー",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はわあれんしやあたいのふゆうりい",
+            "wikibase_item": "Q94578295"
+          },
+          "terms": {
+            "description": [
+              "2021年から放送しているアメリカ合衆国のテレビドラマ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

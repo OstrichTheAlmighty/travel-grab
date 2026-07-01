@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:46:01.686Z",
+  "value": {
+    "searchinfo": {
+      "search": "スペースショット"
+    },
+    "search": [
+      {
+        "id": "Q390365",
+        "title": "Q390365",
+        "pageid": 371476,
+        "concepturi": "http://www.wikidata.org/entity/Q390365",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q390365",
+        "display": {
+          "label": {
+            "value": "Space Shot",
+            "language": "en"
+          },
+          "description": {
+            "value": "type of drop tower amusement ride manufactured by S&S - Sansei Technologies",
+            "language": "en"
+          }
+        },
+        "label": "Space Shot",
+        "description": "type of drop tower amusement ride manufactured by S&S - Sansei Technologies",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "スペースショット"
+        },
+        "aliases": [
+          "スペースショット"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

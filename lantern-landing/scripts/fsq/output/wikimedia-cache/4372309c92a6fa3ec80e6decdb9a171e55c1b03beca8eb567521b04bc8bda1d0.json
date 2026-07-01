@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:33.635Z",
+  "value": {
+    "searchinfo": {
+      "search": "Mitsui Memorial Museum"
+    },
+    "search": [
+      {
+        "id": "Q864700",
+        "title": "Q864700",
+        "pageid": 816098,
+        "concepturi": "http://www.wikidata.org/entity/Q864700",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q864700",
+        "display": {
+          "label": {
+            "value": "Mitsui Memorial Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum",
+            "language": "en"
+          }
+        },
+        "label": "Mitsui Memorial Museum",
+        "description": "art museum",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Mitsui Memorial Museum"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

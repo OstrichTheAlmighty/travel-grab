@@ -1,0 +1,119 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:33.787Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 181408,
+          "ns": 0,
+          "title": "Ishikawa Prefecture",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Kenrokuen_Garden,_Kanazawa_(53621201294).jpg",
+            "wikibase-shortdesc": "Prefecture of Japan",
+            "wikibase_item": "Q131281"
+          },
+          "coordinates": [
+            {
+              "lat": 36.595,
+              "lon": 136.625,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "prefecture of Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 594373,
+          "ns": 0,
+          "title": "Hakusan, Mie",
+          "index": 4,
+          "pageprops": {
+            "wikibase-shortdesc": "Town in Mie Prefecture, Japan",
+            "wikibase_item": "Q5640654"
+          },
+          "terms": {
+            "description": [
+              "dissolved municipality in Ichishi district, Mie prefecture, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 2299886,
+          "ns": 0,
+          "title": "Hakusan, Ishikawa",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Hakusan_city_office.jpg",
+            "wikibase-shortdesc": "City in Chūbu, Japan",
+            "wikibase_item": "Q696407"
+          },
+          "coordinates": [
+            {
+              "lat": 36.51663889,
+              "lon": 136.56558333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "city in Ishikawa Prefecture, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 15330293,
+          "ns": 0,
+          "title": "Hakusan",
+          "index": 2,
+          "pageprops": {
+            "disambiguation": "",
+            "wikibase-shortdesc": "Topics referred to by the same term",
+            "wikibase_item": "Q4494945"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        },
+        {
+          "pageid": 18057633,
+          "ns": 0,
+          "title": "Shirayama Hime Shrine",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Honden_shirayama_hime_shrine_ishikawa.jpg",
+            "wikibase-shortdesc": "Shinto shrine in Hakusan, Ishikawa",
+            "wikibase_item": "Q704702"
+          },
+          "coordinates": [
+            {
+              "lat": 36.43486111,
+              "lon": 136.63613889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Shinto shrine in Ishikawa Prefecture, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

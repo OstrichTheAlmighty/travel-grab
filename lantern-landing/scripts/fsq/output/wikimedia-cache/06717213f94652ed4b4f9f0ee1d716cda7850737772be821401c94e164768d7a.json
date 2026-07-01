@@ -1,0 +1,52 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:40.945Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 115366,
+          "ns": 0,
+          "title": "谷口守泰",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たにくち もりやす",
+            "page_image_free": "Moriyasu_Taniguchi_20090704_Japan_Expo_01.jpg",
+            "wikibase_item": "Q9185215"
+          },
+          "terms": {
+            "description": [
+              "日本のアニメーター、イラストレーター、キャラクターデザイナー"
+            ]
+          }
+        },
+        {
+          "pageid": 552746,
+          "ns": 0,
+          "title": "加藤英美里",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かとう えみり",
+            "wikibase_item": "Q50016"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 2551381,
+          "ns": 0,
+          "title": "川崎純情小町☆",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かわさきしゆんしようこまち",
+            "wikibase_item": "Q11478553"
+          }
+        }
+      ]
+    }
+  }
+}

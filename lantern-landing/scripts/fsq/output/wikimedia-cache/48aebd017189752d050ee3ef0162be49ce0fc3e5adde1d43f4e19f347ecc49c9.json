@@ -1,0 +1,52 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:54.053Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 2662839,
+          "ns": 0,
+          "title": "Tokyo Midtown",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Midtown.2.JPG",
+            "wikibase-shortdesc": "Mixed-use development in Japan",
+            "wikibase_item": "Q1364393"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66583333,
+              "lon": 139.73111111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "buildings complex in Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 26067321,
+          "ns": 0,
+          "title": "List of development projects in Tokyo",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Ebisu_Garden_Palace_from_Tokyo_Tower.jpg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q6616139"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

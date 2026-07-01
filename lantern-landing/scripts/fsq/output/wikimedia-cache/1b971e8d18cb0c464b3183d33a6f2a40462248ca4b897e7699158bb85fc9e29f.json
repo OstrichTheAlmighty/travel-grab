@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:25.511Z",
+  "value": {
+    "searchinfo": {
+      "search": "憲政記念館"
+    },
+    "search": [
+      {
+        "id": "Q11495238",
+        "title": "Q11495238",
+        "pageid": 12634897,
+        "concepturi": "http://www.wikidata.org/entity/Q11495238",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11495238",
+        "display": {
+          "label": {
+            "value": "Parliamentary Museum",
+            "language": "en"
+          }
+        },
+        "label": "Parliamentary Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "憲政記念館"
+        },
+        "aliases": [
+          "憲政記念館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:29.681Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 90937,
+          "ns": 0,
+          "title": "保土ヶ谷宿",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ほとかやしゆく",
+            "page_image_free": "Tokaido04_Hodogaya.jpg",
+            "wikibase_item": "Q684671"
+          },
+          "coordinates": [
+            {
+              "lat": 35.44,
+              "lon": 139.6,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東海道五十三次の04番目の宿場"
+            ]
+          }
+        },
+        {
+          "pageid": 170178,
+          "ns": 0,
+          "title": "昭和女子大学",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しようわしよし",
+            "page_image_free": "Showa_Women's_University.JPG",
+            "wikibase_item": "Q861948"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64363889,
+              "lon": 139.67591667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 1595024,
+          "ns": 0,
+          "title": "矢田部良吉",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やたへ りようきち",
+            "page_image_free": "Yatabe_Ryokichi,_director_of_the_Higher_Normal_School.jpg",
+            "wikibase_item": "Q1515363"
+          },
+          "terms": {
+            "description": [
+              "日本の植物学者、詩人 (1851-1899)"
+            ]
+          }
+        },
+        {
+          "pageid": 1847466,
+          "ns": 0,
+          "title": "東京音楽学校 (旧制)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようおんかくかつこう",
+            "page_image_free": "Sogakudo1926.jpg",
+            "wikibase_item": "Q3577897"
+          },
+          "terms": {
+            "description": [
+              "東京府下谷区にあった官立音楽専門学校"
+            ]
+          }
+        },
+        {
+          "pageid": 3912089,
+          "ns": 0,
+          "title": "人見楠郎",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひとみ くすお",
+            "wikibase_item": "Q62601411"
+          }
+        }
+      ]
+    }
+  }
+}

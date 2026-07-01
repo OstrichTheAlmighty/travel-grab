@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:49.592Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 335937,
+          "ns": 0,
+          "title": "Sumida, Tokyo",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Skytree_&_Asahi_Breweries_Building,_from_Azumabashi,_Asakusa_2012_Ⅲ.JPG",
+            "wikibase-shortdesc": "Special ward in Kantō, Japan",
+            "wikibase_item": "Q235135"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7,
+              "lon": 139.81666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "special ward in the Tokyo Metropolis in Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 1457762,
+          "ns": 0,
+          "title": "Beyer, Peacock and Company",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Bassendean_rail_museum_gnangarra_07.jpg",
+            "wikibase-shortdesc": "Railway locomotive manufacturer",
+            "wikibase_item": "Q853110"
+          },
+          "terms": {
+            "description": [
+              "Railway locomotive manufacturer"
+            ]
+          }
+        },
+        {
+          "pageid": 15025584,
+          "ns": 0,
+          "title": "List of museums in Tokyo",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Ad_Museum_Tokyo.JPG",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q3735824"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 19255192,
+          "ns": 0,
+          "title": "Tobu 8000 series",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Tobu 8000 Series",
+            "page_image_free": "Tobu-Noda-Line-Series8000-8111F.jpg",
+            "wikibase-shortdesc": "Japanese electric multiple unit train type operated by Tobu Railway",
+            "wikibase_item": "Q5363514"
+          },
+          "terms": {
+            "description": [
+              "Japanese electric multiple unit train type operated by Tobu Railway"
+            ]
+          }
+        },
+        {
+          "pageid": 21918844,
+          "ns": 0,
+          "title": "Tobu Museum",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Tobu-railway-1721-20180716-124353.jpg",
+            "wikibase-shortdesc": "Railway museum in Sumida, Tokyo Japan",
+            "wikibase_item": "Q3915461"
+          },
+          "terms": {
+            "description": [
+              "railway museum in Sumida, Tokyo Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

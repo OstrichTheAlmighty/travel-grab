@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:53.657Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 7775,
+          "ns": 0,
+          "title": "目黒駅",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "めくろ",
+            "kartographer_frames": "1",
+            "page_image_free": "Meguro_Station_(9046562198).jpg",
+            "wikibase_item": "Q678461"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63402778,
+              "lon": 139.71583333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区にある駅"
+            ]
+          }
+        },
+        {
+          "pageid": 18724,
+          "ns": 0,
+          "title": "目黒区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "めくろ",
+            "kartographer_frames": "1",
+            "page_image_free": "Meguro_Meguro_River_Cherry_Trees_1.JPG",
+            "wikibase_item": "Q233903"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6415,
+              "lon": 139.69828,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 324245,
+          "ns": 0,
+          "title": "武蔵小山",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "むさしこやま",
+            "page_image_free": "Musashikoyama_shopping_street_palm_shinagawa_tokyo_2009-1.JPG",
+            "wikibase_item": "Q11546351"
+          }
+        },
+        {
+          "pageid": 357262,
+          "ns": 0,
+          "title": "目黒のさんま",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "めくろのさんま",
+            "wikibase_item": "Q11581614"
+          },
+          "terms": {
+            "description": [
+              "落語の演目のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:54.040Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 14142,
+          "ns": 0,
+          "title": "花火",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はなひ",
+            "page_image_free": "Itabashi_Hanabi_Taikai_Zenkei_1.jpg",
+            "toc": "",
+            "wikibase_item": "Q127933"
+          },
+          "terms": {
+            "description": [
+              "火薬と金属の粉末を混ぜて包んだ鑑賞物"
+            ]
+          }
+        },
+        {
+          "pageid": 17067,
+          "ns": 0,
+          "title": "隅田川",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すみたかわ",
+            "kartographer_frames": "2",
+            "page_image_free": "Sumidagawa_bridge.png",
+            "wikibase_item": "Q222149"
+          },
+          "terms": {
+            "description": [
+              "東京都の川"
+            ]
+          }
+        },
+        {
+          "pageid": 398030,
+          "ns": 0,
+          "title": "隅田川花火大会",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "すみたかわはなひたいかい",
+            "page_image_free": "2012年隅田川花火大会.jpg",
+            "wikibase_item": "Q3119229"
+          },
+          "terms": {
+            "description": [
+              "東京都の花火大会"
+            ]
+          }
+        },
+        {
+          "pageid": 1691666,
+          "ns": 0,
+          "title": "東京都の観光地",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようと",
+            "page_image_free": "東京都区部-観光地図-1.jpg",
+            "wikibase_item": "Q10860697"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3244798,
+          "ns": 0,
+          "title": "両国花火資料館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "りようこくはなひしりようかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Ryogoku_Fireworks_Museum2.JPG",
+            "wikibase_item": "Q21014218"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69375278,
+              "lon": 139.79165278,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区両国二丁目にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

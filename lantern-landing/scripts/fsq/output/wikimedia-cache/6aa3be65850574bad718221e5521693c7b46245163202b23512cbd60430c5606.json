@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:19.951Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 282175,
+          "ns": 0,
+          "title": "オリエンタルラジオ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おりえんたるらしお",
+            "page_image_free": "ロンドンチャレンジ沖縄ツアー_(6888007188).jpg",
+            "wikibase_item": "Q7102367"
+          },
+          "terms": {
+            "description": [
+              "日本のお笑いコンビ"
+            ]
+          }
+        },
+        {
+          "pageid": 285901,
+          "ns": 0,
+          "title": "特別機動捜査隊",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とくへつきとうそうさたい",
+            "wikibase_item": "Q11570782"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 531186,
+          "ns": 0,
+          "title": "大日本除虫菊",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たいにほんしよちゆうきく",
+            "page_image_free": "Headquarter_of_Dainihon_Jochugiku_Company,_Limited_1.JPG",
+            "wikibase_item": "Q11435750"
+          },
+          "terms": {
+            "description": [
+              "日本の殺虫剤・日用品メーカー。｢金鳥｣「KINCHO」の商標で知られる。"
+            ]
+          }
+        },
+        {
+          "pageid": 2007199,
+          "ns": 0,
+          "title": "ラーメン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "らあめん",
+            "page_image_free": "Shoyu_Ramen（Tokyo_Ramen）_-_01.jpg",
+            "wikibase_item": "Q234646"
+          },
+          "terms": {
+            "description": [
+              "日本の麺料理"
+            ]
+          }
+        },
+        {
+          "pageid": 3529229,
+          "ns": 0,
+          "title": "サクラクエスト",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さくらくえすと",
+            "wikibase_item": "Q27971247"
+          },
+          "terms": {
+            "description": [
+              "P.A.WORKS制作による日本のテレビアニメ作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

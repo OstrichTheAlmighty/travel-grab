@@ -1,0 +1,125 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:09.844Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 29791,
+          "ns": 0,
+          "title": "米子市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "よなこし",
+            "kartographer_frames": "1",
+            "page_image_free": "Yonago_montage_2017.jpg",
+            "wikibase_item": "Q320964"
+          },
+          "coordinates": [
+            {
+              "lat": 35.42817,
+              "lon": 133.33089,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "鳥取県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 29845,
+          "ns": 0,
+          "title": "津山市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "つやまし",
+            "kartographer_frames": "1",
+            "page_image_free": "津山城_備中櫓と桜.jpg",
+            "wikibase_item": "Q841125"
+          },
+          "coordinates": [
+            {
+              "lat": 35.06911,
+              "lon": 134.00447,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "岡山県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 46344,
+          "ns": 0,
+          "title": "勝田駅",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かつた",
+            "kartographer_frames": "1",
+            "page_image_free": "JR_East・Hitachinaka_Seaside_Railway_Katsuta_Station_East_Exit.jpg",
+            "wikibase_item": "Q859695"
+          },
+          "coordinates": [
+            {
+              "lat": 36.39448056,
+              "lon": 140.52439722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "茨城県ひたちなか市勝田中央にある東日本旅客鉄道・日本貨物鉄道・ひたちなか海浜鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 244615,
+          "ns": 0,
+          "title": "鳥取県立米子東高等学校",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とつとりけんりつよなこひかし",
+            "kartographer_frames": "1",
+            "page_image_free": "Yonago-higashi_highschool.jpg",
+            "wikibase_item": "Q11674583"
+          },
+          "coordinates": [
+            {
+              "lat": 35.43297222,
+              "lon": 133.34372222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "鳥取県の県立高校"
+            ]
+          }
+        },
+        {
+          "pageid": 2854445,
+          "ns": 0,
+          "title": "みんなの疑問 ニュースなぜ太郎",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みんなのきもんにゆうすなせたろう",
+            "wikibase_item": "Q17227723"
+          }
+        }
+      ]
+    }
+  }
+}

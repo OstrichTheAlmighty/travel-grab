@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:06.024Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8777,
+          "ns": 0,
+          "title": "福澤諭吉",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふくさわ ゆきち",
+            "page_image_free": "Fukuzawa_Yukichi_1891.jpg",
+            "wikibase_item": "Q355447"
+          },
+          "terms": {
+            "description": [
+              "日本の教育者"
+            ]
+          }
+        },
+        {
+          "pageid": 229055,
+          "ns": 0,
+          "title": "天狗党の乱",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "てんくとうのらん",
+            "page_image_free": "Tenguto_no_ran.jpg",
+            "wikibase_item": "Q1040831"
+          },
+          "terms": {
+            "description": [
+              "1864年から1865年にかけて日本で発生した一連の争乱"
+            ]
+          }
+        },
+        {
+          "pageid": 2336264,
+          "ns": 0,
+          "title": "郡司鋳造所",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "くんしちゆうそうしよ",
+            "page_image_free": "Site_of_Gunji_Foundry_2.jpg",
+            "wikibase_item": "Q11643120"
+          },
+          "terms": {
+            "description": [
+              "萩にあった長州藩の鋳造所"
+            ]
+          }
+        },
+        {
+          "pageid": 3130718,
+          "ns": 0,
+          "title": "萩反射炉",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はきはんしやろ",
+            "page_image_free": "Hagi_Reverberatory_furnaces.JPG",
+            "wikibase_item": "Q20637540"
+          },
+          "coordinates": [
+            {
+              "lat": 34.42815278,
+              "lon": 131.41829722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "山口県萩市にある反射炉跡"
+            ]
+          }
+        },
+        {
+          "pageid": 3246735,
+          "ns": 0,
+          "title": "築地反射炉",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ついしはんしやろ",
+            "kartographer_frames": "1",
+            "kartographer_links": "1",
+            "page_image_free": "Tsuiji_Reverberatory_furnace_Saga.JPG",
+            "wikibase_item": "Q22131215"
+          },
+          "coordinates": [
+            {
+              "lat": 33.25125,
+              "lon": 130.28373,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "佐賀県佐賀市にあった反射炉"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

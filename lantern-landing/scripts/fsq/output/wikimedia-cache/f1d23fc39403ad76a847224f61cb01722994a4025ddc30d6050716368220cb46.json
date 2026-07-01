@@ -1,0 +1,62 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:20.846Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 36787,
+          "ns": 0,
+          "title": "Budapest",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "View_from_Gellért_Hill_to_the_Danube,_Hungary_-_Budapest_(28493220635).jpg",
+            "wikibase-shortdesc": "Capital and largest city of Hungary",
+            "wikibase_item": "Q1781"
+          },
+          "coordinates": [
+            {
+              "lat": 47.4925,
+              "lon": 19.05138889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "capital and largest city of Hungary"
+            ]
+          }
+        },
+        {
+          "pageid": 75283590,
+          "ns": 0,
+          "title": "2023–2025 Sundhnúkur eruptions",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Sundhnukur eruptions, 2023-2025",
+            "kartographer_frames": "2",
+            "page_image_free": "2023_Grindavik_eruption.jpg",
+            "wikibase-shortdesc": "Volcanic eruptions in Iceland",
+            "wikibase_item": "Q123992305"
+          },
+          "coordinates": [
+            {
+              "lat": 63.87916667,
+              "lon": -22.38722222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "volcanic eruptions in Iceland"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

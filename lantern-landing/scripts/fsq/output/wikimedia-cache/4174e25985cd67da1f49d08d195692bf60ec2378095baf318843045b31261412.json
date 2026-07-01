@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:19.363Z",
+  "value": {
+    "searchinfo": {
+      "search": "森美術館"
+    },
+    "search": [
+      {
+        "id": "Q4410434",
+        "title": "Q4410434",
+        "pageid": 4212412,
+        "concepturi": "http://www.wikidata.org/entity/Q4410434",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q4410434",
+        "display": {
+          "label": {
+            "value": "Mori Art Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "Contemporary art museum in Tokyo, Japan.",
+            "language": "en"
+          }
+        },
+        "label": "Mori Art Museum",
+        "description": "Contemporary art museum in Tokyo, Japan.",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "森美術館"
+        },
+        "aliases": [
+          "森美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

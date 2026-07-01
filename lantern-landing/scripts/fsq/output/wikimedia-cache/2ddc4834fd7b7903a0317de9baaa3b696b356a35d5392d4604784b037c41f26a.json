@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:44.723Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 59201,
+          "ns": 0,
+          "title": "祖師ヶ谷大蔵駅",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "そしかやおおくらえき",
+            "kartographer_frames": "1",
+            "page_image_free": "Odakyu_Soshigayaookura_sta_001.jpg",
+            "wikibase_item": "Q4429457"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64316667,
+              "lon": 139.60927778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区祖師谷にある小田急電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1168558,
+          "ns": 0,
+          "title": "祖師谷",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "そしかや",
+            "kartographer_frames": "1",
+            "page_image_free": "つりがね池公園_-_panoramio_(5).jpg",
+            "wikibase_item": "Q11588518"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1170684,
+          "ns": 0,
+          "title": "砧 (世田谷区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きぬた",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_media_city_kinuta_2014.jpg",
+            "wikibase_item": "Q11587571"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 4537797,
+          "ns": 0,
+          "title": "小田急ハイウェイバス",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おたきゆうはいうえいはす",
+            "page_image_free": "OdakyuHighwayBus2501.jpeg",
+            "wikibase_item": "Q116075275"
+          },
+          "terms": {
+            "description": [
+              "小田急グループのバス事業者"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:29.338Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 509715,
+          "ns": 0,
+          "title": "DMM.com",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ていいえむえむとつとこむ",
+            "page_image_free": "Sumitomo_Fudosan_Roppongi_Grand_Tower.jpg",
+            "wikibase_item": "Q5366830"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都港区にあるインターネットサービス企業"
+            ]
+          }
+        },
+        {
+          "pageid": 2873785,
+          "ns": 0,
+          "title": "フジバラナイト",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふしはらないと",
+            "wikibase_item": "Q16144224"
+          }
+        },
+        {
+          "pageid": 4180126,
+          "ns": 0,
+          "title": "チームラボプラネッツ TOKYO DMM.com",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ちいむらほふらねつつ",
+            "page_image_free": "Map_Tokyo_special_wards.svg",
+            "wikibase_item": "Q97613610"
+          },
+          "coordinates": [
+            {
+              "lat": 35.649075,
+              "lon": 139.789525,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区豊洲にあるアート施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

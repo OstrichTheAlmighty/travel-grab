@@ -1,0 +1,90 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:43.388Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 395858,
+          "ns": 0,
+          "title": "若者のすべて (テレビドラマ)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "わかもののすへて",
+            "wikibase_item": "Q11616690"
+          },
+          "terms": {
+            "description": [
+              "1994年の日本のテレビドラマ"
+            ]
+          }
+        },
+        {
+          "pageid": 399364,
+          "ns": 0,
+          "title": "ファーストリテイリング",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふあすとりていりんく",
+            "page_image_free": "FAST_RETAILING_logo.svg",
+            "wikibase_item": "Q1397688"
+          },
+          "coordinates": [
+            {
+              "lat": 34.03441667,
+              "lon": 131.33438889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本のアパレル企業を傘下に持つ持株会社"
+            ]
+          }
+        },
+        {
+          "pageid": 2436027,
+          "ns": 0,
+          "title": "ここが噂のエル・パラシオ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ここかうわさのえるはらしお",
+            "wikibase_item": "Q872379"
+          },
+          "terms": {
+            "description": [
+              "あおやぎ孝夫による日本の連載漫画"
+            ]
+          }
+        },
+        {
+          "pageid": 3744869,
+          "ns": 0,
+          "title": "声ガール!",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こえかある",
+            "wikibase_item": "Q48765730"
+          }
+        },
+        {
+          "pageid": 3852330,
+          "ns": 0,
+          "title": "SHIN WON HO",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しん うおんほ",
+            "page_image_free": "(TV10)_다이아·딘딘·모모랜드·신원호·엔씨아,_스타들의_설_인사_(Feat._한복_인터뷰)_신원호_2m18s.jpg",
+            "wikibase_item": "Q7497232"
+          }
+        }
+      ]
+    }
+  }
+}

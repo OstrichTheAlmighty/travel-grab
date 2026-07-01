@@ -1,0 +1,109 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:07.401Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 42729,
+          "ns": 0,
+          "title": "橋本市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はしもとし",
+            "kartographer_frames": "1",
+            "page_image_free": "KoyasuJizouji005.JPG",
+            "wikibase_item": "Q842098"
+          },
+          "coordinates": [
+            {
+              "lat": 34.31464,
+              "lon": 135.60522,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "和歌山県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 157088,
+          "ns": 0,
+          "title": "東京都道420号鮫洲大山線",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Metropolitan_Road_Route_420_Pass_the_Nakano_Station.jpg",
+            "wikibase_item": "Q11525793"
+          },
+          "terms": {
+            "description": [
+              "東京都の道路"
+            ]
+          }
+        },
+        {
+          "pageid": 324245,
+          "ns": 0,
+          "title": "武蔵小山",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "むさしこやま",
+            "page_image_free": "Musashikoyama_shopping_street_palm_shinagawa_tokyo_2009-1.JPG",
+            "wikibase_item": "Q11546351"
+          }
+        },
+        {
+          "pageid": 930782,
+          "ns": 0,
+          "title": "神室山",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かむろさん",
+            "kartographer_frames": "1",
+            "page_image_free": "Kamuroyama.jpg",
+            "wikibase_item": "Q11589461"
+          },
+          "coordinates": [
+            {
+              "lat": 38.90222,
+              "lon": 140.49231,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "秋田県と山形県の境にまたがる山"
+            ]
+          }
+        },
+        {
+          "pageid": 1404473,
+          "ns": 0,
+          "title": "小山台",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こやまたい",
+            "kartographer_frames": "1",
+            "page_image_free": "Rinshi_no_mori_park_meguro_shinagawa.JPG",
+            "wikibase_item": "Q11459826"
+          },
+          "terms": {
+            "description": [
+              "東京都品川区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

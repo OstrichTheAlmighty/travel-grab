@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:28.041Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 21116,
+          "ns": 0,
+          "title": "函館市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はこたてし",
+            "kartographer_frames": "1",
+            "page_image_free": "Hakodate_montage.jpg",
+            "wikibase_item": "Q26418"
+          },
+          "coordinates": [
+            {
+              "lat": 41.76867,
+              "lon": 140.72892,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道の市、渡島総合振興局所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 69874,
+          "ns": 0,
+          "title": "上山市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かみのやまし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kaminoyama_Castle_20230806b.jpg",
+            "wikibase_item": "Q770187"
+          },
+          "coordinates": [
+            {
+              "lat": 38.14958,
+              "lon": 140.26786,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "山形県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 156472,
+          "ns": 0,
+          "title": "箱根土地",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はこねとち",
+            "wikibase_item": "Q11603364"
+          },
+          "terms": {
+            "description": [
+              "かつて日本の東京府東京市にあった不動産会社"
+            ]
+          }
+        },
+        {
+          "pageid": 1370957,
+          "ns": 0,
+          "title": "弱虫ペダル",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "よわむしへたる",
+            "page_image_free": "Yowapeda.png",
+            "wikibase_item": "Q1661633"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 2947961,
+          "ns": 0,
+          "title": "武蔵大学",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "むさしたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Daikodo.jpg",
+            "wikibase_item": "Q1954006"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73611111,
+              "lon": 139.66666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都練馬区にある私立大学"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

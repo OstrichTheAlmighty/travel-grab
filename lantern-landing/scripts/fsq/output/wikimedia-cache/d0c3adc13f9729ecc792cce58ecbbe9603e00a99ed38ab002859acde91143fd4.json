@@ -1,0 +1,100 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:31.958Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2183,
+          "ns": 0,
+          "title": "細野晴臣",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ほその はるおみ",
+            "page_image_free": "Hosono_Haruomi_from_\"No_Smoking\"_at_Opening_Ceremony_of_the_Tokyo_International_Film_Festival_2019_(49013189233).jpg",
+            "wikibase_item": "Q705221"
+          },
+          "terms": {
+            "description": [
+              "日本のミュージシャン"
+            ]
+          }
+        },
+        {
+          "pageid": 57496,
+          "ns": 0,
+          "title": "東京芸術大学",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようけいしゆつたいかく",
+            "page_image_free": "Tokyo_geidai_logo.svg",
+            "wikibase_item": "Q1153515"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71944444,
+              "lon": 139.77222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある国立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 60880,
+          "ns": 0,
+          "title": "岸和田少年愚連隊",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きしわたしようねんくれんたい",
+            "wikibase_item": "Q21992775"
+          },
+          "terms": {
+            "description": [
+              "日本のメディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 150120,
+          "ns": 0,
+          "title": "安藤希",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あんとう のそみ",
+            "wikibase_item": "Q783712"
+          },
+          "terms": {
+            "description": [
+              "日本の女優"
+            ]
+          }
+        },
+        {
+          "pageid": 735190,
+          "ns": 0,
+          "title": "周富徳",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しゆう とみとく",
+            "wikibase_item": "Q11416886"
+          },
+          "terms": {
+            "description": [
+              "日本の料理人、実業家 (1943-2014)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

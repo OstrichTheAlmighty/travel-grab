@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:05.508Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 134896,
+          "ns": 0,
+          "title": "西麻布",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にしあさふ",
+            "kartographer_frames": "1",
+            "page_image_free": "Fuji-Film-Head-Office-01.jpg",
+            "wikibase_item": "Q5358662"
+          },
+          "terms": {
+            "description": [
+              "東京都港区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 528784,
+          "ns": 0,
+          "title": "東京15区",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきよう15く",
+            "page_image_free": "東京15区1878年.png",
+            "wikibase_item": "Q11102908"
+          },
+          "terms": {
+            "description": [
+              "1878年から1932年にかけて日本の東京府に存在した一連の行政区域群"
+            ]
+          }
+        },
+        {
+          "pageid": 708214,
+          "ns": 0,
+          "title": "青山 (東京都港区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あおやま",
+            "page_image_free": "JP-Tokyo-Meiji-Jingu-Gaien-Park-Entrance-Street.JPG",
+            "wikibase_item": "Q1193420"
+          },
+          "terms": {
+            "description": [
+              "東京都港区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 1596036,
+          "ns": 0,
+          "title": "港区 (東京都)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みなとく",
+            "kartographer_frames": "1",
+            "page_image_free": "20110405-TokyoTower-Sakura01.jpg",
+            "wikibase_item": "Q190088"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65803,
+              "lon": 139.75153,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 3187573,
+          "ns": 0,
+          "title": "ものづくり日本の奇跡",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ものつくりにほんのきせき",
+            "wikibase_item": "Q24896543"
+          },
+          "terms": {
+            "description": [
+              "シリーズ番組（2015）"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

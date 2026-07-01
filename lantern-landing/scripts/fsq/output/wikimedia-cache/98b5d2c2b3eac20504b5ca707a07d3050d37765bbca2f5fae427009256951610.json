@@ -1,0 +1,70 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:31.972Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 30741,
+          "ns": 0,
+          "title": "熊本城",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "くまもとしよう",
+            "page_image_free": "Kumamoto_Castle_Keep_Tower_20221022-3.jpg",
+            "wikibase_item": "Q613355"
+          },
+          "coordinates": [
+            {
+              "lat": 32.80602778,
+              "lon": 130.70589722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "熊本県の城"
+            ]
+          }
+        },
+        {
+          "pageid": 46690,
+          "ns": 0,
+          "title": "姫路城",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひめししよう",
+            "page_image_free": "Himeji_castle_in_may_2015.jpg",
+            "wikibase-badge-Q17437796": "",
+            "wikibase_item": "Q188754"
+          },
+          "coordinates": [
+            {
+              "lat": 34.83937778,
+              "lon": 134.69409722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県の城"
+            ]
+          }
+        },
+        {
+          "pageid": 349498,
+          "ns": 0,
+          "title": "歩兵第3連隊",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ほへいたいさんれんたい",
+            "wikibase_item": "Q11123709"
+          }
+        }
+      ]
+    }
+  }
+}

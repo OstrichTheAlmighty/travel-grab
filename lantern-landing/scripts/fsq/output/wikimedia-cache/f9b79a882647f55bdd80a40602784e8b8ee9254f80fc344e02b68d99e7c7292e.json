@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:33.683Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 32894,
+          "ns": 0,
+          "title": "阪急百貨店",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はんきゆうひやつかてん",
+            "page_image_free": "Mido-suji_Osaka01s4s3200.jpg",
+            "wikibase_item": "Q5648576"
+          },
+          "terms": {
+            "description": [
+              "日本の百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 32895,
+          "ns": 0,
+          "title": "阪神百貨店",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はんしんひやつかてん",
+            "page_image_free": "OSAKA_UMEDA_TWIN_TOWERS_SOUTH.jpg",
+            "wikibase_item": "Q5651113"
+          },
+          "terms": {
+            "description": [
+              "日本の百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 35571,
+          "ns": 0,
+          "title": "東急ストア",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきゆうすとあ",
+            "page_image_free": "Tokyustorehonsha.jpg",
+            "wikibase_item": "Q11526963"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64505556,
+              "lon": 139.69922222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東急グループのスーパーマーケット事業"
+            ]
+          }
+        },
+        {
+          "pageid": 410184,
+          "ns": 0,
+          "title": "エンドーチェーン",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "えんとうちええん",
+            "page_image_free": "EBeanS_20250813.jpg",
+            "wikibase_item": "Q11291438"
+          },
+          "terms": {
+            "description": [
+              "仙台市の企業"
+            ]
+          }
+        },
+        {
+          "pageid": 2140433,
+          "ns": 0,
+          "title": "東倉吉町",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひかしくらよしまち",
+            "wikibase_item": "Q11526006"
+          }
+        }
+      ]
+    }
+  }
+}

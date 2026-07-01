@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:51.943Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 7827,
+          "ns": 0,
+          "title": "品川区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しなかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "Gate_City_Osaki.jpg",
+            "wikibase_item": "Q233495"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60917,
+              "lon": 139.73017,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の1つ"
+            ]
+          }
+        },
+        {
+          "pageid": 63150,
+          "ns": 0,
+          "title": "防災",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほうさい",
+            "page_image_free": "Blocks_-_Pantelleria,_Trapani,_Italy_-_August_15,_2016.jpg",
+            "wikibase_item": "Q1460420"
+          },
+          "terms": {
+            "description": [
+              "災害への備え"
+            ]
+          }
+        },
+        {
+          "pageid": 105982,
+          "ns": 0,
+          "title": "下神明駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しもしんめい",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyu_Shimo-Shimmei_sta_001.jpg",
+            "wikibase_item": "Q7496934"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60883333,
+              "lon": 139.72622222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区西品川にある東急電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 1091163,
+          "ns": 0,
+          "title": "広町 (品川区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひろまち",
+            "kartographer_frames": "1",
+            "page_image_free": "Shinagawa_ward_office.JPG",
+            "wikibase_item": "Q11485698"
+          },
+          "terms": {
+            "description": [
+              "東京都品川区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1119814,
+          "ns": 0,
+          "title": "しながわ中央公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しなかわちゆうおうこうえん",
+            "page_image_free": "Shinagawa_chuo_park_nishishinagawa.JPG",
+            "wikibase_item": "Q11268912"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60975,
+              "lon": 139.72772222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区にある公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

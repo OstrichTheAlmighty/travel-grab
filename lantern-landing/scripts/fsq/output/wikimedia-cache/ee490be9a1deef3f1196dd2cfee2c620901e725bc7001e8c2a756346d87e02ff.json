@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:08.072Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 51478,
+          "ns": 0,
+          "title": "岐阜放送",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きふほうそう",
+            "page_image_free": "Gifu_Broadcasting_System_in_Gifu_City_Tower_43.jpg",
+            "wikibase_item": "Q8013824"
+          },
+          "terms": {
+            "description": [
+              "岐阜県の独立系民放テレビ・ラジオ局"
+            ]
+          }
+        },
+        {
+          "pageid": 83618,
+          "ns": 0,
+          "title": "国立科学博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こくりつかかくはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "NMNC01s3200.jpg",
+            "wikibase_item": "Q74940"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71635833,
+              "lon": 139.77643333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある国立博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 926339,
+          "ns": 0,
+          "title": "悠木碧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ゆうき あおい",
+            "wikibase_item": "Q1347031"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優、歌手"
+            ]
+          }
+        },
+        {
+          "pageid": 4271254,
+          "ns": 0,
+          "title": "スタン (ティラノサウルス)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すたん",
+            "page_image_free": "Stan_the_Trex_at_Manchester_Museum.jpg",
+            "wikibase_item": "Q65088929"
+          },
+          "terms": {
+            "description": [
+              "アメリカ合衆国サウスダコタ州で発見されたティラノサウルス"
+            ]
+          }
+        },
+        {
+          "pageid": 4272477,
+          "ns": 0,
+          "title": "バッキー (ティラノサウルス)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はつきい",
+            "page_image_free": "Tyrannosaurus_resting_pose.jpg",
+            "wikibase_item": "Q104452492"
+          },
+          "terms": {
+            "description": [
+              "1998年に発見されたティラノサウルスの未成熟個体"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:10.423Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18189,
+          "ns": 0,
+          "title": "お化け屋敷",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おはけやしき",
+            "page_image_free": "Obake_Yashiki.jpg",
+            "wikibase_item": "Q1139917"
+          },
+          "terms": {
+            "description": [
+              "日本の娯楽施設"
+            ]
+          }
+        },
+        {
+          "pageid": 768866,
+          "ns": 0,
+          "title": "台場一丁目商店街",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たいはいちようめしようてんかい",
+            "page_image_free": "DAIBA_1-CHOME_SHOUTENGAI.JPG",
+            "wikibase_item": "Q11411934"
+          }
+        },
+        {
+          "pageid": 768880,
+          "ns": 0,
+          "title": "幽霊ゾンビ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ゆうれいそんひ",
+            "wikibase_item": "Q11484248"
+          }
+        },
+        {
+          "pageid": 786038,
+          "ns": 0,
+          "title": "台場怪奇学校",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たいはかいきやしき",
+            "wikibase_item": "Q11411935"
+          }
+        },
+        {
+          "pageid": 2699801,
+          "ns": 0,
+          "title": "コープスパーティー",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こおふすはあていい",
+            "wikibase_item": "Q1005588"
+          }
+        }
+      ]
+    }
+  }
+}

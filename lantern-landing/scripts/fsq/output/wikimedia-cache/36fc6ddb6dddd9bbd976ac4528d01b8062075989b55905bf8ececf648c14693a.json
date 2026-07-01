@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:55.757Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 53986,
+          "ns": 0,
+          "title": "武蔵野市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "むさしのし",
+            "kartographer_frames": "1",
+            "page_image_free": "Inokasira-sizen-bunkaen.jpg",
+            "wikibase_item": "Q210661"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71772,
+              "lon": 139.56606,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の市"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 656188,
+          "ns": 0,
+          "title": "青線",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あおせん",
+            "wikibase_item": "Q11662690"
+          },
+          "terms": {
+            "description": [
+              "1946年～1958年の間の日本で、非公認で売春が行われていた地域"
+            ]
+          }
+        },
+        {
+          "pageid": 1812628,
+          "ns": 0,
+          "title": "上井草駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かみいくさ",
+            "kartographer_frames": "1",
+            "page_image_free": "South_entrance_of_Kami-Igusa_Station_(1)_2022-09-04.jpg",
+            "wikibase_item": "Q5973346"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72511111,
+              "lon": 139.60355556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都杉並区にある西武鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 2007199,
+          "ns": 0,
+          "title": "ラーメン",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "らあめん",
+            "page_image_free": "Shoyu_Ramen（Tokyo_Ramen）_-_01.jpg",
+            "wikibase_item": "Q234646"
+          },
+          "terms": {
+            "description": [
+              "日本の麺料理"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

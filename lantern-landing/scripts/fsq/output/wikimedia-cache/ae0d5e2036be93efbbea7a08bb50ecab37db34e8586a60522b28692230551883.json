@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:06.256Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 44787,
+          "ns": 0,
+          "title": "東京ミュウミュウ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようみゆうみゆう",
+            "page_image_free": "Tokyo_Mew_Mew_New_-_Anime_logo.png",
+            "wikibase_item": "Q392125"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 82952,
+          "ns": 0,
+          "title": "鹿沼市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かぬまし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kanumaimamiyayatai.jpg",
+            "wikibase_item": "Q390792"
+          },
+          "coordinates": [
+            {
+              "lat": 36.56708,
+              "lon": 139.74506,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "栃木県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 106014,
+          "ns": 0,
+          "title": "清水区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しみすく",
+            "kartographer_frames": "1",
+            "page_image_free": "Mount_Fuji_and_Port_of_Shimizu.JPG",
+            "wikibase_item": "Q79385"
+          },
+          "coordinates": [
+            {
+              "lat": 35.01577778,
+              "lon": 138.48961111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡県静岡市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 1621935,
+          "ns": 0,
+          "title": "夢色パティシエール",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ゆめいろはていしええる",
+            "wikibase_item": "Q944258"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画シリーズ、テレビアニメ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 3185531,
+          "ns": 0,
+          "title": "アイカツ! (アニメ)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あいかつ",
+            "wikibase_item": "Q6560785"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

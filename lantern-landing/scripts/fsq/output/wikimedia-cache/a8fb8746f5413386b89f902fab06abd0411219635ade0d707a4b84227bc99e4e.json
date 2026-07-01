@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:27.646Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 15601,
+          "ns": 0,
+          "title": "Judo",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Jigoro_Kano_and_Kyuzo_Mifune_(restoration).jpg",
+            "wikibase-shortdesc": "Japanese modern martial art",
+            "wikibase_item": "Q11420"
+          },
+          "terms": {
+            "description": [
+              "modern martial art, combat and Olympic/Paralympic sport"
+            ]
+          }
+        },
+        {
+          "pageid": 1447316,
+          "ns": 0,
+          "title": "Kodokan Judo Institute",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Kodokan_Main_Entrance.jpg",
+            "wikibase-shortdesc": "Judo headquarters building in Tokyo, Japan",
+            "wikibase_item": "Q1165384"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7076186,
+              "lon": 139.7534024,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Judo institute"
+            ]
+          }
+        },
+        {
+          "pageid": 3941385,
+          "ns": 0,
+          "title": "List of judo techniques",
+          "index": 3,
+          "pageprops": {
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q2509713"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 7963342,
+          "ns": 0,
+          "title": "Kanō Jigorō",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Kano, Jigoro",
+            "page_image_free": "Portrait_of_late_Mr._Kano.jpg",
+            "wikibase-shortdesc": "Japanese judoka, educator and politician (1860–1938)",
+            "wikibase_item": "Q190141"
+          },
+          "terms": {
+            "description": [
+              "Japanese educator and judoka (1860–1938)"
+            ]
+          }
+        },
+        {
+          "pageid": 44758411,
+          "ns": 0,
+          "title": "Vasili Oshchepkov",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Oshchepkov, Vasili",
+            "page_image_free": "VSOshchepkov1912.jpg",
+            "wikibase-shortdesc": "Russian martial artist (1893–1937)",
+            "wikibase_item": "Q4340844"
+          },
+          "terms": {
+            "description": [
+              "Russian martial artist (1892–1937)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

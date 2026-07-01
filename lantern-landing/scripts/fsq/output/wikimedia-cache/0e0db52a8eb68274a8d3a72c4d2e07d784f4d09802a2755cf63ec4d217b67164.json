@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:38.211Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3803,
+          "ns": 0,
+          "title": "タケノコ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たけのこ",
+            "page_image_free": "Bamboo_sprout2.JPG",
+            "wikibase_item": "Q2157176"
+          },
+          "terms": {
+            "description": [
+              "タケ類(一部のササ類を含む)の若芽"
+            ]
+          }
+        },
+        {
+          "pageid": 95001,
+          "ns": 0,
+          "title": "渥美半島",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あつみはんとう",
+            "page_image_free": "Mikawa_Bay_Aichi_Japan_SRTM.jpg",
+            "wikibase_item": "Q757798"
+          },
+          "coordinates": [
+            {
+              "lat": 34.66666667,
+              "lon": 137.26666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "中部地方の太平洋側にある半島"
+            ]
+          }
+        },
+        {
+          "pageid": 1632197,
+          "ns": 0,
+          "title": "大和野菜",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やまとやさい",
+            "page_image_free": "Nara_Heirloom_Vegetables_restaurant_in_Nara-machi.JPG",
+            "wikibase_item": "Q11433594"
+          },
+          "terms": {
+            "description": [
+              "奈良県農林部が認定した野菜の分類"
+            ]
+          }
+        },
+        {
+          "pageid": 2006878,
+          "ns": 0,
+          "title": "道の駅・川の駅水の郷さわら",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みちのえきかわのえきみすのさとさわら",
+            "kartographer_frames": "1",
+            "page_image_free": "Michinoeki・Kawanoeki_Mizunosato-Sawara02.JPG",
+            "wikibase_item": "Q11641078"
+          },
+          "coordinates": [
+            {
+              "lat": 35.89578,
+              "lon": 140.50664,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県香取市にある施設"
+            ]
+          }
+        },
+        {
+          "pageid": 2359644,
+          "ns": 0,
+          "title": "道の駅サンピコごうつ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みちのえきさんひここうつ",
+            "kartographer_frames": "1",
+            "page_image_free": "Michinoeki_Sanpiko.JPG",
+            "wikibase_item": "Q11641032"
+          },
+          "coordinates": [
+            {
+              "lat": 35.04511111,
+              "lon": 132.29888889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "島根県江津市にある国道9号の道の駅"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

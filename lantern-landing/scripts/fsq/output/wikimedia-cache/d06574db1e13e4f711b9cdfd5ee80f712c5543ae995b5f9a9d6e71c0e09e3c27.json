@@ -1,0 +1,188 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:46:01.365Z",
+  "value": {
+    "searchinfo": {
+      "search": "メリーゴーランド"
+    },
+    "search": [
+      {
+        "id": "Q208322",
+        "title": "Q208322",
+        "pageid": 204337,
+        "concepturi": "http://www.wikidata.org/entity/Q208322",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q208322",
+        "display": {
+          "label": {
+            "value": "carousel",
+            "language": "en"
+          },
+          "description": {
+            "value": "amusement ride consisting of a rotating circular platform with seats for riders",
+            "language": "en"
+          }
+        },
+        "label": "carousel",
+        "description": "amusement ride consisting of a rotating circular platform with seats for riders",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "メリーゴーランド"
+        },
+        "aliases": [
+          "メリーゴーランド"
+        ]
+      },
+      {
+        "id": "Q6692332",
+        "title": "Q6692332",
+        "pageid": 6527116,
+        "concepturi": "http://www.wikidata.org/entity/Q6692332",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6692332",
+        "display": {
+          "label": {
+            "value": "Merry Go Round",
+            "language": "en"
+          },
+          "description": {
+            "value": "South Korean television drama",
+            "language": "en"
+          }
+        },
+        "label": "Merry Go Round",
+        "description": "South Korean television drama",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "メリーゴーランド"
+        },
+        "aliases": [
+          "メリーゴーランド"
+        ]
+      },
+      {
+        "id": "Q119344536",
+        "title": "Q119344536",
+        "pageid": 113836091,
+        "concepturi": "http://www.wikidata.org/entity/Q119344536",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q119344536",
+        "display": {
+          "label": {
+            "value": "メリーゴーランド",
+            "language": "ja"
+          }
+        },
+        "label": "メリーゴーランド",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "メリーゴーランド"
+        }
+      },
+      {
+        "id": "Q11344025",
+        "title": "Q11344025",
+        "pageid": 12481955,
+        "concepturi": "http://www.wikidata.org/entity/Q11344025",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11344025",
+        "display": {
+          "label": {
+            "value": "MerryGoRound",
+            "language": "en"
+          }
+        },
+        "label": "MerryGoRound",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "メリーゴーランド"
+        },
+        "aliases": [
+          "メリーゴーランド"
+        ]
+      },
+      {
+        "id": "Q119344729",
+        "title": "Q119344729",
+        "pageid": 113836283,
+        "concepturi": "http://www.wikidata.org/entity/Q119344729",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q119344729",
+        "display": {
+          "label": {
+            "value": "メリーゴーランド",
+            "language": "ja"
+          }
+        },
+        "label": "メリーゴーランド",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "メリーゴーランド"
+        }
+      },
+      {
+        "id": "Q3206307",
+        "title": "Q3206307",
+        "pageid": 3061484,
+        "concepturi": "http://www.wikidata.org/entity/Q3206307",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3206307",
+        "display": {
+          "label": {
+            "value": "The Last Snows of Spring",
+            "language": "en"
+          },
+          "description": {
+            "value": "1973 film by Raimondo Del Balzo",
+            "language": "en"
+          }
+        },
+        "label": "The Last Snows of Spring",
+        "description": "1973 film by Raimondo Del Balzo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "メリーゴーランド (映画)"
+        },
+        "aliases": [
+          "メリーゴーランド (映画)"
+        ]
+      },
+      {
+        "id": "Q56871187",
+        "title": "Q56871187",
+        "pageid": 56787507,
+        "concepturi": "http://www.wikidata.org/entity/Q56871187",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q56871187",
+        "display": {
+          "label": {
+            "value": "Merry-Go-Round Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Sandusky, Ohio",
+            "language": "en"
+          }
+        },
+        "label": "Merry-Go-Round Museum",
+        "description": "museum in Sandusky, Ohio",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "メリーゴーランドミュージアム"
+        },
+        "aliases": [
+          "メリーゴーランドミュージアム"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

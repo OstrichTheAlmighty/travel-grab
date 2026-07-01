@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:47.103Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 638368,
+          "ns": 0,
+          "title": "市政会館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しせいかいかん",
+            "page_image_free": "Municipal_Research_Building_2.jpg",
+            "wikibase_item": "Q11480479"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67141667,
+              "lon": 139.7555,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区日比谷公園にある建築物。日比谷公会堂を併設"
+            ]
+          }
+        },
+        {
+          "pageid": 2229475,
+          "ns": 0,
+          "title": "北方領土問題",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ほつほうりようともんたい",
+            "page_image_free": "Northern-Territories-of-Japan-Map-日本の北方領土の地図.png",
+            "toc": "",
+            "wikibase_item": "Q389717"
+          },
+          "terms": {
+            "description": [
+              "日本とロシア間の領土問題"
+            ]
+          }
+        },
+        {
+          "pageid": 2820608,
+          "ns": 0,
+          "title": "尖閣諸島問題",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せんかくしよとうもんたい",
+            "page_image_free": "Senkaku_Diaoyu_Tiaoyu_Islands.png",
+            "wikibase_item": "Q192526"
+          },
+          "terms": {
+            "description": [
+              "石油埋蔵の可能性の判明により、1970年から始まった領土問題"
+            ]
+          }
+        },
+        {
+          "pageid": 3366112,
+          "ns": 0,
+          "title": "領土・主権対策企画調整室",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "りようとしゆけんたいさくきかくちようせいしつ",
+            "wikibase_item": "Q24863121"
+          }
+        },
+        {
+          "pageid": 3735218,
+          "ns": 0,
+          "title": "領土・主権展示館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "りようとしゆけんてんしかん",
+            "page_image_free": "National_Museum_of_Territory_and_Sovereignty.jpg",
+            "wikibase_item": "Q47495157"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6714169,
+              "lon": 139.7555,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区の展示施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

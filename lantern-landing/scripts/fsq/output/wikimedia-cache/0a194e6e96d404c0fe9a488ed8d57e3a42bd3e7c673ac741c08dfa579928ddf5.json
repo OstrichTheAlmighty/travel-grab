@@ -1,0 +1,168 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:13.178Z",
+  "value": {
+    "searchinfo": {
+      "search": "Tokyo Disney Resort"
+    },
+    "search": [
+      {
+        "id": "Q605492",
+        "title": "Q605492",
+        "pageid": 570041,
+        "concepturi": "http://www.wikidata.org/entity/Q605492",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q605492",
+        "display": {
+          "label": {
+            "value": "Tokyo Disney Resort",
+            "language": "en"
+          },
+          "description": {
+            "value": "Disney resort in Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Disney Resort",
+        "description": "Disney resort in Tokyo",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Disney Resort"
+        }
+      },
+      {
+        "id": "Q11524312",
+        "title": "Q11524312",
+        "pageid": 12664182,
+        "concepturi": "http://www.wikidata.org/entity/Q11524312",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524312",
+        "display": {
+          "label": {
+            "value": "Tokyo Disney Resort Music Collection \"Dream\"",
+            "language": "en"
+          },
+          "description": {
+            "value": "2008 compilation box set; various artists",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Disney Resort Music Collection \"Dream\"",
+        "description": "2008 compilation box set; various artists",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Disney Resort Music Collection \"Dream\""
+        }
+      },
+      {
+        "id": "Q109362198",
+        "title": "Q109362198",
+        "pageid": 104524906,
+        "concepturi": "http://www.wikidata.org/entity/Q109362198",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q109362198",
+        "display": {
+          "label": {
+            "value": "Tokyo Disney Resort Toy Story Hotel",
+            "language": "en"
+          },
+          "description": {
+            "value": "hotel at Tokyo Disney Resort, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Disney Resort Toy Story Hotel",
+        "description": "hotel at Tokyo Disney Resort, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Disney Resort Toy Story Hotel"
+        }
+      },
+      {
+        "id": "Q11524307",
+        "title": "Q11524307",
+        "pageid": 12664177,
+        "concepturi": "http://www.wikidata.org/entity/Q11524307",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524307",
+        "display": {
+          "label": {
+            "value": "Tokyo Disney Resort COLLECTION CARDS",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Disney Resort COLLECTION CARDS",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Disney Resort COLLECTION CARDS"
+        }
+      },
+      {
+        "id": "Q11524291",
+        "title": "Q11524291",
+        "pageid": 12664161,
+        "concepturi": "http://www.wikidata.org/entity/Q11524291",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524291",
+        "display": {
+          "label": {
+            "value": "Tokyo Disney Resort 25th Anniversary",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Disney Resort 25th Anniversary",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Disney Resort 25th Anniversary"
+        }
+      },
+      {
+        "id": "Q11524305",
+        "title": "Q11524305",
+        "pageid": 12664175,
+        "concepturi": "http://www.wikidata.org/entity/Q11524305",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524305",
+        "display": {
+          "label": {
+            "value": "Tokyo Disney Resort Official Hotels",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Disney Resort Official Hotels",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Disney Resort Official Hotels"
+        }
+      },
+      {
+        "id": "Q11524292",
+        "title": "Q11524292",
+        "pageid": 12664162,
+        "concepturi": "http://www.wikidata.org/entity/Q11524292",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524292",
+        "display": {
+          "label": {
+            "value": "Tokyo Disney Resort 30th:“The Happiness Year”",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Disney Resort 30th:“The Happiness Year”",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Disney Resort 30th:“The Happiness Year”"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

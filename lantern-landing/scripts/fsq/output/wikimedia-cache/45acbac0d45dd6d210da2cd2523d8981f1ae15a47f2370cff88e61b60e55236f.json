@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:35.224Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 148882,
+          "ns": 0,
+          "title": "Harajuku",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "JRE-Harajuku-Station-07.jpg",
+            "wikibase-shortdesc": "District in Shibuya, Tokyo, Japan",
+            "wikibase_item": "Q746573"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6685,
+              "lon": 139.7054,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "District in Shibuya, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 167805,
+          "ns": 0,
+          "title": "Gwen Stefani",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Stefani, Gwen",
+            "page_image_free": "Barack_Obama_and_Gwen_Stefani_State_Dinner_performance_(cropped)_(cropped).jpg",
+            "wikibase-badge-Q17437796": "",
+            "wikibase-shortdesc": "American singer (born 1969)",
+            "wikibase_item": "Q483379"
+          },
+          "terms": {
+            "description": [
+              "American singer"
+            ]
+          }
+        },
+        {
+          "pageid": 2472695,
+          "ns": 0,
+          "title": "Harajuku (disambiguation)",
+          "index": 5,
+          "pageprops": {
+            "disambiguation": "",
+            "wikibase-shortdesc": "Topics referred to by the same term",
+            "wikibase_item": "Q5653624"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        },
+        {
+          "pageid": 22570683,
+          "ns": 0,
+          "title": "Nicki Minaj",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Minaj, Nicki",
+            "page_image_free": "Nicki_Minaj_2025_(3x4_cropped).jpg",
+            "wikibase-shortdesc": "Trinidadian rapper and singer (born 1982)",
+            "wikibase_item": "Q162202"
+          },
+          "terms": {
+            "description": [
+              "Trinidadian rapper (born 1982)"
+            ]
+          }
+        },
+        {
+          "pageid": 46671643,
+          "ns": 0,
+          "title": "Kuu Kuu Harajuku",
+          "index": 2,
+          "pageprops": {
+            "displaytitle": "<i>Kuu Kuu Harajuku</i>",
+            "page_image": "Kuu_Kuu_Harajuku_character_logo.png",
+            "wikibase-shortdesc": "Children's animated television series",
+            "wikibase_item": "Q21539910"
+          },
+          "terms": {
+            "description": [
+              "animated television series"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

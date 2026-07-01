@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:40.055Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1758488,
+          "ns": 0,
+          "title": "ウィリアム・グラッドストン",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "くらつとすとん ういりあむ",
+            "page_image_free": "William_Ewart_Gladstone,_1892_(cropped).jpg",
+            "wikibase-badge-Q17437796": "",
+            "wikibase_item": "Q160852"
+          },
+          "terms": {
+            "description": [
+              "イギリスの政治家 (1809-1898)"
+            ]
+          }
+        },
+        {
+          "pageid": 1842138,
+          "ns": 0,
+          "title": "宇都宮市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "うつのみやし",
+            "kartographer_frames": "1",
+            "page_image_free": "Utsunomiya_montage.jpg",
+            "wikibase_item": "Q200589"
+          },
+          "coordinates": [
+            {
+              "lat": 36.55511,
+              "lon": 139.88256,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "栃木県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 1936364,
+          "ns": 0,
+          "title": "あいちトリエンナーレ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あいちとりえんなあれ",
+            "kartographer_frames": "2",
+            "kartographer_links": "2",
+            "page_image_free": "Aichi-Arts-Center-1.jpg",
+            "wikibase_item": "Q11256639"
+          },
+          "terms": {
+            "description": [
+              "国際芸術祭"
+            ]
+          }
+        },
+        {
+          "pageid": 2208788,
+          "ns": 0,
+          "title": "徳島市阿波おどり",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とくしましあわおとり",
+            "page_image_free": "Awa-odori_2008_Tokushima.jpg",
+            "wikibase_item": "Q11489823"
+          },
+          "terms": {
+            "description": [
+              "徳島県徳島市で開催される盆踊り"
+            ]
+          }
+        },
+        {
+          "pageid": 3712094,
+          "ns": 0,
+          "title": "邪神ちゃんドロップキック",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しやしんちやんとろつふきつく",
+            "page_image_free": "Jashin-chanDropkick01.svg",
+            "wikibase_item": "Q44939441"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画、メディアミックス作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

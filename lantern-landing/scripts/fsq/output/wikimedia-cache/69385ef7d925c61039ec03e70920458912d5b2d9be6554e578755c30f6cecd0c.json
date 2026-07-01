@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:43.772Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 30057,
+          "ns": 0,
+          "title": "Tokyo",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Capital and most populous city in Japan",
+            "wikibase_item": "Q1490"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68972222,
+              "lon": 139.69222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "capital and largest city of Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 1524611,
+          "ns": 0,
+          "title": "Laforet",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Laforet-Harajuku-Tokyo-01.jpg",
+            "wikibase-shortdesc": "Department store in Harajuku, residence and museum in Tokyo",
+            "wikibase_item": "Q1770607"
+          },
+          "terms": {
+            "description": [
+              "Department store in Harajuku, residence and museum in Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 15025584,
+          "ns": 0,
+          "title": "List of museums in Tokyo",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Ad_Museum_Tokyo.JPG",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q3735824"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 47278812,
+          "ns": 0,
+          "title": "Timeline of Tokyo",
+          "index": 4,
+          "pageprops": {
+            "toc": "",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q20983147"
+          },
+          "terms": {
+            "description": [
+              "timeline of the history of Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 74469314,
+          "ns": 0,
+          "title": "Ad Museum Tokyo",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Ad_Museum_Tokyo.JPG",
+            "wikibase-shortdesc": "Advertising museum in Tokyo, Japan",
+            "wikibase_item": "Q11284141"
+          },
+          "coordinates": [
+            {
+              "lat": 35.664333,
+              "lon": 139.762222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "library"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

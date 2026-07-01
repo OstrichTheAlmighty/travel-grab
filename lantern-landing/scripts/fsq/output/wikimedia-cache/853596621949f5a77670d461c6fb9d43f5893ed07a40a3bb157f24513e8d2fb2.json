@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:52.991Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 57466,
+          "ns": 0,
+          "title": "専修大学",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せんしゆうたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Senshu_University_Kanda_Campus_1.jpg",
+            "wikibase_item": "Q1062568"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69683333,
+              "lon": 139.75383333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 108708,
+          "ns": 0,
+          "title": "小諸城",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こもろしよう",
+            "page_image_free": "Komoro_castle00s3872.jpg",
+            "wikibase_item": "Q1197137"
+          },
+          "coordinates": [
+            {
+              "lat": 36.32733611,
+              "lon": 138.41724722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長野県小諸市にある城跡"
+            ]
+          }
+        },
+        {
+          "pageid": 143659,
+          "ns": 0,
+          "title": "大濠公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおほりこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "大濠公園_(3359545709).jpg",
+            "wikibase_item": "Q846710"
+          },
+          "coordinates": [
+            {
+              "lat": 33.58586111,
+              "lon": 130.37625,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福岡市中央区の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 181452,
+          "ns": 0,
+          "title": "長府",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちようふ",
+            "kartographer_frames": "3",
+            "page_image_free": "Chofu_branch_office_in_Shimonoseki,_Yamaguchi.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q11652977"
+          },
+          "coordinates": [
+            {
+              "lat": 33.99888889,
+              "lon": 130.99083333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の山口県下関市の広域地名"
+            ]
+          }
+        },
+        {
+          "pageid": 284911,
+          "ns": 0,
+          "title": "名古屋市電",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "なこやしてん",
+            "page_image_free": "Nagoyashiden-1401.JPG",
+            "wikibase_item": "Q6958953"
+          },
+          "terms": {
+            "description": [
+              "名古屋市営の路面電車"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

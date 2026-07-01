@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:31.691Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 73150,
+          "ns": 0,
+          "title": "武藤敬司",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "むとう けいし",
+            "page_image_free": "Keiji_Mutoh_2009.jpg",
+            "wikibase_item": "Q927964"
+          },
+          "terms": {
+            "description": [
+              "日本の男性プロレスラー"
+            ]
+          }
+        },
+        {
+          "pageid": 134017,
+          "ns": 0,
+          "title": "農林水産大臣",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "のうりんすいさんたいしん",
+            "page_image_free": "農林水産省ロゴマーク.svg",
+            "wikibase_item": "Q8191055"
+          },
+          "terms": {
+            "description": [
+              "日本の国務大臣"
+            ]
+          }
+        },
+        {
+          "pageid": 450774,
+          "ns": 0,
+          "title": "武藤嘉文",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "むとう かふん",
+            "page_image_free": "Kabun_Muto.jpg",
+            "wikibase_item": "Q939576"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家"
+            ]
+          }
+        },
+        {
+          "pageid": 455594,
+          "ns": 0,
+          "title": "武藤英紀",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "むとう ひてき",
+            "page_image_free": "Hideki_Mutoh_2010_Indy_500_Pole_Day.JPG",
+            "wikibase_item": "Q278832"
+          },
+          "terms": {
+            "description": [
+              "日本のレーシングドライバー"
+            ]
+          }
+        },
+        {
+          "pageid": 499083,
+          "ns": 0,
+          "title": "武藤容治",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "むとう ようし",
+            "page_image_free": "Minister_of_Economy,_Trade_and_Industry_Yōji_Mutō.jpg",
+            "wikibase_item": "Q8054534"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家、実業家 (1955-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

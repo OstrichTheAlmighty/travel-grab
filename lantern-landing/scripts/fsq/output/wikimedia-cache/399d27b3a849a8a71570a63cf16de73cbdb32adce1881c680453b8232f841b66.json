@@ -1,0 +1,209 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:25.583Z",
+  "value": {
+    "searchinfo": {
+      "search": "美術館"
+    },
+    "search": [
+      {
+        "id": "Q207694",
+        "title": "Q207694",
+        "pageid": 203834,
+        "concepturi": "http://www.wikidata.org/entity/Q207694",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q207694",
+        "display": {
+          "label": {
+            "value": "art museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "building or space for the exhibition of art (for institution, use Q3196771)",
+            "language": "en"
+          }
+        },
+        "label": "art museum",
+        "description": "building or space for the exhibition of art (for institution, use Q3196771)",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "美術館"
+        },
+        "aliases": [
+          "美術館"
+        ]
+      },
+      {
+        "id": "Q861548",
+        "title": "Q861548",
+        "pageid": 813017,
+        "concepturi": "http://www.wikidata.org/entity/Q861548",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q861548",
+        "display": {
+          "label": {
+            "value": "Florida State University",
+            "language": "en"
+          },
+          "description": {
+            "value": "public university in Tallahassee, Florida, United States",
+            "language": "en"
+          }
+        },
+        "label": "Florida State University",
+        "description": "public university in Tallahassee, Florida, United States",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "美術館 MoFA - Florida State University / Museum of Fine Arts, アメリカ合衆国"
+        },
+        "aliases": [
+          "美術館 MoFA - Florida State University / Museum of Fine Arts, アメリカ合衆国"
+        ]
+      },
+      {
+        "id": "Q3196771",
+        "title": "Q3196771",
+        "pageid": 22930785,
+        "concepturi": "http://www.wikidata.org/entity/Q3196771",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3196771",
+        "display": {
+          "label": {
+            "value": "art museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "institution (for buildings or spaces use Q207694)",
+            "language": "en"
+          }
+        },
+        "label": "art museum",
+        "description": "institution (for buildings or spaces use Q207694)",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "美術館"
+        },
+        "aliases": [
+          "美術館"
+        ]
+      },
+      {
+        "id": "Q18325616",
+        "title": "Q18325616",
+        "pageid": 19855277,
+        "concepturi": "http://www.wikidata.org/entity/Q18325616",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q18325616",
+        "display": {
+          "label": {
+            "value": "Tucson Museum of Art",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum in Tucson, Arizona",
+            "language": "en"
+          }
+        },
+        "label": "Tucson Museum of Art",
+        "description": "art museum in Tucson, Arizona",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "美術館 (Tucson Museum of Art and Historic Block), アメリカ合衆国"
+        },
+        "aliases": [
+          "美術館 (Tucson Museum of Art and Historic Block), アメリカ合衆国"
+        ]
+      },
+      {
+        "id": "Q301250",
+        "title": "Q301250",
+        "pageid": 290239,
+        "concepturi": "http://www.wikidata.org/entity/Q301250",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q301250",
+        "display": {
+          "label": {
+            "value": "Aargauer Kunsthaus",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Aarau in the canton of Aargau, Switzerland",
+            "language": "en"
+          }
+        },
+        "label": "Aargauer Kunsthaus",
+        "description": "museum in Aarau in the canton of Aargau, Switzerland",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "美術館 (Museum of Art Aarau), アーラウ, スイス"
+        },
+        "aliases": [
+          "美術館 (Museum of Art Aarau), アーラウ, スイス"
+        ]
+      },
+      {
+        "id": "Q2000090",
+        "title": "Q2000090",
+        "pageid": 1928588,
+        "concepturi": "http://www.wikidata.org/entity/Q2000090",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2000090",
+        "display": {
+          "label": {
+            "value": "art gallery problem",
+            "language": "en"
+          },
+          "description": {
+            "value": "mathematical problem",
+            "language": "en"
+          }
+        },
+        "label": "art gallery problem",
+        "description": "mathematical problem",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "美術館問題"
+        },
+        "aliases": [
+          "美術館問題"
+        ]
+      },
+      {
+        "id": "Q111339517",
+        "title": "Q111339517",
+        "pageid": 106312724,
+        "concepturi": "http://www.wikidata.org/entity/Q111339517",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q111339517",
+        "display": {
+          "label": {
+            "value": "Wikidata property related to museums",
+            "language": "en"
+          },
+          "description": {
+            "value": "Wikidata property",
+            "language": "en"
+          }
+        },
+        "label": "Wikidata property related to museums",
+        "description": "Wikidata property",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "美術館関連プロパティ"
+        },
+        "aliases": [
+          "美術館関連プロパティ"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:13:59.858Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 3282398,
+          "ns": 0,
+          "title": "今出舞",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いまて まい",
+            "wikibase_item": "Q22126328"
+          },
+          "terms": {
+            "description": [
+              "日本の女優"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

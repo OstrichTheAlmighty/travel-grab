@@ -1,0 +1,119 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:15.916Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8546,
+          "ns": 0,
+          "title": "新橋駅",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しんはし",
+            "kartographer_frames": "1",
+            "page_image_free": "JR_Shimbashi_Station_(2019-05-04)_07.jpg",
+            "wikibase_item": "Q801436"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66638889,
+              "lon": 139.75805556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある駅"
+            ]
+          }
+        },
+        {
+          "pageid": 93729,
+          "ns": 0,
+          "title": "汐留",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しおとめ",
+            "wikibase_item": "Q1185910"
+          },
+          "coordinates": [
+            {
+              "lat": 35.662778,
+              "lon": 139.759847,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京の旧地名、東京都港区の地域名"
+            ]
+          }
+        },
+        {
+          "pageid": 178375,
+          "ns": 0,
+          "title": "鉄道博物館の一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "てつとうはくふつかんのいちらん",
+            "wikibase_item": "Q1863365"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 716538,
+          "ns": 0,
+          "title": "汐留駅 (国鉄)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しおとめ",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Shiodome_Station_SL_passage_picture.webp",
+            "wikibase_item": "Q7497865"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66583333,
+              "lon": 139.76138889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて東京都港区にあった日本国有鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 747913,
+          "ns": 0,
+          "title": "日本の鉄道開業",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "てつとうかいきよう",
+            "page_image_free": "First_steam_train_leaving_Yokohama.jpg",
+            "wikibase_item": "Q11506149"
+          },
+          "terms": {
+            "description": [
+              "新橋駅 - 横浜駅間が1872年に開業した出来事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

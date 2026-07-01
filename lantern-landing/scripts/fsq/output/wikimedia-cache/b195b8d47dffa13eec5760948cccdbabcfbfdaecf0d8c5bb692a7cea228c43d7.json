@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:43.198Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 175571,
+          "ns": 0,
+          "title": "ライオン奥様劇場",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "らいおんおくさまけきしよう",
+            "wikibase_item": "Q11346325"
+          },
+          "terms": {
+            "description": [
+              "かつての日本のテレビドラマ番組シリーズ"
+            ]
+          }
+        },
+        {
+          "pageid": 1741731,
+          "ns": 0,
+          "title": "銀座",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きんさ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ginza_area_at_dusk_from_Tokyo_Tower.jpg",
+            "wikibase_item": "Q746052"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 2956969,
+          "ns": 0,
+          "title": "サッポロ銀座ビル",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さつほろきんさひる",
+            "page_image_free": "Japan_National_Route_15_-02.jpg",
+            "wikibase_item": "Q17226316"
+          },
+          "coordinates": [
+            {
+              "lat": 35.670776,
+              "lon": 139.765009,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 3359800,
+          "ns": 0,
+          "title": "銀座プレイス",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きんさふれいす",
+            "kartographer_frames": "1",
+            "page_image_free": "Ginza_Place_Night_view_2018.jpg",
+            "wikibase_item": "Q24876207"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67081944,
+              "lon": 139.76504167,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都中央区の商業施設"
+            ]
+          }
+        },
+        {
+          "pageid": 3391888,
+          "ns": 0,
+          "title": "サッポロライオン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さつほろらいおん",
+            "page_image_free": "Ginza_lion_building_2014.jpg",
+            "wikibase_item": "Q18700949"
+          }
+        }
+      ]
+    }
+  }
+}

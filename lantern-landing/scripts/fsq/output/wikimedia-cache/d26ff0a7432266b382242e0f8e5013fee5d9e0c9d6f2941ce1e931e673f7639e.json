@@ -1,0 +1,87 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:38.209Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 36305,
+          "ns": 0,
+          "title": "日本刀",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にほんとう",
+            "page_image_free": "Antique_Japanese_(samurai)_katana_met_museum.jpg",
+            "wikibase_item": "Q1768697"
+          },
+          "terms": {
+            "description": [
+              "日本固有の鍛冶製法による刀類の総称"
+            ]
+          }
+        },
+        {
+          "pageid": 1049345,
+          "ns": 0,
+          "title": "マリア観音 (バンド)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "まりあかんのん",
+            "wikibase_item": "Q11341011"
+          }
+        },
+        {
+          "pageid": 1891094,
+          "ns": 0,
+          "title": "大槻ひびき",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおつき ひひき",
+            "page_image_free": "Fresh_Festival_2023_in_Shirakobato_Water_Park_IMG_3414.jpg",
+            "wikibase_item": "Q9187572"
+          },
+          "terms": {
+            "description": [
+              "日本のAV女優"
+            ]
+          }
+        },
+        {
+          "pageid": 3287988,
+          "ns": 0,
+          "title": "にちようチャップリン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にちようちやつふりん",
+            "wikibase_item": "Q22124240"
+          },
+          "terms": {
+            "description": [
+              "テレビ東京のお笑いバラエティ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 4399699,
+          "ns": 0,
+          "title": "孤独のグルメ (テレビドラマ)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ことくのくるめ",
+            "wikibase_item": "Q107409856"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ番組シリーズ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

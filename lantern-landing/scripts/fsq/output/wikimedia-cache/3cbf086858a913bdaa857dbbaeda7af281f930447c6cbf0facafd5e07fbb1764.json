@@ -1,0 +1,116 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:37.976Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 28617,
+          "ns": 0,
+          "title": "Statue of Liberty",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Front_view_of_Statue_of_Liberty_(cropped).jpg",
+            "wikibase-badge-Q17437796": "",
+            "wikibase-shortdesc": "Colossal sculpture in New York Harbor",
+            "wikibase_item": "Q9202"
+          },
+          "coordinates": [
+            {
+              "lat": 40.68916667,
+              "lon": -74.04444444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "monument in New York"
+            ]
+          }
+        },
+        {
+          "pageid": 4424980,
+          "ns": 0,
+          "title": "Statue of Liberty National Monument",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Statue Of Liberty National Monument",
+            "kartographer_frames": "1",
+            "page_image_free": "Liberty_and_Ellis_Island.jpg",
+            "wikibase-shortdesc": "United States national monument",
+            "wikibase_item": "Q359939"
+          },
+          "coordinates": [
+            {
+              "lat": 40.69416667,
+              "lon": -74.04305556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "United States national monument"
+            ]
+          }
+        },
+        {
+          "pageid": 5378000,
+          "ns": 0,
+          "title": "Replicas of the Statue of Liberty",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Replicas Of The Statue Of Liberty",
+            "page_image_free": "Statue_of_Liberty_Paris_2007-05-29.jpg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q2714997"
+          },
+          "terms": {
+            "description": [
+              "list of replicas of the statue the Statue of Liberty"
+            ]
+          }
+        },
+        {
+          "pageid": 20305637,
+          "ns": 0,
+          "title": "Statue of Liberty (disambiguation)",
+          "index": 5,
+          "pageprops": {
+            "disambiguation": "",
+            "wikibase-shortdesc": "Topics referred to by the same term",
+            "wikibase_item": "Q408577"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        },
+        {
+          "pageid": 31016272,
+          "ns": 0,
+          "title": "Conservation-restoration of the Statue of Liberty",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Statue_of_Liberty_restoration_project.jpg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q7316223"
+          },
+          "terms": {
+            "description": [
+              "The Statue of Liberty's 1984-1986 restoration"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

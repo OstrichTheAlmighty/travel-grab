@@ -1,0 +1,60 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:28.763Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 505055,
+          "ns": 0,
+          "title": "マザー牧場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "まさあほくしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "羊の大行進.jpg",
+            "wikibase_item": "Q575499"
+          },
+          "coordinates": [
+            {
+              "lat": 35.24602778,
+              "lon": 139.93483333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県富津市にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 633566,
+          "ns": 0,
+          "title": "キッザニア東京",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きつさにあとうきよう",
+            "page_image_free": "KidZania_Tokyo.jpg",
+            "wikibase_item": "Q5363436"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65583333,
+              "lon": 139.79194444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区豊洲にある体験型商業施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

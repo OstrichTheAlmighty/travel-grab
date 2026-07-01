@@ -1,0 +1,27 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:40.296Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 181010,
+          "ns": 0,
+          "title": "三島通庸",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みしま みちつね",
+            "page_image_free": "Mishima_Michitsune.jpg",
+            "wikibase_item": "Q4142982"
+          },
+          "terms": {
+            "description": [
+              "日本の武士、内務官僚"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

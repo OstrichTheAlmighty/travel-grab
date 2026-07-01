@@ -1,0 +1,174 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:30:58.479Z",
+  "value": {
+    "searchinfo": {
+      "search": "庚申塔"
+    },
+    "search": [
+      {
+        "id": "Q11486001",
+        "title": "Q11486001",
+        "pageid": 12625581,
+        "concepturi": "http://www.wikidata.org/entity/Q11486001",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11486001",
+        "display": {
+          "label": {
+            "value": "Kōshin-tō",
+            "language": "en"
+          }
+        },
+        "label": "Kōshin-tō",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "庚申塔"
+        },
+        "aliases": [
+          "庚申塔"
+        ]
+      },
+      {
+        "id": "Q84342082",
+        "title": "Q84342082",
+        "pageid": 83643397,
+        "concepturi": "http://www.wikidata.org/entity/Q84342082",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q84342082",
+        "display": {
+          "label": {
+            "value": "Sarutahikookami-to",
+            "language": "en"
+          }
+        },
+        "label": "Sarutahikookami-to",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "庚申塔"
+        },
+        "aliases": [
+          "庚申塔"
+        ]
+      },
+      {
+        "id": "Q84332480",
+        "title": "Q84332480",
+        "pageid": 83633895,
+        "concepturi": "http://www.wikidata.org/entity/Q84332480",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q84332480",
+        "display": {
+          "label": {
+            "value": "koshin-to (Ni-chome, Shinsaku, Takatsu-ku, Kawasaki-shi, Knagawa-ken",
+            "language": "en"
+          }
+        },
+        "label": "koshin-to (Ni-chome, Shinsaku, Takatsu-ku, Kawasaki-shi, Knagawa-ken",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "庚申塔（神奈川県川崎市高津区新作二丁目）"
+        },
+        "aliases": [
+          "庚申塔（神奈川県川崎市高津区新作二丁目）"
+        ]
+      },
+      {
+        "id": "Q84343225",
+        "title": "Q84343225",
+        "pageid": 83644543,
+        "concepturi": "http://www.wikidata.org/entity/Q84343225",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q84343225",
+        "display": {
+          "label": {
+            "value": "Koshin-to (Torisaka, Shimizu-ku, Shizuoka-shi, Shizuoka-ken)",
+            "language": "en"
+          }
+        },
+        "label": "Koshin-to (Torisaka, Shimizu-ku, Shizuoka-shi, Shizuoka-ken)",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "庚申塔（静岡県静岡市清水区鳥坂）"
+        },
+        "aliases": [
+          "庚申塔（静岡県静岡市清水区鳥坂）"
+        ]
+      },
+      {
+        "id": "Q83460278",
+        "title": "Q83460278",
+        "pageid": 82776309,
+        "concepturi": "http://www.wikidata.org/entity/Q83460278",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q83460278",
+        "display": {
+          "label": {
+            "value": "Kōshin-tō Dōhyō (Goryo-jinja)",
+            "language": "en"
+          }
+        },
+        "label": "Kōshin-tō Dōhyō (Goryo-jinja)",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "庚申塔道標（御霊神社）"
+        },
+        "aliases": [
+          "庚申塔道標（御霊神社）"
+        ]
+      },
+      {
+        "id": "Q98280284",
+        "title": "Q98280284",
+        "pageid": 96546942,
+        "concepturi": "http://www.wikidata.org/entity/Q98280284",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q98280284",
+        "display": {
+          "label": {
+            "value": "Koshin-to (Higashikata-tenman-gu)",
+            "language": "en"
+          }
+        },
+        "label": "Koshin-to (Higashikata-tenman-gu)",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "庚申塔（東方天満宮）"
+        },
+        "aliases": [
+          "庚申塔（東方天満宮）"
+        ]
+      },
+      {
+        "id": "Q80549244",
+        "title": "Q80549244",
+        "pageid": 79929686,
+        "concepturi": "http://www.wikidata.org/entity/Q80549244",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q80549244",
+        "display": {
+          "label": {
+            "value": "Kōshin-tō (Ondachō, Aoba-ku, Yokohama) 3",
+            "language": "en"
+          }
+        },
+        "label": "Kōshin-tō (Ondachō, Aoba-ku, Yokohama) 3",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "庚申塔（横浜市青葉区恩田町）3"
+        },
+        "aliases": [
+          "庚申塔（横浜市青葉区恩田町）3"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

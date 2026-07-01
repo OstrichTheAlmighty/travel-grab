@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:37.061Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 80123,
+          "ns": 0,
+          "title": "東京都美術館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようとひしゆつかん",
+            "page_image_free": "Toukyoutoartmuseum.jpg",
+            "wikibase_item": "Q864957"
+          },
+          "terms": {
+            "description": [
+              "東京都台東区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 85208,
+          "ns": 0,
+          "title": "ボストン美術館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ほすとんひしゆつかん",
+            "page_image_free": "MFABoston1.jpg",
+            "wikibase_item": "Q49133"
+          },
+          "coordinates": [
+            {
+              "lat": 42.33916667,
+              "lon": -71.09416667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "アメリカ合衆国、ボストンにある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 90675,
+          "ns": 0,
+          "title": "宮城県美術館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みやきけんひしゆつかん",
+            "page_image_free": "The_miyagi_museum_of_art01s3872.jpg",
+            "wikibase_item": "Q11453791"
+          },
+          "coordinates": [
+            {
+              "lat": 38.264056,
+              "lon": 140.854917,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 2568857,
+          "ns": 0,
+          "title": "佐藤美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さとうひしゆつかん",
+            "page_image_free": "Sato_Museum_of_Art,_Shinjuku_03.jpg",
+            "wikibase_item": "Q11384365"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 2569038,
+          "ns": 0,
+          "title": "佐藤記念美術館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さとうきねんひしゆつかん",
+            "kartographer_frames": "2",
+            "page_image_free": "Sato_Memorial_Art_Museum_Toyama02st3200.jpg",
+            "wikibase_item": "Q11384443"
+          },
+          "coordinates": [
+            {
+              "lat": 36.69388889,
+              "lon": 137.21183333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "富山県富山市の富山城址公園内にある美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

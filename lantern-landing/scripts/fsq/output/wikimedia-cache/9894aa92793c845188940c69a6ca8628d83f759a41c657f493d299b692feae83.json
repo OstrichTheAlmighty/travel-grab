@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:13.157Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 19903,
+          "ns": 0,
+          "title": "国立民族学博物館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こくりつみんそくかくはくふつかん",
+            "page_image_free": "National_museum_of_ethnology_Japan.jpg",
+            "wikibase_item": "Q147157"
+          },
+          "coordinates": [
+            {
+              "lat": 34.81286111,
+              "lon": 135.52968333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の大阪府にある民族学博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 140045,
+          "ns": 0,
+          "title": "服飾",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふくしよく",
+            "page_image_free": "Clothes.jpg",
+            "unexpectedUnconnectedPage": "0"
+          }
+        },
+        {
+          "pageid": 169647,
+          "ns": 0,
+          "title": "文化学園大学",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふんかかくえんたいかく",
+            "page_image_free": "2025_Bunka_Gakuen_University.jpg",
+            "wikibase_item": "Q4997733"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68508333,
+              "lon": 139.69438889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京の私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 575219,
+          "ns": 0,
+          "title": "杉野服飾大学短期大学部",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すきのふくしよくたいかくたんき",
+            "page_image_free": "Sugino_Fashion_Junior_College.JPG",
+            "wikibase_item": "Q11522362"
+          },
+          "terms": {
+            "description": [
+              "廃止予定の大学"
+            ]
+          }
+        },
+        {
+          "pageid": 912780,
+          "ns": 0,
+          "title": "クリノリン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "くりのりん",
+            "page_image_free": "Crinoline_era3.gif",
+            "wikibase_item": "Q836084"
+          }
+        }
+      ]
+    }
+  }
+}

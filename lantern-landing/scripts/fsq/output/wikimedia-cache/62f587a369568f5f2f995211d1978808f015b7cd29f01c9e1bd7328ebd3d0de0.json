@@ -1,0 +1,188 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:51.680Z",
+  "value": {
+    "searchinfo": {
+      "search": "Waterfront Park"
+    },
+    "search": [
+      {
+        "id": "Q7974088",
+        "title": "Q7974088",
+        "pageid": 7916283,
+        "concepturi": "http://www.wikidata.org/entity/Q7974088",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q7974088",
+        "display": {
+          "label": {
+            "value": "Waterfront Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Seattle",
+            "language": "en"
+          }
+        },
+        "label": "Waterfront Park",
+        "description": "park in Seattle",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Waterfront Park"
+        }
+      },
+      {
+        "id": "Q66779099",
+        "title": "Q66779099",
+        "pageid": 66372129,
+        "concepturi": "http://www.wikidata.org/entity/Q66779099",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q66779099",
+        "display": {
+          "label": {
+            "value": "Waterfront Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park along the Embarcadero in San Francisco, California",
+            "language": "en"
+          }
+        },
+        "label": "Waterfront Park",
+        "description": "park along the Embarcadero in San Francisco, California",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Waterfront Park"
+        }
+      },
+      {
+        "id": "Q49577520",
+        "title": "Q49577520",
+        "pageid": 50579727,
+        "concepturi": "http://www.wikidata.org/entity/Q49577520",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q49577520",
+        "display": {
+          "label": {
+            "value": "Waterfront Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Alexandria, Virginia, United States of America",
+            "language": "en"
+          }
+        },
+        "label": "Waterfront Park",
+        "description": "park in Alexandria, Virginia, United States of America",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Waterfront Park"
+        }
+      },
+      {
+        "id": "Q7974086",
+        "title": "Q7974086",
+        "pageid": 7916281,
+        "concepturi": "http://www.wikidata.org/entity/Q7974086",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q7974086",
+        "display": {
+          "label": {
+            "value": "Waterfront Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Charleston, United States of America",
+            "language": "en"
+          }
+        },
+        "label": "Waterfront Park",
+        "description": "park in Charleston, United States of America",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Waterfront Park"
+        }
+      },
+      {
+        "id": "Q49577506",
+        "title": "Q49577506",
+        "pageid": 50579713,
+        "concepturi": "http://www.wikidata.org/entity/Q49577506",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q49577506",
+        "display": {
+          "label": {
+            "value": "Waterfront Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Macomb County, Michigan, United States of America",
+            "language": "en"
+          }
+        },
+        "label": "Waterfront Park",
+        "description": "park in Macomb County, Michigan, United States of America",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Waterfront Park"
+        }
+      },
+      {
+        "id": "Q49577499",
+        "title": "Q49577499",
+        "pageid": 50579706,
+        "concepturi": "http://www.wikidata.org/entity/Q49577499",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q49577499",
+        "display": {
+          "label": {
+            "value": "Waterfront Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Benzie County, Michigan, United States of America",
+            "language": "en"
+          }
+        },
+        "label": "Waterfront Park",
+        "description": "park in Benzie County, Michigan, United States of America",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Waterfront Park"
+        }
+      },
+      {
+        "id": "Q49577501",
+        "title": "Q49577501",
+        "pageid": 50579708,
+        "concepturi": "http://www.wikidata.org/entity/Q49577501",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q49577501",
+        "display": {
+          "label": {
+            "value": "Waterfront Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in the United States of America",
+            "language": "en"
+          }
+        },
+        "label": "Waterfront Park",
+        "description": "park in the United States of America",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Waterfront Park"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

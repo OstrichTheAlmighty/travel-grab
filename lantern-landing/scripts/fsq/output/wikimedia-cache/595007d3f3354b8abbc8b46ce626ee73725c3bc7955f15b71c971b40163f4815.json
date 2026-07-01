@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:11.578Z",
+  "value": {
+    "searchinfo": {
+      "search": "西郷隆盛像"
+    },
+    "search": [
+      {
+        "id": "Q11629701",
+        "title": "Q11629701",
+        "pageid": 12770149,
+        "concepturi": "http://www.wikidata.org/entity/Q11629701",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11629701",
+        "display": {
+          "label": {
+            "value": "statues of Saigō Takamori",
+            "language": "en"
+          },
+          "description": {
+            "value": "set of statues in Japan",
+            "language": "en"
+          }
+        },
+        "label": "statues of Saigō Takamori",
+        "description": "set of statues in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "西郷隆盛像"
+        },
+        "aliases": [
+          "西郷隆盛像"
+        ]
+      },
+      {
+        "id": "Q111023721",
+        "title": "Q111023721",
+        "pageid": 106026353,
+        "concepturi": "http://www.wikidata.org/entity/Q111023721",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q111023721",
+        "display": {
+          "label": {
+            "value": "Statue of Saigo Takamori",
+            "language": "en"
+          }
+        },
+        "label": "Statue of Saigo Takamori",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "西郷隆盛像"
+        },
+        "aliases": [
+          "西郷隆盛像"
+        ]
+      },
+      {
+        "id": "Q106062650",
+        "title": "Q106062650",
+        "pageid": 101384121,
+        "concepturi": "http://www.wikidata.org/entity/Q106062650",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q106062650",
+        "display": {
+          "label": {
+            "value": "Statue of Saigō Takamori",
+            "language": "en"
+          },
+          "description": {
+            "value": "statue in Ueno, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Statue of Saigō Takamori",
+        "description": "statue in Ueno, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "西郷隆盛像"
+        },
+        "aliases": [
+          "西郷隆盛像"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

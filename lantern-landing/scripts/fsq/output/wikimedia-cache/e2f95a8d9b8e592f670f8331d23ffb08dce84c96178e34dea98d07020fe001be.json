@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:47.392Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 68232,
+          "ns": 0,
+          "title": "Baldur's Gate",
+          "index": 3,
+          "pageprops": {
+            "displaytitle": "<i>Baldur's Gate</i>",
+            "page_image_free": "Baldurs_Gate_stacked_logo_circa_Enhanced_Edition.png",
+            "wikibase-shortdesc": "Franchise of fantasy role-playing video games",
+            "wikibase_item": "Q2640148"
+          },
+          "terms": {
+            "description": [
+              "franchise of fantasy role-playing video games"
+            ]
+          }
+        },
+        {
+          "pageid": 92706,
+          "ns": 0,
+          "title": "Heaven's Gate (film)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Heaven's Gate (Film)",
+            "displaytitle": "<i>Heaven's Gate</i> (film)",
+            "page_image": "Heavens_gate_post.jpg",
+            "wikibase-shortdesc": "1980 American Western film by Michael Cimino",
+            "wikibase_item": "Q148204"
+          },
+          "terms": {
+            "description": [
+              "1980 American Western film directed by Michael Cimino"
+            ]
+          }
+        },
+        {
+          "pageid": 23185594,
+          "ns": 0,
+          "title": "Steins;Gate",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Steins Gate",
+            "displaytitle": "<i>Steins;Gate</i>",
+            "page_image": "Steins;Gate_cover_art.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "Japanese visual novel video game",
+            "wikibase_item": "Q482494"
+          },
+          "terms": {
+            "description": [
+              "2009 visual novel game"
+            ]
+          }
+        },
+        {
+          "pageid": 54164625,
+          "ns": 0,
+          "title": "Steins;Gate Elite",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Steins Gate Elite",
+            "displaytitle": "<i>Steins;Gate Elite</i>",
+            "page_image": "Steins;Gate_Elite.png",
+            "wikibase-shortdesc": "Japanese visual novel game",
+            "wikibase_item": "Q40887622"
+          },
+          "terms": {
+            "description": [
+              "Japanese visual novel game"
+            ]
+          }
+        },
+        {
+          "pageid": 83394206,
+          "ns": 0,
+          "title": "MacOS Golden Gate",
+          "index": 5,
+          "pageprops": {
+            "displaytitle": "macOS Golden Gate",
+            "page_image": "MacOS_Golden_Gate_screenshot.png",
+            "wikibase-shortdesc": "2026 operating system version",
+            "wikibase_item": "Q139601515"
+          },
+          "terms": {
+            "description": [
+              "future 23rd major version of the macOS operating system"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

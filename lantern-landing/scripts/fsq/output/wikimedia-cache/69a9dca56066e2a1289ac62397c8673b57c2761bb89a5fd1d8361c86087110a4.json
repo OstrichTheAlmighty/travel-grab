@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:34.637Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 763711,
+          "ns": 0,
+          "title": "南足立郡",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みなみあたちくん",
+            "page_image_free": "Tokyo_MinamiAdachi-gun.png",
+            "wikibase_item": "Q10909044"
+          },
+          "terms": {
+            "description": [
+              "日本の東京府にあった郡"
+            ]
+          }
+        },
+        {
+          "pageid": 926017,
+          "ns": 0,
+          "title": "青井 (足立区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あおい",
+            "kartographer_frames": "1",
+            "page_image_free": "Aoi_Heiwa_Street.jpg",
+            "wikibase_item": "Q11661084"
+          },
+          "terms": {
+            "description": [
+              "東京都足立区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 954788,
+          "ns": 0,
+          "title": "興野 (足立区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おきの",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q11613475"
+          },
+          "terms": {
+            "description": [
+              "東京都足立区の町"
+            ]
+          }
+        },
+        {
+          "pageid": 1079365,
+          "ns": 0,
+          "title": "江北村",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こうほくむら",
+            "wikibase_item": "Q11550671"
+          },
+          "coordinates": [
+            {
+              "lat": 35.77494,
+              "lon": 139.76231,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京府南足立郡にあった村"
+            ]
+          }
+        },
+        {
+          "pageid": 1429706,
+          "ns": 0,
+          "title": "足立区立郷土博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あたちくりつきようとはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Adachi_Museum.JPG",
+            "wikibase_item": "Q11636983"
+          },
+          "coordinates": [
+            {
+              "lat": 35.78452778,
+              "lon": 139.84161111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都足立区の博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

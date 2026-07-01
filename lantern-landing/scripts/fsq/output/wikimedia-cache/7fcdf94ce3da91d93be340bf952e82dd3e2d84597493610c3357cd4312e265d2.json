@@ -1,0 +1,88 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:35.932Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 321537,
+          "ns": 0,
+          "title": "Kyokushin",
+          "index": 1,
+          "pageprops": {
+            "wikibase-shortdesc": "Style of karate",
+            "wikibase_item": "Q242791"
+          },
+          "terms": {
+            "description": [
+              "full contact karate organization founded"
+            ]
+          }
+        },
+        {
+          "pageid": 992614,
+          "ns": 0,
+          "title": "Kenji Shimizu",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Shimizu, Kenji",
+            "page_image_free": "Kenji_Shimizu.jpg",
+            "wikibase-shortdesc": "Japanese aikido teacher and style founder",
+            "wikibase_item": "Q562345"
+          },
+          "terms": {
+            "description": [
+              "Japanese aikido teacher and style founder"
+            ]
+          }
+        },
+        {
+          "pageid": 5935164,
+          "ns": 0,
+          "title": "International Brazilian Jiu-Jitsu Federation",
+          "index": 3,
+          "pageprops": {
+            "page_image": "International_Brazilian_Jiu-Jitsu_Federation_logo.svg",
+            "wikibase-shortdesc": "Grappling competition organizer",
+            "wikibase_item": "Q6048842"
+          },
+          "terms": {
+            "description": [
+              "organization"
+            ]
+          }
+        },
+        {
+          "pageid": 51031388,
+          "ns": 0,
+          "title": "Ryushin Shouchi Ryu",
+          "index": 2,
+          "pageprops": {
+            "wikibase_item": "Q86730111"
+          }
+        },
+        {
+          "pageid": 65751124,
+          "ns": 0,
+          "title": "Hideo Nakamura",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Nakamura, Hideo",
+            "wikibase-shortdesc": "Korean Japanese karateka (1913–2013)",
+            "wikibase_item": "Q11365653"
+          },
+          "terms": {
+            "description": [
+              "Korean-Japanese full-contact karate master, the founder of Karatedo Kendokai (1913–2013)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

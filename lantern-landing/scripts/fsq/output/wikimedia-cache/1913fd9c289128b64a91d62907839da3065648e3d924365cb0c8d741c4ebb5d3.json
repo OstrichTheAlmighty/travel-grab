@@ -1,0 +1,128 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:36.170Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 278281,
+          "ns": 0,
+          "title": "中央大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ちゆうおう",
+            "page_image_free": "FOREST_GATEWAY_CHUO-2.jpg",
+            "wikibase_item": "Q1091287"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64138611,
+              "lon": 139.40573889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都八王子市にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 302861,
+          "ns": 0,
+          "title": "関西学院大学",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かんせいかくいん",
+            "page_image_free": "170311_Kwansei_Gakuin_University_Nishinomiya_Hyogo_pref_Japan08n.jpg",
+            "wikibase_item": "Q1036470"
+          },
+          "coordinates": [
+            {
+              "lat": 34.76794444,
+              "lon": 135.34655556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県西宮市にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 1924341,
+          "ns": 0,
+          "title": "法政大学",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ほうせいたいかく",
+            "page_image_free": "法政大学市ヶ谷キャンパス.jpg",
+            "wikibase_item": "Q1323040"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69563889,
+              "lon": 139.74066667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都千代田区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 2758569,
+          "ns": 0,
+          "title": "慶應義塾大学",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "けいおうきしゆくたいかく",
+            "page_image_free": "Old_Keio_University_Library_3.jpg",
+            "wikibase_item": "Q815432"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64894444,
+              "lon": 139.74291667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 3495031,
+          "ns": 0,
+          "title": "一宮市立図書館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いちのみやしりつとしよかん",
+            "page_image_free": "Civic_Complex_Building_in_front_of_Owari-Ichinomiya_Station_ac_(7).jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q27925496"
+          },
+          "terms": {
+            "description": [
+              "愛知県一宮市の公共図書館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:20.222Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 8607,
+          "ns": 0,
+          "title": "日本書紀",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんしよき",
+            "page_image_free": "Nihonshoki_tanaka_version.jpg",
+            "wikibase_item": "Q813935"
+          },
+          "terms": {
+            "description": [
+              "日本の奈良時代に完成した最古の正史"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

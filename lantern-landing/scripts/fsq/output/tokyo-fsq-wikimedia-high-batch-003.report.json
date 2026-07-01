@@ -1,0 +1,2275 @@
+{
+  "generatedAt": "2026-06-29T07:30:05.334Z",
+  "tierAInputCount": 3200,
+  "pilotLimit": 250,
+  "verifiedWikidataMatches": 38,
+  "probableManualReviewMatches": 0,
+  "rejectedRecords": 210,
+  "unmatchedPlaces": 2,
+  "rejectedFalseMatches": 463,
+  "matchRate": 0.152,
+  "englishNameCoverage": 0.22,
+  "japaneseNameCoverage": 0.98,
+  "descriptionCoverage": 0.132,
+  "reusableImageCoverage": 0.116,
+  "licenseBreakdown": {
+    "CC BY-SA 3.0": 6,
+    "Public domain": 4,
+    "CC BY-SA 4.0": 12,
+    "CC BY 3.0": 1,
+    "CC BY 2.5": 1,
+    "CC0": 5
+  },
+  "completeImageAttribution": 29,
+  "tokyoCoreCount": 3005,
+  "broaderTokyoCount": 84,
+  "metroExcursionCount": 64,
+  "reserveCount": 47,
+  "top100TokyoCore": [
+    {
+      "rank": 1,
+      "fsqPlaceId": "4b569977f964a520551628e3",
+      "name": "東京スカイツリー (Tokyo Skytree)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 94.5,
+      "wikidataId": "Q57965",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 2,
+      "fsqPlaceId": "4b56a5e8f964a5208e1728e3",
+      "name": "東京タワー (Tokyo Tower)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 94.5,
+      "wikidataId": "Q183536",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 3,
+      "fsqPlaceId": "4bcd1ed368f976b01ff36383",
+      "name": "紙の博物館(Paper Museum)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 91.3,
+      "wikidataId": "Q11605492",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 4,
+      "fsqPlaceId": "55022c3d498e57abfa6d92fb",
+      "name": "たばこと塩の博物館 (Tobacco & Salt Museum)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 91.3,
+      "wikidataId": "Q11271253",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 5,
+      "fsqPlaceId": "8aa9f2c99db54fa489237417",
+      "name": "日本銀行金融研究所貨幣博物館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 90,
+      "wikidataId": "Q865607",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 6,
+      "fsqPlaceId": "4b64e8a7f964a52022d92ae3",
+      "name": "地下鉄博物館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 89.9,
+      "wikidataId": "Q11424081",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 7,
+      "fsqPlaceId": "5944da91625a6664442057d5",
+      "name": "刀剣博物館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 89,
+      "wikidataId": "Q3329874",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 8,
+      "fsqPlaceId": "4bd932212e6f0f4783020a08",
+      "name": "日本民藝館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 88.6,
+      "wikidataId": "Q3789149",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 9,
+      "fsqPlaceId": "5311307e498ed0b343f75113",
+      "name": "郵政博物館 (Postal Museum Japan)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 88.2,
+      "wikidataId": "Q17225229",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 10,
+      "fsqPlaceId": "4c2043168b3aa59363c59e5f",
+      "name": "早稲田大学 坪内博士記念演劇博物館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 88,
+      "wikidataId": "Q3951945",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 11,
+      "fsqPlaceId": "4b7396b7f964a52021b52de3",
+      "name": "世田谷文学館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 87.7,
+      "wikidataId": "Q11362100",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 12,
+      "fsqPlaceId": "670a27a225b6955ac2dfdaef",
+      "name": "ニコンミュージアム",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 87.7,
+      "wikidataId": "Q21654020",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 13,
+      "fsqPlaceId": "67de7f37fb58ce798dd6f9d2",
+      "name": "こち亀記念館 (Kochikame Museum)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 86.6,
+      "wikidataId": "Q134972437",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 14,
+      "fsqPlaceId": "4d3ec3dacc4c59410c3d1ee6",
+      "name": "日本近代文学館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 86,
+      "wikidataId": "Q1954709",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 15,
+      "fsqPlaceId": "4eab534202d52c460b376c3d",
+      "name": "お札と切手の博物館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 86,
+      "wikidataId": "Q11263157",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 16,
+      "fsqPlaceId": "4b710430f964a52067372de3",
+      "name": "消防博物館 (東京消防庁 消防防災資料センター)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 85.7,
+      "wikidataId": "Q11559505",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 17,
+      "fsqPlaceId": "4eb104ef61afbb09a02d618b",
+      "name": "日比谷図書文化館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 85.7,
+      "wikidataId": "Q11509583",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 18,
+      "fsqPlaceId": "4b8df872f964a520e81433e3",
+      "name": "憲政記念館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 85.2,
+      "wikidataId": "Q11495238",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 19,
+      "fsqPlaceId": "4c2817f9ce3fc928b8c46c88",
+      "name": "民音音楽博物館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 85.2,
+      "wikidataId": "Q65272034",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 20,
+      "fsqPlaceId": "4e3e205e62e19d610978b775",
+      "name": "東京理科大学 近代科学資料館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 85.2,
+      "wikidataId": "Q11525035",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 21,
+      "fsqPlaceId": "59d2fe1cc0f16350a6669f87",
+      "name": "漱石山房記念館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 85.2,
+      "wikidataId": "Q24862403",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 22,
+      "fsqPlaceId": "5c36e032fdb9a7002c292bb5",
+      "name": "六本木ミュージアム",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 85.2,
+      "wikidataId": "Q115977950",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 23,
+      "fsqPlaceId": "602543e9fa4517380b463834",
+      "name": "市谷の杜 本と活字館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 85.2,
+      "wikidataId": "Q140025038",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 24,
+      "fsqPlaceId": "4e6c55ce483b1f5ebe0a1873",
+      "name": "木材・合板博物館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 84.6,
+      "wikidataId": "Q11518627",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 25,
+      "fsqPlaceId": "537ae0b3498e9a76c532ceee",
+      "name": "オカムラいすの博物館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 84.6,
+      "wikidataId": "Q17224098",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 26,
+      "fsqPlaceId": "4d479553564e224b1f28d3cd",
+      "name": "世界のカバン博物館 (World Bag&Luggage Museum)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 84.5,
+      "wikidataId": "Q104698116",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 27,
+      "fsqPlaceId": "4eb21aae9911d335b05a64e4",
+      "name": "山王草堂記念館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 83.6,
+      "wikidataId": "Q116564594",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 28,
+      "fsqPlaceId": "5d7f1dcacda09f00084341b8",
+      "name": "日本オリンピックミュージアム",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 83.6,
+      "wikidataId": "Q140042196",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 29,
+      "fsqPlaceId": "5db93a37d9d8d8000706c627",
+      "name": "明治神宮ミュージアム",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 83.6,
+      "wikidataId": "Q127692420",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 30,
+      "fsqPlaceId": "4eb9bfed722edc0eaee97a2e",
+      "name": "翡翠原石館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 83.1,
+      "wikidataId": "Q136707259",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 31,
+      "fsqPlaceId": "4b8dcbd2f964a520250e33e3",
+      "name": "旧台徳院霊廟惣門",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 81.6,
+      "wikidataId": "Q113385105",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 32,
+      "fsqPlaceId": "4fcae9fbe4b09ba63b831fcf",
+      "name": "津波警告の碑 (波除碑)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 81.6,
+      "wikidataId": "Q109360094",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 33,
+      "fsqPlaceId": "4b710841f964a520c4372de3",
+      "name": "釣り文化資料館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 81.5,
+      "wikidataId": "Q104698254",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 34,
+      "fsqPlaceId": "532d0a48498ec36993b26e66",
+      "name": "Bicycle Culture Center",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 81.5,
+      "wikidataId": "Q104698204",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 35,
+      "fsqPlaceId": "688daab1bfffa54f8b238716",
+      "name": "民主主義博物館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 81.5,
+      "wikidataId": "Q135085261",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 66,
+      "fsqPlaceId": "4bce9d18fb84c9b64b25243e",
+      "name": "自由の女神像 (Statue of Liberty)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 80.6,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 86,
+      "fsqPlaceId": "4b8e328df964a5202b1b33e3",
+      "name": "講道館 (The Kodokan Judo Institute)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 79.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 87,
+      "fsqPlaceId": "4dba63edfa8c2e303f23e7bc",
+      "name": "スノードーム美術館 (Snowdome Museum)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 79.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 88,
+      "fsqPlaceId": "4e86a003be7bfa93092cb6d0",
+      "name": "マダム・タッソー東京 (Madame Tussauds Tokyo)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 79.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 89,
+      "fsqPlaceId": "4eb8b7ade5fa17fc882a43e8",
+      "name": "外交史料館 (Diplomatic Archives)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 79.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 90,
+      "fsqPlaceId": "514eb24ae4b0c471f6972a3e",
+      "name": "INTERMEDIATHEQUE (インターメディアテク)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 79.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 91,
+      "fsqPlaceId": "55b71225498e842f309ea20d",
+      "name": "金融/知のLANDSCAPE",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 79.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 92,
+      "fsqPlaceId": "5763b81dcd10254325bc54f6",
+      "name": "建築倉庫 ARCHI-DEPOT",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 79.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 93,
+      "fsqPlaceId": "5967567ee2da1966bc340b56",
+      "name": "TOKYOミナトリエ",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 79.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 94,
+      "fsqPlaceId": "605819f42d587c167c57d45e",
+      "name": "三菱UFJニコス カードギャラリー",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 79.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 95,
+      "fsqPlaceId": "6631e30e287e9a7abbd2b134",
+      "name": "お〜いお茶ミュージアム (Oi Ocha Museum)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 79.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 102,
+      "fsqPlaceId": "5211620511d2c83296a9fda5",
+      "name": "オリンピック記念塔(Olympic Memorial Tower)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 78,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 283,
+      "fsqPlaceId": "4b6e4af4f964a520a4b62ce3",
+      "name": "「食と農」の博物館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 284,
+      "fsqPlaceId": "4b7785acf964a520a99f2ee3",
+      "name": "台東区環境ふれあい館ひまわり",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 285,
+      "fsqPlaceId": "4b7e0a68f964a5205fe02fe3",
+      "name": "国学発祥之地",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 286,
+      "fsqPlaceId": "4b8c83c6f964a5209cd432e3",
+      "name": "日本製紙ペーパーギャラリー",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 287,
+      "fsqPlaceId": "4b9730c9f964a52092fb34e3",
+      "name": "わだつみのこえ記念館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 288,
+      "fsqPlaceId": "4bbdc3018ec3d13af85f1c28",
+      "name": "お玉が池種痘所跡",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 289,
+      "fsqPlaceId": "4bbfef71f8219c74f6f8b010",
+      "name": "国立公文書館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 290,
+      "fsqPlaceId": "4be125bea7380f47726319b0",
+      "name": "柴又のおもちゃ博物館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 291,
+      "fsqPlaceId": "4c1300e2a1010f470d044a18",
+      "name": "旧 江戸川乱歩邸",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 292,
+      "fsqPlaceId": "4c621cecfa7bc92869930d27",
+      "name": "池袋防災館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 293,
+      "fsqPlaceId": "4ca428275720b1f7c90238ef",
+      "name": "富士見多聞",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 294,
+      "fsqPlaceId": "4d2710294ab78eec6d452c26",
+      "name": "ブレーキ博物館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 295,
+      "fsqPlaceId": "4d9691d9daec224bbd1a1b3e",
+      "name": "駄菓子屋ゲーム博物館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 296,
+      "fsqPlaceId": "4dce155dcc3f07eb1f0638e6",
+      "name": "秩父宮記念スポーツ博物館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 297,
+      "fsqPlaceId": "4e2e4baa62e1fbac610007f4",
+      "name": "両国 花火資料館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 298,
+      "fsqPlaceId": "4e3789fb483bda3eb1125491",
+      "name": "トキワ荘のヒーローたち",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 299,
+      "fsqPlaceId": "4e40b6bd18389e021465f0ea",
+      "name": "ゆしまの小林 (おりがみ会館)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 300,
+      "fsqPlaceId": "4e477ed81f6e29f10db4dc89",
+      "name": "江戸開城会見の地 (薩摩藩蔵屋敷跡)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 301,
+      "fsqPlaceId": "4eab9af8b803cf1ffb9c6a8e",
+      "name": "長州藩大砲鋳造場跡",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 302,
+      "fsqPlaceId": "4eb5fe35f790d87d02fe494e",
+      "name": "阿久悠記念館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 303,
+      "fsqPlaceId": "4eb62f266da1df9ffad3427f",
+      "name": "東洋文庫ミュージアム",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 304,
+      "fsqPlaceId": "4f6ab373e4b07199a89fcda5",
+      "name": "旧寛永寺 五重塔",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 305,
+      "fsqPlaceId": "4f6eb402e4b03b575d6b1eb5",
+      "name": "唐澤博物館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 306,
+      "fsqPlaceId": "4fd0a88fe5e8d5f6e7497397",
+      "name": "赤坂御用地",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 307,
+      "fsqPlaceId": "500b4f41e4b001d6c58d6285",
+      "name": "立原道造記念館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 308,
+      "fsqPlaceId": "50373a03e4b00554dd727717",
+      "name": "法務史料展示室・メッセージギャラリー",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 309,
+      "fsqPlaceId": "50c021a4e4b08c1f63d7e6b5",
+      "name": "山田洋次ミュージアム",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 310,
+      "fsqPlaceId": "518c630f498edf83d0ad282e",
+      "name": "屏風博物館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 311,
+      "fsqPlaceId": "51a3944a501930af7d05ecad",
+      "name": "塚田工房 江戸木目込人形博物館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 312,
+      "fsqPlaceId": "51a40c7550196a654f7af2c4",
+      "name": "桐の博物館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 313,
+      "fsqPlaceId": "51a9633150199f3c6186a7e7",
+      "name": "花王ミュージアム",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 314,
+      "fsqPlaceId": "51b2a87e498e7d57aca661bd",
+      "name": "昭和女子大学 光葉博物館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 315,
+      "fsqPlaceId": "51c54391498efa7848897e06",
+      "name": "石川島資料館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 316,
+      "fsqPlaceId": "52047c39498e0a54e39f41bf",
+      "name": "日本文具資料館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 317,
+      "fsqPlaceId": "54f70b3e498ee95e2fbc80df",
+      "name": "精製糖工業発祥の地",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 318,
+      "fsqPlaceId": "55c58a84498ec4a1e310eada",
+      "name": "声優ミュージアム",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 319,
+      "fsqPlaceId": "55f3aac2498ecab71cf337c6",
+      "name": "ボタンの博物館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 320,
+      "fsqPlaceId": "5636fbef498e3254301b47b4",
+      "name": "国宝 埴輪 挂甲の武人",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 321,
+      "fsqPlaceId": "56baa52c498e92bb58ea05ef",
+      "name": "御仮寓所旧高松宮邸",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 322,
+      "fsqPlaceId": "575bf0a6498e5ed05857f173",
+      "name": "ESP Museum",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 323,
+      "fsqPlaceId": "579bac40498e05138e559c35",
+      "name": "サトちゃんミュージアム",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 324,
+      "fsqPlaceId": "579d4136498e2f42937e977f",
+      "name": "しながわ防災体験館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 325,
+      "fsqPlaceId": "581530fd38fa2885e6caaa04",
+      "name": "木組み博物館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 326,
+      "fsqPlaceId": "583813b33bd4ab217ad58076",
+      "name": "北原コレクション",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 328,
+      "fsqPlaceId": "5a214d24e179100e0450a709",
+      "name": "常盤松御用邸(常陸宮邸)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 329,
+      "fsqPlaceId": "5c68f4c498fbfc002c02f585",
+      "name": "Kudan House",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 330,
+      "fsqPlaceId": "5c9501cfcf72a0002c4a36d4",
+      "name": "昭和ネオン高村看板ミュージアム",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 331,
+      "fsqPlaceId": "5cffe3c9cf3c406b8d3cf7fe",
+      "name": "芸術による教育の会",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 332,
+      "fsqPlaceId": "5dabf3a944d95f0008d0c3d5",
+      "name": "本のミュージアム",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 333,
+      "fsqPlaceId": "5f07e5530f4f9c3f16f7940a",
+      "name": "クロネコヤマトミュージアム",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 334,
+      "fsqPlaceId": "60b1df0e1a5c47058e761d04",
+      "name": "池上本門寺 霊寶殿",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 335,
+      "fsqPlaceId": "61025e9cd9c1144b77278cf4",
+      "name": "亀形文鎮〔栗原貞乗 作〕",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 336,
+      "fsqPlaceId": "621888383c0af57fe96398fe",
+      "name": "ブレーキ博物館",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.5,
+      "matchStatus": "rejected"
+    }
+  ],
+  "top30MetroExcursions": [
+    {
+      "rank": 1,
+      "fsqPlaceId": "4b5a9531f964a52078cc28e3",
+      "name": "新横浜ラーメン博物館 (Shin-Yokohama Ramen Museum)",
+      "category": "food",
+      "catalog": "metro_excursion",
+      "score": 76.7,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 2,
+      "fsqPlaceId": "4ddd219d52b177ff2e7c3763",
+      "name": "日吉の森 庭園美術館",
+      "category": "culture",
+      "catalog": "metro_excursion",
+      "score": 75.6,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 3,
+      "fsqPlaceId": "4b56ee34f964a520a51f28e3",
+      "name": "東京ディズニーリゾート (Tokyo Disney Resort)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 73.7,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 4,
+      "fsqPlaceId": "4b59ebdaf964a52002a128e3",
+      "name": "東京ディズニーランド (Tokyo Disneyland)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 72.5,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 5,
+      "fsqPlaceId": "4c2bf7fe8abca593441c0120",
+      "name": "東京ディズニーシー (Tokyo DisneySea)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 72.5,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 6,
+      "fsqPlaceId": "4e630c71ae60e9edf6077c94",
+      "name": "ピクニックエリア (Picnic Area)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 70.7,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 7,
+      "fsqPlaceId": "4b64f016f964a5200adb2ae3",
+      "name": "夢見ヶ崎動物公園",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 68.1,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 8,
+      "fsqPlaceId": "4f5c0be1e4b086681badb020",
+      "name": "ひでくんちのいちご畑",
+      "category": "food",
+      "catalog": "metro_excursion",
+      "score": 67,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 9,
+      "fsqPlaceId": "4b7f7843f964a5204e3030e3",
+      "name": "トゥーンタウン (TOONTOWN)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 66.5,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 10,
+      "fsqPlaceId": "4bd37f0ccaff95210619d5f0",
+      "name": "メインエントランス (Main Entrance)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 66.5,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 11,
+      "fsqPlaceId": "4bf0f2676f8aa5935166c23c",
+      "name": "ブローフィッシュ・バルーンレース (Blowfish Balloon Race)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 66.5,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 12,
+      "fsqPlaceId": "4c2c4ce677cfe21effdab5f1",
+      "name": "ウォーターフロントパーク ( Waterfront Park)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 66.5,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 13,
+      "fsqPlaceId": "4c70a441b5a5236a8b235152",
+      "name": "ジャンピン・ジェリーフィッシュ (Jumpim' Jellyfish)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 66.5,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 14,
+      "fsqPlaceId": "4c8adc701eafb1f7b2877e35",
+      "name": "トゥモローランド (Tomorrow Land)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 66.5,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 15,
+      "fsqPlaceId": "6636fbb5637c5c1fae105ad2",
+      "name": "ファンタジースプリングス (Fantasy Springs)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 66.5,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 16,
+      "fsqPlaceId": "4b7f3b13f964a520ed2030e3",
+      "name": "トムソーヤ島 (Tom Sawyer Island)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 17,
+      "fsqPlaceId": "4b89cc57f964a520da4d32e3",
+      "name": "チップとデールのツリーハウス (Chip'n Dale's  Treehouse)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 18,
+      "fsqPlaceId": "4b89ceaff964a520f14d32e3",
+      "name": "トゥーンパーク (Toon Park)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 19,
+      "fsqPlaceId": "4b89d7e6f964a520b85032e3",
+      "name": "フォートレス・エクスプロレーション (Fortress Explorations)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 20,
+      "fsqPlaceId": "4b89e025f964a5202f5332e3",
+      "name": "アリエルのグリーティンググロット (Ariel's Greeting Grotto)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 21,
+      "fsqPlaceId": "4c0336ca39d476b00ce42fa7",
+      "name": "ウエスタンランド (Westernland)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 22,
+      "fsqPlaceId": "4c8aefc3a92fa093b86196bf",
+      "name": "ファンタジーランド (Fantasyland)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 23,
+      "fsqPlaceId": "4c96a37d72dd224b6335ae91",
+      "name": "ビリエッテリーア (Biglietteria)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 24,
+      "fsqPlaceId": "4cc4dedfbe40a35d6556814c",
+      "name": "トゥモローランド・ホール (Tomorrowland Hall)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 25,
+      "fsqPlaceId": "4cc4ef291e596dcb4e04d567",
+      "name": "インジャンジョーの洞窟（Injun Joe's Cave）",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 26,
+      "fsqPlaceId": "4cc79f868c5b236aeeb6fa6d",
+      "name": "カメラセンター (CAMERA CENTER)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 27,
+      "fsqPlaceId": "4d0dbfbf95c1a1cdee3204ff",
+      "name": "サルードス・アミーゴス！(\"Saludos Amigos!\" Greeting Dock)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 28,
+      "fsqPlaceId": "4d74290afe1b721e8938aa1f",
+      "name": "チケットブース (Ticketing Booth)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 29,
+      "fsqPlaceId": "661cd18d7ca4316f63858de3",
+      "name": "クワッキーセレブレーション ドナルド・ザ・レジェンド!",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 64.7,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 30,
+      "fsqPlaceId": "53646183498e2cafa287e599",
+      "name": "新横浜公園 第1運動広場",
+      "category": "free",
+      "catalog": "metro_excursion",
+      "score": 63.5,
+      "matchStatus": "unmatched"
+    }
+  ],
+  "top20PerCategory": {
+    "culture": [
+      {
+        "rank": 1,
+        "fsqPlaceId": "4b569977f964a520551628e3",
+        "name": "東京スカイツリー (Tokyo Skytree)",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 94.5,
+        "wikidataId": "Q57965",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 2,
+        "fsqPlaceId": "4b56a5e8f964a5208e1728e3",
+        "name": "東京タワー (Tokyo Tower)",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 94.5,
+        "wikidataId": "Q183536",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 3,
+        "fsqPlaceId": "4bcd1ed368f976b01ff36383",
+        "name": "紙の博物館(Paper Museum)",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 91.3,
+        "wikidataId": "Q11605492",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 4,
+        "fsqPlaceId": "55022c3d498e57abfa6d92fb",
+        "name": "たばこと塩の博物館 (Tobacco & Salt Museum)",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 91.3,
+        "wikidataId": "Q11271253",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 5,
+        "fsqPlaceId": "8aa9f2c99db54fa489237417",
+        "name": "日本銀行金融研究所貨幣博物館",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 90,
+        "wikidataId": "Q865607",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 6,
+        "fsqPlaceId": "4b64e8a7f964a52022d92ae3",
+        "name": "地下鉄博物館",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 89.9,
+        "wikidataId": "Q11424081",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 7,
+        "fsqPlaceId": "5944da91625a6664442057d5",
+        "name": "刀剣博物館",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 89,
+        "wikidataId": "Q3329874",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 8,
+        "fsqPlaceId": "4bd932212e6f0f4783020a08",
+        "name": "日本民藝館",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 88.6,
+        "wikidataId": "Q3789149",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 9,
+        "fsqPlaceId": "5311307e498ed0b343f75113",
+        "name": "郵政博物館 (Postal Museum Japan)",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 88.2,
+        "wikidataId": "Q17225229",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 10,
+        "fsqPlaceId": "4c2043168b3aa59363c59e5f",
+        "name": "早稲田大学 坪内博士記念演劇博物館",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 88,
+        "wikidataId": "Q3951945",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 11,
+        "fsqPlaceId": "4b7396b7f964a52021b52de3",
+        "name": "世田谷文学館",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 87.7,
+        "wikidataId": "Q11362100",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 12,
+        "fsqPlaceId": "670a27a225b6955ac2dfdaef",
+        "name": "ニコンミュージアム",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 87.7,
+        "wikidataId": "Q21654020",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 13,
+        "fsqPlaceId": "67de7f37fb58ce798dd6f9d2",
+        "name": "こち亀記念館 (Kochikame Museum)",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 86.6,
+        "wikidataId": "Q134972437",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 14,
+        "fsqPlaceId": "4d3ec3dacc4c59410c3d1ee6",
+        "name": "日本近代文学館",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 86,
+        "wikidataId": "Q1954709",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 15,
+        "fsqPlaceId": "4eab534202d52c460b376c3d",
+        "name": "お札と切手の博物館",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 86,
+        "wikidataId": "Q11263157",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 16,
+        "fsqPlaceId": "4b710430f964a52067372de3",
+        "name": "消防博物館 (東京消防庁 消防防災資料センター)",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 85.7,
+        "wikidataId": "Q11559505",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 17,
+        "fsqPlaceId": "4eb104ef61afbb09a02d618b",
+        "name": "日比谷図書文化館",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 85.7,
+        "wikidataId": "Q11509583",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 1,
+        "fsqPlaceId": "34201ba6efaf455774a2f157",
+        "name": "Advertising Museum Tokyo",
+        "category": "culture",
+        "catalog": "broader_tokyo",
+        "score": 85.6,
+        "wikidataId": "Q11284141",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 18,
+        "fsqPlaceId": "4b8df872f964a520e81433e3",
+        "name": "憲政記念館",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 85.2,
+        "wikidataId": "Q11495238",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 19,
+        "fsqPlaceId": "4c2817f9ce3fc928b8c46c88",
+        "name": "民音音楽博物館",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 85.2,
+        "wikidataId": "Q65272034",
+        "matchStatus": "verified"
+      }
+    ],
+    "adventure": [
+      {
+        "rank": 38,
+        "fsqPlaceId": "4cc794620fa2721eb42b5fb1",
+        "name": "ベビーセンター (BABY CENTER)",
+        "category": "adventure",
+        "catalog": "broader_tokyo",
+        "score": 65,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 46,
+        "fsqPlaceId": "4e9e31b6b6340e3e347e2b48",
+        "name": "Triton's Kingdom",
+        "category": "adventure",
+        "catalog": "broader_tokyo",
+        "score": 62,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 50,
+        "fsqPlaceId": "50404a60e4b0f7ca2b779a48",
+        "name": "シュテルンビルド",
+        "category": "adventure",
+        "catalog": "broader_tokyo",
+        "score": 61.3,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 51,
+        "fsqPlaceId": "56ab0854498e5b44be3878e3",
+        "name": "コカコーラ場",
+        "category": "adventure",
+        "catalog": "broader_tokyo",
+        "score": 61.3,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 80,
+        "fsqPlaceId": "505583b6e4b0e5434d2295fa",
+        "name": "吾、大地",
+        "category": "adventure",
+        "catalog": "broader_tokyo",
+        "score": 47.3,
+        "matchStatus": "rejected"
+      }
+    ],
+    "nature": [
+      {
+        "rank": 34,
+        "fsqPlaceId": "4ddfafabae60c015c09bf2e8",
+        "name": "谷戸橋広場",
+        "category": "nature",
+        "catalog": "broader_tokyo",
+        "score": 67.3,
+        "matchStatus": "rejected"
+      }
+    ],
+    "food": [
+      {
+        "rank": 527,
+        "fsqPlaceId": "6629eb792ba9fb3a3c960a9b",
+        "name": "喫茶タイムマシン",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 73.4,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 903,
+        "fsqPlaceId": "3625908d89eb497597e9a1e1",
+        "name": "pioppino",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 67.4,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 907,
+        "fsqPlaceId": "588c434eac136914a6088536",
+        "name": "弘仁亭・無事庵",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 67.4,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 2831,
+        "fsqPlaceId": "4de30b37fa7651589f0ea19f",
+        "name": "鮨やなぎ",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 51.2,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 2832,
+        "fsqPlaceId": "56834891498e49bd08591970",
+        "name": "勝田商店",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 51.2,
+        "matchStatus": "rejected"
+      }
+    ]
+  },
+  "lowestRanked50Pilot": [
+    {
+      "rank": 80,
+      "fsqPlaceId": "505583b6e4b0e5434d2295fa",
+      "name": "吾、大地",
+      "category": "adventure",
+      "catalog": "broader_tokyo",
+      "score": 47.3,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 2832,
+      "fsqPlaceId": "56834891498e49bd08591970",
+      "name": "勝田商店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 51.2,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 2831,
+      "fsqPlaceId": "4de30b37fa7651589f0ea19f",
+      "name": "鮨やなぎ",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 51.2,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 51,
+      "fsqPlaceId": "56ab0854498e5b44be3878e3",
+      "name": "コカコーラ場",
+      "category": "adventure",
+      "catalog": "broader_tokyo",
+      "score": 61.3,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 50,
+      "fsqPlaceId": "50404a60e4b0f7ca2b779a48",
+      "name": "シュテルンビルド",
+      "category": "adventure",
+      "catalog": "broader_tokyo",
+      "score": 61.3,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 46,
+      "fsqPlaceId": "4e9e31b6b6340e3e347e2b48",
+      "name": "Triton's Kingdom",
+      "category": "adventure",
+      "catalog": "broader_tokyo",
+      "score": 62,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 38,
+      "fsqPlaceId": "4cc794620fa2721eb42b5fb1",
+      "name": "ベビーセンター (BABY CENTER)",
+      "category": "adventure",
+      "catalog": "broader_tokyo",
+      "score": 65,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 957,
+      "fsqPlaceId": "6158d7a8111a570d3cc73d58",
+      "name": "大花生零食店",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 65.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 34,
+      "fsqPlaceId": "4ddfafabae60c015c09bf2e8",
+      "name": "谷戸橋広場",
+      "category": "nature",
+      "catalog": "broader_tokyo",
+      "score": 67.3,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 907,
+      "fsqPlaceId": "588c434eac136914a6088536",
+      "name": "弘仁亭・無事庵",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 67.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 903,
+      "fsqPlaceId": "3625908d89eb497597e9a1e1",
+      "name": "pioppino",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 67.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 30,
+      "fsqPlaceId": "4f34f236e4b0d361eb9c8c78",
+      "name": "高井戸不動尊",
+      "category": "culture",
+      "catalog": "broader_tokyo",
+      "score": 68.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 833,
+      "fsqPlaceId": "5c53eeac826444002c313d03",
+      "name": "小屋裏と煉瓦壁",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 69,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 830,
+      "fsqPlaceId": "5336a53d498e9aca3cd70bcb",
+      "name": "高燈籠 (常燈明台)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 69,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 829,
+      "fsqPlaceId": "4ec486ee2c5b6307e66b42c9",
+      "name": "石川島灯台",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 69,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 827,
+      "fsqPlaceId": "4d6886636297721e712cbdb5",
+      "name": "赤塚城本丸趾",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 69,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 826,
+      "fsqPlaceId": "4cdf655941ed224beb65df3c",
+      "name": "杉並能楽堂",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 69,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 825,
+      "fsqPlaceId": "4b7c1c98f964a520997d2fe3",
+      "name": "本丸御殿跡",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 69,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 531,
+      "fsqPlaceId": "6633194ce0d21911b9dd2032",
+      "name": "豊澤之地 碑",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 73.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 527,
+      "fsqPlaceId": "6629eb792ba9fb3a3c960a9b",
+      "name": "喫茶タイムマシン",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 73.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 526,
+      "fsqPlaceId": "661a38eae04b916b56f80835",
+      "name": "東京女子医科大学創立者 公益社団法人至誠会創立者 学頭吉岡彌生終焉の地",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 73.8,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 525,
+      "fsqPlaceId": "558be27e498ee0957725a524",
+      "name": "手づくり郷土賞の碑",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 73.8,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 524,
+      "fsqPlaceId": "5080d4eee4b0be59d4b741d6",
+      "name": "星野立子・椿・髙士 三代の句碑",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 73.8,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 521,
+      "fsqPlaceId": "67761b0875f10b61774bc0ba",
+      "name": "皇居宮殿 長和殿",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 74.2,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 520,
+      "fsqPlaceId": "6496a6af2c41ce1bf5a35ede",
+      "name": "明治大学創立者の像",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 74.2,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 519,
+      "fsqPlaceId": "640c1324db848112b19a28a0",
+      "name": "渋谷町立・渋谷區立 大向小学校跡",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 74.2,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 518,
+      "fsqPlaceId": "618229226aaa1c405d274409",
+      "name": "都営地下鉄12号線試作車両",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 74.2,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 517,
+      "fsqPlaceId": "5ccebab031fd14002c536e26",
+      "name": "旧中之橋の親柱石",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 74.2,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 16,
+      "fsqPlaceId": "546708b7498e2881f81e5515",
+      "name": "ミタカ・オルゴール館",
+      "category": "culture",
+      "catalog": "broader_tokyo",
+      "score": 74.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 498,
+      "fsqPlaceId": "676ea1bf848b771daf216686",
+      "name": "庚申塔道標(富士大山・新井薬師道)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 496,
+      "fsqPlaceId": "64eb126a7d02d9027aaf61f0",
+      "name": "ウルトラマン誕生",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 495,
+      "fsqPlaceId": "620f2d907ee3052e425ae61b",
+      "name": "日本體育會體操學校 正門（復元）",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 494,
+      "fsqPlaceId": "5e071941ea8d7a0008676612",
+      "name": "ソニー創業の地",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 493,
+      "fsqPlaceId": "5d076201dbde11002585dde6",
+      "name": "淀橋町道路元標",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 492,
+      "fsqPlaceId": "5c3061ff97cf5a002c3aadb2",
+      "name": "記念碑 晴海見本市会場 (東京国際見本市会場跡)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 491,
+      "fsqPlaceId": "5bbb51f3123a19002c59004e",
+      "name": "羽田道（するがや通り）の碑",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 490,
+      "fsqPlaceId": "5ae5682dfe3740002de88415",
+      "name": "産業遺構・モニュメントクレーン",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 489,
+      "fsqPlaceId": "5aa8aca90313205bc319d7b7",
+      "name": "東京国立博物館 北門",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 488,
+      "fsqPlaceId": "5a5977c5a9fe120acd69d62f",
+      "name": "東京都品川区立 第一日野小学校発祥之地",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 487,
+      "fsqPlaceId": "59fce918db1d816e990c0314",
+      "name": "MM式発信機",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 486,
+      "fsqPlaceId": "59a2d9ca7564f716490dc07c",
+      "name": "高野長英 大觀堂學塾跡",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 485,
+      "fsqPlaceId": "592a60a90802d42532aa2ad4",
+      "name": "周恩来ここに学ぶ",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 484,
+      "fsqPlaceId": "58f86ae550a6f01e7f831594",
+      "name": "日暮小学校跡",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 483,
+      "fsqPlaceId": "58b12926a8b75911adbbed2e",
+      "name": "乃木公園 厩",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 482,
+      "fsqPlaceId": "5893c9c398f8aa7c1422c3ef",
+      "name": "近代硝子工業発祥之地",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 481,
+      "fsqPlaceId": "57bbe72c498e80a6e9485787",
+      "name": "覚林寺 几号水準点",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 480,
+      "fsqPlaceId": "5789c1af498e611faad8d48e",
+      "name": "汽笛一聲 新橋地下駅開業記念",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 479,
+      "fsqPlaceId": "5576d391498e8b7ff4515dec",
+      "name": "栗山久次郎翁顕彰碑",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 478,
+      "fsqPlaceId": "55311e1d498e17137c506753",
+      "name": "道玄坂 与謝野晶子 歌碑",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 477,
+      "fsqPlaceId": "5517592d498e650d9b026e6e",
+      "name": "中野町役場跡",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    }
+  ],
+  "benchmarkStatuses": [
+    {
+      "name": "Sensō-ji",
+      "status": "not_selected",
+      "fsqPlaceId": "4b0587a1f964a5207f9d22e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Meiji Jingū",
+      "status": "not_selected",
+      "fsqPlaceId": "4b5bd0a2f964a520c31729e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Tokyo Skytree",
+      "status": "verified",
+      "fsqPlaceId": "4b569977f964a520551628e3",
+      "wikidataId": "Q57965",
+      "diagnosticReasons": []
+    },
+    {
+      "name": "Tokyo Tower",
+      "status": "verified",
+      "fsqPlaceId": "4b56a5e8f964a5208e1728e3",
+      "wikidataId": "Q183536",
+      "diagnosticReasons": []
+    },
+    {
+      "name": "Shibuya Crossing",
+      "status": "not_selected",
+      "fsqPlaceId": "4b654f7df964a520beec2ae3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Imperial Palace",
+      "status": "not_selected",
+      "fsqPlaceId": "4b566b84f964a5209e0f28e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Ueno Park",
+      "status": "not_selected",
+      "fsqPlaceId": "4b0587a1f964a5209b9d22e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Tokyo National Museum",
+      "status": "not_selected",
+      "fsqPlaceId": "4b556c7ef964a520f5e327e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "teamLab Planets",
+      "status": "not_selected",
+      "fsqPlaceId": "5b3306103731ee002c2b3e78",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Tsukiji Outer Market",
+      "status": "not_selected",
+      "fsqPlaceId": "4b57cb7cf964a5208b4128e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Shinjuku Gyoen",
+      "status": "not_selected",
+      "fsqPlaceId": "4b5ff761f964a520f1d129e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Akihabara",
+      "status": "not_selected",
+      "fsqPlaceId": "4b5a80a4f964a52078c828e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Harajuku",
+      "status": "not_selected",
+      "fsqPlaceId": "4e5f5340b0fb27e2bd450341",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Odaiba",
+      "status": "not_selected",
+      "fsqPlaceId": "4f9df5d1e4b033dc2c12dd47",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Ghibli Museum",
+      "status": "not_selected",
+      "fsqPlaceId": "4b56ac4ff964a5202e1828e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Tokyo Disneyland",
+      "status": "not_selected",
+      "fsqPlaceId": "4b59ebdaf964a52002a128e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Tokyo DisneySea",
+      "status": "not_selected",
+      "fsqPlaceId": "4c2bf7fe8abca593441c0120",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    }
+  ],
+  "matchRatesByEligibility": {
+    "high_wikimedia_likelihood": {
+      "selected": 250,
+      "verified": 38,
+      "probableManualReview": 0,
+      "verifiedRate": 0.152
+    },
+    "medium_wikimedia_likelihood": {
+      "selected": 0,
+      "verified": 0,
+      "probableManualReview": 0,
+      "verifiedRate": 0
+    },
+    "low_wikimedia_likelihood": {
+      "selected": 0,
+      "verified": 0,
+      "probableManualReview": 0,
+      "verifiedRate": 0
+    },
+    "not_expected_to_have_wikimedia_entity": {
+      "selected": 0,
+      "verified": 0,
+      "probableManualReview": 0,
+      "verifiedRate": 0
+    }
+  },
+  "targetResults": {
+    "highLikelihoodAtLeast60Percent": false,
+    "mediumLikelihoodAtLeast30Percent": false,
+    "zeroKnownFalseAutomaticMatches": true,
+    "completeImageLicensingAndAttribution": true
+  },
+  "selectionStrata": {
+    "eligibility_high_batch_003": 250
+  },
+  "knownCurationCorrections": [
+    {
+      "fsqPlaceId": "4b80a4c6f964a520218330e3",
+      "name": "都電おもいで広場",
+      "originalCategory": "culture",
+      "correctedCategory": "culture",
+      "catalogClassification": "tokyo_core",
+      "reasons": [
+        "verified_small_transport_museum_retained_as_culture",
+        "catalog:tokyo_core"
+      ]
+    },
+    {
+      "fsqPlaceId": "4bde825dffdec92874e3e8a1",
+      "name": "九品仏広場",
+      "originalCategory": "free",
+      "correctedCategory": "free",
+      "catalogClassification": "reserve",
+      "reasons": [
+        "manual_qa_minor_or_ambiguous_facility",
+        "municipal_plaza_playground_moved_to_reserve",
+        "catalog:reserve"
+      ]
+    },
+    {
+      "fsqPlaceId": "50790c96e4b0bf54e138f834",
+      "name": "ふれあい動物広場",
+      "originalCategory": "free",
+      "correctedCategory": "adventure",
+      "catalogClassification": "tokyo_core",
+      "reasons": [
+        "category_corrected:free->adventure",
+        "family_zoo_exhibit_reclassified_as_adventure",
+        "catalog:tokyo_core"
+      ]
+    },
+    {
+      "fsqPlaceId": "50aea3d9e4b034c5d70d4a8a",
+      "name": "野外展示場",
+      "originalCategory": "nature",
+      "correctedCategory": "culture",
+      "catalogClassification": "reserve",
+      "reasons": [
+        "category_corrected:nature->culture",
+        "manual_qa_minor_or_ambiguous_facility",
+        "generic_subordinate_sculpture_exhibit_moved_to_reserve",
+        "catalog:reserve"
+      ]
+    },
+    {
+      "fsqPlaceId": "6235cc4adcbe6c01a0bdc7f8",
+      "name": "IKEBUKURO THEATER〔CG STAR LIVE〕",
+      "originalCategory": "food",
+      "correctedCategory": "adventure",
+      "catalogClassification": "tokyo_core",
+      "reasons": [
+        "category_corrected:food->adventure",
+        "verified_vr_entertainment_attraction_not_food",
+        "catalog:tokyo_core"
+      ]
+    },
+    {
+      "fsqPlaceId": "4b0587a4f964a520f89d22e3",
+      "name": "大谷美術館",
+      "originalCategory": "culture",
+      "correctedCategory": "culture",
+      "catalogClassification": "tokyo_core",
+      "reasons": [
+        "verified_art_museum_retained_as_culture",
+        "catalog:tokyo_core"
+      ]
+    }
+  ],
+  "apiRequestsMade": 1296,
+  "cacheHits": 17,
+  "failures": 13,
+  "retries": 33,
+  "runtimeMs": 410964,
+  "estimatedExternalDataCostUsd": 0,
+  "acceptanceGates": {
+    "genuineSourceEntitiesOnly": true,
+    "benchmarksCorrectOrClearlyDiagnosed": true,
+    "zeroKnownFalseMatches": true,
+    "benchmarkNeutralDisplayRank": true,
+    "imagesHaveLicenseAndAttribution": true,
+    "noSupabaseWrites": true,
+    "noPaidDatasets": true,
+    "coreAndMetroSeparated": true,
+    "theaterCategoryCorrected": true
+  },
+  "acceptancePassed": true,
+  "noSupabaseWrites": true,
+  "batchMetadata": {
+    "city": "tokyo",
+    "executionMode": "eligibility_batch",
+    "eligibility": "high_wikimedia_likelihood",
+    "totalCuratedRecords": 3200,
+    "totalEligibleRecords": 1474,
+    "duplicateFsqIdsRemoved": 0,
+    "batch": 3,
+    "batchSize": 250,
+    "startIndex": 500,
+    "endIndexInclusive": 749,
+    "selectedRecordCount": 250,
+    "persistentCacheEnabled": true
+  }
+}

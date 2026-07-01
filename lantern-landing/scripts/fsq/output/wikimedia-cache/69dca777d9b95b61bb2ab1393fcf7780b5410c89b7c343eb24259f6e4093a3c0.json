@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:19.689Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 913334,
+          "ns": 0,
+          "title": "Quebec French lexicon",
+          "index": 4,
+          "pageprops": {
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q731155"
+          }
+        },
+        {
+          "pageid": 3930516,
+          "ns": 0,
+          "title": "Cultural influence of Star Trek",
+          "index": 5,
+          "pageprops": {
+            "displaytitle": "Cultural influence of <i>Star Trek</i>",
+            "page_image_free": "Star_Trek_uniforms.jpg",
+            "wikibase-shortdesc": "Star Trek influence on modern society",
+            "wikibase_item": "Q4246734"
+          },
+          "terms": {
+            "description": [
+              "Star Trek influence on society"
+            ]
+          }
+        },
+        {
+          "pageid": 4218807,
+          "ns": 0,
+          "title": "Dragon Hunters",
+          "index": 3,
+          "pageprops": {
+            "displaytitle": "<i>Dragon Hunters</i>",
+            "page_image": "Chasseurs_de_dragons_(série_télévisée_d'animation)_poster.webp",
+            "wikibase-shortdesc": "2006 French TV series or program",
+            "wikibase_item": "Q1254870"
+          },
+          "terms": {
+            "description": [
+              "French animated television series"
+            ]
+          }
+        },
+        {
+          "pageid": 23387052,
+          "ns": 0,
+          "title": "Popeye",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Popeye_transparent.png",
+            "wikibase-shortdesc": "Comic and cartoon character",
+            "wikibase_item": "Q199796"
+          },
+          "terms": {
+            "description": [
+              "cartoon fictional character"
+            ]
+          }
+        },
+        {
+          "pageid": 44074022,
+          "ns": 0,
+          "title": "VeggieTales in the House",
+          "index": 1,
+          "pageprops": {
+            "displaytitle": "<i>VeggieTales in the House</i>",
+            "page_image_free": "VeggieTales_in_the_House_logo.svg",
+            "wikibase-shortdesc": "American animated children's television series",
+            "wikibase_item": "Q18636803"
+          },
+          "terms": {
+            "description": [
+              "American animated television series"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

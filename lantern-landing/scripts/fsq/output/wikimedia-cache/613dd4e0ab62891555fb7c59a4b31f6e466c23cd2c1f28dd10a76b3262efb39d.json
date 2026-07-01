@@ -1,0 +1,52 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:03.233Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 494986,
+          "ns": 0,
+          "title": "Kenichi Suzumura",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Suzumura, Kenichi",
+            "wikibase-shortdesc": "Japanese voice actor and singer (born 1974)",
+            "wikibase_item": "Q563425"
+          },
+          "terms": {
+            "description": [
+              "Japanese voice actor, narrator and singer"
+            ]
+          }
+        },
+        {
+          "pageid": 2518850,
+          "ns": 0,
+          "title": "Japanese High School Baseball Championship",
+          "index": 1,
+          "pageprops": {
+            "page_image": "Kokoyakyu.jpg",
+            "page_image_free": "Ceremonial_First_Pitch_1915.jpg",
+            "wikibase-shortdesc": "Japanese Spring High School Baseball Tournament",
+            "wikibase_item": "Q1075405"
+          },
+          "coordinates": [
+            {
+              "lat": 34.7214,
+              "lon": 135.3617,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Japanese high school baseball championship"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

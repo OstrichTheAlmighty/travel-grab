@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:50.792Z",
+  "value": {
+    "searchinfo": {
+      "search": "ポートディスカバリー"
+    },
+    "search": [
+      {
+        "id": "Q11339450",
+        "title": "Q11339450",
+        "pageid": 12477378,
+        "concepturi": "http://www.wikidata.org/entity/Q11339450",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11339450",
+        "display": {
+          "label": {
+            "value": "Port Discovery",
+            "language": "en"
+          },
+          "description": {
+            "value": "part of Tokyo DisneySea, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Port Discovery",
+        "description": "part of Tokyo DisneySea, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ポートディスカバリー"
+        },
+        "aliases": [
+          "ポートディスカバリー"
+        ]
+      },
+      {
+        "id": "Q50437418",
+        "title": "Q50437418",
+        "pageid": 51404461,
+        "concepturi": "http://www.wikidata.org/entity/Q50437418",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q50437418",
+        "display": {
+          "label": {
+            "value": "Port Discovery Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "railway station in Maihama, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Port Discovery Station",
+        "description": "railway station in Maihama, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ポートディスカバリー駅"
+        },
+        "aliases": [
+          "ポートディスカバリー駅"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

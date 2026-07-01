@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:13.609Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 20365,
+          "ns": 0,
+          "title": "ヒスイ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひすい",
+            "page_image_free": "歴史を変えたヒスイ.jpg",
+            "wikibase_item": "Q175089"
+          },
+          "terms": {
+            "description": [
+              "宝石"
+            ]
+          }
+        },
+        {
+          "pageid": 416352,
+          "ns": 0,
+          "title": "ヒスイ輝石",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひすいきせき",
+            "page_image_free": "歴史を変えたヒスイ.jpg",
+            "wikibase_item": "Q422173"
+          },
+          "terms": {
+            "description": [
+              "輝石グループの鉱物"
+            ]
+          }
+        },
+        {
+          "pageid": 3953553,
+          "ns": 0,
+          "title": "万葉翡翠",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "まんようひすい",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q64538167"
+          },
+          "terms": {
+            "description": [
+              "松本清張の短編小説"
+            ]
+          }
+        },
+        {
+          "pageid": 4170161,
+          "ns": 0,
+          "title": "糸魚川のヒスイ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いといかわのひすい",
+            "page_image_free": "Kotaki1.JPG",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q97097388"
+          },
+          "terms": {
+            "description": [
+              "新潟県糸魚川市付近を原産とするヒスイ"
+            ]
+          }
+        },
+        {
+          "pageid": 5148188,
+          "ns": 0,
+          "title": "翡翠原石館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひすいけんせきかん",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q136707259"
+          },
+          "terms": {
+            "description": [
+              "東京都品川区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

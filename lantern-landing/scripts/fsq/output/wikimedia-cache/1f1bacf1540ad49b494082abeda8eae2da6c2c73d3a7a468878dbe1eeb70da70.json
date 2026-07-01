@@ -1,0 +1,140 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:41.680Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 55,
+          "ns": 0,
+          "title": "台東区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たいとうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Asakusa_Senso-ji_2021-12_ac_(2).jpg",
+            "wikibase_item": "Q232641"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71261,
+              "lon": 139.77997,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 17138,
+          "ns": 0,
+          "title": "浅草駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あさくさえき",
+            "kartographer_frames": "2",
+            "page_image_free": "Tobu-Asakusa-station-2018.jpg",
+            "wikibase_item": "Q800405"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71208333,
+              "lon": 139.79841667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の鉄道駅"
+            ]
+          }
+        },
+        {
+          "pageid": 36572,
+          "ns": 0,
+          "title": "東京スタジアム (多目的スタジアム)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようすたしあむ",
+            "kartographer_links": "1",
+            "page_image_free": "AJINOMOTO_Studium_entrance_202509.jpg",
+            "wikibase_item": "Q412824"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66416667,
+              "lon": 139.52722222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都調布市にある多目的スタジアム"
+            ]
+          }
+        },
+        {
+          "pageid": 179940,
+          "ns": 0,
+          "title": "東京スカイツリー",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようすかいつりい",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Skytree_2014_Ⅲ.jpg",
+            "wikibase_item": "Q57965"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71013889,
+              "lon": 139.81083333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区の電波塔"
+            ]
+          }
+        },
+        {
+          "pageid": 1731153,
+          "ns": 0,
+          "title": "東京タワー",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようたわあ",
+            "kartographer_frames": "1",
+            "page_image_free": "日本電波塔（東京タワー）.jpg",
+            "wikibase_item": "Q183536"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65861111,
+              "lon": 139.74555556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある電波塔"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

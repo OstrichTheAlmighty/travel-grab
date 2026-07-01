@@ -1,0 +1,129 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:58.533Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 525323,
+          "ns": 0,
+          "title": "Tsukiji fish market",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "2018_Tsukiji_fish_market.jpg",
+            "wikibase-shortdesc": "Former fish market in Tokyo, Japan",
+            "wikibase_item": "Q859471"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66138889,
+              "lon": 139.76972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "building in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 525536,
+          "ns": 0,
+          "title": "Tsukiji",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Tsukiji_2015.jpg",
+            "wikibase-shortdesc": "District of Chūō, Tokyo, Japan",
+            "wikibase_item": "Q1201337"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66819,
+              "lon": 139.7739,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "town located in Chūō-ku, Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 7332666,
+          "ns": 0,
+          "title": "Fish market",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "HAL_fish_market.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Marketplace for fish and fish products",
+            "wikibase_item": "Q1188480"
+          },
+          "terms": {
+            "description": [
+              "marketplace for fish products"
+            ]
+          }
+        },
+        {
+          "pageid": 24489642,
+          "ns": 0,
+          "title": "Toyosu",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Toyosu_2014.JPG",
+            "wikibase-shortdesc": "Neighborhood in Kōtō, Tokyo, Japan",
+            "wikibase_item": "Q3536037"
+          },
+          "coordinates": [
+            {
+              "lat": 35.655,
+              "lon": 139.79611111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "town located in Koto-ku, Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 58650701,
+          "ns": 0,
+          "title": "Toyosu Market",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Toyosu_Market_Tokyo_2.jpg",
+            "wikibase-shortdesc": "Wholesale market in Tokyo, Japan",
+            "wikibase_item": "Q11633916"
+          },
+          "coordinates": [
+            {
+              "lat": 35.644167,
+              "lon": 139.783611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Central wholesale market in Koto-ku, Tokyo, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

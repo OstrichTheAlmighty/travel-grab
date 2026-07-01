@@ -1,0 +1,123 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:27.553Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18792,
+          "ns": 0,
+          "title": "文京区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふんきようく",
+            "kartographer_frames": "1",
+            "page_image_free": "Akamon,_University_of_Tokyo_2019.jpg",
+            "wikibase_item": "Q212713"
+          },
+          "coordinates": [
+            {
+              "lat": 35.708,
+              "lon": 139.75225,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 36617,
+          "ns": 0,
+          "title": "護国寺駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ここくし",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-Metro-Gokokuji-station-Exit1.jpg",
+            "wikibase_item": "Q331941"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71902778,
+              "lon": 139.7275,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある東京地下鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 135415,
+          "ns": 0,
+          "title": "目白台",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めしろたい",
+            "kartographer_frames": "1",
+            "page_image_free": "Munatsuki-saka_Slope_at_Mejiro.jpg",
+            "wikibase_item": "Q3249539"
+          },
+          "terms": {
+            "description": [
+              "東京都文京区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 396866,
+          "ns": 0,
+          "title": "早稲田停留場",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "わせた",
+            "kartographer_frames": "1",
+            "page_image_free": "Toden_Waseda_DSCN8778_20100311.JPG",
+            "wikibase_item": "Q7971386"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71183333,
+              "lon": 139.71888889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区西早稲田にある都電荒川線の停留場"
+            ]
+          }
+        },
+        {
+          "pageid": 972323,
+          "ns": 0,
+          "title": "Bーぐる",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひいくる",
+            "page_image_free": "B-Guru_1251.jpg",
+            "wikibase_item": "Q11192798"
+          },
+          "terms": {
+            "description": [
+              "東京都文京区内を運行するコミュニティバス路線"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

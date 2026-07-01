@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:47.116Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8587,
+          "ns": 0,
+          "title": "名古屋市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なこやし",
+            "kartographer_frames": "1",
+            "page_image_free": "View_of_Westward_from_Sky_Deck_MIRAI360,_Nishiki_Naka_Ward_Nagoya_2022.jpg",
+            "wikibase_item": "Q11751"
+          },
+          "coordinates": [
+            {
+              "lat": 35.1814,
+              "lon": 136.9064,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 14253,
+          "ns": 0,
+          "title": "イチョウ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いちよう",
+            "page_image_free": "Ginkgo_2024.jpg",
+            "toc": "",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q43284"
+          },
+          "terms": {
+            "description": [
+              "裸子植物で落葉性の高木"
+            ]
+          }
+        },
+        {
+          "pageid": 349631,
+          "ns": 0,
+          "title": "西村康稔",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にしむら やすとし",
+            "page_image_free": "Yasutoshi_Nishimura_20190911.jpg",
+            "wikibase_item": "Q8050121"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家"
+            ]
+          }
+        },
+        {
+          "pageid": 459791,
+          "ns": 0,
+          "title": "東京都指定文化財一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようとしていふんかさいいちらん",
+            "wikibase_item": "Q11525325"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1745724,
+          "ns": 0,
+          "title": "水戸黄門 (第14-21部)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みとこうもん14-21",
+            "wikibase_item": "Q11548659"
+          },
+          "terms": {
+            "description": [
+              "日本の時代劇"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

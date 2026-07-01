@@ -1,0 +1,209 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:01.097Z",
+  "value": {
+    "searchinfo": {
+      "search": "パーク"
+    },
+    "search": [
+      {
+        "id": "Q22698",
+        "title": "Q22698",
+        "pageid": 26083,
+        "concepturi": "http://www.wikidata.org/entity/Q22698",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q22698",
+        "display": {
+          "label": {
+            "value": "park",
+            "language": "en"
+          },
+          "description": {
+            "value": "permanently dedicated recreation area, often open to the public and generally characterized by natural, historic, or landscape features",
+            "language": "en"
+          }
+        },
+        "label": "park",
+        "description": "permanently dedicated recreation area, often open to the public and generally characterized by natural, historic, or landscape features",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "パーク"
+        },
+        "aliases": [
+          "パーク"
+        ]
+      },
+      {
+        "id": "Q215184",
+        "title": "Q215184",
+        "pageid": 210508,
+        "concepturi": "http://www.wikidata.org/entity/Q215184",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q215184",
+        "display": {
+          "label": {
+            "value": "BMX",
+            "language": "en"
+          },
+          "description": {
+            "value": "cycle sport using robust bicycles on dirt tracks",
+            "language": "en"
+          }
+        },
+        "label": "BMX",
+        "description": "cycle sport using robust bicycles on dirt tracks",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "パーク"
+        },
+        "aliases": [
+          "パーク"
+        ]
+      },
+      {
+        "id": "Q36600",
+        "title": "Q36600",
+        "pageid": 39230,
+        "concepturi": "http://www.wikidata.org/entity/Q36600",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q36600",
+        "display": {
+          "label": {
+            "value": "The Hague",
+            "language": "en"
+          },
+          "description": {
+            "value": "city and municipality in the Netherlands, seat of the Dutch government",
+            "language": "en"
+          }
+        },
+        "label": "The Hague",
+        "description": "city and municipality in the Netherlands, seat of the Dutch government",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ハーグ"
+        },
+        "aliases": [
+          "ハーグ"
+        ]
+      },
+      {
+        "id": "Q9248",
+        "title": "Q9248",
+        "pageid": 10609,
+        "concepturi": "http://www.wikidata.org/entity/Q9248",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q9248",
+        "display": {
+          "label": {
+            "value": "Baku",
+            "language": "en"
+          },
+          "description": {
+            "value": "capital of Azerbaijan",
+            "language": "en"
+          }
+        },
+        "label": "Baku",
+        "description": "capital of Azerbaijan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "バクー"
+        },
+        "aliases": [
+          "バクー"
+        ]
+      },
+      {
+        "id": "Q20007284",
+        "title": "Q20007284",
+        "pageid": 21648455,
+        "concepturi": "http://www.wikidata.org/entity/Q20007284",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q20007284",
+        "display": {
+          "label": {
+            "value": "Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "family name",
+            "language": "en"
+          }
+        },
+        "label": "Park",
+        "description": "family name",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "パーク"
+        },
+        "aliases": [
+          "パーク"
+        ]
+      },
+      {
+        "id": "Q328703",
+        "title": "Q328703",
+        "pageid": 315526,
+        "concepturi": "http://www.wikidata.org/entity/Q328703",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q328703",
+        "display": {
+          "label": {
+            "value": "hug",
+            "language": "en"
+          },
+          "description": {
+            "value": "form of endearment, universal in human communities, in which two or more people put their arms around the neck, back, or waist of one another and hold each other closely",
+            "language": "en"
+          }
+        },
+        "label": "hug",
+        "description": "form of endearment, universal in human communities, in which two or more people put their arms around the neck, back, or waist of one another and hold each other closely",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ハグ"
+        },
+        "aliases": [
+          "ハグ"
+        ]
+      },
+      {
+        "id": "Q715935",
+        "title": "Q715935",
+        "pageid": 673234,
+        "concepturi": "http://www.wikidata.org/entity/Q715935",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q715935",
+        "display": {
+          "label": {
+            "value": "Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "Korean family name (박)",
+            "language": "en"
+          }
+        },
+        "label": "Park",
+        "description": "Korean family name (박)",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "パク"
+        },
+        "aliases": [
+          "パク"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

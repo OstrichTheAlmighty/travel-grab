@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:44.134Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 83106,
+          "ns": 0,
+          "title": "中区 (横浜市)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Kanagawa_Prefectural_Museum_of_Cultural_History_2009.jpg",
+            "wikibase_item": "Q1141068"
+          },
+          "coordinates": [
+            {
+              "lat": 35.44472222,
+              "lon": 139.64213889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県横浜市の区"
+            ]
+          }
+        },
+        {
+          "pageid": 157742,
+          "ns": 0,
+          "title": "葵区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あおいく",
+            "kartographer_frames": "1",
+            "page_image_free": "Sunpu_Castle_Tatsumi_Yagura_201015a.jpg",
+            "wikibase_item": "Q1131483"
+          },
+          "coordinates": [
+            {
+              "lat": 34.97516667,
+              "lon": 138.38333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡県静岡市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 223277,
+          "ns": 0,
+          "title": "外国人居留地",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かいこくしんきよりゆうち",
+            "page_image_free": "Kobe_bund_Japan_1872.jpg",
+            "wikibase_item": "Q11430357"
+          },
+          "terms": {
+            "description": [
+              "外国人の居留および交易区域として特に定めた一定地域"
+            ]
+          }
+        },
+        {
+          "pageid": 258785,
+          "ns": 0,
+          "title": "世田谷区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せたかやく",
+            "kartographer_frames": "1",
+            "page_image_free": "Seijo_namikimichi_231011.jpg",
+            "wikibase_item": "Q231645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64656,
+              "lon": 139.65322,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 1860772,
+          "ns": 0,
+          "title": "福岡市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふくおかし",
+            "kartographer_frames": "1",
+            "page_image_free": "Fukuoka_City_-_Montage_-_01.JPG",
+            "wikibase_item": "Q26600"
+          },
+          "coordinates": [
+            {
+              "lat": 33.59014,
+              "lon": 130.40172,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福岡県庁所在地"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

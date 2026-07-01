@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:03.845Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京都水の科学館"
+    },
+    "search": [
+      {
+        "id": "Q11525336",
+        "title": "Q11525336",
+        "pageid": 12665211,
+        "concepturi": "http://www.wikidata.org/entity/Q11525336",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11525336",
+        "display": {
+          "label": {
+            "value": "Tokyo Water Science Museum",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Water Science Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京都水の科学館"
+        },
+        "aliases": [
+          "東京都水の科学館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

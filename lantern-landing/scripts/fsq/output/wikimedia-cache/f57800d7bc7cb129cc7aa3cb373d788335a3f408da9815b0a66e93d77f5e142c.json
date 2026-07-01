@@ -1,0 +1,94 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:12.410Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3063,
+          "ns": 0,
+          "title": "魚類",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きよるい",
+            "page_image_free": "Salt_water_fish_with_Finnish_text.jpg",
+            "wikibase_item": "Q152"
+          },
+          "terms": {
+            "description": [
+              "脊椎動物のうち四肢動物を除外した動物"
+            ]
+          }
+        },
+        {
+          "pageid": 100105,
+          "ns": 0,
+          "title": "スズキ (魚)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "すすき",
+            "page_image_free": "スズキ.jpg",
+            "wikibase_item": "Q1151311"
+          },
+          "terms": {
+            "description": [
+              "ホタルジャコ目スズキ科の魚"
+            ]
+          }
+        },
+        {
+          "pageid": 142785,
+          "ns": 0,
+          "title": "さかなクン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さかなくん",
+            "page_image_free": "Masayuki_Miyazawa_cropped_2_Masayuki_Miyazawa_20141024.jpg",
+            "wikibase_item": "Q11267605"
+          },
+          "terms": {
+            "description": [
+              "日本のタレント、イラストレーター、魚類学者"
+            ]
+          }
+        },
+        {
+          "pageid": 458181,
+          "ns": 0,
+          "title": "直感2 〜逃した魚は大きいぞ!〜",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ちよつかんつのかしたさかなはおおきいそ",
+            "wikibase_item": "Q947843"
+          },
+          "terms": {
+            "description": [
+              "モーニング娘。のシングル (2005)"
+            ]
+          }
+        },
+        {
+          "pageid": 4625190,
+          "ns": 0,
+          "title": "ギョギョッとサカナ★スター",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きよきよつとさかなすたあ",
+            "page_image_free": "Gthumb.svg",
+            "wikibase_item": "Q113119219"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:13.814Z",
+  "value": {
+    "searchinfo": {
+      "search": "明治神宮ミュージアム"
+    },
+    "search": [
+      {
+        "id": "Q127692420",
+        "title": "Q127692420",
+        "pageid": 121680099,
+        "concepturi": "http://www.wikidata.org/entity/Q127692420",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q127692420",
+        "display": {
+          "label": {
+            "value": "Meiji Jingū Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Meiji Jingū Museum",
+        "description": "museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "明治神宮ミュージアム"
+        },
+        "aliases": [
+          "明治神宮ミュージアム"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:11.341Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 113493,
+          "ns": 0,
+          "title": "文学館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふんかくかん",
+            "wikibase_item": "Q1865249"
+          },
+          "terms": {
+            "description": [
+              "作家や文学運動に関する品々を集めた博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 211468,
+          "ns": 0,
+          "title": "林芙美子",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はやし ふみこ",
+            "page_image_free": "Fumiko-Hayashi-1.jpg",
+            "wikibase_item": "Q445839"
+          },
+          "terms": {
+            "description": [
+              "日本の女性小説家 (1903-1951)"
+            ]
+          }
+        },
+        {
+          "pageid": 235820,
+          "ns": 0,
+          "title": "平林たい子",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひらはやし たいこ",
+            "page_image_free": "Hirabayashi_Taiko.jpg",
+            "wikibase_item": "Q274003"
+          },
+          "terms": {
+            "description": [
+              "小説家"
+            ]
+          }
+        },
+        {
+          "pageid": 751614,
+          "ns": 0,
+          "title": "中井 (新宿区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "なかい",
+            "kartographer_frames": "1",
+            "page_image_free": "Hayashi_Fumiko_Memorial_Hall_entrance_2016-03-24.jpg",
+            "wikibase_item": "Q11362890"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 2296471,
+          "ns": 0,
+          "title": "林芙美子記念館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はやしふみこきねんかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Hayashi_Fumiko_Memorial_Hall_entrance_2016-03-24.jpg",
+            "wikibase_item": "Q11533289"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

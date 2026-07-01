@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:20.972Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3538,
+          "ns": 0,
+          "title": "東日本旅客鉄道",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひかしにほんりよかくてつとう",
+            "page_image_free": "Logo_JR_East.svg",
+            "wikibase_item": "Q499071"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68727778,
+              "lon": 139.70002778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区に本社を置く鉄道会社"
+            ]
+          }
+        },
+        {
+          "pageid": 66212,
+          "ns": 0,
+          "title": "東京都道318号環状七号線",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Map_of_Kannana-Dori_Ave.Tokyo_Metropolitan_Road_Route_318.png",
+            "wikibase_item": "Q11103002"
+          },
+          "terms": {
+            "description": [
+              "東京都の道路"
+            ]
+          }
+        },
+        {
+          "pageid": 109058,
+          "ns": 0,
+          "title": "石田次男",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いした つきお",
+            "wikibase_item": "Q11587019"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家"
+            ]
+          }
+        },
+        {
+          "pageid": 289909,
+          "ns": 0,
+          "title": "京成バス東京・江戸川営業所",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "けいせいはすとうきようえとかわえいきようしよ",
+            "page_image_free": "Keiseibus-edogawa-dept.jpg",
+            "wikibase_item": "Q11374375"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6992827,
+              "lon": 139.9156973,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都江戸川区にある営業所"
+            ]
+          }
+        },
+        {
+          "pageid": 817180,
+          "ns": 0,
+          "title": "警視庁 (旧警察法)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "けいしちよう",
+            "page_image_free": "Tokyo-Metropolitan-Police-Board-Headquarters-1931.png",
+            "wikibase_item": "Q11632385"
+          },
+          "terms": {
+            "description": [
+              "1948年から1954年まで東京23区内の警察を管轄した自治体警察"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

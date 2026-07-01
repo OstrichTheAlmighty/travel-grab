@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:40.207Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 26204,
+          "ns": 0,
+          "title": "Bunkamura",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふんかむら",
+            "kartographer_frames": "1",
+            "page_image_free": "Bunkamura.JPG",
+            "wikibase_item": "Q583055"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66083333,
+              "lon": 139.695,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある複合文化施設"
+            ]
+          }
+        },
+        {
+          "pageid": 1293884,
+          "ns": 0,
+          "title": "山本勉",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やまもと つとむ",
+            "wikibase_item": "Q11468899"
+          },
+          "terms": {
+            "description": [
+              "日本の美術史学者"
+            ]
+          }
+        },
+        {
+          "pageid": 1761245,
+          "ns": 0,
+          "title": "真如苑",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しんによえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Shinnyo-en_Headquarters.JPG",
+            "wikibase_item": "Q1749662"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69627778,
+              "lon": 139.40486111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "1936年の日本で設立された仏教系新宗教"
+            ]
+          }
+        },
+        {
+          "pageid": 1911142,
+          "ns": 0,
+          "title": "東急田園都市線",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきゆうてんえんとしせん",
+            "page_image_free": "Tokyu_2020_series_Den-en-toshi_Line_Tana_Station_20190530.jpg",
+            "wikibase_item": "Q1190086"
+          },
+          "terms": {
+            "description": [
+              "東急電鉄の鉄道路線"
+            ]
+          }
+        },
+        {
+          "pageid": 3575168,
+          "ns": 0,
+          "title": "水野敬三郎",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みすの けいさふろう",
+            "wikibase_item": "Q29343956"
+          },
+          "terms": {
+            "description": [
+              "日本の美術史学者 (1932-2026)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

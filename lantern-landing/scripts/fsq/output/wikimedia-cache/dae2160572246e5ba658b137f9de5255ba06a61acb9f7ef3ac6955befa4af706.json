@@ -1,0 +1,46 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:01.753Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 545194,
+          "ns": 0,
+          "title": "カリーノグループ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かりいのくるうふ",
+            "page_image_free": "Carino_shimodori.JPG",
+            "wikibase_item": "Q11295063"
+          }
+        },
+        {
+          "pageid": 713925,
+          "ns": 0,
+          "title": "ウオロク",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "うおろく",
+            "page_image_free": "UOROKU.jpg",
+            "wikibase_item": "Q11288825"
+          },
+          "coordinates": [
+            {
+              "lat": 37.90480556,
+              "lon": 139.07008333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "新潟県のスーパーマーケット"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

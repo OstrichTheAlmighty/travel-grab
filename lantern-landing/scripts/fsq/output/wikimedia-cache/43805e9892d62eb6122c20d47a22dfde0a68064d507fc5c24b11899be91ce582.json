@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:33.062Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 15309698,
+          "ns": 0,
+          "title": "Basel Paper Mill",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Basel_Papiermuseum_11-05-2008.jpg",
+            "wikibase_item": "Q594378"
+          },
+          "coordinates": [
+            {
+              "lat": 47.555,
+              "lon": 7.604,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "museum in Basel (Switzerland)"
+            ]
+          }
+        },
+        {
+          "pageid": 16861908,
+          "ns": 0,
+          "title": "Paper",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Various_products_made_from_paper.JPG",
+            "wikibase-shortdesc": "Material for writing, printing, etc.",
+            "wikibase_item": "Q11472"
+          },
+          "terms": {
+            "description": [
+              "thin, flexible material mainly used for writing upon, printing upon, drawing or for packaging"
+            ]
+          }
+        },
+        {
+          "pageid": 48102601,
+          "ns": 0,
+          "title": "Paper and Watermark Museum",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Fabriano_MuseoCarta_cortile.jpg",
+            "wikibase-shortdesc": "Museum in Fabriano, Italy",
+            "wikibase_item": "Q3868060"
+          },
+          "terms": {
+            "description": [
+              "museum of traditional paper production in Fabriano, Ancona"
+            ]
+          }
+        },
+        {
+          "pageid": 68398168,
+          "ns": 0,
+          "title": "Paper Museum",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Paper_Museum.jpg",
+            "wikibase-shortdesc": "Museum in Tokyo, Japan",
+            "wikibase_item": "Q11605492"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7499,
+              "lon": 139.73865,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Museum in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 69393595,
+          "ns": 0,
+          "title": "Paper Museum in Pescia",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Pietrabuona,_museo_della_carta_01.jpg",
+            "wikibase-shortdesc": "Museum in Pescia, Italy",
+            "wikibase_item": "Q55374929"
+          },
+          "coordinates": [
+            {
+              "lat": 43.92957,
+              "lon": 10.69162,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "museum in Pescia, Italy"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

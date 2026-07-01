@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:24.016Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 313757,
+          "ns": 0,
+          "title": "ハンミョウ科",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はんみようか",
+            "page_image_free": "Reitter_Cicindela.jpg",
+            "wikibase_item": "Q196140"
+          },
+          "terms": {
+            "description": [
+              "オサムシ科の亜科、それに属する昆虫の総称"
+            ]
+          }
+        },
+        {
+          "pageid": 1205212,
+          "ns": 0,
+          "title": "クビキリギス",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "くひきりきす",
+            "page_image_free": "Slender_katydid_on_the_wall_-_2.jpg",
+            "wikibase_item": "Q7779775"
+          },
+          "terms": {
+            "description": [
+              "キリギリス科の昆虫"
+            ]
+          }
+        },
+        {
+          "pageid": 2023782,
+          "ns": 0,
+          "title": "松本染升",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "まつもと そめしよう",
+            "wikibase_item": "Q11531135"
+          },
+          "terms": {
+            "description": [
+              "1903-1985, 男性俳優、歌舞伎役者。"
+            ]
+          }
+        },
+        {
+          "pageid": 2576270,
+          "ns": 0,
+          "title": "小山邦太郎",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こやま くにたろう",
+            "page_image_free": "Koyama_Kunitaro.jpg",
+            "wikibase_item": "Q11460000"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家"
+            ]
+          }
+        },
+        {
+          "pageid": 3439343,
+          "ns": 0,
+          "title": "美波わかな",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みなみ わかな",
+            "wikibase_item": "Q24875102"
+          },
+          "terms": {
+            "description": [
+              "日本の女優、女性声優、歌手 (1994-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

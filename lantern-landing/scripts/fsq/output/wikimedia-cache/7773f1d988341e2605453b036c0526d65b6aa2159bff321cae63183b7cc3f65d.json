@@ -1,0 +1,172 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:32.338Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京国立博物館"
+    },
+    "search": [
+      {
+        "id": "Q653433",
+        "title": "Q653433",
+        "pageid": 615001,
+        "concepturi": "http://www.wikidata.org/entity/Q653433",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q653433",
+        "display": {
+          "label": {
+            "value": "Tokyo National Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo National Museum",
+        "description": "art museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京国立博物館"
+        },
+        "aliases": [
+          "東京国立博物館"
+        ]
+      },
+      {
+        "id": "Q107045000",
+        "title": "Q107045000",
+        "pageid": 102297080,
+        "concepturi": "http://www.wikidata.org/entity/Q107045000",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q107045000",
+        "display": {
+          "label": {
+            "value": "東京国立博物館本十六羅漢像",
+            "language": "ja"
+          }
+        },
+        "label": "東京国立博物館本十六羅漢像",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "東京国立博物館本十六羅漢像"
+        }
+      },
+      {
+        "id": "Q107045364",
+        "title": "Q107045364",
+        "pageid": 102297433,
+        "concepturi": "http://www.wikidata.org/entity/Q107045364",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q107045364",
+        "display": {
+          "label": {
+            "value": "Hungry Ghosts Scroll",
+            "language": "en"
+          }
+        },
+        "label": "Hungry Ghosts Scroll",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "東京国立博物館本餓鬼草紙"
+        },
+        "aliases": [
+          "東京国立博物館本餓鬼草紙"
+        ]
+      },
+      {
+        "id": "Q107029762",
+        "title": "Q107029762",
+        "pageid": 102282922,
+        "concepturi": "http://www.wikidata.org/entity/Q107029762",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q107029762",
+        "display": {
+          "label": {
+            "value": "東京国立博物館 文化庁分室",
+            "language": "ja"
+          }
+        },
+        "label": "東京国立博物館 文化庁分室",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京国立博物館 文化庁分室"
+        }
+      },
+      {
+        "id": "Q28809906",
+        "title": "Q28809906",
+        "pageid": 30468699,
+        "concepturi": "http://www.wikidata.org/entity/Q28809906",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q28809906",
+        "display": {
+          "label": {
+            "value": "Narrative Picture Scroll about Love Romance of Courtier and Girl at Sumiyoshi",
+            "language": "en"
+          },
+          "description": {
+            "value": "painting by anonymous painter",
+            "language": "en"
+          }
+        },
+        "label": "Narrative Picture Scroll about Love Romance of Courtier and Girl at Sumiyoshi",
+        "description": "painting by anonymous painter",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "東京国立博物館本住吉物語絵巻"
+        },
+        "aliases": [
+          "東京国立博物館本住吉物語絵巻"
+        ]
+      },
+      {
+        "id": "Q107044986",
+        "title": "Q107044986",
+        "pageid": 102297067,
+        "concepturi": "http://www.wikidata.org/entity/Q107044986",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q107044986",
+        "display": {
+          "label": {
+            "value": "東京国立博物館本大聖武",
+            "language": "ja"
+          }
+        },
+        "label": "東京国立博物館本大聖武",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京国立博物館本大聖武"
+        }
+      },
+      {
+        "id": "Q107045113",
+        "title": "Q107045113",
+        "pageid": 102297191,
+        "concepturi": "http://www.wikidata.org/entity/Q107045113",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q107045113",
+        "display": {
+          "label": {
+            "value": "東京国立博物館本世説新書",
+            "language": "ja"
+          }
+        },
+        "label": "東京国立博物館本世説新書",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京国立博物館本世説新書"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

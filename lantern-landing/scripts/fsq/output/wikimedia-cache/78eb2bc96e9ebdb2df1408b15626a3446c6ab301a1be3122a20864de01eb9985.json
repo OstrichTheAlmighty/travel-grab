@@ -1,0 +1,137 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:49.486Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 9284,
+          "ns": 0,
+          "title": "大阪ドーム",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおさかとおむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Kyocera_Dome_Osaka1.jpg",
+            "wikibase_item": "Q128836"
+          },
+          "coordinates": [
+            {
+              "lat": 34.6693,
+              "lon": 135.47610278,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪府大阪市西区にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 10578,
+          "ns": 0,
+          "title": "札幌ドーム",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さつほろとおむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Sapporo_Dome.jpg",
+            "wikibase_item": "Q494860"
+          },
+          "coordinates": [
+            {
+              "lat": 43.01512778,
+              "lon": 141.40977222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道札幌市豊平区にある屋内スタジアム"
+            ]
+          }
+        },
+        {
+          "pageid": 15740,
+          "ns": 0,
+          "title": "西武ドーム",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せいふとおむ",
+            "page_image_free": "Seibu_Dome_feb_23_2021_various_16_59_23_418000.jpeg",
+            "wikibase_item": "Q1194822"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7685,
+              "lon": 139.4205,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県所沢市にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 15945,
+          "ns": 0,
+          "title": "東京ドーム",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようとおむ",
+            "page_image_free": "Tokyo_Dome_2007-12.jpg",
+            "wikibase_item": "Q733748"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70583333,
+              "lon": 139.75194444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 41570,
+          "ns": 0,
+          "title": "ナゴヤドーム",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なこやとおむ",
+            "page_image_free": "Nagoya_Dome_-_3.jpg",
+            "wikibase_item": "Q929524"
+          },
+          "coordinates": [
+            {
+              "lat": 35.18597778,
+              "lon": 136.94731389,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県名古屋市東区にある多目的ドーム球場"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:18.534Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 19661,
+          "ns": 0,
+          "title": "新潟市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にいかたし",
+            "kartographer_frames": "2",
+            "page_image_free": "Niigata_Montage3.png",
+            "wikibase_item": "Q179691"
+          },
+          "coordinates": [
+            {
+              "lat": 37.91619,
+              "lon": 139.03639,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "新潟県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 133875,
+          "ns": 0,
+          "title": "日本酒メーカー一覧",
+          "index": 2,
+          "pageprops": {
+            "wikibase_item": "Q11509282"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 604433,
+          "ns": 0,
+          "title": "京畿道 (日本統治時代)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "けいきとう",
+            "page_image_free": "Keiki_Prefecture_(August_15,_1945).png",
+            "wikibase_item": "Q10883222"
+          }
+        },
+        {
+          "pageid": 1357598,
+          "ns": 0,
+          "title": "桑名市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "くわなし",
+            "kartographer_frames": "1",
+            "page_image_free": "六華宛庭園の池に写る邸宅.jpg",
+            "wikibase_item": "Q496472"
+          },
+          "coordinates": [
+            {
+              "lat": 35.06219,
+              "lon": 136.68367,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "三重県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 2300153,
+          "ns": 0,
+          "title": "S.H.Figuarts",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "えすえいちふいきゆああつ",
+            "wikibase_item": "Q11242301"
+          },
+          "terms": {
+            "description": [
+              "バンダイのフィギュア"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

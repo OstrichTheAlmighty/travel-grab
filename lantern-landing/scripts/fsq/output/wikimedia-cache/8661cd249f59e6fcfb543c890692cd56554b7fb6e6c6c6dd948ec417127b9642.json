@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:20.863Z",
+  "value": {
+    "searchinfo": {
+      "search": "墨田区総合体育館"
+    },
+    "search": [
+      {
+        "id": "Q11429440",
+        "title": "Q11429440",
+        "pageid": 12568214,
+        "concepturi": "http://www.wikidata.org/entity/Q11429440",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11429440",
+        "display": {
+          "label": {
+            "value": "Higashin Arena",
+            "language": "en"
+          },
+          "description": {
+            "value": "sports venue in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Higashin Arena",
+        "description": "sports venue in Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "墨田区総合体育館"
+        },
+        "aliases": [
+          "墨田区総合体育館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

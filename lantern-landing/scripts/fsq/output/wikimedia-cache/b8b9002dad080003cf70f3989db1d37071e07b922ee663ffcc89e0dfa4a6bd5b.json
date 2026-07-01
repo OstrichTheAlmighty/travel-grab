@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:34.157Z",
+  "value": {
+    "searchinfo": {
+      "search": "足立区立郷土博物館"
+    },
+    "search": [
+      {
+        "id": "Q11636983",
+        "title": "Q11636983",
+        "pageid": 12777442,
+        "concepturi": "http://www.wikidata.org/entity/Q11636983",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11636983",
+        "display": {
+          "label": {
+            "value": "Adachi City Museum",
+            "language": "en"
+          }
+        },
+        "label": "Adachi City Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "足立区立郷土博物館"
+        },
+        "aliases": [
+          "足立区立郷土博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

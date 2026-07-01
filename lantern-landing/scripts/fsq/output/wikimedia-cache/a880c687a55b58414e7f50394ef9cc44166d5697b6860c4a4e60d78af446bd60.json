@@ -1,0 +1,87 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:44.768Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 125183,
+          "ns": 0,
+          "title": "緑地",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "りよくち",
+            "page_image_free": "堀之内緑道.JPG",
+            "wikibase_item": "Q22652"
+          },
+          "terms": {
+            "description": [
+              "都市で空地を空地のまま存続させることを目的に確保した土地"
+            ]
+          }
+        },
+        {
+          "pageid": 681444,
+          "ns": 0,
+          "title": "北沢川 (東京都)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きたさわかわ",
+            "kartographer_frames": "3",
+            "page_image_free": "Kitazawa_River,_Daizawa_3-chōme.jpg",
+            "wikibase_item": "Q11402313"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区を流れていた河川"
+            ]
+          }
+        },
+        {
+          "pageid": 715664,
+          "ns": 0,
+          "title": "代沢",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たいさわ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ikenoue_station.jpg",
+            "wikibase_item": "Q11378267"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 2898445,
+          "ns": 0,
+          "title": "代沢せせらぎ公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たいさわせせらきこうえん",
+            "wikibase_item": "Q17228998"
+          }
+        },
+        {
+          "pageid": 3394425,
+          "ns": 0,
+          "title": "せせらぎ公園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せせらきこうえん",
+            "disambiguation": "",
+            "wikibase_item": "Q23998999"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの曖昧さ回避ページ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

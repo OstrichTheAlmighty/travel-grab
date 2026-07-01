@@ -1,0 +1,130 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:31.837Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 335947,
+          "ns": 0,
+          "title": "Setagaya",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Komazawa_Gymnasium_&_Control_Tower_2009.jpg",
+            "wikibase-shortdesc": "Special ward in Tokyo, Japan",
+            "wikibase_item": "Q231645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64657222,
+              "lon": 139.65324722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "special ward in the Tokyo Metropolis in Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 15783547,
+          "ns": 0,
+          "title": "Setagaya Art Museum",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Setagaya_Art_Museum.jpg",
+            "wikibase-shortdesc": "Art museum in Tokyo",
+            "wikibase_item": "Q3892314"
+          },
+          "coordinates": [
+            {
+              "lat": 35.631589,
+              "lon": 139.621896,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "art museum in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 32239397,
+          "ns": 0,
+          "title": "List of art museums",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Art Museums",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q6606159"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 32535311,
+          "ns": 0,
+          "title": "Seikadō Bunko Art Museum",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Seikado Bunko Art Museum",
+            "kartographer_frames": "1",
+            "page_image_free": "Seikado_Bunko_Art_Museum,_Marunouchi,_Chiyoda,_Tokyo.jpg",
+            "wikibase-shortdesc": "Art museum in Tokyo, Japan",
+            "wikibase_item": "Q3329573"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67888889,
+              "lon": 139.76138889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Japanese private library"
+            ]
+          }
+        },
+        {
+          "pageid": 41350355,
+          "ns": 0,
+          "title": "Setagaya Literary Museum",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Setagaya_bungakukan.JPG",
+            "wikibase-shortdesc": "Museum in Tokyo, Japan",
+            "wikibase_item": "Q11362100"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66705556,
+              "lon": 139.60891667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "museum in Setagaya, Tokyo, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

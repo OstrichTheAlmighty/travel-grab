@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:50.477Z",
+  "value": {
+    "searchinfo": {
+      "search": "六義園"
+    },
+    "search": [
+      {
+        "id": "Q1889010",
+        "title": "Q1889010",
+        "pageid": 1819158,
+        "concepturi": "http://www.wikidata.org/entity/Q1889010",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1889010",
+        "display": {
+          "label": {
+            "value": "Rikugi Garden",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Rikugi Garden",
+        "description": "park in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "六義園"
+        },
+        "aliases": [
+          "六義園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

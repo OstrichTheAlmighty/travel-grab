@@ -1,0 +1,84 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:35.044Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 11306,
+          "ns": 0,
+          "title": "両",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "りよう",
+            "page_image_free": "1ryo-hundo.jpg",
+            "wikibase_item": "Q876244"
+          }
+        },
+        {
+          "pageid": 21302,
+          "ns": 0,
+          "title": "貨幣",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かへい",
+            "page_image_free": "Billets_de_5000.jpg",
+            "wikibase_item": "Q1368"
+          },
+          "terms": {
+            "description": [
+              "物やサービスの交換・流通に用いられる媒介物。または硬貨(coin)。"
+            ]
+          }
+        },
+        {
+          "pageid": 72149,
+          "ns": 0,
+          "title": "両替",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "りようかえ",
+            "wikibase_item": "Q2002539"
+          },
+          "terms": {
+            "description": [
+              "異種の通貨間であるいは同一通貨で異なる単位の紙幣・硬貨を交換すること"
+            ]
+          }
+        },
+        {
+          "pageid": 493890,
+          "ns": 0,
+          "title": "貨幣学",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かへいかく",
+            "page_image_free": "Assorted_United_States_coins.jpg",
+            "wikibase_item": "Q631286"
+          }
+        },
+        {
+          "pageid": 2564827,
+          "ns": 0,
+          "title": "日本銀行",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "につほんきんこう",
+            "page_image_free": "Bank_of_Japan_headquarters_in_Tokyo,_Japan.jpg",
+            "wikibase_item": "Q333101"
+          },
+          "terms": {
+            "description": [
+              "日本の中央銀行"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

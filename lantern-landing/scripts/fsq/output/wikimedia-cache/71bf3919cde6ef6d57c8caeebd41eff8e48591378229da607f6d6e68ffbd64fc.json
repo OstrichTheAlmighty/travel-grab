@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:28.776Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 12490579,
+          "ns": 0,
+          "title": "Alvark Tokyo",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Alvark_Tokyo_logo.png",
+            "wikibase-shortdesc": "Professional basketball team in Tokyo, Japan",
+            "wikibase_item": "Q7830743"
+          },
+          "terms": {
+            "description": [
+              "Professional basketball team in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 12801966,
+          "ns": 0,
+          "title": "Toyota Arena (disambiguation)",
+          "index": 3,
+          "pageprops": {
+            "disambiguation": "",
+            "wikibase-shortdesc": "Topics referred to by the same term",
+            "wikibase_item": "Q7830744"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        },
+        {
+          "pageid": 79300410,
+          "ns": 0,
+          "title": "Music Awards Japan",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Music_Awards_Japan's_official_logo.png",
+            "wikibase-shortdesc": "Japanese music awards",
+            "wikibase_item": "Q130609304"
+          },
+          "terms": {
+            "description": [
+              "Music Awards Japan music show"
+            ]
+          }
+        },
+        {
+          "pageid": 82085021,
+          "ns": 0,
+          "title": "2026 in Rizin Fighting Federation",
+          "index": 4,
+          "pageprops": {
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q137757542"
+          },
+          "terms": {
+            "description": [
+              "Rizin Fighting Federation in 2026"
+            ]
+          }
+        },
+        {
+          "pageid": 83255960,
+          "ns": 0,
+          "title": "Toyota Arena Tokyo",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Toyota Arena Tokyo",
+            "kartographer_frames": "1",
+            "page_image_free": "Toyota_Arena_Tokyo_(93502).jpg",
+            "wikibase-shortdesc": "Indoor arena in Koto, Tokyo, Japan",
+            "wikibase_item": "Q131801357"
+          },
+          "coordinates": [
+            {
+              "lat": 35.626389,
+              "lon": 139.783056,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "indoor arena in Koto, Tokyo, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

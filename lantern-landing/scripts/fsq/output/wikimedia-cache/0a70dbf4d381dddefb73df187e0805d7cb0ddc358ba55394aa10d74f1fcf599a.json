@@ -1,0 +1,128 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:44.835Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17064,
+          "ns": 0,
+          "title": "荒川 (関東)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あらかわ",
+            "kartographer_frames": "2",
+            "page_image_free": "ArakawaKako.jpg",
+            "wikibase_item": "Q625465"
+          },
+          "terms": {
+            "description": [
+              "埼玉県・東京都を流れる河川"
+            ]
+          }
+        },
+        {
+          "pageid": 67053,
+          "ns": 0,
+          "title": "堀切ジャンクション",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほりきりしやんくしよん",
+            "page_image_free": "Map_Tokyo_special_wards.svg",
+            "wikibase_item": "Q10930485"
+          },
+          "coordinates": [
+            {
+              "lat": 35.74417,
+              "lon": 139.82356,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都葛飾区にある首都高速道路の6号向島線と中央環状線を結ぶジャンクション"
+            ]
+          }
+        },
+        {
+          "pageid": 337594,
+          "ns": 0,
+          "title": "荒川河口橋",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あらかわかこうきよう",
+            "page_image_free": "Arakawa-rivermouth-bridge1.jpg",
+            "wikibase_item": "Q11618588"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6475,
+              "lon": 139.84555556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の橋"
+            ]
+          }
+        },
+        {
+          "pageid": 546076,
+          "ns": 0,
+          "title": "岩淵水門",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いわふちすいもん",
+            "page_image_free": "Iwabuchi_suimon_blue.jpg",
+            "wikibase_item": "Q11475353"
+          },
+          "coordinates": [
+            {
+              "lat": 35.78555556,
+              "lon": 139.73361111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の水門"
+            ]
+          }
+        },
+        {
+          "pageid": 914675,
+          "ns": 0,
+          "title": "荒川大橋",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あらかわおおはし",
+            "page_image_free": "Kumagaya_Arakawa-ohashi_Bridge_3.JPG",
+            "wikibase_item": "Q11618549"
+          },
+          "coordinates": [
+            {
+              "lat": 36.13472222,
+              "lon": 139.37888889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県熊谷市の橋"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

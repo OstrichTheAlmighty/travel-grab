@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:19.434Z",
+  "value": {
+    "searchinfo": {
+      "search": "若い時計台"
+    },
+    "search": [
+      {
+        "id": "Q134972411",
+        "title": "Q134972411",
+        "pageid": 128797813,
+        "concepturi": "http://www.wikidata.org/entity/Q134972411",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q134972411",
+        "display": {
+          "label": {
+            "value": "若い時計台",
+            "language": "ja"
+          }
+        },
+        "label": "若い時計台",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "若い時計台"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

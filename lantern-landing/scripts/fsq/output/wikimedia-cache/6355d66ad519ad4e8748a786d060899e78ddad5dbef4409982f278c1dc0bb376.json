@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:29.582Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 71182,
+          "ns": 0,
+          "title": "住友家",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すみともけ",
+            "page_image_free": "井桁.png",
+            "wikibase_item": "Q11381758"
+          },
+          "terms": {
+            "description": [
+              "日本の氏族"
+            ]
+          }
+        },
+        {
+          "pageid": 84961,
+          "ns": 0,
+          "title": "泉屋博古館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せんおくはくこかん",
+            "kartographer_frames": "1",
+            "kartographer_links": "1",
+            "page_image_free": "SenokuHakkoKan.jpg",
+            "wikibase_item": "Q3478488"
+          },
+          "coordinates": [
+            {
+              "lat": 35.01758333,
+              "lon": 135.79277778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市左京区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 263672,
+          "ns": 0,
+          "title": "泉ガーデンタワー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いすみかあてんたわあ",
+            "kartographer_frames": "1",
+            "kartographer_links": "1",
+            "page_image_free": "Izumi_Garden_Tower_from_Tokyo_Tower.jpg",
+            "wikibase_item": "Q3275660"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66472222,
+              "lon": 139.73944444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区の複合ビル"
+            ]
+          }
+        },
+        {
+          "pageid": 1402639,
+          "ns": 0,
+          "title": "狩野芳崖",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かのう ほうかい",
+            "page_image_free": "Kanou_Hougai_01.jpg",
+            "wikibase_item": "Q2384056"
+          },
+          "terms": {
+            "description": [
+              "日本の画家"
+            ]
+          }
+        },
+        {
+          "pageid": 1599711,
+          "ns": 0,
+          "title": "児玉希望",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こたま きほう",
+            "wikibase_item": "Q11388725"
+          },
+          "terms": {
+            "description": [
+              "1898-1971, 日本画家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

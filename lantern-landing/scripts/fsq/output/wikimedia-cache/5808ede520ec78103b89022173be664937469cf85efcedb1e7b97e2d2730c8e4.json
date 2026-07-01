@@ -1,0 +1,82 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:51.166Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 123769,
+          "ns": 0,
+          "title": "千葉進歩",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちは すすむ",
+            "wikibase_item": "Q513326"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優、歌手"
+            ]
+          }
+        },
+        {
+          "pageid": 1983056,
+          "ns": 0,
+          "title": "万延元年遣米使節",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "まんえんかんねんけんへいしせつ",
+            "page_image_free": "Japanese-Embassy-to-the-United-States-Group-Photo-1860.png",
+            "wikibase_item": "Q6158166"
+          }
+        },
+        {
+          "pageid": 2480266,
+          "ns": 0,
+          "title": "六角彩子",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ろつかく あやこ",
+            "page_image_free": "六角彩子選手.jpg",
+            "wikibase_item": "Q11392536"
+          },
+          "terms": {
+            "description": [
+              "女子野球選手、理学療法士"
+            ]
+          }
+        },
+        {
+          "pageid": 2496810,
+          "ns": 0,
+          "title": "スガダイロー",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "すか たいろう",
+            "wikibase_item": "Q11311372"
+          },
+          "terms": {
+            "description": [
+              "日本のジャズ・ピアニスト (1974-)"
+            ]
+          }
+        },
+        {
+          "pageid": 3712445,
+          "ns": 0,
+          "title": "エバレット・ケネディ・ブラウン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふらうん えはれつと",
+            "wikibase_item": "Q45820035"
+          }
+        }
+      ]
+    }
+  }
+}

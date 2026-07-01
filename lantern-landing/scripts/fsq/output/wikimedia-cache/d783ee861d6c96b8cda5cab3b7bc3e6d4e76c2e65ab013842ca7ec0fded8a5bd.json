@@ -1,0 +1,62 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:43.295Z",
+  "value": {
+    "searchinfo": {
+      "search": "ゲストリレーション"
+    },
+    "search": [
+      {
+        "id": "Q11524254",
+        "title": "Q11524254",
+        "pageid": 12664124,
+        "concepturi": "http://www.wikidata.org/entity/Q11524254",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524254",
+        "display": {
+          "label": {
+            "value": "ゲストリレーション",
+            "language": "ja"
+          },
+          "description": {
+            "value": "Wikimedia list article",
+            "language": "en"
+          }
+        },
+        "label": "ゲストリレーション",
+        "description": "Wikimedia list article",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ゲストリレーション"
+        }
+      },
+      {
+        "id": "Q11524282",
+        "title": "Q11524282",
+        "pageid": 12664152,
+        "concepturi": "http://www.wikidata.org/entity/Q11524282",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524282",
+        "display": {
+          "label": {
+            "value": "ゲストリレーション・ウィンドウ",
+            "language": "ja"
+          },
+          "description": {
+            "value": "Wikimedia list article",
+            "language": "en"
+          }
+        },
+        "label": "ゲストリレーション・ウィンドウ",
+        "description": "Wikimedia list article",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ゲストリレーション・ウィンドウ"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

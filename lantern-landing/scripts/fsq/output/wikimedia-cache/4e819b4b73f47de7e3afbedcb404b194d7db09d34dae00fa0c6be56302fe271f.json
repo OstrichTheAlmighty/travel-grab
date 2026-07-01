@@ -1,0 +1,133 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:36.507Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 428768,
+          "ns": 0,
+          "title": "小牧市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こまきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Komakishirekishikan.jpg",
+            "wikibase_item": "Q389537"
+          },
+          "coordinates": [
+            {
+              "lat": 35.29031,
+              "lon": 136.911,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 845695,
+          "ns": 0,
+          "title": "氷川神社 (東京都港区赤坂)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひかわしんしや みなとくあかさか",
+            "kartographer_frames": "1",
+            "page_image_free": "Hikawa-jinjya_Akasaka4.JPG",
+            "wikibase_item": "Q3135503"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66823333,
+              "lon": 139.73551389,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区の神社"
+            ]
+          }
+        },
+        {
+          "pageid": 977885,
+          "ns": 0,
+          "title": "安井 (名古屋市)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やすい",
+            "kartographer_frames": "2",
+            "kartographer_links": "2",
+            "page_image_free": "Rokusho-sha_(Yasui,_Nagoya)_20170909-03.jpg",
+            "wikibase_item": "Q11450186"
+          },
+          "terms": {
+            "description": [
+              "名古屋市北区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 1513456,
+          "ns": 0,
+          "title": "白峯寺",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しろみねし",
+            "kartographer_frames": "1",
+            "page_image_free": "Sirominezi_11.jpg",
+            "wikibase_item": "Q11579651"
+          },
+          "coordinates": [
+            {
+              "lat": 34.33352778,
+              "lon": 133.92676389,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "香川県坂出市にある寺院、四国八十八箇所霊場の第八十一番札所"
+            ]
+          }
+        },
+        {
+          "pageid": 1575826,
+          "ns": 0,
+          "title": "穴守稲荷神社",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あなもりいなりしんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "穴守稲荷神社正面.jpg",
+            "wikibase_item": "Q11597221"
+          },
+          "coordinates": [
+            {
+              "lat": 35.550389,
+              "lon": 139.749639,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都大田区の神社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

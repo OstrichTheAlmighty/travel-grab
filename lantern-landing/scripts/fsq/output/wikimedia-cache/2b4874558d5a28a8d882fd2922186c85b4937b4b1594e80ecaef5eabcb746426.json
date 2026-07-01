@@ -1,0 +1,123 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:03.554Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 7827,
+          "ns": 0,
+          "title": "品川区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しなかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "Gate_City_Osaki.jpg",
+            "wikibase_item": "Q233495"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60917,
+              "lon": 139.73017,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の1つ"
+            ]
+          }
+        },
+        {
+          "pageid": 732770,
+          "ns": 0,
+          "title": "しながわ水族館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しなかわすいそくかん",
+            "page_image_free": "しながわ水族館.jpg",
+            "wikibase_item": "Q11254393"
+          },
+          "coordinates": [
+            {
+              "lat": 35.58847222,
+              "lon": 139.7375,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区にある水族館"
+            ]
+          }
+        },
+        {
+          "pageid": 1085724,
+          "ns": 0,
+          "title": "しながわ区民公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しなかわくみんこうえん",
+            "page_image_free": "しながわ区民公園中央口.jpg",
+            "wikibase_item": "Q11254389"
+          },
+          "coordinates": [
+            {
+              "lat": 35.59302778,
+              "lon": 139.739,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1394575,
+          "ns": 0,
+          "title": "勝島",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かつしま",
+            "kartographer_frames": "1",
+            "page_image_free": "Oi_race_course_entrance.JPG",
+            "wikibase_item": "Q11400274"
+          },
+          "terms": {
+            "description": [
+              "東京都品川区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 3649712,
+          "ns": 0,
+          "title": "しながわ区民公園屋外プール",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しなかわくみんこうえんおくかいふーる",
+            "wikibase_item": "Q48746607"
+          },
+          "coordinates": [
+            {
+              "lat": 35.59386667,
+              "lon": 139.74020278,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

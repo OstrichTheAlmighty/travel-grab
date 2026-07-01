@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:28.560Z",
+  "value": {
+    "searchinfo": {
+      "search": "Kochikame Museum"
+    },
+    "search": [
+      {
+        "id": "Q134972437",
+        "title": "Q134972437",
+        "pageid": 128797841,
+        "concepturi": "http://www.wikidata.org/entity/Q134972437",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q134972437",
+        "display": {
+          "label": {
+            "value": "Kochikame Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Katsushika, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Kochikame Museum",
+        "description": "museum in Katsushika, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Kochikame Museum"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:33.156Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 91018,
+          "ns": 0,
+          "title": "風景印",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふうけいいん",
+            "page_image_free": "Kamakura_22.2.22.JPG",
+            "wikibase_item": "Q10855434"
+          }
+        },
+        {
+          "pageid": 526272,
+          "ns": 0,
+          "title": "郵便区分機",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ゆうひんくふんき",
+            "wikibase_item": "Q827145"
+          }
+        },
+        {
+          "pageid": 1051957,
+          "ns": 0,
+          "title": "大正ロマン",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たいしようろまん",
+            "page_image_free": "Family_of_takahashi_korekiyo_at_his_garden_1920.jpg",
+            "wikibase_item": "Q10936092"
+          },
+          "terms": {
+            "description": [
+              "大正時代の雰囲気を伝える思潮や文化事象"
+            ]
+          }
+        },
+        {
+          "pageid": 1101901,
+          "ns": 0,
+          "title": "関東大震災",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かんとうたいしんさい",
+            "page_image_free": "Kanto-daishinsai.jpg",
+            "toc": "",
+            "wikibase_item": "Q3742341"
+          },
+          "terms": {
+            "description": [
+              "1923年に発生した関東大地震による災害"
+            ]
+          }
+        },
+        {
+          "pageid": 2968042,
+          "ns": 0,
+          "title": "郵政博物館 (日本)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ゆうせいはくふつかん",
+            "page_image_free": "Japan_Tokyo_wards_location_map.svg",
+            "wikibase_item": "Q17225229"
+          },
+          "terms": {
+            "description": [
+              "東京都墨田区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

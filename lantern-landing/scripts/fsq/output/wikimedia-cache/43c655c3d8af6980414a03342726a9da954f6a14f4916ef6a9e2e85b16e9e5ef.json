@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:59.355Z",
+  "value": {
+    "searchinfo": {
+      "search": "葛飾区郷土と天文の博物館"
+    },
+    "search": [
+      {
+        "id": "Q11621071",
+        "title": "Q11621071",
+        "pageid": 12761479,
+        "concepturi": "http://www.wikidata.org/entity/Q11621071",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11621071",
+        "display": {
+          "label": {
+            "value": "Katsushika City Museum",
+            "language": "en"
+          }
+        },
+        "label": "Katsushika City Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "葛飾区郷土と天文の博物館"
+        },
+        "aliases": [
+          "葛飾区郷土と天文の博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:35.406Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 15334,
+          "ns": 0,
+          "title": "ボウリング",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ほうりんく",
+            "page_image_free": "Bowling_ball_release.jpg",
+            "wikibase_item": "Q172809"
+          },
+          "terms": {
+            "description": [
+              "室内で行われるスポーツ競技の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 28918,
+          "ns": 0,
+          "title": "立教大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "りつきようたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Rikkyo_University_1.jpg",
+            "wikibase_item": "Q1143235"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7305,
+              "lon": 139.70394444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 695602,
+          "ns": 0,
+          "title": "ナガサキ・シッピング・リスト・アンド・アドバタイザー",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "なかさきしつひんくりすとあんとあとはたいさあ",
+            "wikibase_item": "Q11323720"
+          }
+        },
+        {
+          "pageid": 992477,
+          "ns": 0,
+          "title": "長崎市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なかさきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Oura_Church_view_-_panoramio_(cropped).jpg",
+            "wikibase_item": "Q38234"
+          },
+          "coordinates": [
+            {
+              "lat": 32.74953,
+              "lon": 129.87964,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長崎県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 1426231,
+          "ns": 0,
+          "title": "近代化産業遺産",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きんたいかさんきよういさん",
+            "page_image_free": "Heritage_of_Industrial_Modernization_of_Japan.svg",
+            "wikibase_item": "Q11638384"
+          },
+          "terms": {
+            "description": [
+              "経済産業省が認定している文化遺産の分類"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

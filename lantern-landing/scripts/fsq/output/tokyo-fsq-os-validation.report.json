@@ -1,0 +1,2591 @@
+{
+  "city": "Tokyo",
+  "country": "JP",
+  "executionMs": 61923.165708,
+  "queryMs": 19278.630084000004,
+  "filterMs": 975.3336249999993,
+  "normalizeMs": 63.67241700000159,
+  "dedupMs": 278.97554200000013,
+  "totalRawPlaces": 24341,
+  "rejectedMissingCoordinates": 0,
+  "rejectedClosed": 1086,
+  "rejectedNotTravelRelevant": 9840,
+  "rejectedGenericBusiness": 696,
+  "retainedPlaces": 13283,
+  "removedPlaces": 11058,
+  "duplicateCount": 132,
+  "byCategory": {
+    "adventure": 658,
+    "culture": 1063,
+    "nature": 4264,
+    "food": 3517,
+    "nightlife": 2315,
+    "luxury": 1321,
+    "free": 145
+  },
+  "byFsqCategoryLabel": {
+    "Arts and Entertainment > Stadium": 78,
+    "Sports and Recreation > Water Sports > Swimming > Swimming Pool": 9,
+    "Arts and Entertainment > Museum > Art Museum": 118,
+    "Arts and Entertainment > Museum > Science Museum": 36,
+    "Retail > Food and Beverage Retail > Liquor Store": 68,
+    "Arts and Entertainment > Museum": 160,
+    "Arts and Entertainment > Performing Arts Venue > Concert Hall": 42,
+    "Landmarks and Outdoors > Monument": 267,
+    "Business and Professional Services > Convention Center > Conference Room": 4,
+    "Landmarks and Outdoors > States and Municipalities > Neighborhood": 43,
+    "Travel and Transportation > Road": 13,
+    "Retail > Shopping Mall": 33,
+    "Arts and Entertainment > Museum > History Museum": 130,
+    "Arts and Entertainment > Planetarium": 2,
+    "Landmarks and Outdoors > Historic and Protected Site": 295,
+    "Community and Government > Spiritual Center > Confucian Temple": 2,
+    "Arts and Entertainment > Art Gallery": 68,
+    "Arts and Entertainment > Aquarium": 140,
+    "Community and Government > Spiritual Center > Buddhist Temple": 32,
+    "Landmarks and Outdoors > Park": 233,
+    "Sports and Recreation": 25,
+    "Sports and Recreation > Racquet Sports > Tennis > Tennis Court": 8,
+    "Landmarks and Outdoors > Garden": 100,
+    "Arts and Entertainment > Exhibit": 8,
+    "Community and Government > Spiritual Center > Shrine": 57,
+    "Landmarks and Outdoors > Plaza": 62,
+    "Landmarks and Outdoors > Park > Playground": 309,
+    "Community and Government > Spiritual Center > Temple": 13,
+    "Retail > Bookstore": 1,
+    "Business and Professional Services > Event Space": 158,
+    "Dining and Drinking > Bar": 465,
+    "Arts and Entertainment > Public Art > Outdoor Sculpture": 59,
+    "Retail > Shopping Plaza": 1,
+    "Dining and Drinking > Cafe, Coffee, and Tea House > Café": 491,
+    "Landmarks and Outdoors > Castle": 5,
+    "Arts and Entertainment > Amusement Park > Attraction": 294,
+    "Arts and Entertainment > Amusement Park": 208,
+    "Arts and Entertainment > Museum > Erotic Museum": 2,
+    "Community and Government > Library": 16,
+    "Retail > Arts and Crafts Store": 13,
+    "Arts and Entertainment > Zoo > Zoo Exhibit": 40,
+    "Sports and Recreation > Gym and Studio > Climbing Gym": 50,
+    "Landmarks and Outdoors > Rock Climbing Spot": 6,
+    "Arts and Entertainment > Stadium > Track Stadium": 7,
+    "Arts and Entertainment > Stadium > Soccer Stadium": 25,
+    "Sports and Recreation > Running and Track > Track": 3,
+    "Arts and Entertainment > Stadium > Tennis Stadium": 1,
+    "Sports and Recreation > Athletic Field": 6,
+    "Arts and Entertainment > Stadium > Rugby Stadium": 1,
+    "Sports and Recreation > Hockey > Hockey Field": 1,
+    "Sports and Recreation > Soccer > Soccer Field": 12,
+    "Sports and Recreation > Gym and Studio > Gym": 7,
+    "Arts and Entertainment > Stadium > Baseball Stadium": 113,
+    "Business and Professional Services > Real Estate Service": 4,
+    "Community and Government > Education > Driving School": 1,
+    "Landmarks and Outdoors > Hot Spring": 79,
+    "Business and Professional Services > Health and Beauty Service > Spa": 1336,
+    "Sports and Recreation > Sauna": 51,
+    "Business and Professional Services > Health and Beauty Service > Massage Clinic": 194,
+    "Retail": 5,
+    "Landmarks and Outdoors > Other Great Outdoors": 41,
+    "Landmarks and Outdoors > Park > Dog Park": 36,
+    "Business and Professional Services > Health and Beauty Service > Bath House": 27,
+    "Landmarks and Outdoors > Campground": 4,
+    "Landmarks and Outdoors > Field": 6,
+    "Landmarks and Outdoors > Lake": 4,
+    "Sports and Recreation > Baseball > Baseball Field": 11,
+    "Community and Government > Education > College and University > College Academic Building": 1,
+    "Travel and Transportation > Transport Hub > Taxi Stand": 3,
+    "Business and Professional Services > Pet Service": 3,
+    "Community and Government > Community Center": 12,
+    "Landmarks and Outdoors > Island": 1,
+    "Sports and Recreation > Indoor Play Area": 12,
+    "Travel and Transportation > Lodging > Resort": 4,
+    "Travel and Transportation > Lodging > Hotel": 11,
+    "Landmarks and Outdoors > Scenic Lookout": 42,
+    "Dining and Drinking > Bar > Lounge": 24,
+    "Retail > Pet Supplies Store": 4,
+    "Landmarks and Outdoors > Park > Natural Park": 2,
+    "Travel and Transportation > Tourist Information and Service": 5,
+    "Community and Government > Cultural Center": 66,
+    "Landmarks and Outdoors > Structure": 28,
+    "Business and Professional Services > Architecture Firm": 1,
+    "Sports and Recreation > Martial Arts Dojo": 12,
+    "Arts and Entertainment > Performing Arts Venue > Music Venue": 1085,
+    "Community and Government > Education > College and University > College Baseball Diamond": 10,
+    "Landmarks and Outdoors > Palace": 7,
+    "Community and Government > Government Building": 4,
+    "Community and Government > Spiritual Center": 12,
+    "Business and Professional Services > Factory": 4,
+    "Community and Government > Organization": 3,
+    "Landmarks and Outdoors > Memorial Site": 15,
+    "Arts and Entertainment > Public Art": 26,
+    "Community and Government > Education": 33,
+    "Arts and Entertainment > Arcade": 48,
+    "Arts and Entertainment > Zoo": 21,
+    "Community and Government > Education > College and University > Student Center": 2,
+    "Business and Professional Services > Auditorium": 2,
+    "Landmarks and Outdoors > Tree": 6,
+    "Arts and Entertainment > Comedy Club": 15,
+    "Community and Government > Residential Building > Apartment or Condo": 7,
+    "Retail > Record Store": 5,
+    "Landmarks and Outdoors > Roof Deck": 9,
+    "Community and Government > Education > College and University > College Track": 1,
+    "Landmarks and Outdoors > Botanical Garden": 16,
+    "Retail > Computers and Electronics Retail > Electronics Store": 48,
+    "Travel and Transportation > Transport Hub > Airport > Airport Lounge": 1,
+    "Community and Government > Education > College and University > College Quad": 7,
+    "Business and Professional Services > Convention Center": 2,
+    "Landmarks and Outdoors > Hiking Trail": 18,
+    "Landmarks and Outdoors > Picnic Shelter": 6,
+    "Event > Other Event": 3,
+    "Community and Government > Spiritual Center > Prayer Room": 1,
+    "Landmarks and Outdoors > Reservoir": 2,
+    "Landmarks and Outdoors > Sculpture Garden": 13,
+    "Landmarks and Outdoors > Mountain": 4,
+    "Arts and Entertainment > Public Art > Street Art": 2,
+    "Dining and Drinking > Restaurant > Theme Restaurant": 9,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant > Ramen Restaurant": 131,
+    "Landmarks and Outdoors > Forest": 12,
+    "Landmarks and Outdoors > River": 6,
+    "Landmarks and Outdoors > Farm": 6,
+    "Business and Professional Services > Agriculture and Forestry Service": 4,
+    "Health and Medicine": 1,
+    "Landmarks and Outdoors > Bathing Area": 3,
+    "Event > Entertainment Event > Music Festival": 1,
+    "Landmarks and Outdoors > Waterfall": 2,
+    "Arts and Entertainment > Stadium > Basketball Stadium": 1,
+    "Travel and Transportation > Parking": 2723,
+    "Sports and Recreation > Fishing Area": 4,
+    "Landmarks and Outdoors > Fountain": 6,
+    "Landmarks and Outdoors > Stable": 1,
+    "Travel and Transportation": 1,
+    "Landmarks and Outdoors > Beach": 9,
+    "Community and Government": 1,
+    "Community and Government > Education > College and University > College Classroom": 1,
+    "Landmarks and Outdoors > Park > National Park": 6,
+    "Dining and Drinking > Restaurant > Southern Food Restaurant": 2,
+    "Dining and Drinking > Bar > Dive Bar": 3,
+    "Sports and Recreation > Gym and Studio": 31,
+    "Sports and Recreation > Skating > Skate Park": 30,
+    "Landmarks and Outdoors > Park > Urban Park": 3,
+    "Business and Professional Services > Child Care Service": 1,
+    "Business and Professional Services > Laboratory": 1,
+    "Business and Professional Services > Scientific Equipment Supplier": 1,
+    "Arts and Entertainment > Water Park": 13,
+    "Landmarks and Outdoors > Park > Picnic Area": 1,
+    "Business and Professional Services > Office > Coworking Space": 54,
+    "Dining and Drinking > Restaurant > Spanish Restaurant": 527,
+    "Business and Professional Services > Print, TV, Radio and Outdoor Advertising Service": 1,
+    "Retail > Food and Beverage Retail > Farmers Market": 249,
+    "Community and Government > Organization > Club House": 2,
+    "Dining and Drinking > Restaurant > BBQ Joint": 132,
+    "Travel and Transportation > Moving Target": 2,
+    "Sports and Recreation > Baseball": 1,
+    "Business and Professional Services > Business Center": 3,
+    "Retail > Flower Store": 26,
+    "Arts and Entertainment > Performing Arts Venue": 23,
+    "Landmarks and Outdoors": 4,
+    "Retail > Sporting Goods Retail": 2,
+    "Business and Professional Services > Art Studio": 3,
+    "Dining and Drinking > Cafe, Coffee, and Tea House > Tea Room": 44,
+    "Landmarks and Outdoors > Lighthouse": 2,
+    "Business and Professional Services > Power Plant": 1,
+    "Community and Government > Public and Social Service": 2,
+    "Arts and Entertainment > Performing Arts Venue > Music Venue > Rock Club": 194,
+    "Sports and Recreation > Recreation Center": 2,
+    "Landmarks and Outdoors > Well": 1,
+    "Arts and Entertainment > Karaoke Box": 21,
+    "Landmarks and Outdoors > Bridge": 3,
+    "Business and Professional Services > Research Station": 1,
+    "Business and Professional Services > Outdoor Event Space": 8,
+    "Business and Professional Services > Ballroom": 1,
+    "Retail > Construction Supplies Store": 4,
+    "Business and Professional Services > Wedding Hall": 4,
+    "Landmarks and Outdoors > Harbor or Marina": 1,
+    "Arts and Entertainment > Performing Arts Venue > Music Venue > Jazz and Blues Venue": 84,
+    "Dining and Drinking > Dessert Shop": 41,
+    "Dining and Drinking > Restaurant": 170,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant > Soba Restaurant": 117,
+    "Dining and Drinking > Snack Place": 15,
+    "Landmarks and Outdoors > Nature Preserve": 3,
+    "Travel and Transportation > Rest Area": 3,
+    "Community and Government > Public Bathroom": 1,
+    "Dining and Drinking > Restaurant > Italian Restaurant": 187,
+    "Landmarks and Outdoors > Canal Lock": 1,
+    "Dining and Drinking > Cafe, Coffee, and Tea House": 40,
+    "Retail > Food and Beverage Retail > Fish Market": 227,
+    "Retail > Music Store": 41,
+    "Dining and Drinking > Bar > Beer Garden": 147,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant": 564,
+    "Retail > Computers and Electronics Retail > Camera Store": 3,
+    "Community and Government > Spiritual Center > Mosque": 1,
+    "Community and Government > Education > Adult Education": 2,
+    "Dining and Drinking > Bar > Karaoke Bar": 31,
+    "Sports and Recreation > Gym and Studio > Dance Studio": 48,
+    "Sports and Recreation > Gym and Studio > Yoga Studio": 17,
+    "Community and Government > Social Club": 1,
+    "Retail > Computers and Electronics Retail > Video Games Store": 2,
+    "Retail > Hobby Store": 3,
+    "Retail > Miscellaneous Store": 13,
+    "Business and Professional Services > Computer Repair Service": 1,
+    "Retail > Vintage and Thrift Store": 1,
+    "Retail > Furniture and Home Store > Home Appliance Store": 1,
+    "Arts and Entertainment > Performing Arts Venue > Indie Theater": 2,
+    "Arts and Entertainment > Performing Arts Venue > Theater": 4,
+    "Arts and Entertainment > Movie Theater > Indie Movie Theater": 1,
+    "Travel and Transportation > Transport Hub > Rail Station": 2,
+    "Sports and Recreation > Golf > Golf Course": 3,
+    "Dining and Drinking > Restaurant > Seafood Restaurant": 90,
+    "Event > Entertainment Event > Parade": 1,
+    "Business and Professional Services > Storage Facility": 2,
+    "Dining and Drinking > Cafe, Coffee, and Tea House > Pet Café": 15,
+    "Arts and Entertainment > Bowling Alley": 8,
+    "Travel and Transportation > Road > Intersection": 24,
+    "Community and Government > Education > College and University": 1,
+    "Business and Professional Services > Home Improvement Service > General Contractor": 253,
+    "Business and Professional Services > Home Improvement Service > Landscaper and Gardener": 362,
+    "Dining and Drinking > Restaurant > Gastropub": 21,
+    "Business and Professional Services > Construction": 52,
+    "Travel and Transportation > Tourist Information and Service > Tour Provider": 1,
+    "Business and Professional Services > Automotive Service > Car Wash and Detail": 3,
+    "Retail > Garden Center": 54,
+    "Retail > Food and Beverage Retail > Fruit and Vegetable Store": 11,
+    "Dining and Drinking > Bar > Pub": 60,
+    "Dining and Drinking > Brewery": 4,
+    "Business and Professional Services > Real Estate Service > Real Estate Agency": 1,
+    "Travel and Transportation > Transport Hub > Rental Car Location": 35,
+    "Dining and Drinking > Restaurant > German Restaurant": 6,
+    "Dining and Drinking > Restaurant > Burger Joint": 24,
+    "Dining and Drinking > Bar > Beer Bar": 34,
+    "Arts and Entertainment > Fair": 1,
+    "Travel and Transportation > Boat or Ferry": 6,
+    "Travel and Transportation > Cruise": 2,
+    "Retail > Eyecare Store": 1,
+    "Sports and Recreation > Water Sports > Swimming > Swim School": 1,
+    "Arts and Entertainment > Gaming Cafe": 22,
+    "Retail > Food and Beverage Retail > Supermarket": 15,
+    "Travel and Transportation > Lodging": 7,
+    "Business and Professional Services > Photography Service > Photography Studio": 1,
+    "Retail > Toy Store": 3,
+    "Retail > Gift Store": 4,
+    "Arts and Entertainment > Movie Theater": 2,
+    "Dining and Drinking > Bar > Sake Bar": 812,
+    "Dining and Drinking > Bar > Cocktail Bar": 46,
+    "Dining and Drinking > Bar > Piano Bar": 11,
+    "Arts and Entertainment > Night Club": 26,
+    "Arts and Entertainment > Pool Hall": 14,
+    "Dining and Drinking > Bar > Wine Bar": 89,
+    "Dining and Drinking > Bar > Whisky Bar": 3,
+    "Community and Government > Education > College and University > College Gym": 1,
+    "Arts and Entertainment > Escape Room": 5,
+    "Business and Professional Services > Entertainment Service": 2,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant > Nabe Restaurant": 42,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant > Shabu-Shabu Restaurant": 44,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant > Sushi Restaurant": 188,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant > Yakitori Restaurant": 417,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant > Kushikatsu Restaurant": 104,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant > Yoshoku Restaurant": 201,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Noodle Restaurant": 55,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant > Sukiyaki Restaurant": 27,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant > Udon Restaurant": 49,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant > Tempura Restaurant": 110,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant > Teishoku Restaurant": 92,
+    "Dining and Drinking > Cafe, Coffee, and Tea House > Coffee Shop": 93,
+    "Dining and Drinking > Bar > Sports Bar": 318,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant > Unagi Restaurant": 30,
+    "Sports and Recreation > Gym and Studio > Pilates Studio": 1,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant > Okonomiyaki Restaurant": 54,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant > Monjayaki Restaurant": 35,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant > Japanese Curry Restaurant": 118,
+    "Health and Medicine > Alternative Medicine Clinic": 5,
+    "Arts and Entertainment > Go Kart Track": 1,
+    "Sports and Recreation > Race Track": 3,
+    "Dining and Drinking > Restaurant > French Restaurant": 66,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Korean Restaurant": 46,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Chinese Restaurant": 130,
+    "Retail > Food and Beverage Retail > Grocery Store": 44,
+    "Dining and Drinking > Restaurant > Bistro": 48,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Thai Restaurant": 19,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Vietnamese Restaurant": 10,
+    "Dining and Drinking > Restaurant > Comfort Food Restaurant": 4,
+    "Dining and Drinking > Restaurant > Steakhouse": 37,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Filipino Restaurant": 1,
+    "Dining and Drinking > Restaurant > Asian Restaurant": 83,
+    "Dining and Drinking > Restaurant > Dumpling Restaurant": 21,
+    "Dining and Drinking > Restaurant > Spanish Restaurant > Tapas Restaurant": 103,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Malay Restaurant": 1,
+    "Retail > Framing Store": 3,
+    "Dining and Drinking > Restaurant > Pizzeria": 34,
+    "Dining and Drinking > Restaurant > Italian Restaurant > Friuli Restaurant": 1,
+    "Dining and Drinking > Bar > Hotel Bar": 15,
+    "Dining and Drinking > Restaurant > Buffet": 3,
+    "Community and Government > Education > Preschool": 1,
+    "Dining and Drinking > Restaurant > Latin American Restaurant > South American Restaurant > Brazilian Restaurant": 12,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant > Tonkatsu Restaurant": 41,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant > Donburi Restaurant": 138,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Chinese Restaurant > Dim Sum Restaurant": 29,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant > Japanese Family Restaurant": 42,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant > Takoyaki Place": 22,
+    "Travel and Transportation > Bike Rental": 55,
+    "Retail > Food and Beverage Retail": 62,
+    "Dining and Drinking > Restaurant > Spanish Restaurant > Paella Restaurant": 63,
+    "Dining and Drinking > Restaurant > Mediterranean Restaurant": 11,
+    "Retail > Food and Beverage Retail > Grocery Store > Organic Grocery": 4,
+    "Retail > Souvenir Store": 3,
+    "Dining and Drinking > Restaurant > American Restaurant": 14,
+    "Community and Government > Education > College and University > Fraternity House": 1,
+    "Business and Professional Services > Health and Beauty Service": 34,
+    "Travel and Transportation > Electric Vehicle Charging Station": 5,
+    "Business and Professional Services > Management Consultant": 2,
+    "Business and Professional Services > Recycling Facility": 1,
+    "Retail > Hardware Store": 7,
+    "Retail > Furniture and Home Store": 7,
+    "Dining and Drinking > Restaurant > Diner": 3,
+    "Retail > Antique Store": 1,
+    "Community and Government > Spiritual Center > Church": 1,
+    "Sports and Recreation > Race Track > Racecourse": 1,
+    "Dining and Drinking > Restaurant > Deli": 36,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Hotpot Restaurant": 11,
+    "Dining and Drinking > Restaurant > Indian Restaurant": 25,
+    "Dining and Drinking > Restaurant > Fast Food Restaurant": 12,
+    "Dining and Drinking > Restaurant > Indian Restaurant > South Indian Restaurant": 5,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Chinese Restaurant > Szechuan Restaurant": 20,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant > Kaiseki Restaurant": 19,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Chinese Restaurant > Hong Kong Restaurant": 5,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Japanese Restaurant > Wagashi Place": 19,
+    "Dining and Drinking > Restaurant > Indian Restaurant > North Indian Restaurant": 4,
+    "Dining and Drinking > Restaurant > Pakistani Restaurant": 1,
+    "Dining and Drinking > Restaurant > Halal Restaurant": 7,
+    "Dining and Drinking > Restaurant > Turkish Restaurant": 4,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Chinese Restaurant > Cantonese Restaurant": 10,
+    "Dining and Drinking > Restaurant > Middle Eastern Restaurant": 6,
+    "Retail > Food and Beverage Retail > Butcher": 5,
+    "Dining and Drinking > Restaurant > Moroccan Restaurant": 1,
+    "Dining and Drinking > Restaurant > Fried Chicken Joint": 7,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Chinese Restaurant > Shanghai Restaurant": 5,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Himalayan Restaurant": 1,
+    "Dining and Drinking > Restaurant > Cajun and Creole Restaurant": 2,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Chinese Restaurant > Taiwanese Restaurant": 17,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Korean Restaurant > Korean BBQ Restaurant": 14,
+    "Dining and Drinking > Restaurant > American Restaurant > New American Restaurant": 2,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Chinese Restaurant > Cha Chaan Teng": 3,
+    "Dining and Drinking > Restaurant > Vegan and Vegetarian Restaurant": 13,
+    "Dining and Drinking > Restaurant > Gluten-Free Restaurant": 2,
+    "Dining and Drinking > Dessert Shop > Ice Cream Parlor": 20,
+    "Dining and Drinking > Restaurant > Wings Joint": 9,
+    "Dining and Drinking > Bakery": 24,
+    "Community and Government > Education > College and University > College Cafeteria": 3,
+    "Dining and Drinking > Restaurant > Mexican Restaurant": 13,
+    "Dining and Drinking > Restaurant > Mexican Restaurant > Taco Restaurant": 2,
+    "Dining and Drinking > Restaurant > Mexican Restaurant > Burrito Restaurant": 2,
+    "Dining and Drinking > Breakfast Spot": 5,
+    "Dining and Drinking > Food Court": 6,
+    "Dining and Drinking > Restaurant > Latin American Restaurant > South American Restaurant > Brazilian Restaurant > Churrascaria": 7,
+    "Dining and Drinking > Restaurant > Hawaiian Restaurant > Poke Restaurant": 1,
+    "Dining and Drinking > Restaurant > Salad Restaurant": 5,
+    "Dining and Drinking > Cafe, Coffee, and Tea House > Bubble Tea Shop": 11,
+    "Dining and Drinking > Restaurant > Mexican Restaurant > Tex-Mex Restaurant": 3,
+    "Retail > Furniture and Home Store > Kitchen Supply Store": 2,
+    "Retail > Food and Beverage Retail > Candy Store": 4,
+    "Business and Professional Services > Food and Beverage Service": 8,
+    "Business and Professional Services > Audiovisual Service": 1,
+    "Dining and Drinking > Restaurant > Turkish Restaurant > Doner Restaurant": 1,
+    "Dining and Drinking > Restaurant > Kebab Restaurant": 5,
+    "Retail > Food and Beverage Retail > Imported Food Store": 2,
+    "Retail > Food and Beverage Retail > Gourmet Store": 15,
+    "Dining and Drinking > Dessert Shop > Cupcake Shop": 2,
+    "Dining and Drinking > Dessert Shop > Pastry Shop": 12,
+    "Business and Professional Services > Manufacturer": 1,
+    "Dining and Drinking > Food Truck": 15,
+    "Dining and Drinking > Cafeteria": 9,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Chinese Restaurant > Yunnan Restaurant": 1,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Indonesian Restaurant": 1,
+    "Dining and Drinking > Restaurant > Asian Restaurant > Chinese Restaurant > Beijing Restaurant": 1,
+    "Dining and Drinking > Restaurant > Soup Spot": 2,
+    "Business and Professional Services > Recording Studio": 28,
+    "Community and Government > Organization > Non-Profit Organization": 3,
+    "Retail > Fashion Retail > Clothing Store": 1,
+    "Business and Professional Services > Locksmith": 2,
+    "Business and Professional Services > Radio Station": 3,
+    "Dining and Drinking > Restaurant > Caribbean Restaurant": 2,
+    "Community and Government > Education > Music School": 18,
+    "Business and Professional Services > Home Improvement Service": 2,
+    "Business and Professional Services > Equipment Rental Service": 1,
+    "Business and Professional Services > Creative Service": 1,
+    "Community and Government > Education > Trade School": 2,
+    "Business and Professional Services > Repair Service": 7,
+    "Retail > Print Store": 1,
+    "Dining and Drinking > Restaurant > Greek Restaurant": 1,
+    "Arts and Entertainment": 16,
+    "Dining and Drinking > Juice Bar": 16,
+    "Travel and Transportation > Lodging > Hotel > Hotel Pool": 4,
+    "Sports and Recreation > Skating > Skating Rink": 1,
+    "Event > Entertainment Event": 1,
+    "Dining and Drinking > Bar > Irish Pub": 3,
+    "Sports and Recreation > Golf > Golf Driving Range": 4,
+    "Sports and Recreation > Gun Range": 3,
+    "Arts and Entertainment > Casino": 1,
+    "Dining and Drinking > Bar > Gay Bar": 4,
+    "Business and Professional Services > Health and Beauty Service > Barbershop": 44,
+    "Business and Professional Services > Health and Beauty Service > Hair Salon": 63,
+    "Health and Medicine > Assisted Living Service": 1,
+    "Business and Professional Services > Health and Beauty Service > Brow Bar": 10,
+    "Business and Professional Services > Health and Beauty Service > Nail Salon": 28,
+    "Retail > Cosmetics Store": 14,
+    "Retail > Sporting Goods Retail > Bicycle Store": 2,
+    "Retail > Pop-Up Store": 1,
+    "Dining and Drinking > Restaurant > Eastern European Restaurant": 2,
+    "Retail > Food and Beverage Retail > Beer Store": 2,
+    "Retail > Food and Beverage Retail > Wine Store": 6,
+    "Travel and Transportation > Lodging > Hostel": 3,
+    "Retail > Food and Beverage Retail > Sausage Store": 2,
+    "Dining and Drinking > Restaurant > Latin American Restaurant": 2,
+    "Travel and Transportation > Travel Lounge": 1,
+    "Dining and Drinking > Restaurant > Belgian Restaurant": 5,
+    "Business and Professional Services > Event Service": 1,
+    "Arts and Entertainment > Strip Club": 11,
+    "Dining and Drinking > Smoothie Shop": 2,
+    "Dining and Drinking > Bar > Hookah Bar": 5,
+    "Retail > Food and Beverage Retail > Meat and Seafood Store": 6,
+    "Business and Professional Services > Automotive Service > Automotive Repair Shop": 1,
+    "Retail > Market": 39,
+    "Arts and Entertainment > Internet Cafe": 14,
+    "Business and Professional Services > Office > Corporate Cafeteria": 2,
+    "Business and Professional Services > Wholesaler": 1,
+    "Community and Government > Trailer Park": 6,
+    "Sports and Recreation > Racquet Sports": 1,
+    "Sports and Recreation > Gym and Studio > Cycle Studio": 1,
+    "Community and Government > Polling Place": 1,
+    "Event > Marketplace > Christmas Market": 2,
+    "Event > Marketplace > Trade Fair": 7,
+    "Dining and Drinking > Restaurant > Scandinavian Restaurant": 1,
+    "Retail > Food and Beverage Retail > Health Food Store": 3,
+    "Retail > Food and Beverage Retail > Coffee Roaster": 14,
+    "Dining and Drinking > Restaurant > English Restaurant": 1,
+    "Dining and Drinking > Restaurant > Sandwich Spot": 3,
+    "Business and Professional Services > Business Service": 1,
+    "Business and Professional Services > Office > Meeting Room": 1,
+    "Dining and Drinking > Restaurant > Jewish Restaurant": 1,
+    "Dining and Drinking > Restaurant > Falafel Restaurant": 1,
+    "Dining and Drinking > Restaurant > Swiss Restaurant": 1,
+    "Dining and Drinking > Restaurant > Fondue Restaurant": 1,
+    "Dining and Drinking > Restaurant > African Restaurant": 2,
+    "Dining and Drinking > Donut Shop": 1,
+    "Retail > Department Store": 1,
+    "Dining and Drinking > Restaurant > Hawaiian Restaurant": 3,
+    "Business and Professional Services > Home Improvement Service > Professional Cleaning Service": 1,
+    "Health and Medicine > Chiropractor": 15,
+    "Health and Medicine > Acupuncture Clinic": 5,
+    "Retail > Furniture and Home Store > Housewares Store": 1,
+    "Health and Medicine > Physician > Doctor's Office": 13,
+    "Health and Medicine > Medical Center": 10,
+    "Retail > Computers and Electronics Retail": 1,
+    "Retail > Warehouse or Wholesale Store": 2,
+    "Retail > Baby Store": 1,
+    "Sports and Recreation > Sports Club": 3,
+    "Health and Medicine > Physical Therapy Clinic": 1,
+    "Sports and Recreation > Gym and Studio > Gym Pool": 2,
+    "Dining and Drinking > Bar > Speakeasy": 5,
+    "Dining and Drinking > Bar > Tiki Bar": 1,
+    "Dining and Drinking > Food Stand": 2,
+    "Dining and Drinking > Restaurant > Fish and Chips Shop": 2,
+    "Dining and Drinking > Restaurant > Latin American Restaurant > South American Restaurant > Argentinian Restaurant": 1,
+    "Business and Professional Services > Home Improvement Service > Painter": 1,
+    "Community and Government > Housing Development": 1,
+    "Dining and Drinking > Restaurant > Hot Dog Joint": 3,
+    "Dining and Drinking > Restaurant > Latin American Restaurant > South American Restaurant > Brazilian Restaurant > Acai House": 1,
+    "Business and Professional Services > Translation Service": 1,
+    "Business and Professional Services > Market Research and Consulting Service": 13,
+    "Business and Professional Services > Search Engine Marketing and Optimization Service": 4,
+    "Business and Professional Services > Direct Mail and Email Marketing Service": 3,
+    "Arts and Entertainment > VR Cafe": 3,
+    "Business and Professional Services > Electrical Equipment Supplier": 1,
+    "Business and Professional Services > Office > Office Building": 1,
+    "Travel and Transportation > Fuel Station": 1,
+    "Retail > Fashion Retail > Men's Store": 1,
+    "Retail > Discount Store": 1,
+    "Sports and Recreation > Rugby > Rugby Pitch": 1,
+    "Retail > Flea Market": 11,
+    "Dining and Drinking > Restaurant > Australian Restaurant": 1,
+    "Retail > Comic Book Store": 2,
+    "Retail > Computers and Electronics Retail > Mobile Phone Store": 1,
+    "Travel and Transportation > Lodging > Bed and Breakfast": 1,
+    "Retail > Convenience Store": 1,
+    "Retail > Stationery Store": 1,
+    "Retail > Supplement Store": 1,
+    "Dining and Drinking > Creperie": 2,
+    "Retail > Sporting Goods Retail > Surf Store": 1,
+    "Business and Professional Services > Health and Beauty Service > Hair Removal Service": 1,
+    "Retail > Perfume Store": 1,
+    "Retail > Automotive Retail > Car Dealership": 1,
+    "Retail > Adult Store": 1,
+    "Event > Entertainment Event > Festival": 2,
+    "Business and Professional Services > Design Studio": 1,
+    "Business and Professional Services > Health and Beauty Service > Tanning Salon": 1
+  },
+  "geographyCounts": {
+    "tokyo_core_23_wards": 10847,
+    "broader_tokyo": 457,
+    "yokohama_or_outside_tokyo": 1505,
+    "unknown": 474
+  },
+  "withCoordinates": 13283,
+  "withWebsites": 7492,
+  "geometryFallbackCount": 0,
+  "chainPenaltyCount": 2,
+  "genericBusinessPenaltyCount": 0,
+  "withAltNames": 0,
+  "withChains": 0,
+  "top50": [
+    {
+      "id": "4ba5d4cef964a520af2439e3",
+      "name": "ひがしんアリーナ (墨田区総合体育館)",
+      "category": "adventure / Arts and Entertainment > Stadium",
+      "score": 100,
+      "lat": 35.699527514714156,
+      "lng": 139.81721118092537
+    },
+    {
+      "id": "4b0587a1f964a5207f9d22e3",
+      "name": "浅草寺 (Sensō-ji Temple)",
+      "category": "culture / Community and Government > Spiritual Center > Buddhist Temple",
+      "score": 99,
+      "lat": 35.71466210373382,
+      "lng": 139.79676067829132
+    },
+    {
+      "id": "4b0587a4f964a520f89d22e3",
+      "name": "大谷美術館",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.74728755842522,
+      "lng": 139.7451115430206
+    },
+    {
+      "id": "4b0587a7f964a520609e22e3",
+      "name": "松岡美術館",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.64002362220551,
+      "lng": 139.72202671614852
+    },
+    {
+      "id": "4b0587a7f964a5206e9e22e3",
+      "name": "野球殿堂博物館",
+      "category": "culture / Arts and Entertainment > Museum > History Museum",
+      "score": 99,
+      "lat": 35.70551972078071,
+      "lng": 139.75315051799774
+    },
+    {
+      "id": "4b0587a7f964a520789e22e3",
+      "name": "熊谷守一美術館",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.733738,
+      "lng": 139.690892
+    },
+    {
+      "id": "4b0587a7f964a520799e22e3",
+      "name": "文化学園服飾博物館",
+      "category": "culture / Arts and Entertainment > Museum",
+      "score": 99,
+      "lat": 35.68678762059553,
+      "lng": 139.6946308504265
+    },
+    {
+      "id": "4b0587a7f964a5208c9e22e3",
+      "name": "JCII Camera Museum",
+      "category": "culture / Arts and Entertainment > Museum",
+      "score": 99,
+      "lat": 35.686200855401665,
+      "lng": 139.74288178806432
+    },
+    {
+      "id": "4b0587a8f964a520969e22e3",
+      "name": "文京ふるさと歴史館",
+      "category": "culture / Arts and Entertainment > Museum > History Museum",
+      "score": 99,
+      "lat": 35.708002649755,
+      "lng": 139.7566279822781
+    },
+    {
+      "id": "4b0587a8f964a520ab9e22e3",
+      "name": "豊島区立郷土資料館",
+      "category": "culture / Arts and Entertainment > Museum > History Museum",
+      "score": 99,
+      "lat": 35.727828417014514,
+      "lng": 139.70667169726775
+    },
+    {
+      "id": "4b0587a8f964a520af9e22e3",
+      "name": "目黒区美術館 (Meguro Museum of Art, Tokyo)",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.634848699353086,
+      "lng": 139.70805403061522
+    },
+    {
+      "id": "4b0587a8f964a520ca9e22e3",
+      "name": "森美術館 (Mori Art Museum)",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.660367,
+      "lng": 139.729222
+    },
+    {
+      "id": "4b289b08f964a520329424e3",
+      "name": "フジフイルム スクエア",
+      "category": "culture / Arts and Entertainment > Art Gallery",
+      "score": 99,
+      "lat": 35.66518623076461,
+      "lng": 139.73043897188455
+    },
+    {
+      "id": "4b4ac427f964a5201f8e26e3",
+      "name": "岡本太郎美術館 (Taro Okamoto Museum of Art)",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.60794161698179,
+      "lng": 139.55786502321666
+    },
+    {
+      "id": "4b4c89f8f964a52089b526e3",
+      "name": "松涛美術館",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.658596939293325,
+      "lng": 139.69181254022686
+    },
+    {
+      "id": "4b5176bbf964a520cb4d27e3",
+      "name": "目黒不動尊 瀧泉寺",
+      "category": "culture / Community and Government > Spiritual Center > Buddhist Temple",
+      "score": 99,
+      "lat": 35.62857169324199,
+      "lng": 139.70808684825897
+    },
+    {
+      "id": "4b52808bf964a520238027e3",
+      "name": "山種美術館 (Yamatane Museum of Art)",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.653317,
+      "lng": 139.713773
+    },
+    {
+      "id": "4b52966cf964a520328327e3",
+      "name": "神田明神 (Kanda-Myōjin Shrine)",
+      "category": "culture / Community and Government > Spiritual Center > Shrine",
+      "score": 99,
+      "lat": 35.70173283297929,
+      "lng": 139.76771441854848
+    },
+    {
+      "id": "4b545279f964a5207cb727e3",
+      "name": "思い出横丁 (Omoide Yokocho)",
+      "category": "culture / Landmarks and Outdoors > States and Municipalities > Neighborhood",
+      "score": 99,
+      "lat": 35.69285700630512,
+      "lng": 139.69952543815089
+    },
+    {
+      "id": "4b548f3bf964a520fdbf27e3",
+      "name": "新宿歴史博物館",
+      "category": "culture / Arts and Entertainment > Museum > History Museum",
+      "score": 99,
+      "lat": 35.69027527943219,
+      "lng": 139.72549656929806
+    },
+    {
+      "id": "4b54f9d9f964a52039d627e3",
+      "name": "国立新美術館 (The National Art Center, Tokyo)",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.6651327835497,
+      "lng": 139.72641706466675
+    },
+    {
+      "id": "4b556c34f964a520ece327e3",
+      "name": "国立西洋美術館 (National Museum of Western Art)",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.71536225601277,
+      "lng": 139.77587968111038
+    },
+    {
+      "id": "4b556c7ef964a520f5e327e3",
+      "name": "東京国立博物館 (Tokyo National Museum)",
+      "category": "culture / Arts and Entertainment > Museum > History Museum",
+      "score": 99,
+      "lat": 35.71869088962384,
+      "lng": 139.77632761001587
+    },
+    {
+      "id": "4b556f55f964a52038e427e3",
+      "name": "日本科学未来館 (Miraikan)",
+      "category": "culture / Arts and Entertainment > Museum > Science Museum",
+      "score": 99,
+      "lat": 35.619244,
+      "lng": 139.776684
+    },
+    {
+      "id": "4b56ab05f964a5200a1828e3",
+      "name": "NTTインターコミュニケーション・センター (ICC)",
+      "category": "culture / Arts and Entertainment > Art Gallery",
+      "score": 99,
+      "lat": 35.68308524838605,
+      "lng": 139.68666625214718
+    },
+    {
+      "id": "4b56ac4ff964a5202e1828e3",
+      "name": "三鷹の森ジブリ美術館 (Ghibli Museum)",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.696236,
+      "lng": 139.570432
+    },
+    {
+      "id": "4b56cc7bf964a520861b28e3",
+      "name": "三井記念美術館 (Mitsui Memorial Museum)",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.68628880197803,
+      "lng": 139.77311635005617
+    },
+    {
+      "id": "4b572472f964a5200b2828e3",
+      "name": "雷門 (Kaminarimon Gate)",
+      "category": "culture / Landmarks and Outdoors > Monument",
+      "score": 99,
+      "lat": 35.71112711020446,
+      "lng": 139.79636773467064
+    },
+    {
+      "id": "4b572db2f964a520b02928e3",
+      "name": "ちひろ美術館",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.72865863511009,
+      "lng": 139.60536671714684
+    },
+    {
+      "id": "4b57bc72f964a520933e28e3",
+      "name": "ルーヴル-DNPミュージアムラボ",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.62810829425713,
+      "lng": 139.71925284728187
+    },
+    {
+      "id": "4b58f714f964a520dd7528e3",
+      "name": "増上寺 (Zojoji Temple)",
+      "category": "culture / Community and Government > Spiritual Center > Buddhist Temple",
+      "score": 99,
+      "lat": 35.657426,
+      "lng": 139.748301
+    },
+    {
+      "id": "4b59b852f964a5207c9428e3",
+      "name": "目黒寄生虫館 (Meguro Parasitological Museum)",
+      "category": "culture / Arts and Entertainment > Museum > Science Museum",
+      "score": 99,
+      "lat": 35.63183340699982,
+      "lng": 139.70670530117354
+    },
+    {
+      "id": "4b59bc55f964a5204d9528e3",
+      "name": "東京都写真美術館 (Tokyo Photographic Art Museum)",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.64161933745236,
+      "lng": 139.71327021718025
+    },
+    {
+      "id": "4b5a1c10f964a520d2ad28e3",
+      "name": "品川歴史館",
+      "category": "culture / Arts and Entertainment > Museum > History Museum",
+      "score": 99,
+      "lat": 35.59671920188438,
+      "lng": 139.73020313050384
+    },
+    {
+      "id": "4b5a80a4f964a52078c828e3",
+      "name": "秋葉原 (Akihabara)",
+      "category": "culture / Landmarks and Outdoors > States and Municipalities > Neighborhood",
+      "score": 99,
+      "lat": 35.69890403797905,
+      "lng": 139.77227914980548
+    },
+    {
+      "id": "4b5a8178f964a5209cc828e3",
+      "name": "練馬区立美術館",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.736982,
+      "lng": 139.636109
+    },
+    {
+      "id": "4b5ac21df964a5207ed328e3",
+      "name": "板橋区立美術館",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.7845257847881,
+      "lng": 139.6445685887266
+    },
+    {
+      "id": "4b5ba455f964a520100d29e3",
+      "name": "浮世絵 太田記念美術館",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.669392,
+      "lng": 139.704916
+    },
+    {
+      "id": "4b5bc476f964a520fe1429e3",
+      "name": "東京都美術館 (Tokyo Metropolitan Art Museum)",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.717154,
+      "lng": 139.772755
+    },
+    {
+      "id": "4b5bd0a2f964a520c31729e3",
+      "name": "明治神宮 (Meiji Jingu Shrine)",
+      "category": "culture / Community and Government > Spiritual Center > Shrine",
+      "score": 99,
+      "lat": 35.67637194402257,
+      "lng": 139.6993589401245
+    },
+    {
+      "id": "4b5be55ff964a520281c29e3",
+      "name": "東京国立近代美術館 (The National Museum of Modern Art, Tokyo)",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.690541286702164,
+      "lng": 139.754693722934
+    },
+    {
+      "id": "4b5be67af964a520591c29e3",
+      "name": "東京都現代美術館 (Museum of Contemporary Art Tokyo) (MOT)",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.679737,
+      "lng": 139.808219
+    },
+    {
+      "id": "4b5be6c3f964a5206d1c29e3",
+      "name": "上野の森美術館 (The Ueno Royal Museum)",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.712731,
+      "lng": 139.774697
+    },
+    {
+      "id": "4b5be785f964a5209b1c29e3",
+      "name": "東京都庭園美術館",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.63689934577148,
+      "lng": 139.71866011619568
+    },
+    {
+      "id": "4b5be809f964a520b31c29e3",
+      "name": "ワタリウム美術館",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.67066976045291,
+      "lng": 139.71337616443634
+    },
+    {
+      "id": "4b5be8d4f964a520d01c29e3",
+      "name": "世田谷美術館 (Setagaya Art Museum)",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.631329443636346,
+      "lng": 139.62197247745922
+    },
+    {
+      "id": "4b5be966f964a520e01c29e3",
+      "name": "根津美術館 (Nezu Museum)",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.662235,
+      "lng": 139.717112
+    },
+    {
+      "id": "4b5bea13f964a520071d29e3",
+      "name": "五島美術館",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.61240437809325,
+      "lng": 139.63589942126234
+    },
+    {
+      "id": "4b5beb1ff964a5203b1d29e3",
+      "name": "がすてなーに ガスの科学館 (Gas Science Center)",
+      "category": "culture / Arts and Entertainment > Museum > Science Museum",
+      "score": 99,
+      "lat": 35.651953,
+      "lng": 139.792525
+    },
+    {
+      "id": "4b5bf230f964a520681e29e3",
+      "name": "聖徳記念絵画館 (Meiji Memorial Picture Gallery)",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.678314907838036,
+      "lng": 139.71820723932248
+    }
+  ],
+  "top20ByCategory": {
+    "adventure": [
+      {
+        "id": "4ba5d4cef964a520af2439e3",
+        "name": "ひがしんアリーナ (墨田区総合体育館)",
+        "category": "adventure / Arts and Entertainment > Stadium",
+        "score": 100,
+        "lat": 35.699527514714156,
+        "lng": 139.81721118092537
+      },
+      {
+        "id": "4b556d98f964a5200de427e3",
+        "name": "Uvanceとどろきスタジアム by Fujitsu (Uvance Todoroki Studium by Fujitsu)",
+        "category": "adventure / Arts and Entertainment > Stadium > Soccer Stadium",
+        "score": 98,
+        "lat": 35.585805,
+        "lng": 139.652722
+      },
+      {
+        "id": "4b5ab0ddf964a520f5d028e3",
+        "name": "日本武道館 (Nippon Budokan)",
+        "category": "adventure / Arts and Entertainment > Stadium",
+        "score": 98,
+        "lat": 35.693358,
+        "lng": 139.749841
+      },
+      {
+        "id": "4b5ce66ef964a5200c4a29e3",
+        "name": "日産スタジアム (Nissan Stadium)",
+        "category": "adventure / Arts and Entertainment > Stadium",
+        "score": 98,
+        "lat": 35.509953,
+        "lng": 139.606407
+      },
+      {
+        "id": "4b6674d0f964a520d5212be3",
+        "name": "明治神宮野球場 (Meiji Jingu Stadium)",
+        "category": "adventure / Arts and Entertainment > Stadium > Baseball Stadium",
+        "score": 98,
+        "lat": 35.674247,
+        "lng": 139.716933
+      },
+      {
+        "id": "4b7544c3f964a520a8032ee3",
+        "name": "東京ドーム (Tokyo Dome)",
+        "category": "adventure / Arts and Entertainment > Stadium > Baseball Stadium",
+        "score": 98,
+        "lat": 35.705327,
+        "lng": 139.751796
+      },
+      {
+        "id": "4b87e677f964a520e0d131e3",
+        "name": "味の素フィールド西が丘 (Ajinomoto Field Nishigaoka)",
+        "category": "adventure / Arts and Entertainment > Stadium > Soccer Stadium",
+        "score": 98,
+        "lat": 35.769144,
+        "lng": 139.707874
+      },
+      {
+        "id": "4b8e24b4f964a5207e1933e3",
+        "name": "武蔵野陸上競技場",
+        "category": "adventure / Arts and Entertainment > Stadium > Soccer Stadium",
+        "score": 98,
+        "lat": 35.71778722854482,
+        "lng": 139.56796301578262
+      },
+      {
+        "id": "4bb6aabb46d4a59312a6c6c0",
+        "name": "駒沢オリンピック公園総合運動場 陸上競技場 (Komazawa Olympic Park Stadium)",
+        "category": "adventure / Arts and Entertainment > Stadium > Soccer Stadium",
+        "score": 98,
+        "lat": 35.625562,
+        "lng": 139.663643
+      },
+      {
+        "id": "4bc94b2a0687ef3b76d7d9cc",
+        "name": "東京武道館 Tokyo Budo-kan",
+        "category": "adventure / Arts and Entertainment > Stadium",
+        "score": 98,
+        "lat": 35.7651015457338,
+        "lng": 139.82578071234855
+      },
+      {
+        "id": "4bdbafb8c79cc9281d2384e9",
+        "name": "大田スタジアム",
+        "category": "adventure / Arts and Entertainment > Stadium > Baseball Stadium",
+        "score": 98,
+        "lat": 35.58831185236765,
+        "lng": 139.75284730976816
+      },
+      {
+        "id": "4bdfb60fea279c743992e22b",
+        "name": "水生物園 (分園)",
+        "category": "adventure / Arts and Entertainment > Aquarium",
+        "score": 98,
+        "lat": 35.699974,
+        "lng": 139.576096
+      },
+      {
+        "id": "4be0ffc70365c9b6fbbab238",
+        "name": "スピアーズえどりくフィールド",
+        "category": "adventure / Arts and Entertainment > Stadium > Soccer Stadium",
+        "score": 98,
+        "lat": 35.65583305799876,
+        "lng": 139.85259703993228
+      },
+      {
+        "id": "4becd8d00ddaa593642b1ec3",
+        "name": "有明コロシアム (Ariake Colosseum)",
+        "category": "adventure / Arts and Entertainment > Stadium",
+        "score": 98,
+        "lat": 35.63643,
+        "lng": 139.790004
+      },
+      {
+        "id": "4c8b3cd2e51e6dcbf5b870de",
+        "name": "第二球技場",
+        "category": "adventure / Arts and Entertainment > Stadium",
+        "score": 98,
+        "lat": 35.58890683319355,
+        "lng": 139.7533540829009
+      },
+      {
+        "id": "4c8c1d87c37a6dcbd078f47a",
+        "name": "足立区総合スポーツセンター",
+        "category": "adventure / Arts and Entertainment > Stadium",
+        "score": 98,
+        "lat": 35.79197992290729,
+        "lng": 139.81410435945102
+      },
+      {
+        "id": "4cadac1e628cb1f780362d15",
+        "name": "1塁側スタンド",
+        "category": "adventure / Arts and Entertainment > Stadium > Baseball Stadium",
+        "score": 98,
+        "lat": 35.70573632965099,
+        "lng": 139.75237818908116
+      },
+      {
+        "id": "4e069f38d4c03ae0b9c5583a",
+        "name": "大泉学園希望ヶ丘公園運動場",
+        "category": "adventure / Arts and Entertainment > Stadium",
+        "score": 98,
+        "lat": 35.77721290286299,
+        "lng": 139.58989218373117
+      },
+      {
+        "id": "4e19c678814da5f552570419",
+        "name": "B-PUMP Tokyo 秋葉原",
+        "category": "adventure / Sports and Recreation > Gym and Studio > Climbing Gym",
+        "score": 98,
+        "lat": 35.700038297526845,
+        "lng": 139.76802697637032
+      },
+      {
+        "id": "5104d01cd86c05b557304e82",
+        "name": "クライミングジム・ドラセナ",
+        "category": "adventure / Sports and Recreation > Gym and Studio > Climbing Gym",
+        "score": 98,
+        "lat": 35.778886339154326,
+        "lng": 139.69866402706162
+      }
+    ],
+    "culture": [
+      {
+        "id": "4b0587a1f964a5207f9d22e3",
+        "name": "浅草寺 (Sensō-ji Temple)",
+        "category": "culture / Community and Government > Spiritual Center > Buddhist Temple",
+        "score": 99,
+        "lat": 35.71466210373382,
+        "lng": 139.79676067829132
+      },
+      {
+        "id": "4b0587a4f964a520f89d22e3",
+        "name": "大谷美術館",
+        "category": "culture / Arts and Entertainment > Museum > Art Museum",
+        "score": 99,
+        "lat": 35.74728755842522,
+        "lng": 139.7451115430206
+      },
+      {
+        "id": "4b0587a7f964a520609e22e3",
+        "name": "松岡美術館",
+        "category": "culture / Arts and Entertainment > Museum > Art Museum",
+        "score": 99,
+        "lat": 35.64002362220551,
+        "lng": 139.72202671614852
+      },
+      {
+        "id": "4b0587a7f964a5206e9e22e3",
+        "name": "野球殿堂博物館",
+        "category": "culture / Arts and Entertainment > Museum > History Museum",
+        "score": 99,
+        "lat": 35.70551972078071,
+        "lng": 139.75315051799774
+      },
+      {
+        "id": "4b0587a7f964a520789e22e3",
+        "name": "熊谷守一美術館",
+        "category": "culture / Arts and Entertainment > Museum > Art Museum",
+        "score": 99,
+        "lat": 35.733738,
+        "lng": 139.690892
+      },
+      {
+        "id": "4b0587a7f964a520799e22e3",
+        "name": "文化学園服飾博物館",
+        "category": "culture / Arts and Entertainment > Museum",
+        "score": 99,
+        "lat": 35.68678762059553,
+        "lng": 139.6946308504265
+      },
+      {
+        "id": "4b0587a7f964a5208c9e22e3",
+        "name": "JCII Camera Museum",
+        "category": "culture / Arts and Entertainment > Museum",
+        "score": 99,
+        "lat": 35.686200855401665,
+        "lng": 139.74288178806432
+      },
+      {
+        "id": "4b0587a8f964a520969e22e3",
+        "name": "文京ふるさと歴史館",
+        "category": "culture / Arts and Entertainment > Museum > History Museum",
+        "score": 99,
+        "lat": 35.708002649755,
+        "lng": 139.7566279822781
+      },
+      {
+        "id": "4b0587a8f964a520ab9e22e3",
+        "name": "豊島区立郷土資料館",
+        "category": "culture / Arts and Entertainment > Museum > History Museum",
+        "score": 99,
+        "lat": 35.727828417014514,
+        "lng": 139.70667169726775
+      },
+      {
+        "id": "4b0587a8f964a520af9e22e3",
+        "name": "目黒区美術館 (Meguro Museum of Art, Tokyo)",
+        "category": "culture / Arts and Entertainment > Museum > Art Museum",
+        "score": 99,
+        "lat": 35.634848699353086,
+        "lng": 139.70805403061522
+      },
+      {
+        "id": "4b0587a8f964a520ca9e22e3",
+        "name": "森美術館 (Mori Art Museum)",
+        "category": "culture / Arts and Entertainment > Museum > Art Museum",
+        "score": 99,
+        "lat": 35.660367,
+        "lng": 139.729222
+      },
+      {
+        "id": "4b289b08f964a520329424e3",
+        "name": "フジフイルム スクエア",
+        "category": "culture / Arts and Entertainment > Art Gallery",
+        "score": 99,
+        "lat": 35.66518623076461,
+        "lng": 139.73043897188455
+      },
+      {
+        "id": "4b4ac427f964a5201f8e26e3",
+        "name": "岡本太郎美術館 (Taro Okamoto Museum of Art)",
+        "category": "culture / Arts and Entertainment > Museum > Art Museum",
+        "score": 99,
+        "lat": 35.60794161698179,
+        "lng": 139.55786502321666
+      },
+      {
+        "id": "4b4c89f8f964a52089b526e3",
+        "name": "松涛美術館",
+        "category": "culture / Arts and Entertainment > Museum > Art Museum",
+        "score": 99,
+        "lat": 35.658596939293325,
+        "lng": 139.69181254022686
+      },
+      {
+        "id": "4b5176bbf964a520cb4d27e3",
+        "name": "目黒不動尊 瀧泉寺",
+        "category": "culture / Community and Government > Spiritual Center > Buddhist Temple",
+        "score": 99,
+        "lat": 35.62857169324199,
+        "lng": 139.70808684825897
+      },
+      {
+        "id": "4b52808bf964a520238027e3",
+        "name": "山種美術館 (Yamatane Museum of Art)",
+        "category": "culture / Arts and Entertainment > Museum > Art Museum",
+        "score": 99,
+        "lat": 35.653317,
+        "lng": 139.713773
+      },
+      {
+        "id": "4b52966cf964a520328327e3",
+        "name": "神田明神 (Kanda-Myōjin Shrine)",
+        "category": "culture / Community and Government > Spiritual Center > Shrine",
+        "score": 99,
+        "lat": 35.70173283297929,
+        "lng": 139.76771441854848
+      },
+      {
+        "id": "4b545279f964a5207cb727e3",
+        "name": "思い出横丁 (Omoide Yokocho)",
+        "category": "culture / Landmarks and Outdoors > States and Municipalities > Neighborhood",
+        "score": 99,
+        "lat": 35.69285700630512,
+        "lng": 139.69952543815089
+      },
+      {
+        "id": "4b548f3bf964a520fdbf27e3",
+        "name": "新宿歴史博物館",
+        "category": "culture / Arts and Entertainment > Museum > History Museum",
+        "score": 99,
+        "lat": 35.69027527943219,
+        "lng": 139.72549656929806
+      },
+      {
+        "id": "4b54f9d9f964a52039d627e3",
+        "name": "国立新美術館 (The National Art Center, Tokyo)",
+        "category": "culture / Arts and Entertainment > Museum > Art Museum",
+        "score": 99,
+        "lat": 35.6651327835497,
+        "lng": 139.72641706466675
+      }
+    ],
+    "nature": [
+      {
+        "id": "4b5c1583f964a520982329e3",
+        "name": "有明テニスの森公園",
+        "category": "nature / Landmarks and Outdoors > Park",
+        "score": 99,
+        "lat": 35.635053,
+        "lng": 139.787502
+      },
+      {
+        "id": "58e8367aa4367c18bb08caea",
+        "name": "下高井戸おおぞら公園",
+        "category": "nature / Landmarks and Outdoors > Park",
+        "score": 99,
+        "lat": 35.671005,
+        "lng": 139.636696
+      },
+      {
+        "id": "06d9f21a4d88494a73141c08",
+        "name": "滝野川自動車",
+        "category": "nature / Landmarks and Outdoors > Hot Spring",
+        "score": 97,
+        "lat": 35.64780927783124,
+        "lng": 139.69085926235533
+      },
+      {
+        "id": "1b73dbab6a374cc3adb59ae6",
+        "name": "バスクリン",
+        "category": "nature / Landmarks and Outdoors > Hot Spring",
+        "score": 97,
+        "lat": 35.69262730700998,
+        "lng": 139.73959311917554
+      },
+      {
+        "id": "29966f01ca5d4829ff3aa5a9",
+        "name": "ガイアネクスト三軒茶屋I",
+        "category": "nature / Landmarks and Outdoors > Park > Playground",
+        "score": 97,
+        "lat": 35.643499124798275,
+        "lng": 139.67178438962497
+      },
+      {
+        "id": "4b48460cf964a520ea4a26e3",
+        "name": "祖師谷公園",
+        "category": "nature / Landmarks and Outdoors > Park",
+        "score": 97,
+        "lat": 35.65366318508028,
+        "lng": 139.60072646048383
+      },
+      {
+        "id": "4b4d99a9f964a520a5d426e3",
+        "name": "檜町公園 (Hinokicho Park)",
+        "category": "nature / Landmarks and Outdoors > Park",
+        "score": 97,
+        "lat": 35.66679762138858,
+        "lng": 139.732586145401
+      },
+      {
+        "id": "4b558502f964a52054e627e3",
+        "name": "平和の森公園",
+        "category": "nature / Landmarks and Outdoors > Park",
+        "score": 97,
+        "lat": 35.579581622331,
+        "lng": 139.74040688547657
+      },
+      {
+        "id": "4b566e2cf964a520111028e3",
+        "name": "東八ツ山公園",
+        "category": "nature / Landmarks and Outdoors > Park",
+        "score": 97,
+        "lat": 35.62482,
+        "lng": 139.743708
+      },
+      {
+        "id": "4b572355f964a520e02728e3",
+        "name": "仙川湯けむりの里",
+        "category": "nature / Landmarks and Outdoors > Hot Spring",
+        "score": 97,
+        "lat": 35.65775369696013,
+        "lng": 139.5876527809216
+      },
+      {
+        "id": "4b57e5fdf964a5209b4528e3",
+        "name": "原っぱ公園",
+        "category": "nature / Landmarks and Outdoors > Park",
+        "score": 97,
+        "lat": 35.601210966134715,
+        "lng": 139.71456614611657
+      },
+      {
+        "id": "4b59ad3bf964a520339228e3",
+        "name": "豊島園 庭の湯",
+        "category": "nature / Landmarks and Outdoors > Hot Spring",
+        "score": 97,
+        "lat": 35.74414680933439,
+        "lng": 139.64791461702936
+      },
+      {
+        "id": "4b5aa79df964a520a7cf28e3",
+        "name": "武蔵野中央公園",
+        "category": "nature / Landmarks and Outdoors > Park",
+        "score": 97,
+        "lat": 35.71786137226845,
+        "lng": 139.55844650415733
+      },
+      {
+        "id": "4b5bc42cf964a520ea1429e3",
+        "name": "しながわ区民公園",
+        "category": "nature / Landmarks and Outdoors > Park",
+        "score": 97,
+        "lat": 35.59303427383113,
+        "lng": 139.73858570256624
+      },
+      {
+        "id": "4b5bc856f964a520f51529e3",
+        "name": "洗足池公園",
+        "category": "nature / Landmarks and Outdoors > Park",
+        "score": 97,
+        "lat": 35.601808332847284,
+        "lng": 139.68901634216306
+      },
+      {
+        "id": "4b5c231bf964a5205f2529e3",
+        "name": "北品川温泉 天神湯",
+        "category": "nature / Landmarks and Outdoors > Hot Spring",
+        "score": 97,
+        "lat": 35.61780716691404,
+        "lng": 139.7434471766342
+      },
+      {
+        "id": "4b5f868df964a52086bf29e3",
+        "name": "ヌーランドさがみ湯",
+        "category": "nature / Landmarks and Outdoors > Hot Spring",
+        "score": 97,
+        "lat": 35.55243779508656,
+        "lng": 139.7146903932209
+      },
+      {
+        "id": "4b5f9b68f964a5203bc429e3",
+        "name": "青山公園 北地区",
+        "category": "nature / Landmarks and Outdoors > Park",
+        "score": 97,
+        "lat": 35.66986703153177,
+        "lng": 139.72528943107366
+      },
+      {
+        "id": "4b650b22f964a52022e12ae3",
+        "name": "スパ リブール ヨコハマ",
+        "category": "nature / Landmarks and Outdoors > Hot Spring",
+        "score": 97,
+        "lat": 35.52457173558611,
+        "lng": 139.64920813406513
+      },
+      {
+        "id": "4b6907ccf964a52066972be3",
+        "name": "大塚山公園",
+        "category": "nature / Landmarks and Outdoors > Park > Playground",
+        "score": 97,
+        "lat": 35.63542529572141,
+        "lng": 139.7038983226595
+      }
+    ],
+    "food": [
+      {
+        "id": "4b5a9531f964a52078cc28e3",
+        "name": "新横浜ラーメン博物館 (Shin-Yokohama Ramen Museum)",
+        "category": "food / Dining and Drinking > Restaurant > Theme Restaurant",
+        "score": 94,
+        "lat": 35.509924,
+        "lng": 139.614593
+      },
+      {
+        "id": "4b5a689ef964a52039c328e3",
+        "name": "小笠原伯爵邸",
+        "category": "food / Dining and Drinking > Restaurant > Spanish Restaurant",
+        "score": 92,
+        "lat": 35.6984673437794,
+        "lng": 139.71751973433848
+      },
+      {
+        "id": "4e06b9752271dfa46bab38f8",
+        "name": "茶道会館",
+        "category": "food / Dining and Drinking > Cafe, Coffee, and Tea House > Tea Room",
+        "score": 92,
+        "lat": 35.7128668546368,
+        "lng": 139.69527930021286
+      },
+      {
+        "id": "4ecdba95490168f8ccd05ae4",
+        "name": "Oyaco Cafe picnic (親子カフェ ピクニック)",
+        "category": "food / Dining and Drinking > Cafe, Coffee, and Tea House > Café",
+        "score": 92,
+        "lat": 35.73250808875299,
+        "lng": 139.70049244456493
+      },
+      {
+        "id": "4f5c0be1e4b086681badb020",
+        "name": "ひでくんちのいちご畑",
+        "category": "food / Retail > Food and Beverage Retail > Farmers Market",
+        "score": 92,
+        "lat": 35.53150057382147,
+        "lng": 139.56721178704973
+      },
+      {
+        "id": "55f3c33f498ec17bcd2fd3b4",
+        "name": "Rock Hills Garden",
+        "category": "food / Dining and Drinking > Restaurant > BBQ Joint",
+        "score": 92,
+        "lat": 35.534947,
+        "lng": 139.69394
+      },
+      {
+        "id": "573ffcbacd10395388bed493",
+        "name": "加藤いちご園",
+        "category": "food / Retail > Food and Beverage Retail > Farmers Market",
+        "score": 92,
+        "lat": 35.75097706393211,
+        "lng": 139.59922950083117
+      },
+      {
+        "id": "6084e81e94b1336604810eb3",
+        "name": "KOBAYASHI FARM いちごはうす",
+        "category": "food / Retail > Food and Beverage Retail > Farmers Market",
+        "score": 92,
+        "lat": 35.68490348144286,
+        "lng": 139.58940424458842
+      },
+      {
+        "id": "61e4e381b582b613eefccbce",
+        "name": "(tefu) lounge",
+        "category": "food / Dining and Drinking > Cafe, Coffee, and Tea House > Café",
+        "score": 92,
+        "lat": 35.660689,
+        "lng": 139.666534
+      },
+      {
+        "id": "69ea24de036b9144202d2841",
+        "name": "Mercedes-Benz Studio Tokyo",
+        "category": "food / Dining and Drinking > Cafe, Coffee, and Tea House > Café",
+        "score": 92,
+        "lat": 35.664806,
+        "lng": 139.712828
+      },
+      {
+        "id": "da05df6c67694c98c10993ad",
+        "name": "Tsukiji Fish Market",
+        "category": "food / Retail > Food and Beverage Retail > Farmers Market",
+        "score": 92,
+        "lat": 35.66502,
+        "lng": 139.770595
+      },
+      {
+        "id": "60909ef95665f260bb8b8a5b",
+        "name": "以志井農園 いちごランド",
+        "category": "food / Dining and Drinking > Dessert Shop",
+        "score": 89,
+        "lat": 35.68184332427773,
+        "lng": 139.5787859660358
+      },
+      {
+        "id": "dcf59d74a14d4f959bcd5aa9",
+        "name": "ダイニングバー バーゼ",
+        "category": "food / Dining and Drinking > Restaurant",
+        "score": 89,
+        "lat": 35.730335226804634,
+        "lng": 139.7071427196349
+      },
+      {
+        "id": "3625908d89eb497597e9a1e1",
+        "name": "pioppino",
+        "category": "food / Dining and Drinking > Restaurant > Italian Restaurant",
+        "score": 88,
+        "lat": 35.65682,
+        "lng": 139.691572
+      },
+      {
+        "id": "50f2571ae4b0419679661233",
+        "name": "中央休憩所",
+        "category": "food / Dining and Drinking > Cafe, Coffee, and Tea House > Café",
+        "score": 88,
+        "lat": 35.6851286979975,
+        "lng": 139.70957279205322
+      },
+      {
+        "id": "588c434eac136914a6088536",
+        "name": "弘仁亭・無事庵",
+        "category": "food / Dining and Drinking > Cafe, Coffee, and Tea House > Tea Room",
+        "score": 88,
+        "lat": 35.661514,
+        "lng": 139.71735
+      },
+      {
+        "id": "5bb310f6fe3740002ce7a91b",
+        "name": "見学ギャラリー",
+        "category": "food / Retail > Food and Beverage Retail > Fish Market",
+        "score": 88,
+        "lat": 35.643353,
+        "lng": 139.7801
+      },
+      {
+        "id": "5f253069011e3572bfec71f3",
+        "name": "Breckenridge Cafe",
+        "category": "food / Dining and Drinking > Cafe, Coffee, and Tea House > Café",
+        "score": 88,
+        "lat": 35.689248844635735,
+        "lng": 139.5986368297324
+      },
+      {
+        "id": "649e68bcf8e922381787b2ec",
+        "name": "水産卸売場棟 見学ギャラリー",
+        "category": "food / Retail > Food and Beverage Retail > Fish Market",
+        "score": 88,
+        "lat": 35.641979,
+        "lng": 139.781061
+      },
+      {
+        "id": "6629eb792ba9fb3a3c960a9b",
+        "name": "喫茶タイムマシン",
+        "category": "food / Dining and Drinking > Cafe, Coffee, and Tea House",
+        "score": 88,
+        "lat": 35.738618,
+        "lng": 139.670906
+      }
+    ],
+    "nightlife": [
+      {
+        "id": "ce028e40be9b4669348f29ee",
+        "name": "ShimokitazawaERA",
+        "category": "nightlife / Arts and Entertainment > Performing Arts Venue > Music Venue",
+        "score": 93,
+        "lat": 35.66330379822046,
+        "lng": 139.6683313658809
+      },
+      {
+        "id": "5e421e53f1a21d00083b9dd8",
+        "name": "池袋AKビル",
+        "category": "nightlife / Arts and Entertainment > Performing Arts Venue > Music Venue",
+        "score": 91,
+        "lat": 35.730079,
+        "lng": 139.713615
+      },
+      {
+        "id": "5b85e87192444afb54dc380b",
+        "name": "カラオケ ビッグエコー 金町駅前店",
+        "category": "nightlife / Arts and Entertainment > Karaoke Box",
+        "score": 90,
+        "lat": 35.769778192054495,
+        "lng": 139.87018208410603
+      },
+      {
+        "id": "4bb6ebe8f562ef3bbfe43097",
+        "name": "ヤマハ音楽振興会",
+        "category": "nightlife / Arts and Entertainment > Performing Arts Venue > Music Venue",
+        "score": 89,
+        "lat": 35.6320095497337,
+        "lng": 139.70752456130342
+      },
+      {
+        "id": "6180bcb5bf5c58453f5187da",
+        "name": "ブイロクの木",
+        "category": "nightlife / Arts and Entertainment > Performing Arts Venue > Music Venue",
+        "score": 87,
+        "lat": 35.648834,
+        "lng": 139.882456
+      },
+      {
+        "id": "3586047dda294465f3345442",
+        "name": "Answer",
+        "category": "nightlife / Dining and Drinking > Bar",
+        "score": 86,
+        "lat": 35.69661,
+        "lng": 139.705064
+      },
+      {
+        "id": "373d7b8286b14c588d37f587",
+        "name": "バスターコール",
+        "category": "nightlife / Arts and Entertainment > Karaoke Box",
+        "score": 86,
+        "lat": 35.658627837821584,
+        "lng": 139.69868431503022
+      },
+      {
+        "id": "9b4124c952794171cba23125",
+        "name": "CandyCandy",
+        "category": "nightlife / Dining and Drinking > Bar",
+        "score": 86,
+        "lat": 35.713519811231144,
+        "lng": 139.7061814550893
+      },
+      {
+        "id": "048b1caba19a4b544a74026f",
+        "name": "とりやき源氣高円寺北口店",
+        "category": "nightlife / Dining and Drinking > Bar",
+        "score": 83,
+        "lat": 35.706210103700926,
+        "lng": 139.64932718467156
+      },
+      {
+        "id": "0ac2eec7c41049d069bab769",
+        "name": "東京やきとり食堂",
+        "category": "nightlife / Dining and Drinking > Bar",
+        "score": 83,
+        "lat": 35.67546371273981,
+        "lng": 139.73619397865158
+      },
+      {
+        "id": "119469e67fe3456dc0ed17a3",
+        "name": "シャングリラズシークレット 表参道店",
+        "category": "nightlife / Dining and Drinking > Bar",
+        "score": 83,
+        "lat": 35.66389075548653,
+        "lng": 139.70890474929558
+      },
+      {
+        "id": "1207128608ad418a65503af0",
+        "name": "ル・キャヴィストウ",
+        "category": "nightlife / Dining and Drinking > Bar",
+        "score": 83,
+        "lat": 35.657428297681236,
+        "lng": 139.7232861370961
+      },
+      {
+        "id": "12780edbc64740241b63d173",
+        "name": "コントレイル",
+        "category": "nightlife / Dining and Drinking > Bar > Cocktail Bar",
+        "score": 83,
+        "lat": 35.66953530419496,
+        "lng": 139.7594181027076
+      },
+      {
+        "id": "1400e13609ea4df3d1cbb78d",
+        "name": "ブレゼ鶴見店",
+        "category": "nightlife / Dining and Drinking > Bar",
+        "score": 83,
+        "lat": 35.50956431242567,
+        "lng": 139.67486064488045
+      },
+      {
+        "id": "1512c3b861bd47806db68cb0",
+        "name": "グッチーナ・カッパス",
+        "category": "nightlife / Dining and Drinking > Bar",
+        "score": 83,
+        "lat": 35.66493924548917,
+        "lng": 139.7099115448202
+      },
+      {
+        "id": "158e43209816413292c8fc9c",
+        "name": "木村屋本店銀座一丁目店",
+        "category": "nightlife / Dining and Drinking > Bar",
+        "score": 83,
+        "lat": 35.6745236489686,
+        "lng": 139.76899186308697
+      },
+      {
+        "id": "1a6cf2dc34f744a6ad6da758",
+        "name": "秋吉銀座店",
+        "category": "nightlife / Dining and Drinking > Bar",
+        "score": 83,
+        "lat": 35.668928,
+        "lng": 139.759053
+      },
+      {
+        "id": "1b3e12591a83495fda10d4aa",
+        "name": "えんウィング高輪店",
+        "category": "nightlife / Dining and Drinking > Bar",
+        "score": 83,
+        "lat": 35.62838793339447,
+        "lng": 139.73702532092867
+      },
+      {
+        "id": "1d6ed103cbc6461458451053",
+        "name": "串かつ でんがな 大森東口店",
+        "category": "nightlife / Dining and Drinking > Bar",
+        "score": 83,
+        "lat": 35.587559876931714,
+        "lng": 139.72886184174038
+      },
+      {
+        "id": "29f5065049ac4ccaf5d5c8ff",
+        "name": "ノー バード",
+        "category": "nightlife / Dining and Drinking > Bar",
+        "score": 83,
+        "lat": 35.670278,
+        "lng": 139.7606
+      }
+    ],
+    "luxury": [
+      {
+        "id": "4b5bf142f964a5203d1e29e3",
+        "name": "極楽湯 和光店",
+        "category": "luxury / Business and Professional Services > Health and Beauty Service > Spa",
+        "score": 91,
+        "lat": 35.76872775426477,
+        "lng": 139.61942240595818
+      },
+      {
+        "id": "4bb825d81261d13a466ae898",
+        "name": "港北天然温泉ゆったりCOco",
+        "category": "luxury / Business and Professional Services > Health and Beauty Service > Spa",
+        "score": 91,
+        "lat": 35.55067909545729,
+        "lng": 139.5757367010031
+      },
+      {
+        "id": "4be10f2a0365c9b606dcb238",
+        "name": "楽天地天然温泉 楽天地スパ",
+        "category": "luxury / Business and Professional Services > Health and Beauty Service > Spa",
+        "score": 91,
+        "lat": 35.696046,
+        "lng": 139.81546
+      },
+      {
+        "id": "4cc3fee4d43ba1436c2064f8",
+        "name": "炭酸泉浴アクアセゾン",
+        "category": "luxury / Business and Professional Services > Health and Beauty Service > Spa",
+        "score": 91,
+        "lat": 35.76164757489895,
+        "lng": 139.68429457979548
+      },
+      {
+        "id": "5739acd2498ed9e518c87829",
+        "name": "SPA大手町",
+        "category": "luxury / Business and Professional Services > Health and Beauty Service > Spa",
+        "score": 91,
+        "lat": 35.68831535799552,
+        "lng": 139.7644940391183
+      },
+      {
+        "id": "61611e684ce22205deae08f3",
+        "name": "おふろの王様 和光店",
+        "category": "luxury / Business and Professional Services > Health and Beauty Service > Spa",
+        "score": 91,
+        "lat": 35.783283,
+        "lng": 139.606055
+      },
+      {
+        "id": "4c109bf8ce57c928f82782d2",
+        "name": "ゆラックス",
+        "category": "luxury / Business and Professional Services > Health and Beauty Service > Spa",
+        "score": 87,
+        "lat": 35.73562,
+        "lng": 139.716515
+      },
+      {
+        "id": "4e33d83ab0fb17f64f87318d",
+        "name": "ラジウム温泉保養センター",
+        "category": "luxury / Business and Professional Services > Health and Beauty Service > Spa",
+        "score": 87,
+        "lat": 35.68117222215332,
+        "lng": 139.8742504435456
+      },
+      {
+        "id": "5c526dc1e4c459002c903235",
+        "name": "野草酵素の岩盤浴",
+        "category": "luxury / Business and Professional Services > Health and Beauty Service > Spa",
+        "score": 87,
+        "lat": 35.67069090490635,
+        "lng": 139.6821197126462
+      },
+      {
+        "id": "5eff02a11fb293000847b9d4",
+        "name": "足湯スカイデッキ",
+        "category": "luxury / Business and Professional Services > Health and Beauty Service > Spa",
+        "score": 87,
+        "lat": 35.547626,
+        "lng": 139.75705
+      },
+      {
+        "id": "4b0587a6f964a520469e22e3",
+        "name": "NAGOMI Spa and Fitness",
+        "category": "luxury / Business and Professional Services > Health and Beauty Service > Spa",
+        "score": 81,
+        "lat": 35.659395498985724,
+        "lng": 139.7285556582839
+      },
+      {
+        "id": "4b80c01ff964a520ff8930e3",
+        "name": "クリーンスパ市川",
+        "category": "luxury / Business and Professional Services > Health and Beauty Service > Spa",
+        "score": 81,
+        "lat": 35.686425,
+        "lng": 139.94375
+      },
+      {
+        "id": "4b865750f964a520a28631e3",
+        "name": "アダムアンドイブ adam･eve",
+        "category": "luxury / Business and Professional Services > Health and Beauty Service > Spa",
+        "score": 81,
+        "lat": 35.65692392535088,
+        "lng": 139.72651345991324
+      },
+      {
+        "id": "4fc1d405e4b0d6554a905235",
+        "name": "evian Spa",
+        "category": "luxury / Business and Professional Services > Health and Beauty Service > Spa",
+        "score": 81,
+        "lat": 35.68487302074563,
+        "lng": 139.76107748749502
+      },
+      {
+        "id": "4b23b8f9f964a520915824e3",
+        "name": "THE SPA 成城",
+        "category": "luxury / Business and Professional Services > Health and Beauty Service > Spa",
+        "score": 79,
+        "lat": 35.653419687162284,
+        "lng": 139.61537613501918
+      },
+      {
+        "id": "4b52d69ff964a520058927e3",
+        "name": "金の指銀の指",
+        "category": "luxury / Business and Professional Services > Health and Beauty Service > Spa",
+        "score": 79,
+        "lat": 35.682609,
+        "lng": 139.807801
+      },
+      {
+        "id": "4b5be524f964a5201c1c29e3",
+        "name": "成城スポーツマッサージ ロコケア",
+        "category": "luxury / Business and Professional Services > Health and Beauty Service > Spa",
+        "score": 79,
+        "lat": 35.639751181879404,
+        "lng": 139.59964276911504
+      },
+      {
+        "id": "4b5c3647f964a5206a2729e3",
+        "name": "アジアンブリーズ三宿店",
+        "category": "luxury / Business and Professional Services > Health and Beauty Service > Spa",
+        "score": 79,
+        "lat": 35.650412805452,
+        "lng": 139.67825169321156
+      },
+      {
+        "id": "4b5e9e92f964a5201e9429e3",
+        "name": "舞浜ユーラシア",
+        "category": "luxury / Business and Professional Services > Health and Beauty Service > Spa",
+        "score": 79,
+        "lat": 35.626347,
+        "lng": 139.89806
+      },
+      {
+        "id": "4b6007c8f964a520aed329e3",
+        "name": "スパ ラクーア",
+        "category": "luxury / Business and Professional Services > Health and Beauty Service > Spa",
+        "score": 79,
+        "lat": 35.70657291868628,
+        "lng": 139.7530156315731
+      }
+    ],
+    "free": [
+      {
+        "id": "4bde825dffdec92874e3e8a1",
+        "name": "九品仏広場",
+        "category": "free / Landmarks and Outdoors > Plaza",
+        "score": 90,
+        "lat": 35.60643597739914,
+        "lng": 139.6618241071701
+      },
+      {
+        "id": "50790c96e4b0bf54e138f834",
+        "name": "ふれあい動物広場",
+        "category": "free / Landmarks and Outdoors > Plaza",
+        "score": 90,
+        "lat": 35.75792542973355,
+        "lng": 139.84087292673973
+      },
+      {
+        "id": "54fae9b5498e727051eca870",
+        "name": "上野英三郎博士とハチ公の像",
+        "category": "free / Arts and Entertainment > Public Art > Outdoor Sculpture",
+        "score": 90,
+        "lat": 35.71634369415918,
+        "lng": 139.7588707088681
+      },
+      {
+        "id": "55a1e73b498e08198e1d8d15",
+        "name": "安産子育河童",
+        "category": "free / Arts and Entertainment > Public Art > Outdoor Sculpture",
+        "score": 90,
+        "lat": 35.68336464956345,
+        "lng": 139.78515277570114
+      },
+      {
+        "id": "5aec1c5789b06a0039c001f7",
+        "name": "わんぱく広場",
+        "category": "free / Landmarks and Outdoors > Plaza",
+        "score": 90,
+        "lat": 35.532238,
+        "lng": 139.73293
+      },
+      {
+        "id": "4e685dfac65be3a564ecc3f6",
+        "name": "陽だまり広場",
+        "category": "free / Landmarks and Outdoors > Plaza",
+        "score": 88,
+        "lat": 35.697183614443055,
+        "lng": 139.7612174953627
+      },
+      {
+        "id": "4e83939c7beb04b92cd8a64d",
+        "name": "安田講堂前広場",
+        "category": "free / Landmarks and Outdoors > Plaza",
+        "score": 88,
+        "lat": 35.7133221185451,
+        "lng": 139.76167637030525
+      },
+      {
+        "id": "4b7f4b67f964a520992530e3",
+        "name": "シネシティ広場",
+        "category": "free / Landmarks and Outdoors > Plaza",
+        "score": 87,
+        "lat": 35.69570413264017,
+        "lng": 139.70106486088463
+      },
+      {
+        "id": "4b80a277f964a520798230e3",
+        "name": "サンシャインシティ噴水広場",
+        "category": "free / Landmarks and Outdoors > Plaza",
+        "score": 87,
+        "lat": 35.729082319107896,
+        "lng": 139.71891064035685
+      },
+      {
+        "id": "4bedf799946c0f472244a363",
+        "name": "一号館広場",
+        "category": "free / Landmarks and Outdoors > Plaza",
+        "score": 87,
+        "lat": 35.678403458411985,
+        "lng": 139.76290720479668
+      },
+      {
+        "id": "4bfc7728b5cd2d7f66aa31fb",
+        "name": "港南ふれあい広場",
+        "category": "free / Landmarks and Outdoors > Plaza",
+        "score": 87,
+        "lat": 35.6289892000466,
+        "lng": 139.7415385234072
+      },
+      {
+        "id": "4c1c90beb9f876b0ff207c46",
+        "name": "おかちまちパンダ広場",
+        "category": "free / Landmarks and Outdoors > Plaza",
+        "score": 87,
+        "lat": 35.706646,
+        "lng": 139.774072
+      },
+      {
+        "id": "4c32b52966e40f47bdfac68b",
+        "name": "サンクガーデン広場",
+        "category": "free / Landmarks and Outdoors > Plaza",
+        "score": 87,
+        "lat": 35.698931327250996,
+        "lng": 139.7648892674959
+      },
+      {
+        "id": "4c8ab2c8e51e6dcb51646bde",
+        "name": "宝物殿前広場",
+        "category": "free / Landmarks and Outdoors > Plaza",
+        "score": 87,
+        "lat": 35.67923867088355,
+        "lng": 139.6981399347435
+      },
+      {
+        "id": "4db76e83cda18a0b60a4ac07",
+        "name": "日テレ ゼロスタ広場",
+        "category": "free / Landmarks and Outdoors > Plaza",
+        "score": 87,
+        "lat": 35.66481693641181,
+        "lng": 139.76041740613465
+      },
+      {
+        "id": "4e214d9a22717a5245c9838d",
+        "name": "スカイデッキ広場",
+        "category": "free / Landmarks and Outdoors > Plaza",
+        "score": 87,
+        "lat": 35.730346610445366,
+        "lng": 139.71055364618312
+      },
+      {
+        "id": "4ed1b4772c5bc350589b49f1",
+        "name": "丸子橋第1広場",
+        "category": "free / Landmarks and Outdoors > Plaza",
+        "score": 87,
+        "lat": 35.58445129926111,
+        "lng": 139.66691550721936
+      },
+      {
+        "id": "4f9cd315e4b065054c980a05",
+        "name": "板橋駅東口噴水広場",
+        "category": "free / Landmarks and Outdoors > Plaza",
+        "score": 87,
+        "lat": 35.745485205150224,
+        "lng": 139.72031373894018
+      },
+      {
+        "id": "50274ddce4b057b8a3f13bdf",
+        "name": "すれ違い広場",
+        "category": "free / Landmarks and Outdoors > Plaza",
+        "score": 87,
+        "lat": 35.698801,
+        "lng": 139.774361
+      },
+      {
+        "id": "5039b3e5e4b01bb806b9f359",
+        "name": "ラ チッタデッラ 噴水広場",
+        "category": "free / Landmarks and Outdoors > Plaza",
+        "score": 87,
+        "lat": 35.52844738678612,
+        "lng": 139.697845079868
+      }
+    ]
+  },
+  "top20TokyoCore": [
+    {
+      "id": "4ba5d4cef964a520af2439e3",
+      "name": "ひがしんアリーナ (墨田区総合体育館)",
+      "category": "adventure / Arts and Entertainment > Stadium",
+      "score": 100,
+      "lat": 35.699527514714156,
+      "lng": 139.81721118092537
+    },
+    {
+      "id": "4b0587a1f964a5207f9d22e3",
+      "name": "浅草寺 (Sensō-ji Temple)",
+      "category": "culture / Community and Government > Spiritual Center > Buddhist Temple",
+      "score": 99,
+      "lat": 35.71466210373382,
+      "lng": 139.79676067829132
+    },
+    {
+      "id": "4b0587a4f964a520f89d22e3",
+      "name": "大谷美術館",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.74728755842522,
+      "lng": 139.7451115430206
+    },
+    {
+      "id": "4b0587a7f964a520609e22e3",
+      "name": "松岡美術館",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.64002362220551,
+      "lng": 139.72202671614852
+    },
+    {
+      "id": "4b0587a7f964a5206e9e22e3",
+      "name": "野球殿堂博物館",
+      "category": "culture / Arts and Entertainment > Museum > History Museum",
+      "score": 99,
+      "lat": 35.70551972078071,
+      "lng": 139.75315051799774
+    },
+    {
+      "id": "4b0587a7f964a520789e22e3",
+      "name": "熊谷守一美術館",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.733738,
+      "lng": 139.690892
+    },
+    {
+      "id": "4b0587a7f964a520799e22e3",
+      "name": "文化学園服飾博物館",
+      "category": "culture / Arts and Entertainment > Museum",
+      "score": 99,
+      "lat": 35.68678762059553,
+      "lng": 139.6946308504265
+    },
+    {
+      "id": "4b0587a7f964a5208c9e22e3",
+      "name": "JCII Camera Museum",
+      "category": "culture / Arts and Entertainment > Museum",
+      "score": 99,
+      "lat": 35.686200855401665,
+      "lng": 139.74288178806432
+    },
+    {
+      "id": "4b0587a8f964a520969e22e3",
+      "name": "文京ふるさと歴史館",
+      "category": "culture / Arts and Entertainment > Museum > History Museum",
+      "score": 99,
+      "lat": 35.708002649755,
+      "lng": 139.7566279822781
+    },
+    {
+      "id": "4b0587a8f964a520ab9e22e3",
+      "name": "豊島区立郷土資料館",
+      "category": "culture / Arts and Entertainment > Museum > History Museum",
+      "score": 99,
+      "lat": 35.727828417014514,
+      "lng": 139.70667169726775
+    },
+    {
+      "id": "4b0587a8f964a520af9e22e3",
+      "name": "目黒区美術館 (Meguro Museum of Art, Tokyo)",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.634848699353086,
+      "lng": 139.70805403061522
+    },
+    {
+      "id": "4b0587a8f964a520ca9e22e3",
+      "name": "森美術館 (Mori Art Museum)",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.660367,
+      "lng": 139.729222
+    },
+    {
+      "id": "4b289b08f964a520329424e3",
+      "name": "フジフイルム スクエア",
+      "category": "culture / Arts and Entertainment > Art Gallery",
+      "score": 99,
+      "lat": 35.66518623076461,
+      "lng": 139.73043897188455
+    },
+    {
+      "id": "4b4c89f8f964a52089b526e3",
+      "name": "松涛美術館",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.658596939293325,
+      "lng": 139.69181254022686
+    },
+    {
+      "id": "4b5176bbf964a520cb4d27e3",
+      "name": "目黒不動尊 瀧泉寺",
+      "category": "culture / Community and Government > Spiritual Center > Buddhist Temple",
+      "score": 99,
+      "lat": 35.62857169324199,
+      "lng": 139.70808684825897
+    },
+    {
+      "id": "4b52808bf964a520238027e3",
+      "name": "山種美術館 (Yamatane Museum of Art)",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.653317,
+      "lng": 139.713773
+    },
+    {
+      "id": "4b52966cf964a520328327e3",
+      "name": "神田明神 (Kanda-Myōjin Shrine)",
+      "category": "culture / Community and Government > Spiritual Center > Shrine",
+      "score": 99,
+      "lat": 35.70173283297929,
+      "lng": 139.76771441854848
+    },
+    {
+      "id": "4b545279f964a5207cb727e3",
+      "name": "思い出横丁 (Omoide Yokocho)",
+      "category": "culture / Landmarks and Outdoors > States and Municipalities > Neighborhood",
+      "score": 99,
+      "lat": 35.69285700630512,
+      "lng": 139.69952543815089
+    },
+    {
+      "id": "4b548f3bf964a520fdbf27e3",
+      "name": "新宿歴史博物館",
+      "category": "culture / Arts and Entertainment > Museum > History Museum",
+      "score": 99,
+      "lat": 35.69027527943219,
+      "lng": 139.72549656929806
+    },
+    {
+      "id": "4b54f9d9f964a52039d627e3",
+      "name": "国立新美術館 (The National Art Center, Tokyo)",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.6651327835497,
+      "lng": 139.72641706466675
+    }
+  ],
+  "top20WiderMetro": [
+    {
+      "id": "4b4ac427f964a5201f8e26e3",
+      "name": "岡本太郎美術館 (Taro Okamoto Museum of Art)",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.60794161698179,
+      "lng": 139.55786502321666
+    },
+    {
+      "id": "4b56ac4ff964a5202e1828e3",
+      "name": "三鷹の森ジブリ美術館 (Ghibli Museum)",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.696236,
+      "lng": 139.570432
+    },
+    {
+      "id": "4b63a7caf964a5200d8a2ae3",
+      "name": "山本有三記念館",
+      "category": "culture / Arts and Entertainment > Museum > History Museum",
+      "score": 99,
+      "lat": 35.69957822519459,
+      "lng": 139.56768855533028
+    },
+    {
+      "id": "4b68ad8ff964a52097862be3",
+      "name": "井の頭弁財天",
+      "category": "culture / Community and Government > Spiritual Center > Buddhist Temple",
+      "score": 99,
+      "lat": 35.69950333339069,
+      "lng": 139.57474887371063
+    },
+    {
+      "id": "4b6a3c5af964a52084ce2be3",
+      "name": "三鷹市美術ギャラリー (Mitaka City Gallery of Art)",
+      "category": "culture / Arts and Entertainment > Art Gallery",
+      "score": 99,
+      "lat": 35.70169608536369,
+      "lng": 139.5610179368436
+    },
+    {
+      "id": "4b6a489ff964a520afd02be3",
+      "name": "武蔵野市立吉祥寺美術館",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.70473190319099,
+      "lng": 139.57914676969563
+    },
+    {
+      "id": "4b70cf40f964a520a52f2de3",
+      "name": "横浜市歴史博物館",
+      "category": "culture / Arts and Entertainment > Museum > History Museum",
+      "score": 99,
+      "lat": 35.550169712678674,
+      "lng": 139.57815393805504
+    },
+    {
+      "id": "4b7fa28ef964a520983730e3",
+      "name": "シンデレラ城 (Cinderella Castle)",
+      "category": "culture / Landmarks and Outdoors > Castle",
+      "score": 99,
+      "lat": 35.632089,
+      "lng": 139.880829
+    },
+    {
+      "id": "4b846cd1f964a520a43431e3",
+      "name": "電気の史料館",
+      "category": "culture / Arts and Entertainment > Museum > Science Museum",
+      "score": 99,
+      "lat": 35.53400733322012,
+      "lng": 139.6729016304016
+    },
+    {
+      "id": "4b8a0dedf964a520cb5d32e3",
+      "name": "講談社 野間記念館",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.714023428464884,
+      "lng": 139.72505637404456
+    },
+    {
+      "id": "4bbaaa5a3db7b713309d239a",
+      "name": "太宰治文学サロン",
+      "category": "culture / Arts and Entertainment > Museum > History Museum",
+      "score": 99,
+      "lat": 35.700119632850075,
+      "lng": 139.562472047947
+    },
+    {
+      "id": "4bc156bc920eb7134ab81a2c",
+      "name": "浦安市郷土博物館",
+      "category": "culture / Arts and Entertainment > Museum > History Museum",
+      "score": 99,
+      "lat": 35.655350829924494,
+      "lng": 139.90149638808595
+    },
+    {
+      "id": "4bcaab64937ca5938966a892",
+      "name": "郭沫若記念館",
+      "category": "culture / Arts and Entertainment > Museum > History Museum",
+      "score": 99,
+      "lat": 35.74107198483423,
+      "lng": 139.91262942552567
+    },
+    {
+      "id": "4c1c4857b4e62d7feeecda93",
+      "name": "東京都水道歴史館",
+      "category": "culture / Arts and Entertainment > Museum > History Museum",
+      "score": 99,
+      "lat": 35.703352,
+      "lng": 139.760732
+    },
+    {
+      "id": "4c5bd3887f661b8d78e5461c",
+      "name": "大山街道ふるさと館",
+      "category": "culture / Arts and Entertainment > Museum > History Museum",
+      "score": 99,
+      "lat": 35.603408009405925,
+      "lng": 139.61290961542284
+    },
+    {
+      "id": "4c89aff33dc2a1cd10baa632",
+      "name": "市川考古博物館",
+      "category": "culture / Arts and Entertainment > Museum > History Museum",
+      "score": 99,
+      "lat": 35.75908777593053,
+      "lng": 139.91197256180948
+    },
+    {
+      "id": "4d0d8840bdbfa35d4f5e6a72",
+      "name": "現代産業科学館",
+      "category": "culture / Arts and Entertainment > Museum > Science Museum",
+      "score": 99,
+      "lat": 35.71500899903754,
+      "lng": 139.93314732742343
+    },
+    {
+      "id": "4d3bcd11d625224bc0878bfa",
+      "name": "市川市東山魁夷記念館",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.722723,
+      "lng": 139.946561
+    },
+    {
+      "id": "4d96718ce07ea35ddc8ec002",
+      "name": "サイエンス倶楽部 川崎教室",
+      "category": "culture / Arts and Entertainment > Museum > Science Museum",
+      "score": 99,
+      "lat": 35.53135669999208,
+      "lng": 139.7013310987343
+    },
+    {
+      "id": "4dd86be245ddced820a0b2d1",
+      "name": "藤子・F・不二雄ミュージアム / FUJIKO・F・FUJIO MUSEUM",
+      "category": "culture / Arts and Entertainment > Museum > Art Museum",
+      "score": 99,
+      "lat": 35.609967,
+      "lng": 139.573539
+    }
+  ],
+  "candidateCounts": {
+    "allInsideBbox": 818155,
+    "travelRelevantOpen": 283934,
+    "usableCoordinates": 818155,
+    "excludedClosed": 124877
+  },
+  "explainPlan": "physical_plan\n┌───────────────────────────┐\n│           TOP_N           │\n│    ────────────────────   │\n│         Top: 20000        │\n│                           │\n│         Order By:         │\n│     row_number() OVER     │\n│ (PARTITION BY CASE  WHEN  │\n│   (regexp_matches(lower   │\n│ (array_to_string(places_os│\n│ .fsq_category_labels, ' ')│\n│), 'museum|historic|landmar│\n│k|shrine|temple|theater|the│\n│atre|gallery|monument|castl│\n│e|palace|shopping|departmen│\n│t store|mall|neighborhood|d│\n│istrict|street|intersection│\n│ |plaza')) THEN ('culture')│\n│    WHEN (regexp_matches   │\n│   (lower(array_to_string  │\n│         (places_os        │\n│ .fsq_category_labels, ' ')│\n│    ), 'amusement|theme    │\n│ park|aquarium|zoo|stadium|│\n│  sports|arcade')) THEN (  │\n│     'adventure') WHEN     │\n│   (regexp_matches(lower   │\n│ (array_to_string(places_os│\n│ .fsq_category_labels, ' ')│\n│), 'park|garden|viewpoint|l│\n│ookout|outdoor|recreation|t│\n│  rail')) THEN ('nature')  │\n│    WHEN (regexp_matches   │\n│   (lower(array_to_string  │\n│         (places_os        │\n│ .fsq_category_labels, ' ')│\n│  ), 'nightclub|bar|music  │\n│   venue|concert')) THEN ( │\n│     'nightlife') WHEN     │\n│   (regexp_matches(lower   │\n│ (array_to_string(places_os│\n│ .fsq_category_labels, ' ')│\n│  ), 'spa|onsen')) THEN (  │\n│      'luxury') WHEN       │\n│   (regexp_matches(lower   │\n│ (array_to_string(places_os│\n│ .fsq_category_labels, ' ')│\n│   ), 'public art|public   │\n│   plaza')) THEN ('free')  │\n│    WHEN (regexp_matches   │\n│   (lower(array_to_string  │\n│         (places_os        │\n│ .fsq_category_labels, ' ')│\n│  ), 'restaurant|cafe|caf  │\n│ é|coffee|market')) THEN ( │\n│  'food') ELSE 'other' END │\n│  ORDER BY ((((CASE  WHEN  │\n│   (regexp_matches(lower   │\n│ (array_to_string(places_os│\n│ .fsq_category_labels, ' ')│\n│), 'museum|historic|landmar│\n│k|observation|aquarium|zoo|│\n│    theme park|national    │\n│       park|botanical      │\n│   garden|palace|castle')) │\n│       THEN (45) WHEN      │\n│   (regexp_matches(lower   │\n│ (array_to_string(places_os│\n│ .fsq_category_labels, ' ')│\n│), 'park|garden|theater|the│\n│ atre|market|stadium|music │\n│   venue|shopping mall'))  │\n│       THEN (32) WHEN      │\n│   (regexp_matches(lower   │\n│ (array_to_string(places_os│\n│ .fsq_category_labels, ' ')│\n│), 'shrine|temple|restauran│\n│  t|bar|cafe|café')) THEN  │\n│  (18) ELSE 10 END + least │\n│        (15, (length       │\n│ (array_to_string(places_os│\n│ .fsq_category_labels, ' ')│\n│ ) / 12))) + CASE  WHEN (( │\n│  (places_os.\"name\" IS NOT │\n│   NULL) AND (length(main. │\n│ \"trim\"(places_os.\"name\")) │\n│  >= 5))) THEN (8) ELSE 0  │\n│    END) + CASE  WHEN ((   │\n│ (places_os.website IS NOT │\n│   NULL) AND (main.\"trim\"  │\n│ (places_os.website) != '')│\n│ )) THEN (4) ELSE 0 END) + │\n│    CASE  WHEN ((TRY_CAST  │\n│ (places_os.date_refreshed │\n│  AS DATE) >= (CURRENT_DATE│\n│     - CAST('3 years' AS   │\n│    INTERVAL)))) THEN (6)  │\n│      ELSE 0 END) DESC,    │\n│   places_os.fsq_place_id  │\n│          ASC) ASC         │\n│ CASE  WHEN (regexp_matches│\n│   (lower(array_to_string  │\n│         (places_os        │\n│ .fsq_category_labels, ' ')│\n│), 'museum|historic|landmar│\n│k|shrine|temple|theater|the│\n│atre|gallery|monument|castl│\n│e|palace|shopping|departmen│\n│t store|mall|neighborhood|d│\n│istrict|street|intersection│\n│ |plaza')) THEN ('culture')│\n│    WHEN (regexp_matches   │\n│   (lower(array_to_string  │\n│         (places_os        │\n│ .fsq_category_labels, ' ')│\n│    ), 'amusement|theme    │\n│ park|aquarium|zoo|stadium|│\n│  sports|arcade')) THEN (  │\n│     'adventure') WHEN     │\n│   (regexp_matches(lower   │\n│ (array_to_string(places_os│\n│ .fsq_category_labels, ' ')│\n│), 'park|garden|viewpoint|l│\n│ookout|outdoor|recreation|t│\n│  rail')) THEN ('nature')  │\n│    WHEN (regexp_matches   │\n│   (lower(array_to_string  │\n│         (places_os        │\n│ .fsq_category_labels, ' ')│\n│  ), 'nightclub|bar|music  │\n│   venue|concert')) THEN ( │\n│     'nightlife') WHEN     │\n│   (regexp_matches(lower   │\n│ (array_to_string(places_os│\n│ .fsq_category_labels, ' ')│\n│  ), 'spa|onsen')) THEN (  │\n│      'luxury') WHEN       │\n│   (regexp_matches(lower   │\n│ (array_to_string(places_os│\n│ .fsq_category_labels, ' ')│\n│   ), 'public art|public   │\n│   plaza')) THEN ('free')  │\n│    WHEN (regexp_matches   │\n│   (lower(array_to_string  │\n│         (places_os        │\n│ .fsq_category_labels, ' ')│\n│  ), 'restaurant|cafe|caf  │\n│ é|coffee|market')) THEN ( │\n│  'food') ELSE 'other' END │\n│             ASC           │\n│      ((((CASE  WHEN       │\n│   (regexp_matches(lower   │\n│ (array_to_string(places_os│\n│ .fsq_category_labels, ' ')│\n│), 'museum|historic|landmar│\n│k|observation|aquarium|zoo|│\n│    theme park|national    │\n│       park|botanical      │\n│   garden|palace|castle')) │\n│       THEN (45) WHEN      │\n│   (regexp_matches(lower   │\n│ (array_to_string(places_os│\n│ .fsq_category_labels, ' ')│\n│), 'park|garden|theater|the│\n│ atre|market|stadium|music │\n│   venue|shopping mall'))  │\n│       THEN (32) WHEN      │\n│   (regexp_matches(lower   │\n│ (array_to_string(places_os│\n│ .fsq_category_labels, ' ')│\n│), 'shrine|temple|restauran│\n│  t|bar|cafe|café')) THEN  │\n│  (18) ELSE 10 END + least │\n│        (15, (length       │\n│ (array_to_string(places_os│\n│ .fsq_category_labels, ' ')│\n│ ) / 12))) + CASE  WHEN (( │\n│  (places_os.\"name\" IS NOT │\n│   NULL) AND (length(main. │\n│ \"trim\"(places_os.\"name\")) │\n│  >= 5))) THEN (8) ELSE 0  │\n│    END) + CASE  WHEN ((   │\n│ (places_os.website IS NOT │\n│   NULL) AND (main.\"trim\"  │\n│ (places_os.website) != '')│\n│ )) THEN (4) ELSE 0 END) + │\n│    CASE  WHEN ((TRY_CAST  │\n│ (places_os.date_refreshed │\n│  AS DATE) >= (CURRENT_DATE│\n│     - CAST('3 years' AS   │\n│    INTERVAL)))) THEN (6)  │\n│      ELSE 0 END) DESC     │\n│ places_os.fsq_place_id ASC│\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│        fsq_place_id       │\n│            name           │\n│          latitude         │\n│         longitude         │\n│          address          │\n│          locality         │\n│           region          │\n│          postcode         │\n│          country          │\n│        date_created       │\n│       date_refreshed      │\n│        date_closed        │\n│          website          │\n│      fsq_category_ids     │\n│    fsq_category_labels    │\n│       placemaker_url      │\n│     coordinate_source     │\n│   sample_category_group   │\n│     source_rank_score     │\n│      stratified_rank      │\n│                           │\n│      ~4,325,376 rows      │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│        fsq_place_id       │\n│            name           │\n│          latitude         │\n│         longitude         │\n│          address          │\n│          locality         │\n│           region          │\n│          postcode         │\n│          country          │\n│        date_created       │\n│       date_refreshed      │\n│        date_closed        │\n│          website          │\n│      fsq_category_ids     │\n│    fsq_category_labels    │\n│       placemaker_url      │\n│         lower(#16)        │\n│            #16            │\n│      stratified_rank      │\n│                           │\n│      ~4,325,376 rows      │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│        fsq_place_id       │\n│            name           │\n│          latitude         │\n│         longitude         │\n│          address          │\n│          locality         │\n│           region          │\n│          postcode         │\n│          country          │\n│        date_created       │\n│       date_refreshed      │\n│        date_closed        │\n│          website          │\n│      fsq_category_ids     │\n│    fsq_category_labels    │\n│       placemaker_url      │\n│         list_aggr         │\n│   (fsq_category_labels,   │\n│       'string_agg')       │\n│      stratified_rank      │\n│                           │\n│      ~4,325,376 rows      │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│             #0            │\n│             #1            │\n│             #2            │\n│             #3            │\n│             #4            │\n│             #5            │\n│             #6            │\n│             #7            │\n│             #8            │\n│             #9            │\n│            #10            │\n│            #11            │\n│            #12            │\n│            #13            │\n│            #14            │\n│            #15            │\n│            #16            │\n│                           │\n│      ~4,325,376 rows      │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│           WINDOW          │\n│    ────────────────────   │\n│        Projections:       │\n│     ROW_NUMBER() OVER     │\n│ (PARTITION BY CASE  WHEN  │\n│   (regexp_matches(lower   │\n│         (list_aggr        │\n│   (fsq_category_labels,   │\n│      'string_agg')),      │\n│'museum|historic|landmark|s│\n│hrine|temple|theater|theatr│\n│e|gallery|monument|castle|p│\n│ alace|shopping|department │\n│ store|mall|neighborhood|di│\n│strict|street|intersection|│\n│ plaza')) THEN ('culture') │\n│    WHEN (regexp_matches   │\n│      (lower(list_aggr     │\n│   (fsq_category_labels,   │\n│      'string_agg')),      │\n│      'amusement|theme     │\n│ park|aquarium|zoo|stadium|│\n│  sports|arcade')) THEN (  │\n│     'adventure') WHEN     │\n│   (regexp_matches(lower   │\n│         (list_aggr        │\n│   (fsq_category_labels,   │\n│      'string_agg')),      │\n│'park|garden|viewpoint|look│\n│out|outdoor|recreation|trai│\n│ l')) THEN ('nature') WHEN │\n│   (regexp_matches(lower   │\n│         (list_aggr        │\n│   (fsq_category_labels,   │\n│      'string_agg')),      │\n│    'nightclub|bar|music   │\n│   venue|concert')) THEN ( │\n│     'nightlife') WHEN     │\n│   (regexp_matches(lower   │\n│         (list_aggr        │\n│   (fsq_category_labels,   │\n│ 'string_agg')), 'spa|onsen│\n│ ')) THEN ('luxury') WHEN  │\n│   (regexp_matches(lower   │\n│         (list_aggr        │\n│   (fsq_category_labels,   │\n│  'string_agg')), 'public  │\n│  art|public plaza')) THEN │\n│       ('free') WHEN       │\n│   (regexp_matches(lower   │\n│         (list_aggr        │\n│   (fsq_category_labels,   │\n│      'string_agg')),      │\n│    'restaurant|cafe|caf   │\n│ é|coffee|market')) THEN ( │\n│  'food') ELSE 'other' END │\n│   ORDER BY ((((CAST(CASE  │\n│    WHEN (regexp_matches   │\n│      (lower(list_aggr     │\n│   (fsq_category_labels,   │\n│      'string_agg')),      │\n│'museum|historic|landmark|o│\n│bservation|aquarium|zoo|the│\n│      me park|national     │\n│       park|botanical      │\n│   garden|palace|castle')) │\n│       THEN (45) WHEN      │\n│   (regexp_matches(lower   │\n│         (list_aggr        │\n│   (fsq_category_labels,   │\n│      'string_agg')),      │\n│'park|garden|theater|theatr│\n│   e|market|stadium|music  │\n│   venue|shopping mall'))  │\n│       THEN (32) WHEN      │\n│   (regexp_matches(lower   │\n│         (list_aggr        │\n│   (fsq_category_labels,   │\n│      'string_agg')),      │\n│'shrine|temple|restaurant|b│\n│ ar|cafe|café')) THEN (18) │\n│  ELSE 10 END AS DOUBLE) + │\n│  least(15.0, (CAST(length │\n│         (list_aggr        │\n│   (fsq_category_labels,   │\n│ 'string_agg')) AS DOUBLE) │\n│   / 12.0))) + CAST(CASE   │\n│  WHEN (((name IS NOT NULL)│\n│  AND (length(\"trim\"(name))│\n│   >= 5))) THEN (8) ELSE 0 │\n│   END AS DOUBLE)) + CAST  │\n│ (CASE  WHEN (((website IS │\n│    NOT NULL) AND (\"trim\"  │\n│ (website) != ''))) THEN (4│\n│ ) ELSE 0 END AS DOUBLE)) +│\n│   CAST(CASE  WHEN ((CAST  │\n│  (TRY_CAST(date_refreshed │\n│  AS DATE) AS TIMESTAMP) >=│\n│   '2023-06-28 00:00:00':  │\n│ :TIMESTAMP)) THEN (6) ELSE│\n│   0 END AS DOUBLE)) DESC  │\n│  NULLS LAST, fsq_place_id │\n│       ASC NULLS LAST)     │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│           FILTER          │\n│    ────────────────────   │\n│    regexp_matches(lower   │\n│         (list_aggr        │\n│   (fsq_category_labels,   │\n│      'string_agg')),      │\n│'landmark|museum|historic|s│\n│hrine|temple|park|garden|vi│\n│ewpoint|lookout|market|rest│\n│      aurant|cafe|caf      │\n│ é|coffee|bar|nightclub|the│\n│     ater|theatre|music    │\n│ venue|concert|amusement|th│\n│eme park|aquarium|zoo|stadi│\n│um|sports|outdoor|recreatio│\n│n|trail|shopping|department│\n│ store|mall|gallery|monumen│\n│t|castle|palace|arcade|spa|│\n│onsen|neighborhood|district│\n│|street|intersection|plaza|│\n│        waterfront')       │\n│                           │\n│      ~4,325,376 rows      │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│       ICEBERG_SCAN        │\n│    ────────────────────   │\n│         Function:         │\n│        ICEBERG_SCAN       │\n│                           │\n│        Projections:       │\n│        date_closed        │\n│         longitude         │\n│          latitude         │\n│    fsq_category_labels    │\n│        fsq_place_id       │\n│            name           │\n│          address          │\n│          locality         │\n│           region          │\n│          postcode         │\n│          country          │\n│        date_created       │\n│       date_refreshed      │\n│          website          │\n│      fsq_category_ids     │\n│       placemaker_url      │\n│                           │\n│          Filters:         │\n│   (date_closed IS NULL)   │\n│   longitude>=139.55 AND   │\n│      longitude<=139.95    │\n│     latitude>=35.5 AND    │\n│       latitude<=35.8      │\n│                           │\n│      ~21,626,880 rows     │\n└───────────────────────────┘\n",
+  "countQueryMs": 7951.969542,
+  "explainMs": 1429.4858750000003,
+  "geographyMs": 27.006915999998455,
+  "attractionQueryMs": 27677.540374999997,
+  "samplingStrategy": "deterministic DuckDB ranking round-robin by major category group, then source score and FSQ ID",
+  "oldLimitWasUnordered": true,
+  "majorAttractionCoverage": [
+    {
+      "name": "Sensō-ji",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b0587a1f964a5207f9d22e3",
+      "fsqName": "浅草寺 (Sensō-ji Temple)",
+      "fsqCategory": "Community and Government > Spiritual Center > Buddhist Temple Landmarks and Outdoors > Historic and Protected Site",
+      "distanceFromGoogleM": 6.911407647876415,
+      "googleBenchmarkName": "Sensō-ji"
+    },
+    {
+      "name": "Meiji Jingū",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b5bd0a2f964a520c31729e3",
+      "fsqName": "明治神宮 (Meiji Jingu Shrine)",
+      "fsqCategory": "Community and Government > Spiritual Center > Shrine Landmarks and Outdoors > Historic and Protected Site",
+      "distanceFromGoogleM": 6.170553312133662,
+      "googleBenchmarkName": "Meiji Jingū"
+    },
+    {
+      "name": "Tokyo Skytree",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b569977f964a520551628e3",
+      "fsqName": "東京スカイツリー (Tokyo Skytree)",
+      "fsqCategory": "Landmarks and Outdoors > Monument Landmarks and Outdoors > Scenic Lookout",
+      "distanceFromGoogleM": 5.194042613173035,
+      "googleBenchmarkName": "Tokyo Skytree"
+    },
+    {
+      "name": "Tokyo Tower",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b56a5e8f964a5208e1728e3",
+      "fsqName": "東京タワー (Tokyo Tower)",
+      "fsqCategory": "Landmarks and Outdoors > Monument Landmarks and Outdoors > Scenic Lookout",
+      "distanceFromGoogleM": 4.480257065113622,
+      "googleBenchmarkName": "Tokyo Tower"
+    },
+    {
+      "name": "Shibuya Crossing",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b654f7df964a520beec2ae3",
+      "fsqName": "渋谷駅前スクランブル交差点 (Shibuya Crossing)",
+      "fsqCategory": "Travel and Transportation > Road > Intersection",
+      "distanceFromGoogleM": 11.184462863622148,
+      "googleBenchmarkName": "Shibuya Crossing"
+    },
+    {
+      "name": "Imperial Palace",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b566b84f964a5209e0f28e3",
+      "fsqName": "皇居 (Imperial Palace)",
+      "fsqCategory": "Landmarks and Outdoors > Palace Landmarks and Outdoors > Historic and Protected Site",
+      "distanceFromGoogleM": 306.8108808864456,
+      "googleBenchmarkName": "Imperial Palace"
+    },
+    {
+      "name": "Ueno Park",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b0587a1f964a5209b9d22e3",
+      "fsqName": "上野恩賜公園 (Ueno Park)",
+      "fsqCategory": "Landmarks and Outdoors > Park",
+      "distanceFromGoogleM": 84.56824096149187,
+      "googleBenchmarkName": "Ueno Park"
+    },
+    {
+      "name": "Tokyo National Museum",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b556c7ef964a520f5e327e3",
+      "fsqName": "東京国立博物館 (Tokyo National Museum)",
+      "fsqCategory": "Arts and Entertainment > Museum > History Museum Arts and Entertainment > Museum",
+      "distanceFromGoogleM": 16.730753653857487,
+      "googleBenchmarkName": "Tokyo National Museum"
+    },
+    {
+      "name": "teamLab Planets",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "5b3306103731ee002c2b3e78",
+      "fsqName": "チームラボプラネッツ (teamLab Planets)",
+      "fsqCategory": "Arts and Entertainment > Museum > Art Museum Arts and Entertainment > Amusement Park",
+      "distanceFromGoogleM": 580.8925534328324,
+      "googleBenchmarkName": "teamLab Planets"
+    },
+    {
+      "name": "Tsukiji Outer Market",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b57cb7cf964a5208b4128e3",
+      "fsqName": "築地場外市場",
+      "fsqCategory": "Retail > Market Retail > Food and Beverage Retail > Fish Market",
+      "distanceFromGoogleM": 77.15715773052501,
+      "googleBenchmarkName": "Tsukiji Outer Market"
+    },
+    {
+      "name": "Shinjuku Gyoen",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b5ff761f964a520f1d129e3",
+      "fsqName": "新宿御苑 (Shinjuku Gyoen)",
+      "fsqCategory": "Landmarks and Outdoors > Garden",
+      "distanceFromGoogleM": 63.520531766304956,
+      "googleBenchmarkName": "Shinjuku Gyoen"
+    },
+    {
+      "name": "Akihabara",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b5a80a4f964a52078c828e3",
+      "fsqName": "秋葉原 (Akihabara)",
+      "fsqCategory": "Landmarks and Outdoors > States and Municipalities > Neighborhood",
+      "distanceFromGoogleM": 92.92752548986756,
+      "googleBenchmarkName": "Akihabara"
+    },
+    {
+      "name": "Harajuku",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4e5f5340b0fb27e2bd450341",
+      "fsqName": "原宿 (Harajuku)",
+      "fsqCategory": "Landmarks and Outdoors > States and Municipalities > Neighborhood",
+      "distanceFromGoogleM": 87.81626448513681,
+      "googleBenchmarkName": "Harajuku"
+    },
+    {
+      "name": "Odaiba",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4f9df5d1e4b033dc2c12dd47",
+      "fsqName": "お台場 (Odaiba)",
+      "fsqCategory": "Landmarks and Outdoors > States and Municipalities > Neighborhood",
+      "distanceFromGoogleM": 27.211711379583548,
+      "googleBenchmarkName": "Odaiba"
+    },
+    {
+      "name": "Ghibli Museum",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b56ac4ff964a5202e1828e3",
+      "fsqName": "三鷹の森ジブリ美術館 (Ghibli Museum)",
+      "fsqCategory": "Arts and Entertainment > Museum > Art Museum",
+      "distanceFromGoogleM": 22.126157511303763,
+      "googleBenchmarkName": "Ghibli Museum"
+    },
+    {
+      "name": "Tokyo Disneyland",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b59ebdaf964a52002a128e3",
+      "fsqName": "東京ディズニーランド (Tokyo Disneyland)",
+      "fsqCategory": "Arts and Entertainment > Amusement Park",
+      "distanceFromGoogleM": 2.577966804278949,
+      "googleBenchmarkName": "Tokyo Disneyland"
+    },
+    {
+      "name": "Tokyo DisneySea",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4c2bf7fe8abca593441c0120",
+      "fsqName": "東京ディズニーシー (Tokyo DisneySea)",
+      "fsqCategory": "Arts and Entertainment > Amusement Park",
+      "distanceFromGoogleM": 151.4139831910498,
+      "googleBenchmarkName": "Tokyo DisneySea"
+    }
+  ],
+  "estimatedApiCostUsd": 0,
+  "noSupabaseWrites": true,
+  "queryLimit": 20000,
+  "queryTimedOut": false,
+  "outputFile": "/Users/oliverwatts/Code/travel-grab/lantern-landing/scripts/fsq/output/tokyo-fsq-os-validation.json",
+  "reportFile": "/Users/oliverwatts/Code/travel-grab/lantern-landing/scripts/fsq/output/tokyo-fsq-os-validation.report.json",
+  "dryRun": true
+}

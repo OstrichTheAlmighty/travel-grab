@@ -1,0 +1,116 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:34.996Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 71135,
+          "ns": 0,
+          "title": "ラフォーレ原宿",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "らふおおれはらしゆく",
+            "page_image_free": "Laforet-Harajuku-Tokyo-01.jpg",
+            "wikibase_item": "Q1770607"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66908333,
+              "lon": 139.7055,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都・表参道にあるファッションビル"
+            ]
+          }
+        },
+        {
+          "pageid": 71136,
+          "ns": 0,
+          "title": "原宿",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はらしゆく",
+            "page_image_free": "Takeshita_st.jpg",
+            "wikibase_item": "Q746573"
+          },
+          "terms": {
+            "description": [
+              "東京都渋谷区の一地区"
+            ]
+          }
+        },
+        {
+          "pageid": 141170,
+          "ns": 0,
+          "title": "ユニバーサルミュージック (日本)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ゆにはあさるみゆうしつく",
+            "page_image_free": "Jingumae_Tower_building,_Shibuya,_Tokyo.jpg",
+            "wikibase_item": "Q8194234"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都渋谷区にあるレコード会社"
+            ]
+          }
+        },
+        {
+          "pageid": 765037,
+          "ns": 0,
+          "title": "原宿RUIDO",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はらしゆくるいいと",
+            "kartographer_frames": "1",
+            "page_image_free": "RUIDO_HARAJUKU.jpg",
+            "wikibase_item": "Q11409560"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67066667,
+              "lon": 139.70466667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 4080134,
+          "ns": 0,
+          "title": "ウィズ原宿",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ういすはらしゆく",
+            "kartographer_frames": "1",
+            "page_image_free": "WITH_HARAJUKU_2022.jpg",
+            "wikibase_item": "Q85870294"
+          },
+          "coordinates": [
+            {
+              "lat": 35.670556,
+              "lon": 139.703194,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある商業施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

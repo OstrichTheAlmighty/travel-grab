@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:18.205Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 150566,
+          "ns": 0,
+          "title": "ハンス・ジマー",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しまあ はんす",
+            "page_image_free": "Sound007RAH041022_(43_of_69)_(52406449433)_(cropped).jpg",
+            "wikibase_item": "Q76364"
+          },
+          "terms": {
+            "description": [
+              "ドイツの映画音楽作曲家"
+            ]
+          }
+        },
+        {
+          "pageid": 2134282,
+          "ns": 0,
+          "title": "TOKYO IDOL FESTIVAL",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようあいとるふえすていはる",
+            "page_image_free": "Wangan_Studio.jpg",
+            "wikibase_item": "Q11249715"
+          },
+          "terms": {
+            "description": [
+              "2010年より開催されている日本の音楽イベント"
+            ]
+          }
+        },
+        {
+          "pageid": 2611177,
+          "ns": 0,
+          "title": "シックス・フラッグス・マジック・マウンテン",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しつくすふらつくすましつくまうんてん",
+            "page_image_free": "USA_California_location_map.svg",
+            "wikibase_item": "Q1515080"
+          },
+          "coordinates": [
+            {
+              "lat": 34.423762,
+              "lon": -118.597069,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "アメリカの遊園地"
+            ]
+          }
+        },
+        {
+          "pageid": 3377611,
+          "ns": 0,
+          "title": "日本のバンド一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんのはんといちらん",
+            "wikibase_item": "Q24869797"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 4403236,
+          "ns": 0,
+          "title": "プロジェクトセカイの楽曲一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふろしえくとせかいのかつきよくいちらん",
+            "wikibase_item": "Q109600329"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

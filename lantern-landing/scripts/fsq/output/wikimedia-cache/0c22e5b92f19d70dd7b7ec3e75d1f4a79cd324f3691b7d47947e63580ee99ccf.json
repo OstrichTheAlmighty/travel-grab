@@ -1,0 +1,88 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:31.381Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 245488,
+          "ns": 0,
+          "title": "なれずし",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "なれすし",
+            "page_image_free": "Funazushi.jpg",
+            "wikibase_item": "Q5368607"
+          },
+          "terms": {
+            "description": [
+              "日本の鮓のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 254373,
+          "ns": 0,
+          "title": "寿司",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すし",
+            "page_image_free": "Various_sushi,_beautiful_October_night_at_midnight.jpg",
+            "wikibase_item": "Q46383"
+          },
+          "terms": {
+            "description": [
+              "米飯と主に魚介類を組み合わせた日本料理"
+            ]
+          }
+        },
+        {
+          "pageid": 831418,
+          "ns": 0,
+          "title": "寿司屋",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "すしや",
+            "page_image_free": "Gonta_sushi.jpg",
+            "wikibase_item": "Q10861387"
+          },
+          "terms": {
+            "description": [
+              "寿司を供する飲食店"
+            ]
+          }
+        },
+        {
+          "pageid": 1171384,
+          "ns": 0,
+          "title": "スシ王子!",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "すしおうし",
+            "wikibase_item": "Q4118320"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ番組シリーズ"
+            ]
+          }
+        },
+        {
+          "pageid": 2832980,
+          "ns": 0,
+          "title": "東京やなぎ句会",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようやなきくかい",
+            "wikibase_item": "Q17214182"
+          }
+        }
+      ]
+    }
+  }
+}

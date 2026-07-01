@@ -1,0 +1,89 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:23.587Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2570,
+          "ns": 0,
+          "title": "本",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ほん",
+            "page_image_free": "Otvorena_knjiga.JPG",
+            "wikibase_item": "Q571"
+          },
+          "terms": {
+            "description": [
+              "情報を文字や図画でまとめ、通常、インクで紙に印刷したもの"
+            ]
+          }
+        },
+        {
+          "pageid": 8404,
+          "ns": 0,
+          "title": "折り紙",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おりかみ",
+            "page_image_free": "Cranes_made_by_Origami_paper.jpg",
+            "wikibase_item": "Q83357"
+          },
+          "terms": {
+            "description": [
+              "日本の遊戯"
+            ]
+          }
+        },
+        {
+          "pageid": 207538,
+          "ns": 0,
+          "title": "松永真",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "まつなか しん",
+            "wikibase_item": "Q11531597"
+          },
+          "terms": {
+            "description": [
+              "1940-, グラフィックデザイナー"
+            ]
+          }
+        },
+        {
+          "pageid": 885640,
+          "ns": 0,
+          "title": "ジョイフルエーケー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しよいふるええけえ",
+            "page_image_free": "JOYFUL_AK_Tonden.jpg",
+            "wikibase_item": "Q11310519"
+          },
+          "terms": {
+            "description": [
+              "日本の北海道札幌市東区に本社を置きホームセンターを展開する企業"
+            ]
+          }
+        },
+        {
+          "pageid": 1657127,
+          "ns": 0,
+          "title": "イルフォード (写真)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いるふおと",
+            "page_image_free": "Ilford_FP4_HP5_XP2.jpg",
+            "wikibase_item": "Q282150"
+          }
+        }
+      ]
+    }
+  }
+}

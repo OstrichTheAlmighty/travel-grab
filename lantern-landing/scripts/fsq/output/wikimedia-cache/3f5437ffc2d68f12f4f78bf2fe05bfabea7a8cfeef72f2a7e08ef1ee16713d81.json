@@ -1,0 +1,45 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:17.877Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 146368,
+          "ns": 0,
+          "title": "銅鐸",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうたく",
+            "page_image_free": "Epoca_yaoi_finale,_campana_rituale_dotaku,_da_shizuoka,_III_sec.JPG",
+            "wikibase_item": "Q2312868"
+          },
+          "terms": {
+            "description": [
+              "弥生時代に製造された釣鐘型の青銅器"
+            ]
+          }
+        },
+        {
+          "pageid": 5113339,
+          "ns": 0,
+          "title": "桜ヶ丘銅鐸・銅戈群",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さくらかおかとうたくとうかくん",
+            "kartographer_frames": "1",
+            "kartographer_links": "1",
+            "page_image_free": "桜ヶ丘銅鐸.JPG",
+            "wikibase_item": "Q130316675"
+          },
+          "terms": {
+            "description": [
+              "神戸市灘区から出土した銅鐸・銅戈"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

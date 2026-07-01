@@ -1,0 +1,81 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:28.842Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 200087,
+          "ns": 0,
+          "title": "きけ わだつみのこえ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きけわたつみのこえ",
+            "wikibase_item": "Q17210315"
+          },
+          "terms": {
+            "description": [
+              "第二次世界大戦に没した日本の学徒兵の遺書集"
+            ]
+          }
+        },
+        {
+          "pageid": 1044216,
+          "ns": 0,
+          "title": "学徒出陣",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かくとしゆつしん",
+            "page_image_free": "Chichibunomiya_Rugby_Stadium-7.jpg",
+            "wikibase_item": "Q62023632"
+          }
+        },
+        {
+          "pageid": 1127679,
+          "ns": 0,
+          "title": "わだつみ像",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "わたつみそう",
+            "wikibase_item": "Q11281902"
+          },
+          "terms": {
+            "description": [
+              "本郷新による彫像"
+            ]
+          }
+        },
+        {
+          "pageid": 1242444,
+          "ns": 0,
+          "title": "山下肇",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "やました はしめ",
+            "wikibase_item": "Q11466045"
+          },
+          "terms": {
+            "description": [
+              "日本の翻訳家"
+            ]
+          }
+        },
+        {
+          "pageid": 1740506,
+          "ns": 0,
+          "title": "日本戦没学生記念会",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にほんせんほつかくせいきねんかい",
+            "wikibase_item": "Q11508127"
+          }
+        }
+      ]
+    }
+  }
+}

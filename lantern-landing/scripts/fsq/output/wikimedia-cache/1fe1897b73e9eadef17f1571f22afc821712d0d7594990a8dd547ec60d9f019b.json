@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:05.135Z",
+  "value": {
+    "searchinfo": {
+      "search": "旧東京音楽学校奏楽堂"
+    },
+    "search": [
+      {
+        "id": "Q3891225",
+        "title": "Q3891225",
+        "pageid": 3712789,
+        "concepturi": "http://www.wikidata.org/entity/Q3891225",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3891225",
+        "display": {
+          "label": {
+            "value": "Sogakudo Concert Hall",
+            "language": "en"
+          },
+          "description": {
+            "value": "historical building in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Sogakudo Concert Hall",
+        "description": "historical building in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "旧東京音楽学校奏楽堂"
+        },
+        "aliases": [
+          "旧東京音楽学校奏楽堂"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

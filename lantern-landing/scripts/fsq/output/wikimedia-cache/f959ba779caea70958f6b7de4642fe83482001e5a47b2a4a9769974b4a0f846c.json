@@ -1,0 +1,209 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:54.365Z",
+  "value": {
+    "searchinfo": {
+      "search": "クラブハウス"
+    },
+    "search": [
+      {
+        "id": "Q1103285",
+        "title": "Q1103285",
+        "pageid": 1050610,
+        "concepturi": "http://www.wikidata.org/entity/Q1103285",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1103285",
+        "display": {
+          "label": {
+            "value": "clubhouse",
+            "language": "en"
+          },
+          "description": {
+            "value": "building of a club",
+            "language": "en"
+          }
+        },
+        "label": "clubhouse",
+        "description": "building of a club",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "クラブハウス"
+        },
+        "aliases": [
+          "クラブハウス"
+        ]
+      },
+      {
+        "id": "Q104101703",
+        "title": "Q104101703",
+        "pageid": 99574177,
+        "concepturi": "http://www.wikidata.org/entity/Q104101703",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q104101703",
+        "display": {
+          "label": {
+            "value": "Clubhouse",
+            "language": "en"
+          },
+          "description": {
+            "value": "American audio-based social networking service",
+            "language": "en"
+          }
+        },
+        "label": "Clubhouse",
+        "description": "American audio-based social networking service",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "クラブハウス ザ・音声SNSアプリ"
+        },
+        "aliases": [
+          "クラブハウス ザ・音声SNSアプリ"
+        ]
+      },
+      {
+        "id": "Q5136525",
+        "title": "Q5136525",
+        "pageid": 4909209,
+        "concepturi": "http://www.wikidata.org/entity/Q5136525",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5136525",
+        "display": {
+          "label": {
+            "value": "Clubhouse",
+            "language": "en"
+          },
+          "description": {
+            "value": "television series",
+            "language": "en"
+          }
+        },
+        "label": "Clubhouse",
+        "description": "television series",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "クラブハウス"
+        },
+        "aliases": [
+          "クラブハウス"
+        ]
+      },
+      {
+        "id": "Q1093380",
+        "title": "Q1093380",
+        "pageid": 1041054,
+        "concepturi": "http://www.wikidata.org/entity/Q1093380",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1093380",
+        "display": {
+          "label": {
+            "value": "club sandwich",
+            "language": "en"
+          },
+          "description": {
+            "value": "type of sandwich",
+            "language": "en"
+          }
+        },
+        "label": "club sandwich",
+        "description": "type of sandwich",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "クラブハウスサンド"
+        },
+        "aliases": [
+          "クラブハウスサンド"
+        ]
+      },
+      {
+        "id": "Q1103298",
+        "title": "Q1103298",
+        "pageid": 1050623,
+        "concepturi": "http://www.wikidata.org/entity/Q1103298",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1103298",
+        "display": {
+          "label": {
+            "value": "Clubhouse Model of Psychosocial Rehabilitation",
+            "language": "en"
+          },
+          "description": {
+            "value": "self-governance and social integration model",
+            "language": "en"
+          }
+        },
+        "label": "Clubhouse Model of Psychosocial Rehabilitation",
+        "description": "self-governance and social integration model",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "クラブハウスモデル"
+        },
+        "aliases": [
+          "クラブハウスモデル"
+        ]
+      },
+      {
+        "id": "Q1103003",
+        "title": "Q1103003",
+        "pageid": 1050334,
+        "concepturi": "http://www.wikidata.org/entity/Q1103003",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1103003",
+        "display": {
+          "label": {
+            "value": "Clubhouse",
+            "language": "en"
+          },
+          "description": {
+            "value": "Italian music band",
+            "language": "en"
+          }
+        },
+        "label": "Clubhouse",
+        "description": "Italian music band",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "クラブハウス (バンド)"
+        },
+        "aliases": [
+          "クラブハウス (バンド)"
+        ]
+      },
+      {
+        "id": "Q5136526",
+        "title": "Q5136526",
+        "pageid": 4909210,
+        "concepturi": "http://www.wikidata.org/entity/Q5136526",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5136526",
+        "display": {
+          "label": {
+            "value": "Clubhouse",
+            "language": "en"
+          },
+          "description": {
+            "value": "1979 studio album by Dexter Gordon",
+            "language": "en"
+          }
+        },
+        "label": "Clubhouse",
+        "description": "1979 studio album by Dexter Gordon",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "クラブハウス (アルバム)"
+        },
+        "aliases": [
+          "クラブハウス (アルバム)"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

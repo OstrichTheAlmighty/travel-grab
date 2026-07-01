@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:45.979Z",
+  "value": {
+    "searchinfo": {
+      "search": "松下村塾"
+    },
+    "search": [
+      {
+        "id": "Q2326743",
+        "title": "Q2326743",
+        "pageid": 2247725,
+        "concepturi": "http://www.wikidata.org/entity/Q2326743",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2326743",
+        "display": {
+          "label": {
+            "value": "Shōkasonjuku Academy",
+            "language": "en"
+          },
+          "description": {
+            "value": "historic academy in Yamaguchi, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Shōkasonjuku Academy",
+        "description": "historic academy in Yamaguchi, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "松下村塾"
+        },
+        "aliases": [
+          "松下村塾"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

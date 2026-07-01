@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:40.761Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 75286,
+          "ns": 0,
+          "title": "Landscape architecture",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Landscape Architecture",
+            "page_image_free": "Stourhead_Bridge_A.jpg",
+            "wikibase-shortdesc": "Design of outdoor public areas, landmarks, and structures",
+            "wikibase_item": "Q47844"
+          },
+          "terms": {
+            "description": [
+              "design of outdoor public areas, landmarks, and structures to achieve environmental, social-behavioral, or aesthetic outcomes"
+            ]
+          }
+        },
+        {
+          "pageid": 205135,
+          "ns": 0,
+          "title": "Landscape",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Cumulus_Clouds_over_Yellow_Prairie2.jpg",
+            "wikibase-shortdesc": "Visible features of a land area",
+            "wikibase_item": "Q107425"
+          },
+          "terms": {
+            "description": [
+              "visible features of an area of land"
+            ]
+          }
+        },
+        {
+          "pageid": 374240,
+          "ns": 0,
+          "title": "Landscaping",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Courtyard_creation_Kuching,_Malaysia.jpg",
+            "wikibase-shortdesc": "Modifying the visible features of areas of land",
+            "wikibase_item": "Q8070591"
+          },
+          "terms": {
+            "description": [
+              "the development and decorative planting of gardens and grounds"
+            ]
+          }
+        },
+        {
+          "pageid": 1359329,
+          "ns": 0,
+          "title": "Landscape painting",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Crossing_the_River_Styx.jpg",
+            "wikibase-shortdesc": "Depiction of landscapes in art",
+            "wikibase_item": "Q191163"
+          },
+          "terms": {
+            "description": [
+              "depiction of landscapes in painting"
+            ]
+          }
+        },
+        {
+          "pageid": 14389994,
+          "ns": 0,
+          "title": "Natural landscape",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Natural Landscape",
+            "page_image_free": "Terra.png",
+            "wikibase-shortdesc": "Original landscape formed by nature",
+            "wikibase_item": "Q1286517"
+          },
+          "terms": {
+            "description": [
+              "original landscape formed by nature"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

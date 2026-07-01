@@ -1,0 +1,60 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:51.501Z",
+  "value": {
+    "searchinfo": {
+      "search": "ウォーターフロントパーク"
+    },
+    "search": [
+      {
+        "id": "Q11288783",
+        "title": "Q11288783",
+        "pageid": 12429473,
+        "concepturi": "http://www.wikidata.org/entity/Q11288783",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11288783",
+        "display": {
+          "label": {
+            "value": "Water Front Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "Plaza at Tokyo DisneySea",
+            "language": "en"
+          }
+        },
+        "label": "Water Front Park",
+        "description": "Plaza at Tokyo DisneySea",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ウォーターフロントパーク"
+        },
+        "aliases": [
+          "ウォーターフロントパーク"
+        ]
+      },
+      {
+        "id": "Q137895889",
+        "title": "Q137895889",
+        "pageid": 131526203,
+        "concepturi": "http://www.wikidata.org/entity/Q137895889",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q137895889",
+        "display": {
+          "label": {
+            "value": "ウォーターフロントパーク金沢",
+            "language": "ja"
+          }
+        },
+        "label": "ウォーターフロントパーク金沢",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ウォーターフロントパーク金沢"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:32.193Z",
+  "value": {
+    "searchinfo": {
+      "search": "キャッスルフォアコート"
+    },
+    "search": [
+      {
+        "id": "Q11297135",
+        "title": "Q11297135",
+        "pageid": 12437070,
+        "concepturi": "http://www.wikidata.org/entity/Q11297135",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11297135",
+        "display": {
+          "label": {
+            "value": "Castle Forecourt",
+            "language": "en"
+          }
+        },
+        "label": "Castle Forecourt",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "キャッスルフォアコート"
+        },
+        "aliases": [
+          "キャッスルフォアコート"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:00.488Z",
+  "value": {
+    "searchinfo": {
+      "search": "うんこミュージアム"
+    },
+    "search": [
+      {
+        "id": "Q65234016",
+        "title": "Q65234016",
+        "pageid": 64874264,
+        "concepturi": "http://www.wikidata.org/entity/Q65234016",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q65234016",
+        "display": {
+          "label": {
+            "value": "Unko Museum",
+            "language": "en"
+          }
+        },
+        "label": "Unko Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "うんこミュージアム"
+        },
+        "aliases": [
+          "うんこミュージアム"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

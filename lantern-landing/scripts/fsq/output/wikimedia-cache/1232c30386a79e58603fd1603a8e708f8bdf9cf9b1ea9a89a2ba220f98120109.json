@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:51.853Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 466195,
+          "ns": 0,
+          "title": "大谷田",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおやた",
+            "kartographer_frames": "1",
+            "page_image_free": "Ooyatarikkyou.jpg",
+            "wikibase_item": "Q11439130"
+          },
+          "terms": {
+            "description": [
+              "東京都足立区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 485616,
+          "ns": 0,
+          "title": "東京都道308号千住小松川葛西沖線",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようととう308こうせんしゆこまつかわかさいおきせん",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-r308-shinkoiwa.JPG",
+            "wikibase_item": "Q11525780"
+          },
+          "terms": {
+            "description": [
+              "東京都の道路"
+            ]
+          }
+        },
+        {
+          "pageid": 549459,
+          "ns": 0,
+          "title": "足立区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あたちく",
+            "kartographer_frames": "1",
+            "page_image_free": "Nishiarai_Daishi.jpg",
+            "wikibase_item": "Q213464"
+          },
+          "coordinates": [
+            {
+              "lat": 35.77494,
+              "lon": 139.80436,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 1302014,
+          "ns": 0,
+          "title": "東京都道314号言問大谷田線",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようととう314",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyotodo_314_Adachi_Word1.JPG",
+            "wikibase_item": "Q11525783"
+          },
+          "terms": {
+            "description": [
+              "東京都の道路"
+            ]
+          }
+        },
+        {
+          "pageid": 3406368,
+          "ns": 0,
+          "title": "中川公園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "なかかわこうえん",
+            "page_image_free": "To-ritsu_Nakagawa_Koen_West_Gate.jpg",
+            "wikibase_item": "Q24868772"
+          },
+          "coordinates": [
+            {
+              "lat": 35.775442,
+              "lon": 139.846312,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

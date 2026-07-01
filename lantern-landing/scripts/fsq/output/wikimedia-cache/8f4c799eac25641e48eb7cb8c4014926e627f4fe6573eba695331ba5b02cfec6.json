@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:43.926Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 33027,
+          "ns": 0,
+          "title": "東急百貨店",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきゆうひやつかてん",
+            "page_image_free": "Tokyu-Honten_Bunkamura_201511.jpg",
+            "wikibase_item": "Q863194"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66144444,
+              "lon": 139.69619444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の百貨店運営会社"
+            ]
+          }
+        },
+        {
+          "pageid": 35571,
+          "ns": 0,
+          "title": "東急ストア",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきゆうすとあ",
+            "page_image_free": "Tokyustorehonsha.jpg",
+            "wikibase_item": "Q11526963"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64505556,
+              "lon": 139.69922222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東急グループのスーパーマーケット事業"
+            ]
+          }
+        },
+        {
+          "pageid": 130379,
+          "ns": 0,
+          "title": "東急電鉄",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきゆうてんてつ",
+            "page_image_free": "渋谷ファーストプレイス.jpg",
+            "wikibase_item": "Q80229029"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65525,
+              "lon": 139.69377778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の鉄道会社"
+            ]
+          }
+        },
+        {
+          "pageid": 536594,
+          "ns": 0,
+          "title": "東急ステーションリテールサービス",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきゆうすてえしよんりているさあひす",
+            "wikibase_item": "Q11526961"
+          }
+        },
+        {
+          "pageid": 2460222,
+          "ns": 0,
+          "title": "東急グループ",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Tokyu_Group_Logo.svg",
+            "wikibase_item": "Q7814063"
+          },
+          "terms": {
+            "description": [
+              "東急株式会社を中心とする日本の企業グループ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

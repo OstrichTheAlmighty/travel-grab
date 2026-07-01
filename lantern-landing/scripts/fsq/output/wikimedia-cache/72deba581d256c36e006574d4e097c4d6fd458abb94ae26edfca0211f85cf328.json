@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:45.328Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京都水道歴史館"
+    },
+    "search": [
+      {
+        "id": "Q11525339",
+        "title": "Q11525339",
+        "pageid": 12665214,
+        "concepturi": "http://www.wikidata.org/entity/Q11525339",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11525339",
+        "display": {
+          "label": {
+            "value": "Tokyo Waterworks Historical Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Bunkyō, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Waterworks Historical Museum",
+        "description": "museum in Bunkyō, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京都水道歴史館"
+        },
+        "aliases": [
+          "東京都水道歴史館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

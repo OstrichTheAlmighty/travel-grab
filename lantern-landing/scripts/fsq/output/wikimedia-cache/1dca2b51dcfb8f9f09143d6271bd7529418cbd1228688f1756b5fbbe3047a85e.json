@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:45:55.233Z",
+  "value": {
+    "searchinfo": {
+      "search": "池淵史跡公園"
+    },
+    "search": [
+      {
+        "id": "Q42312653",
+        "title": "Q42312653",
+        "pageid": 43594888,
+        "concepturi": "http://www.wikidata.org/entity/Q42312653",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q42312653",
+        "display": {
+          "label": {
+            "value": "Ikebuchi Historic Spot Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Nerima, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Ikebuchi Historic Spot Park",
+        "description": "park in Nerima, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "池淵史跡公園"
+        },
+        "aliases": [
+          "池淵史跡公園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:00.547Z",
+  "value": {
+    "searchinfo": {
+      "search": "大名時計博物館"
+    },
+    "search": [
+      {
+        "id": "Q10856362",
+        "title": "Q10856362",
+        "pageid": 12128606,
+        "concepturi": "http://www.wikidata.org/entity/Q10856362",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q10856362",
+        "display": {
+          "label": {
+            "value": "Daimyo Clock Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Taito-ku, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Daimyo Clock Museum",
+        "description": "museum in Taito-ku, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "大名時計博物館"
+        },
+        "aliases": [
+          "大名時計博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

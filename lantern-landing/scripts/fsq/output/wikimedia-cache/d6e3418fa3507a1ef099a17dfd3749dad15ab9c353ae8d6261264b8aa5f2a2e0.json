@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:35.580Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 47968,
+          "ns": 0,
+          "title": "トランスフォーマー",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とらんすふおおまあ",
+            "page_image_free": "Transformers_costume_characters_at_Universal_Studios_Hollywood.jpg",
+            "wikibase_item": "Q1323565"
+          },
+          "terms": {
+            "description": [
+              "アメリカと日本のメディアフランチャイズ"
+            ]
+          }
+        },
+        {
+          "pageid": 805028,
+          "ns": 0,
+          "title": "スカイワープ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すかいわふ",
+            "wikibase_item": "Q2574551"
+          },
+          "terms": {
+            "description": [
+              "トランスフォーマーシリーズの登場キャラクター"
+            ]
+          }
+        },
+        {
+          "pageid": 1162407,
+          "ns": 0,
+          "title": "メガトロン (トランスフォーマー)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "めかとろん",
+            "wikibase_item": "Q828473"
+          },
+          "terms": {
+            "description": [
+              "トランスフォーマーシリーズの登場キャラクター"
+            ]
+          }
+        },
+        {
+          "pageid": 1162744,
+          "ns": 0,
+          "title": "コンボイ (トランスフォーマー)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こんほい",
+            "page_image_free": "Optimus_Prime_statue_(14357131465).jpg",
+            "wikibase_item": "Q151583"
+          },
+          "terms": {
+            "description": [
+              "トランスフォーマーシリーズの登場キャラクター"
+            ]
+          }
+        },
+        {
+          "pageid": 1643244,
+          "ns": 0,
+          "title": "トランスフォーマー/リベンジ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とらんすふおおまありへんし",
+            "wikibase_item": "Q191100"
+          },
+          "terms": {
+            "description": [
+              "2009年のアメリカのSFアクション映画"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

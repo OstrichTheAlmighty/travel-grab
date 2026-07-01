@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:37.918Z",
+  "value": {
+    "searchinfo": {
+      "search": "肥後細川庭園"
+    },
+    "search": [
+      {
+        "id": "Q3162465",
+        "title": "Q3162465",
+        "pageid": 3020800,
+        "concepturi": "http://www.wikidata.org/entity/Q3162465",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3162465",
+        "display": {
+          "label": {
+            "value": "Higo Hosakawa Garden",
+            "language": "en"
+          },
+          "description": {
+            "value": "Garden in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Higo Hosakawa Garden",
+        "description": "Garden in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "肥後細川庭園"
+        },
+        "aliases": [
+          "肥後細川庭園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

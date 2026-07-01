@@ -1,0 +1,89 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:07.389Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1615,
+          "ns": 0,
+          "title": "19世紀",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "19せいき",
+            "page_image_free": "British_Empire_1897.jpg",
+            "wikibase_item": "Q6955"
+          },
+          "terms": {
+            "description": [
+              "西暦1801年から西暦1900年までの100年間"
+            ]
+          }
+        },
+        {
+          "pageid": 169541,
+          "ns": 0,
+          "title": "ホセ・リサール",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "りさある ほせ",
+            "page_image_free": "Jose_Rizal_full.jpg",
+            "wikibase_item": "Q1500"
+          },
+          "terms": {
+            "description": [
+              "フィリピンの革命家"
+            ]
+          }
+        },
+        {
+          "pageid": 643382,
+          "ns": 0,
+          "title": "アンドレス・ボニファシオ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほにふあしお あんとれす",
+            "page_image_free": "Andrés_Bonifacio.jpg",
+            "wikibase_item": "Q313604"
+          },
+          "terms": {
+            "description": [
+              "自伝作家, フィリピン"
+            ]
+          }
+        },
+        {
+          "pageid": 834826,
+          "ns": 0,
+          "title": "木村毅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きむら き",
+            "wikibase_item": "Q11518974"
+          },
+          "terms": {
+            "description": [
+              "日本の歴史家"
+            ]
+          }
+        },
+        {
+          "pageid": 3037949,
+          "ns": 0,
+          "title": "国の擬人化",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "くにのきしんか",
+            "page_image_free": "Britannialion.jpg",
+            "wikibase_item": "Q1142281"
+          }
+        }
+      ]
+    }
+  }
+}

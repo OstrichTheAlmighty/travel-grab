@@ -1,0 +1,86 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:38.525Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 103955,
+          "ns": 0,
+          "title": "岡江久美子",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おかえ くみこ",
+            "wikibase_item": "Q11473366"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優、タレント (1956-2020)"
+            ]
+          }
+        },
+        {
+          "pageid": 1037235,
+          "ns": 0,
+          "title": "オジサンズ11",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おしさんすいれふん",
+            "wikibase_item": "Q11291941"
+          },
+          "terms": {
+            "description": [
+              "日本テレビ系列で放送されていたバラエティ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 1117269,
+          "ns": 0,
+          "title": "フレッシュハーツ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふれつしゆはあつ",
+            "wikibase_item": "Q11334017"
+          }
+        },
+        {
+          "pageid": 2595343,
+          "ns": 0,
+          "title": "進め!ゴレンジャー/秘密戦隊ゴレンジャー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すすめこれれんしやあひみつせんたいこれんしやあ",
+            "wikibase_item": "Q11640107"
+          },
+          "terms": {
+            "description": [
+              "日本の特撮ソング"
+            ]
+          }
+        },
+        {
+          "pageid": 2931807,
+          "ns": 0,
+          "title": "大和田南那",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おおわた なな",
+            "page_image_free": "150505_『여기가_로도스다_여기서뛰어라!』샤메회_후기_02.jpg",
+            "wikibase_item": "Q15731565"
+          },
+          "terms": {
+            "description": [
+              "日本の女優、グラビアモデル、YouTuber"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

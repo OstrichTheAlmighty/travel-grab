@@ -1,0 +1,127 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:37.027Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1803,
+          "ns": 0,
+          "title": "明治",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めいし",
+            "wikibase_item": "Q3125096"
+          },
+          "terms": {
+            "description": [
+              "日本の元号 (1868-1912)"
+            ]
+          }
+        },
+        {
+          "pageid": 771781,
+          "ns": 0,
+          "title": "早稲田大学",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "わせたたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Okuma_Auditorium.jpg",
+            "wikibase_item": "Q274486"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71027778,
+              "lon": 139.72172222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 1924341,
+          "ns": 0,
+          "title": "法政大学",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ほうせいたいかく",
+            "page_image_free": "法政大学市ヶ谷キャンパス.jpg",
+            "wikibase_item": "Q1323040"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69563889,
+              "lon": 139.74066667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都千代田区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 2758569,
+          "ns": 0,
+          "title": "慶應義塾大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "けいおうきしゆくたいかく",
+            "page_image_free": "Old_Keio_University_Library_3.jpg",
+            "wikibase_item": "Q815432"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64894444,
+              "lon": 139.74291667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 4045128,
+          "ns": 0,
+          "title": "リバティタワー (明治大学)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "りはていたわあ",
+            "page_image_free": "Meiji_University_(Liberty_Tower).jpg",
+            "wikibase_item": "Q3304618"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69755556,
+              "lon": 139.76152778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある超高層ビル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:12.925Z",
+  "value": {
+    "searchinfo": {
+      "search": "稲荷社"
+    },
+    "search": [
+      {
+        "id": "Q514480",
+        "title": "Q514480",
+        "pageid": 483886,
+        "concepturi": "http://www.wikidata.org/entity/Q514480",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q514480",
+        "display": {
+          "label": {
+            "value": "Inari shrine",
+            "language": "en"
+          },
+          "description": {
+            "value": "type of Japanese shrine",
+            "language": "en"
+          }
+        },
+        "label": "Inari shrine",
+        "description": "type of Japanese shrine",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "稲荷社"
+        },
+        "aliases": [
+          "稲荷社"
+        ]
+      },
+      {
+        "id": "Q111024186",
+        "title": "Q111024186",
+        "pageid": 106026658,
+        "concepturi": "http://www.wikidata.org/entity/Q111024186",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q111024186",
+        "display": {
+          "label": {
+            "value": "Inari Shrine",
+            "language": "en"
+          }
+        },
+        "label": "Inari Shrine",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "稲荷社"
+        },
+        "aliases": [
+          "稲荷社"
+        ]
+      },
+      {
+        "id": "Q116783669",
+        "title": "Q116783669",
+        "pageid": 111552960,
+        "concepturi": "http://www.wikidata.org/entity/Q116783669",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q116783669",
+        "display": {
+          "label": {
+            "value": "Goseki Inari-sha",
+            "language": "en"
+          },
+          "description": {
+            "value": "Shinto shrine in Saitama Prefecture, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Goseki Inari-sha",
+        "description": "Shinto shrine in Saitama Prefecture, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "稲荷社"
+        },
+        "aliases": [
+          "稲荷社"
+        ]
+      },
+      {
+        "id": "Q85882967",
+        "title": "Q85882967",
+        "pageid": 85153378,
+        "concepturi": "http://www.wikidata.org/entity/Q85882967",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q85882967",
+        "display": {
+          "label": {
+            "value": "Oohama Inari Shrine",
+            "language": "en"
+          },
+          "description": {
+            "value": "Shinto shrine in Aichi Prefecture, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Oohama Inari Shrine",
+        "description": "Shinto shrine in Aichi Prefecture, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "稲荷社"
+        },
+        "aliases": [
+          "稲荷社"
+        ]
+      },
+      {
+        "id": "Q104312123",
+        "title": "Q104312123",
+        "pageid": 99745580,
+        "concepturi": "http://www.wikidata.org/entity/Q104312123",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q104312123",
+        "display": {
+          "label": {
+            "value": "Inari-sha (Toyoda 1-chome, Nagoya)",
+            "language": "en"
+          },
+          "description": {
+            "value": "Shinto shrine in Aichi Prefecture, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Inari-sha (Toyoda 1-chome, Nagoya)",
+        "description": "Shinto shrine in Aichi Prefecture, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "稲荷社"
+        },
+        "aliases": [
+          "稲荷社"
+        ]
+      },
+      {
+        "id": "Q124482335",
+        "title": "Q124482335",
+        "pageid": 118659599,
+        "concepturi": "http://www.wikidata.org/entity/Q124482335",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q124482335",
+        "display": {
+          "label": {
+            "value": "Inari Shrine (Midori-ku)",
+            "language": "en"
+          },
+          "description": {
+            "value": "Shinto shrine in Saitama Prefecture, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Inari Shrine (Midori-ku)",
+        "description": "Shinto shrine in Saitama Prefecture, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "稲荷社"
+        },
+        "aliases": [
+          "稲荷社"
+        ]
+      },
+      {
+        "id": "Q128812662",
+        "title": "Q128812662",
+        "pageid": 122788176,
+        "concepturi": "http://www.wikidata.org/entity/Q128812662",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q128812662",
+        "display": {
+          "label": {
+            "value": "Inari Shrine",
+            "language": "en"
+          }
+        },
+        "label": "Inari Shrine",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "稲荷社"
+        },
+        "aliases": [
+          "稲荷社"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

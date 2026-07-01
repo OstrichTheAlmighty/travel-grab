@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:45.520Z",
+  "value": {
+    "searchinfo": {
+      "search": "多摩川台公園古墳展示室"
+    },
+    "search": [
+      {
+        "id": "Q133272975",
+        "title": "Q133272975",
+        "pageid": 127126650,
+        "concepturi": "http://www.wikidata.org/entity/Q133272975",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q133272975",
+        "display": {
+          "label": {
+            "value": "Tamagawadai Park Kofun Tomb Exhibition Room",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Ōta, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tamagawadai Park Kofun Tomb Exhibition Room",
+        "description": "museum in Ōta, Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "多摩川台公園古墳展示室"
+        },
+        "aliases": [
+          "多摩川台公園古墳展示室"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

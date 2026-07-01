@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:02.277Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 20420,
+          "ns": 0,
+          "title": "北白川宮能久親王",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きたしらかわのみや よしひさしんのう",
+            "page_image_free": "Prince_Kitashirakawa_Yoshihisa.jpg",
+            "wikibase_item": "Q3197569"
+          },
+          "terms": {
+            "description": [
+              "日本の皇族、軍人。輪王寺宮（最後）。伏見宮邦家親王の九男。第4師団長3代、近衛師団長2代。北白川宮2代"
+            ]
+          }
+        },
+        {
+          "pageid": 80336,
+          "ns": 0,
+          "title": "有栖川宮",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ありすかわのみや",
+            "page_image_free": "Arisugawa_no_miya.png",
+            "wikibase_item": "Q2861427"
+          },
+          "terms": {
+            "description": [
+              "旧宮家。四親王家の一"
+            ]
+          }
+        },
+        {
+          "pageid": 107964,
+          "ns": 0,
+          "title": "有栖川宮熾仁親王",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ありすかわのみや たるひとしんのう",
+            "page_image_free": "Portrait_of_Prince_Arisugawa_Taruhito.jpg",
+            "wikibase_item": "Q668338"
+          },
+          "terms": {
+            "description": [
+              "幕末・明治期の皇族、陸軍大将 (1835-1895)"
+            ]
+          }
+        },
+        {
+          "pageid": 108327,
+          "ns": 0,
+          "title": "有栖川宮威仁親王",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ありすかわのみや たけひとしんのう",
+            "page_image_free": "Arisugawa_Takehito.jpg",
+            "wikibase_item": "Q875481"
+          },
+          "terms": {
+            "description": [
+              "日本の皇族、海軍軍人 (1862-1913)"
+            ]
+          }
+        },
+        {
+          "pageid": 256771,
+          "ns": 0,
+          "title": "有栖川宮記念公園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ありすかのみやきねんこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Arisugawa_Park3.jpg",
+            "wikibase_item": "Q4791114"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65204,
+              "lon": 139.72584,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区の公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

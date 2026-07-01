@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:46.139Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 7950,
+          "ns": 0,
+          "title": "Drum",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "DrumMozartRegiment.jpg",
+            "wikibase-shortdesc": "Type of musical instrument of the percussion family",
+            "wikibase_item": "Q11404"
+          },
+          "terms": {
+            "description": [
+              "type of musical instrument of the percussion family"
+            ]
+          }
+        },
+        {
+          "pageid": 325369,
+          "ns": 0,
+          "title": "Hand drum",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Hand Drum",
+            "wikibase-shortdesc": "Drum typically played with bare hands",
+            "wikibase_item": "Q1575231"
+          },
+          "terms": {
+            "description": [
+              "drum typically played with the bare hand"
+            ]
+          }
+        },
+        {
+          "pageid": 722971,
+          "ns": 0,
+          "title": "Sámi drum",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Sami drum",
+            "page_image_free": "Sámi_mythology_shaman_drum_Samisk_mytologi_schamantrumma_079.png",
+            "wikibase-shortdesc": "Shamanic ceremonial drum in the culture of the Sámi people of Northern Europe",
+            "wikibase_item": "Q1771072"
+          },
+          "terms": {
+            "description": [
+              "shamanic ceremonial drum in the culture of the Sámi people of Northern Europe"
+            ]
+          }
+        },
+        {
+          "pageid": 1556734,
+          "ns": 0,
+          "title": "Slit drum",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "TamTam.jpg",
+            "wikibase-shortdesc": "Hollow percussion idiophone instrument",
+            "wikibase_item": "Q628428"
+          },
+          "terms": {
+            "description": [
+              "type of hollow percussion instrument"
+            ]
+          }
+        },
+        {
+          "pageid": 16882534,
+          "ns": 0,
+          "title": "Hubei Provincial Museum",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Hubei_Provincial_Museum.JPG",
+            "wikibase-shortdesc": "Museum in Hubei, China",
+            "wikibase_item": "Q4391403"
+          },
+          "coordinates": [
+            {
+              "lat": 30.56388889,
+              "lon": 114.35888889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "museum in China"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

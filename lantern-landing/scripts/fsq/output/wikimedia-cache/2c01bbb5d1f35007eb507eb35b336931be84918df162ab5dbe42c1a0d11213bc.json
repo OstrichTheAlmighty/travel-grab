@@ -1,0 +1,87 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:24.996Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 209919,
+          "ns": 0,
+          "title": "愛の貧乏脱出大作戦",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あいのひんほうたつしゆつたいさくせん",
+            "wikibase_item": "Q11493355"
+          }
+        },
+        {
+          "pageid": 758530,
+          "ns": 0,
+          "title": "浦野一美",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "うらの かすみ",
+            "page_image_free": "Kazumi_Urano_(cropped).jpg",
+            "wikibase_item": "Q1036673"
+          },
+          "terms": {
+            "description": [
+              "日本の歌手、タレント、AKB48およびSDN48の元メンバー"
+            ]
+          }
+        },
+        {
+          "pageid": 2047188,
+          "ns": 0,
+          "title": "田辺晋太郎",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たなへ しんたろう",
+            "wikibase_item": "Q11577348"
+          },
+          "terms": {
+            "description": [
+              "日本の音楽プロデューサー、作曲家(1978-)"
+            ]
+          }
+        },
+        {
+          "pageid": 3275585,
+          "ns": 0,
+          "title": "じゅん散歩",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しゆんさんほ",
+            "toc": "",
+            "wikibase_item": "Q22123635"
+          },
+          "terms": {
+            "description": [
+              "テレビ朝日系列の紀行番組"
+            ]
+          }
+        },
+        {
+          "pageid": 3859555,
+          "ns": 0,
+          "title": "有吉ぃぃeeeee!そうだ!今からお前んチでゲームしない?",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ありよしいいいいいそうたいまからおまえんちでけえむしない",
+            "wikibase_item": "Q60987028"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビeスポーツ・ゲーム情報バラエティ番組 (2018-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

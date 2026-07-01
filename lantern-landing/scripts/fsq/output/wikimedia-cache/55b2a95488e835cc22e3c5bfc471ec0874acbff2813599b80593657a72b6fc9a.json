@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:19.741Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 15350,
+          "ns": 0,
+          "title": "府中市 (東京都)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふちゆうし",
+            "kartographer_frames": "1",
+            "page_image_free": "東京競馬場_-_panoramio_(4).jpg",
+            "wikibase_item": "Q208818"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6694,
+              "lon": 139.4775,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の市"
+            ]
+          }
+        },
+        {
+          "pageid": 407541,
+          "ns": 0,
+          "title": "東京都下水道局",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようとけすいとうきよく",
+            "page_image_free": "Tokyo_Metropolitan_Government_Building_No.2_2009.jpg",
+            "wikibase_item": "Q11525207"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68919444,
+              "lon": 139.69163889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 510040,
+          "ns": 0,
+          "title": "マンホール",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "まんほおる",
+            "wikibase_item": "Q532998"
+          },
+          "terms": {
+            "description": [
+              "地下の管渠内で、その維持管理を行う人が出入りするための設備"
+            ]
+          }
+        },
+        {
+          "pageid": 795468,
+          "ns": 0,
+          "title": "マンホールの蓋",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "まんほおるのふた",
+            "page_image_free": "Osaka_Suminoeku_Manhole_Cover.jpg",
+            "wikibase_item": "Q652657"
+          },
+          "terms": {
+            "description": [
+              "マンホールの最上部に設置される蓋"
+            ]
+          }
+        },
+        {
+          "pageid": 1757627,
+          "ns": 0,
+          "title": "東京都旗",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようとき",
+            "page_image_free": "Flag_of_Tokyo_Metropolis.svg",
+            "wikibase_item": "Q20900820"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都が1964年に制定した旗"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

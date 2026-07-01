@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:42.737Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 504230,
+          "ns": 0,
+          "title": "Terraced house",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Terraced House",
+            "page_image_free": "Place_Vosges_Paris_Mai_2006_011.jpg",
+            "wikibase-shortdesc": "Form of medium-density housing",
+            "wikibase_item": "Q875016"
+          },
+          "terms": {
+            "description": [
+              "individual house in a terrace of houses"
+            ]
+          }
+        },
+        {
+          "pageid": 1725669,
+          "ns": 0,
+          "title": "Banaue Rice Terraces",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Banaue-terrace.JPG",
+            "wikibase-shortdesc": "Rice terraces in Ifugao, the Philippines",
+            "wikibase_item": "Q826551"
+          },
+          "coordinates": [
+            {
+              "lat": 16.9,
+              "lon": 121.05,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "rice terraces in the Cordillera region, Philippines"
+            ]
+          }
+        },
+        {
+          "pageid": 17768742,
+          "ns": 0,
+          "title": "Longsheng Rice Terraces",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Longsheng Rice Terraces",
+            "page_image_free": "LongshengRiceTerrace.jpg",
+            "wikibase-shortdesc": "Agricultural area in Guangxi, China",
+            "wikibase_item": "Q3388704"
+          },
+          "coordinates": [
+            {
+              "lat": 25.75,
+              "lon": 110.13333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Agricultural area in Guangxi, China"
+            ]
+          }
+        },
+        {
+          "pageid": 20696634,
+          "ns": 0,
+          "title": "High Terrace",
+          "index": 1,
+          "pageprops": {
+            "displaytitle": "<i>High Terrace</i>",
+            "wikibase-shortdesc": "1956 film by Henry Cass",
+            "wikibase_item": "Q5757263"
+          },
+          "terms": {
+            "description": [
+              "1956 film by Henry Cass"
+            ]
+          }
+        },
+        {
+          "pageid": 44981312,
+          "ns": 0,
+          "title": "List of tallest buildings in Mangaluru",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Growing_skylines_of_the_Mangalore_CBD_region.jpg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q19893328"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

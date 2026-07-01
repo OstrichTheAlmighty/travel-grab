@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:06.157Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 11800,
+          "ns": 0,
+          "title": "川越市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かわこえし",
+            "kartographer_frames": "1",
+            "page_image_free": "TokiNoKane_Kawagoe_2013Feb.JPG",
+            "wikibase_item": "Q319740"
+          },
+          "coordinates": [
+            {
+              "lat": 35.92514,
+              "lon": 139.48578,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 68021,
+          "ns": 0,
+          "title": "両津勘吉",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "りようつ かんきち",
+            "page_image": "Statue_of_Kankichi_Ryotsu.jpg",
+            "wikibase_item": "Q10891836"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画『こちら葛飾区亀有公園前派出所』の主人公たる架空の人物"
+            ]
+          }
+        },
+        {
+          "pageid": 107795,
+          "ns": 0,
+          "title": "永井荷風",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なかい かふう",
+            "page_image_free": "Nagai_Kafū_-_May_19_1954_-_Kimura_Ihei.png",
+            "wikibase_item": "Q530588"
+          },
+          "terms": {
+            "description": [
+              "小説家 (1879-1959)"
+            ]
+          }
+        },
+        {
+          "pageid": 2801508,
+          "ns": 0,
+          "title": "資生堂",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しせいとう",
+            "page_image_free": "Shiodome_Tower_2024.jpg",
+            "wikibase_item": "Q728185"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66444444,
+              "lon": 139.76072222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都港区にある化粧品メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 4399699,
+          "ns": 0,
+          "title": "孤独のグルメ (テレビドラマ)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ことくのくるめ",
+            "wikibase_item": "Q107409856"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ番組シリーズ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

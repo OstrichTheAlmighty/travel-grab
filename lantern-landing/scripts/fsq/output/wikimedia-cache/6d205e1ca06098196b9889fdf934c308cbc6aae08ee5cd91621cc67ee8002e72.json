@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:10.003Z",
+  "value": {
+    "searchinfo": {
+      "search": "魔法の文学館"
+    },
+    "search": [
+      {
+        "id": "Q123309852",
+        "title": "Q123309852",
+        "pageid": 117541309,
+        "concepturi": "http://www.wikidata.org/entity/Q123309852",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q123309852",
+        "display": {
+          "label": {
+            "value": "Kiki's Museum of Literature",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Edogawa, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Kiki's Museum of Literature",
+        "description": "museum in Edogawa, Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "魔法の文学館"
+        },
+        "aliases": [
+          "魔法の文学館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

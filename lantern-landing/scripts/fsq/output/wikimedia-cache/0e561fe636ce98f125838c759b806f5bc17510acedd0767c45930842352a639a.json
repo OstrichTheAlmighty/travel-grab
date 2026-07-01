@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:37:50.893Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3739,
+          "ns": 0,
+          "title": "観音菩薩",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かんのんほさつ",
+            "page_image_free": "Sanjusangendo_Thousand-armed_Kannon.JPG",
+            "wikibase_item": "Q193849"
+          },
+          "terms": {
+            "description": [
+              "仏教の菩薩の一尊"
+            ]
+          }
+        },
+        {
+          "pageid": 133065,
+          "ns": 0,
+          "title": "平和公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "へいわこうえん",
+            "page_image_free": "Nagasaki_(4696131594)_(cropped).jpg",
+            "wikibase_item": "Q93490"
+          },
+          "coordinates": [
+            {
+              "lat": 32.775194,
+              "lon": 129.863056,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長崎市の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1614957,
+          "ns": 0,
+          "title": "長崎原爆犠牲者慰霊平和祈念式典",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なかさきけんはくきせいしやいれいへいわきねんしきてん",
+            "page_image_free": "Peace_park_view_-_panoramio.jpg",
+            "wikibase_item": "Q11652418"
+          }
+        },
+        {
+          "pageid": 2152352,
+          "ns": 0,
+          "title": "平和の灯 (広島市)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "へいわのともしひ",
+            "page_image_free": "Peace_Flame_Hiroshima_20120128.JPG",
+            "wikibase_item": "Q11482176"
+          },
+          "coordinates": [
+            {
+              "lat": 34.39345833,
+              "lon": 132.45275556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "広島平和記念公園にある火"
+            ]
+          }
+        },
+        {
+          "pageid": 4713798,
+          "ns": 0,
+          "title": "世界平和統一家庭連合",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せかいへいわとういつかていれんこう",
+            "page_image_free": "Unification_Church_symbol.svg",
+            "wikibase_item": "Q217059"
+          },
+          "terms": {
+            "description": [
+              "文鮮明が創設した新宗教団体"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

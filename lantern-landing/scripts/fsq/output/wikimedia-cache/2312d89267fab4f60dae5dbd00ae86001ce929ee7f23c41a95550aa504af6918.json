@@ -1,0 +1,117 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:41.623Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 5106,
+          "ns": 0,
+          "title": "6月30日",
+          "index": 4,
+          "pageprops": {
+            "wikibase_item": "Q2657"
+          },
+          "terms": {
+            "description": [
+              "日付"
+            ]
+          }
+        },
+        {
+          "pageid": 103773,
+          "ns": 0,
+          "title": "三菱地所",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みつひしししよ",
+            "page_image_free": "三菱地所本社ビル（大手町パークビルディング）.jpg",
+            "wikibase_item": "Q304962"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都千代田区にある不動産ディベロッパー"
+            ]
+          }
+        },
+        {
+          "pageid": 1708037,
+          "ns": 0,
+          "title": "丸の内パークビルディング",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "まるのうちはくひるていんく",
+            "kartographer_frames": "1",
+            "page_image_free": "Marunouchi_Park_Building_2016.jpg",
+            "wikibase_item": "Q11367941"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67898056,
+              "lon": 139.76305833,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区のビル"
+            ]
+          }
+        },
+        {
+          "pageid": 1893815,
+          "ns": 0,
+          "title": "三菱一号館美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みつひしいちこうかんひしゆつかん",
+            "page_image_free": "Mitsubishi_Ichigokan_Museum.JPG",
+            "wikibase_item": "Q3815458"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67830556,
+              "lon": 139.76319444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区丸の内にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 1893818,
+          "ns": 0,
+          "title": "三菱一号館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みつひしいちこうかん",
+            "wikibase_item": "Q11357064"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67834722,
+              "lon": 139.76325,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にあったビル（1894-1968）"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

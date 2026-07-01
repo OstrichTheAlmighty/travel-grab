@@ -1,0 +1,98 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:48.343Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 37275,
+          "ns": 0,
+          "title": "歓楽街",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かんらくかい",
+            "page_image_free": "Kabukicho_Ichibangai_2.jpg",
+            "wikibase_item": "Q3055075"
+          },
+          "terms": {
+            "description": [
+              "飲食店や映画館などのレジャー施設が多数集まっている地区"
+            ]
+          }
+        },
+        {
+          "pageid": 46275,
+          "ns": 0,
+          "title": "帯広市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おひひろし",
+            "kartographer_frames": "1",
+            "page_image_free": "Obihiro_Montage.jpg",
+            "wikibase_item": "Q177149"
+          },
+          "coordinates": [
+            {
+              "lat": 42.92397,
+              "lon": 143.19611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道の市、十勝総合振興局所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1741731,
+          "ns": 0,
+          "title": "銀座",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きんさ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ginza_area_at_dusk_from_Tokyo_Tower.jpg",
+            "wikibase_item": "Q746052"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 2093188,
+          "ns": 0,
+          "title": "東京すずらん通り連合会",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようすすらんとおりれんこうかい",
+            "wikibase_item": "Q11524021"
+          }
+        }
+      ]
+    }
+  }
+}

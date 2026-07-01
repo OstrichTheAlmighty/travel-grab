@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:51.675Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 6888,
+          "ns": 0,
+          "title": "都市再生機構",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "としさいせいきこう",
+            "page_image_free": "Yokohama_Island_Tower.jpg",
+            "wikibase_item": "Q11643596"
+          },
+          "coordinates": [
+            {
+              "lat": 35.45013889,
+              "lon": 139.63511111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "国土交通省所管の中期目標管理法人"
+            ]
+          }
+        },
+        {
+          "pageid": 98445,
+          "ns": 0,
+          "title": "田の中勇",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たのなか いさむ",
+            "wikibase_item": "Q3276073"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優 (1932-2010)"
+            ]
+          }
+        },
+        {
+          "pageid": 1224574,
+          "ns": 0,
+          "title": "ガイア (パチンコ)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かいあ",
+            "page_image_free": "Gaia_Logo.png",
+            "wikibase_item": "Q11295831"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都中央区にあるパチンコ店運営会社"
+            ]
+          }
+        },
+        {
+          "pageid": 1465866,
+          "ns": 0,
+          "title": "飛鳥凛",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あすか りん",
+            "wikibase_item": "Q3268541"
+          },
+          "terms": {
+            "description": [
+              "日本の女優、タレント"
+            ]
+          }
+        },
+        {
+          "pageid": 2360683,
+          "ns": 0,
+          "title": "2002年のテレビ (日本)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "2002ねんのてれひ",
+            "wikibase_item": "Q4600711"
+          }
+        }
+      ]
+    }
+  }
+}

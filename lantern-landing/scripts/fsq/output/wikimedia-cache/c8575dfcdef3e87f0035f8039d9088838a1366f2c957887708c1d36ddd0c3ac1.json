@@ -1,0 +1,109 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:31.852Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 142395,
+          "ns": 0,
+          "title": "Rupert Sheldrake",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Sheldrake, Rupert",
+            "page_image_free": "Sheldrake_TASC2008.JPG",
+            "wikibase-shortdesc": "English author and parapsychological researcher (born 1942)",
+            "wikibase_item": "Q349077"
+          },
+          "terms": {
+            "description": [
+              "English biochemist, author and parapsychological researcher (*1942)"
+            ]
+          }
+        },
+        {
+          "pageid": 235677,
+          "ns": 0,
+          "title": "Modal window",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Modal Window",
+            "wikibase-shortdesc": "Subordinate user interface element",
+            "wikibase_item": "Q776657"
+          },
+          "terms": {
+            "description": [
+              "user interface element"
+            ]
+          }
+        },
+        {
+          "pageid": 4276475,
+          "ns": 0,
+          "title": "The Dark Knight",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Dark Knight, The",
+            "displaytitle": "<i>The Dark Knight</i>",
+            "page_image": "The_Dark_Knight_(2008_film).jpg",
+            "wikibase-badge-Q17437796": "",
+            "wikibase-shortdesc": "2008 film by Christopher Nolan",
+            "wikibase_item": "Q163872"
+          },
+          "terms": {
+            "description": [
+              "2008 film directed by Christopher Nolan"
+            ]
+          }
+        },
+        {
+          "pageid": 18432933,
+          "ns": 0,
+          "title": "Dialogue in the Dark",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Dialogue In The Dark",
+            "kartographer_frames": "1",
+            "page_image_free": "Logo_DID-HH_2014.png",
+            "wikibase-shortdesc": "Blindness organisation and exhibition",
+            "wikibase_item": "Q457196"
+          },
+          "coordinates": [
+            {
+              "lat": 53.546,
+              "lon": 10.002,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "social franchise business, Hamburg"
+            ]
+          }
+        },
+        {
+          "pageid": 24209299,
+          "ns": 0,
+          "title": "Premier Exhibitions",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Discovery-nytimes.jpg",
+            "wikibase-shortdesc": "American company",
+            "wikibase_item": "Q7240292"
+          },
+          "terms": {
+            "description": [
+              "American company"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

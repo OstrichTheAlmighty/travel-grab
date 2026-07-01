@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:05.651Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 129541,
+          "ns": 0,
+          "title": "私の青空",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "わたしのあおそら",
+            "wikibase_item": "Q11594636"
+          },
+          "terms": {
+            "description": [
+              "2000年前期のNHK連続テレビ小説第62作"
+            ]
+          }
+        },
+        {
+          "pageid": 356211,
+          "ns": 0,
+          "title": "渡辺洪基",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "わたなへ ひろもと",
+            "page_image_free": "Hiromoto_Watanabe,_Ex-President.jpg",
+            "wikibase_item": "Q4105263"
+          },
+          "terms": {
+            "description": [
+              "日本の官僚"
+            ]
+          }
+        },
+        {
+          "pageid": 823548,
+          "ns": 0,
+          "title": "ルルル文庫",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "るるるふんこ",
+            "wikibase_item": "Q10851485"
+          },
+          "terms": {
+            "description": [
+              "小学館が刊行していた日本の文庫レーベル"
+            ]
+          }
+        },
+        {
+          "pageid": 1727792,
+          "ns": 0,
+          "title": "渡邉紘平",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "わたなへ こうへい",
+            "wikibase_item": "Q11562652"
+          },
+          "terms": {
+            "description": [
+              "日本の男優"
+            ]
+          }
+        },
+        {
+          "pageid": 2971517,
+          "ns": 0,
+          "title": "渡辺護 (映画監督)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "わたなへ まもる",
+            "wikibase_item": "Q16092072"
+          },
+          "terms": {
+            "description": [
+              "1931-2013, 映画監督、脚本家、映画プロデューサー。"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

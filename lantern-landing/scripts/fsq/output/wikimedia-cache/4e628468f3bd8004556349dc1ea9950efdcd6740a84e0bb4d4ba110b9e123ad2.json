@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:48.030Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 303326,
+          "ns": 0,
+          "title": "Suitcase",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Suitcase1.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "Form of luggage",
+            "wikibase_item": "Q200814"
+          },
+          "terms": {
+            "description": [
+              "form of luggage"
+            ]
+          }
+        },
+        {
+          "pageid": 843978,
+          "ns": 0,
+          "title": "Guccio Gucci",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Gucci, Guccio",
+            "page_image_free": "Guccio_Gucci_c.1940.JPG",
+            "wikibase-shortdesc": "Italian businessman and fashion designer (1881–1953)",
+            "wikibase_item": "Q714126"
+          },
+          "terms": {
+            "description": [
+              "Italian businessman and fashion designer, founder of Gucci (1881–1953)"
+            ]
+          }
+        },
+        {
+          "pageid": 1168875,
+          "ns": 0,
+          "title": "Handbag",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Mi'kmaq_porcupine_quill_purse_(40412695490).jpg",
+            "wikibase-shortdesc": "Handled bag used to carry personal items",
+            "wikibase_item": "Q467505"
+          },
+          "terms": {
+            "description": [
+              "handled medium-to-large bag that is often fashionably designed, typically used by women, to hold personal items"
+            ]
+          }
+        },
+        {
+          "pageid": 4368573,
+          "ns": 0,
+          "title": "Saddlebag",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Satteltasche_am_Westernsattel.jpg",
+            "wikibase-shortdesc": "Bag attached to a saddle",
+            "wikibase_item": "Q1346922"
+          },
+          "terms": {
+            "description": [
+              "Bag attached to a saddle"
+            ]
+          }
+        },
+        {
+          "pageid": 13789396,
+          "ns": 0,
+          "title": "Unclaimed Baggage Center",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Unclaimed_Baggage_logo.png",
+            "wikibase-shortdesc": "Retail store selling items from lost airline luggage in Scottsboro, Alabama, U.S.",
+            "wikibase_item": "Q7882674"
+          },
+          "coordinates": [
+            {
+              "lat": 34.67361111,
+              "lon": -86.04416667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "retail store located in Scottsboro in Jackson County, Alabama, US"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

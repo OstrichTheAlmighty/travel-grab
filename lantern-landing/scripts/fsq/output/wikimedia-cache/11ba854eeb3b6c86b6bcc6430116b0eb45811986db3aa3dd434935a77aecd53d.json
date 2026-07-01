@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:41.231Z",
+  "value": {
+    "searchinfo": {
+      "search": "三菱一号館美術館"
+    },
+    "search": [
+      {
+        "id": "Q3815458",
+        "title": "Q3815458",
+        "pageid": 3638821,
+        "concepturi": "http://www.wikidata.org/entity/Q3815458",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3815458",
+        "display": {
+          "label": {
+            "value": "Mitsubishi Ichigokan Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Mitsubishi Ichigokan Museum",
+        "description": "art museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "三菱一号館美術館"
+        },
+        "aliases": [
+          "三菱一号館美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:28.236Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 27584,
+          "ns": 0,
+          "title": "富良野市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふらのし",
+            "kartographer_frames": "1",
+            "page_image_free": "Furano_Snow_Resort_view2.JPG",
+            "wikibase_item": "Q654738"
+          },
+          "coordinates": [
+            {
+              "lat": 43.34203,
+              "lon": 142.38319,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道の市"
+            ]
+          }
+        },
+        {
+          "pageid": 39814,
+          "ns": 0,
+          "title": "石鎚山サービスエリア",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いしつちさんさあひすえりあ",
+            "page_image_free": "Ishizutiyama_SA.JPG",
+            "wikibase_item": "Q11587269"
+          },
+          "coordinates": [
+            {
+              "lat": 33.88528,
+              "lon": 133.10847,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛媛県西条市にある松山自動車道のサービスエリア"
+            ]
+          }
+        },
+        {
+          "pageid": 904178,
+          "ns": 0,
+          "title": "石と賢治のミュージアム",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いしとけんしのみゆうしあむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ishi_to_Kenji_no_Museum_entrance.jpg",
+            "wikibase_item": "Q11584728"
+          },
+          "terms": {
+            "description": [
+              "岩手県一関市にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 2282615,
+          "ns": 0,
+          "title": "希山明里",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きやま あかり",
+            "wikibase_item": "Q17129651"
+          }
+        },
+        {
+          "pageid": 3035094,
+          "ns": 0,
+          "title": "アニまるっ!",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あにまるつ",
+            "wikibase_item": "Q18335429"
+          }
+        }
+      ]
+    }
+  }
+}

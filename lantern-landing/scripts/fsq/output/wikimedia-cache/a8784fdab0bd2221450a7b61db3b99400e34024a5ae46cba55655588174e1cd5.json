@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:37:56.578Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 89513,
+          "ns": 0,
+          "title": "キャプテン翼",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きやふてんつはさ",
+            "page_image": "Katsushika_Tokyo_Yotsugi_Station_Captain_Tsubasa_Signboard_1.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q647486"
+          },
+          "terms": {
+            "description": [
+              "高橋陽一による日本のスポーツ漫画"
+            ]
+          }
+        },
+        {
+          "pageid": 483307,
+          "ns": 0,
+          "title": "キャプテン翼の登場人物",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きやふてんつはさのとうしようしんふつ",
+            "page_image": "Katsushika_Tokyo_Yotsugi_Station_Captain_Tsubasa_Signboard_1.jpg",
+            "wikibase_item": "Q1703310"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 824986,
+          "ns": 0,
+          "title": "キャプテン翼 (ゲーム)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きやふてんつはさ",
+            "wikibase_item": "Q104819427"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 863884,
+          "ns": 0,
+          "title": "大空翼",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおそらつはさ",
+            "wikibase_item": "Q2484120"
+          },
+          "terms": {
+            "description": [
+              "キャプテン翼の登場人物"
+            ]
+          }
+        },
+        {
+          "pageid": 2903240,
+          "ns": 0,
+          "title": "キャプテン翼の用語一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きやふてんつはさのようこいちらん",
+            "wikibase_item": "Q16144153"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

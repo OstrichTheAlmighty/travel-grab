@@ -1,0 +1,116 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:36.432Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 22131,
+          "ns": 0,
+          "title": "Natural gas",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Natural Gas",
+            "page_image_free": "Cooking_with_gas.jpg",
+            "wikibase-shortdesc": "Gaseous fossil fuel",
+            "wikibase_item": "Q40858"
+          },
+          "terms": {
+            "description": [
+              "fossil fuel"
+            ]
+          }
+        },
+        {
+          "pageid": 58664,
+          "ns": 0,
+          "title": "Gas-turbine engine",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Olympus_Marine_Gas_Turbine_-_geograph.org.uk_-_7879345.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Type of continuous-flow turbine engine",
+            "wikibase_item": "Q193470"
+          },
+          "terms": {
+            "description": [
+              "type of internal combustion engine"
+            ]
+          }
+        },
+        {
+          "pageid": 2368032,
+          "ns": 0,
+          "title": "COSI",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Cosi Columbus",
+            "kartographer_frames": "1",
+            "page_image_free": "COSI_science_museum_logo.svg",
+            "wikibase-shortdesc": "Science museum in Columbus, Ohio",
+            "wikibase_item": "Q5013508"
+          },
+          "coordinates": [
+            {
+              "lat": 39.95968889,
+              "lon": -83.00689194,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "science museum in Columbus, Ohio"
+            ]
+          }
+        },
+        {
+          "pageid": 23208668,
+          "ns": 0,
+          "title": "Connecticut Science Center",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Connecticut_Science_Center.jpg",
+            "wikibase-shortdesc": "Science museum in Connecticut, United States",
+            "wikibase_item": "Q5161605"
+          },
+          "coordinates": [
+            {
+              "lat": 41.7644,
+              "lon": -72.6697,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "science museum in Hartford, Connecticut, United States"
+            ]
+          }
+        },
+        {
+          "pageid": 44687845,
+          "ns": 0,
+          "title": "Gas giant",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Jupiter_OPAL_2.png",
+            "wikibase-shortdesc": "Giant planet mostly made of light elements",
+            "wikibase_item": "Q121750"
+          },
+          "terms": {
+            "description": [
+              "giant planet which mainly consist of light elements such as hydrogen and helium"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

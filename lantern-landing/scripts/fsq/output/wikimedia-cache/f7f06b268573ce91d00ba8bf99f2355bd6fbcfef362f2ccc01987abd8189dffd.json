@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:27.335Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 20031,
+          "ns": 0,
+          "title": "東京国立博物館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようこくりつはくふつかん",
+            "page_image_free": "Tokyo_National_Museum,_Honkan_2010.jpg",
+            "wikibase_item": "Q653433"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71905556,
+              "lon": 139.77666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある国立博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 71931,
+          "ns": 0,
+          "title": "黒田清輝",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "くろた せいき",
+            "page_image_free": "KurodaSeiki.gif",
+            "wikibase_item": "Q910913"
+          },
+          "terms": {
+            "description": [
+              "日本の洋画家、政治家 (1866-1924)"
+            ]
+          }
+        },
+        {
+          "pageid": 84895,
+          "ns": 0,
+          "title": "黒田孝高",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "くろた よしたか",
+            "page_image_free": "Yoshitaka_Kuroda.jpg",
+            "wikibase_item": "Q907019"
+          },
+          "terms": {
+            "description": [
+              "日本の戦国時代の武将、大名"
+            ]
+          }
+        },
+        {
+          "pageid": 241490,
+          "ns": 0,
+          "title": "伊藤清永記念館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いとうきよなかひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Ito_kiyonaga_memorial_museum_of_art01st3200.jpg",
+            "wikibase_item": "Q11380269"
+          },
+          "coordinates": [
+            {
+              "lat": 35.46183333,
+              "lon": 134.87286111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県豊岡市出石町にある市立美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 295915,
+          "ns": 0,
+          "title": "東京文化財研究所",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようふんかさいけんきゆうしよ",
+            "kartographer_frames": "1",
+            "page_image_free": "東京文化財研究所外観.jpg",
+            "wikibase_item": "Q3297795"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72072222,
+              "lon": 139.77552778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある国立文化財機構の下部組織"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

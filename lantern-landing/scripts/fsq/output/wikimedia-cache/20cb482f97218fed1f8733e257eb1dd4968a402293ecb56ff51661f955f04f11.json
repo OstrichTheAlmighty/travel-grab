@@ -1,0 +1,130 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:32.728Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 15945,
+          "ns": 0,
+          "title": "東京ドーム",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようとおむ",
+            "page_image_free": "Tokyo_Dome_2007-12.jpg",
+            "wikibase_item": "Q733748"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70583333,
+              "lon": 139.75194444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 31716,
+          "ns": 0,
+          "title": "千葉マリンスタジアム",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ちはまりんすたしあむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Chiba_Marine_Stadium_2024.jpg",
+            "wikibase_item": "Q486192"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64523889,
+              "lon": 140.03092222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県千葉市美浜区にある野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 41570,
+          "ns": 0,
+          "title": "ナゴヤドーム",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "なこやとおむ",
+            "page_image_free": "Nagoya_Dome_-_3.jpg",
+            "wikibase_item": "Q929524"
+          },
+          "coordinates": [
+            {
+              "lat": 35.18597778,
+              "lon": 136.94731389,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県名古屋市東区にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 46197,
+          "ns": 0,
+          "title": "宮城球場",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みやききゆうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Rakuten_Mobile_Park_Miyagi_Entrance.jpg",
+            "wikibase_item": "Q489699"
+          },
+          "coordinates": [
+            {
+              "lat": 38.25620556,
+              "lon": 140.9025,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "宮城県仙台市宮城野区にある野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 1384627,
+          "ns": 0,
+          "title": "阪神甲子園球場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はんしんこうしえんきゆうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "202309081549_IMG_3516.jpg",
+            "wikibase_item": "Q959811"
+          },
+          "terms": {
+            "description": [
+              "兵庫県西宮市にある野球場"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:57.208Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 140992,
+          "ns": 0,
+          "title": "ポンピドゥー・センター",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほんひとううせんたあ",
+            "kartographer_frames": "1",
+            "page_image_free": "Paris_department_land_cover_location_map.svg",
+            "wikibase_item": "Q178065"
+          },
+          "coordinates": [
+            {
+              "lat": 48.860653,
+              "lon": 2.352411,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "パリにある総合文化施設"
+            ]
+          }
+        },
+        {
+          "pageid": 1691666,
+          "ns": 0,
+          "title": "東京都の観光地",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようと",
+            "page_image_free": "東京都区部-観光地図-1.jpg",
+            "wikibase_item": "Q10860697"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3501381,
+          "ns": 0,
+          "title": "岩谷翔吾",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いわや しようこ",
+            "wikibase_item": "Q27917493"
+          },
+          "terms": {
+            "description": [
+              "日本のダンサー"
+            ]
+          }
+        },
+        {
+          "pageid": 4645296,
+          "ns": 0,
+          "title": "Dream Gate",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とりいむけいと",
+            "wikibase_item": "Q113560483"
+          },
+          "terms": {
+            "description": [
+              "ORβIT、HICO、BUGVELによるライブイベント、ユニット"
+            ]
+          }
+        },
+        {
+          "pageid": 4795332,
+          "ns": 0,
+          "title": "アートアクアリウム",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ああとあくありうむ",
+            "page_image_free": "アートアクアリウム作品「オリガミリウム」.jpg",
+            "wikibase_item": "Q116921556"
+          }
+        }
+      ]
+    }
+  }
+}

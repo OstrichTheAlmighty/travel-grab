@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:52.790Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 69481,
+          "ns": 0,
+          "title": "東京教育大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようきよういく",
+            "page_image_free": "Tokyo_Bunkyo_School_Building,_Univ._of_Tsukuba.jpg",
+            "wikibase_item": "Q11524880"
+          },
+          "terms": {
+            "description": [
+              "かつて東京都文京区にあった国立大学 (1949-1978)"
+            ]
+          }
+        },
+        {
+          "pageid": 258785,
+          "ns": 0,
+          "title": "世田谷区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せたかやく",
+            "kartographer_frames": "1",
+            "page_image_free": "Seijo_namikimichi_231011.jpg",
+            "wikibase_item": "Q231645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64656,
+              "lon": 139.65322,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 1168558,
+          "ns": 0,
+          "title": "祖師谷",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "そしかや",
+            "kartographer_frames": "1",
+            "page_image_free": "つりがね池公園_-_panoramio_(5).jpg",
+            "wikibase_item": "Q11588518"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1173304,
+          "ns": 0,
+          "title": "上祖師谷",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かみそしかや",
+            "kartographer_frames": "1",
+            "page_image_free": "Kamisosigaya.jpg",
+            "wikibase_item": "Q11359992"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1966978,
+          "ns": 0,
+          "title": "祖師谷公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "そしかやこうえん",
+            "wikibase_item": "Q11588519"
+          },
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

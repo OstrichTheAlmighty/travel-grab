@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:28.309Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4934,
+          "ns": 0,
+          "title": "5月21日",
+          "index": 5,
+          "pageprops": {
+            "wikibase_item": "Q2580"
+          },
+          "terms": {
+            "description": [
+              "日付"
+            ]
+          }
+        },
+        {
+          "pageid": 38683,
+          "ns": 0,
+          "title": "忠犬ハチ公",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ちゆうけんはちこう",
+            "page_image_free": "Faithful_Dog_Hachiko_Photo.png",
+            "wikibase_item": "Q186486"
+          },
+          "terms": {
+            "description": [
+              "東京の飼い犬"
+            ]
+          }
+        },
+        {
+          "pageid": 286145,
+          "ns": 0,
+          "title": "上野英三郎",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "うえの ひてさふろう",
+            "page_image_free": "Hidesaburō_Ueno.jpg",
+            "wikibase_item": "Q933532"
+          },
+          "terms": {
+            "description": [
+              "日本の農学者 (1872-1925)"
+            ]
+          }
+        },
+        {
+          "pageid": 1573436,
+          "ns": 0,
+          "title": "東京大学本郷地区キャンパス",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようたいかくほんこうちく",
+            "kartographer_frames": "1",
+            "page_image_free": "U-Tokyo_hongo_1984_air.jpg",
+            "wikibase_item": "Q11524692"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71269444,
+              "lon": 139.76177778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区本郷・弥生に所在する東京大学のキャンパス"
+            ]
+          }
+        },
+        {
+          "pageid": 1585119,
+          "ns": 0,
+          "title": "東京大学大学院農学生命科学研究科・農学部",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようたいかくたいかくいんのうかくせいめいかかくけんきゆうかのうかくふ",
+            "page_image_free": "Graduate_School_of_Agricultural_and_Life_Sciences_&_Faculty_of_Agriculture,_The_University_of_Tokyo_logo.svg",
+            "wikibase_item": "Q11524684"
+          },
+          "terms": {
+            "description": [
+              "東京大学に設置される大学院研究科・学部"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:39.108Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 993766,
+          "ns": 0,
+          "title": "早見沙織",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はやみ さおり",
+            "page_image_free": "Hayami_Saori_from_\"Komada_-A_Whisky_Family-\"_at_Red_Carpet_of_the_Tokyo_International_Film_Festival_2023_(53348308348)_(cropped).jpg",
+            "wikibase_item": "Q1153079"
+          },
+          "terms": {
+            "description": [
+              "日本の声優、歌手"
+            ]
+          }
+        },
+        {
+          "pageid": 5024301,
+          "ns": 0,
+          "title": "Nintendo Switchのゲームタイトル一覧 (2024年)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にんてんとうすいつちのけえむたいとるいちらん2024",
+            "wikibase_item": "Q137651034"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

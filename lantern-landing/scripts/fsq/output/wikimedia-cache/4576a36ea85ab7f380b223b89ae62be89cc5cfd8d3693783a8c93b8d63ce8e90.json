@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:51.482Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 68232,
+          "ns": 0,
+          "title": "Baldur's Gate",
+          "index": 3,
+          "pageprops": {
+            "displaytitle": "<i>Baldur's Gate</i>",
+            "page_image_free": "Baldurs_Gate_stacked_logo_circa_Enhanced_Edition.png",
+            "wikibase-shortdesc": "Franchise of fantasy role-playing video games",
+            "wikibase_item": "Q2640148"
+          },
+          "terms": {
+            "description": [
+              "franchise of fantasy role-playing video games"
+            ]
+          }
+        },
+        {
+          "pageid": 1924894,
+          "ns": 0,
+          "title": "AND gate",
+          "index": 5,
+          "pageprops": {
+            "wikibase-shortdesc": "Digital logic gate type",
+            "wikibase_item": "Q560370"
+          },
+          "terms": {
+            "description": [
+              "logic gate that outputs if both inputs are on"
+            ]
+          }
+        },
+        {
+          "pageid": 2589115,
+          "ns": 0,
+          "title": "NAND gate",
+          "index": 1,
+          "pageprops": {
+            "wikibase-shortdesc": "Logical gate whose output is false if all its inputs are true",
+            "wikibase_item": "Q575178"
+          },
+          "terms": {
+            "description": [
+              "inverse of the AND gate, outputs if both inputs are not on simultaneously"
+            ]
+          }
+        },
+        {
+          "pageid": 18800013,
+          "ns": 0,
+          "title": "Days of week on Hebrew calendar",
+          "index": 2,
+          "pageprops": {
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q5243421"
+          },
+          "terms": {
+            "description": [
+              "reckoning of time"
+            ]
+          }
+        },
+        {
+          "pageid": 44774771,
+          "ns": 0,
+          "title": "Gate (novel series)",
+          "index": 4,
+          "pageprops": {
+            "displaytitle": "<i>Gate</i> (novel series)",
+            "page_image": "Gate_light_novel_volume_1_cover.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Japanese fantasy novel series and its adaptations",
+            "wikibase_item": "Q11301677"
+          },
+          "terms": {
+            "description": [
+              "Japanese novel series"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

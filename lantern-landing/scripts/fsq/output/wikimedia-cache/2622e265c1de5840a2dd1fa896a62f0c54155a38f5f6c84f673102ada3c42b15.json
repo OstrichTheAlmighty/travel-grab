@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:56.594Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 60600,
+          "ns": 0,
+          "title": "久喜市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "くきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kuki_Chōchin_Matsuri_04.jpg",
+            "wikibase_item": "Q47535"
+          },
+          "coordinates": [
+            {
+              "lat": 36.06208,
+              "lon": 139.66681,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 623358,
+          "ns": 0,
+          "title": "本天沼",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ほんあまぬま",
+            "kartographer_frames": "1",
+            "page_image_free": "杉並区天沼児童遊園_20250412.jpg",
+            "wikibase_item": "Q11520105"
+          },
+          "terms": {
+            "description": [
+              "東京都杉並区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1212498,
+          "ns": 0,
+          "title": "桐生市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きりゆうし",
+            "kartographer_frames": "1",
+            "page_image_free": "桐生八木節まつり,_Kiryu_Honcho_Street_in_the_Festival_-_panoramio.jpg",
+            "wikibase_item": "Q634022"
+          },
+          "coordinates": [
+            {
+              "lat": 36.40533,
+              "lon": 139.33047,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "群馬県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 3140562,
+          "ns": 0,
+          "title": "遊び場 (杉並区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あそひは",
+            "wikibase_item": "Q20042963"
+          }
+        },
+        {
+          "pageid": 3598774,
+          "ns": 0,
+          "title": "宮下恵茉",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みやした えま",
+            "wikibase_item": "Q30932711"
+          },
+          "terms": {
+            "description": [
+              "日本の著作家 (1970-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

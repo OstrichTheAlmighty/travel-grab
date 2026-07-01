@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:50.252Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 299459,
+          "ns": 0,
+          "title": "東京ディズニーシーのアトラクションの一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいしいのあとらくしよん",
+            "wikibase_item": "Q6600319"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:53.584Z",
+  "value": {
+    "searchinfo": {
+      "search": "檜町公園"
+    },
+    "search": [
+      {
+        "id": "Q11544635",
+        "title": "Q11544635",
+        "pageid": 12684572,
+        "concepturi": "http://www.wikidata.org/entity/Q11544635",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11544635",
+        "display": {
+          "label": {
+            "value": "Hinokichō Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Minato, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Hinokichō Park",
+        "description": "park in Minato, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "檜町公園"
+        },
+        "aliases": [
+          "檜町公園"
+        ]
+      },
+      {
+        "id": "Q11538289",
+        "title": "Q11538289",
+        "pageid": 12678208,
+        "concepturi": "http://www.wikidata.org/entity/Q11538289",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11538289",
+        "display": {
+          "label": {
+            "value": "檜町公園事件",
+            "language": "ja"
+          }
+        },
+        "label": "檜町公園事件",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "檜町公園事件"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

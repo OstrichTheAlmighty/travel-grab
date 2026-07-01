@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:29.748Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 12031890,
+          "ns": 0,
+          "title": "Shin-toyosu Station",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Shin-Toyosu,_Tokyo,_Japan_(54940607894)_-_cropped.jpg",
+            "wikibase-shortdesc": "Railway station in Tokyo, Japan",
+            "wikibase_item": "Q766348"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6485,
+              "lon": 139.7899,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "railway station in Koto, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 27421476,
+          "ns": 0,
+          "title": "List of most-visited art museums",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Most-visited art museums",
+            "notoc": "",
+            "page_image_free": "Giacomin_Carolina_10921839.svg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q1771711"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 41200593,
+          "ns": 0,
+          "title": "Planet Labs",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Planet_Labs_logo.svg",
+            "wikibase-shortdesc": "American space technology company",
+            "wikibase_item": "Q17085620"
+          },
+          "terms": {
+            "description": [
+              "American company specializing in satellite imaging of Earth"
+            ]
+          }
+        },
+        {
+          "pageid": 62965154,
+          "ns": 0,
+          "title": "TeamLab (art collective)",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Teamlab_logo_RGB_color.png",
+            "wikibase-shortdesc": "Japanese art collective",
+            "wikibase_item": "Q11318607"
+          },
+          "terms": {
+            "description": [
+              "Japanese art collective"
+            ]
+          }
+        },
+        {
+          "pageid": 66057041,
+          "ns": 0,
+          "title": "TeamLab Planets TOKYO DMM.com",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "teamLab Planets TOKYO DMM.com",
+            "kartographer_frames": "1",
+            "wikibase-shortdesc": "Art facility in Tokyo, Japan",
+            "wikibase_item": "Q97613610"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6492,
+              "lon": 139.7897,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "art facility in Tokyo, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

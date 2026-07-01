@@ -1,0 +1,66 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:22.726Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 36875,
+          "ns": 0,
+          "title": "調布市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ちようふし",
+            "kartographer_frames": "1",
+            "page_image_free": "Jindaiji-3.jpg",
+            "wikibase_item": "Q210667"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65058,
+              "lon": 139.54067,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の市"
+            ]
+          }
+        },
+        {
+          "pageid": 694381,
+          "ns": 0,
+          "title": "ふるさと創生事業",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふるさとそうせいしきよう",
+            "wikibase_item": "Q11277299"
+          },
+          "terms": {
+            "description": [
+              "1988年から1989年にかけて、日本政府が各市区町村に対し地域振興のために1億円を交付した政策"
+            ]
+          }
+        },
+        {
+          "pageid": 2378181,
+          "ns": 0,
+          "title": "キンシオ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きんしお",
+            "wikibase_item": "Q11297928"
+          },
+          "terms": {
+            "description": [
+              "テレビ神奈川制作のテレビ番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:18.356Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 36875,
+          "ns": 0,
+          "title": "調布市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちようふし",
+            "kartographer_frames": "1",
+            "page_image_free": "Jindaiji-3.jpg",
+            "wikibase_item": "Q210667"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65058,
+              "lon": 139.54067,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の市"
+            ]
+          }
+        },
+        {
+          "pageid": 259664,
+          "ns": 0,
+          "title": "三軒茶屋",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さんけんちやや",
+            "kartographer_frames": "1",
+            "page_image_free": "Sangenjaya,_Setagaya_City_-_panoramio.jpg",
+            "wikibase_item": "Q11357338"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 324240,
+          "ns": 0,
+          "title": "自由が丘",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しゆうかおか",
+            "kartographer_frames": "1",
+            "page_image_free": "マリクレール通り_-_panoramio.jpg",
+            "wikibase_item": "Q1187503"
+          },
+          "terms": {
+            "description": [
+              "東京都目黒区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 743638,
+          "ns": 0,
+          "title": "青空球児・好児",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あおそら きゆうしこうし",
+            "wikibase_item": "Q11662678"
+          },
+          "terms": {
+            "description": [
+              "日本のお笑いコンビ（1965-）"
+            ]
+          }
+        },
+        {
+          "pageid": 1282948,
+          "ns": 0,
+          "title": "日本体育大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "につほんたいいく",
+            "kartographer_frames": "1",
+            "page_image_free": "Nippon_Sport_Science_University_Fukasawa_Campus.JPG",
+            "wikibase_item": "Q11507234"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62177778,
+              "lon": 139.64925,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都世田谷区にある私立大学"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

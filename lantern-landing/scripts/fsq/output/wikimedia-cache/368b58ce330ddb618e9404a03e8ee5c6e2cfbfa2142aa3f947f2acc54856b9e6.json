@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:15.913Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1385,
+          "ns": 0,
+          "title": "松本零士",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "まつもと れいし",
+            "page_image_free": "Leiji_Matsumoto_-_Lucca_Comics_&_Games_2018_02.jpg",
+            "wikibase_item": "Q431443"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画家 (1938-2023)"
+            ]
+          }
+        },
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 323816,
+          "ns": 0,
+          "title": "峰岸徹",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みねきし とおる",
+            "wikibase_item": "Q11476136"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優（1943−2008）"
+            ]
+          }
+        },
+        {
+          "pageid": 1875716,
+          "ns": 0,
+          "title": "ユニバーサル・レスリング・アソシエーション",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ゆにはあさる れすりんく あそしええしよん",
+            "wikibase_item": "Q604476"
+          }
+        },
+        {
+          "pageid": 3016275,
+          "ns": 0,
+          "title": "羽田クロノゲート",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はねたくろのけえと",
+            "kartographer_frames": "1",
+            "page_image_free": "Haneda_chronogate,20140618.JPG",
+            "wikibase_item": "Q18338867"
+          },
+          "coordinates": [
+            {
+              "lat": 35.55327778,
+              "lon": 139.75083333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

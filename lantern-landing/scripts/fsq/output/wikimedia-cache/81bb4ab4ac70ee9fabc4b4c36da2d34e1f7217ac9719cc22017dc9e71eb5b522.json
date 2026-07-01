@@ -1,0 +1,46 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:37.187Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 223707,
+          "ns": 0,
+          "title": "東京ディズニーランドのアトラクションの一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいらんとのあとらくしよん",
+            "wikibase_item": "Q6600320"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 253927,
+          "ns": 0,
+          "title": "チップとデールのツリーハウス",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ちつふとてえるのつりいはうす",
+            "wikibase_item": "Q11317957"
+          }
+        },
+        {
+          "pageid": 253949,
+          "ns": 0,
+          "title": "トゥーンタウン",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とううんたうん",
+            "wikibase_item": "Q2916668"
+          }
+        }
+      ]
+    }
+  }
+}

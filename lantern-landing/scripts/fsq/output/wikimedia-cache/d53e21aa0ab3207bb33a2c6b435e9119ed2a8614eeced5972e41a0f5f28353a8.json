@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:02.177Z",
+  "value": {
+    "searchinfo": {
+      "search": "昭和のくらし博物館"
+    },
+    "search": [
+      {
+        "id": "Q17228804",
+        "title": "Q17228804",
+        "pageid": 18826055,
+        "concepturi": "http://www.wikidata.org/entity/Q17228804",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q17228804",
+        "display": {
+          "label": {
+            "value": "Museum of Life in the Shōwa Era",
+            "language": "en"
+          }
+        },
+        "label": "Museum of Life in the Shōwa Era",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "昭和のくらし博物館"
+        },
+        "aliases": [
+          "昭和のくらし博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

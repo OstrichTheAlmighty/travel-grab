@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:32.183Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 253467,
+          "ns": 0,
+          "title": "Joshin",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しようしん",
+            "page_image_free": "Joshin_Denki_Headquater01.JPG",
+            "wikibase_item": "Q10867463"
+          },
+          "terms": {
+            "description": [
+              "日本の家電量販店"
+            ]
+          }
+        },
+        {
+          "pageid": 360535,
+          "ns": 0,
+          "title": "マルナカ (チェーンストア)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "まるなか",
+            "page_image_free": "Marunaka田町.jpg",
+            "wikibase_item": "Q11341399"
+          },
+          "terms": {
+            "description": [
+              "イオングループのフジが展開するスーパーマーケットの店舗ブランド"
+            ]
+          }
+        },
+        {
+          "pageid": 578770,
+          "ns": 0,
+          "title": "日本のスーパーマーケット一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんのすうはあまあけつといちらん",
+            "page_image_free": "Aeon_Makuhari.JPG",
+            "wikibase_item": "Q11505638"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1725166,
+          "ns": 0,
+          "title": "秋葉原",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あきははら",
+            "kartographer_frames": "1",
+            "page_image_free": "電気街の夜明け_-_panoramio.jpg",
+            "wikibase_item": "Q418096"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69836,
+              "lon": 139.77313,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区と台東区にまたがる街"
+            ]
+          }
+        },
+        {
+          "pageid": 3231575,
+          "ns": 0,
+          "title": "佐久間元輝",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さくま もとき",
+            "wikibase_item": "Q22129490"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

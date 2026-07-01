@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:10.997Z",
+  "value": {
+    "searchinfo": {
+      "search": "日本オリンピックミュージアム"
+    },
+    "search": [
+      {
+        "id": "Q140042196",
+        "title": "Q140042196",
+        "pageid": 133485210,
+        "concepturi": "http://www.wikidata.org/entity/Q140042196",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q140042196",
+        "display": {
+          "label": {
+            "value": "Japan Olympic Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Shinjuku, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Japan Olympic Museum",
+        "description": "museum in Shinjuku, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "日本オリンピックミュージアム"
+        },
+        "aliases": [
+          "日本オリンピックミュージアム"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

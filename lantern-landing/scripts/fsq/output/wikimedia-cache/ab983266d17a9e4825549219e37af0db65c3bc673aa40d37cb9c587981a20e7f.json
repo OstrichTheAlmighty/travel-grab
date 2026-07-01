@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:45:52.063Z",
+  "value": {
+    "searchinfo": {
+      "search": "お化け屋敷"
+    },
+    "search": [
+      {
+        "id": "Q1139917",
+        "title": "Q1139917",
+        "pageid": 1086641,
+        "concepturi": "http://www.wikidata.org/entity/Q1139917",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1139917",
+        "display": {
+          "label": {
+            "value": "haunted attraction",
+            "language": "en"
+          },
+          "description": {
+            "value": "form of entertainment imitating a horror location",
+            "language": "en"
+          }
+        },
+        "label": "haunted attraction",
+        "description": "form of entertainment imitating a horror location",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "お化け屋敷"
+        },
+        "aliases": [
+          "お化け屋敷"
+        ]
+      },
+      {
+        "id": "Q3521221",
+        "title": "Q3521221",
+        "pageid": 3352620,
+        "concepturi": "http://www.wikidata.org/entity/Q3521221",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3521221",
+        "display": {
+          "label": {
+            "value": "The Haunted House",
+            "language": "mul"
+          },
+          "description": {
+            "value": "1929 Mickey Mouse short by Walt Disney",
+            "language": "en"
+          }
+        },
+        "label": "The Haunted House",
+        "description": "1929 Mickey Mouse short by Walt Disney",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "お化け屋敷"
+        },
+        "aliases": [
+          "お化け屋敷"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:36.980Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 200151,
+          "ns": 0,
+          "title": "Jenga",
+          "index": 1,
+          "pageprops": {
+            "displaytitle": "<i>Jenga</i>",
+            "page_image_free": "Jenga_brand_logo.png",
+            "wikibase-shortdesc": "Game played with a tower of blocks",
+            "wikibase_item": "Q869870"
+          },
+          "terms": {
+            "description": [
+              "game played with tower of blocks"
+            ]
+          }
+        },
+        {
+          "pageid": 451311,
+          "ns": 0,
+          "title": "List of Konami games",
+          "index": 5,
+          "pageprops": {
+            "toc": "",
+            "wikibase-shortdesc": "List of games developed by Konami",
+            "wikibase_item": "Q640537"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 6287713,
+          "ns": 0,
+          "title": "Gator Golf",
+          "index": 4,
+          "pageprops": {
+            "wikibase-shortdesc": "Children's miniature golf game",
+            "wikibase_item": "Q5527474"
+          },
+          "terms": {
+            "description": [
+              "children's miniature golf game"
+            ]
+          }
+        },
+        {
+          "pageid": 52741948,
+          "ns": 0,
+          "title": "The Steam Awards",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Steam Awards, The",
+            "wikibase-shortdesc": "Annual awards event hosted by Valve",
+            "wikibase_item": "Q28407532"
+          },
+          "terms": {
+            "description": [
+              "award"
+            ]
+          }
+        },
+        {
+          "pageid": 73966083,
+          "ns": 0,
+          "title": "Apple Vision Pro",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Apple_Vision_Pro_with_Solo_Knit_Band.jpg",
+            "wikibase-shortdesc": "Mixed reality headset by Apple",
+            "wikibase_item": "Q117715451"
+          },
+          "terms": {
+            "description": [
+              "XR-Headset by Apple Inc."
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

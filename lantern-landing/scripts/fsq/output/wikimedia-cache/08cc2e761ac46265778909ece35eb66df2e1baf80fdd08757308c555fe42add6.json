@@ -1,0 +1,98 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:48.140Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 365989,
+          "ns": 0,
+          "title": "Butoh",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Kazuo_Ohno.jpg",
+            "wikibase-shortdesc": "Post-WWII Japanese dance form",
+            "wikibase_item": "Q1018001"
+          },
+          "terms": {
+            "description": [
+              "post-WWII Japanese dance form"
+            ]
+          }
+        },
+        {
+          "pageid": 593159,
+          "ns": 0,
+          "title": "Sada Abe",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Abe Sada",
+            "page_image_free": "Sada_Abe_portrait.JPG",
+            "wikibase-shortdesc": "Japanese murderer (1905 – 1992 or after)",
+            "wikibase_item": "Q264924"
+          },
+          "terms": {
+            "description": [
+              "20th-century Japanese murderer"
+            ]
+          }
+        },
+        {
+          "pageid": 3204046,
+          "ns": 0,
+          "title": "Japanese curry",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Beef_curry_rice_003.jpg",
+            "wikibase-shortdesc": "Japanese-style curry dish",
+            "wikibase_item": "Q701870"
+          },
+          "terms": {
+            "description": [
+              "Japanese cuisine"
+            ]
+          }
+        },
+        {
+          "pageid": 56374670,
+          "ns": 0,
+          "title": "List of PlayStation (console) games (M–Z)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "List of PlayStation 1 Games",
+            "notoc": "",
+            "page_image_free": "PSX-Console-wController.jpg",
+            "wikibase-shortdesc": "Games for the Sony PlayStation / PS1 / PSone",
+            "wikibase_item": "Q48852103"
+          },
+          "terms": {
+            "description": [
+              "wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 69966899,
+          "ns": 0,
+          "title": "Jagarico",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "An_overhead_view_of_one_can_of_Jagarico.jpg",
+            "wikibase-shortdesc": "Japanese snack product",
+            "wikibase_item": "Q11269372"
+          },
+          "terms": {
+            "description": [
+              "Japanese snack product"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

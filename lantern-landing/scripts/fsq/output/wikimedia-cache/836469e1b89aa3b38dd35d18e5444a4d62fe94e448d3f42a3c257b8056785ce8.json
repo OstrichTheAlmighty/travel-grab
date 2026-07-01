@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:14.345Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 5213,
+          "ns": 0,
+          "title": "自殺・自決・自害した日本の著名人物一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しさつしけつしかいしたにつほんのちよめいしんふついちらん",
+            "wikibase_item": "Q10312698"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 5300,
+          "ns": 0,
+          "title": "東京大空襲",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようたいくうしゆう",
+            "page_image_free": "After_Bombing_of_Tokyo_on_March_1945_19450310.jpg",
+            "wikibase_item": "Q51881408"
+          },
+          "terms": {
+            "description": [
+              "1945年3月10日の東京都区部に対する焼夷弾を用いた大規模な戦略爆撃"
+            ]
+          }
+        },
+        {
+          "pageid": 23899,
+          "ns": 0,
+          "title": "西郷隆盛",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さいこう たかもり",
+            "page_image_free": "Takamori_Saigo.jpg",
+            "wikibase_item": "Q310462"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家・軍人 (1827-1877)"
+            ]
+          }
+        },
+        {
+          "pageid": 356216,
+          "ns": 0,
+          "title": "石黒忠悳",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いしくろ たたのり",
+            "page_image_free": "Ishiguro_Tadanori.jpg",
+            "wikibase_item": "Q11266231"
+          },
+          "terms": {
+            "description": [
+              "日本の陸軍軍医"
+            ]
+          }
+        },
+        {
+          "pageid": 1154739,
+          "ns": 0,
+          "title": "小金牧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こかねまき",
+            "page_image_free": "Chiba-ken_géolocalisation_relief.svg",
+            "wikibase_item": "Q11464347"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7975,
+              "lon": 139.98041667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "江戸幕府による馬の放牧場"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

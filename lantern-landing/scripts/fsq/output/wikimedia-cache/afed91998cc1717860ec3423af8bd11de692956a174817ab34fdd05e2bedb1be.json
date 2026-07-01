@@ -1,0 +1,191 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:18:08.860Z",
+  "value": {
+    "searchinfo": {
+      "search": "storm g"
+    },
+    "search": [
+      {
+        "id": "Q115481069",
+        "title": "Q115481069",
+        "pageid": 110056214,
+        "concepturi": "http://www.wikidata.org/entity/Q115481069",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q115481069",
+        "display": {
+          "label": {
+            "value": "storm deity",
+            "language": "en"
+          },
+          "description": {
+            "value": "deity associated with storm",
+            "language": "en"
+          }
+        },
+        "label": "storm deity",
+        "description": "deity associated with storm",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "storm god"
+        },
+        "aliases": [
+          "storm god"
+        ]
+      },
+      {
+        "id": "Q83493710",
+        "title": "Q83493710",
+        "pageid": 82808953,
+        "concepturi": "http://www.wikidata.org/entity/Q83493710",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q83493710",
+        "display": {
+          "label": {
+            "value": "Storm Gloria",
+            "language": "en"
+          },
+          "description": {
+            "value": "extratropical cyclone which caused severe flooding in eastern Spain in early 2020",
+            "language": "en"
+          }
+        },
+        "label": "Storm Gloria",
+        "description": "extratropical cyclone which caused severe flooding in eastern Spain in early 2020",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Storm Gloria"
+        }
+      },
+      {
+        "id": "Q86909682",
+        "title": "Q86909682",
+        "pageid": 86152932,
+        "concepturi": "http://www.wikidata.org/entity/Q86909682",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q86909682",
+        "display": {
+          "label": {
+            "value": "Storm god brandishing lightning bolts-AO 11188",
+            "language": "en"
+          },
+          "description": {
+            "value": "Storm god brandishing lightning bolts",
+            "language": "en"
+          }
+        },
+        "label": "Storm god brandishing lightning bolts-AO 11188",
+        "description": "Storm god brandishing lightning bolts",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Storm god brandishing lightning bolts-AO 11188"
+        }
+      },
+      {
+        "id": "Q75709586",
+        "title": "Q75709586",
+        "pageid": 75198890,
+        "concepturi": "http://www.wikidata.org/entity/Q75709586",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q75709586",
+        "display": {
+          "label": {
+            "value": "Storm Gregory Andrews",
+            "language": "en"
+          },
+          "description": {
+            "value": "(born 1991)",
+            "language": "en"
+          }
+        },
+        "label": "Storm Gregory Andrews",
+        "description": "(born 1991)",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Storm Gregory Andrews"
+        }
+      },
+      {
+        "id": "Q111807181",
+        "title": "Q111807181",
+        "pageid": 106729186,
+        "concepturi": "http://www.wikidata.org/entity/Q111807181",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q111807181",
+        "display": {
+          "label": {
+            "value": "storm-goddess",
+            "language": "en"
+          },
+          "description": {
+            "value": "narrative motif documented in Thompson's Motif-Index of Folk-Literature",
+            "language": "en"
+          }
+        },
+        "label": "storm-goddess",
+        "description": "narrative motif documented in Thompson's Motif-Index of Folk-Literature",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "storm-goddess"
+        }
+      },
+      {
+        "id": "Q111807180",
+        "title": "Q111807180",
+        "pageid": 106729185,
+        "concepturi": "http://www.wikidata.org/entity/Q111807180",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q111807180",
+        "display": {
+          "label": {
+            "value": "storm-god",
+            "language": "en"
+          },
+          "description": {
+            "value": "narrative motif documented in Thompson's Motif-Index of Folk-Literature",
+            "language": "en"
+          }
+        },
+        "label": "storm-god",
+        "description": "narrative motif documented in Thompson's Motif-Index of Folk-Literature",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "storm-god"
+        }
+      },
+      {
+        "id": "Q275294",
+        "title": "Q275294",
+        "pageid": 266256,
+        "concepturi": "http://www.wikidata.org/entity/Q275294",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q275294",
+        "display": {
+          "label": {
+            "value": "storm glass",
+            "language": "en"
+          },
+          "description": {
+            "value": "meteorological instrumentation",
+            "language": "en"
+          }
+        },
+        "label": "storm glass",
+        "description": "meteorological instrumentation",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "storm glass"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

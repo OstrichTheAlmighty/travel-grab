@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:14.809Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 46890,
+          "ns": 0,
+          "title": "大阪城ホール",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおさかしようほおる",
+            "kartographer_frames": "1",
+            "page_image_free": "Osaka-jo_Hall_in_201408.JPG",
+            "wikibase_item": "Q1092700"
+          },
+          "coordinates": [
+            {
+              "lat": 34.68944444,
+              "lon": 135.52972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪市にある多目的施設"
+            ]
+          }
+        },
+        {
+          "pageid": 62253,
+          "ns": 0,
+          "title": "後楽園球場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こうらくえんきゆうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Korakuen_stadium_aerial_photograph_1984.jpg",
+            "wikibase_item": "Q473519"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70421111,
+              "lon": 139.75372222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて東京都文京区にあった野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 118891,
+          "ns": 0,
+          "title": "後楽園ホール",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こうらくえんほる",
+            "kartographer_frames": "1",
+            "page_image_free": "20170104_Korakuen_Hall.jpg",
+            "wikibase_item": "Q4389857"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70431944,
+              "lon": 139.75193889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "株式会社東京ドームが運営する多目的ホール"
+            ]
+          }
+        },
+        {
+          "pageid": 185129,
+          "ns": 0,
+          "title": "DDTプロレスリング",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ていいていいていいふろれすりんく",
+            "page_image_free": "高木三四郎fire.jpg",
+            "wikibase_item": "Q2876276"
+          },
+          "terms": {
+            "description": [
+              "日本のプロレス団体"
+            ]
+          }
+        },
+        {
+          "pageid": 1272191,
+          "ns": 0,
+          "title": "ミーツポート",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みいつほおと",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyodomecity_Meets_Port.jpg",
+            "wikibase_item": "Q3267633"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70303056,
+              "lon": 139.75479722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京ドームシティの商業施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

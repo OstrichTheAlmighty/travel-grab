@@ -1,0 +1,36 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:35.494Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1911129,
+          "ns": 0,
+          "title": "渋谷区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しふやく",
+            "kartographer_frames": "1",
+            "page_image_free": "2018_Shibuya_Crossing.jpg",
+            "wikibase_item": "Q193638"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66367,
+              "lon": 139.69772,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

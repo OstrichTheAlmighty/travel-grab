@@ -1,0 +1,123 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:10.656Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 31996,
+          "ns": 0,
+          "title": "船の科学館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふねのかかくかん",
+            "page_image_free": "Museum_of_Maritime_Science-1.jpg",
+            "wikibase_item": "Q1048709"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62033333,
+              "lon": 139.77236111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 37214,
+          "ns": 0,
+          "title": "科学館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かかくかん",
+            "page_image_free": "Akashi-Minicipal-Planetarium3387.JPG",
+            "wikibase_item": "Q588140"
+          },
+          "terms": {
+            "description": [
+              "自然科学に関連する展示を行う博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 269480,
+          "ns": 0,
+          "title": "神戸市立青少年科学館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こうへしりつせいしようねんかかくかん",
+            "page_image_free": "Kobe_Science_Museum.jpg",
+            "wikibase_item": "Q11590107"
+          },
+          "coordinates": [
+            {
+              "lat": 34.666111,
+              "lon": 135.218611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1722291,
+          "ns": 0,
+          "title": "仙台市科学館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せんたいしかかくかん",
+            "page_image_free": "Sendai_City_Science_Museum.jpg",
+            "wikibase_item": "Q11377856"
+          },
+          "coordinates": [
+            {
+              "lat": 38.298994,
+              "lon": 140.883104,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の宮城県仙台市青葉区にある科学館"
+            ]
+          }
+        },
+        {
+          "pageid": 4521793,
+          "ns": 0,
+          "title": "気象科学館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きしようかかくかん",
+            "kartographer_frames": "1",
+            "page_image_free": "JMA_Meteorological_Science_Museum.jpg",
+            "wikibase_item": "Q16872707"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66561111,
+              "lon": 139.74605556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区の気象庁本庁にある科学館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

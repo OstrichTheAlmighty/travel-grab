@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:39.029Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 5444,
+          "ns": 0,
+          "title": "スタジオジブリ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "すたしおしふり",
+            "page_image_free": "Studio_Ghibli_studio_3.jpg",
+            "wikibase_item": "Q182950"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70305556,
+              "lon": 139.52916667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都小金井市にあるアニメ制作会社"
+            ]
+          }
+        },
+        {
+          "pageid": 14613,
+          "ns": 0,
+          "title": "三鷹の森ジブリ美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みたかのもりしふりひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "三鷹之森吉卜力美術館_(16202559242).jpg",
+            "wikibase_item": "Q947907"
+          },
+          "terms": {
+            "description": [
+              "日本のアニメーション美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 360072,
+          "ns": 0,
+          "title": "水グモもんもん",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みすくももんもん",
+            "wikibase_item": "Q735713"
+          },
+          "terms": {
+            "description": [
+              "日本の短編アニメーション映画 (2006)"
+            ]
+          }
+        },
+        {
+          "pageid": 360075,
+          "ns": 0,
+          "title": "やどさがし",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やとさかし",
+            "wikibase_item": "Q2454829"
+          },
+          "terms": {
+            "description": [
+              "日本の短編アニメーション映画 (2006)"
+            ]
+          }
+        },
+        {
+          "pageid": 706758,
+          "ns": 0,
+          "title": "宮崎駿",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みやさき はやお",
+            "page_image_free": "HayaoMiyazakiCCJuly09.jpg",
+            "wikibase_item": "Q55400"
+          },
+          "terms": {
+            "description": [
+              "日本のアニメ監督、アニメーター、漫画家 (1941-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

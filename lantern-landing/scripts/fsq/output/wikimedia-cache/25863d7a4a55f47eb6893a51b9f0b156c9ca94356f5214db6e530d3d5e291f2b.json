@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:42.886Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 245574,
+          "ns": 0,
+          "title": "ビリ犬",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひりけん",
+            "wikibase_item": "Q11331011"
+          },
+          "terms": {
+            "description": [
+              "藤子不二雄の安孫子素雄による日本の漫画"
+            ]
+          }
+        },
+        {
+          "pageid": 276556,
+          "ns": 0,
+          "title": "名奉行 遠山の金さん",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めいふきようとおやまのきんさん",
+            "wikibase_item": "Q11415351"
+          },
+          "terms": {
+            "description": [
+              "テレビ朝日で放送された日本のテレビドラマ"
+            ]
+          }
+        },
+        {
+          "pageid": 937961,
+          "ns": 0,
+          "title": "ディー・エル・イー",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ていいえるいい",
+            "page_image_free": "DLE_Logo_(2025).svg",
+            "wikibase_item": "Q5205538"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68386111,
+              "lon": 139.73894444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にあるアニメ制作会社"
+            ]
+          }
+        },
+        {
+          "pageid": 3268125,
+          "ns": 0,
+          "title": "コレナンデ商会",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "これなんてしようかい",
+            "wikibase_item": "Q22126860"
+          }
+        },
+        {
+          "pageid": 3305580,
+          "ns": 0,
+          "title": "おそ松さん",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おそまつさん",
+            "page_image_free": "Mr._Osomatsu_logo.png",
+            "wikibase_item": "Q22341701"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビアニメ番組、メディアミックス作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

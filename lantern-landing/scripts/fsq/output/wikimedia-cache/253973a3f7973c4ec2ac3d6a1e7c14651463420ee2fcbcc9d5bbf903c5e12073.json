@@ -1,0 +1,85 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:14.917Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 113493,
+          "ns": 0,
+          "title": "文学館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふんかくかん",
+            "wikibase_item": "Q1865249"
+          },
+          "terms": {
+            "description": [
+              "作家や文学運動に関する品々を集めた博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 141208,
+          "ns": 0,
+          "title": "前川國男",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "まえかわ くにお",
+            "wikibase_item": "Q129938"
+          },
+          "terms": {
+            "description": [
+              "建築家 (1905-1986)"
+            ]
+          }
+        },
+        {
+          "pageid": 296215,
+          "ns": 0,
+          "title": "辻邦生",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "つし くにお",
+            "wikibase_item": "Q2458501"
+          },
+          "terms": {
+            "description": [
+              "日本の小説家・フランス文学者 (1925-1999)"
+            ]
+          }
+        },
+        {
+          "pageid": 1061215,
+          "ns": 0,
+          "title": "徳川義崇",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とくかわ よしたか",
+            "wikibase_item": "Q6636908"
+          }
+        },
+        {
+          "pageid": 2722666,
+          "ns": 0,
+          "title": "学習院大学史料館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かくしゆういんたいかくしりようかん",
+            "wikibase_item": "Q11448881"
+          },
+          "terms": {
+            "description": [
+              "日本の文書館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

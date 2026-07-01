@@ -1,0 +1,201 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:08.932Z",
+  "value": {
+    "searchinfo": {
+      "search": "SEE FA"
+    },
+    "search": [
+      {
+        "id": "Q94400851",
+        "title": "Q94400851",
+        "pageid": 93399266,
+        "concepturi": "http://www.wikidata.org/entity/Q94400851",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q94400851",
+        "display": {
+          "label": {
+            "value": "See-fai Ho",
+            "language": "en"
+          }
+        },
+        "label": "See-fai Ho",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "See-fai Ho"
+        }
+      },
+      {
+        "id": "Q41602",
+        "title": "Q41602",
+        "pageid": 43880,
+        "concepturi": "http://www.wikidata.org/entity/Q41602",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q41602",
+        "display": {
+          "label": {
+            "value": "Sea of Okhotsk",
+            "language": "en"
+          },
+          "description": {
+            "value": "marginal sea of the Pacific Ocean",
+            "language": "en"
+          }
+        },
+        "label": "Sea of Okhotsk",
+        "description": "marginal sea of the Pacific Ocean",
+        "match": {
+          "type": "label",
+          "language": "fy",
+          "text": "See fan Ochotsk"
+        },
+        "aliases": [
+          "See fan Ochotsk"
+        ]
+      },
+      {
+        "id": "Q35367",
+        "title": "Q35367",
+        "pageid": 38033,
+        "concepturi": "http://www.wikidata.org/entity/Q35367",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q35367",
+        "display": {
+          "label": {
+            "value": "Sea of Marmara",
+            "language": "en"
+          },
+          "description": {
+            "value": "inland sea, entirely within the borders of Turkey",
+            "language": "en"
+          }
+        },
+        "label": "Sea of Marmara",
+        "description": "inland sea, entirely within the borders of Turkey",
+        "match": {
+          "type": "label",
+          "language": "fy",
+          "text": "See fan Marmara"
+        },
+        "aliases": [
+          "See fan Marmara"
+        ]
+      },
+      {
+        "id": "Q35000",
+        "title": "Q35000",
+        "pageid": 37700,
+        "concepturi": "http://www.wikidata.org/entity/Q35000",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q35000",
+        "display": {
+          "label": {
+            "value": "Sea of Azov",
+            "language": "en"
+          },
+          "description": {
+            "value": "Inland sea of ​​the Atlantic Ocean basin",
+            "language": "en"
+          }
+        },
+        "label": "Sea of Azov",
+        "description": "Inland sea of ​​the Atlantic Ocean basin",
+        "match": {
+          "type": "label",
+          "language": "fy",
+          "text": "See fan Azov"
+        },
+        "aliases": [
+          "See fan Azov"
+        ]
+      },
+      {
+        "id": "Q72154",
+        "title": "Q72154",
+        "pageid": 74849,
+        "concepturi": "http://www.wikidata.org/entity/Q72154",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q72154",
+        "display": {
+          "label": {
+            "value": "Amundsen Sea",
+            "language": "en"
+          },
+          "description": {
+            "value": "part of the Southern Ocean",
+            "language": "en"
+          }
+        },
+        "label": "Amundsen Sea",
+        "description": "part of the Southern Ocean",
+        "match": {
+          "type": "alias",
+          "language": "fy",
+          "text": "See fan Amundsen"
+        },
+        "aliases": [
+          "See fan Amundsen"
+        ]
+      },
+      {
+        "id": "Q199408",
+        "title": "Q199408",
+        "pageid": 196626,
+        "concepturi": "http://www.wikidata.org/entity/Q199408",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q199408",
+        "display": {
+          "label": {
+            "value": "Alboran Sea",
+            "language": "en"
+          },
+          "description": {
+            "value": "westernmost portion of the Mediterranean Sea",
+            "language": "en"
+          }
+        },
+        "label": "Alboran Sea",
+        "description": "westernmost portion of the Mediterranean Sea",
+        "match": {
+          "type": "alias",
+          "language": "fy",
+          "text": "See fan Alboran"
+        },
+        "aliases": [
+          "See fan Alboran"
+        ]
+      },
+      {
+        "id": "Q1971856",
+        "title": "Q1971856",
+        "pageid": 1900837,
+        "concepturi": "http://www.wikidata.org/entity/Q1971856",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1971856",
+        "display": {
+          "label": {
+            "value": "Sea of the Hebrides",
+            "language": "en"
+          },
+          "description": {
+            "value": "portion of the North Atlantic Ocean, located off the coast of western Scotland",
+            "language": "en"
+          }
+        },
+        "label": "Sea of the Hebrides",
+        "description": "portion of the North Atlantic Ocean, located off the coast of western Scotland",
+        "match": {
+          "type": "label",
+          "language": "fy",
+          "text": "See fan de Hebriden"
+        },
+        "aliases": [
+          "See fan de Hebriden"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

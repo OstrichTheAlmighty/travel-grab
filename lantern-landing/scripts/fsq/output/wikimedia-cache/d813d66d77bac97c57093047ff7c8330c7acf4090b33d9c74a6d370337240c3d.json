@@ -1,0 +1,74 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:45.124Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 253903,
+          "ns": 0,
+          "title": "ウエスタンランド・シューティングギャラリー",
+          "index": 3,
+          "pageprops": {
+            "wikibase_item": "Q11288648"
+          }
+        },
+        {
+          "pageid": 253945,
+          "ns": 0,
+          "title": "ウエスタンランド",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "うえすたんらんと",
+            "wikibase_item": "Q732575"
+          },
+          "terms": {
+            "description": [
+              "ディズニーテーマパークのテーマランド"
+            ]
+          }
+        },
+        {
+          "pageid": 943364,
+          "ns": 0,
+          "title": "東京ディズニーランドのショップの一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいらんとのしよつふ",
+            "wikibase_item": "Q11524284"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1566174,
+          "ns": 0,
+          "title": "フロンティアランド",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふろんていあらんと",
+            "wikibase_item": "Q11334159"
+          }
+        },
+        {
+          "pageid": 1623675,
+          "ns": 0,
+          "title": "シューティングギャラリー",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しゆうていんくきやらりい",
+            "wikibase_item": "Q3453570"
+          }
+        }
+      ]
+    }
+  }
+}

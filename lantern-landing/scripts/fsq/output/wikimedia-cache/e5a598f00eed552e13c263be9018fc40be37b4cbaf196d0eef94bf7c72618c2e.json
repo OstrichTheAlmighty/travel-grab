@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:50.713Z",
+  "value": {
+    "searchinfo": {
+      "search": "アメリカンウォーターフロント"
+    },
+    "search": [
+      {
+        "id": "Q674795",
+        "title": "Q674795",
+        "pageid": 635604,
+        "concepturi": "http://www.wikidata.org/entity/Q674795",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q674795",
+        "display": {
+          "label": {
+            "value": "American Waterfront",
+            "language": "en"
+          },
+          "description": {
+            "value": "\"Port-of-call\" (themed land) at Tokyo DisneySea in the Tokyo Disney Resort",
+            "language": "en"
+          }
+        },
+        "label": "American Waterfront",
+        "description": "\"Port-of-call\" (themed land) at Tokyo DisneySea in the Tokyo Disney Resort",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "アメリカンウォーターフロント"
+        },
+        "aliases": [
+          "アメリカンウォーターフロント"
+        ]
+      },
+      {
+        "id": "Q50437130",
+        "title": "Q50437130",
+        "pageid": 51404184,
+        "concepturi": "http://www.wikidata.org/entity/Q50437130",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q50437130",
+        "display": {
+          "label": {
+            "value": "American Waterfront Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "railway station in Maihama, Japan",
+            "language": "en"
+          }
+        },
+        "label": "American Waterfront Station",
+        "description": "railway station in Maihama, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "アメリカンウォーターフロント駅"
+        },
+        "aliases": [
+          "アメリカンウォーターフロント駅"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

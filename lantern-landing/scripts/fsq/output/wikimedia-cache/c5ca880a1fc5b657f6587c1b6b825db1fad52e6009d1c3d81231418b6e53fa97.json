@@ -1,0 +1,85 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:42.711Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 127687,
+          "ns": 0,
+          "title": "ロマンシング サ・ガ3",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ろまんしんくさか3",
+            "wikibase_item": "Q4048413"
+          },
+          "terms": {
+            "description": [
+              "1995年のスクウェアのロールプレイングゲーム"
+            ]
+          }
+        },
+        {
+          "pageid": 236620,
+          "ns": 0,
+          "title": "地球空洞説",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちきゆうくうとうせつ",
+            "wikibase_item": "Q649143"
+          },
+          "terms": {
+            "description": [
+              "地球の内部が空洞になっていて、その中に世界や文明が存在するという仮説・伝説"
+            ]
+          }
+        },
+        {
+          "pageid": 3354704,
+          "ns": 0,
+          "title": "名探偵ピカチュウ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めいたんていひかちゆう",
+            "wikibase_item": "Q22635280"
+          },
+          "terms": {
+            "description": [
+              "日本のゲームソフト"
+            ]
+          }
+        },
+        {
+          "pageid": 3547275,
+          "ns": 0,
+          "title": "アイドルタイムプリパラ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あいとるたいむふりはら",
+            "wikibase_item": "Q28690902"
+          }
+        },
+        {
+          "pageid": 4492380,
+          "ns": 0,
+          "title": "山本真央樹",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "やまもと まおき",
+            "wikibase_item": "Q109768162"
+          },
+          "terms": {
+            "description": [
+              "日本のドラマー、作曲家、編曲家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

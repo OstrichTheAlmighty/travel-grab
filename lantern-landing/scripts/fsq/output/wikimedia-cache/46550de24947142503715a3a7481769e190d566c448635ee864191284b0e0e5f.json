@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:06.643Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2906,
+          "ns": 0,
+          "title": "岡本太郎",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おかもと たろう",
+            "page_image_free": "Tarō_Okamoto.jpg",
+            "wikibase_item": "Q983942"
+          },
+          "terms": {
+            "description": [
+              "日本の芸術家 (1911-1996)"
+            ]
+          }
+        },
+        {
+          "pageid": 806843,
+          "ns": 0,
+          "title": "春日井市道風記念館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうふうきねんかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Tofu_Memorial_Museum.jpg",
+            "wikibase_item": "Q11641867"
+          },
+          "terms": {
+            "description": [
+              "愛知県春日井市にある書道専門の美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 940983,
+          "ns": 0,
+          "title": "香美市立やなせたかし記念館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かみしりつやなせたかしきねんかん",
+            "page_image_free": "Kami_Kochi_Yanase_Takashi_Memorial_Hall_1.JPG",
+            "wikibase_item": "Q2496737"
+          },
+          "coordinates": [
+            {
+              "lat": 33.64769444,
+              "lon": 133.78375,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "高知県香美市にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 1458218,
+          "ns": 0,
+          "title": "岡本太郎記念館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おかもとたろうきねんかん",
+            "page_image_free": "Taro_Okamoto_Memorial_Museum_Tokyo.jpg",
+            "wikibase_item": "Q11473108"
+          },
+          "coordinates": [
+            {
+              "lat": 35.661308,
+              "lon": 139.715583,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京・青山にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 1613496,
+          "ns": 0,
+          "title": "川崎市岡本太郎美術館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かわさきしおかもとたろうひしゆつかん",
+            "page_image_free": "Taro_Okamoto_Museum3a.jpg",
+            "wikibase_item": "Q7686506"
+          },
+          "coordinates": [
+            {
+              "lat": 35.608075,
+              "lon": 139.55747778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県川崎市多摩区桝形の生田緑地内にある市立美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

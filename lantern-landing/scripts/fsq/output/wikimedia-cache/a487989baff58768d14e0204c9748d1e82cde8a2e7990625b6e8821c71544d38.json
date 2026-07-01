@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:16.628Z",
+  "value": {
+    "searchinfo": {
+      "search": "古賀政男音楽博物館"
+    },
+    "search": [
+      {
+        "id": "Q107437312",
+        "title": "Q107437312",
+        "pageid": 102717437,
+        "concepturi": "http://www.wikidata.org/entity/Q107437312",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q107437312",
+        "display": {
+          "label": {
+            "value": "Koga Masao Museum of Music",
+            "language": "en"
+          }
+        },
+        "label": "Koga Masao Museum of Music",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "古賀政男音楽博物館"
+        },
+        "aliases": [
+          "古賀政男音楽博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

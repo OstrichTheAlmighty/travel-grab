@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:37.975Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4418,
+          "ns": 0,
+          "title": "サウジアラビア",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さうしあらひあ",
+            "page_image_free": "Flag_of_Saudi_Arabia.svg",
+            "toc": "",
+            "wikibase_item": "Q851"
+          },
+          "terms": {
+            "description": [
+              "西アジアの国"
+            ]
+          }
+        },
+        {
+          "pageid": 7289,
+          "ns": 0,
+          "title": "東京競馬場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようけいはしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "東京競馬場_-_panoramio_(4).jpg",
+            "wikibase_item": "Q1055592"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66222222,
+              "lon": 139.48555556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都府中市にある競馬場"
+            ]
+          }
+        },
+        {
+          "pageid": 253942,
+          "ns": 0,
+          "title": "アドベンチャーランド",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あとへんちやあらんと",
+            "wikibase_item": "Q2825400"
+          }
+        },
+        {
+          "pageid": 631032,
+          "ns": 0,
+          "title": "アラビアンコースト",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あらひあんこおすと",
+            "wikibase_item": "Q2338693"
+          },
+          "terms": {
+            "description": [
+              "東京ディズニーシーのテーマポート"
+            ]
+          }
+        },
+        {
+          "pageid": 3306957,
+          "ns": 0,
+          "title": "ディズニーパークのテーマランドの一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ていしにいはあくのてえまらんとのいちらん",
+            "wikibase_item": "Q6624913"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

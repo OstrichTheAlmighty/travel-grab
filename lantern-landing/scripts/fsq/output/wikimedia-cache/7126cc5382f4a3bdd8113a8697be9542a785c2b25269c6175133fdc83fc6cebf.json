@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:31.132Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 424445,
+          "ns": 0,
+          "title": "Odaiba",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Odaiba_close_up_-_2025_Jan_14_01-27PM.jpeg",
+            "wikibase-shortdesc": "Artificial island in Tokyo Bay, Japan",
+            "wikibase_item": "Q211861"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63,
+              "lon": 139.775,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "town located in Minato-ku, Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 500894,
+          "ns": 0,
+          "title": "ASIMO",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Asimo",
+            "page_image_free": "Honda_ASIMO_(ver._2011)_2011_Tokyo_Motor_Show.jpg",
+            "wikibase-shortdesc": "Humanoid robot created by Honda",
+            "wikibase_item": "Q297769"
+          },
+          "terms": {
+            "description": [
+              "humanoid robot created by Honda"
+            ]
+          }
+        },
+        {
+          "pageid": 9616780,
+          "ns": 0,
+          "title": "Miraikan",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Miraikan.jpg",
+            "wikibase-shortdesc": "Science and technology museum in Odaiba, Tokyo, Japan",
+            "wikibase_item": "Q656957"
+          },
+          "terms": {
+            "description": [
+              "building"
+            ]
+          }
+        },
+        {
+          "pageid": 18933360,
+          "ns": 0,
+          "title": "Björk",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Bjork",
+            "page_image_free": "Bjork_Orkestral_Paris_(cropped).png",
+            "wikibase-shortdesc": "Icelandic singer (born 1965)",
+            "wikibase_item": "Q42455"
+          },
+          "terms": {
+            "description": [
+              "Icelandic singer (born 1965)"
+            ]
+          }
+        },
+        {
+          "pageid": 46254141,
+          "ns": 0,
+          "title": "AuthaGraph projection",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Projection_AuthaGraph.png",
+            "wikibase-shortdesc": "Polyhedral compromise map projection",
+            "wikibase_item": "Q11293194"
+          },
+          "terms": {
+            "description": [
+              "equal-area type world map projection"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

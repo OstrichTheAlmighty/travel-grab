@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:32.811Z",
+  "value": {
+    "searchinfo": {
+      "search": "Postal Museum Japan"
+    },
+    "search": [
+      {
+        "id": "Q17225229",
+        "title": "Q17225229",
+        "pageid": 18822137,
+        "concepturi": "http://www.wikidata.org/entity/Q17225229",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q17225229",
+        "display": {
+          "label": {
+            "value": "Postal Museum Japan",
+            "language": "en"
+          }
+        },
+        "label": "Postal Museum Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Postal Museum Japan"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

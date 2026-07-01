@@ -1,0 +1,144 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:26.838Z",
+  "value": {
+    "searchinfo": {
+      "search": "講道館"
+    },
+    "search": [
+      {
+        "id": "Q1165384",
+        "title": "Q1165384",
+        "pageid": 1111462,
+        "concepturi": "http://www.wikidata.org/entity/Q1165384",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1165384",
+        "display": {
+          "label": {
+            "value": "Kōdōkan",
+            "language": "en"
+          },
+          "description": {
+            "value": "Judo institute",
+            "language": "en"
+          }
+        },
+        "label": "Kōdōkan",
+        "description": "Judo institute",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "講道館"
+        },
+        "aliases": [
+          "講道館"
+        ]
+      },
+      {
+        "id": "Q3276780",
+        "title": "Q3276780",
+        "pageid": 3125791,
+        "concepturi": "http://www.wikidata.org/entity/Q3276780",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3276780",
+        "display": {
+          "label": {
+            "value": "Kōdōkan Shitennō",
+            "language": "en"
+          },
+          "description": {
+            "value": "judoka",
+            "language": "en"
+          }
+        },
+        "label": "Kōdōkan Shitennō",
+        "description": "judoka",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "講道館四天王"
+        },
+        "aliases": [
+          "講道館四天王"
+        ]
+      },
+      {
+        "id": "Q3111413",
+        "title": "Q3111413",
+        "pageid": 2973135,
+        "concepturi": "http://www.wikidata.org/entity/Q3111413",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3111413",
+        "display": {
+          "label": {
+            "value": "Kodokan Goshin Jutsu",
+            "language": "en"
+          },
+          "description": {
+            "value": "martial arts - self-defence",
+            "language": "en"
+          }
+        },
+        "label": "Kodokan Goshin Jutsu",
+        "description": "martial arts - self-defence",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "講道館護身術"
+        },
+        "aliases": [
+          "講道館護身術"
+        ]
+      },
+      {
+        "id": "Q11981405",
+        "title": "Q11981405",
+        "pageid": 13180403,
+        "concepturi": "http://www.wikidata.org/entity/Q11981405",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11981405",
+        "display": {
+          "label": {
+            "value": "Kodokan judo",
+            "language": "en"
+          },
+          "description": {
+            "value": "judo",
+            "language": "en"
+          }
+        },
+        "label": "Kodokan judo",
+        "description": "judo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "講道館柔道"
+        },
+        "aliases": [
+          "講道館柔道"
+        ]
+      },
+      {
+        "id": "Q11632227",
+        "title": "Q11632227",
+        "pageid": 12772673,
+        "concepturi": "http://www.wikidata.org/entity/Q11632227",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11632227",
+        "display": {
+          "label": {
+            "value": "講道館杯全日本柔道体重別選手権大会",
+            "language": "ja"
+          }
+        },
+        "label": "講道館杯全日本柔道体重別選手権大会",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "講道館杯全日本柔道体重別選手権大会"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

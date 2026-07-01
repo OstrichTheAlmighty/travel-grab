@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:08.184Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 25569,
+          "ns": 0,
+          "title": "二俣川駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふたまたかわえき",
+            "kartographer_frames": "1",
+            "page_image_free": "Futamatagawa_Station_2018_-_01c.jpg",
+            "wikibase_item": "Q846471"
+          },
+          "coordinates": [
+            {
+              "lat": 35.46358333,
+              "lon": 139.53230556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県横浜市旭区にある相模鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 29576,
+          "ns": 0,
+          "title": "銀座駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きんさ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ginza-station-ExitA3-after-renewal.jpg",
+            "wikibase_item": "Q602372"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67283333,
+              "lon": 139.76325,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都中央区にある東京地下鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 110570,
+          "ns": 0,
+          "title": "大阪城公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおさかしようこうえん",
+            "page_image_free": "Osaka_Castle_Park_20071230.jpg",
+            "wikibase_item": "Q150118"
+          },
+          "coordinates": [
+            {
+              "lat": 34.68197222,
+              "lon": 135.53105556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪市の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 3359490,
+          "ns": 0,
+          "title": "GinzaNovo",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きんさのほ",
+            "page_image_free": "Tokyu_Plaza_Ginza1b.JPG",
+            "wikibase_item": "Q24876140"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67222222,
+              "lon": 139.7625,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都中央区の商業施設"
+            ]
+          }
+        },
+        {
+          "pageid": 3838702,
+          "ns": 0,
+          "title": "2010年代の建築",
+          "index": 5,
+          "pageprops": {
+            "wikibase_item": "Q60996027"
+          }
+        }
+      ]
+    }
+  }
+}

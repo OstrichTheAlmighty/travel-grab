@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:11.526Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 59182,
+          "ns": 0,
+          "title": "深見梨加",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふかみ りか",
+            "wikibase_item": "Q1324613"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 140967,
+          "ns": 0,
+          "title": "ラクーア",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "らくうあ",
+            "kartographer_frames": "1",
+            "page_image_free": "LaQua(Tokyo_Dome_City_).jpg",
+            "wikibase_item": "Q5368622"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70711111,
+              "lon": 139.75280556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京ドームシティ内のスパを中心とした商業施設"
+            ]
+          }
+        },
+        {
+          "pageid": 194940,
+          "ns": 0,
+          "title": "メリーゴーラウンド",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "めりいこうらうんと",
+            "page_image_free": "Carousels回転木馬.jpg",
+            "wikibase_item": "Q208322"
+          },
+          "terms": {
+            "description": [
+              "遊具のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 1251434,
+          "ns": 0,
+          "title": "ワンダードロップ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "わんたとろつふ",
+            "wikibase_item": "Q11351558"
+          },
+          "terms": {
+            "description": [
+              "東京ドームシティ内にあるウォーターアトラクション"
+            ]
+          }
+        },
+        {
+          "pageid": 1690591,
+          "ns": 0,
+          "title": "美少女戦士セーラームーン (ゲーム)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひしようしよせんしせえらあむうん",
+            "wikibase_item": "Q30314507"
+          }
+        }
+      ]
+    }
+  }
+}

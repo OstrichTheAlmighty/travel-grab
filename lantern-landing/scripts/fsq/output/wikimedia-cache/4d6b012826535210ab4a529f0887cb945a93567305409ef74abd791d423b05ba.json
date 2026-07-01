@@ -1,0 +1,90 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:43.667Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 23441,
+          "ns": 0,
+          "title": "キク",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きく",
+            "page_image_free": "Kiku_yellow01.jpg",
+            "wikibase_item": "Q15530181"
+          },
+          "terms": {
+            "description": [
+              "キク科キク属の植物"
+            ]
+          }
+        },
+        {
+          "pageid": 28405,
+          "ns": 0,
+          "title": "ハナショウブ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はなしようふ",
+            "page_image_free": "Iris_ensata_cv_kumoinogan.jpg",
+            "wikibase_item": "Q21558856"
+          },
+          "terms": {
+            "description": [
+              "キジカクシ目アヤメ科の植物"
+            ]
+          }
+        },
+        {
+          "pageid": 615291,
+          "ns": 0,
+          "title": "植木鉢",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "うえきはち",
+            "page_image_free": "Pots_in_the_Buckingham_Garden_Centre_-_geograph.org.uk_-_1476735.jpg",
+            "wikibase_item": "Q869381"
+          },
+          "terms": {
+            "description": [
+              "植物を植えるための鉢・容器"
+            ]
+          }
+        },
+        {
+          "pageid": 641685,
+          "ns": 0,
+          "title": "古典園芸植物",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こてんえんけいしよくふつ",
+            "page_image_free": "Matumotosenno.jpg",
+            "wikibase_item": "Q11410941"
+          },
+          "terms": {
+            "description": [
+              "日本の伝統的な園芸植物"
+            ]
+          }
+        },
+        {
+          "pageid": 2333096,
+          "ns": 0,
+          "title": "肥後六花",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひころつか",
+            "page_image_free": "Higo_camellia_in_Kumamoto_Castle_201104091515.png",
+            "wikibase_item": "Q11611567"
+          }
+        }
+      ]
+    }
+  }
+}

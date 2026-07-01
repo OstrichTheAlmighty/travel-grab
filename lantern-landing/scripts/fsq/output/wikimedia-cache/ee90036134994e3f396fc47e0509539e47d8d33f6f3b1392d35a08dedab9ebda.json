@@ -1,0 +1,130 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:03.750Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 182844,
+          "ns": 0,
+          "title": "長崎漁港",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "なかさききよこう",
+            "page_image_free": "Azekari-Mie080919.JPG",
+            "wikibase_item": "Q11652613"
+          },
+          "coordinates": [
+            {
+              "lat": 32.81944444,
+              "lon": 129.76722222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長崎県長崎市にある漁港"
+            ]
+          }
+        },
+        {
+          "pageid": 922559,
+          "ns": 0,
+          "title": "豊洲市場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とよすししよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Toyosu_Market_Tokyo_2.jpg",
+            "wikibase_item": "Q11633916"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区豊洲に所在する公設卸売市場"
+            ]
+          }
+        },
+        {
+          "pageid": 946532,
+          "ns": 0,
+          "title": "ガスの科学館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かすのかかくかん",
+            "page_image_free": "Gas_Science_Museum_\"Gasutenani\",_at_Toyosu,_Koto,_Tokyo_(2019-01-01).jpg",
+            "wikibase_item": "Q11295937"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65223056,
+              "lon": 139.79252778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区にある東京ガスが運営する科学館"
+            ]
+          }
+        },
+        {
+          "pageid": 1131895,
+          "ns": 0,
+          "title": "静岡市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しすおかし",
+            "kartographer_frames": "1",
+            "page_image_free": "Higashi-Shizuoka_Panorama_02.jpg",
+            "wikibase_item": "Q174691"
+          },
+          "coordinates": [
+            {
+              "lat": 34.9756,
+              "lon": 138.3825,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 1778099,
+          "ns": 0,
+          "title": "大田区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-International-Airport_Satellite.jpg",
+            "wikibase_item": "Q217234"
+          },
+          "coordinates": [
+            {
+              "lat": 35.56128,
+              "lon": 139.71603,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:50.366Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 278281,
+          "ns": 0,
+          "title": "中央大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ちゆうおう",
+            "page_image_free": "FOREST_GATEWAY_CHUO-2.jpg",
+            "wikibase_item": "Q1091287"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64138611,
+              "lon": 139.40573889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都八王子市にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 429597,
+          "ns": 0,
+          "title": "東洋大学",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうよう",
+            "page_image_free": "Toyo_University_2019a.jpg",
+            "wikibase_item": "Q1321655"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72358333,
+              "lon": 139.74966667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 556738,
+          "ns": 0,
+          "title": "新渡戸文化短期大学",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にとへふんかたんき",
+            "page_image_free": "Nitobe_Bunka_Gakuen_JHS_and_HS.JPG",
+            "wikibase_item": "Q7813841"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69647222,
+              "lon": 139.66188889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都中野区に本部を置く私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 1568742,
+          "ns": 0,
+          "title": "日本大学",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんたいかく",
+            "page_image_free": "Nihon_university_logo.svg",
+            "wikibase_item": "Q1326230"
+          },
+          "coordinates": [
+            {
+              "lat": 35.691,
+              "lon": 139.73760833,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 1924341,
+          "ns": 0,
+          "title": "法政大学",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ほうせいたいかく",
+            "page_image_free": "法政大学市ヶ谷キャンパス.jpg",
+            "wikibase_item": "Q1323040"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69563889,
+              "lon": 139.74066667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都千代田区にある私立大学"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

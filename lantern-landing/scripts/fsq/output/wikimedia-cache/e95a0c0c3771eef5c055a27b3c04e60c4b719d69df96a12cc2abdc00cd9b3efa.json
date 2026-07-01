@@ -1,0 +1,57 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:20.517Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 34586,
+          "ns": 0,
+          "title": "東京ドームシティアトラクションズ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようとおむしていあとらくしよんす",
+            "page_image_free": "Tokyo-dome_air.jpg",
+            "wikibase_item": "Q564646"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70522222,
+              "lon": 139.754,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区の遊園地"
+            ]
+          }
+        },
+        {
+          "pageid": 3606203,
+          "ns": 0,
+          "title": "バイキング (アトラクション)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はいきんく",
+            "page_image_free": "Hudsonbay-Walibiworld.jpg",
+            "wikibase_item": "Q1815874"
+          }
+        },
+        {
+          "pageid": 3647694,
+          "ns": 0,
+          "title": "アトラクション (遊園地)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あとらくしよん",
+            "page_image_free": "Unknown._Russian_swing._1807.jpg",
+            "wikibase_item": "Q1144661"
+          }
+        }
+      ]
+    }
+  }
+}

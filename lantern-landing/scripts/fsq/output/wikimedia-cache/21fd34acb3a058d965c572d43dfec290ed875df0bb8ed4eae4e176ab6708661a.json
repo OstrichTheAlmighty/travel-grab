@@ -1,0 +1,173 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:53.579Z",
+  "value": {
+    "searchinfo": {
+      "search": "西館"
+    },
+    "search": [
+      {
+        "id": "Q116763643",
+        "title": "Q116763643",
+        "pageid": 111528925,
+        "concepturi": "http://www.wikidata.org/entity/Q116763643",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q116763643",
+        "display": {
+          "label": {
+            "value": "西館",
+            "language": "ja"
+          }
+        },
+        "label": "西館",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "西館"
+        }
+      },
+      {
+        "id": "Q11629996",
+        "title": "Q11629996",
+        "pageid": 12770445,
+        "concepturi": "http://www.wikidata.org/entity/Q11629996",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11629996",
+        "display": {
+          "label": {
+            "value": "Nishidate",
+            "language": "en"
+          },
+          "description": {
+            "value": "dissolved municipality in Kitaakita district, Akita prefecture, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Nishidate",
+        "description": "dissolved municipality in Kitaakita district, Akita prefecture, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "西館村"
+        },
+        "aliases": [
+          "西館村"
+        ]
+      },
+      {
+        "id": "Q83937361",
+        "title": "Q83937361",
+        "pageid": 83243504,
+        "concepturi": "http://www.wikidata.org/entity/Q83937361",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q83937361",
+        "display": {
+          "label": {
+            "value": "西館小学校",
+            "language": "ja"
+          }
+        },
+        "label": "西館小学校",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "西館小学校"
+        }
+      },
+      {
+        "id": "Q42683053",
+        "title": "Q42683053",
+        "pageid": 43943862,
+        "concepturi": "http://www.wikidata.org/entity/Q42683053",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q42683053",
+        "display": {
+          "label": {
+            "value": "Kazume Nishidate",
+            "language": "en"
+          }
+        },
+        "label": "Kazume Nishidate",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "西館数芽"
+        },
+        "aliases": [
+          "西館数芽"
+        ]
+      },
+      {
+        "id": "Q11629993",
+        "title": "Q11629993",
+        "pageid": 12770442,
+        "concepturi": "http://www.wikidata.org/entity/Q11629993",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11629993",
+        "display": {
+          "label": {
+            "value": "Nishidate Tatehisa",
+            "language": "en"
+          }
+        },
+        "label": "Nishidate Tatehisa",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "西館建久"
+        },
+        "aliases": [
+          "西館建久"
+        ]
+      },
+      {
+        "id": "Q60986802",
+        "title": "Q60986802",
+        "pageid": 60840250,
+        "concepturi": "http://www.wikidata.org/entity/Q60986802",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q60986802",
+        "display": {
+          "label": {
+            "value": "Nishidateyama Ski Area",
+            "language": "en"
+          }
+        },
+        "label": "Nishidateyama Ski Area",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "西館山スキー場"
+        },
+        "aliases": [
+          "西館山スキー場"
+        ]
+      },
+      {
+        "id": "Q11629995",
+        "title": "Q11629995",
+        "pageid": 12770444,
+        "concepturi": "http://www.wikidata.org/entity/Q11629995",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11629995",
+        "display": {
+          "label": {
+            "value": "Nishidate Tateo",
+            "language": "en"
+          }
+        },
+        "label": "Nishidate Tateo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "西館建雄"
+        },
+        "aliases": [
+          "西館建雄"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:21.623Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 532230,
+          "ns": 0,
+          "title": "鹿児島相互信用金庫",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かこしまそうこしんようきんこ",
+            "page_image_free": "Kagoshima_Sogo_Shinkin_Bank.JPG",
+            "wikibase_item": "Q11676702"
+          },
+          "terms": {
+            "description": [
+              "鹿児島市にある信用金庫"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

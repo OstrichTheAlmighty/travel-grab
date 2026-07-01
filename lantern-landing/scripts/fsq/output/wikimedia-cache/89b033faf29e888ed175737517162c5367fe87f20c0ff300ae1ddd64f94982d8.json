@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:17:54.230Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 28362,
+          "ns": 0,
+          "title": "八王子市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はちおうしし",
+            "kartographer_frames": "1",
+            "page_image_free": "Takao-san-Top_10.11.13_saturday.JPG",
+            "wikibase_item": "Q208863"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66644,
+              "lon": 139.316,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の市"
+            ]
+          }
+        },
+        {
+          "pageid": 28918,
+          "ns": 0,
+          "title": "立教大学",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "りつきようたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Rikkyo_University_1.jpg",
+            "wikibase_item": "Q1143235"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7305,
+              "lon": 139.70394444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 770451,
+          "ns": 0,
+          "title": "福島瑞穂",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふくしま みすほ",
+            "page_image_free": "Mizuho_Fukushima_20250328_(cropped).jpg",
+            "wikibase_item": "Q264290"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家、弁護士"
+            ]
+          }
+        },
+        {
+          "pageid": 1039206,
+          "ns": 0,
+          "title": "秋篠宮文仁親王",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あきしののみや ふみひとしんのう",
+            "page_image_free": "Fumihito,_Crown_Prince_Akishino_(54751644693,_cropped).jpg",
+            "wikibase_item": "Q311174"
+          },
+          "terms": {
+            "description": [
+              "日本の親王 (1965-)"
+            ]
+          }
+        },
+        {
+          "pageid": 2382702,
+          "ns": 0,
+          "title": "チーム・バチスタシリーズ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちいむはちすた",
+            "wikibase_item": "Q16690038"
+          },
+          "terms": {
+            "description": [
+              "海堂尊による医療ミステリー小説シリーズ『田口・白鳥シリーズ』の別呼称"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

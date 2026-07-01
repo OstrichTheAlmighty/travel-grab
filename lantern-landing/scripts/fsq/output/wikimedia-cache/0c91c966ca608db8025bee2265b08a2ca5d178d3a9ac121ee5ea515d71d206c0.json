@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:51.268Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 794957,
+          "ns": 0,
+          "title": "Burj Khalifa",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Burj_Khalifa_(worlds_tallest_building)_and_the_Dubai_skyline_(25781049892).jpg",
+            "wikibase-shortdesc": "Skyscraper in Dubai, United Arab Emirates",
+            "wikibase_item": "Q12495"
+          },
+          "coordinates": [
+            {
+              "lat": 25.1972,
+              "lon": 55.2742,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "skyscraper in Dubai, United Arab Emirates"
+            ]
+          }
+        },
+        {
+          "pageid": 1388815,
+          "ns": 0,
+          "title": "Observation deck",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Observation Deck",
+            "page_image_free": "Edge_HY.jpg",
+            "wikibase-shortdesc": "Elevated sightseeing platform",
+            "wikibase_item": "Q177305"
+          },
+          "terms": {
+            "description": [
+              "elevated sightseeing platform"
+            ]
+          }
+        },
+        {
+          "pageid": 19372810,
+          "ns": 0,
+          "title": "2 World Trade Center (1971–2001)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "2 World Trade Center (1971-2001)",
+            "kartographer_frames": "1",
+            "wikibase-shortdesc": "Former skyscraper in Manhattan, New York",
+            "wikibase_item": "Q20445008"
+          },
+          "coordinates": [
+            {
+              "lat": 40.71094444,
+              "lon": -74.01305556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "former South Tower of the World Trade Center (twin towers) in New York City"
+            ]
+          }
+        },
+        {
+          "pageid": 33649740,
+          "ns": 0,
+          "title": "SkyPoint Observation Deck",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Q1_oberservation_deck.jpg",
+            "wikibase-shortdesc": "Observation deck in Gold Coast, Australia",
+            "wikibase_item": "Q7537197"
+          },
+          "coordinates": [
+            {
+              "lat": -28.00611111,
+              "lon": 153.42944444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Observation Deck in Gold Coast, Australia"
+            ]
+          }
+        },
+        {
+          "pageid": 41228882,
+          "ns": 0,
+          "title": "30 Hudson Yards",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "2",
+            "page_image_free": "Hudson_Yards_from_Hudson_Commons_(95131p)_(30_Hudson_Yards).jpg",
+            "wikibase-shortdesc": "Skyscraper in Manhattan, New York",
+            "wikibase_item": "Q15264266"
+          },
+          "coordinates": [
+            {
+              "lat": 40.7541,
+              "lon": -74.0008,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Supertall skyscraper in New York City"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

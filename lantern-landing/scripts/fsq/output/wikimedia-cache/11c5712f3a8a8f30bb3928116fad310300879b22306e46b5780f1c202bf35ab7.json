@@ -1,0 +1,109 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:04.227Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 40851,
+          "ns": 0,
+          "title": "鹿児島大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かこしまたいかく",
+            "page_image_free": "鹿児島大学正門.jpg",
+            "wikibase_item": "Q335924"
+          },
+          "coordinates": [
+            {
+              "lat": 31.57194444,
+              "lon": 130.54547222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "鹿児島県鹿児島市にある国立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 53398,
+          "ns": 0,
+          "title": "農学部",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "のうかくふ",
+            "wikibase_item": "Q11637943"
+          }
+        },
+        {
+          "pageid": 534847,
+          "ns": 0,
+          "title": "日本大学第三中学校・高等学校",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんたいかくたいさん",
+            "kartographer_frames": "1",
+            "page_image_free": "Nichidaisankou.jpg",
+            "wikibase_item": "Q11507864"
+          },
+          "coordinates": [
+            {
+              "lat": 35.59197222,
+              "lon": 139.41930556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都町田市にある私立中高一貫校"
+            ]
+          }
+        },
+        {
+          "pageid": 1568742,
+          "ns": 0,
+          "title": "日本大学",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんたいかく",
+            "page_image_free": "Nihon_university_logo.svg",
+            "wikibase_item": "Q1326230"
+          },
+          "coordinates": [
+            {
+              "lat": 35.691,
+              "lon": 139.73760833,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 2412300,
+          "ns": 0,
+          "title": "日本大学生物資源科学部・大学院生物資源科学研究科及び獣医学研究科",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にほんたいかくせいふつしけんかかくふ",
+            "page_image_free": "Nihon_UNIV_Shonan.jpg",
+            "wikibase_item": "Q125120923"
+          }
+        }
+      ]
+    }
+  }
+}

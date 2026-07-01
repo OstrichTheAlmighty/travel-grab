@@ -1,0 +1,94 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:42.149Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 16500,
+          "ns": 0,
+          "title": "明治神宮野球場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めいししんくうやきゆうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "明治神宮野球場_2025年2月8日の東京_202502081229_IMG_5901.jpg",
+            "wikibase_item": "Q944559"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67457222,
+              "lon": 139.71713611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区にある野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 90163,
+          "ns": 0,
+          "title": "国立霞ヶ丘競技場",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こくりつかすみかおかきようきしよう",
+            "page_image_free": "Jingu_gaien_air.jpg",
+            "wikibase_item": "Q6588189"
+          }
+        },
+        {
+          "pageid": 1384627,
+          "ns": 0,
+          "title": "阪神甲子園球場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はんしんこうしえんきゆうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "202309081549_IMG_3516.jpg",
+            "wikibase_item": "Q959811"
+          },
+          "terms": {
+            "description": [
+              "兵庫県西宮市にある野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 1777267,
+          "ns": 0,
+          "title": "荒木大輔",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あらき たいすけ",
+            "page_image_free": "Araki_daisuke.jpg",
+            "wikibase_item": "Q11256019"
+          },
+          "terms": {
+            "description": [
+              "日本のプロ選手選手、指導者、評論家、解説者"
+            ]
+          }
+        },
+        {
+          "pageid": 3725431,
+          "ns": 0,
+          "title": "2018年の野球",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "2018ねんのやきゆう",
+            "wikibase_item": "Q47073026"
+          }
+        }
+      ]
+    }
+  }
+}

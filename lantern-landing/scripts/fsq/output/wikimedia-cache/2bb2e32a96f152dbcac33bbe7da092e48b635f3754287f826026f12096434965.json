@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:54.400Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 67924,
+          "ns": 0,
+          "title": "一之江出入口",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いちのえていりくち",
+            "page_image_free": "Ichinoe_entrance_1.jpg",
+            "wikibase_item": "Q10863798"
+          }
+        },
+        {
+          "pageid": 155358,
+          "ns": 0,
+          "title": "盆栽",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほんさい",
+            "page_image_free": "Bonsai,_Kenshin_Toge.jpg",
+            "wikibase_item": "Q64365"
+          },
+          "terms": {
+            "description": [
+              "草木を鉢に植えて鑑賞する趣味"
+            ]
+          }
+        },
+        {
+          "pageid": 1114863,
+          "ns": 0,
+          "title": "新堀 (江戸川区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にいほり",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q11501605"
+          },
+          "terms": {
+            "description": [
+              "東京都江戸川区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 3010225,
+          "ns": 0,
+          "title": "さいたま市大宮盆栽美術館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さいたましおおみやほんさいひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Saitama_Omiya_Bonsai_Art_Museum・garden.jpg",
+            "wikibase_item": "Q17991646"
+          },
+          "coordinates": [
+            {
+              "lat": 35.92877778,
+              "lon": 139.63333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県さいたま市北区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 3908341,
+          "ns": 0,
+          "title": "春花園BONSAI美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しゆんかえんほんさいひしゆつかん",
+            "page_image_free": "Shunkaen_Bonsai_Museum.JPG",
+            "wikibase_item": "Q29570077"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70261111,
+              "lon": 139.88833333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江戸川区にある美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

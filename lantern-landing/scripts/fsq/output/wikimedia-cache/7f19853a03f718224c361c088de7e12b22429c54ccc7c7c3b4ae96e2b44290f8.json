@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:46.006Z",
+  "value": {
+    "searchinfo": {
+      "search": "日本近代文学館"
+    },
+    "search": [
+      {
+        "id": "Q1954709",
+        "title": "Q1954709",
+        "pageid": 1883998,
+        "concepturi": "http://www.wikidata.org/entity/Q1954709",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1954709",
+        "display": {
+          "label": {
+            "value": "Museum of Modern Japanese Literature",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Meguro, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Museum of Modern Japanese Literature",
+        "description": "museum in Meguro, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "日本近代文学館"
+        },
+        "aliases": [
+          "日本近代文学館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

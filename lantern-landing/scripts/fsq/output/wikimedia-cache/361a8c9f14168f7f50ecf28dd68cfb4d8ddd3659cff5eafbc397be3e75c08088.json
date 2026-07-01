@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:54.463Z",
+  "value": {
+    "searchinfo": {
+      "search": "宮城道雄記念館"
+    },
+    "search": [
+      {
+        "id": "Q2274375",
+        "title": "Q2274375",
+        "pageid": 2196873,
+        "concepturi": "http://www.wikidata.org/entity/Q2274375",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2274375",
+        "display": {
+          "label": {
+            "value": "Miyagi Michio Memorial Hall",
+            "language": "en"
+          },
+          "description": {
+            "value": "building in Shinjuku, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Miyagi Michio Memorial Hall",
+        "description": "building in Shinjuku, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "宮城道雄記念館"
+        },
+        "aliases": [
+          "宮城道雄記念館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

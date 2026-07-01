@@ -1,0 +1,108 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:03.832Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 12821,
+          "ns": 0,
+          "title": "Gate",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Gate_of_the_BCR_Headquarters_Building_(Bucharest,_Romania).jpg",
+            "wikibase-shortdesc": "Point of entry to a space enclosed by walls",
+            "wikibase_item": "Q53060"
+          },
+          "terms": {
+            "description": [
+              "point of entry to a space enclosed by building, wall or fence"
+            ]
+          }
+        },
+        {
+          "pageid": 68232,
+          "ns": 0,
+          "title": "Baldur's Gate",
+          "index": 4,
+          "pageprops": {
+            "displaytitle": "<i>Baldur's Gate</i>",
+            "page_image_free": "Baldurs_Gate_stacked_logo_circa_Enhanced_Edition.png",
+            "wikibase-shortdesc": "Franchise of fantasy role-playing video games",
+            "wikibase_item": "Q2640148"
+          },
+          "terms": {
+            "description": [
+              "franchise of fantasy role-playing video games"
+            ]
+          }
+        },
+        {
+          "pageid": 92706,
+          "ns": 0,
+          "title": "Heaven's Gate (film)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Heaven's Gate (Film)",
+            "displaytitle": "<i>Heaven's Gate</i> (film)",
+            "page_image": "Heavens_gate_post.jpg",
+            "wikibase-shortdesc": "1980 American Western film by Michael Cimino",
+            "wikibase_item": "Q148204"
+          },
+          "terms": {
+            "description": [
+              "1980 American Western film directed by Michael Cimino"
+            ]
+          }
+        },
+        {
+          "pageid": 417891,
+          "ns": 0,
+          "title": "The Ninth Gate",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Ninth Gate, The",
+            "displaytitle": "<i>The Ninth Gate</i>",
+            "page_image": "Ninth_gate_ver3.jpg",
+            "wikibase-shortdesc": "1999 film directed by Roman Polanski",
+            "wikibase_item": "Q19405"
+          },
+          "terms": {
+            "description": [
+              "1999 film directed by Roman Polanski"
+            ]
+          }
+        },
+        {
+          "pageid": 582837,
+          "ns": 0,
+          "title": "Ishtar Gate",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Berlín,_Museo_de_Pérgamo_05.jpg",
+            "wikibase-shortdesc": "Eighth gate to the capital city of Babylon",
+            "wikibase_item": "Q26082"
+          },
+          "coordinates": [
+            {
+              "lat": 32.54333333,
+              "lon": 44.42222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "eighth gate to the inner city of Babylon"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

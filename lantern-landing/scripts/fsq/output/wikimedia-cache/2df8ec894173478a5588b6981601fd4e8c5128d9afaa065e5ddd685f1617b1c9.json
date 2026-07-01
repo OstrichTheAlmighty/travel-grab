@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:02.113Z",
+  "value": {
+    "searchinfo": {
+      "search": "関口芭蕉庵"
+    },
+    "search": [
+      {
+        "id": "Q11655663",
+        "title": "Q11655663",
+        "pageid": 12795709,
+        "concepturi": "http://www.wikidata.org/entity/Q11655663",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11655663",
+        "display": {
+          "label": {
+            "value": "Sekiguchi Bashōan",
+            "language": "en"
+          }
+        },
+        "label": "Sekiguchi Bashōan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "関口芭蕉庵"
+        },
+        "aliases": [
+          "関口芭蕉庵"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:23.111Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 77121,
+          "ns": 0,
+          "title": "森美術館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "もりひしゆつかん",
+            "page_image_free": "Mori_Art_Museum_Entrance_2013.jpg",
+            "wikibase_item": "Q4410434"
+          },
+          "terms": {
+            "description": [
+              "東京都港区の六本木ヒルズにある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 84385,
+          "ns": 0,
+          "title": "アーティゾン美術館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あていそんひしゆつかん",
+            "page_image_free": "Artizon_Museum_lobby_view_201912.jpg",
+            "wikibase_item": "Q913808"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区にある私立美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 93729,
+          "ns": 0,
+          "title": "汐留",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しおとめ",
+            "wikibase_item": "Q1185910"
+          },
+          "coordinates": [
+            {
+              "lat": 35.662778,
+              "lon": 139.759847,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京の旧地名、東京都港区の地域名"
+            ]
+          }
+        },
+        {
+          "pageid": 105232,
+          "ns": 0,
+          "title": "パナソニック エレクトリックワークス",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はなそにつくえれくとりつくわあくす",
+            "page_image_free": "Panasonic_Shiodome_Bldg.jpg",
+            "wikibase_item": "Q5364758"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都港区にある電気機器メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 952171,
+          "ns": 0,
+          "title": "パナソニック汐留美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はなそにつくしおとめひしゆつかん",
+            "page_image_free": "Japan_Tokyo_Yamanote_loop_location_map.svg",
+            "wikibase_item": "Q11550512"
+          },
+          "terms": {
+            "description": [
+              "東京都港区にある美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:20.608Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8420,
+          "ns": 0,
+          "title": "Dodo",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Oxford_Dodo_display.jpg",
+            "wikibase-badge-Q17437796": "",
+            "wikibase-shortdesc": "Extinct species of bird",
+            "wikibase_item": "Q43502"
+          },
+          "terms": {
+            "description": [
+              "species of extinct bird native to Mauritius Island"
+            ]
+          }
+        },
+        {
+          "pageid": 9731,
+          "ns": 0,
+          "title": "List of extinct bird species since 1500",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Edwards'_Dodo.jpg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q1059748"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 187269,
+          "ns": 0,
+          "title": "Extinct language",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Extinct Language",
+            "page_image_free": "Eteocypriot_writing.jpg",
+            "wikibase-shortdesc": "Language that no longer has any first-language or second-language speakers",
+            "wikibase_item": "Q38058796"
+          },
+          "terms": {
+            "description": [
+              "language that no longer has any first-language or second-language speakers"
+            ]
+          }
+        },
+        {
+          "pageid": 3529760,
+          "ns": 0,
+          "title": "List of European species extinct in the Holocene",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Extinct Animals In Europe, List Of",
+            "page_image_free": "Europe_orthographic_Caucasus_Urals_boundary.svg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q2270708"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 4015120,
+          "ns": 0,
+          "title": "List of African species extinct in the Holocene",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Africa_(orthographic_projection).svg",
+            "wikibase-shortdesc": "Animal extinctions in the African continent since 9700 BCE",
+            "wikibase_item": "Q2850313"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

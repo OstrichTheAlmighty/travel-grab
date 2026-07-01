@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:04.834Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17114,
+          "ns": 0,
+          "title": "国立印刷局",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こくりついんさつきよく",
+            "wikibase_item": "Q130035"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66877778,
+              "lon": 139.74468611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "公的な印刷を行う日本の独立行政法人"
+            ]
+          }
+        },
+        {
+          "pageid": 27802,
+          "ns": 0,
+          "title": "切手",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きつて",
+            "noindex": "",
+            "page_image_free": "Penny_black.jpg",
+            "wikibase_item": "Q37930"
+          },
+          "terms": {
+            "description": [
+              "郵便料金を事前に納めた証拠として郵便物に貼る証紙"
+            ]
+          }
+        },
+        {
+          "pageid": 143228,
+          "ns": 0,
+          "title": "収入印紙",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しゆうにゆういんし",
+            "page_image_free": "Shotoku_taishi_revenue_500Yen_1948.jpg",
+            "wikibase_item": "Q699462"
+          }
+        },
+        {
+          "pageid": 385448,
+          "ns": 0,
+          "title": "切手の博物館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きつてのはくふつかん",
+            "page_image_free": "Kitte_no_Hakubutsukan.JPG",
+            "wikibase_item": "Q11396206"
+          },
+          "coordinates": [
+            {
+              "lat": 35.718278,
+              "lon": 139.705806,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 567833,
+          "ns": 0,
+          "title": "お札と切手の博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おさつときつてのはくふつかん",
+            "page_image_free": "Museum-gaikan.jpg",
+            "wikibase_item": "Q11263157"
+          },
+          "terms": {
+            "description": [
+              "東京都北区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

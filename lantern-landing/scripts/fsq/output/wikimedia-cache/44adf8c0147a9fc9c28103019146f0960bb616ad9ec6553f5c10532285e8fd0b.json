@@ -1,0 +1,36 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:50.959Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 286979,
+          "ns": 0,
+          "title": "六義園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "りくきえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Bunkyo_Rikugien_Panoramic_View_In_Late_Autumn_1.JPG",
+            "wikibase_item": "Q1889010"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73305556,
+              "lon": 139.74666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区本駒込にある都立庭園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

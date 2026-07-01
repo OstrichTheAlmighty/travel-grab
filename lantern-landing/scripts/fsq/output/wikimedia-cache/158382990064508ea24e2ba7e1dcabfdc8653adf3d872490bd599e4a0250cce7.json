@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:46.365Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 113493,
+          "ns": 0,
+          "title": "文学館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふんかくかん",
+            "wikibase_item": "Q1865249"
+          },
+          "terms": {
+            "description": [
+              "作家や文学運動に関する品々を集めた博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 662778,
+          "ns": 0,
+          "title": "神奈川近代文学館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かなかわきんたいふんかくかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Kanabun004.jpg",
+            "wikibase_item": "Q11589405"
+          },
+          "terms": {
+            "description": [
+              "横浜市中区山手町にある神奈川県立の文学館"
+            ]
+          }
+        },
+        {
+          "pageid": 1095407,
+          "ns": 0,
+          "title": "日本近代文学館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんきんたいふんかくかん",
+            "page_image_free": "Nihon-kindai-bungakukan.jpg",
+            "wikibase_item": "Q1954709"
+          },
+          "coordinates": [
+            {
+              "lat": 35.662808,
+              "lon": 139.680929,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都目黒区の駒場公園内にある文学館"
+            ]
+          }
+        },
+        {
+          "pageid": 1098382,
+          "ns": 0,
+          "title": "中村稔 (詩人)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "なかむら みのる",
+            "page_image_free": "Minoru_Nakamura_cropped_1_Minoru_Nakamura_201011.jpg",
+            "wikibase_item": "Q11365890"
+          },
+          "terms": {
+            "description": [
+              "日本の弁護士、詩人 (1927-)"
+            ]
+          }
+        },
+        {
+          "pageid": 2060741,
+          "ns": 0,
+          "title": "仙台文学館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せんたいふんかくかん",
+            "page_image_free": "Sendai_Bungaku_kan1_crop.jpg",
+            "wikibase_item": "Q11378011"
+          },
+          "coordinates": [
+            {
+              "lat": 38.29647222,
+              "lon": 140.87611111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "仙台市青葉区にある文学館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

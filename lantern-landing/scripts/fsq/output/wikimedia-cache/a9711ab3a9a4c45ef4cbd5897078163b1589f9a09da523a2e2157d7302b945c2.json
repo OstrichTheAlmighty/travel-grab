@@ -1,0 +1,108 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:18:03.975Z",
+  "value": {
+    "searchinfo": {
+      "search": "花やしき"
+    },
+    "search": [
+      {
+        "id": "Q863180",
+        "title": "Q863180",
+        "pageid": 814621,
+        "concepturi": "http://www.wikidata.org/entity/Q863180",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q863180",
+        "display": {
+          "label": {
+            "value": "Hanayashiki",
+            "language": "en"
+          },
+          "description": {
+            "value": "amusement park in Asakusa, Taitō, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Hanayashiki",
+        "description": "amusement park in Asakusa, Taitō, Tokyo",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "花やしき"
+        },
+        "aliases": [
+          "花やしき"
+        ]
+      },
+      {
+        "id": "Q113557542",
+        "title": "Q113557542",
+        "pageid": 108327981,
+        "concepturi": "http://www.wikidata.org/entity/Q113557542",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q113557542",
+        "display": {
+          "label": {
+            "value": "HANAYASHIKI",
+            "language": "en"
+          },
+          "description": {
+            "value": "1985 business",
+            "language": "en"
+          }
+        },
+        "label": "HANAYASHIKI",
+        "description": "1985 business",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "花やしき"
+        },
+        "aliases": [
+          "花やしき"
+        ]
+      },
+      {
+        "id": "Q109595861",
+        "title": "Q109595861",
+        "pageid": 104722819,
+        "concepturi": "http://www.wikidata.org/entity/Q109595861",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q109595861",
+        "display": {
+          "label": {
+            "value": "花やしき浮舟園",
+            "language": "ja"
+          }
+        },
+        "label": "花やしき浮舟園",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "花やしき浮舟園"
+        }
+      },
+      {
+        "id": "Q11615086",
+        "title": "Q11615086",
+        "pageid": 12755448,
+        "concepturi": "http://www.wikidata.org/entity/Q11615086",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11615086",
+        "display": {
+          "label": {
+            "value": "花やしきアクターズスタジオ",
+            "language": "ja"
+          }
+        },
+        "label": "花やしきアクターズスタジオ",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "花やしきアクターズスタジオ"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

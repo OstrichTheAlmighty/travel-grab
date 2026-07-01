@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:55.499Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8073,
+          "ns": 0,
+          "title": "新宿区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しんしゆくく",
+            "kartographer_frames": "1",
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "wikibase_item": "Q179645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69389,
+              "lon": 139.70342,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 41170,
+          "ns": 0,
+          "title": "立川市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たちかわし",
+            "kartographer_frames": "1",
+            "page_image_free": "Tama_Intercity_Monorail_viewed_from_Green_Springs.jpg",
+            "wikibase_item": "Q269634"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71394,
+              "lon": 139.40792,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の市"
+            ]
+          }
+        },
+        {
+          "pageid": 94879,
+          "ns": 0,
+          "title": "大塚明夫",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおつか あきお",
+            "page_image_free": "Akio_Otsuka_2018.jpg",
+            "wikibase_item": "Q418649"
+          },
+          "terms": {
+            "description": [
+              "日本の声優、ナレーター、俳優"
+            ]
+          }
+        },
+        {
+          "pageid": 1131895,
+          "ns": 0,
+          "title": "静岡市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しすおかし",
+            "kartographer_frames": "1",
+            "page_image_free": "Higashi-Shizuoka_Panorama_02.jpg",
+            "wikibase_item": "Q174691"
+          },
+          "coordinates": [
+            {
+              "lat": 34.9756,
+              "lon": 138.3825,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 1967102,
+          "ns": 0,
+          "title": "ズームイン!!SUPER",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "すむいん すうはあ",
+            "page_image_free": "日本テレビ・二代目マイスタジオ_2007-01.jpg",
+            "wikibase_item": "Q11314087"
+          },
+          "terms": {
+            "description": [
+              "日本テレビの情報番組 (2001-2011)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

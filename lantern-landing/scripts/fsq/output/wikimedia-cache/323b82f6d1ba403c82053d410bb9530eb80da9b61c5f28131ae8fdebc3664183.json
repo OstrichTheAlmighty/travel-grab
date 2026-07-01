@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:18.725Z",
+  "value": {
+    "searchinfo": {
+      "search": "本の森ちゅうおう"
+    },
+    "search": [
+      {
+        "id": "Q116172668",
+        "title": "Q116172668",
+        "pageid": 110882343,
+        "concepturi": "http://www.wikidata.org/entity/Q116172668",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q116172668",
+        "display": {
+          "label": {
+            "value": "Honnomori Chuo",
+            "language": "en"
+          },
+          "description": {
+            "value": "building in Chuo city, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Honnomori Chuo",
+        "description": "building in Chuo city, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "本の森ちゅうおう"
+        },
+        "aliases": [
+          "本の森ちゅうおう"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:34.557Z",
+  "value": {
+    "searchinfo": {
+      "search": "トムソーヤ島"
+    },
+    "search": [
+      {
+        "id": "Q3530881",
+        "title": "Q3530881",
+        "pageid": 3361626,
+        "concepturi": "http://www.wikidata.org/entity/Q3530881",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3530881",
+        "display": {
+          "label": {
+            "value": "Pirate's Lair on Tom Sawyer Island",
+            "language": "en"
+          },
+          "description": {
+            "value": "artificial island at Disney theme parks",
+            "language": "en"
+          }
+        },
+        "label": "Pirate's Lair on Tom Sawyer Island",
+        "description": "artificial island at Disney theme parks",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "トムソーヤ島"
+        },
+        "aliases": [
+          "トムソーヤ島"
+        ]
+      },
+      {
+        "id": "Q6600320",
+        "title": "Q6600320",
+        "pageid": 6427084,
+        "concepturi": "http://www.wikidata.org/entity/Q6600320",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6600320",
+        "display": {
+          "label": {
+            "value": "list of Tokyo Disneyland attractions",
+            "language": "en"
+          },
+          "description": {
+            "value": "Wikimedia list article",
+            "language": "en"
+          }
+        },
+        "label": "list of Tokyo Disneyland attractions",
+        "description": "Wikimedia list article",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "トムソーヤ島いかだ"
+        },
+        "aliases": [
+          "トムソーヤ島いかだ"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

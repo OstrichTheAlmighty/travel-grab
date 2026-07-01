@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:56.110Z",
+  "value": {
+    "searchinfo": {
+      "search": "勝海舟記念館"
+    },
+    "search": [
+      {
+        "id": "Q97371284",
+        "title": "Q97371284",
+        "pageid": 95795024,
+        "concepturi": "http://www.wikidata.org/entity/Q97371284",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q97371284",
+        "display": {
+          "label": {
+            "value": "Katsu Kaishū Memorial Museum",
+            "language": "en"
+          }
+        },
+        "label": "Katsu Kaishū Memorial Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "勝海舟記念館"
+        },
+        "aliases": [
+          "勝海舟記念館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

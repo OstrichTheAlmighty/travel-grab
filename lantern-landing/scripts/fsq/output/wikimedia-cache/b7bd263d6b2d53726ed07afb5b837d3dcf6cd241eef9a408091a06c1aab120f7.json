@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:37.296Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 5071,
+          "ns": 0,
+          "title": "植物",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しよくふつ",
+            "page_image_free": "Diversity_of_plants_(Streptophyta)_version_2.png",
+            "wikibase_item": "Q756"
+          },
+          "terms": {
+            "description": [
+              "根があって場所が固定されて生きているような生物のこと"
+            ]
+          }
+        },
+        {
+          "pageid": 68031,
+          "ns": 0,
+          "title": "テリー伊藤",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いとう てりい",
+            "page_image_free": "Terry_Ito_2017.jpg",
+            "wikibase_item": "Q11319423"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビプロデューサー、タレント"
+            ]
+          }
+        },
+        {
+          "pageid": 506194,
+          "ns": 0,
+          "title": "松本善明",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "まつもと せんめい",
+            "wikibase_item": "Q9005428"
+          },
+          "terms": {
+            "description": [
+              "日本の元衆議院議員・弁護士（1926−2019）"
+            ]
+          }
+        },
+        {
+          "pageid": 667393,
+          "ns": 0,
+          "title": "キャベツ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きやへつ",
+            "page_image_free": "Cabbage.jpg",
+            "wikibase_item": "Q35051"
+          },
+          "terms": {
+            "description": [
+              "アブラナ科アブラナ属の多年草"
+            ]
+          }
+        },
+        {
+          "pageid": 1242562,
+          "ns": 0,
+          "title": "女子学院中学校・高等学校",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しよしかくいん",
+            "kartographer_frames": "1",
+            "page_image_free": "Joshigakuin_Junior_and_Senior_High_School_2025.jpg",
+            "wikibase_item": "Q11446376"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68788889,
+              "lon": 139.73838889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある中高一貫女子校"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

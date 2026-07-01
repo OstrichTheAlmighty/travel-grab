@@ -1,0 +1,43 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:20.687Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 49092769,
+          "ns": 0,
+          "title": "List of musical supergroups",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Musical supergroups",
+            "wikibase-shortdesc": "List of music acts composed of members with already established careers outside of them",
+            "wikibase_item": "Q25110035"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 66193663,
+          "ns": 0,
+          "title": "Deaths in August 2021",
+          "index": 2,
+          "pageprops": {
+            "notoc": "",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q107437682"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

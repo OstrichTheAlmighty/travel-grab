@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:25.892Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 32683,
+          "ns": 0,
+          "title": "小田原市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おたわらし",
+            "kartographer_frames": "1",
+            "page_image_free": "Odawara_montage.JPG",
+            "wikibase_item": "Q267258"
+          },
+          "coordinates": [
+            {
+              "lat": 35.26461,
+              "lon": 139.15222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 70911,
+          "ns": 0,
+          "title": "北海道拓殖銀行",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほつかいとうたくしよくきんこう",
+            "page_image_free": "The_Hokkaido_Takushoku_Bank.JPG",
+            "wikibase_item": "Q3139207"
+          },
+          "terms": {
+            "description": [
+              "かつて存在した日本の銀行"
+            ]
+          }
+        },
+        {
+          "pageid": 156293,
+          "ns": 0,
+          "title": "日本の生活協同組合一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せいかつきようとうくみあいいちらん",
+            "wikibase_item": "Q11506037"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1654144,
+          "ns": 0,
+          "title": "前橋市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "まえはしし",
+            "kartographer_frames": "1",
+            "page_image_free": "Maebashi_Montage.jpg",
+            "wikibase_item": "Q201613"
+          },
+          "coordinates": [
+            {
+              "lat": 36.3895,
+              "lon": 139.06344,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "群馬県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 4399699,
+          "ns": 0,
+          "title": "孤独のグルメ (テレビドラマ)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ことくのくるめ",
+            "wikibase_item": "Q107409856"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ番組シリーズ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

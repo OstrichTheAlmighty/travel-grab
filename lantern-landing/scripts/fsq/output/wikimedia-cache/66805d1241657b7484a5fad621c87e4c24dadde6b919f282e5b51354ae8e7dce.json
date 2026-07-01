@@ -1,0 +1,117 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:03.949Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 176894,
+          "ns": 0,
+          "title": "観覧車",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かんらんしや",
+            "page_image_free": "London_Eye_Twilight_April_2006.jpg",
+            "wikibase_item": "Q202570"
+          }
+        },
+        {
+          "pageid": 239332,
+          "ns": 0,
+          "title": "葛西臨海公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かさいりんかいこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Kasai_Kaihin_Park,_Nagisa-bridge.JPG",
+            "wikibase_item": "Q1038727"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64222222,
+              "lon": 139.86027778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江戸川区にある公園"
+            ]
+          }
+        },
+        {
+          "pageid": 999445,
+          "ns": 0,
+          "title": "泉陽興業",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せんようこうきよう",
+            "page_image_free": "SENYO_Building.JPG",
+            "wikibase_item": "Q11554952"
+          },
+          "terms": {
+            "description": [
+              "日本の遊具製造・運営企業"
+            ]
+          }
+        },
+        {
+          "pageid": 1055483,
+          "ns": 0,
+          "title": "パレットタウン大観覧車",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はれつとたうんたいかんらんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Palette_Town_Giant_Ferris_Wheel.jpg",
+            "wikibase_item": "Q751175"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6263915,
+              "lon": 139.7822902,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区のパレットタウンにあった観覧車"
+            ]
+          }
+        },
+        {
+          "pageid": 1761634,
+          "ns": 0,
+          "title": "ダイヤと花の大観覧車",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たいやとはなのたいかんらんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Ferris_wheel_at_Kasai_Rinkai_Park.jpg",
+            "wikibase_item": "Q901219"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64394444,
+              "lon": 139.85705556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江戸川区の葛西臨海公園にある観覧車"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

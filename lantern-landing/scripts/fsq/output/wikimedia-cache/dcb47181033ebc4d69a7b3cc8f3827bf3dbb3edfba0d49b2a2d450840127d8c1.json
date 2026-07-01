@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:30.661Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 32894,
+          "ns": 0,
+          "title": "阪急百貨店",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はんきゆうひやつかてん",
+            "page_image_free": "Mido-suji_Osaka01s4s3200.jpg",
+            "wikibase_item": "Q5648576"
+          },
+          "terms": {
+            "description": [
+              "日本の百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 102325,
+          "ns": 0,
+          "title": "団地",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たんち",
+            "page_image_free": "Toshima_5-choume_danchi.jpg",
+            "wikibase_item": "Q5215430"
+          },
+          "terms": {
+            "description": [
+              "集合住宅などの建物が集積している地区"
+            ]
+          }
+        },
+        {
+          "pageid": 268332,
+          "ns": 0,
+          "title": "北山緑化植物園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きたやまりよくかしよくふつえん",
+            "page_image_free": "Kitayama_Botanical_Garden02n4592.jpg",
+            "wikibase_item": "Q6417925"
+          },
+          "coordinates": [
+            {
+              "lat": 34.76475,
+              "lon": 135.31711111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県西宮市にある植物園"
+            ]
+          }
+        },
+        {
+          "pageid": 313374,
+          "ns": 0,
+          "title": "日帰り入浴施設",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひかえりにゆうよくしせつ",
+            "page_image_free": "Togo_onsen01nt3200.jpg",
+            "wikibase_item": "Q11505291"
+          },
+          "terms": {
+            "description": [
+              "公衆浴場の一種"
+            ]
+          }
+        },
+        {
+          "pageid": 1741731,
+          "ns": 0,
+          "title": "銀座",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きんさ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ginza_area_at_dusk_from_Tokyo_Tower.jpg",
+            "wikibase_item": "Q746052"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

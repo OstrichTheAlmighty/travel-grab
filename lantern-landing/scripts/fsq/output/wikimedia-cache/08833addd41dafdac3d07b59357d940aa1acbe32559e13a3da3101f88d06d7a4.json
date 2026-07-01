@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:20.494Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 89895,
+          "ns": 0,
+          "title": "ハローキティ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はろおきてい",
+            "page_image_free": "Waiting_Room_C3,_Taoyuan_Airport_Terminal_2_20120620.jpg",
+            "wikibase_item": "Q191794"
+          },
+          "terms": {
+            "description": [
+              "サンリオキャラクター"
+            ]
+          }
+        },
+        {
+          "pageid": 100775,
+          "ns": 0,
+          "title": "多摩美術大学",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たまひしゆつ",
+            "page_image_free": "Tama_Art_University_(Hachioji_Library).jpg",
+            "wikibase_item": "Q1141980"
+          },
+          "coordinates": [
+            {
+              "lat": 35.61198611,
+              "lon": 139.35049722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 334640,
+          "ns": 0,
+          "title": "明治大学の人物一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "めいし",
+            "wikibase_item": "Q11512314"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 575794,
+          "ns": 0,
+          "title": "エポスカード",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "えほすかあと",
+            "wikibase_item": "Q11290717"
+          },
+          "terms": {
+            "description": [
+              "日本のクレジットカード会社"
+            ]
+          }
+        },
+        {
+          "pageid": 2395566,
+          "ns": 0,
+          "title": "でんぱ組.inc",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "てんはくみいんく",
+            "page_image_free": "Dempagumi.inc_at_HYPER_JAPAN_summer_2015.jpg",
+            "wikibase_item": "Q11272873"
+          },
+          "terms": {
+            "description": [
+              "日本の女性アイドルグループ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:51.619Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 45711,
+          "ns": 0,
+          "title": "砂の器",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すなのうつわ",
+            "page_image_free": "JRW_kamedake_sta.jpg",
+            "wikibase_item": "Q18918071"
+          },
+          "terms": {
+            "description": [
+              "松本清張の小説"
+            ]
+          }
+        },
+        {
+          "pageid": 171948,
+          "ns": 0,
+          "title": "キネマ旬報",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きねましゆんほう",
+            "page_image_free": "KinemaJunpo_(TheMovieTimes)_1919-07-11_No1_cover.jpg",
+            "toc": "",
+            "wikibase_item": "Q1052227"
+          },
+          "terms": {
+            "description": [
+              "日本の映画雑誌"
+            ]
+          }
+        },
+        {
+          "pageid": 570375,
+          "ns": 0,
+          "title": "松竹大船撮影所",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しようちくおおふなさつえいしよ",
+            "page_image_free": "Shochiku_Ofuna_Studio_1981-05-31.jpg",
+            "wikibase_item": "Q11532188"
+          },
+          "terms": {
+            "description": [
+              "神奈川県鎌倉市にあった映画スタジオ"
+            ]
+          }
+        },
+        {
+          "pageid": 770794,
+          "ns": 0,
+          "title": "男はつらいよ 寅次郎紅の花",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おとこはつらいよ とらしろうくれないのはな",
+            "page_image_free": "MimasakatakioSt.jpg",
+            "wikibase_item": "Q7825334"
+          },
+          "terms": {
+            "description": [
+              "日本の映画作品、『男はつらいよ』シリーズ第48作（最終作）"
+            ]
+          }
+        },
+        {
+          "pageid": 805228,
+          "ns": 0,
+          "title": "男はつらいよ 寅次郎ハイビスカスの花",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おとこはつらいよ とらしろうはいひすかすのはな",
+            "wikibase_item": "Q7825287"
+          },
+          "terms": {
+            "description": [
+              "日本の映画作品、『男はつらいよ』シリーズ第25作"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:51.496Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 33180,
+          "ns": 0,
+          "title": "名鉄百貨店",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "めいてつひやつかてん",
+            "page_image_free": "MEITETSU_Department_Store_-_Head_Store_-_01.JPG",
+            "wikibase_item": "Q11415791"
+          },
+          "terms": {
+            "description": [
+              "閉店した日本の百貨店（1954-2026）"
+            ]
+          }
+        },
+        {
+          "pageid": 41170,
+          "ns": 0,
+          "title": "立川市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たちかわし",
+            "kartographer_frames": "1",
+            "page_image_free": "Tama_Intercity_Monorail_viewed_from_Green_Springs.jpg",
+            "wikibase_item": "Q269634"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71394,
+              "lon": 139.40792,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の市"
+            ]
+          }
+        },
+        {
+          "pageid": 95703,
+          "ns": 0,
+          "title": "繁華街",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はんかかい",
+            "page_image_free": "Ginza-WAKO_at_night.jpg",
+            "wikibase_item": "Q66364404"
+          },
+          "terms": {
+            "description": [
+              "百貨店や専門店、飲食店などの商業施設が多く立ち並び、人が多く集まる地域"
+            ]
+          }
+        },
+        {
+          "pageid": 259664,
+          "ns": 0,
+          "title": "三軒茶屋",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さんけんちやや",
+            "kartographer_frames": "1",
+            "page_image_free": "Sangenjaya,_Setagaya_City_-_panoramio.jpg",
+            "wikibase_item": "Q11357338"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

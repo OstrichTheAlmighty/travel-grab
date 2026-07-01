@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:28.427Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 83618,
+          "ns": 0,
+          "title": "国立科学博物館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こくりつかかくはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "NMNC01s3200.jpg",
+            "wikibase_item": "Q74940"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71635833,
+              "lon": 139.77643333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある国立博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 738016,
+          "ns": 0,
+          "title": "東京大学の建造物",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようたいかくのけんそうふつ",
+            "wikibase_item": "Q5028728"
+          },
+          "terms": {
+            "description": [
+              "東京大学の学内に存在する建造物"
+            ]
+          }
+        },
+        {
+          "pageid": 1217400,
+          "ns": 0,
+          "title": "藤島亥治郎",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふししま かいしろう",
+            "wikibase_item": "Q6509480"
+          },
+          "terms": {
+            "description": [
+              "建築史家"
+            ]
+          }
+        },
+        {
+          "pageid": 1554242,
+          "ns": 0,
+          "title": "東京大学",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Yasuda_Auditorium_-_Tokyo_University_3.jpg",
+            "wikibase_item": "Q7842"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71333333,
+              "lon": 139.76222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある国立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 2868214,
+          "ns": 0,
+          "title": "東京大学総合研究博物館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようたいかくそうこうはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "The_University_Museum,_The_University_of_Tokyo_P3097606.jpg",
+            "wikibase_item": "Q15524927"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70861111,
+              "lon": 139.76119444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "国立大学法人東京大学の全学センターとして設置されている教育研究機関かつ博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

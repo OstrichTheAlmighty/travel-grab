@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:42.058Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 99031,
+          "ns": 0,
+          "title": "Butch Cassidy and the Sundance Kid",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Butch Cassidy and the Sundance Kid",
+            "displaytitle": "<i>Butch Cassidy and the Sundance Kid</i>",
+            "page_image": "Butch_sundance_poster.jpg",
+            "wikibase-shortdesc": "1969 film by George Roy Hill",
+            "wikibase_item": "Q232000"
+          },
+          "terms": {
+            "description": [
+              "1969 American Western film directed by George Roy Hill"
+            ]
+          }
+        },
+        {
+          "pageid": 151855,
+          "ns": 0,
+          "title": "Billy the Kid",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Billy_the_Kid_tintype,_Fort_Sumner,_1879-80-Edit2.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "American outlaw and gunfighter (1859–1881)",
+            "wikibase_item": "Q44200"
+          },
+          "terms": {
+            "description": [
+              "American outlaw and gunfighter (1859–1881)"
+            ]
+          }
+        },
+        {
+          "pageid": 509306,
+          "ns": 0,
+          "title": "Toys \"R\" Us",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Toys R Us",
+            "page_image_free": "Toys_R_Us_department_in_Macy's_Center_City_Philadelphia.jpg",
+            "wikibase-shortdesc": "American toy, clothing, and baby product retailer",
+            "wikibase_item": "Q696334"
+          },
+          "terms": {
+            "description": [
+              "American international company and toy, clothing and baby product retailer, now down to 7 stores (1948-2021)"
+            ]
+          }
+        },
+        {
+          "pageid": 605077,
+          "ns": 0,
+          "title": ".us",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Us",
+            "page_image_free": "DotUS_domain_logo.png",
+            "wikibase-shortdesc": "Top-level Internet domain for the US",
+            "wikibase_item": "Q37861"
+          },
+          "terms": {
+            "description": [
+              "Internet country code top-level domain for the United States"
+            ]
+          }
+        },
+        {
+          "pageid": 67179752,
+          "ns": 0,
+          "title": "Discovery Family",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Discovery Family",
+            "page_image_free": "Discovery_Family_Channel_(DFC).png",
+            "wikibase-shortdesc": "American cable television channel",
+            "wikibase_item": "Q565847"
+          },
+          "terms": {
+            "description": [
+              "American pay television channel focused towards family audiences"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

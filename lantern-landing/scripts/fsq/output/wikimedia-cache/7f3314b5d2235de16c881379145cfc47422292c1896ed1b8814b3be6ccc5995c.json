@@ -1,0 +1,130 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:52.319Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1974594,
+          "ns": 0,
+          "title": "Waterfront Park",
+          "index": 1,
+          "pageprops": {
+            "disambiguation": "",
+            "wikibase-shortdesc": "Topics referred to by the same term",
+            "wikibase_item": "Q7974087"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        },
+        {
+          "pageid": 2309136,
+          "ns": 0,
+          "title": "Louisville Waterfront Park",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "WaterfrontPkDwnt.jpg",
+            "wikibase-shortdesc": "Non-profit organization and public park in Kentucky",
+            "wikibase_item": "Q3263910"
+          },
+          "coordinates": [
+            {
+              "lat": 38.25936944,
+              "lon": -85.74631111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "along the Ohio River in Louisville, Kentucky, which opened in 1999"
+            ]
+          }
+        },
+        {
+          "pageid": 19864746,
+          "ns": 0,
+          "title": "Waterfront Park (Seattle)",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Waterfront_Park_(Seattle).jpg",
+            "wikibase-shortdesc": "Park in Seattle, Washington, United States",
+            "wikibase_item": "Q7974088"
+          },
+          "coordinates": [
+            {
+              "lat": 47.60694444,
+              "lon": -122.34194444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "park in Seattle"
+            ]
+          }
+        },
+        {
+          "pageid": 22997910,
+          "ns": 0,
+          "title": "Waterfront Park (Charleston)",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Charleston-SC-pineapple-fountain.jpg",
+            "wikibase-shortdesc": "Park in Charleston, South Carolina, United States",
+            "wikibase_item": "Q7974086"
+          },
+          "coordinates": [
+            {
+              "lat": 32.77805556,
+              "lon": -79.92527778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "park in Charleston, United States of America"
+            ]
+          }
+        },
+        {
+          "pageid": 24326778,
+          "ns": 0,
+          "title": "Kakaʻako Waterfront Park",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Kakaako_Waterfront_Park_NW_20100517.jpg",
+            "wikibase-shortdesc": "Park in downtown Honolulu, Hawaii, U.S.",
+            "wikibase_item": "Q6349112"
+          },
+          "coordinates": [
+            {
+              "lat": 21.293901,
+              "lon": -157.864092,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "park in Hawaii"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

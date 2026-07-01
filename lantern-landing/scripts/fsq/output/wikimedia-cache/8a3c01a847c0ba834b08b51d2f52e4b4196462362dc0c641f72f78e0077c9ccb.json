@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:37:49.531Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2245,
+          "ns": 0,
+          "title": "長谷川町子",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はせかわ まちこ",
+            "page_image_free": "Hasegawa-Machiko-1.jpg",
+            "wikibase_item": "Q265148"
+          },
+          "terms": {
+            "description": [
+              "日本の女性漫画家 (1920-1992)"
+            ]
+          }
+        },
+        {
+          "pageid": 36331,
+          "ns": 0,
+          "title": "桜新町駅",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さくらしんまちえき",
+            "kartographer_frames": "1",
+            "page_image_free": "Sakura-shimmachi-sta-West.JPG",
+            "wikibase_item": "Q261870"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63166667,
+              "lon": 139.64477778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区桜新町にある東急電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 489788,
+          "ns": 0,
+          "title": "長谷川町子美術館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はせかわまちこひしゆつかん",
+            "page_image_free": "Hasegawa_Machiko_Museum_200823a.jpg",
+            "wikibase_item": "Q3788646"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62794444,
+              "lon": 139.64358333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区にある個人美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 1178830,
+          "ns": 0,
+          "title": "サザエさん",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ささえさん",
+            "page_image": "Setagaya_Sazaesan_Family_Statue_1.JPG",
+            "wikibase_item": "Q1140442"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画作品"
+            ]
+          }
+        },
+        {
+          "pageid": 4634240,
+          "ns": 0,
+          "title": "サザエさん銅像",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ささえさんとうそう",
+            "page_image": "Setagaya_Sazaesan_Family_Statue_3.JPG",
+            "wikibase_item": "Q113375513"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都世田谷区桜新町に設置されている銅像"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

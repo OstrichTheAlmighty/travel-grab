@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:06.832Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京大空襲・戦災資料センター"
+    },
+    "search": [
+      {
+        "id": "Q15961648",
+        "title": "Q15961648",
+        "pageid": 17584630,
+        "concepturi": "http://www.wikidata.org/entity/Q15961648",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q15961648",
+        "display": {
+          "label": {
+            "value": "Center of the Tokyo Raids and War Damage",
+            "language": "en"
+          },
+          "description": {
+            "value": "history museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Center of the Tokyo Raids and War Damage",
+        "description": "history museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京大空襲・戦災資料センター"
+        },
+        "aliases": [
+          "東京大空襲・戦災資料センター"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:42.898Z",
+  "value": {
+    "searchinfo": {
+      "search": "銀座ライオン"
+    },
+    "search": [
+      {
+        "id": "Q105317752",
+        "title": "Q105317752",
+        "pageid": 100697979,
+        "concepturi": "http://www.wikidata.org/entity/Q105317752",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q105317752",
+        "display": {
+          "label": {
+            "value": "Ginza Lion",
+            "language": "en"
+          }
+        },
+        "label": "Ginza Lion",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "銀座ライオン"
+        },
+        "aliases": [
+          "銀座ライオン"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

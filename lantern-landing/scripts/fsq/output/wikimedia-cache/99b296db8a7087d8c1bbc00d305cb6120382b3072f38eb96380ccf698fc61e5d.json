@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:50.352Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 14921,
+          "ns": 0,
+          "title": "枚方市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひらかたし",
+            "forcetoc": "",
+            "kartographer_frames": "1",
+            "page_image_free": "Hirakata_Park.jpg",
+            "wikibase_item": "Q270912"
+          },
+          "coordinates": [
+            {
+              "lat": 34.81436,
+              "lon": 135.65064,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪府の市"
+            ]
+          }
+        },
+        {
+          "pageid": 161752,
+          "ns": 0,
+          "title": "アテルイ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あてるい",
+            "page_image_free": "束稲山登山口付近のアテルイ像.jpg",
+            "wikibase_item": "Q1088046"
+          },
+          "terms": {
+            "description": [
+              "蝦夷の族長"
+            ]
+          }
+        },
+        {
+          "pageid": 237455,
+          "ns": 0,
+          "title": "王仁",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "わに",
+            "page_image_free": "伝王仁墓_01.jpg",
+            "wikibase_item": "Q482722"
+          },
+          "terms": {
+            "description": [
+              "百済から日本に渡来し、千字文と論語を伝えたとされる伝承上の人物。『日本書紀』では王仁、『古事記』では和邇吉師と記されている。『古今和歌集』仮名序に1首"
+            ]
+          }
+        },
+        {
+          "pageid": 1324556,
+          "ns": 0,
+          "title": "日本の書道史",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しよとうし",
+            "wikibase_item": "Q42313217"
+          }
+        },
+        {
+          "pageid": 4384672,
+          "ns": 0,
+          "title": "藤塚鄰",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふしつか ちかし",
+            "page_image_free": "京城帝国大学教授時代.png",
+            "wikibase_item": "Q108111301"
+          },
+          "terms": {
+            "description": [
+              "日本の漢学者"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:12.635Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 26689,
+          "ns": 0,
+          "title": "伊集院光",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いしゆういん ひかる",
+            "wikibase_item": "Q5760419"
+          },
+          "terms": {
+            "description": [
+              "日本のタレント、ラジオパーソナリティ (1967-)"
+            ]
+          }
+        },
+        {
+          "pageid": 134870,
+          "ns": 0,
+          "title": "日経スペシャル ガイアの夜明け",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "につけいすへしやる かいあのよあけ",
+            "wikibase_item": "Q11510184"
+          },
+          "terms": {
+            "description": [
+              "テレビ東京系列で放送の経済ドキュメンタリー番組、『日経スペシャル』レーベル"
+            ]
+          }
+        },
+        {
+          "pageid": 1105827,
+          "ns": 0,
+          "title": "土屋伸之",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "つちや のふゆき",
+            "wikibase_item": "Q104012943"
+          },
+          "terms": {
+            "description": [
+              "日本の漫才師"
+            ]
+          }
+        },
+        {
+          "pageid": 5005609,
+          "ns": 0,
+          "title": "一茂×かまいたち ゲンバ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かすしけかまいたちけんは",
+            "wikibase_item": "Q132395381"
+          },
+          "terms": {
+            "description": [
+              "日本テレビのバラエティ番組 (2024-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

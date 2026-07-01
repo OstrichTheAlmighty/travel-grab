@@ -1,0 +1,82 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:50.548Z",
+  "value": {
+    "searchinfo": {
+      "search": "Observation Deck"
+    },
+    "search": [
+      {
+        "id": "Q177305",
+        "title": "Q177305",
+        "pageid": 176895,
+        "concepturi": "http://www.wikidata.org/entity/Q177305",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q177305",
+        "display": {
+          "label": {
+            "value": "observation deck",
+            "language": "en"
+          },
+          "description": {
+            "value": "elevated sightseeing platform",
+            "language": "en"
+          }
+        },
+        "label": "observation deck",
+        "description": "elevated sightseeing platform",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "observation deck"
+        }
+      },
+      {
+        "id": "Q131597161",
+        "title": "Q131597161",
+        "pageid": 125507217,
+        "concepturi": "http://www.wikidata.org/entity/Q131597161",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q131597161",
+        "display": {
+          "label": {
+            "value": "Observation deck (Hotoginosato Ryokuchi)",
+            "language": "en"
+          }
+        },
+        "label": "Observation deck (Hotoginosato Ryokuchi)",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Observation deck (Hotoginosato Ryokuchi)"
+        }
+      },
+      {
+        "id": "Q136087001",
+        "title": "Q136087001",
+        "pageid": 129799327,
+        "concepturi": "http://www.wikidata.org/entity/Q136087001",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q136087001",
+        "display": {
+          "label": {
+            "value": "observation deck in NSG Bucher Brack-Bölsdorfer Haken",
+            "language": "en"
+          },
+          "description": {
+            "value": "observation deck in a nature reserve in Sachsen-Anhalt, Germany",
+            "language": "en"
+          }
+        },
+        "label": "observation deck in NSG Bucher Brack-Bölsdorfer Haken",
+        "description": "observation deck in a nature reserve in Sachsen-Anhalt, Germany",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "observation deck in NSG Bucher Brack-Bölsdorfer Haken"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

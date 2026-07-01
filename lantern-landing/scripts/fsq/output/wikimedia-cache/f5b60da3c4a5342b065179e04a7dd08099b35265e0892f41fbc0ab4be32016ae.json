@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:21.696Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 33027,
+          "ns": 0,
+          "title": "東急百貨店",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきゆうひやつかてん",
+            "page_image_free": "Tokyu-Honten_Bunkamura_201511.jpg",
+            "wikibase_item": "Q863194"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66144444,
+              "lon": 139.69619444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の百貨店運営会社"
+            ]
+          }
+        },
+        {
+          "pageid": 33900,
+          "ns": 0,
+          "title": "イトーヨーカ堂",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いとうようかとう",
+            "page_image_free": "Seven_&_i_Holdings_Headquaters.jpg",
+            "wikibase_item": "Q3088746"
+          },
+          "coordinates": [
+            {
+              "lat": 35.58777778,
+              "lon": 139.73027778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区にあるスーパーマーケットチェーンの運営企業"
+            ]
+          }
+        },
+        {
+          "pageid": 634157,
+          "ns": 0,
+          "title": "井上 (百貨店)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いのうえひやつかてん",
+            "kartographer_frames": "1",
+            "page_image_free": "井上百貨店_本店_2017.jpg",
+            "wikibase_item": "Q11372759"
+          },
+          "coordinates": [
+            {
+              "lat": 36.22961111,
+              "lon": 137.96797222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の長野県松本市にある百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 662773,
+          "ns": 0,
+          "title": "ヤスサキ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "やすさき",
+            "page_image_free": "Pario_CiTY.JPG",
+            "wikibase_item": "Q11345028"
+          }
+        },
+        {
+          "pageid": 998856,
+          "ns": 0,
+          "title": "ハニー (協同組合)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はにい",
+            "page_image_free": "Gthumb.svg",
+            "wikibase_item": "Q11326589"
+          },
+          "terms": {
+            "description": [
+              "協同組合"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

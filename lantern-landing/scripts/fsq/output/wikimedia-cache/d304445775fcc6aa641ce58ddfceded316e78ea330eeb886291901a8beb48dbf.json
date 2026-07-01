@@ -1,0 +1,59 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:35.784Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 599591,
+          "ns": 0,
+          "title": "東中野 (中野区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひかしなかの",
+            "kartographer_frames": "1",
+            "page_image_free": "Higashi-Nakano-Sta.JPG",
+            "wikibase_item": "Q11523886"
+          },
+          "terms": {
+            "description": [
+              "東京都中野区の町"
+            ]
+          }
+        },
+        {
+          "pageid": 1073452,
+          "ns": 0,
+          "title": "東京都のご当地ソング一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ことうちそんくいちらん とうきようと",
+            "wikibase_item": "Q6639838"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1880908,
+          "ns": 0,
+          "title": "堀之内 (八王子市)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほりのうち",
+            "page_image_free": "KTR_Keio-Horinouchi_station.jpg",
+            "wikibase_item": "Q11427188"
+          },
+          "terms": {
+            "description": [
+              "東京都八王子市の地名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:10.462Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 5464,
+          "ns": 0,
+          "title": "児童文学",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しとうふんかく",
+            "page_image_free": "Children_reading_The_Grinch.jpg",
+            "wikibase_item": "Q131539"
+          },
+          "terms": {
+            "description": [
+              "児童を対象とした文学"
+            ]
+          }
+        },
+        {
+          "pageid": 74108,
+          "ns": 0,
+          "title": "角野栄子",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かとの えいこ",
+            "wikibase_item": "Q449522"
+          },
+          "terms": {
+            "description": [
+              "日本の女性童話作家 (1935-)"
+            ]
+          }
+        },
+        {
+          "pageid": 662778,
+          "ns": 0,
+          "title": "神奈川近代文学館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かなかわきんたいふんかくかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Kanabun004.jpg",
+            "wikibase_item": "Q11589405"
+          },
+          "terms": {
+            "description": [
+              "横浜市中区山手町にある神奈川県立の文学館"
+            ]
+          }
+        },
+        {
+          "pageid": 1917850,
+          "ns": 0,
+          "title": "アニメ古典文学館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あにめこてんふんかくかん",
+            "wikibase_item": "Q10901361"
+          }
+        },
+        {
+          "pageid": 4848055,
+          "ns": 0,
+          "title": "江戸川区角野栄子児童文学館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "えとかわくかとのえいこしとうふんかくかん",
+            "page_image_free": "Kiki's_Museum_of_Literature.jpg",
+            "wikibase_item": "Q123309852"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64925,
+              "lon": 139.88225,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都江戸川区にある文学館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:26.908Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 434342,
+          "ns": 0,
+          "title": "Museum of Contemporary Art, Los Angeles",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "MOCA, Los Angeles",
+            "kartographer_frames": "1",
+            "page_image_free": "Moca-exterior.jpg",
+            "wikibase-shortdesc": "Art museum in California , U.S.",
+            "wikibase_item": "Q1134646"
+          },
+          "coordinates": [
+            {
+              "lat": 34.05333333,
+              "lon": -118.25083333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "art museum in Los Angeles, California"
+            ]
+          }
+        },
+        {
+          "pageid": 434440,
+          "ns": 0,
+          "title": "Museum of Contemporary Art",
+          "index": 5,
+          "pageprops": {
+            "disambiguation": "",
+            "toc": "",
+            "wikibase-shortdesc": "Topics referred to by the same term",
+            "wikibase_item": "Q355931"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        },
+        {
+          "pageid": 4941114,
+          "ns": 0,
+          "title": "Museum of Contemporary Art Tokyo",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Museum_of_Contemporary_Art_Tokyo_2009.jpg",
+            "wikibase-shortdesc": "Art museum in Tokyo, Japan",
+            "wikibase_item": "Q1649688"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68,
+              "lon": 139.80805556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "museum in Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 15025584,
+          "ns": 0,
+          "title": "List of museums in Tokyo",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Ad_Museum_Tokyo.JPG",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q3735824"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 30409460,
+          "ns": 0,
+          "title": "Mori Art Museum",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Mori_Art_Museum_-----.png",
+            "wikibase-shortdesc": "Contemporary art museum in Tokyo, Japan",
+            "wikibase_item": "Q4410434"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66050556,
+              "lon": 139.72906667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Contemporary art museum in Tokyo, Japan."
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

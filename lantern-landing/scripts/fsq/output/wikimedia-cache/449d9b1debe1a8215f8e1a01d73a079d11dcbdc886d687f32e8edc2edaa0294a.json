@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:18.651Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 7827,
+          "ns": 0,
+          "title": "品川区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しなかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "Gate_City_Osaki.jpg",
+            "wikibase_item": "Q233495"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60917,
+              "lon": 139.73017,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の1つ"
+            ]
+          }
+        },
+        {
+          "pageid": 18987,
+          "ns": 0,
+          "title": "東急池上線",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきゆういけかみせん",
+            "page_image_free": "Tokyu-Series7000-7105F.jpg",
+            "wikibase_item": "Q1192388"
+          },
+          "terms": {
+            "description": [
+              "東急電鉄の鉄道路線"
+            ]
+          }
+        },
+        {
+          "pageid": 345826,
+          "ns": 0,
+          "title": "五反田",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こたんた",
+            "kartographer_frames": "1",
+            "page_image_free": "JR_Gotanda_sta_001.jpg",
+            "wikibase_item": "Q3091005"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62583,
+              "lon": 139.72361,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 1256609,
+          "ns": 0,
+          "title": "西五反田",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にしこたんた",
+            "kartographer_frames": "1",
+            "page_image_free": "DNP_Gotanda_Building.jpg",
+            "wikibase_item": "Q7040550"
+          },
+          "terms": {
+            "description": [
+              "東京都品川区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1727787,
+          "ns": 0,
+          "title": "五反田駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こたんた",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q736018"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62638889,
+              "lon": 139.72347222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区にある東日本旅客鉄道・東急電鉄・東京都交通局の駅"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

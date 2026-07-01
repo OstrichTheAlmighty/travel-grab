@@ -1,0 +1,117 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:52.661Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 411,
+          "ns": 0,
+          "title": "徳島県",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とくしまけん",
+            "kartographer_frames": "1",
+            "page_image_free": "Onaruto-bridge_and_Naruto_Channel,Naruto-city,Japan.JPG",
+            "wikibase_item": "Q160734"
+          },
+          "coordinates": [
+            {
+              "lat": 34.0656,
+              "lon": 134.5592,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の四国地方にある県"
+            ]
+          }
+        },
+        {
+          "pageid": 138110,
+          "ns": 0,
+          "title": "藍住町",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あいすみちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Aizumi_Ai_no_Yakata.jpg",
+            "wikibase_item": "Q1206365"
+          },
+          "coordinates": [
+            {
+              "lat": 34.12664,
+              "lon": 134.49511,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "徳島県板野郡の町"
+            ]
+          }
+        },
+        {
+          "pageid": 576350,
+          "ns": 0,
+          "title": "ホテルプラザ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ほてるふらさ",
+            "page_image_free": "Hotel_Plaza.jpg",
+            "wikibase_item": "Q11337897"
+          }
+        },
+        {
+          "pageid": 2103543,
+          "ns": 0,
+          "title": "兵庫県の観光地",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひようこけん",
+            "page_image_free": "Night_view_of_Rokkō_Island_and_Higashinada-ku,_Kobe,_Japan.jpg",
+            "wikibase_item": "Q11392864"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2811584,
+          "ns": 0,
+          "title": "ワテラス",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "わてらす",
+            "kartographer_frames": "1",
+            "page_image_free": "Waterras.jpg",
+            "wikibase_item": "Q15727066"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69752778,
+              "lon": 139.76736111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区の複合施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

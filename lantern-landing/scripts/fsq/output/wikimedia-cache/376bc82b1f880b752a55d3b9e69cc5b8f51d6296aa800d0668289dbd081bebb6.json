@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:51.895Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1673745,
+          "ns": 0,
+          "title": "A.1. Sauce",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "A1_Steak_sauce.jpg",
+            "wikibase-shortdesc": "Brand of brown sauce condiment",
+            "wikibase_item": "Q279668"
+          },
+          "terms": {
+            "description": [
+              "Brown sauce by Kraft Heinz"
+            ]
+          }
+        },
+        {
+          "pageid": 10099060,
+          "ns": 0,
+          "title": "A-1 Pictures",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "A-1_Pictures_Logo.svg",
+            "wikibase-shortdesc": "Japanese animation studio and production company",
+            "wikibase_item": "Q277763"
+          },
+          "terms": {
+            "description": [
+              "Japanese animation studio"
+            ]
+          }
+        },
+        {
+          "pageid": 22341528,
+          "ns": 0,
+          "title": "A1",
+          "index": 1,
+          "pageprops": {
+            "disambiguation": "",
+            "toc": "",
+            "wikibase-shortdesc": "Topics referred to by the same term",
+            "wikibase_item": "Q217441"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        },
+        {
+          "pageid": 61881708,
+          "ns": 0,
+          "title": "1.1.1.1",
+          "index": 4,
+          "pageprops": {
+            "wikibase-shortdesc": "Free DNS service maintained by Cloudflare in partnership with APNIC",
+            "wikibase_item": "Q52556170"
+          },
+          "terms": {
+            "description": [
+              "free DNS service maintained by Cloudflare in partnership with APNIC"
+            ]
+          }
+        },
+        {
+          "pageid": 77591639,
+          "ns": 0,
+          "title": "1",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "1 (Number)",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "Natural number",
+            "wikibase_item": "Q199"
+          },
+          "terms": {
+            "description": [
+              "natural number one"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

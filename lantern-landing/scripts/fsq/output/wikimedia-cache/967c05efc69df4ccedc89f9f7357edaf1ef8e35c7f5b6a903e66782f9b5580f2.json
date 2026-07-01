@@ -1,0 +1,116 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:46.224Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 129096,
+          "ns": 0,
+          "title": "有明コロシアム",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ありあけころしあむ",
+            "page_image_free": "Ariake_Tennis_no_Mori_Kōen_1.jpg",
+            "wikibase_item": "Q3299452"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63633333,
+              "lon": 139.79016667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区にあるスタジアム"
+            ]
+          }
+        },
+        {
+          "pageid": 246748,
+          "ns": 0,
+          "title": "有明テニスの森駅",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ありあけてにすのもり",
+            "kartographer_frames": "1",
+            "page_image_free": "Ariake-tennis-no-mori_Station,_at_Ariake,_Koto,_Tokyo_(2019-01-01)_01.jpg",
+            "wikibase_item": "Q373913"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63994444,
+              "lon": 139.78888889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区有明にあるゆりかもめの駅"
+            ]
+          }
+        },
+        {
+          "pageid": 649540,
+          "ns": 0,
+          "title": "ジャパン・オープン・テニス選手権",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しやはんおおふんてにすせんしゆけん",
+            "wikibase_item": "Q1025949"
+          }
+        },
+        {
+          "pageid": 1055214,
+          "ns": 0,
+          "title": "有明 (江東区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ありあけ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ariake_Station,_at_Ariake,_Koto,_Tokyo_(2019-08-13)_01.jpg",
+            "wikibase_item": "Q2861159"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1058042,
+          "ns": 0,
+          "title": "有明テニスの森公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ありあけてにすのもりこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Ariake_Coliseum,_at_Ariake,_Koto,_Tokyo_(2019-01-01)_01.jpg",
+            "wikibase_item": "Q11516419"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63525,
+              "lon": 139.78822222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:47.977Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 61757,
+          "ns": 0,
+          "title": "Kanagawa Prefecture",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Yokohama_(52978652484).jpg",
+            "wikibase-shortdesc": "Prefecture of Japan",
+            "wikibase_item": "Q127513"
+          },
+          "coordinates": [
+            {
+              "lat": 35.44750833,
+              "lon": 139.64234444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "prefecture of Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 335947,
+          "ns": 0,
+          "title": "Setagaya",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Komazawa_Gymnasium_&_Control_Tower_2009.jpg",
+            "wikibase-shortdesc": "Special ward in Tokyo, Japan",
+            "wikibase_item": "Q231645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64657222,
+              "lon": 139.65324722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "special ward in the Tokyo Metropolis in Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 4523205,
+          "ns": 0,
+          "title": "Uvance Todoroki Stadium by Fujitsu",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Todoroki_15031401.JPG",
+            "wikibase-shortdesc": "Sports stadium in Kawasaki, Japan",
+            "wikibase_item": "Q1190230"
+          },
+          "terms": {
+            "description": [
+              "stadium"
+            ]
+          }
+        },
+        {
+          "pageid": 53795833,
+          "ns": 0,
+          "title": "List of My Hero Academia characters",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "My Hero Academia character list",
+            "displaytitle": "List of <i>My Hero Academia</i> characters",
+            "page_image": "Mhacharacters.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q29915557"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 67128318,
+          "ns": 0,
+          "title": "Nijisanji",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "AnyColor_logo.svg",
+            "wikibase-shortdesc": "Japanese virtual YouTuber talent agency",
+            "wikibase_item": "Q56345672"
+          },
+          "terms": {
+            "description": [
+              "Japanese Virtual YouTuber group"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

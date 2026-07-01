@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:11.996Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 383182,
+          "ns": 0,
+          "title": "熊谷守一",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "くまかい もりかす",
+            "page_image_free": "Portrait_of_Kumagai_Morikazu_-_1942_-_Yasui_Nakaji.png",
+            "wikibase_item": "Q11568738"
+          },
+          "terms": {
+            "description": [
+              "1880-1977, 画家"
+            ]
+          }
+        },
+        {
+          "pageid": 659525,
+          "ns": 0,
+          "title": "愛知県美術館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あいちけんひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "View_of_Aichi_Arts_Center_from_the_Top_of_Spaceship-Aqua_of_Oasis21,_Higashi-Sakura_Higashi_Ward_Nagoya_2022.jpg",
+            "wikibase_item": "Q11256823"
+          },
+          "terms": {
+            "description": [
+              "愛知県名古屋市にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 660344,
+          "ns": 0,
+          "title": "名古屋市美術館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "なこやしひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Nagoya_City_Art_Museum,_Sakae_Naka_Ward_Nagoya_2022.jpg",
+            "wikibase_item": "Q469573"
+          },
+          "terms": {
+            "description": [
+              "愛知県名古屋市にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 909781,
+          "ns": 0,
+          "title": "板橋区立美術館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いたはしくりつひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Itabashi_ku_ritsu_Bijutsukan_Gaikan_20200321.jpg",
+            "wikibase_item": "Q11532663"
+          },
+          "coordinates": [
+            {
+              "lat": 35.78421355,
+              "lon": 139.64449133,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都板橋区の美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 4475721,
+          "ns": 0,
+          "title": "豊島区立熊谷守一美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "としまくりつくまかいもりかすひしゆつかん",
+            "page_image_free": "Morikazu_Kumagai_Memorial_Gallery_2021-10-21.jpg",
+            "wikibase_item": "Q109597345"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73375,
+              "lon": 139.69088889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京・千早の熊谷守一の旧居跡地にある美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

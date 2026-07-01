@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:25.049Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 166740,
+          "ns": 0,
+          "title": "エビフライ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "えひふらい",
+            "page_image_free": "Ebi_Fry_003.jpg",
+            "wikibase_item": "Q120495866"
+          },
+          "terms": {
+            "description": [
+              "日本発祥のフライ料理"
+            ]
+          }
+        },
+        {
+          "pageid": 254373,
+          "ns": 0,
+          "title": "寿司",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すし",
+            "page_image_free": "Various_sushi,_beautiful_October_night_at_midnight.jpg",
+            "wikibase_item": "Q46383"
+          },
+          "terms": {
+            "description": [
+              "米飯と主に魚介類を組み合わせた日本料理"
+            ]
+          }
+        },
+        {
+          "pageid": 254520,
+          "ns": 0,
+          "title": "天ぷら",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "てんふら",
+            "page_image_free": "Tempurainjapan-ikebukuro-dec312007.jpg",
+            "wikibase_item": "Q328709"
+          },
+          "terms": {
+            "description": [
+              "魚介類や野菜を溶いた小麦粉で包み油で揚げて調理する日本料理"
+            ]
+          }
+        },
+        {
+          "pageid": 1423207,
+          "ns": 0,
+          "title": "おでん",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おてん",
+            "page_image_free": "Oden_001.jpg",
+            "wikibase_item": "Q655040"
+          },
+          "terms": {
+            "description": [
+              "日本料理、煮物"
+            ]
+          }
+        },
+        {
+          "pageid": 2007199,
+          "ns": 0,
+          "title": "ラーメン",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "らあめん",
+            "page_image_free": "Shoyu_Ramen（Tokyo_Ramen）_-_01.jpg",
+            "wikibase_item": "Q234646"
+          },
+          "terms": {
+            "description": [
+              "日本の麺料理"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

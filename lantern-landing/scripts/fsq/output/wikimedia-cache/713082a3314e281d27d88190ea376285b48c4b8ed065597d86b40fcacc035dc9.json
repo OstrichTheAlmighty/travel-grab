@@ -1,0 +1,130 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:36.938Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 7212,
+          "ns": 0,
+          "title": "京都市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きようとし",
+            "kartographer_frames": "2",
+            "page_image_free": "Kiyomizu-dera,_Kyoto,_November_2016_-02.jpg",
+            "wikibase_item": "Q34600"
+          },
+          "coordinates": [
+            {
+              "lat": 35.01161,
+              "lon": 135.76811,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都府庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 25185,
+          "ns": 0,
+          "title": "沼津市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ぬまつし",
+            "kartographer_frames": "1",
+            "page_image_free": "Numazu_Montage.jpg",
+            "wikibase_item": "Q241037"
+          },
+          "coordinates": [
+            {
+              "lat": 35.09558,
+              "lon": 138.86344,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 265215,
+          "ns": 0,
+          "title": "蕎麦",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "そは",
+            "page_image_free": "Mori-soba_002.jpg",
+            "wikibase_item": "Q753910"
+          },
+          "terms": {
+            "description": [
+              "そば粉で作られた麺および料理"
+            ]
+          }
+        },
+        {
+          "pageid": 1197324,
+          "ns": 0,
+          "title": "Qiball",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きほおる",
+            "kartographer_frames": "1",
+            "page_image_free": "Qiball2.jpg",
+            "wikibase_item": "Q11240266"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60744444,
+              "lon": 140.12286111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉市中央区にある官民複合施設"
+            ]
+          }
+        },
+        {
+          "pageid": 1924341,
+          "ns": 0,
+          "title": "法政大学",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ほうせいたいかく",
+            "page_image_free": "法政大学市ヶ谷キャンパス.jpg",
+            "wikibase_item": "Q1323040"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69563889,
+              "lon": 139.74066667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都千代田区にある私立大学"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

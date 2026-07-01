@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:03.124Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 31165,
+          "ns": 0,
+          "title": "物流",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふつりゆう",
+            "wikibase_item": "Q108039701"
+          }
+        },
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 1060918,
+          "ns": 0,
+          "title": "鉄道博物館 (さいたま市)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "てつとうはくふつかん",
+            "page_image_free": "Logo_of_Railway_museum(Saitama).svg",
+            "wikibase_item": "Q846106"
+          },
+          "coordinates": [
+            {
+              "lat": 35.920556,
+              "lon": 139.618333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県さいたま市大宮区にある鉄道博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 1246360,
+          "ns": 0,
+          "title": "海事博物館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かいしはくふつかん",
+            "page_image_free": "Wisconsin_museum.JPG",
+            "wikibase_item": "Q1863818"
+          },
+          "terms": {
+            "description": [
+              "海事に関する事柄の展示した博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 3292499,
+          "ns": 0,
+          "title": "物流博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふつりゆうはくふつかん",
+            "page_image_free": "Museum_of_Logistics.JPG",
+            "wikibase_item": "Q21654524"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62909,
+              "lon": 139.732234,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

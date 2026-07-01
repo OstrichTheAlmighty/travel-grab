@@ -1,0 +1,75 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:23.414Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 54734,
+          "ns": 0,
+          "title": "BS日本",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひいえすにつほん",
+            "page_image_free": "Nippon_TV_Tower.jpg",
+            "wikibase_item": "Q8013425"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66441944,
+              "lon": 139.75991111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本のBSデジタル放送局"
+            ]
+          }
+        },
+        {
+          "pageid": 4646105,
+          "ns": 0,
+          "title": "杉山央",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すきやま おう",
+            "wikibase_item": "Q116936069"
+          },
+          "terms": {
+            "description": [
+              "日本のアートイベントのプロデューサー"
+            ]
+          }
+        },
+        {
+          "pageid": 4824943,
+          "ns": 0,
+          "title": "森ビル デジタルアート ミュージアム:エプソン チームラボボーダレス",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "もりひるてしたるああとみゆうしあむえふそんちいむらほほおたれす",
+            "wikibase_item": "Q104235671"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区にあった美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 5221602,
+          "ns": 0,
+          "title": "Media Ambition Tokyo",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "めていああんひしよんとうきよう",
+            "unexpectedUnconnectedPage": "0"
+          }
+        }
+      ]
+    }
+  }
+}

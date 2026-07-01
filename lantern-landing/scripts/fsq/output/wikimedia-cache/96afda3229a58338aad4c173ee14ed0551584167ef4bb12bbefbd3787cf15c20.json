@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:35.362Z",
+  "value": {
+    "searchinfo": {
+      "search": "江戸川区郷土資料室"
+    },
+    "search": [
+      {
+        "id": "Q117424691",
+        "title": "Q117424691",
+        "pageid": 112188061,
+        "concepturi": "http://www.wikidata.org/entity/Q117424691",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q117424691",
+        "display": {
+          "label": {
+            "value": "Edogawa-ku Local Museum",
+            "language": "en"
+          }
+        },
+        "label": "Edogawa-ku Local Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "江戸川区郷土資料室"
+        },
+        "aliases": [
+          "江戸川区郷土資料室"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

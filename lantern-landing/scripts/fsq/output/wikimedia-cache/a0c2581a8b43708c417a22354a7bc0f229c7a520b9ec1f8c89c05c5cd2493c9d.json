@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:25.706Z",
+  "value": {
+    "searchinfo": {
+      "search": "Meiji Jingu Stadium"
+    },
+    "search": [
+      {
+        "id": "Q944559",
+        "title": "Q944559",
+        "pageid": 894685,
+        "concepturi": "http://www.wikidata.org/entity/Q944559",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q944559",
+        "display": {
+          "label": {
+            "value": "Meiji Jingu Stadium",
+            "language": "en"
+          },
+          "description": {
+            "value": "baseball stadium in Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Meiji Jingu Stadium",
+        "description": "baseball stadium in Tokyo",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Meiji Jingu Stadium"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

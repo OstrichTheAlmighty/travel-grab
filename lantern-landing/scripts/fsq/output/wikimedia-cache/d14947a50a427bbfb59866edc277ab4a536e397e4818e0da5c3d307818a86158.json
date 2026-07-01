@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:26.982Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 32977,
+          "ns": 0,
+          "title": "松坂屋",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "まつさかや",
+            "page_image_free": "Matsuzakaya-minamikan.JPG",
+            "wikibase_item": "Q3116938"
+          },
+          "coordinates": [
+            {
+              "lat": 35.16527778,
+              "lon": 136.90788889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 139708,
+          "ns": 0,
+          "title": "市川崑",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いちかわ こん",
+            "page_image_free": "Ichikawa-Kon-2.jpg",
+            "wikibase_item": "Q55397"
+          },
+          "terms": {
+            "description": [
+              "日本の映画監督"
+            ]
+          }
+        },
+        {
+          "pageid": 311857,
+          "ns": 0,
+          "title": "和田アキ子",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "わた あきこ",
+            "wikibase_item": "Q710937"
+          },
+          "terms": {
+            "description": [
+              "日本の女性歌手、タレント、女優"
+            ]
+          }
+        },
+        {
+          "pageid": 631641,
+          "ns": 0,
+          "title": "日建設計",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "につけんせつけい",
+            "page_image_free": "Nikken_sekkei_tokyo_building_iidabashi.JPG",
+            "wikibase_item": "Q2804130"
+          },
+          "terms": {
+            "description": [
+              "日本の組織系建築設計事務所"
+            ]
+          }
+        },
+        {
+          "pageid": 3887817,
+          "ns": 0,
+          "title": "牛銀本店",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きゆうきんほんてん",
+            "kartographer_frames": "1",
+            "page_image_free": "Gyugin.jpg",
+            "wikibase_item": "Q60989196"
+          },
+          "coordinates": [
+            {
+              "lat": 34.57916667,
+              "lon": 136.5285,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

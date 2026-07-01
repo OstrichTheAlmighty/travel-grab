@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:49.527Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 3641298,
+          "ns": 0,
+          "title": "建築倉庫ミュージアム",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "けんちくそうこみゆうしあむ",
+            "page_image_free": "WHAT_MUSEUM.jpg",
+            "wikibase_item": "Q38266999"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62,
+              "lon": 139.75,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区のWHAT MUSEUM内にあるミュージアム"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

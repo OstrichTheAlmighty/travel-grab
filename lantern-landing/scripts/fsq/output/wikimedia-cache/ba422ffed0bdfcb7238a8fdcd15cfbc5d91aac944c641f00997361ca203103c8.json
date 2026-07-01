@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:25.456Z",
+  "value": {
+    "searchinfo": {
+      "search": "SOMPO美術館"
+    },
+    "search": [
+      {
+        "id": "Q1614504",
+        "title": "Q1614504",
+        "pageid": 1549201,
+        "concepturi": "http://www.wikidata.org/entity/Q1614504",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1614504",
+        "display": {
+          "label": {
+            "value": "Sompo Museum of Art",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum",
+            "language": "en"
+          }
+        },
+        "label": "Sompo Museum of Art",
+        "description": "art museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "SOMPO美術館"
+        },
+        "aliases": [
+          "SOMPO美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

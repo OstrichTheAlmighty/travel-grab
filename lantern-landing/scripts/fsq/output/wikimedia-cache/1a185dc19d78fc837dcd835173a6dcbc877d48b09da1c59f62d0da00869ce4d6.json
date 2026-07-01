@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:27.633Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 7827,
+          "ns": 0,
+          "title": "品川区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しなかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "Gate_City_Osaki.jpg",
+            "wikibase_item": "Q233495"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60917,
+              "lon": 139.73017,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の1つ"
+            ]
+          }
+        },
+        {
+          "pageid": 16097,
+          "ns": 0,
+          "title": "ファッション",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふあつしよん",
+            "wikibase_item": "Q12684"
+          },
+          "terms": {
+            "description": [
+              "服装などのスタイルや風習"
+            ]
+          }
+        },
+        {
+          "pageid": 469265,
+          "ns": 0,
+          "title": "杉野服飾大学",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すきのふくしよく",
+            "page_image_free": "Sugino_Fashion_College.JPG",
+            "wikibase_item": "Q7635119"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63161111,
+              "lon": 139.71583333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区に本部を置く私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 916799,
+          "ns": 0,
+          "title": "杉野芳子",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "すきの よしこ",
+            "page_image_free": "Sugino_Yoshiko.JPG",
+            "wikibase_item": "Q11522372"
+          },
+          "terms": {
+            "description": [
+              "日本のファッションデザイナーで、学校経営者"
+            ]
+          }
+        },
+        {
+          "pageid": 920011,
+          "ns": 0,
+          "title": "杉野繁一",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すきの しけいち",
+            "page_image_free": "Shigeichi_Sugino_and_Yoshiko_Sugino.jpg",
+            "wikibase_item": "Q11522371"
+          },
+          "terms": {
+            "description": [
+              "日本の建築家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

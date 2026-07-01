@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:49.334Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 31991,
+          "ns": 0,
+          "title": "東武博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうふはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Tobu_Museum.jpg",
+            "wikibase_item": "Q3915461"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7244,
+              "lon": 139.8192,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 110279,
+          "ns": 0,
+          "title": "東武動物公園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうふとうふつこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Ferris_wheel_in_Tobu_Zoo_Park_001.jpg",
+            "wikibase_item": "Q11527526"
+          },
+          "coordinates": [
+            {
+              "lat": 36.02008333,
+              "lon": 139.71972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県宮代町と白岡市にある遊園地・動物園"
+            ]
+          }
+        },
+        {
+          "pageid": 3417655,
+          "ns": 0,
+          "title": "Japan Railway Journal",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しやはんれえるうえいしやあなる",
+            "wikibase_item": "Q24875741"
+          }
+        },
+        {
+          "pageid": 3834955,
+          "ns": 0,
+          "title": "高坂彫刻プロムナード",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たかさかちようこくふろむなあと",
+            "page_image_free": "Map_of_Saitama_Prefecture_Ja.svg",
+            "wikibase_item": "Q60985422"
+          },
+          "coordinates": [
+            {
+              "lat": 36.00247222,
+              "lon": 139.39669444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県東松山市の歩道に展示される高田博厚の彫刻作品群"
+            ]
+          }
+        },
+        {
+          "pageid": 4228877,
+          "ns": 0,
+          "title": "岡田記念館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おかたきねんかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Okada_Memorial_Hall.JPG",
+            "wikibase_item": "Q107121021"
+          },
+          "coordinates": [
+            {
+              "lat": 36.38616667,
+              "lon": 139.73336111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "栃木県栃木市にある屋敷を公開した施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

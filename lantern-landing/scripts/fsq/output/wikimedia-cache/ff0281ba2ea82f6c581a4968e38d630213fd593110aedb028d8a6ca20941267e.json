@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:45:53.930Z",
+  "value": {
+    "searchinfo": {
+      "search": "ザ・ダイブ"
+    },
+    "search": [
+      {
+        "id": "Q7770995",
+        "title": "Q7770995",
+        "pageid": 7700710,
+        "concepturi": "http://www.wikidata.org/entity/Q7770995",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q7770995",
+        "display": {
+          "label": {
+            "value": "The Typewriter",
+            "language": "en"
+          },
+          "description": {
+            "value": "musical composition",
+            "language": "en"
+          }
+        },
+        "label": "The Typewriter",
+        "description": "musical composition",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ザ・タイプライター"
+        },
+        "aliases": [
+          "ザ・タイプライター"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

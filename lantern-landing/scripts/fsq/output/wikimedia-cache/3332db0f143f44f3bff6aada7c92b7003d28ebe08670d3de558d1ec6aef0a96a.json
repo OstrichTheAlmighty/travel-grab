@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:35.584Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8251,
+          "ns": 0,
+          "title": "江東区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こうとうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tomioka_Hachiman-gu_201708.jpg",
+            "wikibase_item": "Q215175"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67281,
+              "lon": 139.81728,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 358129,
+          "ns": 0,
+          "title": "門前仲町",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "もんせんなかちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Monzen-nakacho_Station_-_exit-3-2018-3-10.jpg",
+            "wikibase_item": "Q11654956"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 363249,
+          "ns": 0,
+          "title": "深川区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふかかわく",
+            "wikibase_item": "Q11559997"
+          },
+          "terms": {
+            "description": [
+              "かつて日本の東京府東京市にあった区"
+            ]
+          }
+        },
+        {
+          "pageid": 1608983,
+          "ns": 0,
+          "title": "東京駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-STA_Marunouchi-Entrance_2023.jpg",
+            "wikibase_item": "Q283196"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68111111,
+              "lon": 139.76666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある駅"
+            ]
+          }
+        },
+        {
+          "pageid": 1691666,
+          "ns": 0,
+          "title": "東京都の観光地",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようと",
+            "page_image_free": "東京都区部-観光地図-1.jpg",
+            "wikibase_item": "Q10860697"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

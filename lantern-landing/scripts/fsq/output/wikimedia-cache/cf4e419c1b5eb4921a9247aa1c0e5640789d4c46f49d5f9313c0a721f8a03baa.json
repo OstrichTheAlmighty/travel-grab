@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:42.879Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 5172,
+          "ns": 0,
+          "title": "池田勇人",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いけた はやと",
+            "page_image_free": "Hayato_Ikeda_19600719.jpg",
+            "wikibase_item": "Q299142"
+          },
+          "terms": {
+            "description": [
+              "日本の官僚、政治家 (1899-1965)。第58・59・60代内閣総理大臣、通産大臣、大蔵大臣。"
+            ]
+          }
+        },
+        {
+          "pageid": 70237,
+          "ns": 0,
+          "title": "屋号",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "やこう",
+            "wikibase_item": "Q428873"
+          },
+          "terms": {
+            "description": [
+              "一門・一家の特徴を基に家に付けられた称号、苗字公称許可の無い庶民らが名乗った家名"
+            ]
+          }
+        },
+        {
+          "pageid": 173222,
+          "ns": 0,
+          "title": "池田満寿夫",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いけた ますお",
+            "page_image_free": "Ikeda_Masuo_bijutsu-techo_1962201.jpg",
+            "wikibase_item": "Q2345434"
+          },
+          "terms": {
+            "description": [
+              "画家、版画家 (1934-1997)"
+            ]
+          }
+        },
+        {
+          "pageid": 253252,
+          "ns": 0,
+          "title": "ベトナム料理",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "へとなむりようり",
+            "page_image_free": "2023-07-28_Cuisine_of_Hanoi_一般家庭ベトナム料理DSCF0706.jpg",
+            "wikibase_item": "Q826059"
+          },
+          "terms": {
+            "description": [
+              "ベトナムに伝わる郷土料理"
+            ]
+          }
+        },
+        {
+          "pageid": 1171384,
+          "ns": 0,
+          "title": "スシ王子!",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "すしおうし",
+            "wikibase_item": "Q4118320"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ番組シリーズ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

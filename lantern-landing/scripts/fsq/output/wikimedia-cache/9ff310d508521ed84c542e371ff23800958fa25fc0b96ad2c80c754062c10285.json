@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:38.836Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 19903,
+          "ns": 0,
+          "title": "国立民族学博物館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こくりつみんそくかくはくふつかん",
+            "page_image_free": "National_museum_of_ethnology_Japan.jpg",
+            "wikibase_item": "Q147157"
+          },
+          "coordinates": [
+            {
+              "lat": 34.81286111,
+              "lon": 135.52968333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の大阪府にある民族学博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 639091,
+          "ns": 0,
+          "title": "民主音楽協会",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みんしゆおんかくきようかい",
+            "page_image_free": "Min-On_Music_Museum.JPG",
+            "wikibase_item": "Q6634542"
+          },
+          "terms": {
+            "description": [
+              "日本の一般財団法人"
+            ]
+          }
+        },
+        {
+          "pageid": 1060918,
+          "ns": 0,
+          "title": "鉄道博物館 (さいたま市)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "てつとうはくふつかん",
+            "page_image_free": "Logo_of_Railway_museum(Saitama).svg",
+            "wikibase_item": "Q846106"
+          },
+          "coordinates": [
+            {
+              "lat": 35.920556,
+              "lon": 139.618333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県さいたま市大宮区にある鉄道博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 1936002,
+          "ns": 0,
+          "title": "藤田敏雄",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふした としお",
+            "wikibase_item": "Q11624805"
+          },
+          "terms": {
+            "description": [
+              "日本の劇作家、作詞家、演出家"
+            ]
+          }
+        },
+        {
+          "pageid": 3951283,
+          "ns": 0,
+          "title": "民音音楽博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みんおんおんかくはくふつかん",
+            "page_image_free": "Min-On_Music_Museum.JPG",
+            "wikibase_item": "Q65272034"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6823,
+              "lon": 139.71927,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

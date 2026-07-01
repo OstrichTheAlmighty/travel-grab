@@ -1,0 +1,129 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:14.720Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8587,
+          "ns": 0,
+          "title": "名古屋市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "なこやし",
+            "kartographer_frames": "1",
+            "page_image_free": "View_of_Westward_from_Sky_Deck_MIRAI360,_Nishiki_Naka_Ward_Nagoya_2022.jpg",
+            "wikibase_item": "Q11751"
+          },
+          "coordinates": [
+            {
+              "lat": 35.1814,
+              "lon": 136.9064,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 62124,
+          "ns": 0,
+          "title": "明治神宮",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めいししんくう",
+            "kartographer_frames": "1",
+            "page_image_free": "Courtyard_of_Meiji_Shrine_20190717.jpg",
+            "wikibase_item": "Q287165"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67611111,
+              "lon": 139.69916667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 71135,
+          "ns": 0,
+          "title": "ラフォーレ原宿",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "らふおおれはらしゆく",
+            "page_image_free": "Laforet-Harajuku-Tokyo-01.jpg",
+            "wikibase_item": "Q1770607"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66908333,
+              "lon": 139.7055,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都・表参道にあるファッションビル"
+            ]
+          }
+        },
+        {
+          "pageid": 547281,
+          "ns": 0,
+          "title": "聖徳記念絵画館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "せいとくきねんかいかかん",
+            "page_image_free": "Meiji_Memorial_Picture_Gallery_tokyo.jpg",
+            "wikibase_item": "Q5153794"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67877778,
+              "lon": 139.71763889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 1625413,
+          "ns": 0,
+          "title": "明治天皇",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "めいしてんのう",
+            "page_image_free": "Emperor_Meiji_in_1873.jpg",
+            "wikibase_item": "Q174231"
+          },
+          "terms": {
+            "description": [
+              "日本の第122代天皇 (1852-1912)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

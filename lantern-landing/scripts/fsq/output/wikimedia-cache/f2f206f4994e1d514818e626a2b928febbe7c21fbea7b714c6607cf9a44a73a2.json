@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:35.577Z",
+  "value": {
+    "searchinfo": {
+      "search": "がすてなーに ガスの科学館"
+    },
+    "search": [
+      {
+        "id": "Q11295937",
+        "title": "Q11295937",
+        "pageid": 12435997,
+        "concepturi": "http://www.wikidata.org/entity/Q11295937",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11295937",
+        "display": {
+          "label": {
+            "value": "Gas Science Museum",
+            "language": "en"
+          }
+        },
+        "label": "Gas Science Museum",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "がすてなーに ガスの科学館"
+        },
+        "aliases": [
+          "がすてなーに ガスの科学館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

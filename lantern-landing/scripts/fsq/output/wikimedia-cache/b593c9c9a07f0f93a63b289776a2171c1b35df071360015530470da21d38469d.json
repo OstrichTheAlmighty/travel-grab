@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:11.021Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8907,
+          "ns": 0,
+          "title": "教育関係人物一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きよういくかんけいしんふついちらん",
+            "wikibase_item": "Q4391591"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 39807,
+          "ns": 0,
+          "title": "土方歳三",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひしかた としそう",
+            "page_image_free": "Hijikata_Toshizo.jpg",
+            "wikibase_item": "Q701182"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸時代の武士 (1835-1869)"
+            ]
+          }
+        },
+        {
+          "pageid": 122623,
+          "ns": 0,
+          "title": "高島忠夫",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たかしま たたお",
+            "page_image_free": "Tadao_Takashima.jpg",
+            "wikibase_item": "Q279321"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優、タレント (1930-2019)"
+            ]
+          }
+        },
+        {
+          "pageid": 411096,
+          "ns": 0,
+          "title": "毎日出版文化賞",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "まいにちしゆつはんふんかしよう",
+            "page_image_free": "Lit.jpg",
+            "wikibase_item": "Q1554156"
+          },
+          "terms": {
+            "description": [
+              "毎日新聞社が主催する文学・文化賞"
+            ]
+          }
+        },
+        {
+          "pageid": 2758569,
+          "ns": 0,
+          "title": "慶應義塾大学",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "けいおうきしゆくたいかく",
+            "page_image_free": "Old_Keio_University_Library_3.jpg",
+            "wikibase_item": "Q815432"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64894444,
+              "lon": 139.74291667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある私立大学"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

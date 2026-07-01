@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:06.353Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 10742,
+          "ns": 0,
+          "title": "板橋区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いたはしく",
+            "kartographer_frames": "1",
+            "page_image_free": "Itabashi-at-nakajuku.JPG",
+            "wikibase_item": "Q232635"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75119,
+              "lon": 139.70928,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 492709,
+          "ns": 0,
+          "title": "小豆沢",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あすさわ",
+            "kartographer_frames": "1",
+            "page_image_free": "AzusawaShingashiriver.jpg",
+            "wikibase_item": "Q11463805"
+          },
+          "terms": {
+            "description": [
+              "東京都板橋区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 972212,
+          "ns": 0,
+          "title": "坂下 (板橋区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さかした",
+            "kartographer_frames": "1",
+            "page_image_free": "Chogocho_Traffic_Park.jpg",
+            "wikibase_item": "Q11424820"
+          },
+          "terms": {
+            "description": [
+              "東京都板橋区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1087616,
+          "ns": 0,
+          "title": "東坂下",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひかしさかした",
+            "kartographer_frames": "1",
+            "page_image_free": "Shimurabashi-2.jpg",
+            "wikibase_item": "Q11526394"
+          },
+          "terms": {
+            "description": [
+              "東京都板橋区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1173097,
+          "ns": 0,
+          "title": "志村 (東京府)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しむら",
+            "wikibase_item": "Q11490978"
+          },
+          "coordinates": [
+            {
+              "lat": 35.77647,
+              "lon": 139.69597,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京府北豊島郡にあった村"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

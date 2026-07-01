@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:39.159Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 29898,
+          "ns": 0,
+          "title": "川上弘美",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かわかみ ひろみ",
+            "page_image_free": "Hiromi_Kawakami_DSC01346_LiteratureXchange_Festival_(cropped2).jpg",
+            "wikibase_item": "Q286701"
+          },
+          "terms": {
+            "description": [
+              "日本の小説家"
+            ]
+          }
+        },
+        {
+          "pageid": 607388,
+          "ns": 0,
+          "title": "多摩川",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たまかわ",
+            "kartographer_frames": "2",
+            "page_image_free": "Odakyu_Tama_River_Bridge.jpg",
+            "wikibase_item": "Q1063006"
+          },
+          "coordinates": [
+            {
+              "lat": 35.521784,
+              "lon": 139.798333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "山梨県・東京都・神奈川県を流れる河川"
+            ]
+          }
+        },
+        {
+          "pageid": 752661,
+          "ns": 0,
+          "title": "関之尾滝",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せきのおのたき",
+            "kartographer_frames": "1",
+            "page_image_free": "Sekinoo_falls.jpg",
+            "wikibase_item": "Q11655547"
+          },
+          "coordinates": [
+            {
+              "lat": 31.76111111,
+              "lon": 130.98722222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "宮崎県都城市にある滝"
+            ]
+          }
+        },
+        {
+          "pageid": 1425853,
+          "ns": 0,
+          "title": "神様はじめました",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かみさまはしめました",
+            "wikibase_item": "Q484259"
+          },
+          "terms": {
+            "description": [
+              "鈴木ジュリエッタによる日本の漫画作品およびそれを原作とするアニメ、ゲーム、舞台等の作品群"
+            ]
+          }
+        },
+        {
+          "pageid": 1962963,
+          "ns": 0,
+          "title": "エンタの神様",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えんたのかみさま",
+            "wikibase_item": "Q11291381"
+          },
+          "terms": {
+            "description": [
+              "日本テレビのお笑い・バラエティ番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

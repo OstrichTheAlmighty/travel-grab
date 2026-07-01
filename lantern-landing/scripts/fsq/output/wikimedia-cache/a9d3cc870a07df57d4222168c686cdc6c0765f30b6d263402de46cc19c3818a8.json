@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:13.652Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 242247,
+          "ns": 0,
+          "title": "陸軍士官学校 (日本)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "りくくんしかんかつこう",
+            "page_image_free": "Rikugun_Shikan_Gakko_1907.jpg",
+            "wikibase_item": "Q700130"
+          },
+          "terms": {
+            "description": [
+              "日本にかつて存在した軍学校"
+            ]
+          }
+        },
+        {
+          "pageid": 257189,
+          "ns": 0,
+          "title": "大本営",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たいほんえい",
+            "page_image_free": "Imperial_general_headquaters_meeting.jpg",
+            "wikibase_item": "Q702397"
+          },
+          "terms": {
+            "description": [
+              "旧日本軍の最高統帥機関"
+            ]
+          }
+        },
+        {
+          "pageid": 278281,
+          "ns": 0,
+          "title": "中央大学",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ちゆうおう",
+            "page_image_free": "FOREST_GATEWAY_CHUO-2.jpg",
+            "wikibase_item": "Q1091287"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64138611,
+              "lon": 139.40573889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都八王子市にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 315857,
+          "ns": 0,
+          "title": "陸軍予科士官学校",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "りくくんよかしかんかつこう",
+            "page_image_free": "JGSDF_Camp_Asaka_Shinbudai_Kinenkan.jpg",
+            "wikibase_item": "Q11658659"
+          },
+          "terms": {
+            "description": [
+              "大日本帝国陸軍の教育機関の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 380971,
+          "ns": 0,
+          "title": "防衛省市ヶ谷地区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いちかやちゆうとんち",
+            "kartographer_frames": "1",
+            "page_image_free": "Ministry_of_Defense2.JPG",
+            "wikibase_item": "Q11479979"
+          },
+          "terms": {
+            "description": [
+              "東京都にある陸上自衛隊の駐屯地、防衛省施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

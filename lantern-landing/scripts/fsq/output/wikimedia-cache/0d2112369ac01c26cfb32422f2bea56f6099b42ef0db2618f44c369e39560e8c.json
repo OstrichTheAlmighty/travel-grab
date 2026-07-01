@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:49.248Z",
+  "value": {
+    "searchinfo": {
+      "search": "ARCHI-DEPOT"
+    },
+    "search": [
+      {
+        "id": "Q38266999",
+        "title": "Q38266999",
+        "pageid": 39633161,
+        "concepturi": "http://www.wikidata.org/entity/Q38266999",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q38266999",
+        "display": {
+          "label": {
+            "value": "Archi-Depot Museum",
+            "language": "en"
+          }
+        },
+        "label": "Archi-Depot Museum",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Archi-Depot Museum"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

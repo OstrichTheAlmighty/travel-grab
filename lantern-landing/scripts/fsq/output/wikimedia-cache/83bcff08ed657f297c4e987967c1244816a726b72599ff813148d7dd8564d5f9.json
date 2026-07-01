@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:12.191Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1899,
+          "ns": 0,
+          "title": "歴史",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "れきし",
+            "page_image_free": "Kojiki_Shinpukuji.jpg",
+            "wikibase_item": "Q309"
+          },
+          "terms": {
+            "description": [
+              "過去の出来事やその研究"
+            ]
+          }
+        },
+        {
+          "pageid": 26103,
+          "ns": 0,
+          "title": "マシュー・ペリー",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "へりい ましゆう かるふれいす",
+            "page_image_free": "Commodore_Matthew_Calbraith_Perry.png",
+            "wikibase_item": "Q61855"
+          },
+          "terms": {
+            "description": [
+              "アメリカの海軍軍人 (1794-1858)"
+            ]
+          }
+        },
+        {
+          "pageid": 33352,
+          "ns": 0,
+          "title": "杉原千畝",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すきはら ちうね",
+            "page_image_free": "Sugihara_b.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q161381"
+          },
+          "terms": {
+            "description": [
+              "日本の官僚、外交官 (1900-1986)"
+            ]
+          }
+        },
+        {
+          "pageid": 1002957,
+          "ns": 0,
+          "title": "外務省外交史料館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かいむしようかいこうしりようかん",
+            "page_image_free": "Iikura_Guesthouse.jpg",
+            "wikibase_item": "Q3788463"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66,
+              "lon": 139.74,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある外務省の公文書館"
+            ]
+          }
+        },
+        {
+          "pageid": 1163462,
+          "ns": 0,
+          "title": "フランクリン・ルーズベルト",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "るうすへると ふらんくりん",
+            "page_image_free": "FDR_1944_Color_Portrait.jpg",
+            "wikibase_item": "Q8007"
+          },
+          "terms": {
+            "description": [
+              "アメリカ合衆国の第32代大統領"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

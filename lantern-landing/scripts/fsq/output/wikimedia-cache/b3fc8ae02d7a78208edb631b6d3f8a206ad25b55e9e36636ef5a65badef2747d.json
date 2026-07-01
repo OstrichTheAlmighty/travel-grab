@@ -1,0 +1,209 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:38.128Z",
+  "value": {
+    "searchinfo": {
+      "search": "六本木"
+    },
+    "search": [
+      {
+        "id": "Q265071",
+        "title": "Q265071",
+        "pageid": 256936,
+        "concepturi": "http://www.wikidata.org/entity/Q265071",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q265071",
+        "display": {
+          "label": {
+            "value": "Roppongi",
+            "language": "en"
+          },
+          "description": {
+            "value": "neighborhood in Minato-ku, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Roppongi",
+        "description": "neighborhood in Minato-ku, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "六本木"
+        },
+        "aliases": [
+          "六本木"
+        ]
+      },
+      {
+        "id": "Q47092415",
+        "title": "Q47092415",
+        "pageid": 48146084,
+        "concepturi": "http://www.wikidata.org/entity/Q47092415",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q47092415",
+        "display": {
+          "label": {
+            "value": "Roppongi",
+            "language": "en"
+          },
+          "description": {
+            "value": "Japanese family name (六本木)",
+            "language": "en"
+          }
+        },
+        "label": "Roppongi",
+        "description": "Japanese family name (六本木)",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "六本木"
+        },
+        "aliases": [
+          "六本木"
+        ]
+      },
+      {
+        "id": "Q1071084",
+        "title": "Q1071084",
+        "pageid": 1019580,
+        "concepturi": "http://www.wikidata.org/entity/Q1071084",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1071084",
+        "display": {
+          "label": {
+            "value": "Roppongi Hills",
+            "language": "en"
+          },
+          "description": {
+            "value": "buildings complex in Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Roppongi Hills",
+        "description": "buildings complex in Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "六本木ヒルズ"
+        },
+        "aliases": [
+          "六本木ヒルズ"
+        ]
+      },
+      {
+        "id": "Q1326723",
+        "title": "Q1326723",
+        "pageid": 1266447,
+        "concepturi": "http://www.wikidata.org/entity/Q1326723",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1326723",
+        "display": {
+          "label": {
+            "value": "Roppongi Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "metro station in Minato, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Roppongi Station",
+        "description": "metro station in Minato, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "六本木駅"
+        },
+        "aliases": [
+          "六本木駅"
+        ]
+      },
+      {
+        "id": "Q1771772",
+        "title": "Q1771772",
+        "pageid": 1703864,
+        "concepturi": "http://www.wikidata.org/entity/Q1771772",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1771772",
+        "display": {
+          "label": {
+            "value": "Roppongi Hills Mori Tower",
+            "language": "en"
+          },
+          "description": {
+            "value": "building in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Roppongi Hills Mori Tower",
+        "description": "building in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "六本木ヒルズ森タワー"
+        },
+        "aliases": [
+          "六本木ヒルズ森タワー"
+        ]
+      },
+      {
+        "id": "Q23666199",
+        "title": "Q23666199",
+        "pageid": 25673424,
+        "concepturi": "http://www.wikidata.org/entity/Q23666199",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q23666199",
+        "display": {
+          "label": {
+            "value": "Sumitomo Fudosan Roppongi Grand Tower",
+            "language": "en"
+          },
+          "description": {
+            "value": "building in Minato-ku, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Sumitomo Fudosan Roppongi Grand Tower",
+        "description": "building in Minato-ku, Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "六本木グランドタワー"
+        },
+        "aliases": [
+          "六本木グランドタワー"
+        ]
+      },
+      {
+        "id": "Q3607318",
+        "title": "Q3607318",
+        "pageid": 3435437,
+        "concepturi": "http://www.wikidata.org/entity/Q3607318",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3607318",
+        "display": {
+          "label": {
+            "value": "Akemi Roppongi",
+            "language": "en"
+          },
+          "description": {
+            "value": "fictional character from Maison Ikkoku",
+            "language": "en"
+          }
+        },
+        "label": "Akemi Roppongi",
+        "description": "fictional character from Maison Ikkoku",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "六本木朱美"
+        },
+        "aliases": [
+          "六本木朱美"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

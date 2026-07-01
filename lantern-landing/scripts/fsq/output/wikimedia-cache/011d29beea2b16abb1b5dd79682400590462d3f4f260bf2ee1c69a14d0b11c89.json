@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:51.038Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17067,
+          "ns": 0,
+          "title": "隅田川",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すみたかわ",
+            "kartographer_frames": "2",
+            "page_image_free": "Sumidagawa_bridge.png",
+            "wikibase_item": "Q222149"
+          },
+          "terms": {
+            "description": [
+              "東京都の川"
+            ]
+          }
+        },
+        {
+          "pageid": 293183,
+          "ns": 0,
+          "title": "享保の大飢饉",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きようほうのたいききん",
+            "page_image_free": "仏心寺（佐賀市大財）の享保の飢饉供養塔「本州庶民餓死累葬之墓」.jpg",
+            "wikibase_item": "Q10883099"
+          },
+          "terms": {
+            "description": [
+              "江戸時代中期に起こった飢饉"
+            ]
+          }
+        },
+        {
+          "pageid": 398030,
+          "ns": 0,
+          "title": "隅田川花火大会",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "すみたかわはなひたいかい",
+            "page_image_free": "2012年隅田川花火大会.jpg",
+            "wikibase_item": "Q3119229"
+          },
+          "terms": {
+            "description": [
+              "東京都の花火大会"
+            ]
+          }
+        },
+        {
+          "pageid": 2049001,
+          "ns": 0,
+          "title": "向島 (花街)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "むこうしま かかい",
+            "wikibase_item": "Q11415954"
+          },
+          "terms": {
+            "description": [
+              "東京都墨田区向島にある花街"
+            ]
+          }
+        },
+        {
+          "pageid": 4532878,
+          "ns": 0,
+          "title": "すみだ郷土文化資料館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すみたきようとふんかしりようかん",
+            "page_image_free": "すみだ郷土文化資料館.jpg",
+            "wikibase_item": "Q104698259"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71391667,
+              "lon": 139.80586111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

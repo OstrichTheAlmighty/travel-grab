@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:12.647Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 21208,
+          "ns": 0,
+          "title": "皇居",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こうきよ",
+            "kartographer_frames": "1",
+            "page_image_free": "Kokyo0057.jpg",
+            "wikibase_item": "Q500681"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6825,
+              "lon": 139.75277778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある天皇の住居"
+            ]
+          }
+        },
+        {
+          "pageid": 301265,
+          "ns": 0,
+          "title": "江戸城",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "えとしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Edo_Castle_1979.94.21P01B.jpg",
+            "wikibase_item": "Q865913"
+          },
+          "coordinates": [
+            {
+              "lat": 35.688325,
+              "lon": 139.75436667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にあった城（現・皇居）"
+            ]
+          }
+        },
+        {
+          "pageid": 572145,
+          "ns": 0,
+          "title": "皇居外苑",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こうきよかいえん",
+            "page_image_free": "北の丸公園入り口_-_panoramio_(1).jpg",
+            "wikibase_item": "Q844963"
+          },
+          "terms": {
+            "description": [
+              "東京都千代田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1027694,
+          "ns": 0,
+          "title": "今井町",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "いまいちよう",
+            "page_image_free": "Imaichō_Kashihara_JPN_002.jpg",
+            "wikibase_item": "Q11376662"
+          },
+          "coordinates": [
+            {
+              "lat": 34.50709722,
+              "lon": 135.78650833,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "奈良県橿原市の地域"
+            ]
+          }
+        },
+        {
+          "pageid": 1663423,
+          "ns": 0,
+          "title": "櫓 (城郭)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "やくら",
+            "page_image_free": "Osaka_Castle_rampart_in_1865.jpg",
+            "wikibase_item": "Q603192"
+          },
+          "terms": {
+            "description": [
+              "城郭内に防御や物見のために建てられた建築物"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:48.877Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 159999,
+          "ns": 0,
+          "title": "University of Tehran",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Tehran, University of",
+            "kartographer_frames": "1",
+            "page_image": "University_of_Tehran_logo.svg",
+            "page_image_free": "University_of_Tehran_in_Tehran_map_(in_black).GIF",
+            "wikibase-shortdesc": "Public collegiate university in Tehran, Iran",
+            "wikibase_item": "Q737835"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70411,
+              "lon": 51.39513,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "university in Tehran, Iranian national heritage site"
+            ]
+          }
+        },
+        {
+          "pageid": 252534,
+          "ns": 0,
+          "title": "Topkapı Palace",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Topkapi Palace",
+            "kartographer_frames": "1",
+            "page_image_free": "Topkapı_-_01.jpg",
+            "wikibase-shortdesc": "Palace museum in Istanbul, Turkey",
+            "wikibase_item": "Q170495"
+          },
+          "coordinates": [
+            {
+              "lat": 41.013,
+              "lon": 28.984,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "palace museum in Istanbul, Turkey"
+            ]
+          }
+        },
+        {
+          "pageid": 2412401,
+          "ns": 0,
+          "title": "Joint Entrance Examination – Main",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Joint Entrance Examination - Main",
+            "wikibase-shortdesc": "Examination for admission to engineering colleges in India",
+            "wikibase_item": "Q4728938"
+          },
+          "terms": {
+            "description": [
+              "Undergraduate entrance test for engineering colleges in India. Prelims for JEE-Advanced."
+            ]
+          }
+        },
+        {
+          "pageid": 3955597,
+          "ns": 0,
+          "title": "Bibi Ka Maqbara",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "The_Tomb_of_Dilras_Banu_Begum.jpg",
+            "wikibase-shortdesc": "Mausoleum in Aurangabad",
+            "wikibase_item": "Q856259"
+          },
+          "coordinates": [
+            {
+              "lat": 19.90151,
+              "lon": 75.320195,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Tomb in Chhatrapati Sambhajinagar, Maharashtra"
+            ]
+          }
+        },
+        {
+          "pageid": 36719633,
+          "ns": 0,
+          "title": "Teghut mine",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Teghut_Mine_2014.jpg",
+            "wikibase-shortdesc": "Copper and molybdenum mine in Armenia",
+            "wikibase_item": "Q4456930"
+          },
+          "coordinates": [
+            {
+              "lat": 41.088087,
+              "lon": 44.846274,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Armenia"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

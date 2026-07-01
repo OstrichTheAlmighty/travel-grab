@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:59.841Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 43841,
+          "ns": 0,
+          "title": "葛飾区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かつしかく",
+            "displaytitle": "葛飾区",
+            "kartographer_frames": "1",
+            "page_image_free": "Shibamata_Taishakuten_March_11_2021_various_20_44_16_882000.jpeg",
+            "wikibase_item": "Q232628"
+          },
+          "coordinates": [
+            {
+              "lat": 35.74344,
+              "lon": 139.84717,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 214341,
+          "ns": 0,
+          "title": "葛西",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かさい",
+            "wikibase_item": "Q13530387"
+          },
+          "terms": {
+            "description": [
+              "東京都東部の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 241964,
+          "ns": 0,
+          "title": "立石 (葛飾区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たていし",
+            "graph-data-sources": "inline:22",
+            "kartographer_frames": "1",
+            "page_image_free": "Tateishi_2006.jpg",
+            "wikibase_item": "Q3117901"
+          },
+          "terms": {
+            "description": [
+              "東京都葛飾区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 254920,
+          "ns": 0,
+          "title": "葛飾区郷土と天文の博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かつしかくきようととてんもんのはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Katsushika_City_Museum.JPG",
+            "wikibase_item": "Q11621071"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75291667,
+              "lon": 139.84344722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都葛飾区白鳥三丁目にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 1097934,
+          "ns": 0,
+          "title": "金町",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かなまち",
+            "wikibase_item": "Q100299159"
+          },
+          "terms": {
+            "description": [
+              "日本の東京府南葛飾郡にあった町"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

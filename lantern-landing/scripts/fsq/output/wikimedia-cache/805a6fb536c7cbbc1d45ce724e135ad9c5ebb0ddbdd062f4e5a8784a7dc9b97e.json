@@ -1,0 +1,123 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:52.069Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 41511,
+          "ns": 0,
+          "title": "築地市場駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "つきしししよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Tsukijishijo-Sta-A1.JPG",
+            "wikibase_item": "Q246180"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66491667,
+              "lon": 139.76694444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都中央区にある東京都交通局の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 63865,
+          "ns": 0,
+          "title": "築地市場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "つきしいちは",
+            "page_image_free": "2018_Tsukiji_fish_market.jpg",
+            "wikibase_item": "Q859471"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66138889,
+              "lon": 139.76972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて東京都中央区築地に存在した公設卸売市場"
+            ]
+          }
+        },
+        {
+          "pageid": 103335,
+          "ns": 0,
+          "title": "築地",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "つきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Tsukiji_2015.jpg",
+            "wikibase_item": "Q1201337"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 277855,
+          "ns": 0,
+          "title": "築地本願寺",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "つきしほんかんし",
+            "kartographer_frames": "1",
+            "page_image_free": "2019_Tsukiji_Honganji.jpg",
+            "wikibase_item": "Q943255"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66647222,
+              "lon": 139.77230556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都中央区にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 303365,
+          "ns": 0,
+          "title": "東京都道・千葉県道50号東京市川線",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようととうちはけんとう050",
+            "kartographer_frames": "1",
+            "page_image_free": "Shin-ohashi_dori_as_seen_from_Shiodome_City_Center.JPG",
+            "wikibase_item": "Q11525844"
+          },
+          "terms": {
+            "description": [
+              "東京都と千葉県の道路"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

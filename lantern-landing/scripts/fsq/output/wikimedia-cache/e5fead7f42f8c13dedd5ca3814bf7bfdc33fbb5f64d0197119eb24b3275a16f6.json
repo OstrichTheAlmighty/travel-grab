@@ -1,0 +1,94 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:44.307Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 54719,
+          "ns": 0,
+          "title": "沖縄セルラー電話",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おきなわせるらあてんわ",
+            "page_image_free": "Okinawa_Cellular_Head_Office_June_2013.JPG",
+            "wikibase_item": "Q1960157"
+          },
+          "coordinates": [
+            {
+              "lat": 26.2169,
+              "lon": 127.6791,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の電気通信事業者"
+            ]
+          }
+        },
+        {
+          "pageid": 232798,
+          "ns": 0,
+          "title": "磁石 (お笑いコンビ)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ししやく",
+            "wikibase_item": "Q11587843"
+          },
+          "terms": {
+            "description": [
+              "日本のお笑いコンビ"
+            ]
+          }
+        },
+        {
+          "pageid": 446976,
+          "ns": 0,
+          "title": "齋藤将基",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さいとう まさき",
+            "wikibase_item": "Q3246330"
+          },
+          "terms": {
+            "description": [
+              "日本のサッカー選手"
+            ]
+          }
+        },
+        {
+          "pageid": 1471868,
+          "ns": 0,
+          "title": "女神のマルシェ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めかみのまるしえ",
+            "wikibase_item": "Q11446557"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ通販番組"
+            ]
+          }
+        },
+        {
+          "pageid": 4171783,
+          "ns": 0,
+          "title": "大久保花梨",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおくほ かりん",
+            "wikibase_item": "Q97273334"
+          }
+        }
+      ]
+    }
+  }
+}

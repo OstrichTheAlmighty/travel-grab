@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:50.913Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17352,
+          "ns": 0,
+          "title": "デッキ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "てつき",
+            "disambiguation": "",
+            "wikibase_item": "Q341488"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの曖昧さ回避ページ"
+            ]
+          }
+        },
+        {
+          "pageid": 436036,
+          "ns": 0,
+          "title": "ブルジュ・ハリファ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふるしゆはりふあ",
+            "page_image_free": "Burj_Khalifa_(worlds_tallest_building)_and_the_Dubai_skyline_(25781049892).jpg",
+            "wikibase_item": "Q12495"
+          },
+          "coordinates": [
+            {
+              "lat": 25.19713889,
+              "lon": 55.27411111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "アラブ首長国連邦の超高層ビル"
+            ]
+          }
+        },
+        {
+          "pageid": 2203914,
+          "ns": 0,
+          "title": "マリーナベイ・サンズ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "まりいなへいさんす",
+            "page_image_free": "Marina_Bay_Sands_in_the_evening_-_20101120.jpg",
+            "wikibase_item": "Q548679"
+          },
+          "coordinates": [
+            {
+              "lat": 1.28265,
+              "lon": 103.85841667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "シンガポールのマリーナ・ベイに面した統合型リゾート"
+            ]
+          }
+        },
+        {
+          "pageid": 3475729,
+          "ns": 0,
+          "title": "グラントーレ・サンティアゴ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "くらんとれさんていあこ",
+            "kartographer_frames": "1",
+            "page_image_free": "Costanera_Center_Sep._13.jpg",
+            "wikibase_item": "Q1542408"
+          },
+          "coordinates": [
+            {
+              "lat": -33.41688889,
+              "lon": -70.60670556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "チリ・サンティアゴの超高層ビル"
+            ]
+          }
+        },
+        {
+          "pageid": 4379550,
+          "ns": 0,
+          "title": "30 ハドソン・ヤード",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Hudson_Yards_from_Hudson_Commons_(95131p)_(30_Hudson_Yards).jpg",
+            "wikibase_item": "Q15264266"
+          },
+          "terms": {
+            "description": [
+              "ニューヨークの超高層ビル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

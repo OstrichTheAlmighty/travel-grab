@@ -1,0 +1,27 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:26.499Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 74493231,
+          "ns": 0,
+          "title": "Tea culture in Japan",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Casual_tea_set@Japan.jpg",
+            "wikibase-shortdesc": "Ancient Japanese cultural tradition",
+            "wikibase_item": "Q122664257"
+          },
+          "terms": {
+            "description": [
+              "use of tea in Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:04.785Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 139021,
+          "ns": 0,
+          "title": "東京都道・神奈川県道2号東京丸子横浜線",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "NakaharaGuchi_01.jpg",
+            "wikibase_item": "Q11525866"
+          },
+          "terms": {
+            "description": [
+              "東京都から神奈川県に至る道路"
+            ]
+          }
+        },
+        {
+          "pageid": 194209,
+          "ns": 0,
+          "title": "洗足池",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せんそくいけ",
+            "page_image_free": "洗足池01.JPG",
+            "wikibase_item": "Q11555793"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60166667,
+              "lon": 139.69027778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都大田区南千束にある池"
+            ]
+          }
+        },
+        {
+          "pageid": 1414072,
+          "ns": 0,
+          "title": "南千束",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みなみせんそく",
+            "kartographer_frames": "1",
+            "page_image_free": "洗足池.jpg",
+            "wikibase_item": "Q11407551"
+          },
+          "terms": {
+            "description": [
+              "東京都大田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1778099,
+          "ns": 0,
+          "title": "大田区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おおたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-International-Airport_Satellite.jpg",
+            "wikibase_item": "Q217234"
+          },
+          "coordinates": [
+            {
+              "lat": 35.56128,
+              "lon": 139.71603,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 4012805,
+          "ns": 0,
+          "title": "足洗潟",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あしあらいかた",
+            "kartographer_frames": "1",
+            "page_image_free": "Gthumb.svg",
+            "wikibase_item": "Q81591940"
+          },
+          "coordinates": [
+            {
+              "lat": 36.75990278,
+              "lon": 137.16526111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の富山県射水市にある池"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

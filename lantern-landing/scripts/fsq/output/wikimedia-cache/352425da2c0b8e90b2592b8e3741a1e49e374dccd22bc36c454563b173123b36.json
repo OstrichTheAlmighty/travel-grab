@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:22.466Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 64079,
+          "ns": 0,
+          "title": "國學院大學",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こくかくいんたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Kokugakuin_university_2021.jpg",
+            "wikibase_item": "Q495330"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65563889,
+              "lon": 139.71163889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都渋谷区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 123969,
+          "ns": 0,
+          "title": "昌平坂学問所",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しようへいさかかくもんしよ",
+            "wikibase_item": "Q4059219"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸幕府直轄の教学機関、施設"
+            ]
+          }
+        },
+        {
+          "pageid": 175278,
+          "ns": 0,
+          "title": "皇典講究所",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こうてんこうきゆうしよ",
+            "page_image_free": "皇典講究所.jpg",
+            "wikibase_item": "Q11580997"
+          },
+          "terms": {
+            "description": [
+              "明治政府が設立した神職養成機関"
+            ]
+          }
+        },
+        {
+          "pageid": 366491,
+          "ns": 0,
+          "title": "荷田春満",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かた の あすままろ",
+            "page_image_free": "Kada_no_Azumamaro.jpg",
+            "wikibase_item": "Q1334955"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸時代中期の国学者、歌人 (1669-1736)"
+            ]
+          }
+        },
+        {
+          "pageid": 2954087,
+          "ns": 0,
+          "title": "竹崎島",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たけさきしま",
+            "kartographer_frames": "1",
+            "page_image_free": "Takesakijima.jpg",
+            "wikibase_item": "Q17210185"
+          },
+          "coordinates": [
+            {
+              "lat": 32.95638889,
+              "lon": 130.21905556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の佐賀県太良町にある島"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

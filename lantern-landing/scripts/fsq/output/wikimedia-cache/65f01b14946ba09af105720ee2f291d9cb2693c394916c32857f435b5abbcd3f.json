@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:53.868Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17064,
+          "ns": 0,
+          "title": "荒川 (関東)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あらかわ",
+            "kartographer_frames": "2",
+            "page_image_free": "ArakawaKako.jpg",
+            "wikibase_item": "Q625465"
+          },
+          "terms": {
+            "description": [
+              "埼玉県・東京都を流れる河川"
+            ]
+          }
+        },
+        {
+          "pageid": 60406,
+          "ns": 0,
+          "title": "玉川上水",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たまかわしようすい",
+            "page_image_free": "TamagawaJosui_fromMikageBridge.JPG",
+            "wikibase_item": "Q1014298"
+          },
+          "terms": {
+            "description": [
+              "江戸市中への飲料水が流れていた上水道"
+            ]
+          }
+        },
+        {
+          "pageid": 280657,
+          "ns": 0,
+          "title": "碧血碑",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "へきけつひ",
+            "kartographer_frames": "1",
+            "page_image_free": "碧血碑.jpg",
+            "wikibase_item": "Q11587796"
+          },
+          "coordinates": [
+            {
+              "lat": 41.75155556,
+              "lon": 140.70877778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道函館市にある慰霊碑"
+            ]
+          }
+        },
+        {
+          "pageid": 453553,
+          "ns": 0,
+          "title": "河村瑞賢",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かわむら すいけん",
+            "page_image_free": "Kawamura_Zuiken.JPG",
+            "wikibase_item": "Q11553936"
+          },
+          "terms": {
+            "description": [
+              "1617?-1699, 江戸時代初期の政商"
+            ]
+          }
+        },
+        {
+          "pageid": 912016,
+          "ns": 0,
+          "title": "新川 (東京都中央区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しんかわ",
+            "kartographer_frames": "1",
+            "page_image_free": "Shinkawa_Park.jpg",
+            "wikibase_item": "Q11502056"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

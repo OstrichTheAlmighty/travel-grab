@@ -1,0 +1,129 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:26.246Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18724,
+          "ns": 0,
+          "title": "目黒区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "めくろ",
+            "kartographer_frames": "1",
+            "page_image_free": "Meguro_Meguro_River_Cherry_Trees_1.JPG",
+            "wikibase_item": "Q233903"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6415,
+              "lon": 139.69828,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 19539,
+          "ns": 0,
+          "title": "博物館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はくふつかん",
+            "page_image_free": "British_Museum_from_NE_2.JPG",
+            "wikibase_item": "Q33506"
+          },
+          "terms": {
+            "description": [
+              "特定の分野に対して価値のあるものを収集・保存・研究・展示する施設"
+            ]
+          }
+        },
+        {
+          "pageid": 1472484,
+          "ns": 0,
+          "title": "キザクラカッパカントリー",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きさくらかつはかんとり",
+            "page_image_free": "Kizakura_Kappa_Country05nt3200.jpg",
+            "wikibase_item": "Q11296642"
+          },
+          "coordinates": [
+            {
+              "lat": 34.93066667,
+              "lon": 135.76044444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都府京都市伏見区にある黄桜のテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 2259997,
+          "ns": 0,
+          "title": "のぼりべつクマ牧場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "のほりへつくまほくしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "のぼりべつクマ牧場1.jpg",
+            "wikibase_item": "Q11275229"
+          },
+          "coordinates": [
+            {
+              "lat": 42.49016667,
+              "lon": 141.15925,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道登別市にあるクマのテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 2728113,
+          "ns": 0,
+          "title": "めぐろ歴史資料館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めくろれきししりようかん",
+            "page_image_free": "Meguro_History_Museum.JPG",
+            "wikibase_item": "Q11279688"
+          },
+          "coordinates": [
+            {
+              "lat": 35.639333,
+              "lon": 139.702583,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都目黒区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

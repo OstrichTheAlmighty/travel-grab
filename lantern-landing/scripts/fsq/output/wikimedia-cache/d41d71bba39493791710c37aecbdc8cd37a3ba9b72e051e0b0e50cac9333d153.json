@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:01.492Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1046,
+          "ns": 0,
+          "title": "弘前市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひろさきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Hirosaki_Montage.jpg",
+            "wikibase_item": "Q194087"
+          },
+          "coordinates": [
+            {
+              "lat": 40.60311,
+              "lon": 140.46383,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "青森県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 190309,
+          "ns": 0,
+          "title": "脊振山地",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せふりさんち",
+            "page_image_free": "Sefuri02.JPG",
+            "wikibase_item": "Q11612199"
+          },
+          "coordinates": [
+            {
+              "lat": 33.43638889,
+              "lon": 130.36861111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の福岡県と佐賀県に跨る山地"
+            ]
+          }
+        },
+        {
+          "pageid": 287723,
+          "ns": 0,
+          "title": "早川町",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はやかわちよう",
+            "page_image_free": "Stone_pavement_of_Akasawa.JPG",
+            "wikibase_item": "Q1204436"
+          },
+          "coordinates": [
+            {
+              "lat": 35.41261,
+              "lon": 138.36314,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "山梨県南巨摩郡の町"
+            ]
+          }
+        },
+        {
+          "pageid": 2783348,
+          "ns": 0,
+          "title": "大蔵大根",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおくらたいこん",
+            "page_image_free": "大蔵大根1_ohkura-daikon.jpg",
+            "wikibase_item": "Q17221627"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区を原産地とする大根の品種"
+            ]
+          }
+        },
+        {
+          "pageid": 3488747,
+          "ns": 0,
+          "title": "あけぼの大豆",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あけほのたいす",
+            "wikibase_item": "Q28068268"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:30.556Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 19342,
+          "ns": 0,
+          "title": "GIZA studio",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きさすてゆうていお",
+            "page_image_free": "Gthumb.svg",
+            "wikibase_item": "Q1074851"
+          },
+          "terms": {
+            "description": [
+              "B ZONE傘下のメジャーレーベルレコード会社"
+            ]
+          }
+        },
+        {
+          "pageid": 249100,
+          "ns": 0,
+          "title": "ザ・ハウス・オブ・ザ・デッドシリーズ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さはうすおふさてつとしりいす",
+            "wikibase_item": "Q1204597"
+          }
+        },
+        {
+          "pageid": 299271,
+          "ns": 0,
+          "title": "ハリー・ポッターと謎のプリンス",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はりいほつたあとなそのふりんす",
+            "page_image_free": "Harry_Potter_lines.jpg",
+            "wikibase_item": "Q46887"
+          },
+          "terms": {
+            "description": [
+              "J・K・ローリングによる2005年のファンタジー小説"
+            ]
+          }
+        },
+        {
+          "pageid": 590066,
+          "ns": 0,
+          "title": "ザ・ベストハウス123",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さへすとはうすわんつうすりい",
+            "wikibase_item": "Q11306734"
+          },
+          "terms": {
+            "description": [
+              "日本のバラエティ番組 (2006-2012)"
+            ]
+          }
+        },
+        {
+          "pageid": 2667266,
+          "ns": 0,
+          "title": "テラスハウス (テレビ番組)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "てらすはうす",
+            "wikibase_item": "Q332909"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビリアリティ番組シリーズ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

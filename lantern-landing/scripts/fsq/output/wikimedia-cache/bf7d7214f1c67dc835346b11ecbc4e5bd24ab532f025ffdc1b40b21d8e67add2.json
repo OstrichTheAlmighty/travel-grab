@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:15.813Z",
+  "value": {
+    "searchinfo": {
+      "search": "ナンジャタウン"
+    },
+    "search": [
+      {
+        "id": "Q5364305",
+        "title": "Q5364305",
+        "pageid": 5130772,
+        "concepturi": "http://www.wikidata.org/entity/Q5364305",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5364305",
+        "display": {
+          "label": {
+            "value": "Namco Namja Town",
+            "language": "en"
+          }
+        },
+        "label": "Namco Namja Town",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ナンジャタウン"
+        },
+        "aliases": [
+          "ナンジャタウン"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

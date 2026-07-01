@@ -1,0 +1,129 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:30.080Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17419,
+          "ns": 0,
+          "title": "東京都写真美術館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようとしやしんひしゆつかん",
+            "page_image_free": "Tokyo_Metropolitan_Museum_of_Photography_entrance_2011_January.jpg",
+            "wikibase_item": "Q862884"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6417,
+              "lon": 139.7132,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都目黒区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 19839,
+          "ns": 0,
+          "title": "東京国立近代美術館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようこくりつきんたいひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "National_Museum_of_Modern_Art_Tokyo.jpg",
+            "wikibase_item": "Q1359908"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69050833,
+              "lon": 139.75465278,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北の丸公園にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 80123,
+          "ns": 0,
+          "title": "東京都美術館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようとひしゆつかん",
+            "page_image_free": "Toukyoutoartmuseum.jpg",
+            "wikibase_item": "Q864957"
+          },
+          "terms": {
+            "description": [
+              "東京都台東区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 90399,
+          "ns": 0,
+          "title": "東京都庭園美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようとていえんひしゆつかん",
+            "page_image_free": "Tokyo_Metropolitan_Teien_Art_Museum.jpg",
+            "wikibase_item": "Q743773"
+          },
+          "coordinates": [
+            {
+              "lat": 35.636862,
+              "lon": 139.719269,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 1596036,
+          "ns": 0,
+          "title": "港区 (東京都)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みなとく",
+            "kartographer_frames": "1",
+            "page_image_free": "20110405-TokyoTower-Sakura01.jpg",
+            "wikibase_item": "Q190088"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65803,
+              "lon": 139.75153,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

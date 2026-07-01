@@ -1,0 +1,178 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:36.469Z",
+  "value": {
+    "searchinfo": {
+      "search": "Odaiba"
+    },
+    "search": [
+      {
+        "id": "Q211861",
+        "title": "Q211861",
+        "pageid": 207484,
+        "concepturi": "http://www.wikidata.org/entity/Q211861",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q211861",
+        "display": {
+          "label": {
+            "value": "Odaiba",
+            "language": "en"
+          },
+          "description": {
+            "value": "town located in Minato-ku, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Odaiba",
+        "description": "town located in Minato-ku, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Odaiba"
+        }
+      },
+      {
+        "id": "Q86819860",
+        "title": "Q86819860",
+        "pageid": 86064277,
+        "concepturi": "http://www.wikidata.org/entity/Q86819860",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q86819860",
+        "display": {
+          "label": {
+            "value": "Odaiba",
+            "language": "en"
+          },
+          "description": {
+            "value": "floruit 1899",
+            "language": "en"
+          }
+        },
+        "label": "Odaiba",
+        "description": "floruit 1899",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Odaiba"
+        }
+      },
+      {
+        "id": "Q5368576",
+        "title": "Q5368576",
+        "pageid": 5134922,
+        "concepturi": "http://www.wikidata.org/entity/Q5368576",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5368576",
+        "display": {
+          "label": {
+            "value": "Odaiba Marine Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Odaiba Marine Park",
+        "description": "park in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Odaiba Marine Park"
+        }
+      },
+      {
+        "id": "Q858883",
+        "title": "Q858883",
+        "pageid": 810464,
+        "concepturi": "http://www.wikidata.org/entity/Q858883",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q858883",
+        "display": {
+          "label": {
+            "value": "Odaiba-kaihinkōen Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "railway station in Minato, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Odaiba-kaihinkōen Station",
+        "description": "railway station in Minato, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Odaiba-kaihinkōen Station"
+        }
+      },
+      {
+        "id": "Q22120475",
+        "title": "Q22120475",
+        "pageid": 24150985,
+        "concepturi": "http://www.wikidata.org/entity/Q22120475",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q22120475",
+        "display": {
+          "label": {
+            "value": "Odaiba Gakuen",
+            "language": "en"
+          },
+          "description": {
+            "value": "elementary and junior school in Minato, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Odaiba Gakuen",
+        "description": "elementary and junior school in Minato, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Odaiba Gakuen"
+        }
+      },
+      {
+        "id": "Q11262950",
+        "title": "Q11262950",
+        "pageid": 12406934,
+        "concepturi": "http://www.wikidata.org/entity/Q11262950",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11262950",
+        "display": {
+          "label": {
+            "value": "Odaiba Rainbow Fireworks",
+            "language": "en"
+          }
+        },
+        "label": "Odaiba Rainbow Fireworks",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Odaiba Rainbow Fireworks"
+        }
+      },
+      {
+        "id": "Q48744285",
+        "title": "Q48744285",
+        "pageid": 49765807,
+        "concepturi": "http://www.wikidata.org/entity/Q48744285",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q48744285",
+        "display": {
+          "label": {
+            "value": "Odaiba Tokyo Oedo-Onsen Monogatari",
+            "language": "en"
+          }
+        },
+        "label": "Odaiba Tokyo Oedo-Onsen Monogatari",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Odaiba Tokyo Oedo-Onsen Monogatari"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

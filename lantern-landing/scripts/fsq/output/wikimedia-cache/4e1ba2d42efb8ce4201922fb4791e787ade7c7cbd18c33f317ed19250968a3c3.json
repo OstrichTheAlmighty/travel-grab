@@ -1,0 +1,117 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:18:07.233Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 458972,
+          "ns": 0,
+          "title": "保木間",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ほきま",
+            "kartographer_frames": "1",
+            "page_image_free": "Motofuchie_park_hokima_adachi_2014.jpg",
+            "wikibase_item": "Q11385841"
+          },
+          "terms": {
+            "description": [
+              "東京都足立区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 522532,
+          "ns": 0,
+          "title": "井の頭自然文化園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "いのかしらしせんふんかえん",
+            "page_image_free": "Inokashira-Park-Zoo_Maingate.jpg",
+            "wikibase_item": "Q10860225"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70083333,
+              "lon": 139.57275,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の動物園"
+            ]
+          }
+        },
+        {
+          "pageid": 549459,
+          "ns": 0,
+          "title": "足立区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あたちく",
+            "kartographer_frames": "1",
+            "page_image_free": "Nishiarai_Daishi.jpg",
+            "wikibase_item": "Q213464"
+          },
+          "coordinates": [
+            {
+              "lat": 35.77494,
+              "lon": 139.80436,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 1729305,
+          "ns": 0,
+          "title": "蝶園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ちようえん",
+            "page_image_free": "Butterfly_zoo.JPG",
+            "wikibase_item": "Q1886911"
+          }
+        },
+        {
+          "pageid": 2114839,
+          "ns": 0,
+          "title": "足立区生物園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あたちくせいふつえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Adachi_Park_of_Living_Things.jpg",
+            "wikibase_item": "Q11636941"
+          },
+          "coordinates": [
+            {
+              "lat": 35.79244444,
+              "lon": 139.80722222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都足立区の元渕江公園内にある動物園・水族館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

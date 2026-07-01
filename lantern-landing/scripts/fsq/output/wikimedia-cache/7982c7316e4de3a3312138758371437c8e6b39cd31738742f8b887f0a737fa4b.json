@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:15.455Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 37577,
+          "ns": 0,
+          "title": "高砂市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たかさこし",
+            "kartographer_frames": "1",
+            "page_image_free": "Takasago-jinja_aioinomatsu.JPG",
+            "wikibase_item": "Q869037"
+          },
+          "coordinates": [
+            {
+              "lat": 34.76594,
+              "lon": 134.79064,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 62253,
+          "ns": 0,
+          "title": "後楽園球場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こうらくえんきゆうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Korakuen_stadium_aerial_photograph_1984.jpg",
+            "wikibase_item": "Q473519"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70421111,
+              "lon": 139.75372222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて東京都文京区にあった野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 105586,
+          "ns": 0,
+          "title": "日本の野球場一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのやきゆうしよういちらん",
+            "wikibase_item": "Q6607277"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 775747,
+          "ns": 0,
+          "title": "高砂市野球場",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たかさこしやきゆうしよう",
+            "page_image_free": "Takasago_Municipal_Baseball_Stadium.JPG",
+            "wikibase_item": "Q7677283"
+          }
+        },
+        {
+          "pageid": 840813,
+          "ns": 0,
+          "title": "全国高等学校野球選手権兵庫大会",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せんこくこうとうかつこうやきゆうせんしゆけんひようこたいかい",
+            "page_image_free": "Akashi_baseball_field01.JPG",
+            "wikibase_item": "Q11389752"
+          },
+          "terms": {
+            "description": [
+              "夏の甲子園 兵庫地方大会"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

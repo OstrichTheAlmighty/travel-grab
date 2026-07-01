@@ -1,0 +1,83 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:40.548Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 193261,
+          "ns": 0,
+          "title": "平田篤胤",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひらた あつたね",
+            "page_image_free": "Portrait_of_Atsutane_Hirata.jpg",
+            "wikibase_item": "Q2572749"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸時代後期の国学者、神道家、思想家、医者 (1776-1843)"
+            ]
+          }
+        },
+        {
+          "pageid": 637167,
+          "ns": 0,
+          "title": "旅がらす事件帖",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たひからすしけんちよう",
+            "wikibase_item": "Q11504437"
+          }
+        },
+        {
+          "pageid": 1314514,
+          "ns": 0,
+          "title": "両津家",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "りようつけ",
+            "wikibase_item": "Q11362656"
+          }
+        },
+        {
+          "pageid": 1563682,
+          "ns": 0,
+          "title": "萬代峰子",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "よろすよ みねこ",
+            "page_image_free": "Yorozuyo_Mineko.jpg",
+            "wikibase_item": "Q17210901"
+          },
+          "terms": {
+            "description": [
+              "日本の女優"
+            ]
+          }
+        },
+        {
+          "pageid": 1834379,
+          "ns": 0,
+          "title": "柳永二郎",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "やなき えいしろう",
+            "page_image_free": "Honjitsu_kyushin_(1952)_Eijiro_Yanagi.jpg",
+            "wikibase_item": "Q11534357"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優 (1895-1984)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

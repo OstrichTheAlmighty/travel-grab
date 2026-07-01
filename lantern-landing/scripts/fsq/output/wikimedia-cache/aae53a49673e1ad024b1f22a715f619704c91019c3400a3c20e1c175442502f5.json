@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:45.870Z",
+  "value": {
+    "searchinfo": {
+      "search": "有明テニスの森公園"
+    },
+    "search": [
+      {
+        "id": "Q11516419",
+        "title": "Q11516419",
+        "pageid": 12656222,
+        "concepturi": "http://www.wikidata.org/entity/Q11516419",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11516419",
+        "display": {
+          "label": {
+            "value": "Ariake Tennis Forest Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "sports park in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Ariake Tennis Forest Park",
+        "description": "sports park in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "有明テニスの森公園"
+        },
+        "aliases": [
+          "有明テニスの森公園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

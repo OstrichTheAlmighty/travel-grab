@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:13.721Z",
+  "value": {
+    "searchinfo": {
+      "search": "小石川植物園"
+    },
+    "search": [
+      {
+        "id": "Q1064892",
+        "title": "Q1064892",
+        "pageid": 1013529,
+        "concepturi": "http://www.wikidata.org/entity/Q1064892",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1064892",
+        "display": {
+          "label": {
+            "value": "Koishikawa Botanical Garden",
+            "language": "en"
+          },
+          "description": {
+            "value": "botanical garden",
+            "language": "en"
+          }
+        },
+        "label": "Koishikawa Botanical Garden",
+        "description": "botanical garden",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "小石川植物園"
+        },
+        "aliases": [
+          "小石川植物園"
+        ]
+      },
+      {
+        "id": "Q104819793",
+        "title": "Q104819793",
+        "pageid": 100236063,
+        "concepturi": "http://www.wikidata.org/entity/Q104819793",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q104819793",
+        "display": {
+          "label": {
+            "value": "The oldest specimen of Prunus yedoensis in the botanic garden of Tokyo Imperial University.",
+            "language": "en"
+          },
+          "description": {
+            "value": "scientific article published in 1935",
+            "language": "en"
+          }
+        },
+        "label": "The oldest specimen of Prunus yedoensis in the botanic garden of Tokyo Imperial University.",
+        "description": "scientific article published in 1935",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "小石川植物園の染井ヨシノ桜の老木について"
+        },
+        "aliases": [
+          "小石川植物園の染井ヨシノ桜の老木について"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

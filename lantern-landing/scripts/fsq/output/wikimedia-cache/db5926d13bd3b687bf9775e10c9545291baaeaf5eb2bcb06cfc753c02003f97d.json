@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:38.173Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 84786,
+          "ns": 0,
+          "title": "Meiji era",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Meiji Period",
+            "page_image_free": "Meiji_tenno3.jpg",
+            "wikibase-shortdesc": "Period of Japanese history (1868–1912)",
+            "wikibase_item": "Q3125096"
+          },
+          "terms": {
+            "description": [
+              "Japanese era from October 1868 to July 1912"
+            ]
+          }
+        },
+        {
+          "pageid": 294236,
+          "ns": 0,
+          "title": "Meiji Shrine",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Meiji_Jingu_2023-3.jpg",
+            "wikibase-shortdesc": "Shinto shrine in Tokyo, Japan",
+            "wikibase_item": "Q287165"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67611111,
+              "lon": 139.69916667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Shinto shrine in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 364173,
+          "ns": 0,
+          "title": "Meiji Constitution",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Meiji-Constitution-Empire-of-Japan.png",
+            "wikibase-shortdesc": "1890–1947 Empire of Japan constitution",
+            "wikibase_item": "Q122804"
+          },
+          "terms": {
+            "description": [
+              "constitution of Japan from 1889 to 1947"
+            ]
+          }
+        },
+        {
+          "pageid": 48452699,
+          "ns": 0,
+          "title": "Meiji Memorial Picture Gallery",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "聖徳記念絵画館.jpg",
+            "wikibase-shortdesc": "Building in Tōkyō, Japan",
+            "wikibase_item": "Q5153794"
+          },
+          "coordinates": [
+            {
+              "lat": 35.678778,
+              "lon": 139.717639,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "museum in Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 64227538,
+          "ns": 0,
+          "title": "Meiji Shrine Outer Garden",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Jingu_Gaien_Ginkgo_Street_in_Autumn_5.jpg",
+            "wikibase-shortdesc": "Garden in Tokyo, Japan",
+            "wikibase_item": "Q6631448"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6775,
+              "lon": 139.71833333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "garden in Tokyo, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

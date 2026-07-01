@@ -1,0 +1,88 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:41.851Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 22828,
+          "ns": 0,
+          "title": "投手",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうしゆ",
+            "page_image_free": "野球ポジション画像.png",
+            "wikibase_item": "Q1048902"
+          },
+          "terms": {
+            "description": [
+              "野球やソフトボールにおいて打者にボールを投げる役割の選手"
+            ]
+          }
+        },
+        {
+          "pageid": 214255,
+          "ns": 0,
+          "title": "打撃投手",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たけきとうしゆ",
+            "wikibase_item": "Q11497233"
+          }
+        },
+        {
+          "pageid": 226238,
+          "ns": 0,
+          "title": "マウンド",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "まうんと",
+            "page_image_free": "Mariano_Clutch.jpg",
+            "wikibase_item": "Q8189187"
+          },
+          "terms": {
+            "description": [
+              "野球で投手が投げるところ"
+            ]
+          }
+        },
+        {
+          "pageid": 543648,
+          "ns": 0,
+          "title": "スイッチピッチャー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すいつちひつちやあ",
+            "wikibase_item": "Q7659073"
+          },
+          "terms": {
+            "description": [
+              "野球で左右両方の腕でボールを投げることができる珍しい投手"
+            ]
+          }
+        },
+        {
+          "pageid": 2303357,
+          "ns": 0,
+          "title": "ウィッフルボール",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ういつふるほおる",
+            "page_image_free": "Wiffle_bat_and_ball.jpg",
+            "wikibase_item": "Q142918"
+          },
+          "terms": {
+            "description": [
+              "球技の一つ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:22.781Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1939,
+          "ns": 0,
+          "title": "1957年",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "1957ねん",
+            "wikibase_item": "Q5311"
+          },
+          "terms": {
+            "description": [
+              "年"
+            ]
+          }
+        },
+        {
+          "pageid": 20252,
+          "ns": 0,
+          "title": "小林一三",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こはやし いちそう",
+            "page_image_free": "Ichizo_Kobayashi_by_Shigeru_Tamura_(cropped).jpg",
+            "wikibase_item": "Q5364081"
+          },
+          "terms": {
+            "description": [
+              "日本の実業家 (1873-1957)"
+            ]
+          }
+        },
+        {
+          "pageid": 1741731,
+          "ns": 0,
+          "title": "銀座",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きんさ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ginza_area_at_dusk_from_Tokyo_Tower.jpg",
+            "wikibase_item": "Q746052"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 2024818,
+          "ns": 0,
+          "title": "田中良 (美術家)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たなか りよう",
+            "wikibase_item": "Q11575887"
+          },
+          "terms": {
+            "description": [
+              "日本の美術家（1884 - 1974）"
+            ]
+          }
+        },
+        {
+          "pageid": 2293515,
+          "ns": 0,
+          "title": "櫻町公子",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さくらまち きみこ",
+            "wikibase_item": "Q11544845"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優 (1918-2005)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

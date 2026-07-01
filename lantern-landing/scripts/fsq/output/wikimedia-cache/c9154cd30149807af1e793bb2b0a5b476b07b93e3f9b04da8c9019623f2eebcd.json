@@ -1,0 +1,98 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:37:52.040Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 13783,
+          "ns": 0,
+          "title": "柔道",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しゆうとう",
+            "page_image_free": "Haraigoshi.jpg",
+            "wikibase_item": "Q11420"
+          },
+          "terms": {
+            "description": [
+              "日本発祥の武道"
+            ]
+          }
+        },
+        {
+          "pageid": 69480,
+          "ns": 0,
+          "title": "東京高等師範学校",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようこうとうしはんかつこう",
+            "page_image_free": "Main_building_of_the_Tokyo_University_of_Literature_and_Science.jpg",
+            "wikibase_item": "Q11525952"
+          },
+          "terms": {
+            "description": [
+              "かつて東京都神田区にあった官制高等師範学校"
+            ]
+          }
+        },
+        {
+          "pageid": 146694,
+          "ns": 0,
+          "title": "嘉納治五郎",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かのう しころう",
+            "page_image_free": "Portrait_of_late_Mr._Kano.jpg",
+            "wikibase_item": "Q190141"
+          },
+          "terms": {
+            "description": [
+              "日本の柔道家、教育者"
+            ]
+          }
+        },
+        {
+          "pageid": 150926,
+          "ns": 0,
+          "title": "講道館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こうとうかん",
+            "page_image_free": "Kodokan_Buildings.jpg",
+            "wikibase_item": "Q1165384"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70805556,
+              "lon": 139.75333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 191304,
+          "ns": 0,
+          "title": "西郷四郎",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さいこう しろう",
+            "page_image_free": "Saigo_Shirou.jpg",
+            "wikibase_item": "Q2637587"
+          },
+          "terms": {
+            "description": [
+              "日本の柔道家（1866-1922）"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

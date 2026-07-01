@@ -1,0 +1,204 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:44.049Z",
+  "value": {
+    "searchinfo": {
+      "search": "皇居"
+    },
+    "search": [
+      {
+        "id": "Q865913",
+        "title": "Q865913",
+        "pageid": 817269,
+        "concepturi": "http://www.wikidata.org/entity/Q865913",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q865913",
+        "display": {
+          "label": {
+            "value": "Edo Castle",
+            "language": "en"
+          },
+          "description": {
+            "value": "castle in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Edo Castle",
+        "description": "castle in Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "皇居"
+        },
+        "aliases": [
+          "皇居"
+        ]
+      },
+      {
+        "id": "Q500681",
+        "title": "Q500681",
+        "pageid": 470956,
+        "concepturi": "http://www.wikidata.org/entity/Q500681",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q500681",
+        "display": {
+          "label": {
+            "value": "Tokyo Imperial Palace",
+            "language": "en"
+          },
+          "description": {
+            "value": "main residence of the Emperor of Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Imperial Palace",
+        "description": "main residence of the Emperor of Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "皇居"
+        },
+        "aliases": [
+          "皇居"
+        ]
+      },
+      {
+        "id": "Q3076188",
+        "title": "Q3076188",
+        "pageid": 2940138,
+        "concepturi": "http://www.wikidata.org/entity/Q3076188",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3076188",
+        "display": {
+          "label": {
+            "value": "Museum of the Imperial Collections",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Museum of the Imperial Collections",
+        "description": "art museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "皇居三の丸尚蔵館"
+        },
+        "aliases": [
+          "皇居三の丸尚蔵館"
+        ]
+      },
+      {
+        "id": "Q844963",
+        "title": "Q844963",
+        "pageid": 797050,
+        "concepturi": "http://www.wikidata.org/entity/Q844963",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q844963",
+        "display": {
+          "label": {
+            "value": "Kōkyogaien",
+            "language": "en"
+          },
+          "description": {
+            "value": "town located in Chiyoda-ku, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Kōkyogaien",
+        "description": "town located in Chiyoda-ku, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "皇居外苑"
+        },
+        "aliases": [
+          "皇居外苑"
+        ]
+      },
+      {
+        "id": "Q6631907",
+        "title": "Q6631907",
+        "pageid": 6460774,
+        "concepturi": "http://www.wikidata.org/entity/Q6631907",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6631907",
+        "display": {
+          "label": {
+            "value": "Imperial Palace East Gardens",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Chiyoda-ku, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Imperial Palace East Gardens",
+        "description": "park in Chiyoda-ku, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "皇居東御苑"
+        },
+        "aliases": [
+          "皇居東御苑"
+        ]
+      },
+      {
+        "id": "Q11103006",
+        "title": "Q11103006",
+        "pageid": 12308996,
+        "concepturi": "http://www.wikidata.org/entity/Q11103006",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11103006",
+        "display": {
+          "label": {
+            "value": "Tokyo Metropolitan Road Route 404",
+            "language": "en"
+          },
+          "description": {
+            "value": "road in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Metropolitan Road Route 404",
+        "description": "road in Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "皇居前東京停車場線"
+        },
+        "aliases": [
+          "皇居前東京停車場線"
+        ]
+      },
+      {
+        "id": "Q11581048",
+        "title": "Q11581048",
+        "pageid": 12720987,
+        "concepturi": "http://www.wikidata.org/entity/Q11581048",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11581048",
+        "display": {
+          "label": {
+            "value": "Imperial Guard Headquarters",
+            "language": "en"
+          }
+        },
+        "label": "Imperial Guard Headquarters",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "皇居警察"
+        },
+        "aliases": [
+          "皇居警察"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

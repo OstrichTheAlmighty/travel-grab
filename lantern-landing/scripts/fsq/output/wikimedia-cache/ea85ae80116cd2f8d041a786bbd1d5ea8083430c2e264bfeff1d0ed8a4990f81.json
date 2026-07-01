@@ -1,0 +1,42 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:47.626Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 640261,
+          "ns": 0,
+          "title": "榑橋村",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "くれはしむら",
+            "wikibase_item": "Q11541873"
+          },
+          "terms": {
+            "description": [
+              "日本の埼玉県新座郡にあった村"
+            ]
+          }
+        },
+        {
+          "pageid": 1238095,
+          "ns": 0,
+          "title": "東京あおば農業協同組合",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようあおはのうきようきようとうくみあい",
+            "page_image_free": "JA_TokyoAoba.JPG",
+            "wikibase_item": "Q11524015"
+          },
+          "terms": {
+            "description": [
+              "東京都練馬区にある農業協同組合"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

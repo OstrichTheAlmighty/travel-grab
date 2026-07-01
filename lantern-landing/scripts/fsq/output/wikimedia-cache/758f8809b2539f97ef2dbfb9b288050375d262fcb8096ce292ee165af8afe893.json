@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:05.290Z",
+  "value": {
+    "searchinfo": {
+      "search": "ヨックモックミュージアム"
+    },
+    "search": [
+      {
+        "id": "Q131904628",
+        "title": "Q131904628",
+        "pageid": 125789666,
+        "concepturi": "http://www.wikidata.org/entity/Q131904628",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q131904628",
+        "display": {
+          "label": {
+            "value": "Yoku Moku Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum in Minato, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Yoku Moku Museum",
+        "description": "art museum in Minato, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ヨックモックミュージアム"
+        },
+        "aliases": [
+          "ヨックモックミュージアム"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

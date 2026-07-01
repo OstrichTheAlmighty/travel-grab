@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:31.204Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18499,
+          "ns": 0,
+          "title": "美空ひばり",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みそら ひはり",
+            "page_image_free": "Misora-Hibari-4.png",
+            "wikibase_item": "Q147811"
+          },
+          "terms": {
+            "description": [
+              "日本の女性歌手、俳優 (1937-1989)"
+            ]
+          }
+        },
+        {
+          "pageid": 176320,
+          "ns": 0,
+          "title": "加藤和也 (ひばりプロダクション)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かとう かすや",
+            "wikibase_item": "Q11399075"
+          },
+          "terms": {
+            "description": [
+              "日本の実業家、プロデューサー (1971-)"
+            ]
+          }
+        },
+        {
+          "pageid": 824008,
+          "ns": 0,
+          "title": "ひばりプロダクション",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひはりふろたくしよん",
+            "wikibase_item": "Q11276455"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64897222,
+              "lon": 139.69802778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の芸能事務所、著作権管理会社"
+            ]
+          }
+        },
+        {
+          "pageid": 4596133,
+          "ns": 0,
+          "title": "あやとり (美空ひばりの曲)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あやとり",
+            "wikibase_item": "Q119346015"
+          },
+          "terms": {
+            "description": [
+              "美空ひばりの曲"
+            ]
+          }
+        },
+        {
+          "pageid": 4617001,
+          "ns": 0,
+          "title": "旅人 (美空ひばりの曲)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たひひと",
+            "wikibase_item": "Q119346102"
+          },
+          "terms": {
+            "description": [
+              "美空ひばりのシングル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

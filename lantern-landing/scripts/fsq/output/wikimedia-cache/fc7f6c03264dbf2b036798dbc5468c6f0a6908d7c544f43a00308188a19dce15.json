@@ -1,0 +1,88 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:09.379Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4148,
+          "ns": 0,
+          "title": "ビッグコミックスピリッツ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひつくこみつくすひりつつ",
+            "wikibase_item": "Q858726"
+          },
+          "terms": {
+            "description": [
+              "小学館が発行する日本の漫画雑誌"
+            ]
+          }
+        },
+        {
+          "pageid": 137674,
+          "ns": 0,
+          "title": "THE ビッグオー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さひつくお",
+            "wikibase_item": "Q974411"
+          },
+          "terms": {
+            "description": [
+              "1999年に放送された日本のテレビアニメ"
+            ]
+          }
+        },
+        {
+          "pageid": 248278,
+          "ns": 0,
+          "title": "ビッグオー",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひつくおお",
+            "disambiguation": "",
+            "wikibase_item": "Q344385"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの曖昧さ回避ページ"
+            ]
+          }
+        },
+        {
+          "pageid": 969267,
+          "ns": 0,
+          "title": "ビッグ・オー (観覧車)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひつくお",
+            "page_image_free": "LaQua02s3200.jpg",
+            "wikibase_item": "Q794709"
+          }
+        },
+        {
+          "pageid": 1886252,
+          "ns": 0,
+          "title": "ザ・ビッグ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さひつく",
+            "page_image_free": "ザ・ビッグロゴ.svg",
+            "wikibase_item": "Q11306676"
+          },
+          "terms": {
+            "description": [
+              "日本のスーパーマーケット"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

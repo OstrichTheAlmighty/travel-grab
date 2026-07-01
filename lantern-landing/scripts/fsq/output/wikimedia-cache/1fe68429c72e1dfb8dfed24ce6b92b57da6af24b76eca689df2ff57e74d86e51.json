@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:39.529Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 234954,
+          "ns": 0,
+          "title": "ローランド ディー. ジー.",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ろおらんとていいしい",
+            "page_image_free": "DJI_20231002063445_0117_D.jpg",
+            "wikibase_item": "Q2162714"
+          },
+          "coordinates": [
+            {
+              "lat": 34.81333333,
+              "lon": 137.73027778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1639993,
+          "ns": 0,
+          "title": "日新丸",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "につしんまる",
+            "wikibase_item": "Q520637"
+          }
+        }
+      ]
+    }
+  }
+}

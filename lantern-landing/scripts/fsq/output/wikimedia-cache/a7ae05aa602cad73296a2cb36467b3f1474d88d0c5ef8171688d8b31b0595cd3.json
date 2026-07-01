@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:14.787Z",
+  "value": {
+    "searchinfo": {
+      "search": "地下鉄博物館"
+    },
+    "search": [
+      {
+        "id": "Q11424081",
+        "title": "Q11424081",
+        "pageid": 12562835,
+        "concepturi": "http://www.wikidata.org/entity/Q11424081",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11424081",
+        "display": {
+          "label": {
+            "value": "Tokyo Metro Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "railway museum in Edogawa, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Metro Museum",
+        "description": "railway museum in Edogawa, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "地下鉄博物館"
+        },
+        "aliases": [
+          "地下鉄博物館"
+        ]
+      },
+      {
+        "id": "Q126762",
+        "title": "Q126762",
+        "pageid": 128845,
+        "concepturi": "http://www.wikidata.org/entity/Q126762",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q126762",
+        "display": {
+          "label": {
+            "value": "Kasai Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "metro station in Edogawa-ku, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Kasai Station",
+        "description": "metro station in Edogawa-ku, Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "地下鉄博物館前"
+        },
+        "aliases": [
+          "地下鉄博物館前"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

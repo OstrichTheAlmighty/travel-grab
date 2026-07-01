@@ -1,0 +1,118 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:39.914Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 33900,
+          "ns": 0,
+          "title": "イトーヨーカ堂",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いとうようかとう",
+            "page_image_free": "Seven_&_i_Holdings_Headquaters.jpg",
+            "wikibase_item": "Q3088746"
+          },
+          "coordinates": [
+            {
+              "lat": 35.58777778,
+              "lon": 139.73027778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区にあるスーパーマーケットチェーンの運営企業"
+            ]
+          }
+        },
+        {
+          "pageid": 63865,
+          "ns": 0,
+          "title": "築地市場",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "つきしいちは",
+            "page_image_free": "2018_Tsukiji_fish_market.jpg",
+            "wikibase_item": "Q859471"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66138889,
+              "lon": 139.76972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて東京都中央区築地に存在した公設卸売市場"
+            ]
+          }
+        },
+        {
+          "pageid": 395858,
+          "ns": 0,
+          "title": "若者のすべて (テレビドラマ)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "わかもののすへて",
+            "wikibase_item": "Q11616690"
+          },
+          "terms": {
+            "description": [
+              "1994年の日本のテレビドラマ"
+            ]
+          }
+        },
+        {
+          "pageid": 1569917,
+          "ns": 0,
+          "title": "吉田恵 (キャスター)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "よした けい",
+            "wikibase_item": "Q11413797"
+          },
+          "terms": {
+            "description": [
+              "日本の女性アナウンサー"
+            ]
+          }
+        },
+        {
+          "pageid": 1725166,
+          "ns": 0,
+          "title": "秋葉原",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あきははら",
+            "kartographer_frames": "1",
+            "page_image_free": "電気街の夜明け_-_panoramio.jpg",
+            "wikibase_item": "Q418096"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69836,
+              "lon": 139.77313,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区と台東区にまたがる街"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

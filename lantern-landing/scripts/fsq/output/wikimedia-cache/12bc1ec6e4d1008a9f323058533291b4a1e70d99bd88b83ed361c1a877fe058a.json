@@ -1,0 +1,90 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:01.857Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2220,
+          "ns": 0,
+          "title": "植田まさし",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "うえた まさし",
+            "wikibase_item": "Q1906779"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画家"
+            ]
+          }
+        },
+        {
+          "pageid": 35038,
+          "ns": 0,
+          "title": "コボちゃん",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こほちやん",
+            "wikibase_item": "Q707964"
+          },
+          "terms": {
+            "description": [
+              "読売新聞朝刊に掲載の植田まさしによる4コマ漫画 (1982 - )"
+            ]
+          }
+        },
+        {
+          "pageid": 135225,
+          "ns": 0,
+          "title": "上村典子",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "うえむら のりこ",
+            "wikibase_item": "Q7051287"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 2462522,
+          "ns": 0,
+          "title": "コボ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こほ",
+            "wikibase_item": "Q389251"
+          },
+          "terms": {
+            "description": [
+              "カナダの電子書籍関連企業"
+            ]
+          }
+        },
+        {
+          "pageid": 3532719,
+          "ns": 0,
+          "title": "山田朝彦",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やまた ともひこ",
+            "wikibase_item": "Q28015780"
+          },
+          "terms": {
+            "description": [
+              "日本の彫刻家（1943 - ）"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

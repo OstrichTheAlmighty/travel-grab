@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:06.744Z",
+  "value": {
+    "searchinfo": {
+      "search": "日比谷図書文化館"
+    },
+    "search": [
+      {
+        "id": "Q11509583",
+        "title": "Q11509583",
+        "pageid": 12649302,
+        "concepturi": "http://www.wikidata.org/entity/Q11509583",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11509583",
+        "display": {
+          "label": {
+            "value": "Hibiya Library & Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "library",
+            "language": "en"
+          }
+        },
+        "label": "Hibiya Library & Museum",
+        "description": "library",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "日比谷図書文化館"
+        },
+        "aliases": [
+          "日比谷図書文化館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

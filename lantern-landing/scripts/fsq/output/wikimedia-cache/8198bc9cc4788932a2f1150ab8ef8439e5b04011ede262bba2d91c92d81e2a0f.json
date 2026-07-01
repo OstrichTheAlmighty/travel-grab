@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:00.030Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 84184,
+          "ns": 0,
+          "title": "京都府立堂本印象美術館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きようとふりつとうもといんしようひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Insho-Domoto_Museum_of_Fine_Arts01s5.jpg",
+            "wikibase_item": "Q11375242"
+          }
+        },
+        {
+          "pageid": 133534,
+          "ns": 0,
+          "title": "箱根 彫刻の森美術館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はこねちようこくのもりひしゆつかん",
+            "page_image_free": "Hakone5.jpg",
+            "wikibase_item": "Q1134422"
+          },
+          "coordinates": [
+            {
+              "lat": 35.24471944,
+              "lon": 139.05151111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の屋外美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 452684,
+          "ns": 0,
+          "title": "群馬県立館林美術館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "くんまけんりつたてはやしひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Gunma_Museum_of_Art,_Tatebayashi_1.jpg",
+            "wikibase_item": "Q521611"
+          },
+          "coordinates": [
+            {
+              "lat": 36.26619444,
+              "lon": 139.50588889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "群馬県館林市日向町の多々良沼畔にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 1551187,
+          "ns": 0,
+          "title": "西田俊英",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にした しゆんえい",
+            "wikibase_item": "Q7040526"
+          },
+          "terms": {
+            "description": [
+              "日本の日本画家 (1953-)"
+            ]
+          }
+        },
+        {
+          "pageid": 3270730,
+          "ns": 0,
+          "title": "京都市美術館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きようとしひしゆつかん",
+            "page_image_free": "Kyoto_Municipal_Museum_of_Art_1933_ⅱ.jpg",
+            "wikibase_item": "Q3330657"
+          },
+          "coordinates": [
+            {
+              "lat": 35.01280556,
+              "lon": 135.78363889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市左京区岡崎にある美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:11.880Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 23899,
+          "ns": 0,
+          "title": "西郷隆盛",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さいこう たかもり",
+            "page_image_free": "Takamori_Saigo.jpg",
+            "wikibase_item": "Q310462"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家・軍人 (1827-1877)"
+            ]
+          }
+        },
+        {
+          "pageid": 33752,
+          "ns": 0,
+          "title": "上野恩賜公園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "うえのおんしこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "上野公園航空写真1984.jpg",
+            "wikibase_item": "Q746216"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71222222,
+              "lon": 139.77111111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 928897,
+          "ns": 0,
+          "title": "銅像",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうそう",
+            "page_image_free": "SaigoTakamori1332.jpg",
+            "wikibase_item": "Q928357"
+          },
+          "terms": {
+            "description": [
+              "銅で作られた像"
+            ]
+          }
+        },
+        {
+          "pageid": 1690075,
+          "ns": 0,
+          "title": "西郷隆盛像",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さいこうたかもりそう",
+            "wikibase_item": "Q11629701"
+          },
+          "terms": {
+            "description": [
+              "日本の武士・軍人である西郷隆盛の顕彰を目的として建立された銅像"
+            ]
+          }
+        },
+        {
+          "pageid": 3484064,
+          "ns": 0,
+          "title": "西郷どん (NHK大河ドラマ)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せことん",
+            "wikibase_item": "Q28359588"
+          },
+          "terms": {
+            "description": [
+              "2018年のNHK大河ドラマ第57作"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

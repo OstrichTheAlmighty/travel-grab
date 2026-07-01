@@ -1,0 +1,2636 @@
+{
+  "generatedAt": "2026-06-29T07:37:36.228Z",
+  "tierAInputCount": 3200,
+  "pilotLimit": 250,
+  "verifiedWikidataMatches": 33,
+  "probableManualReviewMatches": 4,
+  "rejectedRecords": 211,
+  "unmatchedPlaces": 2,
+  "rejectedFalseMatches": 361,
+  "matchRate": 0.132,
+  "englishNameCoverage": 0.232,
+  "japaneseNameCoverage": 0.944,
+  "descriptionCoverage": 0.132,
+  "reusableImageCoverage": 0.108,
+  "licenseBreakdown": {
+    "Attribution": 1,
+    "Public domain": 2,
+    "CC0": 3,
+    "CC BY-SA 4.0": 5,
+    "CC BY-SA 3.0": 13,
+    "CC BY-SA 2.0": 1,
+    "CC BY 3.0": 2
+  },
+  "completeImageAttribution": 27,
+  "tokyoCoreCount": 3005,
+  "broaderTokyoCount": 84,
+  "metroExcursionCount": 64,
+  "reserveCount": 47,
+  "top100TokyoCore": [
+    {
+      "rank": 1,
+      "fsqPlaceId": "4b5ff761f964a520f1d129e3",
+      "name": "新宿御苑 (Shinjuku Gyoen)",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 86.7,
+      "wikidataId": "Q776863",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 2,
+      "fsqPlaceId": "4b56a684f964a520961728e3",
+      "name": "浜離宮恩賜庭園 (Hamarikyu Garden)",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 86.5,
+      "wikidataId": "Q1033333",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 3,
+      "fsqPlaceId": "4bdd08424ffaa59375a86ef7",
+      "name": "清澄庭園 (Kiyosumi Gardens)",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 85.7,
+      "wikidataId": "Q4388146",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 4,
+      "fsqPlaceId": "4c0dbc74d64c0f470f3e275d",
+      "name": "展望デッキ (Observation Deck)",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 84.1,
+      "wikidataId": "Q177305",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 5,
+      "fsqPlaceId": "515576cbe4b039dd4397aebe",
+      "name": "目黒天空庭園 (Meguro Sky Garden)",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 83.9,
+      "wikidataId": "Q11581649",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 6,
+      "fsqPlaceId": "4b658d10f964a52020f42ae3",
+      "name": "小石川植物園",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 82.9,
+      "wikidataId": "Q1064892",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 7,
+      "fsqPlaceId": "4b591810f964a5203d7c28e3",
+      "name": "小石川後楽園",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 82.7,
+      "wikidataId": "Q1778881",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 8,
+      "fsqPlaceId": "4b0587a5f964a520309e22e3",
+      "name": "旧芝離宮恩賜庭園",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 82.4,
+      "wikidataId": "Q3266874",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 9,
+      "fsqPlaceId": "4b7372c8f964a52009af2de3",
+      "name": "向島百花園",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 82.2,
+      "wikidataId": "Q7076776",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 10,
+      "fsqPlaceId": "4b5fc115f964a52082cb29e3",
+      "name": "旧古河庭園",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 82,
+      "wikidataId": "Q3082256",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 11,
+      "fsqPlaceId": "4bb2dd8b4019a593e66437b8",
+      "name": "肥後細川庭園",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 82,
+      "wikidataId": "Q3162465",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 12,
+      "fsqPlaceId": "4ba4377ef964a520dc8c38e3",
+      "name": "夢の島熱帯植物館",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 81.8,
+      "wikidataId": "Q4388023",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 13,
+      "fsqPlaceId": "4b5a70d4f964a5204dc528e3",
+      "name": "国立科学博物館附属 自然教育園",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 81.6,
+      "wikidataId": "Q5557026",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 14,
+      "fsqPlaceId": "4c6ab1268d22c9281867ba45",
+      "name": "牧野記念庭園",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 81.6,
+      "wikidataId": "Q5158903",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 15,
+      "fsqPlaceId": "4b9ae2a9f964a52079df35e3",
+      "name": "毛利庭園 (Mohri Garden)",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 81.5,
+      "wikidataId": "Q11547673",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 63,
+      "fsqPlaceId": "4cdf4f8c78ddf04db44ea098",
+      "name": "ローズガーデン",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 80.2,
+      "wikidataId": "Q365436",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 84,
+      "fsqPlaceId": "4b6c0f00f964a520c6212ce3",
+      "name": "忠犬ハチ公 (Hachiko Statue)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 79.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 89,
+      "fsqPlaceId": "4b5beb50f964a520451d29e3",
+      "name": "蘆花恒春園 (蘆花公園)",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 78.9,
+      "wikidataId": "Q11625161",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 90,
+      "fsqPlaceId": "4b8e0b5ff964a520d31633e3",
+      "name": "旧安田庭園",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 78.9,
+      "wikidataId": "Q11511031",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 91,
+      "fsqPlaceId": "4be10b4fc1732d7f752d5b9a",
+      "name": "堀切菖蒲園",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 78.5,
+      "wikidataId": "Q11427321",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 92,
+      "fsqPlaceId": "4c0b31b36071a59373ffe032",
+      "name": "小岩菖蒲園",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 78.5,
+      "wikidataId": "Q85879656",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 93,
+      "fsqPlaceId": "4c5a61fb6407d13a86a1b428",
+      "name": "Aさんの庭",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 78.5,
+      "wikidataId": "Q18990855",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 94,
+      "fsqPlaceId": "4b91e099f964a52021dd33e3",
+      "name": "東京シティビュー (Tokyo City View)",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 78.3,
+      "wikidataId": "Q126417093",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 97,
+      "fsqPlaceId": "4b9b33a7f964a52087f935e3",
+      "name": "すずめのお宿緑地公園",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 77.8,
+      "wikidataId": "Q11269700",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 270,
+      "fsqPlaceId": "4b638fa4f964a5207a832ae3",
+      "name": "Farmer's Market",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 76.8,
+      "wikidataId": "Q1522620",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 271,
+      "fsqPlaceId": "4b679975f964a52010572be3",
+      "name": "渋谷区ふれあい植物センター",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 76.8,
+      "wikidataId": "Q110215017",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 368,
+      "fsqPlaceId": "4c147bcb77cea59379cad060",
+      "name": "一之江抹香亭",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 76.3,
+      "wikidataId": "Q118985226",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 369,
+      "fsqPlaceId": "4b5e7f11f964a520e49029e3",
+      "name": "西郷隆盛像",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 370,
+      "fsqPlaceId": "4b70f0c4f964a5201e352de3",
+      "name": "大村益次郎銅像",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 383,
+      "fsqPlaceId": "4eed92150aaf1d45b2190b20",
+      "name": "日本初飛行の地 (日本航空発始之地記念碑)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 384,
+      "fsqPlaceId": "50a4bda6e4b05d87e65cf975",
+      "name": "広げよう納税の輪像",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 385,
+      "fsqPlaceId": "513be504e4b017814336dba4",
+      "name": "北村治禧《麗新》",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 388,
+      "fsqPlaceId": "5250eaec11d2e0ab7f5934b7",
+      "name": "佐々木隆興先生 像",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.1,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 393,
+      "fsqPlaceId": "55d840c9498e45a2035da489",
+      "name": "コボちゃん",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 397,
+      "fsqPlaceId": "64842d51a223706183a8a78a",
+      "name": "宮城浩蔵先生像",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 399,
+      "fsqPlaceId": "673b2692c070221931c884f0",
+      "name": "中山道志村ノ辻地藏尊",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 401,
+      "fsqPlaceId": "6a290ff87523ee55cf19e047",
+      "name": "風のモニュメント(エコノキ・エノキ)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 76.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 407,
+      "fsqPlaceId": "4e8522a6a17cd14ccd75f7e0",
+      "name": "東京スカイツリー天望デッキ",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 75.3,
+      "wikidataId": "Q117066302",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 408,
+      "fsqPlaceId": "4fb4acd3e4b06fa0ebcb9f87",
+      "name": "東京スカイツリー天望回廊",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 75.3,
+      "wikidataId": "Q117066320",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 409,
+      "fsqPlaceId": "4fbad233121d47491a1cf8b4",
+      "name": "フロア350",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 75.3,
+      "wikidataId": "Q117066302",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 412,
+      "fsqPlaceId": "644b3e56b8ab765f5607647d",
+      "name": "岸本辰雄先生像",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75.3,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 413,
+      "fsqPlaceId": "66d9a0269f640f1312598dfe",
+      "name": "交わる白と黒",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75.3,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 414,
+      "fsqPlaceId": "67f3f31f1ad1fc7cff980009",
+      "name": "はてなのうてな",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75.3,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 415,
+      "fsqPlaceId": "6842b9123a74f04eab72fbbb",
+      "name": "ありし日の谷中五重塔",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75.3,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 425,
+      "fsqPlaceId": "4b89f450f964a520785832e3",
+      "name": "若い時計台",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 526,
+      "fsqPlaceId": "6647017fcd1a845a93ac8b8a",
+      "name": "ガラスドーム",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 528,
+      "fsqPlaceId": "67d51e0db617275de5355c36",
+      "name": "石川啄木歌碑「二晩おきに 夜の一時頃に切通の坂を上りしも 勤めなればかな」",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 529,
+      "fsqPlaceId": "67d53e6febacad21193be033",
+      "name": "高久 靄厓　筆塚",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 530,
+      "fsqPlaceId": "67dfbe9bae1cda5795f870b6",
+      "name": "陸軍用地境界杭(ハンズ裏)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 531,
+      "fsqPlaceId": "67fc9bb45d5fb741185c5706",
+      "name": "庚申塔(自然石・天保十三年)",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 532,
+      "fsqPlaceId": "6822ba1f7131ed0b621a8e6a",
+      "name": "第六天神社前 道標",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 534,
+      "fsqPlaceId": "69ec6bf29d957c73ee52701e",
+      "name": "東京国立博物館 ミュージアムショップ ラウンジ",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 75,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 537,
+      "fsqPlaceId": "5ef17348b57c170008236cde",
+      "name": "恋人の聖地",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 74.9,
+      "wikidataId": "Q11492001",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 538,
+      "fsqPlaceId": "4bfe720c55539c7414dabcf3",
+      "name": "風景式庭園",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 74.8,
+      "wikidataId": "Q24887393",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 546,
+      "fsqPlaceId": "4d69f0a72acd6ea89ed540c0",
+      "name": "展望ロビー",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 74.2,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 547,
+      "fsqPlaceId": "54fae9b5498e727051eca870",
+      "name": "上野英三郎博士とハチ公の像",
+      "category": "free",
+      "catalog": "tokyo_core",
+      "score": 74.2,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 553,
+      "fsqPlaceId": "682193fb1f5aa163fb9f4c78",
+      "name": "皇居 豊明殿",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 74.2,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 554,
+      "fsqPlaceId": "686cc045672a2e0fde0867d0",
+      "name": "crevia base tokyo",
+      "category": "culture",
+      "catalog": "tokyo_core",
+      "score": 74.2,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 571,
+      "fsqPlaceId": "4b7237fdf964a52064742de3",
+      "name": "北の丸公園 (Kitanomaru National Garden)",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 72.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 573,
+      "fsqPlaceId": "4b7f8b41f964a520c43330e3",
+      "name": "スカイデッキ (Sky Deck)",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 72.7,
+      "matchStatus": "probable_manual_review"
+    },
+    {
+      "rank": 574,
+      "fsqPlaceId": "4b835349f964a520860231e3",
+      "name": "ミッドタウン・ガーデン (Midtown Garden)",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 72.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 577,
+      "fsqPlaceId": "4c1a916a63750f475a7fb367",
+      "name": "明治神宮御苑 (Meiji Jingu Gyoen)",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 72.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 579,
+      "fsqPlaceId": "4c8c9926c37a6dcb31dff87a",
+      "name": "銀座テラス (Ginza Terrace)",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 72.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 583,
+      "fsqPlaceId": "514a99ade4b095673be9deb9",
+      "name": "屋上庭園 KITTEガーデン",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 72.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 639,
+      "fsqPlaceId": "588ec0948b0ebb5d017acf72",
+      "name": "my sky hole 93-3 手まり坂",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 71.2,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 640,
+      "fsqPlaceId": "5bc73548ea1e44002cc718de",
+      "name": "アヲ GINZA TOKYO",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 71.2,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 737,
+      "fsqPlaceId": "4b6d0bcaf964a52097642ce3",
+      "name": "ebisu green garden",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 739,
+      "fsqPlaceId": "4b7f4beff964a520bb2530e3",
+      "name": "フラワーランド",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 741,
+      "fsqPlaceId": "4b8121f5f964a520dc9730e3",
+      "name": "球体展望室 はちたま",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 742,
+      "fsqPlaceId": "4b8a0bfff964a520585d32e3",
+      "name": "タワーホール船堀 タワー展望室",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 746,
+      "fsqPlaceId": "4ba80590f964a5200bc739e3",
+      "name": "平成つつじ公園",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "probable_manual_review"
+    },
+    {
+      "rank": 747,
+      "fsqPlaceId": "4bc14cd5461576b0edd97b32",
+      "name": "屋上庭園 アイ・ガーデン / ステージ",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 750,
+      "fsqPlaceId": "4bdfcf270ee3a593dc7035b0",
+      "name": "東京都庁 北展望室",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 751,
+      "fsqPlaceId": "4be0feaac1732d7f67115b9a",
+      "name": "メインデッキ",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 752,
+      "fsqPlaceId": "4be1e31387e42d7ff734880b",
+      "name": "佐野いこいの森",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 755,
+      "fsqPlaceId": "4c0af946ffb8c9b6ac996c61",
+      "name": "若葉東公園",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 757,
+      "fsqPlaceId": "4c368b3593db0f47625b1e92",
+      "name": "北烏山九丁目屋敷林市民緑地",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 758,
+      "fsqPlaceId": "4c6cbde046353704936907bc",
+      "name": "トップデッキ",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 759,
+      "fsqPlaceId": "4c708b1cd7fab1f7be095fc9",
+      "name": "成城五丁目猪股庭園",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 761,
+      "fsqPlaceId": "4c94255682b56dcbdbb7ccaa",
+      "name": "板橋区立 熱帯環境植物館",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 765,
+      "fsqPlaceId": "4ce63d9af1c6236af54752f0",
+      "name": "展望ラウンジ",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 767,
+      "fsqPlaceId": "4d3a8155fa736ea8b60d178a",
+      "name": "ギャザリア ビオガーデン フジクラ 木場千年の森",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 768,
+      "fsqPlaceId": "4d545712d8f7a0908da7cb0a",
+      "name": "東京都庁展望室",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "probable_manual_review"
+    },
+    {
+      "rank": 770,
+      "fsqPlaceId": "4d96cb6ba2c654811d0cc953",
+      "name": "池上会館 展望台",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 771,
+      "fsqPlaceId": "4db9f0b67aba1fe0fb3edda2",
+      "name": "ホテルニューオータニ 日本庭園",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 772,
+      "fsqPlaceId": "4de9f3a588774880e30ef82c",
+      "name": "アトレ目黒1 空中庭園",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 773,
+      "fsqPlaceId": "4e19ac24fa761946459cad57",
+      "name": "経堂コルティ 屋上庭園",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 774,
+      "fsqPlaceId": "4e672f14e4cdfdecb02e55cd",
+      "name": "テレコムセンター展望室",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 775,
+      "fsqPlaceId": "4e70a712d22d2dfc31be0b93",
+      "name": "シェラトン都ホテル 庭園",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 776,
+      "fsqPlaceId": "4e733da752b145ffbf76f51d",
+      "name": "烏山つつじ緑地 （北烏山つつじ広場）",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 777,
+      "fsqPlaceId": "4ebf6c45b8f7963bcd90f7d8",
+      "name": "一之江名主屋敷",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 778,
+      "fsqPlaceId": "4ec873b502d5888e9d11f2c7",
+      "name": "千住ミルディス 屋上広場",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 779,
+      "fsqPlaceId": "4eead47baa1f5709140c346d",
+      "name": "自然再生緑地 おおはし里の杜",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 780,
+      "fsqPlaceId": "4efbc42b30f8809e75f32e85",
+      "name": "椿山荘 庭園",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 781,
+      "fsqPlaceId": "4f62e129e4b03a7cdf76b6e0",
+      "name": "東京国立博物館 庭園",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 782,
+      "fsqPlaceId": "4f72a500e4b042cc95b3c2a5",
+      "name": "西神田 百樹の広場",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 783,
+      "fsqPlaceId": "4f8f866ae4b000f3fb6716de",
+      "name": "おもはらの森",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 784,
+      "fsqPlaceId": "4fbad359121d47491a1d2111",
+      "name": "フロア345",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 785,
+      "fsqPlaceId": "4fbad492121d47491a1d4749",
+      "name": "フロア340",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 786,
+      "fsqPlaceId": "4fcc7e256d869f4549365ee1",
+      "name": "ドームガーデン",
+      "category": "nature",
+      "catalog": "tokyo_core",
+      "score": 69.7,
+      "matchStatus": "rejected"
+    }
+  ],
+  "top30MetroExcursions": [
+    {
+      "rank": 1,
+      "fsqPlaceId": "4b5a9531f964a52078cc28e3",
+      "name": "新横浜ラーメン博物館 (Shin-Yokohama Ramen Museum)",
+      "category": "food",
+      "catalog": "metro_excursion",
+      "score": 76.7,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 2,
+      "fsqPlaceId": "4ddd219d52b177ff2e7c3763",
+      "name": "日吉の森 庭園美術館",
+      "category": "culture",
+      "catalog": "metro_excursion",
+      "score": 75.6,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 3,
+      "fsqPlaceId": "4b56ee34f964a520a51f28e3",
+      "name": "東京ディズニーリゾート (Tokyo Disney Resort)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 73.7,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 4,
+      "fsqPlaceId": "4b59ebdaf964a52002a128e3",
+      "name": "東京ディズニーランド (Tokyo Disneyland)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 72.5,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 5,
+      "fsqPlaceId": "4c2bf7fe8abca593441c0120",
+      "name": "東京ディズニーシー (Tokyo DisneySea)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 72.5,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 6,
+      "fsqPlaceId": "4e630c71ae60e9edf6077c94",
+      "name": "ピクニックエリア (Picnic Area)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 70.7,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 7,
+      "fsqPlaceId": "4b64f016f964a5200adb2ae3",
+      "name": "夢見ヶ崎動物公園",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 68.1,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 8,
+      "fsqPlaceId": "4f5c0be1e4b086681badb020",
+      "name": "ひでくんちのいちご畑",
+      "category": "food",
+      "catalog": "metro_excursion",
+      "score": 67,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 9,
+      "fsqPlaceId": "4b7f7843f964a5204e3030e3",
+      "name": "トゥーンタウン (TOONTOWN)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 66.5,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 10,
+      "fsqPlaceId": "4bd37f0ccaff95210619d5f0",
+      "name": "メインエントランス (Main Entrance)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 66.5,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 11,
+      "fsqPlaceId": "4bf0f2676f8aa5935166c23c",
+      "name": "ブローフィッシュ・バルーンレース (Blowfish Balloon Race)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 66.5,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 12,
+      "fsqPlaceId": "4c2c4ce677cfe21effdab5f1",
+      "name": "ウォーターフロントパーク ( Waterfront Park)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 66.5,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 13,
+      "fsqPlaceId": "4c70a441b5a5236a8b235152",
+      "name": "ジャンピン・ジェリーフィッシュ (Jumpim' Jellyfish)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 66.5,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 14,
+      "fsqPlaceId": "4c8adc701eafb1f7b2877e35",
+      "name": "トゥモローランド (Tomorrow Land)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 66.5,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 15,
+      "fsqPlaceId": "6636fbb5637c5c1fae105ad2",
+      "name": "ファンタジースプリングス (Fantasy Springs)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 66.5,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 16,
+      "fsqPlaceId": "4b7f3b13f964a520ed2030e3",
+      "name": "トムソーヤ島 (Tom Sawyer Island)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 17,
+      "fsqPlaceId": "4b89cc57f964a520da4d32e3",
+      "name": "チップとデールのツリーハウス (Chip'n Dale's  Treehouse)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 18,
+      "fsqPlaceId": "4b89ceaff964a520f14d32e3",
+      "name": "トゥーンパーク (Toon Park)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 19,
+      "fsqPlaceId": "4b89d7e6f964a520b85032e3",
+      "name": "フォートレス・エクスプロレーション (Fortress Explorations)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 20,
+      "fsqPlaceId": "4b89e025f964a5202f5332e3",
+      "name": "アリエルのグリーティンググロット (Ariel's Greeting Grotto)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 21,
+      "fsqPlaceId": "4c0336ca39d476b00ce42fa7",
+      "name": "ウエスタンランド (Westernland)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 22,
+      "fsqPlaceId": "4c8aefc3a92fa093b86196bf",
+      "name": "ファンタジーランド (Fantasyland)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 23,
+      "fsqPlaceId": "4c96a37d72dd224b6335ae91",
+      "name": "ビリエッテリーア (Biglietteria)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 24,
+      "fsqPlaceId": "4cc4dedfbe40a35d6556814c",
+      "name": "トゥモローランド・ホール (Tomorrowland Hall)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 25,
+      "fsqPlaceId": "4cc4ef291e596dcb4e04d567",
+      "name": "インジャンジョーの洞窟（Injun Joe's Cave）",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 26,
+      "fsqPlaceId": "4cc79f868c5b236aeeb6fa6d",
+      "name": "カメラセンター (CAMERA CENTER)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 27,
+      "fsqPlaceId": "4d0dbfbf95c1a1cdee3204ff",
+      "name": "サルードス・アミーゴス！(\"Saludos Amigos!\" Greeting Dock)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 28,
+      "fsqPlaceId": "4d74290afe1b721e8938aa1f",
+      "name": "チケットブース (Ticketing Booth)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 29,
+      "fsqPlaceId": "661cd18d7ca4316f63858de3",
+      "name": "クワッキーセレブレーション ドナルド・ザ・レジェンド!",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 64.7,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 30,
+      "fsqPlaceId": "53646183498e2cafa287e599",
+      "name": "新横浜公園 第1運動広場",
+      "category": "free",
+      "catalog": "metro_excursion",
+      "score": 63.5,
+      "matchStatus": "unmatched"
+    }
+  ],
+  "top20PerCategory": {
+    "culture": [
+      {
+        "rank": 84,
+        "fsqPlaceId": "4b6c0f00f964a520c6212ce3",
+        "name": "忠犬ハチ公 (Hachiko Statue)",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 79.1,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 369,
+        "fsqPlaceId": "4b5e7f11f964a520e49029e3",
+        "name": "西郷隆盛像",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 76.1,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 370,
+        "fsqPlaceId": "4b70f0c4f964a5201e352de3",
+        "name": "大村益次郎銅像",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 76.1,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 383,
+        "fsqPlaceId": "4eed92150aaf1d45b2190b20",
+        "name": "日本初飛行の地 (日本航空発始之地記念碑)",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 76.1,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 384,
+        "fsqPlaceId": "50a4bda6e4b05d87e65cf975",
+        "name": "広げよう納税の輪像",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 76.1,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 385,
+        "fsqPlaceId": "513be504e4b017814336dba4",
+        "name": "北村治禧《麗新》",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 76.1,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 388,
+        "fsqPlaceId": "5250eaec11d2e0ab7f5934b7",
+        "name": "佐々木隆興先生 像",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 76.1,
+        "matchStatus": "unmatched"
+      },
+      {
+        "rank": 393,
+        "fsqPlaceId": "55d840c9498e45a2035da489",
+        "name": "コボちゃん",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 76.1,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 397,
+        "fsqPlaceId": "64842d51a223706183a8a78a",
+        "name": "宮城浩蔵先生像",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 76.1,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 399,
+        "fsqPlaceId": "673b2692c070221931c884f0",
+        "name": "中山道志村ノ辻地藏尊",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 76.1,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 401,
+        "fsqPlaceId": "6a290ff87523ee55cf19e047",
+        "name": "風のモニュメント(エコノキ・エノキ)",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 76.1,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 2,
+        "fsqPlaceId": "4ddd219d52b177ff2e7c3763",
+        "name": "日吉の森 庭園美術館",
+        "category": "culture",
+        "catalog": "metro_excursion",
+        "score": 75.6,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 412,
+        "fsqPlaceId": "644b3e56b8ab765f5607647d",
+        "name": "岸本辰雄先生像",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 75.3,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 413,
+        "fsqPlaceId": "66d9a0269f640f1312598dfe",
+        "name": "交わる白と黒",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 75.3,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 414,
+        "fsqPlaceId": "67f3f31f1ad1fc7cff980009",
+        "name": "はてなのうてな",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 75.3,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 415,
+        "fsqPlaceId": "6842b9123a74f04eab72fbbb",
+        "name": "ありし日の谷中五重塔",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 75.3,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 425,
+        "fsqPlaceId": "4b89f450f964a520785832e3",
+        "name": "若い時計台",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 75,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 526,
+        "fsqPlaceId": "6647017fcd1a845a93ac8b8a",
+        "name": "ガラスドーム",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 75,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 528,
+        "fsqPlaceId": "67d51e0db617275de5355c36",
+        "name": "石川啄木歌碑「二晩おきに 夜の一時頃に切通の坂を上りしも 勤めなればかな」",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 75,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 529,
+        "fsqPlaceId": "67d53e6febacad21193be033",
+        "name": "高久 靄厓　筆塚",
+        "category": "culture",
+        "catalog": "tokyo_core",
+        "score": 75,
+        "matchStatus": "rejected"
+      }
+    ],
+    "nature": [
+      {
+        "rank": 1,
+        "fsqPlaceId": "4b5ff761f964a520f1d129e3",
+        "name": "新宿御苑 (Shinjuku Gyoen)",
+        "category": "nature",
+        "catalog": "tokyo_core",
+        "score": 86.7,
+        "wikidataId": "Q776863",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 2,
+        "fsqPlaceId": "4b56a684f964a520961728e3",
+        "name": "浜離宮恩賜庭園 (Hamarikyu Garden)",
+        "category": "nature",
+        "catalog": "tokyo_core",
+        "score": 86.5,
+        "wikidataId": "Q1033333",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 3,
+        "fsqPlaceId": "4bdd08424ffaa59375a86ef7",
+        "name": "清澄庭園 (Kiyosumi Gardens)",
+        "category": "nature",
+        "catalog": "tokyo_core",
+        "score": 85.7,
+        "wikidataId": "Q4388146",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 4,
+        "fsqPlaceId": "4c0dbc74d64c0f470f3e275d",
+        "name": "展望デッキ (Observation Deck)",
+        "category": "nature",
+        "catalog": "tokyo_core",
+        "score": 84.1,
+        "wikidataId": "Q177305",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 5,
+        "fsqPlaceId": "515576cbe4b039dd4397aebe",
+        "name": "目黒天空庭園 (Meguro Sky Garden)",
+        "category": "nature",
+        "catalog": "tokyo_core",
+        "score": 83.9,
+        "wikidataId": "Q11581649",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 6,
+        "fsqPlaceId": "4b658d10f964a52020f42ae3",
+        "name": "小石川植物園",
+        "category": "nature",
+        "catalog": "tokyo_core",
+        "score": 82.9,
+        "wikidataId": "Q1064892",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 7,
+        "fsqPlaceId": "4b591810f964a5203d7c28e3",
+        "name": "小石川後楽園",
+        "category": "nature",
+        "catalog": "tokyo_core",
+        "score": 82.7,
+        "wikidataId": "Q1778881",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 8,
+        "fsqPlaceId": "4b0587a5f964a520309e22e3",
+        "name": "旧芝離宮恩賜庭園",
+        "category": "nature",
+        "catalog": "tokyo_core",
+        "score": 82.4,
+        "wikidataId": "Q3266874",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 9,
+        "fsqPlaceId": "4b7372c8f964a52009af2de3",
+        "name": "向島百花園",
+        "category": "nature",
+        "catalog": "tokyo_core",
+        "score": 82.2,
+        "wikidataId": "Q7076776",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 10,
+        "fsqPlaceId": "4b5fc115f964a52082cb29e3",
+        "name": "旧古河庭園",
+        "category": "nature",
+        "catalog": "tokyo_core",
+        "score": 82,
+        "wikidataId": "Q3082256",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 11,
+        "fsqPlaceId": "4bb2dd8b4019a593e66437b8",
+        "name": "肥後細川庭園",
+        "category": "nature",
+        "catalog": "tokyo_core",
+        "score": 82,
+        "wikidataId": "Q3162465",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 12,
+        "fsqPlaceId": "4ba4377ef964a520dc8c38e3",
+        "name": "夢の島熱帯植物館",
+        "category": "nature",
+        "catalog": "tokyo_core",
+        "score": 81.8,
+        "wikidataId": "Q4388023",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 13,
+        "fsqPlaceId": "4b5a70d4f964a5204dc528e3",
+        "name": "国立科学博物館附属 自然教育園",
+        "category": "nature",
+        "catalog": "tokyo_core",
+        "score": 81.6,
+        "wikidataId": "Q5557026",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 14,
+        "fsqPlaceId": "4c6ab1268d22c9281867ba45",
+        "name": "牧野記念庭園",
+        "category": "nature",
+        "catalog": "tokyo_core",
+        "score": 81.6,
+        "wikidataId": "Q5158903",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 15,
+        "fsqPlaceId": "4b9ae2a9f964a52079df35e3",
+        "name": "毛利庭園 (Mohri Garden)",
+        "category": "nature",
+        "catalog": "tokyo_core",
+        "score": 81.5,
+        "wikidataId": "Q11547673",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 63,
+        "fsqPlaceId": "4cdf4f8c78ddf04db44ea098",
+        "name": "ローズガーデン",
+        "category": "nature",
+        "catalog": "tokyo_core",
+        "score": 80.2,
+        "wikidataId": "Q365436",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 89,
+        "fsqPlaceId": "4b5beb50f964a520451d29e3",
+        "name": "蘆花恒春園 (蘆花公園)",
+        "category": "nature",
+        "catalog": "tokyo_core",
+        "score": 78.9,
+        "wikidataId": "Q11625161",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 90,
+        "fsqPlaceId": "4b8e0b5ff964a520d31633e3",
+        "name": "旧安田庭園",
+        "category": "nature",
+        "catalog": "tokyo_core",
+        "score": 78.9,
+        "wikidataId": "Q11511031",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 91,
+        "fsqPlaceId": "4be10b4fc1732d7f752d5b9a",
+        "name": "堀切菖蒲園",
+        "category": "nature",
+        "catalog": "tokyo_core",
+        "score": 78.5,
+        "wikidataId": "Q11427321",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 92,
+        "fsqPlaceId": "4c0b31b36071a59373ffe032",
+        "name": "小岩菖蒲園",
+        "category": "nature",
+        "catalog": "tokyo_core",
+        "score": 78.5,
+        "wikidataId": "Q85879656",
+        "matchStatus": "verified"
+      }
+    ],
+    "food": [
+      {
+        "rank": 270,
+        "fsqPlaceId": "4b638fa4f964a5207a832ae3",
+        "name": "Farmer's Market",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 76.8,
+        "wikidataId": "Q1522620",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 907,
+        "fsqPlaceId": "4bc3ef284cdfc9b6e51d9821",
+        "name": "FARMERS MARKET 二子玉川",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 67.4,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 924,
+        "fsqPlaceId": "687144e18dc4022626ae0254",
+        "name": "代官山青果店 Produced By Redep",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 67.4,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 940,
+        "fsqPlaceId": "51849514498e0a3c50fc57f5",
+        "name": "Natural Harmony 玉堤店",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 67,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 988,
+        "fsqPlaceId": "4b84b36ef964a520924131e3",
+        "name": "Belgian Beer & Tapas BEER GARAGE",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 65.2,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 991,
+        "fsqPlaceId": "4c551ac44623be9a8f5bd6f3",
+        "name": "ムスビガーデン 都立大学店",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 65.2,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 999,
+        "fsqPlaceId": "5348b57b11d286a990464cf3",
+        "name": "干物〇まる",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 65.2,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1003,
+        "fsqPlaceId": "5e98fcb45836e50008c61188",
+        "name": "DAITA DESICA from aomori",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 65.2,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1031,
+        "fsqPlaceId": "43fb89ac529e42a3a2ee0e7b",
+        "name": "魚喜池袋店",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 64.4,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1032,
+        "fsqPlaceId": "4b57cb7cf964a5208b4128e3",
+        "name": "築地場外市場",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 64.4,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1035,
+        "fsqPlaceId": "4b6ce45df964a520045c2ce3",
+        "name": "ヒルズマルシェ",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 64.4,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1036,
+        "fsqPlaceId": "4b6d2ef1f964a5206a6a2ce3",
+        "name": "香川・愛媛せとうち旬彩館",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 64.4,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1038,
+        "fsqPlaceId": "4b76260ef964a5200d402ee3",
+        "name": "築地斉藤水産",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 64.4,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1039,
+        "fsqPlaceId": "4b7c948bf964a520219c2fe3",
+        "name": "フレッシュ大和田",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 64.4,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1040,
+        "fsqPlaceId": "4bb6cc511344b713351d9e04",
+        "name": "JA東京あおば 総合園芸センター ふれあいの里",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 64.4,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1041,
+        "fsqPlaceId": "4bdfc6236198c9b6075d18ff",
+        "name": "はるさん商会",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 64.4,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1043,
+        "fsqPlaceId": "4c34127c7cc0c9b63edcf29a",
+        "name": "築地 江戸一 本店",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 64.4,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1045,
+        "fsqPlaceId": "4c3980f02c8020a15adb8c00",
+        "name": "ヤオヤプラス",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 64.4,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1046,
+        "fsqPlaceId": "4c43b193429a0f4761d0471e",
+        "name": "べじふるセンター練馬",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 64.4,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1047,
+        "fsqPlaceId": "4c4b9b4d959220a1cef9c40f",
+        "name": "JA東京あおばファーマーズショップこぐれ村",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 64.4,
+        "matchStatus": "rejected"
+      }
+    ],
+    "free": [
+      {
+        "rank": 547,
+        "fsqPlaceId": "54fae9b5498e727051eca870",
+        "name": "上野英三郎博士とハチ公の像",
+        "category": "free",
+        "catalog": "tokyo_core",
+        "score": 74.2,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 935,
+        "fsqPlaceId": "50d3c4ece4b0365cbff66982",
+        "name": "産業遺構・錨",
+        "category": "free",
+        "catalog": "tokyo_core",
+        "score": 67.1,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 968,
+        "fsqPlaceId": "4c3e74dd98ea9c747f6dc0b5",
+        "name": "ガチャピン",
+        "category": "free",
+        "catalog": "tokyo_core",
+        "score": 65.5,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 970,
+        "fsqPlaceId": "52248e6311d2a6bad866aeb4",
+        "name": "時をつなぐ",
+        "category": "free",
+        "catalog": "tokyo_core",
+        "score": 65.5,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 971,
+        "fsqPlaceId": "5250ea36498eb6f5c3f97c37",
+        "name": "佐々木政吉先生 像",
+        "category": "free",
+        "catalog": "tokyo_core",
+        "score": 65.5,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 972,
+        "fsqPlaceId": "5250ea87498ec08e20ef5447",
+        "name": "佐々木東洋先生 像",
+        "category": "free",
+        "catalog": "tokyo_core",
+        "score": 65.5,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 973,
+        "fsqPlaceId": "5250f470498eb5708b0e411c",
+        "name": "川合渉先生 像",
+        "category": "free",
+        "catalog": "tokyo_core",
+        "score": 65.5,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 974,
+        "fsqPlaceId": "54cc7bbc498e5e3d9632906a",
+        "name": "東京市のマンホール",
+        "category": "free",
+        "catalog": "tokyo_core",
+        "score": 65.5,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 976,
+        "fsqPlaceId": "58f2cb45aa6c955cd716081a",
+        "name": "産業遺構 錘",
+        "category": "free",
+        "catalog": "tokyo_core",
+        "score": 65.5,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1261,
+        "fsqPlaceId": "5acea64afc9e940c3bd43149",
+        "name": "伊東忠太動物園",
+        "category": "free",
+        "catalog": "tokyo_core",
+        "score": 63.6,
+        "matchStatus": "rejected"
+      }
+    ],
+    "nightlife": [
+      {
+        "rank": 1023,
+        "fsqPlaceId": "5180aab2498e138b536f175f",
+        "name": "フレッシュワン",
+        "category": "nightlife",
+        "catalog": "tokyo_core",
+        "score": 64.8,
+        "matchStatus": "rejected"
+      }
+    ]
+  },
+  "lowestRanked50Pilot": [
+    {
+      "rank": 2886,
+      "fsqPlaceId": "4d6f0fa027316ea80d7dabaa",
+      "name": "遠忠商店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 50.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 2885,
+      "fsqPlaceId": "29d04d36849a499212ec4a27",
+      "name": "武藤水産",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 50.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1495,
+      "fsqPlaceId": "1b85ffdfc1d5403048aa3a2a",
+      "name": "吉川水産株式会社烏山店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1276,
+      "fsqPlaceId": "60fd1039a5281a69204eec8e",
+      "name": "マルエツ　江戸川橋店　鮮魚売り場",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 63.3,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1273,
+      "fsqPlaceId": "5b6150244aa3f8002c209da0",
+      "name": "海鮮工房田中 梅島店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 63.3,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1270,
+      "fsqPlaceId": "5940f1d46fd626017627f40e",
+      "name": "ハヤシフルーツ",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 63.3,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1268,
+      "fsqPlaceId": "54290c3d498e96bfdfa0ca03",
+      "name": "ゆめま〜る",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 63.3,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1265,
+      "fsqPlaceId": "ac1e169b7f8e41b12ff9819a",
+      "name": "魚寅 テルミナ店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 63.6,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1263,
+      "fsqPlaceId": "615eba7cab603b3f8dd16086",
+      "name": "山野草園やまあい",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 63.6,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1262,
+      "fsqPlaceId": "5e244247b57bd1000894e2f5",
+      "name": "THỰC PHẨM VIỆT TOKYO",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 63.6,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1261,
+      "fsqPlaceId": "5acea64afc9e940c3bd43149",
+      "name": "伊東忠太動物園",
+      "category": "free",
+      "catalog": "tokyo_core",
+      "score": 63.6,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1260,
+      "fsqPlaceId": "5497bfe3498eac4fe27ad63b",
+      "name": "季彩や ひで",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 63.6,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1127,
+      "fsqPlaceId": "ff8b46df903f4255535f2c83",
+      "name": "築地キタニ水産",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1126,
+      "fsqPlaceId": "fc0341a594ac47d5b3ebe5e2",
+      "name": "魚卯鮮魚店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1125,
+      "fsqPlaceId": "f6a176216d444326a37aaa2f",
+      "name": "山助大泉学園店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1124,
+      "fsqPlaceId": "875bab5b6a9f4963955c1638",
+      "name": "まぐろ屋斉藤水産",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1123,
+      "fsqPlaceId": "69dc030d637e7330f5d64dd5",
+      "name": "総本店東信水産荻窪",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1122,
+      "fsqPlaceId": "699a5f6ea785a868b6c0734f",
+      "name": "ねこのきもちマルシェ",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1121,
+      "fsqPlaceId": "692afde46f4cf132fadd90d2",
+      "name": "Christmas Advent in Ueno Park",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1120,
+      "fsqPlaceId": "643a1d94e03a7e555221fc95",
+      "name": "SKY DUO Harumi Flag",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1119,
+      "fsqPlaceId": "641305c9fc814e48c1aefe4c",
+      "name": "Tsukiji Sabuchan",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1118,
+      "fsqPlaceId": "623d1663fb16837aaff45969",
+      "name": "田中農場自動販売機本一色店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1117,
+      "fsqPlaceId": "6094dd58a4c02610bef55b68",
+      "name": "Asia Yaosho",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1116,
+      "fsqPlaceId": "6045f363b2bda11bf4c5f0fd",
+      "name": "鮮魚アオキ",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1115,
+      "fsqPlaceId": "600b9b8289f75350edb9ce81",
+      "name": "あだち菜の郷",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1114,
+      "fsqPlaceId": "5fade9b56ebada16277aeecb",
+      "name": "さかなや旬",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1113,
+      "fsqPlaceId": "5f868d28edd56e26f279c865",
+      "name": "メルカティーノ中目黒",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1110,
+      "fsqPlaceId": "5d5b695b9bc3f60007d28115",
+      "name": "東京魚市場卸協同組合（東卸組合）",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 1109,
+      "fsqPlaceId": "5d3694401d74df00082280be",
+      "name": "タカマル鮮魚店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1108,
+      "fsqPlaceId": "5d189d4e6d22da002f995445",
+      "name": "島田製粉所",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1107,
+      "fsqPlaceId": "5cfafedb471d6e002cc4a8d8",
+      "name": "サカナバッカ 中延",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1106,
+      "fsqPlaceId": "5cf2270fc4df1d002c515df4",
+      "name": "田中農場 一之江駅前自販機",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1105,
+      "fsqPlaceId": "5cb26d269fca56002cb632e0",
+      "name": "新潟中央水産市場築地支店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1104,
+      "fsqPlaceId": "5c7b31813fffb40025e3348c",
+      "name": "ふるさと交流ショップ台東",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1103,
+      "fsqPlaceId": "5bc17b4c95a722002c3f36ee",
+      "name": "魚がし横丁",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1102,
+      "fsqPlaceId": "5b9dfdc5f00a70002c9414e5",
+      "name": "Grand Food Hall",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1101,
+      "fsqPlaceId": "5b8258bc464d65002c582876",
+      "name": "ムカイ林檎店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1100,
+      "fsqPlaceId": "5ab7108bbfc6d07285045e0e",
+      "name": "水産卸売場棟",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1099,
+      "fsqPlaceId": "5ab7044312138448fbe8790c",
+      "name": "水産仲卸売場棟",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1098,
+      "fsqPlaceId": "59d9a0e9916bc1155f4d1f2d",
+      "name": "大間水産 (コウメイ水産)",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1096,
+      "fsqPlaceId": "591ed1bd2be4257582375458",
+      "name": "さかなや心星",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1095,
+      "fsqPlaceId": "588479670802cb5c601def97",
+      "name": "羽田市場 銀座直売店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1094,
+      "fsqPlaceId": "57d518b5498ef8be73c2e529",
+      "name": "鮮魚アオキ 板橋店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1093,
+      "fsqPlaceId": "57bbd0c3498ed9332505c24b",
+      "name": "東急ストア フードステーション",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1092,
+      "fsqPlaceId": "57b3d205498e54f7dc530e3e",
+      "name": "コモディ イイダ 北葛西店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1090,
+      "fsqPlaceId": "56a72c90498efaa26df1dba1",
+      "name": "つくばの野菜畑",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1089,
+      "fsqPlaceId": "5651300e498e33716534a292",
+      "name": "湯島 よろずや",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1088,
+      "fsqPlaceId": "55c42d8a498e410875a650fe",
+      "name": "さかな屋高知家",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1087,
+      "fsqPlaceId": "5584f0eb498e1ca1e22faa20",
+      "name": "しなちるママの野菜畑",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1086,
+      "fsqPlaceId": "5542f096498e8c80b267af69",
+      "name": "まぐろ専門店 大興",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.4,
+      "matchStatus": "rejected"
+    }
+  ],
+  "benchmarkStatuses": [
+    {
+      "name": "Sensō-ji",
+      "status": "not_selected",
+      "fsqPlaceId": "4b0587a1f964a5207f9d22e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Meiji Jingū",
+      "status": "not_selected",
+      "fsqPlaceId": "4b5bd0a2f964a520c31729e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Tokyo Skytree",
+      "status": "not_selected",
+      "fsqPlaceId": "4b569977f964a520551628e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Tokyo Tower",
+      "status": "not_selected",
+      "fsqPlaceId": "4b56a5e8f964a5208e1728e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Shibuya Crossing",
+      "status": "not_selected",
+      "fsqPlaceId": "4b654f7df964a520beec2ae3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Imperial Palace",
+      "status": "not_selected",
+      "fsqPlaceId": "4b566b84f964a5209e0f28e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Ueno Park",
+      "status": "not_selected",
+      "fsqPlaceId": "4b0587a1f964a5209b9d22e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Tokyo National Museum",
+      "status": "not_selected",
+      "fsqPlaceId": "4b556c7ef964a520f5e327e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "teamLab Planets",
+      "status": "not_selected",
+      "fsqPlaceId": "5b3306103731ee002c2b3e78",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Tsukiji Outer Market",
+      "status": "rejected",
+      "fsqPlaceId": "4b57cb7cf964a5208b4128e3",
+      "diagnosticReasons": [
+        "closed_or_destroyed_entity_incompatible"
+      ]
+    },
+    {
+      "name": "Shinjuku Gyoen",
+      "status": "verified",
+      "fsqPlaceId": "4b5ff761f964a520f1d129e3",
+      "wikidataId": "Q776863",
+      "diagnosticReasons": []
+    },
+    {
+      "name": "Akihabara",
+      "status": "not_selected",
+      "fsqPlaceId": "4b5a80a4f964a52078c828e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Harajuku",
+      "status": "not_selected",
+      "fsqPlaceId": "4e5f5340b0fb27e2bd450341",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Odaiba",
+      "status": "not_selected",
+      "fsqPlaceId": "4f9df5d1e4b033dc2c12dd47",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Ghibli Museum",
+      "status": "not_selected",
+      "fsqPlaceId": "4b56ac4ff964a5202e1828e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Tokyo Disneyland",
+      "status": "not_selected",
+      "fsqPlaceId": "4b59ebdaf964a52002a128e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Tokyo DisneySea",
+      "status": "not_selected",
+      "fsqPlaceId": "4c2bf7fe8abca593441c0120",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    }
+  ],
+  "matchRatesByEligibility": {
+    "high_wikimedia_likelihood": {
+      "selected": 250,
+      "verified": 33,
+      "probableManualReview": 4,
+      "verifiedRate": 0.132
+    },
+    "medium_wikimedia_likelihood": {
+      "selected": 0,
+      "verified": 0,
+      "probableManualReview": 0,
+      "verifiedRate": 0
+    },
+    "low_wikimedia_likelihood": {
+      "selected": 0,
+      "verified": 0,
+      "probableManualReview": 0,
+      "verifiedRate": 0
+    },
+    "not_expected_to_have_wikimedia_entity": {
+      "selected": 0,
+      "verified": 0,
+      "probableManualReview": 0,
+      "verifiedRate": 0
+    }
+  },
+  "targetResults": {
+    "highLikelihoodAtLeast60Percent": false,
+    "mediumLikelihoodAtLeast30Percent": false,
+    "zeroKnownFalseAutomaticMatches": true,
+    "completeImageLicensingAndAttribution": true
+  },
+  "selectionStrata": {
+    "eligibility_high_batch_004": 250
+  },
+  "knownCurationCorrections": [
+    {
+      "fsqPlaceId": "4b80a4c6f964a520218330e3",
+      "name": "都電おもいで広場",
+      "originalCategory": "culture",
+      "correctedCategory": "culture",
+      "catalogClassification": "tokyo_core",
+      "reasons": [
+        "verified_small_transport_museum_retained_as_culture",
+        "catalog:tokyo_core"
+      ]
+    },
+    {
+      "fsqPlaceId": "4bde825dffdec92874e3e8a1",
+      "name": "九品仏広場",
+      "originalCategory": "free",
+      "correctedCategory": "free",
+      "catalogClassification": "reserve",
+      "reasons": [
+        "manual_qa_minor_or_ambiguous_facility",
+        "municipal_plaza_playground_moved_to_reserve",
+        "catalog:reserve"
+      ]
+    },
+    {
+      "fsqPlaceId": "50790c96e4b0bf54e138f834",
+      "name": "ふれあい動物広場",
+      "originalCategory": "free",
+      "correctedCategory": "adventure",
+      "catalogClassification": "tokyo_core",
+      "reasons": [
+        "category_corrected:free->adventure",
+        "family_zoo_exhibit_reclassified_as_adventure",
+        "catalog:tokyo_core"
+      ]
+    },
+    {
+      "fsqPlaceId": "50aea3d9e4b034c5d70d4a8a",
+      "name": "野外展示場",
+      "originalCategory": "nature",
+      "correctedCategory": "culture",
+      "catalogClassification": "reserve",
+      "reasons": [
+        "category_corrected:nature->culture",
+        "manual_qa_minor_or_ambiguous_facility",
+        "generic_subordinate_sculpture_exhibit_moved_to_reserve",
+        "catalog:reserve"
+      ]
+    },
+    {
+      "fsqPlaceId": "6235cc4adcbe6c01a0bdc7f8",
+      "name": "IKEBUKURO THEATER〔CG STAR LIVE〕",
+      "originalCategory": "food",
+      "correctedCategory": "adventure",
+      "catalogClassification": "tokyo_core",
+      "reasons": [
+        "category_corrected:food->adventure",
+        "verified_vr_entertainment_attraction_not_food",
+        "catalog:tokyo_core"
+      ]
+    },
+    {
+      "fsqPlaceId": "4b0587a4f964a520f89d22e3",
+      "name": "大谷美術館",
+      "originalCategory": "culture",
+      "correctedCategory": "culture",
+      "catalogClassification": "tokyo_core",
+      "reasons": [
+        "verified_art_museum_retained_as_culture",
+        "catalog:tokyo_core"
+      ]
+    }
+  ],
+  "apiRequestsMade": 1266,
+  "cacheHits": 19,
+  "failures": 16,
+  "retries": 38,
+  "runtimeMs": 401863,
+  "estimatedExternalDataCostUsd": 0,
+  "acceptanceGates": {
+    "genuineSourceEntitiesOnly": true,
+    "benchmarksCorrectOrClearlyDiagnosed": true,
+    "zeroKnownFalseMatches": true,
+    "benchmarkNeutralDisplayRank": true,
+    "imagesHaveLicenseAndAttribution": true,
+    "noSupabaseWrites": true,
+    "noPaidDatasets": true,
+    "coreAndMetroSeparated": true,
+    "theaterCategoryCorrected": true
+  },
+  "acceptancePassed": true,
+  "noSupabaseWrites": true,
+  "batchMetadata": {
+    "city": "tokyo",
+    "executionMode": "eligibility_batch",
+    "eligibility": "high_wikimedia_likelihood",
+    "totalCuratedRecords": 3200,
+    "totalEligibleRecords": 1474,
+    "duplicateFsqIdsRemoved": 0,
+    "batch": 4,
+    "batchSize": 250,
+    "startIndex": 750,
+    "endIndexInclusive": 999,
+    "selectedRecordCount": 250,
+    "persistentCacheEnabled": true
+  }
+}

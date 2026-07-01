@@ -1,0 +1,100 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:22.678Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 167962,
+          "ns": 0,
+          "title": "驚きももの木20世紀",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おとろきもものきにしつせいき",
+            "wikibase_item": "Q11668556"
+          },
+          "terms": {
+            "description": [
+              "テレビ朝日系列の歴史ドキュメンタリー番組（1993-1999）"
+            ]
+          }
+        },
+        {
+          "pageid": 194360,
+          "ns": 0,
+          "title": "津島町",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "つしまちよう",
+            "page_image_free": "愛媛南楽園13.jpg",
+            "wikibase_item": "Q7850311"
+          },
+          "coordinates": [
+            {
+              "lat": 33.12583,
+              "lon": 132.52125,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の愛媛県北宇和郡にあった町"
+            ]
+          }
+        },
+        {
+          "pageid": 2039957,
+          "ns": 0,
+          "title": "全日本そっくり大賞",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せんにほんそつくりたいしよう",
+            "wikibase_item": "Q11389882"
+          },
+          "terms": {
+            "description": [
+              "テレビ東京系列のものまね番組（1981-1996）"
+            ]
+          }
+        },
+        {
+          "pageid": 2250892,
+          "ns": 0,
+          "title": "新語・流行語大賞",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しんこりゆうこうこたいしよう",
+            "wikibase_item": "Q5363346"
+          },
+          "terms": {
+            "description": [
+              "新語・流行語に関する日本の賞"
+            ]
+          }
+        },
+        {
+          "pageid": 2737027,
+          "ns": 0,
+          "title": "桶川ストーカー殺人事件",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おけかわすとおかあさつしんしけん",
+            "page_image_free": "Okegawa_Mine.JPG",
+            "wikibase_item": "Q6938059"
+          },
+          "terms": {
+            "description": [
+              "1999年に日本の埼玉県桶川市で発生した殺人事件"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

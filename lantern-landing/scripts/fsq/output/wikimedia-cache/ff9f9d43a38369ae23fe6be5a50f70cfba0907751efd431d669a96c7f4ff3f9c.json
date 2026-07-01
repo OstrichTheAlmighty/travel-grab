@@ -1,0 +1,83 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:29.219Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 664973,
+          "ns": 0,
+          "title": "日本の郷土料理一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きようとりようりいちらん",
+            "notoc": "",
+            "wikibase_item": "Q11506125"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1219185,
+          "ns": 0,
+          "title": "巣鴨バラエティ横丁",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すかもはらえていよこちよう",
+            "wikibase_item": "Q11479425"
+          }
+        },
+        {
+          "pageid": 2910512,
+          "ns": 0,
+          "title": "艦隊これくしょん -艦これ-",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かんたいこれくしよんかんこれ",
+            "page_image_free": "Handa_building_2019.jpg",
+            "wikibase_item": "Q14785138"
+          },
+          "terms": {
+            "description": [
+              "角川ゲームスが開発し、DMM.comが配信しているブラウザゲーム、およびそれを原作とする小説、アニメ等のメディアミックス作品群"
+            ]
+          }
+        },
+        {
+          "pageid": 4231584,
+          "ns": 0,
+          "title": "丸う",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "まるう",
+            "wikibase_item": "Q100373385"
+          },
+          "terms": {
+            "description": [
+              "日本の水産加工品メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 4351964,
+          "ns": 0,
+          "title": "日本における死刑囚の一覧 (-1950年代)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にほんにおけるしけいしゆうのいちらん",
+            "wikibase_item": "Q113287161"
+          },
+          "terms": {
+            "description": [
+              "ウィキペディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

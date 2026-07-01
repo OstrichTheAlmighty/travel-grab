@@ -1,0 +1,124 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:18:08.575Z",
+  "value": {
+    "searchinfo": {
+      "search": "バックダーン"
+    },
+    "search": [
+      {
+        "id": "Q65241484",
+        "title": "Q65241484",
+        "pageid": 64881724,
+        "concepturi": "http://www.wikidata.org/entity/Q65241484",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q65241484",
+        "display": {
+          "label": {
+            "value": "Panic Coaster – Back Daaan",
+            "language": "en"
+          },
+          "description": {
+            "value": "indoor family roller coaster at Tokyo Dome City",
+            "language": "en"
+          }
+        },
+        "label": "Panic Coaster – Back Daaan",
+        "description": "indoor family roller coaster at Tokyo Dome City",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "バックダーン"
+        },
+        "aliases": [
+          "バックダーン"
+        ]
+      },
+      {
+        "id": "Q204050",
+        "title": "Q204050",
+        "pageid": 200470,
+        "concepturi": "http://www.wikidata.org/entity/Q204050",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q204050",
+        "display": {
+          "label": {
+            "value": "moonwalk",
+            "language": "en"
+          },
+          "description": {
+            "value": "dance move in which the dancer moves backwards",
+            "language": "en"
+          }
+        },
+        "label": "moonwalk",
+        "description": "dance move in which the dancer moves backwards",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "バックダンス"
+        },
+        "aliases": [
+          "バックダンス"
+        ]
+      },
+      {
+        "id": "Q4838688",
+        "title": "Q4838688",
+        "pageid": 4624565,
+        "concepturi": "http://www.wikidata.org/entity/Q4838688",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q4838688",
+        "display": {
+          "label": {
+            "value": "Bach Dang River",
+            "language": "en"
+          },
+          "description": {
+            "value": "river in Vietnam",
+            "language": "en"
+          }
+        },
+        "label": "Bach Dang River",
+        "description": "river in Vietnam",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "バックダン川"
+        },
+        "aliases": [
+          "バックダン川"
+        ]
+      },
+      {
+        "id": "Q4839598",
+        "title": "Q4839598",
+        "pageid": 4625446,
+        "concepturi": "http://www.wikidata.org/entity/Q4839598",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q4839598",
+        "display": {
+          "label": {
+            "value": "Backdancers!",
+            "language": "en"
+          },
+          "description": {
+            "value": "2006 film by Kozo Nagayama",
+            "language": "en"
+          }
+        },
+        "label": "Backdancers!",
+        "description": "2006 film by Kozo Nagayama",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "バックダンサーズ!"
+        },
+        "aliases": [
+          "バックダンサーズ!"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

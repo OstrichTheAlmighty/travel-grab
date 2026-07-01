@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:19.531Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 194940,
+          "ns": 0,
+          "title": "メリーゴーラウンド",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めりいこうらうんと",
+            "page_image_free": "Carousels回転木馬.jpg",
+            "wikibase_item": "Q208322"
+          },
+          "terms": {
+            "description": [
+              "遊具のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 384938,
+          "ns": 0,
+          "title": "アクアパーク品川",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あくあはあくしなかわ",
+            "kartographer_frames": "1",
+            "page_image_free": "Avatar_The_Way_of_Water_Tokyo_Press_Conference_(52562513647).jpg",
+            "wikibase_item": "Q3055859"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62782889,
+              "lon": 139.73508694,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京の水族館"
+            ]
+          }
+        },
+        {
+          "pageid": 834931,
+          "ns": 0,
+          "title": "第41回スーパーボウル",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すうはあほうる41",
+            "page_image_free": "Dolphin-stadium-super-bowl-xli-2007-02-03.jpg",
+            "wikibase_item": "Q597607"
+          },
+          "terms": {
+            "description": [
+              "2007年2月に開催のNFLスーパーボウル"
+            ]
+          }
+        },
+        {
+          "pageid": 999445,
+          "ns": 0,
+          "title": "泉陽興業",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せんようこうきよう",
+            "page_image_free": "SENYO_Building.JPG",
+            "wikibase_item": "Q11554952"
+          },
+          "terms": {
+            "description": [
+              "日本の遊具製造・運営企業"
+            ]
+          }
+        },
+        {
+          "pageid": 1593592,
+          "ns": 0,
+          "title": "ピクミンシリーズ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひくみんしりいす",
+            "wikibase_item": "Q8198020"
+          },
+          "terms": {
+            "description": [
+              "任天堂のコンピュータゲームシリーズ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

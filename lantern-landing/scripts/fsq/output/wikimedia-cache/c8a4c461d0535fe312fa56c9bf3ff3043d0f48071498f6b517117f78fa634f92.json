@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:18.100Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 8548,
+          "ns": 0,
+          "title": "浜松町駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はままつちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "MonoHama.JPG",
+            "wikibase_item": "Q800873"
+          },
+          "coordinates": [
+            {
+              "lat": 35.655,
+              "lon": 139.75694444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある東日本旅客鉄道・東京モノレールの駅"
+            ]
+          }
+        },
+        {
+          "pageid": 273358,
+          "ns": 0,
+          "title": "MIYASHITA PARK",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みやしたはあく",
+            "page_image_free": "MIYASHITA_PARK_2025年1月22日の渋谷_202501221307_IMG_2538.jpg",
+            "wikibase_item": "Q99961928"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6612,
+              "lon": 139.7017,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある複合施設"
+            ]
+          }
+        },
+        {
+          "pageid": 519532,
+          "ns": 0,
+          "title": "屋上庭園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おくしようていえん",
+            "page_image_free": "Hanging_Gardens_of_Babylon.jpg",
+            "wikibase_item": "Q1156696"
+          },
+          "terms": {
+            "description": [
+              "建築物の屋上などに造られた植栽を伴う庭園"
+            ]
+          }
+        },
+        {
+          "pageid": 1731153,
+          "ns": 0,
+          "title": "東京タワー",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようたわあ",
+            "kartographer_frames": "1",
+            "page_image_free": "日本電波塔（東京タワー）.jpg",
+            "wikibase_item": "Q183536"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65861111,
+              "lon": 139.74555556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある電波塔"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

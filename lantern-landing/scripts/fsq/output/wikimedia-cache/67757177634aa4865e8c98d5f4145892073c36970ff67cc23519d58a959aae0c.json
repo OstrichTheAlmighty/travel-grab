@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:56.479Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 194209,
+          "ns": 0,
+          "title": "洗足池",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せんそくいけ",
+            "page_image_free": "洗足池01.JPG",
+            "wikibase_item": "Q11555793"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60166667,
+              "lon": 139.69027778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都大田区南千束にある池"
+            ]
+          }
+        },
+        {
+          "pageid": 716888,
+          "ns": 0,
+          "title": "勝海舟 (NHK大河ドラマ)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かつかいしゆう",
+            "wikibase_item": "Q11400418"
+          },
+          "terms": {
+            "description": [
+              "1974年のNHK大河ドラマ第12作"
+            ]
+          }
+        },
+        {
+          "pageid": 800382,
+          "ns": 0,
+          "title": "勝海舟",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かつ かいしゆう",
+            "page_image_free": "Kaishu_Katsu_2.jpg",
+            "wikibase_item": "Q700470"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸～明治時代の武士、政治家"
+            ]
+          }
+        },
+        {
+          "pageid": 2260937,
+          "ns": 0,
+          "title": "佐藤総合計画",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さとうそうこうけいかく",
+            "wikibase_item": "Q11384348"
+          }
+        },
+        {
+          "pageid": 3242964,
+          "ns": 0,
+          "title": "洗足軒",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せんそくけん",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q21019105"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60211111,
+              "lon": 139.69227778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

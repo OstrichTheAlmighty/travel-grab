@@ -1,0 +1,119 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:03.049Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 40266,
+          "ns": 0,
+          "title": "杉津パーキングエリア",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すいつはあきんくえりあ",
+            "kartographer_frames": "1",
+            "page_image_free": "Suizu_PA_2020-1.jpg",
+            "wikibase_item": "Q11095185"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73272222,
+              "lon": 136.112,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福井県敦賀市にある北陸自動車道のパーキングエリア"
+            ]
+          }
+        },
+        {
+          "pageid": 323970,
+          "ns": 0,
+          "title": "デート",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "てえと",
+            "wikibase_item": "Q654810"
+          },
+          "terms": {
+            "description": [
+              "日時や場所を定めて男女が会うこと"
+            ]
+          }
+        },
+        {
+          "pageid": 799813,
+          "ns": 0,
+          "title": "恋人の聖地",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こいひとのせいち",
+            "wikibase_item": "Q11492001"
+          },
+          "terms": {
+            "description": [
+              "「恋人の聖地プロジェクト」により選定された観光スポット"
+            ]
+          }
+        },
+        {
+          "pageid": 1143132,
+          "ns": 0,
+          "title": "道の駅恋人の聖地 うたづ臨海公園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みちのえきこいひとのせいちうたつりんかいこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Utadu20220608_4.jpg",
+            "wikibase_item": "Q11640657"
+          },
+          "coordinates": [
+            {
+              "lat": 34.31342,
+              "lon": 133.80783,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "香川県綾歌郡宇多津町にある香川県道194号の道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 2653804,
+          "ns": 0,
+          "title": "那須高原恋人の聖地展望台",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なすこうけんこいひとのせいちてんほうたい",
+            "page_image_free": "Nasu_chausudake.jpg",
+            "wikibase_item": "Q11642986"
+          },
+          "coordinates": [
+            {
+              "lat": 37.10494444,
+              "lon": 139.99547222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "栃木県那須町の展望台"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

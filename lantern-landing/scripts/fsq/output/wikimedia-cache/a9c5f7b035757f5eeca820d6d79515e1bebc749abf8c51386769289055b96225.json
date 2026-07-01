@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:28.694Z",
+  "value": {
+    "searchinfo": {
+      "search": "Disneyland Tokyo"
+    },
+    "search": [
+      {
+        "id": "Q843997",
+        "title": "Q843997",
+        "pageid": 796132,
+        "concepturi": "http://www.wikidata.org/entity/Q843997",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q843997",
+        "display": {
+          "label": {
+            "value": "Tokyo Disneyland",
+            "language": "en"
+          },
+          "description": {
+            "value": "theme park in Japan, owned by The Oriental Land Company",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Disneyland",
+        "description": "theme park in Japan, owned by The Oriental Land Company",
+        "match": {
+          "type": "alias",
+          "language": "vi",
+          "text": "Disneyland Tokyo"
+        },
+        "aliases": [
+          "Disneyland Tokyo"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

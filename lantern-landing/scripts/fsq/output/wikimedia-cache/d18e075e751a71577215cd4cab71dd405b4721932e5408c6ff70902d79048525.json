@@ -1,0 +1,36 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:51.212Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1691548,
+          "ns": 0,
+          "title": "渋沢史料館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しふさわしりようかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Shibusawa_memorial_museum_in_Asukayama_park.jpg",
+            "wikibase_item": "Q11254595"
+          },
+          "coordinates": [
+            {
+              "lat": 35.74913889,
+              "lon": 139.73922222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都北区にある渋沢栄一に関する博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

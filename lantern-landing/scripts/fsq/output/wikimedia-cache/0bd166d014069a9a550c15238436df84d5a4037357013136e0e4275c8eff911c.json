@@ -1,0 +1,129 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:18.699Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17334,
+          "ns": 0,
+          "title": "有明駅 (東京都)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ありあけ",
+            "kartographer_frames": "1",
+            "page_image_free": "Yurikamome_Ariake-STA.jpg",
+            "wikibase_item": "Q17719"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6347,
+              "lon": 139.7933,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区有明にあるゆりかもめの駅"
+            ]
+          }
+        },
+        {
+          "pageid": 38016,
+          "ns": 0,
+          "title": "海老名サービスエリア",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "えひなさあひすえりあ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ebina-SA-Nobori.JPG",
+            "wikibase_item": "Q11559138"
+          },
+          "coordinates": [
+            {
+              "lat": 35.431556,
+              "lon": 139.400139,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県海老名市にある東名高速道路のサービスエリア"
+            ]
+          }
+        },
+        {
+          "pageid": 75884,
+          "ns": 0,
+          "title": "日本のサービスエリア・パーキングエリア一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんのさあひすはあきんくえりあいちらん",
+            "wikibase_item": "Q11505628"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1596036,
+          "ns": 0,
+          "title": "港区 (東京都)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みなとく",
+            "kartographer_frames": "1",
+            "page_image_free": "20110405-TokyoTower-Sakura01.jpg",
+            "wikibase_item": "Q190088"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65803,
+              "lon": 139.75153,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 2240060,
+          "ns": 0,
+          "title": "東京臨海広域防災公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようりんかいこういきほうさいこうえん",
+            "page_image_free": "Tokyo_Rinkai_Disaster_Prevention_Park.jpg",
+            "wikibase_item": "Q11525110"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63570833,
+              "lon": 139.79673333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

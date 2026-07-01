@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:30.026Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4063,
+          "ns": 0,
+          "title": "テーマパーク",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "てえまはあく",
+            "page_image_free": "USJ_2018.09-24.jpg",
+            "wikibase_item": "Q2416723"
+          },
+          "terms": {
+            "description": [
+              "観光施設"
+            ]
+          }
+        },
+        {
+          "pageid": 27176,
+          "ns": 0,
+          "title": "博物館明治村",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はくふつかんめいしむら",
+            "page_image_free": "Meijimura1.jpg",
+            "wikibase_item": "Q985290"
+          },
+          "coordinates": [
+            {
+              "lat": 35.34175,
+              "lon": 136.98925,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県犬山市にある野外博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 356754,
+          "ns": 0,
+          "title": "くまもとアートポリス",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "くまもとあとほりす",
+            "wikibase_item": "Q11265539"
+          },
+          "terms": {
+            "description": [
+              "熊本県の都市計画"
+            ]
+          }
+        },
+        {
+          "pageid": 632271,
+          "ns": 0,
+          "title": "警察博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "けいさつはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Gotanda_TOC-building.JPG",
+            "wikibase_item": "Q11632332"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区にある警視庁に関する博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 1530069,
+          "ns": 0,
+          "title": "博物館の一覧",
+          "index": 4,
+          "pageprops": {
+            "toc": "",
+            "wikibase_item": "Q1346256"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

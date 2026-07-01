@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:33.391Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4305,
+          "ns": 0,
+          "title": "東京メトロ東西線",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようめとろとうさいせん",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-Metro_Series15000-15001.jpg",
+            "wikibase_item": "Q1147054"
+          },
+          "terms": {
+            "description": [
+              "東京地下鉄の鉄道路線"
+            ]
+          }
+        },
+        {
+          "pageid": 2640749,
+          "ns": 0,
+          "title": "獨協大学",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とつきようたいかく",
+            "page_image_free": "Dokkyo_University_East_Building.jpg",
+            "wikibase_item": "Q953446"
+          },
+          "coordinates": [
+            {
+              "lat": 35.83986111,
+              "lon": 139.79433333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県草加市の私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 2697877,
+          "ns": 0,
+          "title": "みんな!エスパーだよ!",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みんなえすはあたよ",
+            "wikibase_item": "Q10934561"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 2916310,
+          "ns": 0,
+          "title": "闇金ウシジマくん (テレビドラマ)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "やみきんうししまくん",
+            "wikibase_item": "Q12972665"
+          }
+        },
+        {
+          "pageid": 3928771,
+          "ns": 0,
+          "title": "BACKSTAGE (テレビ番組)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はつくすてえし",
+            "wikibase_item": "Q65227657"
+          },
+          "terms": {
+            "description": [
+              "TBS系列のドキュメンタリー番組 (2019 - 2022)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:16.282Z",
+  "value": {
+    "searchinfo": {
+      "search": "豊島区立郷土資料館"
+    },
+    "search": [
+      {
+        "id": "Q104698258",
+        "title": "Q104698258",
+        "pageid": 100126212,
+        "concepturi": "http://www.wikidata.org/entity/Q104698258",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q104698258",
+        "display": {
+          "label": {
+            "value": "Museum of Toshima City",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Toshima, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Museum of Toshima City",
+        "description": "museum in Toshima, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "豊島区立郷土資料館"
+        },
+        "aliases": [
+          "豊島区立郷土資料館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

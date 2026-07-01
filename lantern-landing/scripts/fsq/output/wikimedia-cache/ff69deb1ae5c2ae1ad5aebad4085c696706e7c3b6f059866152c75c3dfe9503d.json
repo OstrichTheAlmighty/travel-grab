@@ -1,0 +1,73 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:36.531Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 311017,
+          "ns": 0,
+          "title": "オシャレ魔女♥ラブandベリー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おしやれましよらふあんとへりい",
+            "wikibase_item": "Q7106582"
+          },
+          "terms": {
+            "description": [
+              "アーケードゲーム"
+            ]
+          }
+        },
+        {
+          "pageid": 1174974,
+          "ns": 0,
+          "title": "あっちこっち",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あつちこつち",
+            "page_image_free": "Inage-Kaigan_Station_south.jpg",
+            "wikibase_item": "Q2633652"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画作品、テレビアニメ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 3396565,
+          "ns": 0,
+          "title": "ぺこぱ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "へこは",
+            "page_image_free": "Pekopa_20220106.jpg",
+            "wikibase_item": "Q24863263"
+          },
+          "terms": {
+            "description": [
+              "日本のお笑いコンビ"
+            ]
+          }
+        },
+        {
+          "pageid": 4059775,
+          "ns": 0,
+          "title": "シュウペイ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しゆうへい",
+            "wikibase_item": "Q97216365"
+          },
+          "terms": {
+            "description": [
+              "日本のお笑い芸人"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

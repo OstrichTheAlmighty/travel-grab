@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:32.749Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1502,
+          "ns": 0,
+          "title": "スキー",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "すきい",
+            "page_image_free": "Ski_Famille_-_Family_Ski_Holidays.jpg",
+            "wikibase_item": "Q130949"
+          },
+          "terms": {
+            "description": [
+              "スキー板を用いて行うスポーツ"
+            ]
+          }
+        },
+        {
+          "pageid": 28626,
+          "ns": 0,
+          "title": "卸売",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おろしうり",
+            "page_image_free": "Incense_import_boxes_inside_TOC_building_in_Gotanda.jpg",
+            "wikibase_item": "Q220695"
+          },
+          "terms": {
+            "description": [
+              "小売業者やその他の卸売業者に対する商品やサービスの販売、およびその業者"
+            ]
+          }
+        },
+        {
+          "pageid": 514572,
+          "ns": 0,
+          "title": "ノーサンプトンシャー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "のおさんふとんしやあ",
+            "page_image_free": "Northamptonshire_UK_locator_map_2010.svg",
+            "wikibase_item": "Q23115"
+          },
+          "terms": {
+            "description": [
+              "イングランドの州"
+            ]
+          }
+        },
+        {
+          "pageid": 1730838,
+          "ns": 0,
+          "title": "ジーユー",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しいゆう",
+            "page_image_free": "GU_logo.svg",
+            "wikibase_item": "Q5512642"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63705556,
+              "lon": 139.77994444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本のファッションブランドを手がける企業"
+            ]
+          }
+        },
+        {
+          "pageid": 1741731,
+          "ns": 0,
+          "title": "銀座",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きんさ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ginza_area_at_dusk_from_Tokyo_Tower.jpg",
+            "wikibase_item": "Q746052"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

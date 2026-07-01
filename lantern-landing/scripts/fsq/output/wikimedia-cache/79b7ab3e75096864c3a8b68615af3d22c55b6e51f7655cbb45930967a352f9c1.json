@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:55.246Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 64338,
+          "ns": 0,
+          "title": "トキワ荘",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ときわそう",
+            "kartographer_frames": "1",
+            "page_image": "Tokiwasou_Hanasaki_Park.JPG",
+            "page_image_free": "Modello_3D_Edificio_Tokiwa-sō_3.png",
+            "wikibase_item": "Q841272"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72408333,
+              "lon": 139.68830556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて日本の東京都豊島区にあったアパート"
+            ]
+          }
+        },
+        {
+          "pageid": 92229,
+          "ns": 0,
+          "title": "水野英子",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みすの ひてこ",
+            "wikibase_item": "Q1140911"
+          },
+          "terms": {
+            "description": [
+              "日本の女性漫画家 (1939-)"
+            ]
+          }
+        },
+        {
+          "pageid": 384376,
+          "ns": 0,
+          "title": "石ノ森章太郎",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いしのもり しようたろう",
+            "displaytitle": "石<span style=\"font-size:smaller;\">ノ</span>森章太郎",
+            "wikibase_item": "Q471103"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画家 (1938-1998)"
+            ]
+          }
+        },
+        {
+          "pageid": 2286384,
+          "ns": 0,
+          "title": "ぼくらマンガ家 トキワ荘物語",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ほくらまんかかときわそうものかたり",
+            "wikibase_item": "Q16144082"
+          },
+          "terms": {
+            "description": [
+              "1981年にフジテレビで放送された日本のテレビアニメ"
+            ]
+          }
+        },
+        {
+          "pageid": 4164228,
+          "ns": 0,
+          "title": "トキワ荘マンガミュージアム",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ときわそうまんかみゆうしあむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokiwaso-Manga-Museum.jpg",
+            "wikibase_item": "Q96707302"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72430556,
+              "lon": 139.68605556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,209 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:35.275Z",
+  "value": {
+    "searchinfo": {
+      "search": "フロア"
+    },
+    "search": [
+      {
+        "id": "Q217164",
+        "title": "Q217164",
+        "pageid": 212304,
+        "concepturi": "http://www.wikidata.org/entity/Q217164",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q217164",
+        "display": {
+          "label": {
+            "value": "floor",
+            "language": "en"
+          },
+          "description": {
+            "value": "walking surface of a room",
+            "language": "en"
+          }
+        },
+        "label": "floor",
+        "description": "walking surface of a room",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "フロア"
+        },
+        "aliases": [
+          "フロア"
+        ]
+      },
+      {
+        "id": "Q831691",
+        "title": "Q831691",
+        "pageid": 784398,
+        "concepturi": "http://www.wikidata.org/entity/Q831691",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q831691",
+        "display": {
+          "label": {
+            "value": "storey",
+            "language": "en"
+          },
+          "description": {
+            "value": "level part of a building that could be used by people",
+            "language": "en"
+          }
+        },
+        "label": "storey",
+        "description": "level part of a building that could be used by people",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "フロア"
+        },
+        "aliases": [
+          "フロア"
+        ]
+      },
+      {
+        "id": "Q160927",
+        "title": "Q160927",
+        "pageid": 161795,
+        "concepturi": "http://www.wikidata.org/entity/Q160927",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q160927",
+        "display": {
+          "label": {
+            "value": "Blois",
+            "language": "en"
+          },
+          "description": {
+            "value": "French commune and city in Loir-et-Cher, Centre-Val de Loire",
+            "language": "en"
+          }
+        },
+        "label": "Blois",
+        "description": "French commune and city in Loir-et-Cher, Centre-Val de Loire",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ブロア"
+        },
+        "aliases": [
+          "ブロア"
+        ]
+      },
+      {
+        "id": "Q603635",
+        "title": "Q603635",
+        "pageid": 568238,
+        "concepturi": "http://www.wikidata.org/entity/Q603635",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q603635",
+        "display": {
+          "label": {
+            "value": "Flore",
+            "language": "en"
+          },
+          "description": {
+            "value": "village and civil parish in Northamptonshire, England, UK",
+            "language": "en"
+          }
+        },
+        "label": "Flore",
+        "description": "village and civil parish in Northamptonshire, England, UK",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "フロア"
+        },
+        "aliases": [
+          "フロア"
+        ]
+      },
+      {
+        "id": "Q206763",
+        "title": "Q206763",
+        "pageid": 203005,
+        "concepturi": "http://www.wikidata.org/entity/Q206763",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q206763",
+        "display": {
+          "label": {
+            "value": "floorball",
+            "language": "en"
+          },
+          "description": {
+            "value": "team sport",
+            "language": "en"
+          }
+        },
+        "label": "floorball",
+        "description": "team sport",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "フロアボール"
+        },
+        "aliases": [
+          "フロアボール"
+        ]
+      },
+      {
+        "id": "Q1535890",
+        "title": "Q1535890",
+        "pageid": 1472717,
+        "concepturi": "http://www.wikidata.org/entity/Q1535890",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1535890",
+        "display": {
+          "label": {
+            "value": "proa",
+            "language": "en"
+          },
+          "description": {
+            "value": "type of multihull sailing vessel",
+            "language": "en"
+          }
+        },
+        "label": "proa",
+        "description": "type of multihull sailing vessel",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "プロア"
+        },
+        "aliases": [
+          "プロア"
+        ]
+      },
+      {
+        "id": "Q11774891",
+        "title": "Q11774891",
+        "pageid": 12911689,
+        "concepturi": "http://www.wikidata.org/entity/Q11774891",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11774891",
+        "display": {
+          "label": {
+            "value": "ice hockey player",
+            "language": "en"
+          },
+          "description": {
+            "value": "sportsperson taking part in ice hockey competitions",
+            "language": "en"
+          }
+        },
+        "label": "ice hockey player",
+        "description": "sportsperson taking part in ice hockey competitions",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "プロアイスホッケー選手"
+        },
+        "aliases": [
+          "プロアイスホッケー選手"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

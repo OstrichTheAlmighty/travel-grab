@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:45:52.467Z",
+  "value": {
+    "searchinfo": {
+      "search": "台場怪奇学校"
+    },
+    "search": [
+      {
+        "id": "Q11411935",
+        "title": "Q11411935",
+        "pageid": 12550638,
+        "concepturi": "http://www.wikidata.org/entity/Q11411935",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11411935",
+        "display": {
+          "label": {
+            "value": "Daiba Haunted School",
+            "language": "en"
+          }
+        },
+        "label": "Daiba Haunted School",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "台場怪奇学校"
+        },
+        "aliases": [
+          "台場怪奇学校"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

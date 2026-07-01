@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:04.626Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3387,
+          "ns": 0,
+          "title": "小田急電鉄",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おたきゆうてんてつ",
+            "page_image_free": "Shinjuku-Daiichi-Life-Building-01.jpg",
+            "wikibase_item": "Q83584"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69163889,
+              "lon": 139.69102778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の鉄道会社"
+            ]
+          }
+        },
+        {
+          "pageid": 8459,
+          "ns": 0,
+          "title": "小田急小田原線",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おたきゆうおたわらせん",
+            "page_image_free": "Odakyu_Series70000_Hakone-7.jpg",
+            "wikibase_item": "Q135176"
+          },
+          "terms": {
+            "description": [
+              "小田急電鉄の鉄道路線"
+            ]
+          }
+        },
+        {
+          "pageid": 33360,
+          "ns": 0,
+          "title": "渋谷",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しふや",
+            "kartographer_frames": "1",
+            "page_image_free": "2018_Shibuya_Crossing.jpg",
+            "wikibase_item": "Q595153"
+          },
+          "terms": {
+            "description": [
+              "東京都渋谷区の渋谷駅周辺の地域"
+            ]
+          }
+        },
+        {
+          "pageid": 33374,
+          "ns": 0,
+          "title": "新宿",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しんしゆく",
+            "kartographer_frames": "1",
+            "page_image_free": "Japan_Tokyo_Shinjuku_location_map.svg",
+            "wikibase_item": "Q836198"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区の町名・副都心"
+            ]
+          }
+        },
+        {
+          "pageid": 4099190,
+          "ns": 0,
+          "title": "西武の店舗一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せいふのてんほいちらん",
+            "kartographer_frames": "2",
+            "page_image_free": "Seibu_logo.svg",
+            "wikibase_item": "Q97311747"
+          },
+          "terms": {
+            "description": [
+              "ウィキペディアの一覧ページ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:39.510Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 345909,
+          "ns": 0,
+          "title": "MISSING BOY",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みつしんくほおい",
+            "wikibase_item": "Q11231673"
+          }
+        },
+        {
+          "pageid": 2780534,
+          "ns": 0,
+          "title": "Heart Of Klaxon",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はあとおふくらくしよん",
+            "wikibase_item": "Q17232668"
+          }
+        },
+        {
+          "pageid": 2783875,
+          "ns": 0,
+          "title": "LIVEBEAT BOX",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "らいふひいとほつくす",
+            "wikibase_item": "Q17212017"
+          }
+        },
+        {
+          "pageid": 2786825,
+          "ns": 0,
+          "title": "OZAKI FILM ALIVE AT ARIAKE COLOSSEUM IN 1987 THE TWENTY-FIRST SUMMER",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おさきふいるむあらいふあつとありあけころしあむ",
+            "wikibase_item": "Q17209217"
+          }
+        },
+        {
+          "pageid": 2803859,
+          "ns": 0,
+          "title": "告白 (Confession)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こくはく",
+            "wikibase_item": "Q17220512"
+          }
+        }
+      ]
+    }
+  }
+}

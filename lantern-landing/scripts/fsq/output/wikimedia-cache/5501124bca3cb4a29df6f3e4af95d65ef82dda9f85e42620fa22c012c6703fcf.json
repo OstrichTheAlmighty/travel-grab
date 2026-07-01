@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:10.844Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 28377,
+          "ns": 0,
+          "title": "Santorini",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "2011_Dimos_Thiras.png",
+            "wikibase-shortdesc": "Greek island in the Aegean Sea",
+            "wikibase_item": "Q129296"
+          },
+          "coordinates": [
+            {
+              "lat": 36.415,
+              "lon": 25.4325,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Greek island in the Cyclades"
+            ]
+          }
+        },
+        {
+          "pageid": 30058,
+          "ns": 0,
+          "title": "Trojan War",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Akhilleus_Patroklos_Antikensammlung_Berlin_F2278.jpg",
+            "wikibase-shortdesc": "Legendary war in Greek mythology",
+            "wikibase_item": "Q42937"
+          },
+          "terms": {
+            "description": [
+              "legendary war in Greek mythology"
+            ]
+          }
+        },
+        {
+          "pageid": 552897,
+          "ns": 0,
+          "title": "Randy Savage",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Savage, Randy",
+            "page_image_free": "Randy_Savage_1988.jpeg",
+            "wikibase-shortdesc": "American professional wrestler (1952–2011)",
+            "wikibase_item": "Q59635"
+          },
+          "terms": {
+            "description": [
+              "American professional wrestler (1952–2011)"
+            ]
+          }
+        },
+        {
+          "pageid": 1320364,
+          "ns": 0,
+          "title": "Professional Wrestling Hall of Fame and Museum",
+          "index": 5,
+          "pageprops": {
+            "wikibase-shortdesc": "Hall of fame and museum in Texas, US",
+            "wikibase_item": "Q865105"
+          },
+          "coordinates": [
+            {
+              "lat": 33.912113,
+              "lon": -98.492014,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "American professional wrestling hall of fame and museum in Wichita Falls, Texas"
+            ]
+          }
+        },
+        {
+          "pageid": 6911444,
+          "ns": 0,
+          "title": "Austronesian peoples",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Austronesian Peoples",
+            "page_image_free": "Taiwanese_aborigines.JPG",
+            "wikibase-shortdesc": "Speakers of Austronesian languages",
+            "wikibase_item": "Q861225"
+          },
+          "terms": {
+            "description": [
+              "group of Austronesian-speaking peoples"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

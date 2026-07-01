@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:02.892Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 14142,
+          "ns": 0,
+          "title": "花火",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はなひ",
+            "page_image_free": "Itabashi_Hanabi_Taikai_Zenkei_1.jpg",
+            "toc": "",
+            "wikibase_item": "Q127933"
+          },
+          "terms": {
+            "description": [
+              "火薬と金属の粉末を混ぜて包んだ鑑賞物"
+            ]
+          }
+        },
+        {
+          "pageid": 57602,
+          "ns": 0,
+          "title": "宮古島",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みやこしま",
+            "kartographer_frames": "1",
+            "page_image_free": "Miyakojima_sky_view.jpg",
+            "wikibase_item": "Q700946"
+          },
+          "coordinates": [
+            {
+              "lat": 24.80472222,
+              "lon": 125.28111111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "沖縄県、宮古列島にある島"
+            ]
+          }
+        },
+        {
+          "pageid": 228286,
+          "ns": 0,
+          "title": "日本庭園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にほんていえん",
+            "page_image_free": "Kare-sansui_zen_garden,_Ryōan-ji,_Kyoto_20190416_1.jpg",
+            "wikibase_item": "Q15835"
+          },
+          "terms": {
+            "description": [
+              "日本の伝統的な庭園"
+            ]
+          }
+        },
+        {
+          "pageid": 1129175,
+          "ns": 0,
+          "title": "スタリ・モスト",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すたりもすと",
+            "page_image_free": "Mostar_bridge.jpg",
+            "wikibase_item": "Q188528"
+          },
+          "coordinates": [
+            {
+              "lat": 43.33727778,
+              "lon": 17.81508333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 3413017,
+          "ns": 0,
+          "title": "メナイ吊橋",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "めないつりはし",
+            "page_image_free": "The_Menai_Suspension_Bridge.jpg",
+            "wikibase_item": "Q581526"
+          },
+          "coordinates": [
+            {
+              "lat": 53.22027778,
+              "lon": -4.16333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

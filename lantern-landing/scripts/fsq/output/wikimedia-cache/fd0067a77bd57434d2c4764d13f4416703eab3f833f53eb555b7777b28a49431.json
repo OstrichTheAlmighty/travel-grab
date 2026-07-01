@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:51.593Z",
+  "value": {
+    "searchinfo": {
+      "search": "築地場外市場"
+    },
+    "search": [
+      {
+        "id": "Q859471",
+        "title": "Q859471",
+        "pageid": 810988,
+        "concepturi": "http://www.wikidata.org/entity/Q859471",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q859471",
+        "display": {
+          "label": {
+            "value": "Tsukiji fish market",
+            "language": "en"
+          },
+          "description": {
+            "value": "building in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tsukiji fish market",
+        "description": "building in Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "築地場外市場商店街"
+        },
+        "aliases": [
+          "築地場外市場商店街"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

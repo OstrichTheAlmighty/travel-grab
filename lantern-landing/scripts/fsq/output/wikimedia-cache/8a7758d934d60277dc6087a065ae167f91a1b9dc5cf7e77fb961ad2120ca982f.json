@@ -1,0 +1,84 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:39.247Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 222480,
+          "ns": 0,
+          "title": "橋のない川",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はしのないかわ",
+            "wikibase_item": "Q7761033"
+          }
+        },
+        {
+          "pageid": 288155,
+          "ns": 0,
+          "title": "ファイティング原田",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はらた ふあいていんく",
+            "page_image_free": "Masahiko_Harada_1968.jpg",
+            "wikibase_item": "Q952577"
+          },
+          "terms": {
+            "description": [
+              "日本のプロボクサー (1943-)"
+            ]
+          }
+        },
+        {
+          "pageid": 860992,
+          "ns": 0,
+          "title": "猿ロック",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さるろつく",
+            "wikibase_item": "Q576823"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画作品"
+            ]
+          }
+        },
+        {
+          "pageid": 2920085,
+          "ns": 0,
+          "title": "ヤギ (企業)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やき",
+            "wikibase_item": "Q11391316"
+          }
+        },
+        {
+          "pageid": 3905674,
+          "ns": 0,
+          "title": "尾頭橋",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おとうはし",
+            "kartographer_frames": "7",
+            "kartographer_links": "6",
+            "page_image_free": "Otobashi_20130512.JPG",
+            "wikibase_item": "Q62127629"
+          },
+          "terms": {
+            "description": [
+              "名古屋市中川区にある町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:43.399Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 7688,
+          "ns": 0,
+          "title": "講談社",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こうたんしや",
+            "page_image_free": "Kodansha_(head_office).jpg",
+            "wikibase_item": "Q726081"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71775,
+              "lon": 139.72780556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都文京区にある出版社"
+            ]
+          }
+        },
+        {
+          "pageid": 78486,
+          "ns": 0,
+          "title": "土田麦僊",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "つちた はくせん",
+            "page_image_free": "Tsuchida_Bakusen.jpg",
+            "wikibase_item": "Q7849916"
+          },
+          "terms": {
+            "description": [
+              "日本の画家"
+            ]
+          }
+        },
+        {
+          "pageid": 223111,
+          "ns": 0,
+          "title": "田中光顕",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たなか みつあき",
+            "page_image_free": "TANAKA_Mitsuaki.jpg",
+            "wikibase_item": "Q10856312"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家"
+            ]
+          }
+        },
+        {
+          "pageid": 485713,
+          "ns": 0,
+          "title": "野間清治",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "のま せいし",
+            "page_image_free": "Seiji_Noma.JPG",
+            "wikibase_item": "Q1674630"
+          },
+          "terms": {
+            "description": [
+              "講談社の創業者（1878 - 1938）"
+            ]
+          }
+        },
+        {
+          "pageid": 4297667,
+          "ns": 0,
+          "title": "講談社野間記念館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こうたんしやのまきねんかん",
+            "page_image_free": "Kodansha_Noma_Memorial_Museum_-_DSC07743.JPG",
+            "wikibase_item": "Q3788846"
+          },
+          "coordinates": [
+            {
+              "lat": 35.714,
+              "lon": 139.72502778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

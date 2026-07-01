@@ -1,0 +1,100 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:20.396Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 10741,
+          "ns": 0,
+          "title": "練馬区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ねりまく",
+            "kartographer_frames": "1",
+            "page_image_free": "三宝寺池と厳島神社（2021年5月）.jpg",
+            "wikibase_item": "Q232655"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73553,
+              "lon": 139.65169,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 103722,
+          "ns": 0,
+          "title": "発車メロディ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はつしやめろてい",
+            "wikibase_item": "Q7832892"
+          },
+          "terms": {
+            "description": [
+              "鉄道駅において列車の発車を知らせるための音楽"
+            ]
+          }
+        },
+        {
+          "pageid": 2078733,
+          "ns": 0,
+          "title": "デジモンアドベンチャーの登場キャラクター",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "てしもんあとへんちやあ",
+            "wikibase_item": "Q1276765"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2300493,
+          "ns": 0,
+          "title": "ぶらぶら美術・博物館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふらふらひしゆつはくふつかん",
+            "wikibase_item": "Q11277457"
+          },
+          "terms": {
+            "description": [
+              "日本の教養バラエティ番組(2010-2023)"
+            ]
+          }
+        },
+        {
+          "pageid": 3200654,
+          "ns": 0,
+          "title": "乃木坂工事中",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "のきさかこうしちゆう",
+            "wikibase_item": "Q20042107"
+          },
+          "terms": {
+            "description": [
+              "乃木坂46の冠バラエティ番組 (2015-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

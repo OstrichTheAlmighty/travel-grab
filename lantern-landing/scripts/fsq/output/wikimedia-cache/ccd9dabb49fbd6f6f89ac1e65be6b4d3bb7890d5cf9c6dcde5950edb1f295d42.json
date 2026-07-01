@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:22.432Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 120445,
+          "ns": 0,
+          "title": "北野天満宮",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きたのてんまんくう",
+            "kartographer_frames": "1",
+            "page_image_free": "Main_Shrine,_Kitano-tenmangu-No4-2020-07.jpg",
+            "wikibase_item": "Q662176"
+          },
+          "coordinates": [
+            {
+              "lat": 35.02919444,
+              "lon": 135.735,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市上京区にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 323671,
+          "ns": 0,
+          "title": "東北学院大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうほくかくいん",
+            "kartographer_frames": "1",
+            "page_image_free": "Tohoku_Gakuin_University_Main_Building.jpg",
+            "wikibase_item": "Q910529"
+          },
+          "coordinates": [
+            {
+              "lat": 38.24925,
+              "lon": 140.87802778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "仙台の私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 386392,
+          "ns": 0,
+          "title": "田能村竹田",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たのむら ちくてん",
+            "page_image_free": "TanomuraChikuden田能村竹田.jpg",
+            "wikibase_item": "Q1358543"
+          },
+          "terms": {
+            "description": [
+              "1777-1835, 江戸時代後期の南画（文人画）家"
+            ]
+          }
+        },
+        {
+          "pageid": 2009219,
+          "ns": 0,
+          "title": "浮世絵師一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "うきよえしいちらん",
+            "wikibase_item": "Q11558497"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2200335,
+          "ns": 0,
+          "title": "茶外茶",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちやかいちや",
+            "wikibase_item": "Q11617958"
+          }
+        }
+      ]
+    }
+  }
+}

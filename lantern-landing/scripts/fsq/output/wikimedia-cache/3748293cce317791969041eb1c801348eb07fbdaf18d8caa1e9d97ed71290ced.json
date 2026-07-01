@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:28.783Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 626921,
+          "ns": 0,
+          "title": "Ueno Park",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Ueno_park.jpg",
+            "wikibase-shortdesc": "Park in Tokyo, Japan",
+            "wikibase_item": "Q746216"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71222222,
+              "lon": 139.77111111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "park in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 3449904,
+          "ns": 0,
+          "title": "Fujisankei Communications Group",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "2018_FCG_Headquarters_Building_2.jpg",
+            "wikibase-shortdesc": "Japanese company",
+            "wikibase_item": "Q841397"
+          },
+          "terms": {
+            "description": [
+              "Japanese multinational mass media conglomerate group"
+            ]
+          }
+        },
+        {
+          "pageid": 42160943,
+          "ns": 0,
+          "title": "Tetsuya Noda",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Noda, Tetsuya",
+            "page_image_free": "Noda_Tetsuya_野田_哲也_at_opening_of_YOUR_HAND_IN_MINE_-_TETSUYA_NODA_(DIARY)_執子之手_-_野田哲也(日記).png",
+            "wikibase-shortdesc": "Japanese artist (born 1940)",
+            "wikibase_item": "Q15919506"
+          },
+          "terms": {
+            "description": [
+              "Japanese artist (born 1940)"
+            ]
+          }
+        },
+        {
+          "pageid": 72322282,
+          "ns": 0,
+          "title": "Japan Art Association",
+          "index": 3,
+          "pageprops": {
+            "wikibase_item": "Q2867839"
+          },
+          "terms": {
+            "description": [
+              "Japanese art organization"
+            ]
+          }
+        },
+        {
+          "pageid": 75267705,
+          "ns": 0,
+          "title": "Ueno Royal Museum",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Ueno_Royal_Museum.JPG",
+            "wikibase-shortdesc": "Art museum in Tokyo, Japan",
+            "wikibase_item": "Q11360245"
+          },
+          "coordinates": [
+            {
+              "lat": 35.712701,
+              "lon": 139.774674,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "museum in Tokyo, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

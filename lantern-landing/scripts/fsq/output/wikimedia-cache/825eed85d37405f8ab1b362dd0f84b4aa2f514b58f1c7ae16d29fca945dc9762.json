@@ -1,0 +1,80 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:28.305Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 420818,
+          "ns": 0,
+          "title": "米澤穂信",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "よねさわ ほのふ",
+            "wikibase_item": "Q9323704"
+          },
+          "terms": {
+            "description": [
+              "日本の小説家"
+            ]
+          }
+        },
+        {
+          "pageid": 1174309,
+          "ns": 0,
+          "title": "Strange Circus 奇妙なサーカス",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きみようなさあかす",
+            "wikibase_item": "Q1848718"
+          }
+        },
+        {
+          "pageid": 2786561,
+          "ns": 0,
+          "title": "SCRAP",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すくらつふ",
+            "wikibase_item": "Q16140475"
+          },
+          "terms": {
+            "description": [
+              "リアル脱出ゲームを中心としたイベントの企画・運営などを行う日本の企業"
+            ]
+          }
+        },
+        {
+          "pageid": 3542337,
+          "ns": 0,
+          "title": "光が丘大サーカス",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひかりかおかたいさあかす",
+            "wikibase_item": "Q28689998"
+          }
+        },
+        {
+          "pageid": 3865073,
+          "ns": 0,
+          "title": "王とサーカス",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おうとさあかす",
+            "wikibase_item": "Q60987396"
+          },
+          "terms": {
+            "description": [
+              "米澤穂信の推理小説"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

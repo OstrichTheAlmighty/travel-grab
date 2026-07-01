@@ -1,0 +1,123 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:09.379Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 173415,
+          "ns": 0,
+          "title": "帝国図書館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ていこくとしよかん",
+            "page_image_free": "Imperial_Library,_Ueno,_Tokyo.jpg",
+            "wikibase_item": "Q6006737"
+          },
+          "terms": {
+            "description": [
+              "国立国会図書館の前身である国立図書館"
+            ]
+          }
+        },
+        {
+          "pageid": 201996,
+          "ns": 0,
+          "title": "国際子ども図書館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こくさいこともとしよかん",
+            "kartographer_frames": "1",
+            "page_image_free": "2019_International_Library_of_Children's_Literature.jpg",
+            "wikibase_item": "Q4346431"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71958333,
+              "lon": 139.77372222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "2000年に開館した日本の国立図書館"
+            ]
+          }
+        },
+        {
+          "pageid": 501683,
+          "ns": 0,
+          "title": "フランス国立図書館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふらんすこくりつとしよかん",
+            "page_image_free": "La_salle_ovale_du_site_Richelieu,_Bibliothèque_nationale_de_France,_Paris_2022.jpg",
+            "wikibase_item": "Q193563"
+          },
+          "coordinates": [
+            {
+              "lat": 48.83361111,
+              "lon": 2.37583333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "フランス・パリにある国立図書館"
+            ]
+          }
+        },
+        {
+          "pageid": 633896,
+          "ns": 0,
+          "title": "横浜市中央図書館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "よこはましちゆうおうとしよかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Yokohama_central_library_and_public_art.jpg",
+            "wikibase_item": "Q11262862"
+          },
+          "coordinates": [
+            {
+              "lat": 35.44763889,
+              "lon": 139.62652778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "横浜市西区にある図書館"
+            ]
+          }
+        },
+        {
+          "pageid": 1255844,
+          "ns": 0,
+          "title": "田原市図書館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たはらしとしよかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Tahara_City_Central_Library_2021-09_ac_(1).jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q11576254"
+          },
+          "terms": {
+            "description": [
+              "愛知県田原市の公共図書館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

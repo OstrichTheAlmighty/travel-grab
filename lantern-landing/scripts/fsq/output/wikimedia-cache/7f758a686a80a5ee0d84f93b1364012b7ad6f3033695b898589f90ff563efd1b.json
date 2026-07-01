@@ -1,0 +1,36 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:51.687Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 926727,
+          "ns": 0,
+          "title": "大府市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおふし",
+            "kartographer_frames": "1",
+            "page_image_free": "Aichikenko1.JPG",
+            "wikibase_item": "Q384809"
+          },
+          "coordinates": [
+            {
+              "lat": 35.01167,
+              "lon": 136.96383,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県の市"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

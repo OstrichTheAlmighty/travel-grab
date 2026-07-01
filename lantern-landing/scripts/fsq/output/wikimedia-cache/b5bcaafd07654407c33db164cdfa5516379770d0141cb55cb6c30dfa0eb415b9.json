@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:50.714Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1035,
+          "ns": 0,
+          "title": "棟方志功",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "むなかた しこう",
+            "page_image_free": "Shikō_Munakata.jpg",
+            "wikibase_item": "Q1251247"
+          },
+          "terms": {
+            "description": [
+              "日本の芸術家"
+            ]
+          }
+        },
+        {
+          "pageid": 2756,
+          "ns": 0,
+          "title": "孫文",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "そん ふん",
+            "page_image_free": "孙中山肖像.jpg",
+            "wikibase_item": "Q8573"
+          },
+          "terms": {
+            "description": [
+              "中国の政治家・革命家 (1866–1925)"
+            ]
+          }
+        },
+        {
+          "pageid": 876678,
+          "ns": 0,
+          "title": "鈴木信太郎 (フランス文学者)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すすき しんたろう",
+            "page_image_free": "Shintaro_Suzuki_1955.jpg",
+            "wikibase_item": "Q11648567"
+          },
+          "terms": {
+            "description": [
+              "日本のフランス文学者 (1895年 - 1970年)"
+            ]
+          }
+        },
+        {
+          "pageid": 1635259,
+          "ns": 0,
+          "title": "豊島区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "としまく",
+            "kartographer_frames": "1",
+            "page_image_free": "Sunshine_60_1_Ikebukuro_Tokyo_21_May_2004.jpg",
+            "wikibase_item": "Q236680"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7261,
+              "lon": 139.7167,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 2084404,
+          "ns": 0,
+          "title": "天才画の女",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "てんさいかのおんな",
+            "page_image_free": "Art_gallery_of_Ginza,Tokyo.JPG",
+            "wikibase_item": "Q17218311"
+          },
+          "terms": {
+            "description": [
+              "松本清張の小説"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

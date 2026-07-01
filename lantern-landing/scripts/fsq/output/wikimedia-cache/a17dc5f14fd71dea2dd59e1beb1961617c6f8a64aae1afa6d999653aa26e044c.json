@@ -1,0 +1,56 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:18.188Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 4653899,
+          "ns": 0,
+          "title": "千原ジュニアの愛知あたりまえワールド☆〜あなたの街に新仰天!〜",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ちはらしゆにあのあいちあたりまえわあるとあなたのまちにしんきようてん",
+            "wikibase_item": "Q113702575"
+          },
+          "terms": {
+            "description": [
+              "テレビ愛知のバラエティ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 4655701,
+          "ns": 0,
+          "title": "ライトノベルの漫画化作品一覧 (2020年代 前半)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "らいとのへるのまんかかさくひんいちらん2020ねんたいせんはん",
+            "wikibase_item": "Q113995074"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 5141159,
+          "ns": 0,
+          "title": "出川哲朗の充電させてもらえませんか?",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "てかわてつろうのしゆうてんさせてもらえませんか",
+            "wikibase_item": "Q22123195"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ東京の旅・バラエティ番組 (2017-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

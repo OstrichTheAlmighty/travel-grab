@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:23.491Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 10145,
+          "ns": 0,
+          "title": "野球場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やきゆうしよう",
+            "page_image_free": "SafecoFieldTop.jpg",
+            "wikibase_item": "Q595452"
+          },
+          "terms": {
+            "description": [
+              "野球の試合を行う施設"
+            ]
+          }
+        },
+        {
+          "pageid": 63852,
+          "ns": 0,
+          "title": "駒澤野球場",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こまさわやきゆうしよう",
+            "page_image_free": "Komazawa_Stadium_1955.jpg",
+            "wikibase_item": "Q11668425"
+          },
+          "terms": {
+            "description": [
+              "かつて東京都世田谷区にあった野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 71296,
+          "ns": 0,
+          "title": "静岡県草薙総合運動場硬式野球場",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しすおかけんくさなきそうこううんとうしようこうしきやきゆうしよう",
+            "page_image_free": "Kusanagi_Stadium_plaque.jpg",
+            "wikibase_item": "Q6447772"
+          },
+          "coordinates": [
+            {
+              "lat": 34.99075,
+              "lon": 138.42913889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡市駿河区の野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 80720,
+          "ns": 0,
+          "title": "花咲スポーツ公園硬式野球場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はなさきすほつこうえんこうしきやきゆうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Hokkaidō_géolocalisation.svg",
+            "wikibase_item": "Q11081691"
+          },
+          "coordinates": [
+            {
+              "lat": 43.78888889,
+              "lon": 142.36861111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道旭川市にある野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 105586,
+          "ns": 0,
+          "title": "日本の野球場一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのやきゆうしよういちらん",
+            "wikibase_item": "Q6607277"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

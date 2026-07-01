@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:36.091Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8587,
+          "ns": 0,
+          "title": "名古屋市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "なこやし",
+            "kartographer_frames": "1",
+            "page_image_free": "View_of_Westward_from_Sky_Deck_MIRAI360,_Nishiki_Naka_Ward_Nagoya_2022.jpg",
+            "wikibase_item": "Q11751"
+          },
+          "coordinates": [
+            {
+              "lat": 35.1814,
+              "lon": 136.9064,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 391315,
+          "ns": 0,
+          "title": "トロ箱",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とろはこ",
+            "wikibase_item": "Q11322212"
+          },
+          "terms": {
+            "description": [
+              "海産物を入れる箱"
+            ]
+          }
+        },
+        {
+          "pageid": 586368,
+          "ns": 0,
+          "title": "漁港 (バンド)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きよこう",
+            "page_image_free": "Gyoko-Shinurayasu-matsuri-a-sept7-2014.jpg",
+            "wikibase_item": "Q11565359"
+          }
+        },
+        {
+          "pageid": 1860772,
+          "ns": 0,
+          "title": "福岡市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふくおかし",
+            "kartographer_frames": "1",
+            "page_image_free": "Fukuoka_City_-_Montage_-_01.JPG",
+            "wikibase_item": "Q26600"
+          },
+          "coordinates": [
+            {
+              "lat": 33.59014,
+              "lon": 130.40172,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福岡県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 2226163,
+          "ns": 0,
+          "title": "キッチンが走る!",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きつちんかはしる",
+            "wikibase_item": "Q17211312"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

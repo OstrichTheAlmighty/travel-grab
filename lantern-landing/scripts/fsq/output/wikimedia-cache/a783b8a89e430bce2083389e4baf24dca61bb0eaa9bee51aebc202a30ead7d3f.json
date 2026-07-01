@@ -1,0 +1,57 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:09.262Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 461902,
+          "ns": 0,
+          "title": "世界のドキュメンタリー",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひいえすせかいのときゆめんたりい",
+            "wikibase_item": "Q11191809"
+          },
+          "terms": {
+            "description": [
+              "NHKEテレで放送されているドキュメンタリー番組（2004-）"
+            ]
+          }
+        },
+        {
+          "pageid": 2160696,
+          "ns": 0,
+          "title": "AKB48関連の楽曲一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ええけえひいふおおていえいとかんれんのかつきよくいちらん",
+            "wikibase_item": "Q5957554"
+          },
+          "terms": {
+            "description": [
+              "日本の女性アイドルグループ・AKB48および派生ユニットによる楽曲の一覧"
+            ]
+          }
+        },
+        {
+          "pageid": 5148791,
+          "ns": 0,
+          "title": "YouTubeの歴史",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "YouTubeのれきし",
+            "page_image_free": "YouTube_video_player_history.png",
+            "wikibase_item": "Q5867307"
+          },
+          "terms": {
+            "description": [
+              "アメリカ合衆国の動画投稿サイトであるYouTubeの歴史"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

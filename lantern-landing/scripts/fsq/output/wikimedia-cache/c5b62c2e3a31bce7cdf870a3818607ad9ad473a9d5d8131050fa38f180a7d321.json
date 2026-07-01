@@ -1,0 +1,125 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:04.208Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2674,
+          "ns": 0,
+          "title": "雪舟",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せつしゆう",
+            "page_image_free": "Portrait_of_Sesshu.jpg",
+            "wikibase_item": "Q48514"
+          },
+          "terms": {
+            "description": [
+              "室町時代の日本の水墨画家、禅僧"
+            ]
+          }
+        },
+        {
+          "pageid": 18792,
+          "ns": 0,
+          "title": "文京区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふんきようく",
+            "kartographer_frames": "1",
+            "page_image_free": "Akamon,_University_of_Tokyo_2019.jpg",
+            "wikibase_item": "Q212713"
+          },
+          "coordinates": [
+            {
+              "lat": 35.708,
+              "lon": 139.75225,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 84282,
+          "ns": 0,
+          "title": "根津美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ねつひしゆつかん",
+            "page_image_free": "2018_Nezu_Museum_1.jpg",
+            "wikibase_item": "Q1047097"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66222222,
+              "lon": 139.71708333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 2021919,
+          "ns": 0,
+          "title": "根津記念館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ねつきねんかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Nezu_Memorial_Museum_in_Yamanashi_City_Yamanashi_Pref.jpg",
+            "wikibase_item": "Q11536453"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67880556,
+              "lon": 138.66830556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "山梨県山梨市にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 2290785,
+          "ns": 0,
+          "title": "青楓美術館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "せいふうひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Seifu_Art_Museum.JPG",
+            "wikibase_item": "Q11599754"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66058333,
+              "lon": 138.70583333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:33.970Z",
+  "value": {
+    "searchinfo": {
+      "search": "日本民藝館"
+    },
+    "search": [
+      {
+        "id": "Q3789149",
+        "title": "Q3789149",
+        "pageid": 3613124,
+        "concepturi": "http://www.wikidata.org/entity/Q3789149",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3789149",
+        "display": {
+          "label": {
+            "value": "Japanese Folk Crafts Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Japanese Folk Crafts Museum",
+        "description": "museum in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "日本民藝館"
+        },
+        "aliases": [
+          "日本民藝館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

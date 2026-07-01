@@ -1,0 +1,59 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:02.183Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 61260,
+          "ns": 0,
+          "title": "Filling station",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Mattoon_Service_Station_(pre-fabricated),_angle_view,_National_&_Washington_Boulevards,_Culver_City,_California_LOC_37555778230.jpg",
+            "wikibase-shortdesc": "Facility that sells gasoline and diesel",
+            "wikibase_item": "Q205495"
+          },
+          "terms": {
+            "description": [
+              "establishment that primarily sells fuel, lubricating oils, and other merchandise, such as tires and batteries, for motor vehicles and that often also perform minor repair work"
+            ]
+          }
+        },
+        {
+          "pageid": 20198995,
+          "ns": 0,
+          "title": "Idemitsu Kosan",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Otemachi_One.jpg",
+            "wikibase-shortdesc": "Japanese petroleum company",
+            "wikibase_item": "Q2216770"
+          },
+          "terms": {
+            "description": [
+              "Japanese petroleum company"
+            ]
+          }
+        },
+        {
+          "pageid": 80156242,
+          "ns": 0,
+          "title": "Mibot",
+          "index": 3,
+          "pageprops": {
+            "wikibase-shortdesc": "Japanese electric microcar",
+            "wikibase_item": "Q136696959"
+          },
+          "terms": {
+            "description": [
+              "Japanese electric microcar"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

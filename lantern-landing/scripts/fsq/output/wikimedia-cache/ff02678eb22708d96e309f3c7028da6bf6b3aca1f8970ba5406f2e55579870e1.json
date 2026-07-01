@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:52.639Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 63079,
+          "ns": 0,
+          "title": "京成立石駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "けいせいたていし",
+            "page_image_free": "Keisei-railway-KS49-Keisei-tateishi-station-entrance-20170104-151154.jpg",
+            "wikibase_item": "Q5366765"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73827778,
+              "lon": 139.84861111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都葛飾区立石にある京成電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 149558,
+          "ns": 0,
+          "title": "日本のアーケード商店街",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にほんのああけえと",
+            "page_image_free": "GalleriaTakemachi3.jpg",
+            "wikibase_item": "Q96288605"
+          },
+          "terms": {
+            "description": [
+              "全蓋式アーケードを備えた商店街"
+            ]
+          }
+        },
+        {
+          "pageid": 241964,
+          "ns": 0,
+          "title": "立石 (葛飾区)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たていし",
+            "graph-data-sources": "inline:22",
+            "kartographer_frames": "1",
+            "page_image_free": "Tateishi_2006.jpg",
+            "wikibase_item": "Q3117901"
+          },
+          "terms": {
+            "description": [
+              "東京都葛飾区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 527862,
+          "ns": 0,
+          "title": "間宮兄弟",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "まみやきようたい",
+            "wikibase_item": "Q5368843"
+          },
+          "terms": {
+            "description": [
+              "2006年の日本映画"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

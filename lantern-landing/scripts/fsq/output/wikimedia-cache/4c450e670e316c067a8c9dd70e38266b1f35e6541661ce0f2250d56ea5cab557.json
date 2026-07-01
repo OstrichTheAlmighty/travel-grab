@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:19.424Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8531987,
+          "ns": 0,
+          "title": "Shimokitazawa",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Shimokitazawa_Street_2015.jpg",
+            "wikibase-shortdesc": "Area in Kitazawa, Setagaya, Tokyo",
+            "wikibase_item": "Q735384"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66160556,
+              "lon": 139.6665611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "town located in Setagaya-ku, Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 15049456,
+          "ns": 0,
+          "title": "Girugamesh (album)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Girugamesh (Album)",
+            "displaytitle": "<i>Girugamesh</i> (album)",
+            "page_image": "Girugamesh_-_Girugamesh.jpg",
+            "wikibase-shortdesc": "2007 studio album by Girugamesh",
+            "wikibase_item": "Q268598"
+          },
+          "terms": {
+            "description": [
+              "album by Girugamesh"
+            ]
+          }
+        },
+        {
+          "pageid": 20832667,
+          "ns": 0,
+          "title": "Sakanaction",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Sakanaction11.jpg",
+            "wikibase-shortdesc": "Japanese rock band",
+            "wikibase_item": "Q847394"
+          },
+          "terms": {
+            "description": [
+              "Japanese rock band (2005-)"
+            ]
+          }
+        },
+        {
+          "pageid": 49446607,
+          "ns": 0,
+          "title": "Enon Kawatani",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Kawatani, Enon",
+            "page_image_free": "Enon_Kawatani,_2015.jpg",
+            "wikibase-shortdesc": "Musical artist",
+            "wikibase_item": "Q22443064"
+          },
+          "terms": {
+            "description": [
+              "Japanese singer-songwriter"
+            ]
+          }
+        },
+        {
+          "pageid": 49801375,
+          "ns": 0,
+          "title": "Wednesday Campanella",
+          "index": 3,
+          "pageprops": {
+            "wikibase-shortdesc": "Japanese musical band",
+            "wikibase_item": "Q18458718"
+          },
+          "terms": {
+            "description": [
+              "Japanese electronic music band"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

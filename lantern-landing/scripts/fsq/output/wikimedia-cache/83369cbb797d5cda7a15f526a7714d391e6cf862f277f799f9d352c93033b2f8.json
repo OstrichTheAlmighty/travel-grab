@@ -1,0 +1,119 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:13.526Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 12755,
+          "ns": 0,
+          "title": "舞浜リゾートラインディズニーリゾートライン",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "まいはまりそおとらいんていすにいりそおとらいん",
+            "page_image_free": "DisneyResortLine141.jpg",
+            "wikibase_item": "Q1143216"
+          },
+          "terms": {
+            "description": [
+              "東京ディズニーリゾート内を運行するモノレール"
+            ]
+          }
+        },
+        {
+          "pageid": 122531,
+          "ns": 0,
+          "title": "ウォルト・ディズニー・カンパニー",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "うおるとていすにいかんはにい",
+            "page_image_free": "The_Walt_Disney_company_logo.svg",
+            "wikibase_item": "Q7414"
+          },
+          "terms": {
+            "description": [
+              "アメリカ合衆国の多国籍メディア・コングロマリット"
+            ]
+          }
+        },
+        {
+          "pageid": 943186,
+          "ns": 0,
+          "title": "東京ディズニーシー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきよううていすにいしい",
+            "page_image_free": "Tokyo_DisneySea_logo.svg",
+            "wikibase_item": "Q1202341"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62666944,
+              "lon": 139.88806111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県浦安市にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 1205726,
+          "ns": 0,
+          "title": "東京ディズニーリゾート",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいりそおと",
+            "page_image_free": "Japan_Tokyo_keiyo_location_map.svg",
+            "wikibase_item": "Q605492"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63277778,
+              "lon": 139.88055556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県浦安市にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 3040300,
+          "ns": 0,
+          "title": "東京ディズニーランド",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいらんと",
+            "page_image_free": "Japan_Tokyo_keiyo_location_map.svg",
+            "wikibase_item": "Q843997"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63277778,
+              "lon": 139.88055556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県浦安市にあるテーマパーク"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

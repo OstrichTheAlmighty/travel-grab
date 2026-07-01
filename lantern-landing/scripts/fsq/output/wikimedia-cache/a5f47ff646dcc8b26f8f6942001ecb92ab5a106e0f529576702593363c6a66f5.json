@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:01.027Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 13823,
+          "ns": 0,
+          "title": "神戸市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こうへし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kobe_montage1.jpg",
+            "wikibase_item": "Q48320"
+          },
+          "coordinates": [
+            {
+              "lat": 34.69017,
+              "lon": 135.19544,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 21936,
+          "ns": 0,
+          "title": "福島テレビ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふくしまてれひ",
+            "page_image_free": "Fukushima_TV_Headquarter.jpg",
+            "wikibase_item": "Q8014010"
+          },
+          "terms": {
+            "description": [
+              "福島県のフジテレビ系列局"
+            ]
+          }
+        },
+        {
+          "pageid": 1911129,
+          "ns": 0,
+          "title": "渋谷区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しふやく",
+            "kartographer_frames": "1",
+            "page_image_free": "2018_Shibuya_Crossing.jpg",
+            "wikibase_item": "Q193638"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66367,
+              "lon": 139.69772,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 2829802,
+          "ns": 0,
+          "title": "稲田醍伊祐",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "いなた たいすけ",
+            "wikibase_item": "Q16264231"
+          }
+        },
+        {
+          "pageid": 3088868,
+          "ns": 0,
+          "title": "渋谷区文化総合センター大和田",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しふやくみんふんかそうこうせんたおおわた",
+            "page_image_free": "Shibuya_Planetarium.jpg",
+            "wikibase_item": "Q20044812"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65547222,
+              "lon": 139.69991667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区の公共文化施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

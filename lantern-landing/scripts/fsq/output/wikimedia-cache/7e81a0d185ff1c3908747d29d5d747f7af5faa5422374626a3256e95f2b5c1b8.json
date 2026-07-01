@@ -1,0 +1,94 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:49.198Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 30995,
+          "ns": 0,
+          "title": "佐渡市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さとし",
+            "page_image_free": "Sado_Montage.jpg",
+            "wikibase_item": "Q499047"
+          },
+          "coordinates": [
+            {
+              "lat": 38.0444,
+              "lon": 138.3897,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "新潟県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 610043,
+          "ns": 0,
+          "title": "加役方人足寄場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かやくかたにんそくよせは",
+            "wikibase_item": "Q11398626"
+          }
+        },
+        {
+          "pageid": 1447824,
+          "ns": 0,
+          "title": "沖縄県の灯台一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おきなわけんのとうたいいちらん",
+            "wikibase_item": "Q11139396"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1522543,
+          "ns": 0,
+          "title": "石川県の灯台一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いしかわけんのとうたいいちらん",
+            "wikibase_item": "Q11585925"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2871944,
+          "ns": 0,
+          "title": "兵庫県の灯台一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひようこけんのとうたいいちらん",
+            "wikibase_item": "Q17210215"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

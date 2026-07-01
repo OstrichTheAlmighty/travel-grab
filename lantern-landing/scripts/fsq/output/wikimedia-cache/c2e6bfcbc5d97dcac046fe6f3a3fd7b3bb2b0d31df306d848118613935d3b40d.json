@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:36.305Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 329810,
+          "ns": 0,
+          "title": "関東愛媛県人会",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かんとうえひめけんしんかい",
+            "wikibase_item": "Q11655962"
+          }
+        },
+        {
+          "pageid": 514955,
+          "ns": 0,
+          "title": "アンテナショップ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あんてなしよつふ",
+            "wikibase_item": "Q17173503"
+          },
+          "terms": {
+            "description": [
+              "地域の商品を販売促進する店"
+            ]
+          }
+        },
+        {
+          "pageid": 764614,
+          "ns": 0,
+          "title": "タルト (キャラクター)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たると",
+            "wikibase_item": "Q11316416"
+          },
+          "terms": {
+            "description": [
+              "日本のキャラクター、キャラクター商品シリーズ"
+            ]
+          }
+        },
+        {
+          "pageid": 1015438,
+          "ns": 0,
+          "title": "香川・愛媛せとうち旬彩館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かかわ えひめせとうちしゆんさいかん",
+            "wikibase_item": "Q11667265"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66691667,
+              "lon": 139.75938889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1112179,
+          "ns": 0,
+          "title": "南海放送",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "なんかいほうそう",
+            "page_image_free": "RNB_Hon-machi.jpg",
+            "wikibase_item": "Q843695"
+          },
+          "coordinates": [
+            {
+              "lat": 33.84083333,
+              "lon": 132.75847222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛媛県の日本テレビ系列局、およびJRN・NRN系列ラジオ局"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

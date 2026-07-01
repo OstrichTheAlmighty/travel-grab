@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:30.412Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 2344510,
+          "ns": 0,
+          "title": "FEMM (duo)",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "FEMM_at_J-Pop_Summit_2015.jpg",
+            "wikibase-shortdesc": "Japanese electronic dance music duo",
+            "wikibase_item": "Q18682962"
+          },
+          "terms": {
+            "description": [
+              "Japanese electronic dance music duo"
+            ]
+          }
+        },
+        {
+          "pageid": 28222625,
+          "ns": 0,
+          "title": "Sega",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Osaki_Garden_Tower.jpg",
+            "toc": "",
+            "wikibase-badge-Q17437796": "",
+            "wikibase-shortdesc": "Japanese video game company",
+            "wikibase_item": "Q122741"
+          },
+          "terms": {
+            "description": [
+              "Japanese video game developer and publisher and subsidiary of Sega Sammy Holdings"
+            ]
+          }
+        },
+        {
+          "pageid": 58798706,
+          "ns": 0,
+          "title": "History of Sega",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "SEGA_logo.svg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "History of Japanese video game company",
+            "wikibase_item": "Q60528392"
+          },
+          "terms": {
+            "description": [
+              "historical overview of Sega"
+            ]
+          }
+        },
+        {
+          "pageid": 70060749,
+          "ns": 0,
+          "title": "List of Nintendo DS games (Q–Z)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "List of Nintendo DS games (Q-Z)",
+            "notoc": "",
+            "page_image_free": "Nintendo_Game_Cartridge_Size_Comparison.jpg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q111023722"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 81929451,
+          "ns": 0,
+          "title": "List of GameCenter CX episodes",
+          "index": 2,
+          "pageprops": {
+            "displaytitle": "List of <i>GameCenter CX</i> episodes",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q137739168"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

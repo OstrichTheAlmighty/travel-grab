@@ -1,0 +1,2343 @@
+{
+  "generatedAt": "2026-06-29T07:50:05.662Z",
+  "tierAInputCount": 3200,
+  "pilotLimit": 224,
+  "verifiedWikidataMatches": 9,
+  "probableManualReviewMatches": 0,
+  "rejectedRecords": 213,
+  "unmatchedPlaces": 2,
+  "rejectedFalseMatches": 400,
+  "matchRate": 0.04017857142857143,
+  "englishNameCoverage": 0.22767857142857142,
+  "japaneseNameCoverage": 0.9330357142857143,
+  "descriptionCoverage": 0.04017857142857143,
+  "reusableImageCoverage": 0.026785714285714284,
+  "licenseBreakdown": {
+    "CC BY 2.0": 1,
+    "CC BY-SA 4.0": 2,
+    "CC BY-SA 3.0": 3
+  },
+  "completeImageAttribution": 6,
+  "tokyoCoreCount": 3005,
+  "broaderTokyoCount": 84,
+  "metroExcursionCount": 64,
+  "reserveCount": 47,
+  "top100TokyoCore": [
+    {
+      "rank": 247,
+      "fsqPlaceId": "4d0c8281f393224b19d016ee",
+      "name": "駒沢オリンピック公園総合運動場 体育館",
+      "category": "adventure",
+      "catalog": "tokyo_core",
+      "score": 76.8,
+      "wikidataId": "Q2021485",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 516,
+      "fsqPlaceId": "50021a9fe4b0ed54498a8615",
+      "name": "大田区総合体育館",
+      "category": "adventure",
+      "catalog": "tokyo_core",
+      "score": 74.4,
+      "wikidataId": "Q11437869",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 614,
+      "fsqPlaceId": "5d85bdf0632d6000078098ce",
+      "name": "安室奈美恵の手形",
+      "category": "free",
+      "catalog": "tokyo_core",
+      "score": 71.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 844,
+      "fsqPlaceId": "546fbacc498e7ddb1b6d2432",
+      "name": "東京新宿ベジフル株式会社",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 68.5,
+      "wikidataId": "Q120197359",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 926,
+      "fsqPlaceId": "4b206ec2f964a520363224e3",
+      "name": "両国国技館 (Ryōgoku Kokugikan)",
+      "category": "adventure",
+      "catalog": "tokyo_core",
+      "score": 67.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 927,
+      "fsqPlaceId": "4b599427f964a520568d28e3",
+      "name": "東京体育館 (Tokyo Metropolitan Gymnasium)",
+      "category": "adventure",
+      "catalog": "tokyo_core",
+      "score": 67.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 937,
+      "fsqPlaceId": "5de10cc861260b000799c787",
+      "name": "国立競技場 (National Stadium)",
+      "category": "adventure",
+      "catalog": "tokyo_core",
+      "score": 67.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 939,
+      "fsqPlaceId": "68b02c33a26a651ff44e4a56",
+      "name": "トヨタアリーナ東京 (TOYOTA ARENA TOKYO)",
+      "category": "adventure",
+      "catalog": "tokyo_core",
+      "score": 67.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 942,
+      "fsqPlaceId": "3586047dda294465f3345442",
+      "name": "Answer",
+      "category": "nightlife",
+      "catalog": "tokyo_core",
+      "score": 66.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 950,
+      "fsqPlaceId": "9b4124c952794171cba23125",
+      "name": "CandyCandy",
+      "category": "nightlife",
+      "catalog": "tokyo_core",
+      "score": 66.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 958,
+      "fsqPlaceId": "4fc49c6ce4b0b59cdf274507",
+      "name": "内田青果 下高井戸店(Uchida Seika)",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 65.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 959,
+      "fsqPlaceId": "60681430423ee5595c965d96",
+      "name": "アンテナショップ 三陸SUN",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 65.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 962,
+      "fsqPlaceId": "64ebf5b3dfefd64bcb3c8b22",
+      "name": "一般社団法人LMN",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 65.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 963,
+      "fsqPlaceId": "6561a5858ea2d506d54a5b2b",
+      "name": "海味umi",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 65.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1005,
+      "fsqPlaceId": "67f48becfbe4ec6d23be552d",
+      "name": "ja東京中央farmers market 荻窪",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 65.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1025,
+      "fsqPlaceId": "644e091c23e4f04b412dfd2e",
+      "name": "器ながやFLK",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 64.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1131,
+      "fsqPlaceId": "4b596ca1f964a520e68728e3",
+      "name": "後楽園ホール",
+      "category": "adventure",
+      "catalog": "tokyo_core",
+      "score": 64.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1133,
+      "fsqPlaceId": "4b776288f964a520d7962ee3",
+      "name": "中村南スポーツ交流センター",
+      "category": "adventure",
+      "catalog": "tokyo_core",
+      "score": 64.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1155,
+      "fsqPlaceId": "5d059eff4a7aae002cbbfc05",
+      "name": "海の森水上競技場",
+      "category": "adventure",
+      "catalog": "tokyo_core",
+      "score": 64.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1162,
+      "fsqPlaceId": "6300cd3c67061342e7943d87",
+      "name": "サブアリーナ",
+      "category": "adventure",
+      "catalog": "tokyo_core",
+      "score": 64.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1163,
+      "fsqPlaceId": "6300d183ed81271c3eaa253f",
+      "name": "メインアリーナ",
+      "category": "adventure",
+      "catalog": "tokyo_core",
+      "score": 64.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1164,
+      "fsqPlaceId": "67affc5f1709b64c4fb941fb",
+      "name": "TOKYO SQUARE in Itabashi",
+      "category": "adventure",
+      "catalog": "tokyo_core",
+      "score": 64.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1167,
+      "fsqPlaceId": "6907ef9ff3acdc110b024410",
+      "name": "足立区鹿浜地域体育館",
+      "category": "adventure",
+      "catalog": "tokyo_core",
+      "score": 64.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1170,
+      "fsqPlaceId": "69c66744c6404910a0648e07",
+      "name": "Mufg Stadium Liminal Suite",
+      "category": "adventure",
+      "catalog": "tokyo_core",
+      "score": 64.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1340,
+      "fsqPlaceId": "4e8facc2b8039b45579c78bf",
+      "name": "くりのないとう",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1341,
+      "fsqPlaceId": "4eaa0c612c5b5d71e6a3e646",
+      "name": "さかなや魚真",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1342,
+      "fsqPlaceId": "4ed05a70e3007feb7d759040",
+      "name": "丸福水産 築地販売所",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1343,
+      "fsqPlaceId": "4ed07f8a0cd62a61dd1aa58e",
+      "name": "越中屋 立石店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1344,
+      "fsqPlaceId": "4ed83c9d7bebc294549429ab",
+      "name": "ベジフルタチバナ",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1345,
+      "fsqPlaceId": "4edb2061f9abeea3da904f13",
+      "name": "世田谷青空市",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1346,
+      "fsqPlaceId": "4ee6f97561aff5a344262c1a",
+      "name": "Veggy Marche",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1347,
+      "fsqPlaceId": "4eed6034be7b6d620084ae83",
+      "name": "Fresh Land Vegi Full",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1348,
+      "fsqPlaceId": "4efd1326f790570bcf85802b",
+      "name": "鰹節 松村",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1349,
+      "fsqPlaceId": "4f08183ee4b0a2229a79b6c5",
+      "name": "イグチフルーツ",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1350,
+      "fsqPlaceId": "4f2ff8f6e4b05a84da7d8e5a",
+      "name": "ベジタブルファーム",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1351,
+      "fsqPlaceId": "4f42df83e4b06bcb6c228d37",
+      "name": "市場専門卸 いそっぷ",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1352,
+      "fsqPlaceId": "4f49fe0dd5fb493bfa3ef4d1",
+      "name": "文化堂 阿佐ヶ谷店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1353,
+      "fsqPlaceId": "4f53173be4b0754d585d65c1",
+      "name": "マルシン青果",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1354,
+      "fsqPlaceId": "4f62d2f9121d20ef391c0459",
+      "name": "神楽坂野菜計画",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1355,
+      "fsqPlaceId": "4f6841e6e4b05e22651c5e02",
+      "name": "グリーンファーム",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1356,
+      "fsqPlaceId": "4f854526e4b0cd08a470a0a5",
+      "name": "九州屋 学大市場店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1357,
+      "fsqPlaceId": "4f87ec6de4b0ab5c8679903b",
+      "name": "山六ひもの店 東京学大駅中店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1358,
+      "fsqPlaceId": "4f915bfae4b042e662208bb6",
+      "name": "膳場青果店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1359,
+      "fsqPlaceId": "4f9397f4e4b04d6ccbdbfac4",
+      "name": "JA東京あおば石神井ファーマーズセンター",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1360,
+      "fsqPlaceId": "4f9cdb41e4b02343c8d0e5a4",
+      "name": "房州おんだら市場",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1361,
+      "fsqPlaceId": "4fba05d1e4b06ef132b5255e",
+      "name": "千葉県産農産物直販組合11号店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1362,
+      "fsqPlaceId": "4fd0118ee4b0ebc0f2c43351",
+      "name": "とれたて村",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1363,
+      "fsqPlaceId": "4fd622de771670eb02e2e83b",
+      "name": "ハヤシフルーツ (林フルーツ) 蒲田店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1364,
+      "fsqPlaceId": "4fd625a7771670eb02e34f76",
+      "name": "ハヤシフルーツ (林フルーツ) 新小岩店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1365,
+      "fsqPlaceId": "4fd638d6771670eb02e5bf8c",
+      "name": "澤光青果 (さわみつ青果) 大井町店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1366,
+      "fsqPlaceId": "4fd84ebae4b0173fc1c23bd7",
+      "name": "淡路町マルシェ",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1367,
+      "fsqPlaceId": "4fe958e5e4b010a6776a8f8c",
+      "name": "杉並グリーンセンターファームショップあぐり～ん",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1368,
+      "fsqPlaceId": "500b71c4e4b0081296fa29a9",
+      "name": "有山青果 光が丘店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1369,
+      "fsqPlaceId": "500cbcb73950eb29dcd8fd85",
+      "name": "はりまざかマルシェ",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1370,
+      "fsqPlaceId": "5027372ce4b040ed53053a74",
+      "name": "築地フレッシュ丸都",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1371,
+      "fsqPlaceId": "502ca0fbe4b0c5182452fb94",
+      "name": "農's ギャラリー",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1372,
+      "fsqPlaceId": "50377b7ee4b0d834600e73be",
+      "name": "なめがたシティギャラリー とうきょうスカイツリー駅前店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1373,
+      "fsqPlaceId": "50a844d8e4b03f2b08e2d967",
+      "name": "高橋農園 直販所",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1374,
+      "fsqPlaceId": "50a84b60e4b05977ce92e4fd",
+      "name": "下山直売所",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1375,
+      "fsqPlaceId": "50a850eee4b025015c14b208",
+      "name": "杉田農園直売所 朝市くん",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1376,
+      "fsqPlaceId": "50c02dd4e4b0bd5b2f113739",
+      "name": "金剛院ミニ産直朝市",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1377,
+      "fsqPlaceId": "50c2fb76e4b0e0fa3426eb5b",
+      "name": "一功 小田急新宿店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1378,
+      "fsqPlaceId": "50c3e2a644a0471d43530766",
+      "name": "魚壮ストアー",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1379,
+      "fsqPlaceId": "50d02058e4b019c8131e9659",
+      "name": "浜屋食品 本店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1380,
+      "fsqPlaceId": "50de9a1be4b09e22ee2feb6c",
+      "name": "のんちゃんの店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1381,
+      "fsqPlaceId": "50ed21c5e4b0f4e81b4f383a",
+      "name": "鮮魚 山長",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1382,
+      "fsqPlaceId": "51035e02e4b0059cd85f89bf",
+      "name": "利根川食品",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1383,
+      "fsqPlaceId": "51047e12e4b0cc17c8824b71",
+      "name": "ファームドゥ 農家の野菜 蓮根駅前店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1384,
+      "fsqPlaceId": "51187e64e4b051a090d95e37",
+      "name": "地産マルシェ 小滝橋店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1385,
+      "fsqPlaceId": "513467f9ebca9aa8e7c59082",
+      "name": "おき水産物",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1386,
+      "fsqPlaceId": "52034bb1498efb80edd96676",
+      "name": "川上精肉店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1387,
+      "fsqPlaceId": "522c2de811d2036be19808c9",
+      "name": "魚壮 東十条店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1388,
+      "fsqPlaceId": "526c8cc611d2e3c4437f48f6",
+      "name": "青果江戸屋 萩中店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1389,
+      "fsqPlaceId": "53098df911d2ee2ffd932364",
+      "name": "魚耕光が丘店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1390,
+      "fsqPlaceId": "5326c805498e6d82aae0026a",
+      "name": "魚壮 (田端銀座)",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1391,
+      "fsqPlaceId": "536b103e498e227e65aa992a",
+      "name": "鳥越うおよね",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1392,
+      "fsqPlaceId": "539163d3498ed1bfbbce098e",
+      "name": "地産マルシェ",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1393,
+      "fsqPlaceId": "53d619ff498efde7e4afdc39",
+      "name": "菜果 麻布十番店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1394,
+      "fsqPlaceId": "5440891a498e713d54e342d6",
+      "name": "FRUIT SHOP Kanno",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1396,
+      "fsqPlaceId": "5539a749498e935d05e582b5",
+      "name": "つきじ喜代村 まぐろ2号店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1397,
+      "fsqPlaceId": "581bab8dd7954f017193d6e5",
+      "name": "辰巳屋魚店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1398,
+      "fsqPlaceId": "59607d89018cbb53abf53ff8",
+      "name": "産直市場 ペロスケ赤塚店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1399,
+      "fsqPlaceId": "59b22e8c16fa04346f37f595",
+      "name": "りんごの自動販売機",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1400,
+      "fsqPlaceId": "59ba569eda5ede2141ebf1f4",
+      "name": "魚力グランエミオ大泉学園店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1401,
+      "fsqPlaceId": "59def6905a2c912c62620cfd",
+      "name": "グリーングルメ",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1402,
+      "fsqPlaceId": "5a54c4fd89e490304781dd4b",
+      "name": "朝採れ野菜直売所",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1404,
+      "fsqPlaceId": "5b3710d3fc9e94002ca599ff",
+      "name": "山田米穀店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1405,
+      "fsqPlaceId": "5bb87c832b9844002c7c7e0a",
+      "name": "三崎まぐろ金印",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1407,
+      "fsqPlaceId": "5cc53a99e47b46002c5c73a1",
+      "name": "お魚の店 池田屋",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1408,
+      "fsqPlaceId": "5cee10d23731ee002c692e84",
+      "name": "Tonboya",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1409,
+      "fsqPlaceId": "5d1c90a1e3245200231751f7",
+      "name": "Keio Kitchen",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1410,
+      "fsqPlaceId": "5d808c72f839d20008280987",
+      "name": "水産加工パッケージ棟",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1411,
+      "fsqPlaceId": "5d8afac31d360a000787edfb",
+      "name": "光成 大久保市場",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1412,
+      "fsqPlaceId": "5d92c98f7932c000081a6596",
+      "name": "加藤ファミリー農園 農産物直売所",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1413,
+      "fsqPlaceId": "5e17f5693c3155000841f775",
+      "name": "鮮魚 三友シーフーズ",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 1414,
+      "fsqPlaceId": "5e7f18f2850ac200079b7830",
+      "name": "鮮魚精肉 ぼてふりの四文屋 阿佐ヶ谷北口",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1415,
+      "fsqPlaceId": "5e97ca230944ff0008dc6a8c",
+      "name": "青山 魚仙",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1416,
+      "fsqPlaceId": "5e9ff82bbfc62100087086d2",
+      "name": "池袋 魚卯",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1417,
+      "fsqPlaceId": "5f1a45c60954116ceed3c1b3",
+      "name": "築地わたなべ",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1418,
+      "fsqPlaceId": "5f38a0cb886d3b7de7698043",
+      "name": "小さな築地 舟藤",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.9,
+      "matchStatus": "rejected"
+    }
+  ],
+  "top30MetroExcursions": [
+    {
+      "rank": 1,
+      "fsqPlaceId": "4b56ee34f964a520a51f28e3",
+      "name": "東京ディズニーリゾート (Tokyo Disney Resort)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 88.3,
+      "wikidataId": "Q605492",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 2,
+      "fsqPlaceId": "4b59ebdaf964a52002a128e3",
+      "name": "東京ディズニーランド (Tokyo Disneyland)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 87.4,
+      "wikidataId": "Q843997",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 3,
+      "fsqPlaceId": "4c2bf7fe8abca593441c0120",
+      "name": "東京ディズニーシー (Tokyo DisneySea)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 86.4,
+      "wikidataId": "Q1202341",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 4,
+      "fsqPlaceId": "4b5a9531f964a52078cc28e3",
+      "name": "新横浜ラーメン博物館 (Shin-Yokohama Ramen Museum)",
+      "category": "food",
+      "catalog": "metro_excursion",
+      "score": 76.7,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 5,
+      "fsqPlaceId": "4b7f7843f964a5204e3030e3",
+      "name": "トゥーンタウン (TOONTOWN)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 76.6,
+      "wikidataId": "Q2916668",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 6,
+      "fsqPlaceId": "4c8aefc3a92fa093b86196bf",
+      "name": "ファンタジーランド (Fantasyland)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 75.8,
+      "wikidataId": "Q2441096",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 7,
+      "fsqPlaceId": "4ddd219d52b177ff2e7c3763",
+      "name": "日吉の森 庭園美術館",
+      "category": "culture",
+      "catalog": "metro_excursion",
+      "score": 75.6,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 8,
+      "fsqPlaceId": "4b89d7e6f964a520b85032e3",
+      "name": "フォートレス・エクスプロレーション (Fortress Explorations)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 72.8,
+      "wikidataId": "Q11332978",
+      "matchStatus": "verified"
+    },
+    {
+      "rank": 9,
+      "fsqPlaceId": "4e630c71ae60e9edf6077c94",
+      "name": "ピクニックエリア (Picnic Area)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 70.7,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 10,
+      "fsqPlaceId": "4b64f016f964a5200adb2ae3",
+      "name": "夢見ヶ崎動物公園",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 68.1,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 11,
+      "fsqPlaceId": "4f5c0be1e4b086681badb020",
+      "name": "ひでくんちのいちご畑",
+      "category": "food",
+      "catalog": "metro_excursion",
+      "score": 67,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 12,
+      "fsqPlaceId": "4bd37f0ccaff95210619d5f0",
+      "name": "メインエントランス (Main Entrance)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 66.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 13,
+      "fsqPlaceId": "4bf0f2676f8aa5935166c23c",
+      "name": "ブローフィッシュ・バルーンレース (Blowfish Balloon Race)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 66.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 14,
+      "fsqPlaceId": "4c2c4ce677cfe21effdab5f1",
+      "name": "ウォーターフロントパーク ( Waterfront Park)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 66.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 15,
+      "fsqPlaceId": "4c70a441b5a5236a8b235152",
+      "name": "ジャンピン・ジェリーフィッシュ (Jumpim' Jellyfish)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 66.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 16,
+      "fsqPlaceId": "4c8adc701eafb1f7b2877e35",
+      "name": "トゥモローランド (Tomorrow Land)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 66.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 17,
+      "fsqPlaceId": "6636fbb5637c5c1fae105ad2",
+      "name": "ファンタジースプリングス (Fantasy Springs)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 66.5,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 18,
+      "fsqPlaceId": "4b7f3b13f964a520ed2030e3",
+      "name": "トムソーヤ島 (Tom Sawyer Island)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 19,
+      "fsqPlaceId": "4b89cc57f964a520da4d32e3",
+      "name": "チップとデールのツリーハウス (Chip'n Dale's  Treehouse)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 20,
+      "fsqPlaceId": "4b89ceaff964a520f14d32e3",
+      "name": "トゥーンパーク (Toon Park)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 21,
+      "fsqPlaceId": "4b89e025f964a5202f5332e3",
+      "name": "アリエルのグリーティンググロット (Ariel's Greeting Grotto)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 22,
+      "fsqPlaceId": "4c0336ca39d476b00ce42fa7",
+      "name": "ウエスタンランド (Westernland)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 23,
+      "fsqPlaceId": "4c96a37d72dd224b6335ae91",
+      "name": "ビリエッテリーア (Biglietteria)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 24,
+      "fsqPlaceId": "4cc4dedfbe40a35d6556814c",
+      "name": "トゥモローランド・ホール (Tomorrowland Hall)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 25,
+      "fsqPlaceId": "4cc4ef291e596dcb4e04d567",
+      "name": "インジャンジョーの洞窟（Injun Joe's Cave）",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 26,
+      "fsqPlaceId": "4cc79f868c5b236aeeb6fa6d",
+      "name": "カメラセンター (CAMERA CENTER)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 27,
+      "fsqPlaceId": "4d0dbfbf95c1a1cdee3204ff",
+      "name": "サルードス・アミーゴス！(\"Saludos Amigos!\" Greeting Dock)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 28,
+      "fsqPlaceId": "4d74290afe1b721e8938aa1f",
+      "name": "チケットブース (Ticketing Booth)",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 65,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 29,
+      "fsqPlaceId": "661cd18d7ca4316f63858de3",
+      "name": "クワッキーセレブレーション ドナルド・ザ・レジェンド!",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 64.7,
+      "matchStatus": "unmatched"
+    },
+    {
+      "rank": 30,
+      "fsqPlaceId": "53646183498e2cafa287e599",
+      "name": "新横浜公園 第1運動広場",
+      "category": "free",
+      "catalog": "metro_excursion",
+      "score": 63.5,
+      "matchStatus": "unmatched"
+    }
+  ],
+  "top20PerCategory": {
+    "food": [
+      {
+        "rank": 844,
+        "fsqPlaceId": "546fbacc498e7ddb1b6d2432",
+        "name": "東京新宿ベジフル株式会社",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 68.5,
+        "wikidataId": "Q120197359",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 958,
+        "fsqPlaceId": "4fc49c6ce4b0b59cdf274507",
+        "name": "内田青果 下高井戸店(Uchida Seika)",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 65.9,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 959,
+        "fsqPlaceId": "60681430423ee5595c965d96",
+        "name": "アンテナショップ 三陸SUN",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 65.9,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 962,
+        "fsqPlaceId": "64ebf5b3dfefd64bcb3c8b22",
+        "name": "一般社団法人LMN",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 65.9,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 963,
+        "fsqPlaceId": "6561a5858ea2d506d54a5b2b",
+        "name": "海味umi",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 65.9,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1005,
+        "fsqPlaceId": "67f48becfbe4ec6d23be552d",
+        "name": "ja東京中央farmers market 荻窪",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 65.1,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1025,
+        "fsqPlaceId": "644e091c23e4f04b412dfd2e",
+        "name": "器ながやFLK",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 64.7,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1340,
+        "fsqPlaceId": "4e8facc2b8039b45579c78bf",
+        "name": "くりのないとう",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 62.9,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1341,
+        "fsqPlaceId": "4eaa0c612c5b5d71e6a3e646",
+        "name": "さかなや魚真",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 62.9,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1342,
+        "fsqPlaceId": "4ed05a70e3007feb7d759040",
+        "name": "丸福水産 築地販売所",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 62.9,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1343,
+        "fsqPlaceId": "4ed07f8a0cd62a61dd1aa58e",
+        "name": "越中屋 立石店",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 62.9,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1344,
+        "fsqPlaceId": "4ed83c9d7bebc294549429ab",
+        "name": "ベジフルタチバナ",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 62.9,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1345,
+        "fsqPlaceId": "4edb2061f9abeea3da904f13",
+        "name": "世田谷青空市",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 62.9,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1346,
+        "fsqPlaceId": "4ee6f97561aff5a344262c1a",
+        "name": "Veggy Marche",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 62.9,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1347,
+        "fsqPlaceId": "4eed6034be7b6d620084ae83",
+        "name": "Fresh Land Vegi Full",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 62.9,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1348,
+        "fsqPlaceId": "4efd1326f790570bcf85802b",
+        "name": "鰹節 松村",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 62.9,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1349,
+        "fsqPlaceId": "4f08183ee4b0a2229a79b6c5",
+        "name": "イグチフルーツ",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 62.9,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1350,
+        "fsqPlaceId": "4f2ff8f6e4b05a84da7d8e5a",
+        "name": "ベジタブルファーム",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 62.9,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1351,
+        "fsqPlaceId": "4f42df83e4b06bcb6c228d37",
+        "name": "市場専門卸 いそっぷ",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 62.9,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 1352,
+        "fsqPlaceId": "4f49fe0dd5fb493bfa3ef4d1",
+        "name": "文化堂 阿佐ヶ谷店",
+        "category": "food",
+        "catalog": "tokyo_core",
+        "score": 62.9,
+        "matchStatus": "rejected"
+      }
+    ],
+    "adventure": [
+      {
+        "rank": 1,
+        "fsqPlaceId": "4b56ee34f964a520a51f28e3",
+        "name": "東京ディズニーリゾート (Tokyo Disney Resort)",
+        "category": "adventure",
+        "catalog": "metro_excursion",
+        "score": 88.3,
+        "wikidataId": "Q605492",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 2,
+        "fsqPlaceId": "4b59ebdaf964a52002a128e3",
+        "name": "東京ディズニーランド (Tokyo Disneyland)",
+        "category": "adventure",
+        "catalog": "metro_excursion",
+        "score": 87.4,
+        "wikidataId": "Q843997",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 3,
+        "fsqPlaceId": "4c2bf7fe8abca593441c0120",
+        "name": "東京ディズニーシー (Tokyo DisneySea)",
+        "category": "adventure",
+        "catalog": "metro_excursion",
+        "score": 86.4,
+        "wikidataId": "Q1202341",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 247,
+        "fsqPlaceId": "4d0c8281f393224b19d016ee",
+        "name": "駒沢オリンピック公園総合運動場 体育館",
+        "category": "adventure",
+        "catalog": "tokyo_core",
+        "score": 76.8,
+        "wikidataId": "Q2021485",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 5,
+        "fsqPlaceId": "4b7f7843f964a5204e3030e3",
+        "name": "トゥーンタウン (TOONTOWN)",
+        "category": "adventure",
+        "catalog": "metro_excursion",
+        "score": 76.6,
+        "wikidataId": "Q2916668",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 6,
+        "fsqPlaceId": "4c8aefc3a92fa093b86196bf",
+        "name": "ファンタジーランド (Fantasyland)",
+        "category": "adventure",
+        "catalog": "metro_excursion",
+        "score": 75.8,
+        "wikidataId": "Q2441096",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 516,
+        "fsqPlaceId": "50021a9fe4b0ed54498a8615",
+        "name": "大田区総合体育館",
+        "category": "adventure",
+        "catalog": "tokyo_core",
+        "score": 74.4,
+        "wikidataId": "Q11437869",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 8,
+        "fsqPlaceId": "4b89d7e6f964a520b85032e3",
+        "name": "フォートレス・エクスプロレーション (Fortress Explorations)",
+        "category": "adventure",
+        "catalog": "metro_excursion",
+        "score": 72.8,
+        "wikidataId": "Q11332978",
+        "matchStatus": "verified"
+      },
+      {
+        "rank": 926,
+        "fsqPlaceId": "4b206ec2f964a520363224e3",
+        "name": "両国国技館 (Ryōgoku Kokugikan)",
+        "category": "adventure",
+        "catalog": "tokyo_core",
+        "score": 67.1,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 927,
+        "fsqPlaceId": "4b599427f964a520568d28e3",
+        "name": "東京体育館 (Tokyo Metropolitan Gymnasium)",
+        "category": "adventure",
+        "catalog": "tokyo_core",
+        "score": 67.1,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 937,
+        "fsqPlaceId": "5de10cc861260b000799c787",
+        "name": "国立競技場 (National Stadium)",
+        "category": "adventure",
+        "catalog": "tokyo_core",
+        "score": 67.1,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 939,
+        "fsqPlaceId": "68b02c33a26a651ff44e4a56",
+        "name": "トヨタアリーナ東京 (TOYOTA ARENA TOKYO)",
+        "category": "adventure",
+        "catalog": "tokyo_core",
+        "score": 67.1,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 12,
+        "fsqPlaceId": "4bd37f0ccaff95210619d5f0",
+        "name": "メインエントランス (Main Entrance)",
+        "category": "adventure",
+        "catalog": "metro_excursion",
+        "score": 66.5,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 13,
+        "fsqPlaceId": "4bf0f2676f8aa5935166c23c",
+        "name": "ブローフィッシュ・バルーンレース (Blowfish Balloon Race)",
+        "category": "adventure",
+        "catalog": "metro_excursion",
+        "score": 66.5,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 14,
+        "fsqPlaceId": "4c2c4ce677cfe21effdab5f1",
+        "name": "ウォーターフロントパーク ( Waterfront Park)",
+        "category": "adventure",
+        "catalog": "metro_excursion",
+        "score": 66.5,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 15,
+        "fsqPlaceId": "4c70a441b5a5236a8b235152",
+        "name": "ジャンピン・ジェリーフィッシュ (Jumpim' Jellyfish)",
+        "category": "adventure",
+        "catalog": "metro_excursion",
+        "score": 66.5,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 16,
+        "fsqPlaceId": "4c8adc701eafb1f7b2877e35",
+        "name": "トゥモローランド (Tomorrow Land)",
+        "category": "adventure",
+        "catalog": "metro_excursion",
+        "score": 66.5,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 17,
+        "fsqPlaceId": "6636fbb5637c5c1fae105ad2",
+        "name": "ファンタジースプリングス (Fantasy Springs)",
+        "category": "adventure",
+        "catalog": "metro_excursion",
+        "score": 66.5,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 18,
+        "fsqPlaceId": "4b7f3b13f964a520ed2030e3",
+        "name": "トムソーヤ島 (Tom Sawyer Island)",
+        "category": "adventure",
+        "catalog": "metro_excursion",
+        "score": 65,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 19,
+        "fsqPlaceId": "4b89cc57f964a520da4d32e3",
+        "name": "チップとデールのツリーハウス (Chip'n Dale's  Treehouse)",
+        "category": "adventure",
+        "catalog": "metro_excursion",
+        "score": 65,
+        "matchStatus": "rejected"
+      }
+    ],
+    "nightlife": [
+      {
+        "rank": 942,
+        "fsqPlaceId": "3586047dda294465f3345442",
+        "name": "Answer",
+        "category": "nightlife",
+        "catalog": "tokyo_core",
+        "score": 66.7,
+        "matchStatus": "rejected"
+      },
+      {
+        "rank": 950,
+        "fsqPlaceId": "9b4124c952794171cba23125",
+        "name": "CandyCandy",
+        "category": "nightlife",
+        "catalog": "tokyo_core",
+        "score": 66.7,
+        "matchStatus": "rejected"
+      }
+    ],
+    "free": [
+      {
+        "rank": 614,
+        "fsqPlaceId": "5d85bdf0632d6000078098ce",
+        "name": "安室奈美恵の手形",
+        "category": "free",
+        "catalog": "tokyo_core",
+        "score": 71.5,
+        "matchStatus": "rejected"
+      }
+    ]
+  },
+  "lowestRanked50Pilot": [
+    {
+      "rank": 82,
+      "fsqPlaceId": "5ad2f2993ba7671c3e73b06e",
+      "name": "山野球場",
+      "category": "adventure",
+      "catalog": "broader_tokyo",
+      "score": 44.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 2943,
+      "fsqPlaceId": "7a092681f3864ca9eaff7dc8",
+      "name": "魚友商店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 48.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 2942,
+      "fsqPlaceId": "699fcdabd8edf078325ab4cf",
+      "name": "近海対面",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 48.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 2935,
+      "fsqPlaceId": "59adfdde37114761e737c95b",
+      "name": "加藤商店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 48.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 2934,
+      "fsqPlaceId": "4efa7f64b8f72ebeab0a7eb6",
+      "name": "田所食品",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 48.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1674,
+      "fsqPlaceId": "ba5ccb793f174cd61fe22a99",
+      "name": "小山商店鐘ケ淵支店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 60.6,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 43,
+      "fsqPlaceId": "4c628af9e1621b8d5b9c2353",
+      "name": "カールじいさんの空飛ぶ家の像",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 60.9,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1643,
+      "fsqPlaceId": "65f116f003313c40b996228c",
+      "name": "無人直売所",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 61,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 53,
+      "fsqPlaceId": "5231534111d2c74a10d70260",
+      "name": "明治神宮野球場 クラブハウス",
+      "category": "adventure",
+      "catalog": "broader_tokyo",
+      "score": 61,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 52,
+      "fsqPlaceId": "4ebf07246c25dfd981546136",
+      "name": "葛飾シニアグランド",
+      "category": "adventure",
+      "catalog": "broader_tokyo",
+      "score": 61,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1575,
+      "fsqPlaceId": "64eb7f208d2cc32c6b9922ab",
+      "name": "三代目 魚第",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 61.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1574,
+      "fsqPlaceId": "62104f14bb8e8f1882ca0da1",
+      "name": "海産物問屋 築地信濃屋",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 61.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1573,
+      "fsqPlaceId": "5fa4c7c2f952223027ed5834",
+      "name": "魚屋かどはち",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 61.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1572,
+      "fsqPlaceId": "5f5849f8a878b571b2bea374",
+      "name": "旬鮮市場 楓",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 61.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1570,
+      "fsqPlaceId": "5badac9912c8f0002c99d820",
+      "name": "全日食チェーン スーパー田中3丁目店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 61.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1569,
+      "fsqPlaceId": "56d26a05498ec4e1c48de497",
+      "name": "数寄屋フルーツ",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 61.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1568,
+      "fsqPlaceId": "53f6c645498e18360738bfb0",
+      "name": "鳩屋海苔 新店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 61.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1567,
+      "fsqPlaceId": "526f28cf498e4c1ef6432d54",
+      "name": "やお九州 築地場外市場店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 61.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1566,
+      "fsqPlaceId": "51b65705498ea871d29f7453",
+      "name": "沖縄物産 がじゅまる",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 61.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1564,
+      "fsqPlaceId": "4f9d1076e4b065054cbbfcce",
+      "name": "武田青果店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 61.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1563,
+      "fsqPlaceId": "4f39a358e4b0dd1d0df47098",
+      "name": "フルーツショップみのりや",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 61.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1562,
+      "fsqPlaceId": "4ec371fd77c83d76b160d6ad",
+      "name": "べじたがーでん 高田馬場店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 61.7,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 42,
+      "fsqPlaceId": "4cd149903e63721e1caaa2cc",
+      "name": "ディズニーマジック・イン・ザ・スカイ",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 62,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 41,
+      "fsqPlaceId": "4cbad9749552b60cc78adc8b",
+      "name": "アメリカンウォーターフロント",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 62,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 40,
+      "fsqPlaceId": "4bf7d7f3508c0f47400e3e31",
+      "name": "ゲストリレーション",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 62,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 39,
+      "fsqPlaceId": "4b6d25c7f964a520d7682ce3",
+      "name": "プラザパビリオン・バンドスタンド",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 62,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 38,
+      "fsqPlaceId": "4b63cd67f964a52041922ae3",
+      "name": "キャッスル・フォアコート",
+      "category": "adventure",
+      "catalog": "metro_excursion",
+      "score": 62,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1528,
+      "fsqPlaceId": "6974681c315c457e8601aaf5",
+      "name": "つくだに鮒藤",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1527,
+      "fsqPlaceId": "6969a82052a49f08a3649b27",
+      "name": "世田谷のボロ市",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1526,
+      "fsqPlaceId": "6944b2d00247e137d0e6daab",
+      "name": "浅草寺 歳の市",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1525,
+      "fsqPlaceId": "691dae469733aa715d3ca32d",
+      "name": "東京クリスマスアドベント",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1524,
+      "fsqPlaceId": "68cf55c54c2c856909623d4c",
+      "name": "島田果樹園",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1523,
+      "fsqPlaceId": "6885ba2f73562b11ad4a4ead",
+      "name": "亀戸ぎょうざ",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1522,
+      "fsqPlaceId": "685a3f75284edb206d6c4304",
+      "name": "麻布台やまゆき鮮魚店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1521,
+      "fsqPlaceId": "6845026e6b9b42591a5042d4",
+      "name": "ブルーベリーファーム東京",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1520,
+      "fsqPlaceId": "682971225ce381726fe55b6d",
+      "name": "ふれあい農園",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1519,
+      "fsqPlaceId": "6781f5f4848c3a015b4eeb6f",
+      "name": "野菜無人販売",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1518,
+      "fsqPlaceId": "67024d321b0a6e373aeeb531",
+      "name": "生鮮大関屋 鮮魚",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1517,
+      "fsqPlaceId": "65bdbd4e66f7e5534c874aa0",
+      "name": "大田市場　西通り",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1516,
+      "fsqPlaceId": "65bdb23866f7e5534c68e71c",
+      "name": "大田市場　東通り",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1515,
+      "fsqPlaceId": "6545bbd3fb649c5923fee204",
+      "name": "もったいないマルシェ",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1514,
+      "fsqPlaceId": "64c627df95feb8069451ddfa",
+      "name": "アグリの森直売所",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1513,
+      "fsqPlaceId": "6401c165e5297b40aaa92a76",
+      "name": "吉川水産 日本橋三越本店",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1512,
+      "fsqPlaceId": "63ffc35acb9dd308b68c1a32",
+      "name": "Lumine Agri Shop",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1511,
+      "fsqPlaceId": "63db609d13dce4083bd6e372",
+      "name": "ともちゃんの畑",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1510,
+      "fsqPlaceId": "62e742f42a3f3a7ebff32c49",
+      "name": "kanaloa",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1509,
+      "fsqPlaceId": "62a9569ec5648277aa04486e",
+      "name": "無人野菜直売所",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1508,
+      "fsqPlaceId": "62a3f1f1f3364008c3172a22",
+      "name": "米彦@海幸橋",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1507,
+      "fsqPlaceId": "6292d919c5552d7373e90906",
+      "name": "橋本農園直売所",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    },
+    {
+      "rank": 1506,
+      "fsqPlaceId": "603b17417fcc512a2134e919",
+      "name": "佐久間農園",
+      "category": "food",
+      "catalog": "tokyo_core",
+      "score": 62.1,
+      "matchStatus": "rejected"
+    }
+  ],
+  "benchmarkStatuses": [
+    {
+      "name": "Sensō-ji",
+      "status": "not_selected",
+      "fsqPlaceId": "4b0587a1f964a5207f9d22e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Meiji Jingū",
+      "status": "not_selected",
+      "fsqPlaceId": "4b5bd0a2f964a520c31729e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Tokyo Skytree",
+      "status": "not_selected",
+      "fsqPlaceId": "4b569977f964a520551628e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Tokyo Tower",
+      "status": "not_selected",
+      "fsqPlaceId": "4b56a5e8f964a5208e1728e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Shibuya Crossing",
+      "status": "not_selected",
+      "fsqPlaceId": "4b654f7df964a520beec2ae3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Imperial Palace",
+      "status": "not_selected",
+      "fsqPlaceId": "4b566b84f964a5209e0f28e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Ueno Park",
+      "status": "not_selected",
+      "fsqPlaceId": "4b0587a1f964a5209b9d22e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Tokyo National Museum",
+      "status": "not_selected",
+      "fsqPlaceId": "4b556c7ef964a520f5e327e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "teamLab Planets",
+      "status": "not_selected",
+      "fsqPlaceId": "5b3306103731ee002c2b3e78",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Tsukiji Outer Market",
+      "status": "not_selected",
+      "fsqPlaceId": "4b57cb7cf964a5208b4128e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Shinjuku Gyoen",
+      "status": "not_selected",
+      "fsqPlaceId": "4b5ff761f964a520f1d129e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Akihabara",
+      "status": "not_selected",
+      "fsqPlaceId": "4b5a80a4f964a52078c828e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Harajuku",
+      "status": "not_selected",
+      "fsqPlaceId": "4e5f5340b0fb27e2bd450341",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Odaiba",
+      "status": "not_selected",
+      "fsqPlaceId": "4f9df5d1e4b033dc2c12dd47",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Ghibli Museum",
+      "status": "not_selected",
+      "fsqPlaceId": "4b56ac4ff964a5202e1828e3",
+      "diagnosticReasons": [
+        "not_selected"
+      ]
+    },
+    {
+      "name": "Tokyo Disneyland",
+      "status": "verified",
+      "fsqPlaceId": "4b59ebdaf964a52002a128e3",
+      "wikidataId": "Q843997",
+      "diagnosticReasons": []
+    },
+    {
+      "name": "Tokyo DisneySea",
+      "status": "verified",
+      "fsqPlaceId": "4c2bf7fe8abca593441c0120",
+      "wikidataId": "Q1202341",
+      "diagnosticReasons": []
+    }
+  ],
+  "matchRatesByEligibility": {
+    "high_wikimedia_likelihood": {
+      "selected": 224,
+      "verified": 9,
+      "probableManualReview": 0,
+      "verifiedRate": 0.04017857142857143
+    },
+    "medium_wikimedia_likelihood": {
+      "selected": 0,
+      "verified": 0,
+      "probableManualReview": 0,
+      "verifiedRate": 0
+    },
+    "low_wikimedia_likelihood": {
+      "selected": 0,
+      "verified": 0,
+      "probableManualReview": 0,
+      "verifiedRate": 0
+    },
+    "not_expected_to_have_wikimedia_entity": {
+      "selected": 0,
+      "verified": 0,
+      "probableManualReview": 0,
+      "verifiedRate": 0
+    }
+  },
+  "targetResults": {
+    "highLikelihoodAtLeast60Percent": false,
+    "mediumLikelihoodAtLeast30Percent": false,
+    "zeroKnownFalseAutomaticMatches": true,
+    "completeImageLicensingAndAttribution": true
+  },
+  "selectionStrata": {
+    "eligibility_high_batch_006": 224
+  },
+  "knownCurationCorrections": [
+    {
+      "fsqPlaceId": "4b80a4c6f964a520218330e3",
+      "name": "都電おもいで広場",
+      "originalCategory": "culture",
+      "correctedCategory": "culture",
+      "catalogClassification": "tokyo_core",
+      "reasons": [
+        "verified_small_transport_museum_retained_as_culture",
+        "catalog:tokyo_core"
+      ]
+    },
+    {
+      "fsqPlaceId": "4bde825dffdec92874e3e8a1",
+      "name": "九品仏広場",
+      "originalCategory": "free",
+      "correctedCategory": "free",
+      "catalogClassification": "reserve",
+      "reasons": [
+        "manual_qa_minor_or_ambiguous_facility",
+        "municipal_plaza_playground_moved_to_reserve",
+        "catalog:reserve"
+      ]
+    },
+    {
+      "fsqPlaceId": "50790c96e4b0bf54e138f834",
+      "name": "ふれあい動物広場",
+      "originalCategory": "free",
+      "correctedCategory": "adventure",
+      "catalogClassification": "tokyo_core",
+      "reasons": [
+        "category_corrected:free->adventure",
+        "family_zoo_exhibit_reclassified_as_adventure",
+        "catalog:tokyo_core"
+      ]
+    },
+    {
+      "fsqPlaceId": "50aea3d9e4b034c5d70d4a8a",
+      "name": "野外展示場",
+      "originalCategory": "nature",
+      "correctedCategory": "culture",
+      "catalogClassification": "reserve",
+      "reasons": [
+        "category_corrected:nature->culture",
+        "manual_qa_minor_or_ambiguous_facility",
+        "generic_subordinate_sculpture_exhibit_moved_to_reserve",
+        "catalog:reserve"
+      ]
+    },
+    {
+      "fsqPlaceId": "6235cc4adcbe6c01a0bdc7f8",
+      "name": "IKEBUKURO THEATER〔CG STAR LIVE〕",
+      "originalCategory": "food",
+      "correctedCategory": "adventure",
+      "catalogClassification": "tokyo_core",
+      "reasons": [
+        "category_corrected:food->adventure",
+        "verified_vr_entertainment_attraction_not_food",
+        "catalog:tokyo_core"
+      ]
+    },
+    {
+      "fsqPlaceId": "4b0587a4f964a520f89d22e3",
+      "name": "大谷美術館",
+      "originalCategory": "culture",
+      "correctedCategory": "culture",
+      "catalogClassification": "tokyo_core",
+      "reasons": [
+        "verified_art_museum_retained_as_culture",
+        "catalog:tokyo_core"
+      ]
+    }
+  ],
+  "apiRequestsMade": 1144,
+  "cacheHits": 21,
+  "failures": 12,
+  "retries": 31,
+  "runtimeMs": 355344,
+  "estimatedExternalDataCostUsd": 0,
+  "acceptanceGates": {
+    "genuineSourceEntitiesOnly": true,
+    "benchmarksCorrectOrClearlyDiagnosed": true,
+    "zeroKnownFalseMatches": true,
+    "benchmarkNeutralDisplayRank": true,
+    "imagesHaveLicenseAndAttribution": true,
+    "noSupabaseWrites": true,
+    "noPaidDatasets": true,
+    "coreAndMetroSeparated": true,
+    "theaterCategoryCorrected": true
+  },
+  "acceptancePassed": true,
+  "noSupabaseWrites": true,
+  "batchMetadata": {
+    "city": "tokyo",
+    "executionMode": "eligibility_batch",
+    "eligibility": "high_wikimedia_likelihood",
+    "totalCuratedRecords": 3200,
+    "totalEligibleRecords": 1474,
+    "duplicateFsqIdsRemoved": 0,
+    "batch": 6,
+    "batchSize": 250,
+    "startIndex": 1250,
+    "endIndexInclusive": 1473,
+    "selectedRecordCount": 224,
+    "persistentCacheEnabled": true
+  }
+}

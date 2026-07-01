@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:12.268Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3616761,
+          "ns": 0,
+          "title": "Honbasho",
+          "index": 3,
+          "pageprops": {
+            "displaytitle": "<span title=\"Japanese-language text\"><i lang=\"ja-Latn\">Honbasho</i></span>",
+            "page_image_free": "Sumo_Emperor_Cup.JPG",
+            "wikibase-shortdesc": "Official sumo tournament",
+            "wikibase_item": "Q835803"
+          },
+          "terms": {
+            "description": [
+              "official professional sumo tournament"
+            ]
+          }
+        },
+        {
+          "pageid": 6995089,
+          "ns": 0,
+          "title": "Ryōgoku Kokugikan",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Ryogoku Kokugikan",
+            "kartographer_frames": "2",
+            "wikibase-shortdesc": "Arena in Tokyo",
+            "wikibase_item": "Q176821"
+          },
+          "terms": {
+            "description": [
+              "sumo indoor arena located in Sumida-ku, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 7782620,
+          "ns": 0,
+          "title": "Ryōgoku",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Ryogoku",
+            "page_image_free": "Ryoogoku.jpg",
+            "wikibase-shortdesc": "District in Sumida, Tokyo",
+            "wikibase_item": "Q3083463"
+          },
+          "coordinates": [
+            {
+              "lat": 35.694833,
+              "lon": 139.794052,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "town located in Sumida-ku, Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 7785289,
+          "ns": 0,
+          "title": "Ryōgoku Station",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Ryogoku Station",
+            "page_image_free": "JR兩國站20170529.jpg",
+            "wikibase-shortdesc": "Railway and metro station in Tokyo, Japan",
+            "wikibase_item": "Q801389"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69573889,
+              "lon": 139.79395556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "railway station and metro station in Sumida, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 81903604,
+          "ns": 0,
+          "title": "2026 in sumo",
+          "index": 5,
+          "pageprops": {
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q137546178"
+          },
+          "terms": {
+            "description": [
+              "overview of sumo-related events during the year of 2026"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

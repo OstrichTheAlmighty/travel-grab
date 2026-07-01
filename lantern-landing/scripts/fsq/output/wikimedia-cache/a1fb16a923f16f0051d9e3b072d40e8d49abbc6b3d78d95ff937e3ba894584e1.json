@@ -1,0 +1,188 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:47.574Z",
+  "value": {
+    "searchinfo": {
+      "search": "Fantasyland"
+    },
+    "search": [
+      {
+        "id": "Q49970948",
+        "title": "Q49970948",
+        "pageid": 50970783,
+        "concepturi": "http://www.wikidata.org/entity/Q49970948",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q49970948",
+        "display": {
+          "label": {
+            "value": "Fantasyland",
+            "language": "en"
+          },
+          "description": {
+            "value": "part of Disneyland Park in Disneyland Paris",
+            "language": "en"
+          }
+        },
+        "label": "Fantasyland",
+        "description": "part of Disneyland Park in Disneyland Paris",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Fantasyland"
+        }
+      },
+      {
+        "id": "Q122373971",
+        "title": "Q122373971",
+        "pageid": 116688675,
+        "concepturi": "http://www.wikidata.org/entity/Q122373971",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q122373971",
+        "display": {
+          "label": {
+            "value": "Fantasyland",
+            "language": "en"
+          },
+          "description": {
+            "value": "2018 video game",
+            "language": "en"
+          }
+        },
+        "label": "Fantasyland",
+        "description": "2018 video game",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Fantasyland"
+        }
+      },
+      {
+        "id": "Q2441096",
+        "title": "Q2441096",
+        "pageid": 2357850,
+        "concepturi": "http://www.wikidata.org/entity/Q2441096",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2441096",
+        "display": {
+          "label": {
+            "value": "Fantasyland",
+            "language": "en"
+          },
+          "description": {
+            "value": "themed land at Disney theme parks",
+            "language": "en"
+          }
+        },
+        "label": "Fantasyland",
+        "description": "themed land at Disney theme parks",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Fantasyland"
+        }
+      },
+      {
+        "id": "Q49969740",
+        "title": "Q49969740",
+        "pageid": 50969578,
+        "concepturi": "http://www.wikidata.org/entity/Q49969740",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q49969740",
+        "display": {
+          "label": {
+            "value": "Fantasyland",
+            "language": "en"
+          },
+          "description": {
+            "value": "part of Magic Kingdom, Florida",
+            "language": "en"
+          }
+        },
+        "label": "Fantasyland",
+        "description": "part of Magic Kingdom, Florida",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Fantasyland"
+        }
+      },
+      {
+        "id": "Q49967255",
+        "title": "Q49967255",
+        "pageid": 50967154,
+        "concepturi": "http://www.wikidata.org/entity/Q49967255",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q49967255",
+        "display": {
+          "label": {
+            "value": "Fantasyland",
+            "language": "en"
+          },
+          "description": {
+            "value": "part of Disneyland Park, Anaheim",
+            "language": "en"
+          }
+        },
+        "label": "Fantasyland",
+        "description": "part of Disneyland Park, Anaheim",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Fantasyland"
+        }
+      },
+      {
+        "id": "Q49971339",
+        "title": "Q49971339",
+        "pageid": 50971169,
+        "concepturi": "http://www.wikidata.org/entity/Q49971339",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q49971339",
+        "display": {
+          "label": {
+            "value": "Fantasyland",
+            "language": "en"
+          },
+          "description": {
+            "value": "part of Hong Kong Disneyland",
+            "language": "en"
+          }
+        },
+        "label": "Fantasyland",
+        "description": "part of Hong Kong Disneyland",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Fantasyland"
+        }
+      },
+      {
+        "id": "Q49970784",
+        "title": "Q49970784",
+        "pageid": 50970620,
+        "concepturi": "http://www.wikidata.org/entity/Q49970784",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q49970784",
+        "display": {
+          "label": {
+            "value": "Fantasyland",
+            "language": "en"
+          },
+          "description": {
+            "value": "part of Tokyo Disneyland, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Fantasyland",
+        "description": "part of Tokyo Disneyland, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Fantasyland"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

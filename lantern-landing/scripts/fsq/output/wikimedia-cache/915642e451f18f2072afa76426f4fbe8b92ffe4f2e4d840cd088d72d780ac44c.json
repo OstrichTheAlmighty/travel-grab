@@ -1,0 +1,87 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:36.614Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 257546,
+          "ns": 0,
+          "title": "メセナ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "めせな",
+            "wikibase_item": "Q214092"
+          },
+          "terms": {
+            "description": [
+              "企業などによる文化支援活動"
+            ]
+          }
+        },
+        {
+          "pageid": 627451,
+          "ns": 0,
+          "title": "鈴木正和 (声優)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すすき まさかす",
+            "wikibase_item": "Q11648972"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 2101361,
+          "ns": 0,
+          "title": "前島貴志",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "まえしま たかし",
+            "wikibase_item": "Q11397131"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 2300493,
+          "ns": 0,
+          "title": "ぶらぶら美術・博物館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふらふらひしゆつはくふつかん",
+            "wikibase_item": "Q11277457"
+          },
+          "terms": {
+            "description": [
+              "日本の教養バラエティ番組(2010-2023)"
+            ]
+          }
+        },
+        {
+          "pageid": 3886794,
+          "ns": 0,
+          "title": "聖母子と聖カテリナと羊飼い",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "せいほしとせいかてりなとひつしかい",
+            "page_image_free": "Tizian-Madonna_mit_dem_Kaninchen.jpg",
+            "wikibase_item": "Q24249"
+          },
+          "terms": {
+            "description": [
+              "ティツィアーノ・ヴェチェッリオによる絵画 (1530頃)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

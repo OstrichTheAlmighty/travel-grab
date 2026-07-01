@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:08.250Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 193595,
+          "ns": 0,
+          "title": "Level crossing",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Level_crossing_-_geograph.org.uk_-_4653552.jpg",
+            "wikibase-shortdesc": "Intersection where a road crosses a railway at the same level",
+            "wikibase_item": "Q171448"
+          },
+          "terms": {
+            "description": [
+              "place where a road crosses a railway at the same level"
+            ]
+          }
+        },
+        {
+          "pageid": 1294917,
+          "ns": 0,
+          "title": "Tongariro Alpine Crossing",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "wikibase-shortdesc": "Tramping track in New Zealand",
+            "wikibase_item": "Q2441670"
+          },
+          "terms": {
+            "description": [
+              "tramping track in New Zealand"
+            ]
+          }
+        },
+        {
+          "pageid": 11977307,
+          "ns": 0,
+          "title": "Napoleon Crossing the Alps",
+          "index": 4,
+          "pageprops": {
+            "displaytitle": "<i>Napoleon Crossing the Alps</i>",
+            "page_image_free": "David_-_Napoleon_crossing_the_Alps_-_Malmaison2.jpg",
+            "wikibase-shortdesc": "Series of paintings by Jacques-Louis David",
+            "wikibase_item": "Q59201"
+          },
+          "terms": {
+            "description": [
+              "series of paintings by Jacques-Louis David in 5 versions"
+            ]
+          }
+        },
+        {
+          "pageid": 14691686,
+          "ns": 0,
+          "title": "Power line crossings in Poland",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Power Line Crossings In Poland",
+            "page_image_free": "Vistula_In_Lomianki.jpg",
+            "wikibase_item": "Q7236528"
+          }
+        },
+        {
+          "pageid": 55705291,
+          "ns": 0,
+          "title": "Adàwe Crossing",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Adàwe_Crossing,_art_work_entitled_\"A_View_from_Two_Sides\".jpg",
+            "wikibase-shortdesc": "Canadian bridge across the Rideau River in Ottawa",
+            "wikibase_item": "Q48796246"
+          },
+          "coordinates": [
+            {
+              "lat": 45.42633333,
+              "lon": -75.67016667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Canadian bridge across the Rideau River in Ottawa"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

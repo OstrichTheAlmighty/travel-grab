@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:08.301Z",
+  "value": {
+    "searchinfo": {
+      "search": "したまちミュージアム"
+    },
+    "search": [
+      {
+        "id": "Q3915464",
+        "title": "Q3915464",
+        "pageid": 3735260,
+        "concepturi": "http://www.wikidata.org/entity/Q3915464",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3915464",
+        "display": {
+          "label": {
+            "value": "Shitamachi Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Shitamachi Museum",
+        "description": "museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "したまちミュージアム"
+        },
+        "aliases": [
+          "したまちミュージアム"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

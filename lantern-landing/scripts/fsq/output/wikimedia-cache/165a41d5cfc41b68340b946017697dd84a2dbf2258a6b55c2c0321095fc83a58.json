@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:24.416Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 166215,
+          "ns": 0,
+          "title": "University of Tokyo",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Tokyo, University Of",
+            "kartographer_frames": "1",
+            "page_image_free": "2024_Yasuda_Auditorium_-_Tokyo_University.jpg",
+            "wikibase-shortdesc": "Public research university in Japan",
+            "wikibase_item": "Q7842"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71333333,
+              "lon": 139.76222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "national university in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 45246221,
+          "ns": 0,
+          "title": "JP Tower",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "JP_Tower.jpg",
+            "wikibase-shortdesc": "Skyscraper in Japan",
+            "wikibase_item": "Q11226072"
+          },
+          "coordinates": [
+            {
+              "lat": 35.679583,
+              "lon": 139.764722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "building in Chiyoda-ku, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 70016605,
+          "ns": 0,
+          "title": "University Museum (University of Tokyo)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "University Museum, The University of Tokyo, The",
+            "kartographer_frames": "1",
+            "page_image": "Logo_of_The_University_Museum,_The_University_of_Tokyo.jpg",
+            "wikibase-shortdesc": "University museum in Tokyo, Japan",
+            "wikibase_item": "Q15524927"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70866,
+              "lon": 139.76118,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "university museum in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 74852369,
+          "ns": 0,
+          "title": "Naoki Takizawa",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Takizawa, Naoki",
+            "wikibase-shortdesc": "Japanese fashion designer",
+            "wikibase_item": "Q11565236"
+          },
+          "terms": {
+            "description": [
+              "Japanese fashion designer"
+            ]
+          }
+        },
+        {
+          "pageid": 78476938,
+          "ns": 0,
+          "title": "Shōzō Arisaka",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Arisaka, Shōzō",
+            "page_image_free": "Arisaka_Shozo.jpg",
+            "wikibase-shortdesc": "Japanese naval engineer (1868–1941)",
+            "wikibase_item": "Q11516335"
+          },
+          "terms": {
+            "description": [
+              "Japanese admiral, engineer, professor emeritus of Imperial University of Tokyo (1868-1941)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

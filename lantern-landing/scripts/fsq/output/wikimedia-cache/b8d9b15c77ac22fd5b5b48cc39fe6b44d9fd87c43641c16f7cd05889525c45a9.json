@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:45:55.629Z",
+  "value": {
+    "searchinfo": {
+      "search": "Omoide Yokocho"
+    },
+    "search": [
+      {
+        "id": "Q11501868",
+        "title": "Q11501868",
+        "pageid": 12641552,
+        "concepturi": "http://www.wikidata.org/entity/Q11501868",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11501868",
+        "display": {
+          "label": {
+            "value": "Omoide Yokochō",
+            "language": "en"
+          }
+        },
+        "label": "Omoide Yokochō",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Omoide Yokochō"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

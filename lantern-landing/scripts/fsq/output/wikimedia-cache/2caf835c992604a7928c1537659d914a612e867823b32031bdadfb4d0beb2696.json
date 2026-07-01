@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:01.294Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 57602,
+          "ns": 0,
+          "title": "宮古島",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みやこしま",
+            "kartographer_frames": "1",
+            "page_image_free": "Miyakojima_sky_view.jpg",
+            "wikibase_item": "Q700946"
+          },
+          "coordinates": [
+            {
+              "lat": 24.80472222,
+              "lon": 125.28111111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "沖縄県、宮古列島にある島"
+            ]
+          }
+        },
+        {
+          "pageid": 172545,
+          "ns": 0,
+          "title": "金刀比羅宮",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ことひらくう",
+            "kartographer_frames": "1",
+            "page_image_free": "Kotohira-gu01s.jpg",
+            "wikibase_item": "Q94760"
+          },
+          "coordinates": [
+            {
+              "lat": 34.18400278,
+              "lon": 133.80953611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "香川県琴平町にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 241797,
+          "ns": 0,
+          "title": "擬洋風建築",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きようふうけんちく",
+            "page_image_free": "Former_Kaichi_School03_1024.jpg",
+            "wikibase_item": "Q518007"
+          },
+          "terms": {
+            "description": [
+              "明治時代初期の日本において、主として近世以来の技術を身につけた大工棟梁によって設計・施工された建築"
+            ]
+          }
+        },
+        {
+          "pageid": 872613,
+          "ns": 0,
+          "title": "楓川",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かえてかわ",
+            "page_image_free": "Shuto_expressway_takaracho.jpg",
+            "wikibase_item": "Q11541135"
+          },
+          "coordinates": [
+            {
+              "lat": 35.679427,
+              "lon": 139.775743,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都中央区にあった運河"
+            ]
+          }
+        },
+        {
+          "pageid": 1582695,
+          "ns": 0,
+          "title": "北木石",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きたきいし",
+            "page_image_free": "北木石中目(不死鳥の石）・_2008年12月採掘分を本研磨仕上げ鶴田石材株式会社採石.jpg",
+            "wikibase_item": "Q11401909"
+          },
+          "terms": {
+            "description": [
+              "岡山県笠岡諸島の北木島で産出される花崗岩"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

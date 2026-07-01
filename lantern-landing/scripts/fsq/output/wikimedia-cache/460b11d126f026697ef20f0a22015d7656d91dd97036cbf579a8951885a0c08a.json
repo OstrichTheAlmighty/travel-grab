@@ -1,0 +1,65 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:32.482Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 487380,
+          "ns": 0,
+          "title": "キャッスルフォアコート",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きやするふおあこおと",
+            "wikibase_item": "Q11297135"
+          }
+        },
+        {
+          "pageid": 653181,
+          "ns": 0,
+          "title": "シンデレラブレーション:ライツ・オブ・ロマンス",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しんてれらふれえしよん らいつおふろまんす",
+            "wikibase_item": "Q11308647"
+          }
+        },
+        {
+          "pageid": 758973,
+          "ns": 0,
+          "title": "シンデレラブレーション",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しんてれらふれえしよん",
+            "wikibase_item": "Q11308646"
+          }
+        },
+        {
+          "pageid": 2187457,
+          "ns": 0,
+          "title": "バズ・ライトイヤー 夏の大作戦",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はすらいといやあなつのたいさくせん",
+            "wikibase_item": "Q11327734"
+          }
+        },
+        {
+          "pageid": 2820386,
+          "ns": 0,
+          "title": "ディズニー夏祭り",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ていすにいなつまつり",
+            "wikibase_item": "Q17454666"
+          }
+        }
+      ]
+    }
+  }
+}

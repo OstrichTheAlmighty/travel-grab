@@ -1,0 +1,76 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:20.018Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 276904,
+          "ns": 0,
+          "title": "新宿NSビル",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しんしゆくえぬえすひる",
+            "page_image_free": "Shinjuku-NS-Building-04.jpg",
+            "wikibase_item": "Q863639"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68805556,
+              "lon": 139.69333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区のビル"
+            ]
+          }
+        },
+        {
+          "pageid": 560441,
+          "ns": 0,
+          "title": "ハヤテのごとく!",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はやてのことく",
+            "wikibase_item": "Q116122"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 970814,
+          "ns": 0,
+          "title": "振り子時計",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふりことけい",
+            "page_image_free": "Old_Pendulum_clock.jpg",
+            "wikibase_item": "Q41751"
+          }
+        },
+        {
+          "pageid": 1807252,
+          "ns": 0,
+          "title": "富谷龍一",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とみや りゆういち",
+            "wikibase_item": "Q11457310"
+          },
+          "terms": {
+            "description": [
+              "日本の画家 (1925-1997)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

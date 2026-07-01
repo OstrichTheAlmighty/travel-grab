@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:12.012Z",
+  "value": {
+    "searchinfo": {
+      "search": "世田谷区立郷土資料館"
+    },
+    "search": [
+      {
+        "id": "Q104708389",
+        "title": "Q104708389",
+        "pageid": 100136405,
+        "concepturi": "http://www.wikidata.org/entity/Q104708389",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q104708389",
+        "display": {
+          "label": {
+            "value": "Setagaya City Local Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Setagaya, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Setagaya City Local Museum",
+        "description": "museum in Setagaya, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "世田谷区立郷土資料館"
+        },
+        "aliases": [
+          "世田谷区立郷土資料館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

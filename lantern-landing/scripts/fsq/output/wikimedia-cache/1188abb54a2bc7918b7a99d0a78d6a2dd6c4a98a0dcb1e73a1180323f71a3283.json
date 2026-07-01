@@ -1,0 +1,94 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:39.074Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 6905166,
+          "ns": 0,
+          "title": "Shimeji",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Asian_mushrooms.jpg",
+            "wikibase-shortdesc": "Mushroom",
+            "wikibase_item": "Q4388649"
+          },
+          "terms": {
+            "description": [
+              "mushroom"
+            ]
+          }
+        },
+        {
+          "pageid": 7264818,
+          "ns": 0,
+          "title": "Agrocybe",
+          "index": 4,
+          "pageprops": {
+            "displaytitle": "<i>Agrocybe</i>",
+            "page_image_free": "Agrocybe_praecox_cupertino.jpg",
+            "wikibase-shortdesc": "Genus of fungi",
+            "wikibase_item": "Q341780"
+          },
+          "terms": {
+            "description": [
+              "genus of fungi"
+            ]
+          }
+        },
+        {
+          "pageid": 11974030,
+          "ns": 0,
+          "title": "List of Chinese mushrooms and fungi",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Chinese mushrooms and fungi",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q25113740"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        },
+        {
+          "pageid": 37712501,
+          "ns": 0,
+          "title": "Cyclocybe aegerita",
+          "index": 1,
+          "pageprops": {
+            "displaytitle": "<i>Cyclocybe aegerita</i>",
+            "page_image_free": "Agrocybe_aegerita.jpg",
+            "wikibase-shortdesc": "Species of fungus",
+            "wikibase_item": "Q27668537"
+          },
+          "terms": {
+            "description": [
+              "species of fungus"
+            ]
+          }
+        },
+        {
+          "pageid": 69431286,
+          "ns": 0,
+          "title": "Lyophyllum shimeji",
+          "index": 3,
+          "pageprops": {
+            "displaytitle": "<i>Lyophyllum shimeji</i>",
+            "page_image_free": "Lyophyllum_shimeji_1999_1102_Niigata_(2).jpg",
+            "wikibase-shortdesc": "Species of fungus",
+            "wikibase_item": "Q1054803"
+          },
+          "terms": {
+            "description": [
+              "species of fungus"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

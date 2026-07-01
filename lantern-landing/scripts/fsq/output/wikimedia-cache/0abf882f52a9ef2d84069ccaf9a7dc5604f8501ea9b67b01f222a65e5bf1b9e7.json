@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:18:02.866Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 30057,
+          "ns": 0,
+          "title": "Tokyo",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Capital and most populous city in Japan",
+            "wikibase_item": "Q1490"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68972222,
+              "lon": 139.69222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "capital and largest city of Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 2601214,
+          "ns": 0,
+          "title": "R360",
+          "index": 4,
+          "pageprops": {
+            "page_image": "Sega_R-360_machine.png",
+            "wikibase-shortdesc": "Arcade cabinet",
+            "wikibase_item": "Q3928098"
+          },
+          "terms": {
+            "description": [
+              "arcade cabinet"
+            ]
+          }
+        },
+        {
+          "pageid": 4362003,
+          "ns": 0,
+          "title": "Joypolis",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Sega_Joypolis_Odaiba.jpg",
+            "wikibase-shortdesc": "Indoor amusement park chain",
+            "wikibase_item": "Q11310533"
+          },
+          "coordinates": [
+            {
+              "lat": 35.628508,
+              "lon": 139.775161,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "indoor amusement park chain"
+            ]
+          }
+        },
+        {
+          "pageid": 29689827,
+          "ns": 0,
+          "title": "List of Sonic the Hedgehog video games",
+          "index": 5,
+          "pageprops": {
+            "displaytitle": "List of <i>Sonic the Hedgehog</i> video games",
+            "page_image_free": "Sonic_The_Hedgehog.svg",
+            "wikibase-shortdesc": "List of video game series",
+            "wikibase_item": "Q973711"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 48559083,
+          "ns": 0,
+          "title": "CA Sega Joypolis",
+          "index": 2,
+          "pageprops": {
+            "page_image": "CA_Sega_Joypolis.png",
+            "wikibase-shortdesc": "Amusement park company",
+            "wikibase_item": "Q22079741"
+          },
+          "terms": {
+            "description": [
+              "amusement park company"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

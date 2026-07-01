@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:02.626Z",
+  "value": {
+    "searchinfo": {
+      "search": "サンシャイン60展望台 てんぼうパーク"
+    },
+    "search": [
+      {
+        "id": "Q126417267",
+        "title": "Q126417267",
+        "pageid": 120443211,
+        "concepturi": "http://www.wikidata.org/entity/Q126417267",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q126417267",
+        "display": {
+          "label": {
+            "value": "Sunshine 60 Observatory Tenbou Park",
+            "language": "en"
+          }
+        },
+        "label": "Sunshine 60 Observatory Tenbou Park",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "サンシャイン60展望台 てんぼうパーク"
+        },
+        "aliases": [
+          "サンシャイン60展望台 てんぼうパーク"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

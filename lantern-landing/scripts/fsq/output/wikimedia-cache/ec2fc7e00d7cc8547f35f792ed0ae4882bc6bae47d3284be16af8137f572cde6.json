@@ -1,0 +1,133 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:13.468Z",
+  "value": {
+    "searchinfo": {
+      "search": "ガチャピン"
+    },
+    "search": [
+      {
+        "id": "Q5516180",
+        "title": "Q5516180",
+        "pageid": 5277155,
+        "concepturi": "http://www.wikidata.org/entity/Q5516180",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5516180",
+        "display": {
+          "label": {
+            "value": "Gachapin",
+            "language": "en"
+          },
+          "description": {
+            "value": "Japanese children's television character",
+            "language": "en"
+          }
+        },
+        "label": "Gachapin",
+        "description": "Japanese children's television character",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ガチャピン"
+        },
+        "aliases": [
+          "ガチャピン"
+        ]
+      },
+      {
+        "id": "Q11330762",
+        "title": "Q11330762",
+        "pageid": 12468892,
+        "concepturi": "http://www.wikidata.org/entity/Q11330762",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11330762",
+        "display": {
+          "label": {
+            "value": "Gunther",
+            "language": "en"
+          },
+          "description": {
+            "value": "Austrian professional wrestler",
+            "language": "en"
+          }
+        },
+        "label": "Gunther",
+        "description": "Austrian professional wrestler",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ガチャピング"
+        },
+        "aliases": [
+          "ガチャピング"
+        ]
+      },
+      {
+        "id": "Q11296025",
+        "title": "Q11296025",
+        "pageid": 12436080,
+        "concepturi": "http://www.wikidata.org/entity/Q11296025",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11296025",
+        "display": {
+          "label": {
+            "value": "ガチャピン☆ボンバーマン",
+            "language": "ja"
+          },
+          "description": {
+            "value": "video game",
+            "language": "en"
+          }
+        },
+        "label": "ガチャピン☆ボンバーマン",
+        "description": "video game",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ガチャピン☆ボンバーマン"
+        }
+      },
+      {
+        "id": "Q11296026",
+        "title": "Q11296026",
+        "pageid": 12436081,
+        "concepturi": "http://www.wikidata.org/entity/Q11296026",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11296026",
+        "display": {
+          "label": {
+            "value": "ガチャピン・ムックのパジャマDEナイト",
+            "language": "ja"
+          }
+        },
+        "label": "ガチャピン・ムックのパジャマDEナイト",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ガチャピン・ムックのパジャマDEナイト"
+        }
+      },
+      {
+        "id": "Q11296024",
+        "title": "Q11296024",
+        "pageid": 12436079,
+        "concepturi": "http://www.wikidata.org/entity/Q11296024",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11296024",
+        "display": {
+          "label": {
+            "value": "ガチャピンClub",
+            "language": "ja"
+          }
+        },
+        "label": "ガチャピンClub",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ガチャピンClub"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

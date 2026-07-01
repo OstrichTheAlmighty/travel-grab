@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:26.497Z",
+  "value": {
+    "searchinfo": {
+      "search": "The National Art Center, Tokyo"
+    },
+    "search": [
+      {
+        "id": "Q1362638",
+        "title": "Q1362638",
+        "pageid": 1302194,
+        "concepturi": "http://www.wikidata.org/entity/Q1362638",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1362638",
+        "display": {
+          "label": {
+            "value": "National Art Center, Tokyo",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "National Art Center, Tokyo",
+        "description": "art museum in Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "The National Art Center, Tokyo"
+        },
+        "aliases": [
+          "The National Art Center, Tokyo"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

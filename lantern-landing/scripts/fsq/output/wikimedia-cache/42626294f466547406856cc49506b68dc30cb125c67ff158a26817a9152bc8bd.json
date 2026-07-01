@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:43.497Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 275216,
+          "ns": 0,
+          "title": "シンデレラ城",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しんてれらしよう",
+            "page_image_free": "Cinderella_Castle,_Magic_Kingdom_Walt_Disney_World_(2024).jpg",
+            "wikibase_item": "Q2742709"
+          },
+          "terms": {
+            "description": [
+              "複数のトピックが混合したウィキペディアの記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2512094,
+          "ns": 0,
+          "title": "アイドルマスター シンデレラガールズ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あいとるますたあしんてれらかあるす",
+            "toc": "",
+            "wikibase_item": "Q115508"
+          },
+          "terms": {
+            "description": [
+              "日本のソーシャルゲーム（2011-2023）、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 3276425,
+          "ns": 0,
+          "title": "アイドルマスター シンデレラガールズ スターライトステージ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あいとるますたあしんてれらかあるすすたあらいとすてえし",
+            "wikibase_item": "Q20931781"
+          },
+          "terms": {
+            "description": [
+              "日本の音楽ゲームアプリ"
+            ]
+          }
+        },
+        {
+          "pageid": 3423624,
+          "ns": 0,
+          "title": "アイドルマスター シンデレラガールズ (アニメ)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あいとるますたあしんてれらかあるすあにめ",
+            "toc": "",
+            "wikibase_item": "Q19357037"
+          },
+          "terms": {
+            "description": [
+              "2015年のアニメ"
+            ]
+          }
+        },
+        {
+          "pageid": 4135346,
+          "ns": 0,
+          "title": "アイドルマスター シンデレラガールズの楽曲一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あいとるますたあしんてれらかあるすのかつきよくいちらん",
+            "wikibase_item": "Q114413949"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

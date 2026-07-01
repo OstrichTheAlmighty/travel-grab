@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:17:50.794Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 78499,
+          "ns": 0,
+          "title": "熊谷スポーツ文化公園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "くまかやすほつふんかこうえん",
+            "page_image_free": "Kumagaya_Sports_Park_with_Sakura.jpg",
+            "wikibase_item": "Q11568696"
+          },
+          "coordinates": [
+            {
+              "lat": 36.16689167,
+              "lon": 139.40558056,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の都市公園"
+            ]
+          }
+        },
+        {
+          "pageid": 163500,
+          "ns": 0,
+          "title": "モビリティリゾートもてぎ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "もひりてりそと もてき",
+            "kartographer_frames": "1",
+            "page_image_free": "Super_Speedway_(Twin_Ring_Motegi)_01.JPG",
+            "wikibase_item": "Q1420895"
+          },
+          "coordinates": [
+            {
+              "lat": 36.53333333,
+              "lon": 140.22694444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "栃木県茂木町にあるサーキット"
+            ]
+          }
+        },
+        {
+          "pageid": 203357,
+          "ns": 0,
+          "title": "広場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひろは",
+            "page_image_free": "Milano_galleria_piazza_duomo.jpg",
+            "wikibase_item": "Q174782"
+          },
+          "terms": {
+            "description": [
+              "都市において歩行者が集まる広く平らな公共の空間"
+            ]
+          }
+        },
+        {
+          "pageid": 858924,
+          "ns": 0,
+          "title": "みんなの広場だ!わんパーク",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みんなのひろはたわんはく",
+            "wikibase_item": "Q11279472"
+          }
+        },
+        {
+          "pageid": 1165436,
+          "ns": 0,
+          "title": "帯広の森スピードスケート場",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おひひろのもりすひとすけとしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "明治北海道十勝オーバル.JPG",
+            "wikibase_item": "Q3142989"
+          },
+          "coordinates": [
+            {
+              "lat": 42.89444444,
+              "lon": 143.14,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道帯広市にある屋内スピードスケート場"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

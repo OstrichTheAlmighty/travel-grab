@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:13.009Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 228286,
+          "ns": 0,
+          "title": "日本庭園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんていえん",
+            "page_image_free": "Kare-sansui_zen_garden,_Ryōan-ji,_Kyoto_20190416_1.jpg",
+            "wikibase_item": "Q15835"
+          },
+          "terms": {
+            "description": [
+              "日本の伝統的な庭園"
+            ]
+          }
+        },
+        {
+          "pageid": 644290,
+          "ns": 0,
+          "title": "旧古河庭園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きゆうふるかわていえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Kyu-Furukawa_Tei_(House)2.jpg",
+            "wikibase_item": "Q3082256"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7425,
+              "lon": 139.74611111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都北区の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 791938,
+          "ns": 0,
+          "title": "旧岩崎邸庭園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きゆういわさきていていえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Former_Iwasaki_Family_House_and_Garden_2010.jpg",
+            "wikibase_item": "Q1358767"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70972222,
+              "lon": 139.76777778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 926362,
+          "ns": 0,
+          "title": "旧芝離宮恩賜庭園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きゆうしはりきゆうおんしていえん",
+            "page_image_free": "Kyu_Shiba_Rikyu_Garden_03.jpg",
+            "wikibase_item": "Q3266874"
+          },
+          "coordinates": [
+            {
+              "lat": 35.655,
+              "lon": 139.759,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都港区にある公園"
+            ]
+          }
+        },
+        {
+          "pageid": 2128956,
+          "ns": 0,
+          "title": "北村信正",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きたむら のふまさ",
+            "wikibase_item": "Q11401941"
+          },
+          "terms": {
+            "description": [
+              "日本の造園家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:32.844Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 28521,
+          "ns": 0,
+          "title": "JNNニュースの森",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しえいえぬえぬにゆうすのもり",
+            "wikibase_item": "Q55521188"
+          },
+          "terms": {
+            "description": [
+              "TBSテレビ系の報道番組（1990 - 2005）"
+            ]
+          }
+        },
+        {
+          "pageid": 50876,
+          "ns": 0,
+          "title": "各務原市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かかみかはらし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kawashima-Parking-Area-1.jpg",
+            "wikibase_item": "Q641491"
+          },
+          "coordinates": [
+            {
+              "lat": 35.39881,
+              "lon": 136.84842,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "岐阜県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 141687,
+          "ns": 0,
+          "title": "どうぶつの森シリーズ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうふつのもりしりいす",
+            "page_image_free": "Animal_Crossing_Fink_Heavy.png",
+            "wikibase_item": "Q1139803"
+          },
+          "terms": {
+            "description": [
+              "任天堂が開発するコンピュータゲームのシリーズ"
+            ]
+          }
+        },
+        {
+          "pageid": 143969,
+          "ns": 0,
+          "title": "森雪之丞",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "もり ゆきのしよう",
+            "wikibase_item": "Q11540438"
+          },
+          "terms": {
+            "description": [
+              "日本の作詞家、詩人、作曲家"
+            ]
+          }
+        },
+        {
+          "pageid": 3958543,
+          "ns": 0,
+          "title": "あつまれ どうぶつの森",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あつまれとうふつのもり",
+            "page_image_free": "Animal_Crossing-New_Horizons.png",
+            "wikibase_item": "Q64566657"
+          },
+          "terms": {
+            "description": [
+              "2020年に任天堂がNintendo Switch向けに開発したコンピュータゲーム"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

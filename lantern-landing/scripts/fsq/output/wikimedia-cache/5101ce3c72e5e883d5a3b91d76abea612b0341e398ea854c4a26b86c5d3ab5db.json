@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:47.888Z",
+  "value": {
+    "searchinfo": {
+      "search": "スターシート"
+    },
+    "search": [
+      {
+        "id": "Q7601280",
+        "title": "Q7601280",
+        "pageid": 7520231,
+        "concepturi": "http://www.wikidata.org/entity/Q7601280",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q7601280",
+        "display": {
+          "label": {
+            "value": "star people",
+            "language": "en"
+          },
+          "description": {
+            "value": "people who declare they are from another planet or galaxy",
+            "language": "en"
+          }
+        },
+        "label": "star people",
+        "description": "people who declare they are from another planet or galaxy",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "スターシード"
+        },
+        "aliases": [
+          "スターシード"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

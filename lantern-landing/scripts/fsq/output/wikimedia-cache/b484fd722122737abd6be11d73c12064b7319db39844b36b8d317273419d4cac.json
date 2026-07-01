@@ -1,0 +1,123 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:09.352Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 36330,
+          "ns": 0,
+          "title": "用賀駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ようか",
+            "kartographer_frames": "1",
+            "page_image_free": "Yoga_Station,_200511.jpg",
+            "wikibase_item": "Q5367233"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62638889,
+              "lon": 139.63388889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区用賀にある東急電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 258785,
+          "ns": 0,
+          "title": "世田谷区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せたかやく",
+            "kartographer_frames": "1",
+            "page_image_free": "Seijo_namikimichi_231011.jpg",
+            "wikibase_item": "Q231645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64656,
+              "lon": 139.65322,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 521987,
+          "ns": 0,
+          "title": "玉川地域",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たまかわちいき",
+            "page_image_free": "Tamagawa_General_Branch_Office_Building,_Setagaya_City,_Tokyo,_Japan.jpg",
+            "wikibase_item": "Q11572556"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60855278,
+              "lon": 139.64851111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区の5地域の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 565828,
+          "ns": 0,
+          "title": "上用賀",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かみようか",
+            "kartographer_frames": "1",
+            "page_image_free": "Keyaki_Hiroba_-_Setagya,_Tokyo,_Japan_-_DSC09662.jpg",
+            "wikibase_item": "Q28692658"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1005728,
+          "ns": 0,
+          "title": "桜丘 (世田谷区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さくらかおか",
+            "kartographer_frames": "1",
+            "page_image_free": "Pond_in_Sakuragaoka_Sumireba_Nature_Garden_(桜丘すみれば自然庭園)_-_panoramio.jpg",
+            "wikibase_item": "Q11537729"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

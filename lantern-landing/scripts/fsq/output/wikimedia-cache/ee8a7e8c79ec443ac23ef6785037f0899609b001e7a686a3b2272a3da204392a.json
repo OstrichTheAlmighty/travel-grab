@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:48.190Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 63865,
+          "ns": 0,
+          "title": "築地市場",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "つきしいちは",
+            "page_image_free": "2018_Tsukiji_fish_market.jpg",
+            "wikibase_item": "Q859471"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66138889,
+              "lon": 139.76972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて東京都中央区築地に存在した公設卸売市場"
+            ]
+          }
+        },
+        {
+          "pageid": 88741,
+          "ns": 0,
+          "title": "国道195号",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こくとう195",
+            "kartographer_frames": "1",
+            "page_image_free": "R195_1.JPG",
+            "wikibase_item": "Q6156911"
+          },
+          "terms": {
+            "description": [
+              "高知県から徳島県に至る一般国道"
+            ]
+          }
+        },
+        {
+          "pageid": 257401,
+          "ns": 0,
+          "title": "勝鬨橋",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かちときはし",
+            "page_image_free": "Tsukiji_buildings.jpg",
+            "wikibase_item": "Q4844361"
+          },
+          "terms": {
+            "description": [
+              "東京都の橋"
+            ]
+          }
+        },
+        {
+          "pageid": 399285,
+          "ns": 0,
+          "title": "大さん橋",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおさんはし",
+            "page_image_free": "Yokohama_Osambashi_3.jpg",
+            "wikibase_item": "Q3518430"
+          },
+          "coordinates": [
+            {
+              "lat": 35.45166667,
+              "lon": 139.64777778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "横浜市中区にある港湾施設"
+            ]
+          }
+        },
+        {
+          "pageid": 992477,
+          "ns": 0,
+          "title": "長崎市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "なかさきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Oura_Church_view_-_panoramio_(cropped).jpg",
+            "wikibase_item": "Q38234"
+          },
+          "coordinates": [
+            {
+              "lat": 32.74953,
+              "lon": 129.87964,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長崎県庁所在地"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

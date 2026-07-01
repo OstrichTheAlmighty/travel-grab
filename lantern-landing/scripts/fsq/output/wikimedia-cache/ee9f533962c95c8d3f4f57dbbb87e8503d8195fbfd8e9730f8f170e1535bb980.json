@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:12.451Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 5388,
+          "ns": 0,
+          "title": "日本料理",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんりようり",
+            "page_image_free": "Osechi_001.jpg",
+            "wikibase_item": "Q234138"
+          },
+          "terms": {
+            "description": [
+              "日本の料理あるいは食文化"
+            ]
+          }
+        },
+        {
+          "pageid": 26738,
+          "ns": 0,
+          "title": "ブリ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふり",
+            "page_image_free": "Seriola_quinqueradiata_(200810).jpg",
+            "wikibase_item": "Q1202973"
+          },
+          "terms": {
+            "description": [
+              "アジ目アジ科の海水魚"
+            ]
+          }
+        },
+        {
+          "pageid": 98854,
+          "ns": 0,
+          "title": "ビッグトゥデイ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひつくとうてい",
+            "wikibase_item": "Q11330752"
+          },
+          "terms": {
+            "description": [
+              "フジテレビの情報番組"
+            ]
+          }
+        },
+        {
+          "pageid": 1054587,
+          "ns": 0,
+          "title": "江戸前の旬",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えとまえのしゆん",
+            "wikibase_item": "Q11550996"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画作品、テレビドラマ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 4186288,
+          "ns": 0,
+          "title": "ぬまづみなと商店街",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ぬまつみなとしようてんかい",
+            "kartographer_frames": "1",
+            "page_image_free": "Street_at_port_of_Numazu_seefood_shop_and_restaurant.jpg",
+            "wikibase_item": "Q98082905"
+          },
+          "coordinates": [
+            {
+              "lat": 35.0825,
+              "lon": 138.85824,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡県沼津市にある商店街"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

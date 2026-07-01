@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:15.398Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 12594,
+          "ns": 0,
+          "title": "墨田区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "すみたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Skytree_2014_Ⅲ.jpg",
+            "wikibase_item": "Q235135"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71069,
+              "lon": 139.8015,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 112129,
+          "ns": 0,
+          "title": "東京都電車",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようとてんしや",
+            "page_image_free": "Toden8800_4colors_20101225.jpg",
+            "wikibase_item": "Q7814005"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都交通局が運営する路面電車路線"
+            ]
+          }
+        },
+        {
+          "pageid": 329961,
+          "ns": 0,
+          "title": "錦糸町",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きんしちよう",
+            "page_image_free": "Cityscape_from_Tokyo_Skytree_2014-09-09_04.jpg",
+            "wikibase_item": "Q11650537"
+          },
+          "terms": {
+            "description": [
+              "東京都墨田区の歓楽街"
+            ]
+          }
+        },
+        {
+          "pageid": 475145,
+          "ns": 0,
+          "title": "隅田公園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すみたこうえん",
+            "page_image_free": "Sumida_Park.jpg",
+            "wikibase_item": "Q6630114"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71194444,
+              "lon": 139.80363889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区・墨田区の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 618669,
+          "ns": 0,
+          "title": "置行堀",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おいてけほり",
+            "page_image_free": "Kuniteru_Honjo-nana-fushigi_Oitekebori.jpg",
+            "wikibase_item": "Q11608537"
+          },
+          "terms": {
+            "description": [
+              "日本の怪談"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

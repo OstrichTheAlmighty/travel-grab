@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:07.931Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 145994,
+          "ns": 0,
+          "title": "泉岳寺",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "せんかくし",
+            "page_image_free": "Sengakuji_201904d2.jpg",
+            "wikibase_item": "Q3176144"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63772222,
+              "lon": 139.73627778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 207427,
+          "ns": 0,
+          "title": "赤穂城",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あこうしよう",
+            "page_image_free": "141115_Ako_Castle_Ako_Hyogo_pref_Japan01bs3.jpg",
+            "wikibase_item": "Q601598"
+          },
+          "coordinates": [
+            {
+              "lat": 34.74566944,
+              "lon": 134.38898333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県赤穂市にある城"
+            ]
+          }
+        },
+        {
+          "pageid": 292645,
+          "ns": 0,
+          "title": "赤穂事件",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あこうしけん",
+            "page_image_free": "Ohiroma_Honmaru_Edo_Castle_4.JPG",
+            "wikibase_item": "Q822472"
+          },
+          "terms": {
+            "description": [
+              "1701年に日本の江戸で発生した刃傷・切腹事件"
+            ]
+          }
+        },
+        {
+          "pageid": 301295,
+          "ns": 0,
+          "title": "大石良雄",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおいし よしお",
+            "page_image_free": "Ōishi_Yoshio.jpg",
+            "wikibase_item": "Q530128"
+          },
+          "terms": {
+            "description": [
+              "江戸時代前期の武士。播磨赤穂藩の筆頭家老。大石良昭の長男"
+            ]
+          }
+        },
+        {
+          "pageid": 588594,
+          "ns": 0,
+          "title": "吉良義周",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きら よしちか",
+            "wikibase_item": "Q11414256"
+          },
+          "terms": {
+            "description": [
+              "江戸時代前期の旗本"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

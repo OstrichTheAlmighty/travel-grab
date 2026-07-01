@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:40.070Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4332,
+          "ns": 0,
+          "title": "笹塚駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ささつかえき",
+            "kartographer_frames": "1",
+            "page_image_free": "WIN_笹塚駅北口20260403_12_11_11_Pro.jpg",
+            "wikibase_item": "Q841861"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67366667,
+              "lon": 139.66722222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区笹塚にある京王電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 8587,
+          "ns": 0,
+          "title": "名古屋市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "なこやし",
+            "kartographer_frames": "1",
+            "page_image_free": "View_of_Westward_from_Sky_Deck_MIRAI360,_Nishiki_Naka_Ward_Nagoya_2022.jpg",
+            "wikibase_item": "Q11751"
+          },
+          "coordinates": [
+            {
+              "lat": 35.1814,
+              "lon": 136.9064,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 631582,
+          "ns": 0,
+          "title": "笹塚 (渋谷区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ささつか",
+            "kartographer_frames": "1",
+            "page_image_free": "笹塚-18.JPG",
+            "wikibase_item": "Q11602515"
+          },
+          "terms": {
+            "description": [
+              "東京都渋谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 3110961,
+          "ns": 0,
+          "title": "渋谷区立笹塚小学校",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しふやくりつささつかしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Shibuya_Ward_Sasazuka_Elementary_School_201904a.jpg",
+            "wikibase_item": "Q20044531"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67600556,
+              "lon": 139.66925,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都渋谷区にある公立小学校"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

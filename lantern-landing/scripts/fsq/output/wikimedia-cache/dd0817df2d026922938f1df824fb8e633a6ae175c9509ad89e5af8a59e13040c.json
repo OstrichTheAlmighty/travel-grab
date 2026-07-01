@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:27.165Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2536,
+          "ns": 0,
+          "title": "1931年",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "1931ねん",
+            "wikibase_item": "Q18782"
+          },
+          "terms": {
+            "description": [
+              "年"
+            ]
+          }
+        },
+        {
+          "pageid": 119759,
+          "ns": 0,
+          "title": "青二プロダクション",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あおにふろたくしよん",
+            "wikibase_item": "Q1359479"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都港区にある声優事務所"
+            ]
+          }
+        },
+        {
+          "pageid": 155129,
+          "ns": 0,
+          "title": "悪魔くん",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あくまくん",
+            "page_image": "Akumakun.JPG",
+            "wikibase_item": "Q423722"
+          },
+          "terms": {
+            "description": [
+              "水木しげるによる日本の漫画、メディアミックス作品、その主人公たる架空のキャラクターの通称"
+            ]
+          }
+        },
+        {
+          "pageid": 363044,
+          "ns": 0,
+          "title": "銀牙 -流れ星 銀-",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きんかなかれほしきん",
+            "wikibase_item": "Q1148439"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 473866,
+          "ns": 0,
+          "title": "法政大学の人物一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ほうせい",
+            "wikibase_item": "Q11555171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

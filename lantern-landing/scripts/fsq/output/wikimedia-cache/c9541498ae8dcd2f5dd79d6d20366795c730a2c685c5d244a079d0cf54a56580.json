@@ -1,0 +1,71 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:23.979Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 46690,
+          "ns": 0,
+          "title": "姫路城",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひめししよう",
+            "page_image_free": "Himeji_castle_in_may_2015.jpg",
+            "wikibase-badge-Q17437796": "",
+            "wikibase_item": "Q188754"
+          },
+          "coordinates": [
+            {
+              "lat": 34.83937778,
+              "lon": 134.69409722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県の城"
+            ]
+          }
+        },
+        {
+          "pageid": 180427,
+          "ns": 0,
+          "title": "山種美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "やまたねひしゆつかん",
+            "page_image_free": "Yamatane_Museum_Tokyo.jpg",
+            "wikibase_item": "Q3329572"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65317,
+              "lon": 139.7137,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある日本画専門の美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 5124361,
+          "ns": 0,
+          "title": "炎舞",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "えんふ",
+            "page_image_free": "Enbu_by_Hayami_Gyoshu.jpg",
+            "unexpectedUnconnectedPage": "0"
+          }
+        }
+      ]
+    }
+  }
+}

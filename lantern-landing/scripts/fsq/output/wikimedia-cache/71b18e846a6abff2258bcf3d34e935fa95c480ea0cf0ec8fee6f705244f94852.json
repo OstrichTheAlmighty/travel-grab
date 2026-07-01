@@ -1,0 +1,135 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:05.338Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 29794,
+          "ns": 0,
+          "title": "境港市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さかいみなとし",
+            "kartographer_frames": "1",
+            "page_image": "Sakaiminato_Mizuki_Shigeru_Memorial_Hall_1.jpg",
+            "page_image_free": "Sakaiminato_city_office_1.jpg",
+            "wikibase_item": "Q496431"
+          },
+          "coordinates": [
+            {
+              "lat": 35.53961,
+              "lon": 133.23161,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "鳥取県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 65030,
+          "ns": 0,
+          "title": "安芸区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あきく",
+            "page_image_free": "Egesan.jpg",
+            "wikibase_item": "Q63446"
+          },
+          "coordinates": [
+            {
+              "lat": 34.37172,
+              "lon": 132.5255,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "広島県広島市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 445189,
+          "ns": 0,
+          "title": "宝仙寺",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほうせんし",
+            "page_image_free": "Hosen-ji_(Nio-mon).jpg",
+            "wikibase_item": "Q11452336"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69888889,
+              "lon": 139.67944444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都中野区にある寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 539967,
+          "ns": 0,
+          "title": "中野町 (東京府)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "なかのまち",
+            "wikibase_item": "Q10876745"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6986,
+              "lon": 139.6789,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京府豊多摩郡にあった町"
+            ]
+          }
+        },
+        {
+          "pageid": 972185,
+          "ns": 0,
+          "title": "野方町",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "のかたまち",
+            "wikibase_item": "Q11645473"
+          },
+          "coordinates": [
+            {
+              "lat": 35.718333,
+              "lon": 139.653333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京府豊多摩郡にあった町"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

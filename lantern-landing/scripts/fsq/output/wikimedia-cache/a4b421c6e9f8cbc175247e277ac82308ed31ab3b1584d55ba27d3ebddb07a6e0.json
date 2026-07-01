@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:03.148Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 405276,
+          "ns": 0,
+          "title": "Minato, Tokyo",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Minato_City,_Tokyo,_Japan.jpg",
+            "wikibase-shortdesc": "Special ward in Kantō, Japan",
+            "wikibase_item": "Q190088"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65805556,
+              "lon": 139.75138889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "special ward in the Tokyo Metropolis in Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 1094319,
+          "ns": 0,
+          "title": "Zōjō-ji",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Zojo-ji",
+            "kartographer_frames": "1",
+            "page_image_free": "Zōjō-ji_20241021.jpg",
+            "wikibase-shortdesc": "Buddhist temple in Tokyo, Japan",
+            "wikibase_item": "Q249139"
+          },
+          "coordinates": [
+            {
+              "lat": 35.657479,
+              "lon": 139.748376,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Buddhist temple in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 1923747,
+          "ns": 0,
+          "title": "Hasui Kawase",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Kawase, Hasui",
+            "page_image_free": "Kawase_Hasui_May_1939.jpg",
+            "wikibase-shortdesc": "Japanese artist (1883–1957)",
+            "wikibase_item": "Q344166"
+          },
+          "terms": {
+            "description": [
+              "Japanese ukiyo-e artist, printmaker (1883-1957)"
+            ]
+          }
+        },
+        {
+          "pageid": 70636770,
+          "ns": 0,
+          "title": "Ministry of Religion (Japan)",
+          "index": 3,
+          "pageprops": {
+            "wikibase-shortdesc": "Japanese government agency",
+            "wikibase_item": "Q4294653"
+          },
+          "terms": {
+            "description": [
+              "Japanese government agency"
+            ]
+          }
+        },
+        {
+          "pageid": 76568224,
+          "ns": 0,
+          "title": "Norman Tolman",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Tolman, Norman",
+            "wikibase-shortdesc": "American art dealer and collector (1936–2025)",
+            "wikibase_item": "Q130390372"
+          },
+          "terms": {
+            "description": [
+              "American art dealer and collector"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

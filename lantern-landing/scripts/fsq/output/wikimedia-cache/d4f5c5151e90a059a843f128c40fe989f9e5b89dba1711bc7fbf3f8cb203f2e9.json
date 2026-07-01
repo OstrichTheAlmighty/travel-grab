@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:19.014Z",
+  "value": {
+    "searchinfo": {
+      "search": "海苔のふるさと館"
+    },
+    "search": [
+      {
+        "id": "Q20748918",
+        "title": "Q20748918",
+        "pageid": 22494500,
+        "concepturi": "http://www.wikidata.org/entity/Q20748918",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q20748918",
+        "display": {
+          "label": {
+            "value": "Omori Nori Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "seaweed museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Omori Nori Museum",
+        "description": "seaweed museum in Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "海苔のふるさと館"
+        },
+        "aliases": [
+          "海苔のふるさと館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

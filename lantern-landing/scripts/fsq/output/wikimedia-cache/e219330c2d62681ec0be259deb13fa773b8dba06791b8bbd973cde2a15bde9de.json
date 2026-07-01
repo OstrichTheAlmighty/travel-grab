@@ -1,0 +1,128 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:24.331Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2891,
+          "ns": 0,
+          "title": "ワールドトレードセンター (ニューヨーク)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "わあるととれえとせんたあにゆうよおく",
+            "page_image_free": "World_Trade_Center,_New_York_City_-_aerial_view_(March_2001).jpg",
+            "wikibase_item": "Q11235"
+          },
+          "coordinates": [
+            {
+              "lat": 40.71166667,
+              "lon": -74.01361111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "ニューヨーク州マンハッタンのかつての超高層ビル群"
+            ]
+          }
+        },
+        {
+          "pageid": 296181,
+          "ns": 0,
+          "title": "筑波山ロープウェイ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "つくはさんろおふうえい",
+            "page_image_free": "Mt_Tsukuba_Ropeway.jpg",
+            "wikibase_item": "Q6924215"
+          },
+          "terms": {
+            "description": [
+              "茨城県つくば市にある筑波山を登る筑波観光鉄道のロープウェイ"
+            ]
+          }
+        },
+        {
+          "pageid": 436036,
+          "ns": 0,
+          "title": "ブルジュ・ハリファ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふるしゆはりふあ",
+            "page_image_free": "Burj_Khalifa_(worlds_tallest_building)_and_the_Dubai_skyline_(25781049892).jpg",
+            "wikibase_item": "Q12495"
+          },
+          "coordinates": [
+            {
+              "lat": 25.19713889,
+              "lon": 55.27411111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "アラブ首長国連邦の超高層ビル"
+            ]
+          }
+        },
+        {
+          "pageid": 2203914,
+          "ns": 0,
+          "title": "マリーナベイ・サンズ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "まりいなへいさんす",
+            "page_image_free": "Marina_Bay_Sands_in_the_evening_-_20101120.jpg",
+            "wikibase_item": "Q548679"
+          },
+          "coordinates": [
+            {
+              "lat": 1.28265,
+              "lon": 103.85841667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "シンガポールのマリーナ・ベイに面した統合型リゾート"
+            ]
+          }
+        },
+        {
+          "pageid": 3475729,
+          "ns": 0,
+          "title": "グラントーレ・サンティアゴ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "くらんとれさんていあこ",
+            "kartographer_frames": "1",
+            "page_image_free": "Costanera_Center_Sep._13.jpg",
+            "wikibase_item": "Q1542408"
+          },
+          "coordinates": [
+            {
+              "lat": -33.41688889,
+              "lon": -70.60670556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "チリ・サンティアゴの超高層ビル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

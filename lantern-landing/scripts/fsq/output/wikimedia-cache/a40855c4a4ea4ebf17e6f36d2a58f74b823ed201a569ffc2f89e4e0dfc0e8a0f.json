@@ -1,0 +1,130 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:42.719Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 82686,
+          "ns": 0,
+          "title": "東京都庁舎",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようとちようしや",
+            "kartographer_frames": "2",
+            "page_image_free": "Tokyo_Metropolitan_Government_Building_No.1_200908.jpg",
+            "wikibase_item": "Q111973"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6895,
+              "lon": 139.69175,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区にある行政施設"
+            ]
+          }
+        },
+        {
+          "pageid": 179940,
+          "ns": 0,
+          "title": "東京スカイツリー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようすかいつりい",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Skytree_2014_Ⅲ.jpg",
+            "wikibase_item": "Q57965"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71013889,
+              "lon": 139.81083333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区の電波塔"
+            ]
+          }
+        },
+        {
+          "pageid": 276904,
+          "ns": 0,
+          "title": "新宿NSビル",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しんしゆくえぬえすひる",
+            "page_image_free": "Shinjuku-NS-Building-04.jpg",
+            "wikibase_item": "Q863639"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68805556,
+              "lon": 139.69333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区のビル"
+            ]
+          }
+        },
+        {
+          "pageid": 1731153,
+          "ns": 0,
+          "title": "東京タワー",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようたわあ",
+            "kartographer_frames": "1",
+            "page_image_free": "日本電波塔（東京タワー）.jpg",
+            "wikibase_item": "Q183536"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65861111,
+              "lon": 139.74555556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある電波塔"
+            ]
+          }
+        },
+        {
+          "pageid": 1994211,
+          "ns": 0,
+          "title": "東京都道新宿副都心十二号線",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようととうしんしゆくふくとしん12",
+            "page_image_free": "新宿副都心十二号線.jpg",
+            "wikibase_item": "Q11525881"
+          },
+          "terms": {
+            "description": [
+              "東京都の道路"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

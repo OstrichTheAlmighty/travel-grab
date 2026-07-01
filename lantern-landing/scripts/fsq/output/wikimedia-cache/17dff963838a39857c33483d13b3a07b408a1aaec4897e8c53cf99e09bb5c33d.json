@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:33.459Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 602166,
+          "ns": 0,
+          "title": "Ogata Kōrin",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Ogata, Korin",
+            "wikibase-shortdesc": "Japanese visual artist (1658–1716)",
+            "wikibase_item": "Q952938"
+          },
+          "terms": {
+            "description": [
+              "Japanese painter, craftsman (1658-1716)"
+            ]
+          }
+        },
+        {
+          "pageid": 3163241,
+          "ns": 0,
+          "title": "Nezu Museum",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "2018_Nezu_Museum_1.jpg",
+            "wikibase-shortdesc": "Art museum in Tokyo, Japan",
+            "wikibase_item": "Q1047097"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66215,
+              "lon": 139.71703,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "art museum"
+            ]
+          }
+        },
+        {
+          "pageid": 6074829,
+          "ns": 0,
+          "title": "Nezu",
+          "index": 3,
+          "pageprops": {
+            "disambiguation": "",
+            "wikibase-shortdesc": "Topics referred to by the same term",
+            "wikibase_item": "Q1984045"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        },
+        {
+          "pageid": 50552199,
+          "ns": 0,
+          "title": "Nezu Kaichirō",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Nezu Kaichiro",
+            "page_image_free": "NEZU_Kaichiro_I.jpg",
+            "wikibase_item": "Q11536442"
+          },
+          "terms": {
+            "description": [
+              "Japanese politician and businessperson (1860-1940)"
+            ]
+          }
+        },
+        {
+          "pageid": 54457666,
+          "ns": 0,
+          "title": "Irises screen",
+          "index": 2,
+          "pageprops": {
+            "displaytitle": "<i>Irises</i> screen",
+            "wikibase-shortdesc": "Pair of folding screens by Japanese artist Ogata Kōrin",
+            "wikibase_item": "Q31892412"
+          },
+          "terms": {
+            "description": [
+              "pair of folding screens Ogata Kōrin"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

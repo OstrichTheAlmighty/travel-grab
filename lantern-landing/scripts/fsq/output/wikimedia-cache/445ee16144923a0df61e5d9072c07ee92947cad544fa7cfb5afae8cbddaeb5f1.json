@@ -1,0 +1,128 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:51.099Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 63865,
+          "ns": 0,
+          "title": "築地市場",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "つきしいちは",
+            "page_image_free": "2018_Tsukiji_fish_market.jpg",
+            "wikibase_item": "Q859471"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66138889,
+              "lon": 139.76972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて東京都中央区築地に存在した公設卸売市場"
+            ]
+          }
+        },
+        {
+          "pageid": 246749,
+          "ns": 0,
+          "title": "市場前駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ししようまえ",
+            "kartographer_frames": "1",
+            "page_image_free": "Toyosu_fish_market-1a1.jpg",
+            "wikibase_item": "Q859054"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64566667,
+              "lon": 139.78563889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区豊洲にあるゆりかもめの駅"
+            ]
+          }
+        },
+        {
+          "pageid": 922559,
+          "ns": 0,
+          "title": "豊洲市場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とよすししよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Toyosu_Market_Tokyo_2.jpg",
+            "wikibase_item": "Q11633916"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区豊洲に所在する公設卸売市場"
+            ]
+          }
+        },
+        {
+          "pageid": 946532,
+          "ns": 0,
+          "title": "ガスの科学館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かすのかかくかん",
+            "page_image_free": "Gas_Science_Museum_\"Gasutenani\",_at_Toyosu,_Koto,_Tokyo_(2019-01-01).jpg",
+            "wikibase_item": "Q11295937"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65223056,
+              "lon": 139.79252778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区にある東京ガスが運営する科学館"
+            ]
+          }
+        },
+        {
+          "pageid": 2091320,
+          "ns": 0,
+          "title": "札幌市中央卸売市場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さつほろしちゆうおうおろしうりししよう",
+            "wikibase_item": "Q11521201"
+          },
+          "coordinates": [
+            {
+              "lat": 43.07316667,
+              "lon": 141.32094444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道札幌市にある中央卸売市場"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

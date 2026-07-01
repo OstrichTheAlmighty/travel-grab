@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:34.294Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 57105,
+          "ns": 0,
+          "title": "千歳烏山駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちとせからすやま",
+            "kartographer_frames": "1",
+            "page_image_free": "Chitosekarasuyama-Sta-N.JPG",
+            "wikibase_item": "Q841868"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66819444,
+              "lon": 139.60111111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区南烏山にある京王電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 57112,
+          "ns": 0,
+          "title": "つつじヶ丘駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "つつしかおかえき",
+            "kartographer_frames": "1",
+            "page_image_free": "Keio-sen_Tsutsujigaoka_Station.jpg",
+            "wikibase_item": "Q841913"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65805556,
+              "lon": 139.575,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都調布市西つつじヶ丘にある京王電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 95703,
+          "ns": 0,
+          "title": "繁華街",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はんかかい",
+            "page_image_free": "Ginza-WAKO_at_night.jpg",
+            "wikibase_item": "Q66364404"
+          },
+          "terms": {
+            "description": [
+              "百貨店や専門店、飲食店などの商業施設が多く立ち並び、人が多く集まる地域"
+            ]
+          }
+        },
+        {
+          "pageid": 565603,
+          "ns": 0,
+          "title": "吉祥寺",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きちしようし",
+            "page_image_free": "Kichijoji_N-gate_Square.JPG",
+            "wikibase_item": "Q287771"
+          },
+          "terms": {
+            "description": [
+              "東京都武蔵野市の広域地名"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:49.109Z",
+  "value": {
+    "searchinfo": {
+      "search": "小岩菖蒲園"
+    },
+    "search": [
+      {
+        "id": "Q85879656",
+        "title": "Q85879656",
+        "pageid": 85150163,
+        "concepturi": "http://www.wikidata.org/entity/Q85879656",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q85879656",
+        "display": {
+          "label": {
+            "value": "Koiwa Shōbu Garden",
+            "language": "en"
+          }
+        },
+        "label": "Koiwa Shōbu Garden",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "小岩菖蒲園"
+        },
+        "aliases": [
+          "小岩菖蒲園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

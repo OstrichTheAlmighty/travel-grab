@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:48.562Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 37585,
+          "ns": 0,
+          "title": "Museum",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Museo_Chileno_de_Arte_Precolombino_-_2020_-_10.jpg",
+            "wikibase-shortdesc": "Institution preserving and interpreting collections or heritage",
+            "wikibase_item": "Q33506"
+          },
+          "terms": {
+            "description": [
+              "institution that holds artifacts and other objects of scientific, artistic, cultural, historical, or other importance"
+            ]
+          }
+        },
+        {
+          "pageid": 170318,
+          "ns": 0,
+          "title": "20th Century Studios",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "20th_Century_Studios_(2020).svg",
+            "wikibase-shortdesc": "American film production and distribution company",
+            "wikibase_item": "Q434841"
+          },
+          "terms": {
+            "description": [
+              "American film studio owned by The Walt Disney Company"
+            ]
+          }
+        },
+        {
+          "pageid": 18764957,
+          "ns": 0,
+          "title": "Night at the Museum: Battle of the Smithsonian",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Night At The Museum: Battle Of The Smithsonian",
+            "displaytitle": "<i>Night at the Museum: Battle of the Smithsonian</i>",
+            "page_image": "Night_at_the_Museum_2_poster.jpg",
+            "wikibase-shortdesc": "2009 film directed by Shawn Levy",
+            "wikibase_item": "Q476726"
+          },
+          "terms": {
+            "description": [
+              "2009 film directed by Shawn Levy"
+            ]
+          }
+        },
+        {
+          "pageid": 22546727,
+          "ns": 0,
+          "title": "Spam Museum",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Spam_Museum.jpg",
+            "wikibase-shortdesc": "Museum in Minnesota, United States",
+            "wikibase_item": "Q24061396"
+          },
+          "coordinates": [
+            {
+              "lat": 43.66930556,
+              "lon": -92.97458333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "museum in Minnesota, United States"
+            ]
+          }
+        },
+        {
+          "pageid": 25224397,
+          "ns": 0,
+          "title": "21st Century Museum of Contemporary Art, Kanazawa",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "21st_Century_Museum_of_Contemporary_Art,_Kanazawa011.jpg",
+            "wikibase-shortdesc": "Japanese museum",
+            "wikibase_item": "Q3242206"
+          },
+          "coordinates": [
+            {
+              "lat": 36.56083333,
+              "lon": 136.65805556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "art museum in Kanazawa, Ishikawa, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:21.673Z",
+  "value": {
+    "searchinfo": {
+      "search": "日本武道館"
+    },
+    "search": [
+      {
+        "id": "Q386246",
+        "title": "Q386246",
+        "pageid": 367529,
+        "concepturi": "http://www.wikidata.org/entity/Q386246",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q386246",
+        "display": {
+          "label": {
+            "value": "Nippon Budōkan",
+            "language": "en"
+          },
+          "description": {
+            "value": "indoor arena located in Chiyoda, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Nippon Budōkan",
+        "description": "indoor arena located in Chiyoda, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "日本武道館"
+        },
+        "aliases": [
+          "日本武道館"
+        ]
+      },
+      {
+        "id": "Q116982889",
+        "title": "Q116982889",
+        "pageid": 111776333,
+        "concepturi": "http://www.wikidata.org/entity/Q116982889",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q116982889",
+        "display": {
+          "label": {
+            "value": "Nippon Budokan",
+            "language": "en"
+          },
+          "description": {
+            "value": "Management operator of Nippon Budokan",
+            "language": "en"
+          }
+        },
+        "label": "Nippon Budokan",
+        "description": "Management operator of Nippon Budokan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "日本武道館"
+        },
+        "aliases": [
+          "日本武道館"
+        ]
+      },
+      {
+        "id": "Q11508368",
+        "title": "Q11508368",
+        "pageid": 12648085,
+        "concepturi": "http://www.wikidata.org/entity/Q11508368",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11508368",
+        "display": {
+          "label": {
+            "value": "日本武道館 -2011年4月24日 ROCK & SOUL 2010-2011 TOUR FINAL-",
+            "language": "ja"
+          },
+          "description": {
+            "value": "album by Shunsuke Kiyokiba",
+            "language": "en"
+          }
+        },
+        "label": "日本武道館 -2011年4月24日 ROCK & SOUL 2010-2011 TOUR FINAL-",
+        "description": "album by Shunsuke Kiyokiba",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "日本武道館 -2011年4月24日 ROCK & SOUL 2010-2011 TOUR FINAL-"
+        }
+      },
+      {
+        "id": "Q27972413",
+        "title": "Q27972413",
+        "pageid": 29677488,
+        "concepturi": "http://www.wikidata.org/entity/Q27972413",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q27972413",
+        "display": {
+          "label": {
+            "value": "日本武道館における公演",
+            "language": "ja"
+          }
+        },
+        "label": "日本武道館における公演",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "日本武道館における公演"
+        }
+      },
+      {
+        "id": "Q11508367",
+        "title": "Q11508367",
+        "pageid": 12648084,
+        "concepturi": "http://www.wikidata.org/entity/Q11508367",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11508367",
+        "display": {
+          "label": {
+            "value": "日本武道館 -2010年1月31日 FLYING JET TOUR 2009〜2010 TOUR FINAL-",
+            "language": "ja"
+          },
+          "description": {
+            "value": "album by Shunsuke Kiyokiba",
+            "language": "en"
+          }
+        },
+        "label": "日本武道館 -2010年1月31日 FLYING JET TOUR 2009〜2010 TOUR FINAL-",
+        "description": "album by Shunsuke Kiyokiba",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "日本武道館 -2010年1月31日 FLYING JET TOUR 2009〜2010 TOUR FINAL-"
+        }
+      },
+      {
+        "id": "Q663424",
+        "title": "Q663424",
+        "pageid": 624501,
+        "concepturi": "http://www.wikidata.org/entity/Q663424",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q663424",
+        "display": {
+          "label": {
+            "value": "Live at Budokan",
+            "language": "en"
+          },
+          "description": {
+            "value": "live album by Ozzy Osbourne",
+            "language": "en"
+          }
+        },
+        "label": "Live at Budokan",
+        "description": "live album by Ozzy Osbourne",
+        "match": {
+          "type": "label",
+          "language": "zh",
+          "text": "日本武道館現場"
+        },
+        "aliases": [
+          "日本武道館現場"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

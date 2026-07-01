@@ -1,0 +1,123 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:01.089Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 61470,
+          "ns": 0,
+          "title": "水戸街道",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みとかいとう",
+            "kartographer_frames": "2",
+            "page_image_free": "水戸街道.png",
+            "wikibase_item": "Q3070330"
+          },
+          "terms": {
+            "description": [
+              "江戸と水戸をつなぐ江戸時代の街道"
+            ]
+          }
+        },
+        {
+          "pageid": 156993,
+          "ns": 0,
+          "title": "板橋宿",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いたはししゆく",
+            "page_image_free": "Kisokaido01_Itabashi.jpg",
+            "wikibase_item": "Q3155832"
+          },
+          "coordinates": [
+            {
+              "lat": 35.755074,
+              "lon": 139.709176,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "中山道六十九次のうち江戸・日本橋から数えて1番目の宿場"
+            ]
+          }
+        },
+        {
+          "pageid": 210415,
+          "ns": 0,
+          "title": "千住宿",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せんしゆしゆく",
+            "page_image_free": "Senju_in_the_Musachi_provimce.jpg",
+            "wikibase_item": "Q11405343"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75069,
+              "lon": 139.802313,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日光街道・奥州街道の宿場"
+            ]
+          }
+        },
+        {
+          "pageid": 1949388,
+          "ns": 0,
+          "title": "草加宿",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "そうかしゆく",
+            "page_image_free": "Saitama-ken_géolocalisation_relief.svg",
+            "wikibase_item": "Q11618087"
+          },
+          "coordinates": [
+            {
+              "lat": 35.835336,
+              "lon": 139.80647,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日光街道・奥州街道の2番目の宿駅"
+            ]
+          }
+        },
+        {
+          "pageid": 1949888,
+          "ns": 0,
+          "title": "越ヶ谷宿",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こしかやしゆく",
+            "page_image_free": "越ヶ谷宿及び周辺主要海道.png",
+            "wikibase_item": "Q11636368"
+          },
+          "coordinates": [
+            {
+              "lat": 35.896628,
+              "lon": 139.783114,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

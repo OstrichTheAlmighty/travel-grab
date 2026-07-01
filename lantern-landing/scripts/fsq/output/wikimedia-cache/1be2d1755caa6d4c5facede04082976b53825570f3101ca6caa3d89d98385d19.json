@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:27.223Z",
+  "value": {
+    "searchinfo": {
+      "search": "MoN Takanawa"
+    },
+    "search": [
+      {
+        "id": "Q136463408",
+        "title": "Q136463408",
+        "pageid": 130163691,
+        "concepturi": "http://www.wikidata.org/entity/Q136463408",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q136463408",
+        "display": {
+          "label": {
+            "value": "MoN Takanawa: The Museum of Narratives",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Minato, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "MoN Takanawa: The Museum of Narratives",
+        "description": "museum in Minato, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "MoN Takanawa: The Museum of Narratives"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

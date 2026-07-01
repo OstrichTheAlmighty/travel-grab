@@ -1,0 +1,88 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:20.505Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 35384,
+          "ns": 0,
+          "title": "回転寿司",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かいてんすし",
+            "graph-data-sources": "inline:10",
+            "wikibase_item": "Q1230557"
+          },
+          "terms": {
+            "description": [
+              "日本で一般的な寿司の提供方式"
+            ]
+          }
+        },
+        {
+          "pageid": 84170,
+          "ns": 0,
+          "title": "海賊",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かいそく",
+            "page_image_free": "Flag_of_Edward_England.svg",
+            "wikibase_item": "Q45393"
+          },
+          "terms": {
+            "description": [
+              "海上の船を襲撃し、暴行や略奪などを行うこと"
+            ]
+          }
+        },
+        {
+          "pageid": 1837860,
+          "ns": 0,
+          "title": "みなみの海をすくえ!",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みなみのうみをすくえ",
+            "wikibase_item": "Q11279173"
+          },
+          "terms": {
+            "description": [
+              "日本テレビ『24時間テレビ13』内で放送された東京ムービー制作のテレビアニメスペシャル"
+            ]
+          }
+        },
+        {
+          "pageid": 2510513,
+          "ns": 0,
+          "title": "日米豪印戦略対話",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にちへいこういんせんりやくたいわ",
+            "page_image_free": "Quadrilateral_Security_Dialogue_Countries_(ver_2).svg",
+            "wikibase_item": "Q7268405"
+          },
+          "terms": {
+            "description": [
+              "日米豪印4ヶ国による経済や安全保障を協議する枠組み"
+            ]
+          }
+        },
+        {
+          "pageid": 3898970,
+          "ns": 0,
+          "title": "国鉄UC1形コンテナ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こくてつUC1かたこんてな",
+            "wikibase_item": "Q65255192"
+          }
+        }
+      ]
+    }
+  }
+}

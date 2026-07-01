@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:14.733Z",
+  "value": {
+    "searchinfo": {
+      "search": "渋谷区ふれあい植物センター"
+    },
+    "search": [
+      {
+        "id": "Q110215017",
+        "title": "Q110215017",
+        "pageid": 105291008,
+        "concepturi": "http://www.wikidata.org/entity/Q110215017",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q110215017",
+        "display": {
+          "label": {
+            "value": "Shibuya City Botanical Garden FUREAI",
+            "language": "en"
+          }
+        },
+        "label": "Shibuya City Botanical Garden FUREAI",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "渋谷区ふれあい植物センター"
+        },
+        "aliases": [
+          "渋谷区ふれあい植物センター"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

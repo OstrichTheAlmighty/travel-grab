@@ -1,0 +1,195 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:31.331Z",
+  "value": {
+    "searchinfo": {
+      "search": "道しるべ"
+    },
+    "search": [
+      {
+        "id": "Q22812402",
+        "title": "Q22812402",
+        "pageid": 24833744,
+        "concepturi": "http://www.wikidata.org/entity/Q22812402",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q22812402",
+        "display": {
+          "label": {
+            "value": "signpost",
+            "language": "en"
+          },
+          "description": {
+            "value": "type of road sign",
+            "language": "en"
+          }
+        },
+        "label": "signpost",
+        "description": "type of road sign",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "道しるべ"
+        },
+        "aliases": [
+          "道しるべ"
+        ]
+      },
+      {
+        "id": "Q16980762",
+        "title": "Q16980762",
+        "pageid": 18584703,
+        "concepturi": "http://www.wikidata.org/entity/Q16980762",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q16980762",
+        "display": {
+          "label": {
+            "value": "fingerpost",
+            "language": "en"
+          },
+          "description": {
+            "value": "sign post pointing in the direction of travel",
+            "language": "en"
+          }
+        },
+        "label": "fingerpost",
+        "description": "sign post pointing in the direction of travel",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "道しるべ"
+        },
+        "aliases": [
+          "道しるべ"
+        ]
+      },
+      {
+        "id": "Q28688364",
+        "title": "Q28688364",
+        "pageid": 30347959,
+        "concepturi": "http://www.wikidata.org/entity/Q28688364",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q28688364",
+        "display": {
+          "label": {
+            "value": "Michi Shirube",
+            "language": "en"
+          },
+          "description": {
+            "value": "2017 single by Busaiku",
+            "language": "en"
+          }
+        },
+        "label": "Michi Shirube",
+        "description": "2017 single by Busaiku",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "道しるべ"
+        },
+        "aliases": [
+          "道しるべ"
+        ]
+      },
+      {
+        "id": "Q7944306",
+        "title": "Q7944306",
+        "pageid": 7884771,
+        "concepturi": "http://www.wikidata.org/entity/Q7944306",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q7944306",
+        "display": {
+          "label": {
+            "value": "Vägmärken",
+            "language": "en"
+          },
+          "description": {
+            "value": "book by Dag Hammarskjöld",
+            "language": "en"
+          }
+        },
+        "label": "Vägmärken",
+        "description": "book by Dag Hammarskjöld",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "道しるべ"
+        },
+        "aliases": [
+          "道しるべ"
+        ]
+      },
+      {
+        "id": "Q119344789",
+        "title": "Q119344789",
+        "pageid": 113836341,
+        "concepturi": "http://www.wikidata.org/entity/Q119344789",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q119344789",
+        "display": {
+          "label": {
+            "value": "道しるべ",
+            "language": "ja"
+          }
+        },
+        "label": "道しるべ",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "道しるべ"
+        }
+      },
+      {
+        "id": "Q133884863",
+        "title": "Q133884863",
+        "pageid": 127755759,
+        "concepturi": "http://www.wikidata.org/entity/Q133884863",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q133884863",
+        "display": {
+          "label": {
+            "value": "道しるべ",
+            "language": "ja"
+          },
+          "description": {
+            "value": "The theme song for the 200th anniversary of Don Bosco's birth",
+            "language": "en"
+          }
+        },
+        "label": "道しるべ",
+        "description": "The theme song for the 200th anniversary of Don Bosco's birth",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "道しるべ"
+        }
+      },
+      {
+        "id": "Q11233253",
+        "title": "Q11233253",
+        "pageid": 12383319,
+        "concepturi": "http://www.wikidata.org/entity/Q11233253",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11233253",
+        "display": {
+          "label": {
+            "value": "道しるべ (mihimaru GTの曲)",
+            "language": "ja"
+          },
+          "description": {
+            "value": "album by Mihimaru GT",
+            "language": "en"
+          }
+        },
+        "label": "道しるべ (mihimaru GTの曲)",
+        "description": "album by Mihimaru GT",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "道しるべ (mihimaru GTの曲)"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

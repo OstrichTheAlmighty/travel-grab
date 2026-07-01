@@ -1,0 +1,129 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:37.994Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 11272,
+          "ns": 0,
+          "title": "国際花と緑の博覧会",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こくさいはなとみとりのはくらんかい",
+            "page_image_free": "Expo’90.svg",
+            "wikibase_item": "Q903645"
+          },
+          "terms": {
+            "description": [
+              "1990年に大阪府の鶴見緑地で行われた国際博覧会"
+            ]
+          }
+        },
+        {
+          "pageid": 35904,
+          "ns": 0,
+          "title": "緑区 (名古屋市)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みとりく",
+            "page_image_free": "Arimatsu_Historic_Townscape,_Arimatsu_Midori_Ward_Nagoya_2022.jpg",
+            "wikibase_item": "Q1155209"
+          },
+          "coordinates": [
+            {
+              "lat": 35.07080556,
+              "lon": 136.95233333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県名古屋市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 46866,
+          "ns": 0,
+          "title": "花博記念公園鶴見緑地",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はなはくきんえこうえんつるみりよくち",
+            "kartographer_frames": "1",
+            "page_image_free": "Tsurumi-ryokuchi1-R.jpg",
+            "wikibase_item": "Q11615139"
+          },
+          "coordinates": [
+            {
+              "lat": 34.71338889,
+              "lon": 135.57472222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪府大阪市鶴見区と守口市にまたがる公園"
+            ]
+          }
+        },
+        {
+          "pageid": 929911,
+          "ns": 0,
+          "title": "大阪市立長居植物園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおさかしりつなかいしよくふつえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Nemophila_field_at_Nagai_Botanical_Garden.jpg",
+            "wikibase_item": "Q6149771"
+          },
+          "coordinates": [
+            {
+              "lat": 34.6105,
+              "lon": 135.52158333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪市の植物園"
+            ]
+          }
+        },
+        {
+          "pageid": 2503616,
+          "ns": 0,
+          "title": "グランモール公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "くらんもおるこうえん",
+            "page_image_free": "Granmole_Park_-01R_(2017).jpg",
+            "wikibase_item": "Q11300416"
+          },
+          "coordinates": [
+            {
+              "lat": 35.45716667,
+              "lon": 139.63116667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "横浜市西区にある公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

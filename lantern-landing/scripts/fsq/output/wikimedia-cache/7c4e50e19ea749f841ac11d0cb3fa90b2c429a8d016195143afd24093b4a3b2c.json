@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:28.361Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 66377,
+          "ns": 0,
+          "title": "千駄木駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せんたき",
+            "kartographer_frames": "1",
+            "page_image_free": "Sendagi-station-Exit1.jpg",
+            "wikibase_item": "Q390662"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72555556,
+              "lon": 139.76325,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある東京地下鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 140108,
+          "ns": 0,
+          "title": "としまえん",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Toshimaen_main_gate_2019-01-13_(2).jpg",
+            "wikibase_item": "Q423559"
+          },
+          "coordinates": [
+            {
+              "lat": 35.74505556,
+              "lon": 139.64533333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都練馬区にあった遊園地"
+            ]
+          }
+        },
+        {
+          "pageid": 1698572,
+          "ns": 0,
+          "title": "日本ナショナルトラスト",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんなしよなるとらすと",
+            "wikibase_item": "Q3873198"
+          }
+        },
+        {
+          "pageid": 2027029,
+          "ns": 0,
+          "title": "千駄木",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せんたき",
+            "kartographer_frames": "1",
+            "page_image_free": "Mori_Ogai_Memorial_Museum_Sendagi_Bunkyo_Tokyo_Japan_2021.jpg",
+            "wikibase_item": "Q11406891"
+          },
+          "terms": {
+            "description": [
+              "東京都文京区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 4038448,
+          "ns": 0,
+          "title": "安田善四郎 (2代目)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やすた せんしろう 2",
+            "page_image_free": "二代目安田善四郎.jpg",
+            "wikibase_item": "Q79017184"
+          }
+        }
+      ]
+    }
+  }
+}

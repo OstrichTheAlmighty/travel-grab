@@ -1,0 +1,86 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:19.008Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 162135,
+          "ns": 0,
+          "title": "第13独立部隊",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たいしゆうさんとくりつふたい",
+            "wikibase_item": "Q11600207"
+          },
+          "terms": {
+            "description": [
+              "ガンダムシリーズの用語"
+            ]
+          }
+        },
+        {
+          "pageid": 243224,
+          "ns": 0,
+          "title": "ペナルティーキック",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "へなるていきつく",
+            "page_image_free": "Ivory_Coast_penalty.jpg",
+            "wikibase_item": "Q279532"
+          },
+          "terms": {
+            "description": [
+              "フリーキックの一種"
+            ]
+          }
+        },
+        {
+          "pageid": 506218,
+          "ns": 0,
+          "title": "瞳そらさないで",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひとみそらさないて",
+            "wikibase_item": "Q11583819"
+          },
+          "terms": {
+            "description": [
+              "DEENのシングル (1994)"
+            ]
+          }
+        },
+        {
+          "pageid": 1642838,
+          "ns": 0,
+          "title": "ウワサの真相/ワグ・ザ・ドッグ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "うわさのしんそうわくさとつく",
+            "wikibase_item": "Q623443"
+          }
+        },
+        {
+          "pageid": 2179599,
+          "ns": 0,
+          "title": "黒宮れい",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "くろみや れい",
+            "wikibase_item": "Q11678086"
+          },
+          "terms": {
+            "description": [
+              "日本のグラビアアイドル、歌手"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

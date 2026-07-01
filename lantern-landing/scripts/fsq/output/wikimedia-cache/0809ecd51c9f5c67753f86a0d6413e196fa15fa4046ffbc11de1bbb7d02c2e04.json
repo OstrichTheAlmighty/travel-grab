@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:32.307Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 680383,
+          "ns": 0,
+          "title": "Tokyo Verdy",
+          "index": 4,
+          "pageprops": {
+            "page_image": "Tokyo_Verdy_logo.svg",
+            "wikibase-shortdesc": "Japanese professional football club",
+            "wikibase_item": "Q620499"
+          },
+          "terms": {
+            "description": [
+              "Japanese football club"
+            ]
+          }
+        },
+        {
+          "pageid": 16360780,
+          "ns": 0,
+          "title": "Ajinomoto Field Nishigaoka",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Nishigaoka_Stadium_1.JPG",
+            "wikibase-shortdesc": "Stadium in Kita, Tokyo, Japan",
+            "wikibase_item": "Q7040543"
+          },
+          "coordinates": [
+            {
+              "lat": 35.76916667,
+              "lon": 139.70777778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "building in Nishigaoka, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 19930804,
+          "ns": 0,
+          "title": "Tokyo Verdy Beleza",
+          "index": 2,
+          "pageprops": {
+            "page_image": "Tokyo_Verdy_logo.svg",
+            "wikibase-shortdesc": "Football club",
+            "wikibase_item": "Q3071871"
+          },
+          "terms": {
+            "description": [
+              "women's association football team of Tokyo Verdy"
+            ]
+          }
+        },
+        {
+          "pageid": 74872143,
+          "ns": 0,
+          "title": "2023 All Japan High School Soccer Tournament",
+          "index": 3,
+          "pageprops": {
+            "wikibase-shortdesc": "Football tournament season",
+            "wikibase_item": "Q123200589"
+          },
+          "terms": {
+            "description": [
+              "football tournament season"
+            ]
+          }
+        },
+        {
+          "pageid": 81784447,
+          "ns": 0,
+          "title": "2025 All Japan High School Soccer Tournament",
+          "index": 5,
+          "pageprops": {
+            "page_image": "2025_All_Japan_High_School_Soccer_Tournament_Logo.png",
+            "wikibase-shortdesc": "Football tournament season",
+            "wikibase_item": "Q137290433"
+          },
+          "terms": {
+            "description": [
+              "football tournament season"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

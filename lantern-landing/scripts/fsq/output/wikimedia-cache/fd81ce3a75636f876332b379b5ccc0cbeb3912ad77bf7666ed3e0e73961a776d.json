@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:11.525Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 66070,
+          "ns": 0,
+          "title": "ジャム",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しやむ",
+            "wikibase_item": "Q1269"
+          },
+          "terms": {
+            "description": [
+              "果物に砂糖を加えて加熱した食品"
+            ]
+          }
+        },
+        {
+          "pageid": 80023,
+          "ns": 0,
+          "title": "南箕輪村",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みなみみのわむら",
+            "page_image_free": "Shinshu_University_agricultural_department.jpg",
+            "wikibase_item": "Q1347404"
+          },
+          "coordinates": [
+            {
+              "lat": 35.87286,
+              "lon": 137.97511,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長野県上伊那郡の村"
+            ]
+          }
+        },
+        {
+          "pageid": 505055,
+          "ns": 0,
+          "title": "マザー牧場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "まさあほくしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "羊の大行進.jpg",
+            "wikibase_item": "Q575499"
+          },
+          "coordinates": [
+            {
+              "lat": 35.24602778,
+              "lon": 139.93483333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県富津市にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 2124269,
+          "ns": 0,
+          "title": "那須ガーデンアウトレット",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "なすかてんあうとれつと",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q11642891"
+          },
+          "coordinates": [
+            {
+              "lat": 36.96614444,
+              "lon": 139.99163889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 3615821,
+          "ns": 0,
+          "title": "十勝ヒルズ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とかちひるす",
+            "page_image_free": "Tokachi_Hills,_Makubetsu,_Hokkaido_-_Aug_13,_2025_(1).jpg",
+            "wikibase_item": "Q30576578"
+          },
+          "coordinates": [
+            {
+              "lat": 42.86333333,
+              "lon": 143.24333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道中川郡幕別町にある施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

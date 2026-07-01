@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:27.410Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3393,
+          "ns": 0,
+          "title": "三越",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みつこし",
+            "page_image_free": "Mitsukoshi_Nihonbashi_main_store_9.jpg",
+            "wikibase_item": "Q1065598"
+          },
+          "terms": {
+            "description": [
+              "日本の百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 125249,
+          "ns": 0,
+          "title": "金子みすゞ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かねこ みすす",
+            "page_image_free": "Kaneko_Misuzu.jpg",
+            "wikibase_item": "Q291489"
+          },
+          "terms": {
+            "description": [
+              "日本の童謡詩人 (1903 - 1930)"
+            ]
+          }
+        },
+        {
+          "pageid": 981241,
+          "ns": 0,
+          "title": "葵タワー",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あおいたわあ",
+            "kartographer_frames": "1",
+            "page_image_free": "Aoi-Tower.jpg",
+            "wikibase_item": "Q11621188"
+          },
+          "coordinates": [
+            {
+              "lat": 34.97258333,
+              "lon": 138.3865,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡市に所在する再開発ビル"
+            ]
+          }
+        },
+        {
+          "pageid": 1159258,
+          "ns": 0,
+          "title": "鈴廣",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すすひろ",
+            "page_image_free": "Suzuhiro_Co.,_Ltd._Head_Office.JPG",
+            "wikibase_item": "Q11648393"
+          },
+          "coordinates": [
+            {
+              "lat": 35.24551417,
+              "lon": 139.12891556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県小田原市に本社を置くかまぼこを中心にした食品会社"
+            ]
+          }
+        },
+        {
+          "pageid": 4632934,
+          "ns": 0,
+          "title": "ファーストペンギン!",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふああすとへんきん",
+            "wikibase_item": "Q113296238"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

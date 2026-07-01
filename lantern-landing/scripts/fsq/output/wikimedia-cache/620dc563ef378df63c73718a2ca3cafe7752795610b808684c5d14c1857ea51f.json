@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:41.548Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 332727,
+          "ns": 0,
+          "title": "History of gardening",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Villandry_Jardins_style_Renaissance.jpg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q1361707"
+          },
+          "terms": {
+            "description": [
+              "aspect of history"
+            ]
+          }
+        },
+        {
+          "pageid": 335956,
+          "ns": 0,
+          "title": "Kōtō",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Koto, Tokyo",
+            "page_image_free": "Great_Harumi_Bridge.jpg",
+            "wikibase-shortdesc": "Special ward in Kantō, Japan",
+            "wikibase_item": "Q215175"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66666667,
+              "lon": 139.81666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "special ward in the Tokyo Metropolis in Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 15025536,
+          "ns": 0,
+          "title": "List of parks and gardens in Tokyo",
+          "index": 3,
+          "pageprops": {
+            "wikibase-shortdesc": "Parks and gardens in Tokyo, Japan",
+            "wikibase_item": "Q5158875"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 31094915,
+          "ns": 0,
+          "title": "Kiyosumi Garden",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Kiyosumi-1.JPG",
+            "wikibase-shortdesc": "Traditional Japanese stroll garden in Fukagawa, Tokyo, Japan",
+            "wikibase_item": "Q4388146"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68,
+              "lon": 139.79777778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "traditional Japanese stroll garden located in Fukagawa, Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 31106805,
+          "ns": 0,
+          "title": "Kyū-Iwasaki-tei Garden",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Former_Iwasaki_Family_House_and_Garden_2010.jpg",
+            "wikibase-shortdesc": "Historic estate in Taitō, Tokyo, Japan",
+            "wikibase_item": "Q1358767"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70972222,
+              "lon": 139.76777778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "park"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

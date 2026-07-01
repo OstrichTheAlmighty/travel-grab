@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:10.472Z",
+  "value": {
+    "searchinfo": {
+      "search": "蘆花恒春園"
+    },
+    "search": [
+      {
+        "id": "Q11625161",
+        "title": "Q11625161",
+        "pageid": 12765596,
+        "concepturi": "http://www.wikidata.org/entity/Q11625161",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11625161",
+        "display": {
+          "label": {
+            "value": "Roka Kōshun-en",
+            "language": "en"
+          }
+        },
+        "label": "Roka Kōshun-en",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "蘆花恒春園"
+        },
+        "aliases": [
+          "蘆花恒春園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

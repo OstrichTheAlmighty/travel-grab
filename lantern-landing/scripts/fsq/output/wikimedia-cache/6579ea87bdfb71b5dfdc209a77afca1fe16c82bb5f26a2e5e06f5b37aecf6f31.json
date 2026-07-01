@@ -1,0 +1,125 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:07.933Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 129096,
+          "ns": 0,
+          "title": "有明コロシアム",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ありあけころしあむ",
+            "page_image_free": "Ariake_Tennis_no_Mori_Kōen_1.jpg",
+            "wikibase_item": "Q3299452"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63633333,
+              "lon": 139.79016667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区にあるスタジアム"
+            ]
+          }
+        },
+        {
+          "pageid": 433138,
+          "ns": 0,
+          "title": "ディファ有明",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ていふあありあけ",
+            "page_image_free": "Differ-Ariake.jpg",
+            "wikibase_item": "Q5275264"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63872222,
+              "lon": 139.78922222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて東京都江東区にあったホール"
+            ]
+          }
+        },
+        {
+          "pageid": 1055214,
+          "ns": 0,
+          "title": "有明 (江東区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ありあけ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ariake_Station,_at_Ariake,_Koto,_Tokyo_(2019-08-13)_01.jpg",
+            "wikibase_item": "Q2861159"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 3483788,
+          "ns": 0,
+          "title": "有明アリーナ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ありあけありいな",
+            "kartographer_frames": "1",
+            "page_image_free": "有明アリーナ_2024年12月16日の東京_202412161406_IMG_4936.jpg",
+            "wikibase_item": "Q28068157"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64355556,
+              "lon": 139.79425,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区にある競技施設"
+            ]
+          }
+        },
+        {
+          "pageid": 4121292,
+          "ns": 0,
+          "title": "有明ガーデン",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ありあけかあてん",
+            "kartographer_frames": "1",
+            "page_image_free": "Ariake_Garden_1.jpg",
+            "wikibase_item": "Q97203037"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63858,
+              "lon": 139.79342,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:31.100Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1288623,
+          "ns": 0,
+          "title": "文化堂",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふんかとう",
+            "page_image_free": "Bunkado_food_store_togoshiginzaten_shinagawa_tokyo_2015.jpg",
+            "wikibase_item": "Q11499802"
+          },
+          "terms": {
+            "description": [
+              "東京、横浜、川崎に展開しているスーパーマーケット"
+            ]
+          }
+        },
+        {
+          "pageid": 1644116,
+          "ns": 0,
+          "title": "阿佐ヶ谷姉妹",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あさかやしまい",
+            "wikibase_item": "Q11657217"
+          },
+          "terms": {
+            "description": [
+              "日本の女性お笑いコンビ"
+            ]
+          }
+        },
+        {
+          "pageid": 1668627,
+          "ns": 0,
+          "title": "阿佐ヶ谷住宅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あさかやたんち",
+            "page_image_free": "The_Terrace_House_in_Asagaya_residence,_Tokyo.jpg",
+            "wikibase_item": "Q11657216"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69618,
+              "lon": 139.63362,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1690273,
+          "ns": 0,
+          "title": "杉並区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すきなみく",
+            "kartographer_frames": "1",
+            "page_image_free": "2018_Kōenji.jpg",
+            "wikibase_item": "Q232631"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6995,
+              "lon": 139.63642,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 4444937,
+          "ns": 0,
+          "title": "阿佐ヶ谷姉妹の のほほんふたり暮らし",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あさかやしまいの のほほんふたりくらし",
+            "wikibase_item": "Q109602101"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:31.205Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 11056,
+          "ns": 0,
+          "title": "平壌市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひよんやん",
+            "kartographer_frames": "1",
+            "page_image_free": "Pyongyang_montage.png",
+            "wikibase_item": "Q18808"
+          },
+          "coordinates": [
+            {
+              "lat": 39.031859,
+              "lon": 125.753765,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北朝鮮の首都"
+            ]
+          }
+        },
+        {
+          "pageid": 14989,
+          "ns": 0,
+          "title": "キムチ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きむち",
+            "page_image_free": "Gimchi.jpg",
+            "wikibase_item": "Q141898"
+          },
+          "terms": {
+            "description": [
+              "朝鮮半島発祥の漬物"
+            ]
+          }
+        },
+        {
+          "pageid": 50876,
+          "ns": 0,
+          "title": "各務原市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かかみかはらし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kawashima-Parking-Area-1.jpg",
+            "wikibase_item": "Q641491"
+          },
+          "coordinates": [
+            {
+              "lat": 35.39881,
+              "lon": 136.84842,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "岐阜県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 704067,
+          "ns": 0,
+          "title": "漣川郡",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "よんちよん",
+            "page_image_free": "Q483790_Yeoncheon_01.jpg",
+            "wikibase_item": "Q50258"
+          },
+          "terms": {
+            "description": [
+              "韓国・京畿道にある郡"
+            ]
+          }
+        },
+        {
+          "pageid": 834771,
+          "ns": 0,
+          "title": "コエックスモール",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こえつくすもる",
+            "page_image_free": "별마당.jpg",
+            "wikibase_item": "Q490387"
+          },
+          "coordinates": [
+            {
+              "lat": 37.51194444,
+              "lon": 127.05888889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:43.128Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 231443,
+          "ns": 0,
+          "title": "井原慶子",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いはら けいこ",
+            "page_image_free": "KeikoIhara_p.jpg",
+            "wikibase_item": "Q6383677"
+          },
+          "terms": {
+            "description": [
+              "日本の女性レーサー"
+            ]
+          }
+        },
+        {
+          "pageid": 4460638,
+          "ns": 0,
+          "title": "カズレーザーと学ぶ。",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かすれえさあとまなふ",
+            "wikibase_item": "Q116251777"
+          },
+          "terms": {
+            "description": [
+              "日本テレビのテレビ番組 (2021-2025)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

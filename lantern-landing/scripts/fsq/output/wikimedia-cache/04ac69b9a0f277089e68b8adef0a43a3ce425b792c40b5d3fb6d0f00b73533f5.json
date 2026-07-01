@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:17:49.727Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 57466,
+          "ns": 0,
+          "title": "専修大学",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せんしゆうたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Senshu_University_Kanda_Campus_1.jpg",
+            "wikibase_item": "Q1062568"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69683333,
+              "lon": 139.75383333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 60997,
+          "ns": 0,
+          "title": "さいたま新都心",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さいたましんとしん",
+            "page_image_free": "Japanese_Saitama_Shintoshin_west_building.jpg",
+            "wikibase_item": "Q7402542"
+          },
+          "terms": {
+            "description": [
+              "さいたま市中央区に設置された新都心"
+            ]
+          }
+        },
+        {
+          "pageid": 268662,
+          "ns": 0,
+          "title": "横浜赤レンガ倉庫",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "よこはまあかれんかそうこ",
+            "page_image_free": "Yokohama_Red_Brick_Warehouse_2012.JPG",
+            "wikibase_item": "Q5363823"
+          },
+          "terms": {
+            "description": [
+              "横浜市の新港埠頭にある歴史的建造物"
+            ]
+          }
+        },
+        {
+          "pageid": 1708037,
+          "ns": 0,
+          "title": "丸の内パークビルディング",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "まるのうちはくひるていんく",
+            "kartographer_frames": "1",
+            "page_image_free": "Marunouchi_Park_Building_2016.jpg",
+            "wikibase_item": "Q11367941"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67898056,
+              "lon": 139.76305833,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区のビル"
+            ]
+          }
+        },
+        {
+          "pageid": 2322074,
+          "ns": 0,
+          "title": "日比谷ダイビル",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひひやたいひる",
+            "page_image_free": "Hibiya_Daibiru.JPG",
+            "wikibase_item": "Q11509580"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67003333,
+              "lon": 139.75672222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区のビル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

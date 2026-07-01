@@ -1,0 +1,86 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:41.662Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3073059,
+          "ns": 0,
+          "title": "禁断の多数決",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きんだんのたすうけつ",
+            "wikibase_item": "Q18233278"
+          },
+          "terms": {
+            "description": [
+              "日本の音楽グループ"
+            ]
+          }
+        },
+        {
+          "pageid": 3397458,
+          "ns": 0,
+          "title": "マジカル・パンチライン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ましかるはんちらいん",
+            "wikibase_item": "Q24863825"
+          },
+          "terms": {
+            "description": [
+              "日本のアイドルグループ"
+            ]
+          }
+        },
+        {
+          "pageid": 3537044,
+          "ns": 0,
+          "title": "2017年の日本",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "2017ねんのにほん",
+            "page_image_free": "Flag_of_Japan.svg",
+            "wikibase_item": "Q28091970"
+          }
+        },
+        {
+          "pageid": 3585498,
+          "ns": 0,
+          "title": "石若駿",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いしわか しゆん",
+            "wikibase_item": "Q30928853"
+          },
+          "terms": {
+            "description": [
+              "日本のジャズ・ドラマー (1992-)"
+            ]
+          }
+        },
+        {
+          "pageid": 4146933,
+          "ns": 0,
+          "title": "月森楓",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "つきもり かえて",
+            "wikibase_item": "Q97280509"
+          },
+          "terms": {
+            "description": [
+              "日本の声優・アイドル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

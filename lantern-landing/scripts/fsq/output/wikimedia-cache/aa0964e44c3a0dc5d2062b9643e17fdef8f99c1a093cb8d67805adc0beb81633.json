@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:06.899Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 83393,
+          "ns": 0,
+          "title": "八重洲",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やえす",
+            "kartographer_frames": "1",
+            "page_image_free": "Yaesu_Street_from_Tokyo_Station_Yaesu_exit.jpg",
+            "wikibase_item": "Q1249041"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の町丁"
+            ]
+          }
+        },
+        {
+          "pageid": 103335,
+          "ns": 0,
+          "title": "築地",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "つきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Tsukiji_2015.jpg",
+            "wikibase_item": "Q1201337"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 828639,
+          "ns": 0,
+          "title": "宇品",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "うしな",
+            "page_image_free": "Old_Hiroshima_Port_and_Harbor_Promotion_Office_01.JPG",
+            "wikibase_item": "Q11449164"
+          },
+          "terms": {
+            "description": [
+              "広島市南区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 1122135,
+          "ns": 0,
+          "title": "明石町 (東京都中央区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あかしちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "St._Luke's_College_of_Nursing_(2006.05.06)_1.jpg",
+            "wikibase_item": "Q11512542"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 1255359,
+          "ns": 0,
+          "title": "京橋 (東京都中央区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きようはし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kyobashi_Edogrand_2019.jpg",
+            "wikibase_item": "Q1795217"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

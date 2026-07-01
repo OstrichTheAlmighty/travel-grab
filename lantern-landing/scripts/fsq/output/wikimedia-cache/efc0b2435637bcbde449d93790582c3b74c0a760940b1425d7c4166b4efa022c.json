@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:24.732Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 12448,
+          "ns": 0,
+          "title": "近点・遠点",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きんてんえんてん",
+            "page_image_free": "Elliptical-orbit.png",
+            "wikibase_item": "Q83481"
+          }
+        },
+        {
+          "pageid": 140108,
+          "ns": 0,
+          "title": "としまえん",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Toshimaen_main_gate_2019-01-13_(2).jpg",
+            "wikibase_item": "Q423559"
+          },
+          "coordinates": [
+            {
+              "lat": 35.74505556,
+              "lon": 139.64533333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都練馬区にあった遊園地"
+            ]
+          }
+        },
+        {
+          "pageid": 646121,
+          "ns": 0,
+          "title": "ゆずえん",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ゆすえん",
+            "wikibase_item": "Q11280779"
+          },
+          "terms": {
+            "description": [
+              "ゆずのアルバム"
+            ]
+          }
+        },
+        {
+          "pageid": 4176021,
+          "ns": 0,
+          "title": "ぴえん",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひえん",
+            "page_image_free": "Noto_Emoji_R_1f97a.svg",
+            "wikibase_item": "Q97435608"
+          },
+          "terms": {
+            "description": [
+              "泣いているさまを表す擬態語"
+            ]
+          }
+        },
+        {
+          "pageid": 4689762,
+          "ns": 0,
+          "title": "まいまいまいごえん",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "まいまいまいこえん",
+            "wikibase_item": "Q115445304"
+          },
+          "terms": {
+            "description": [
+              "サンリオによるキャラクタープロジェクト、メディアミックス作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

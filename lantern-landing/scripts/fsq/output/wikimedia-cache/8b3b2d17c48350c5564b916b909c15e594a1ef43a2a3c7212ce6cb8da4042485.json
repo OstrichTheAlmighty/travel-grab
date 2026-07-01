@@ -1,0 +1,60 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:28.460Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 90979,
+          "ns": 0,
+          "title": "上野の森美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "うえののもりひしゆつかん",
+            "page_image_free": "Ueno_Royal_Museum.JPG",
+            "wikibase_item": "Q11360245"
+          },
+          "coordinates": [
+            {
+              "lat": 35.712722,
+              "lon": 139.774806,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 4499267,
+          "ns": 0,
+          "title": "井田幸昌",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いた ゆきまさ",
+            "wikibase_item": "Q119930135"
+          },
+          "terms": {
+            "description": [
+              "日本の画家、現代美術家"
+            ]
+          }
+        },
+        {
+          "pageid": 4911787,
+          "ns": 0,
+          "title": "VOCA",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほか",
+            "unexpectedUnconnectedPage": "0"
+          }
+        }
+      ]
+    }
+  }
+}

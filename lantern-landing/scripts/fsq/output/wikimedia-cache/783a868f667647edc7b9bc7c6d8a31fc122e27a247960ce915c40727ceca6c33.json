@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:36.046Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 2006952,
+          "ns": 0,
+          "title": "Emio",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えみお",
+            "wikibase_item": "Q11198291"
+          },
+          "terms": {
+            "description": [
+              "西武グルーブの駅ナカ商業施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

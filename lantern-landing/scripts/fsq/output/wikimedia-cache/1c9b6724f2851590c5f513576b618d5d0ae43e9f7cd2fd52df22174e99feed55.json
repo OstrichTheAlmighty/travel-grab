@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:18.403Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 78296,
+          "ns": 0,
+          "title": "東京都道・神奈川県道3号世田谷町田線",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "三軒茶屋交差点0001.jpg",
+            "wikibase_item": "Q11525868"
+          },
+          "terms": {
+            "description": [
+              "東京都と神奈川県の道路"
+            ]
+          }
+        },
+        {
+          "pageid": 258785,
+          "ns": 0,
+          "title": "世田谷区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せたかやく",
+            "kartographer_frames": "1",
+            "page_image_free": "Seijo_namikimichi_231011.jpg",
+            "wikibase_item": "Q231645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64656,
+              "lon": 139.65322,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 259664,
+          "ns": 0,
+          "title": "三軒茶屋",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さんけんちやや",
+            "kartographer_frames": "1",
+            "page_image_free": "Sangenjaya,_Setagaya_City_-_panoramio.jpg",
+            "wikibase_item": "Q11357338"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 287028,
+          "ns": 0,
+          "title": "ボロ市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほろいち",
+            "page_image_free": "2012_Setagaya_Boro-Ichi_02.JPG",
+            "wikibase_item": "Q11338823"
+          }
+        },
+        {
+          "pageid": 1154018,
+          "ns": 0,
+          "title": "世田谷 (世田谷区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せたかや",
+            "kartographer_frames": "1",
+            "page_image_free": "Setagaya_Ward_Office_2009.jpg",
+            "wikibase_item": "Q11362055"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

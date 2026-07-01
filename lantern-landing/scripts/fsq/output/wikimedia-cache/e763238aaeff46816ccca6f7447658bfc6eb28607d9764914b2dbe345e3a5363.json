@@ -1,0 +1,137 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:05.876Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 119839,
+          "ns": 0,
+          "title": "青山霊園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あおやまれいえん",
+            "page_image_free": "Aoyama_cemetery.jpg",
+            "wikibase_item": "Q1036028"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66666667,
+              "lon": 139.72222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の霊園"
+            ]
+          }
+        },
+        {
+          "pageid": 812917,
+          "ns": 0,
+          "title": "北区 (新潟市)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きたく",
+            "page_image_free": "Fukushimagata.jpg",
+            "wikibase_item": "Q711739"
+          },
+          "coordinates": [
+            {
+              "lat": 37.91347222,
+              "lon": 139.22161111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "新潟県新潟市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 1596036,
+          "ns": 0,
+          "title": "港区 (東京都)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みなとく",
+            "kartographer_frames": "1",
+            "page_image_free": "20110405-TokyoTower-Sakura01.jpg",
+            "wikibase_item": "Q190088"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65803,
+              "lon": 139.75153,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 1731724,
+          "ns": 0,
+          "title": "青山公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あおやまこうえん",
+            "page_image_free": "Aoyama_park.jpg",
+            "wikibase_item": "Q11661217"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66361111,
+              "lon": 139.72472222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1913137,
+          "ns": 0,
+          "title": "三木市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Miki_hardware_Festival_15.JPG",
+            "wikibase_item": "Q31238"
+          },
+          "coordinates": [
+            {
+              "lat": 34.79692,
+              "lon": 134.99019,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県の市"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

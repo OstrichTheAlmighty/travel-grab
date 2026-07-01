@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:37.879Z",
+  "value": {
+    "searchinfo": {
+      "search": "板橋区立郷土資料館"
+    },
+    "search": [
+      {
+        "id": "Q104696866",
+        "title": "Q104696866",
+        "pageid": 100125385,
+        "concepturi": "http://www.wikidata.org/entity/Q104696866",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q104696866",
+        "display": {
+          "label": {
+            "value": "Itabashi Historical Museum",
+            "language": "en"
+          }
+        },
+        "label": "Itabashi Historical Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "板橋区立郷土資料館"
+        },
+        "aliases": [
+          "板橋区立郷土資料館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:53.340Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 2366980,
+          "ns": 0,
+          "title": "西武バス練馬営業所",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せいふはすねりまえいきようしよ",
+            "page_image_free": "西武バス練馬営業所(南田中車庫).JPG",
+            "wikibase_item": "Q11628889"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7314683,
+              "lon": 139.619195,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

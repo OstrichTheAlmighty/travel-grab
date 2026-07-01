@@ -1,0 +1,71 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:50.406Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 35618,
+          "ns": 0,
+          "title": "新宿御苑",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しんしゆくきよえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Shinjuku_Gyoen_National_Garden_-_sakura_3.JPG",
+            "wikibase_item": "Q776863"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68527778,
+              "lon": 139.70972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都にある国民公園"
+            ]
+          }
+        },
+        {
+          "pageid": 65843,
+          "ns": 0,
+          "title": "新宿御苑前駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しんしゆくきよえんまえ",
+            "kartographer_frames": "1",
+            "page_image_free": "Shinjuku-gyoemmae-station-Exit1.jpg",
+            "wikibase_item": "Q1132610"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68858333,
+              "lon": 139.71069444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区にある東京地下鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 2803466,
+          "ns": 0,
+          "title": "アンリ・マルチネ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "まるちね あんり",
+            "wikibase_item": "Q98605566"
+          }
+        }
+      ]
+    }
+  }
+}

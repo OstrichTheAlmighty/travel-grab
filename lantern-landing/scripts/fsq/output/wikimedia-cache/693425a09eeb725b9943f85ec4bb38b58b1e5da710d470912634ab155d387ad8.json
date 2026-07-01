@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:40.721Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 54558,
+          "ns": 0,
+          "title": "下北沢",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しもきたさわ",
+            "page_image_free": "Shimokitazawa_Street_2015.jpg",
+            "wikibase_item": "Q735384"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66152778,
+              "lon": 139.67361111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区北沢および下北沢駅の周辺地域を指す呼称"
+            ]
+          }
+        },
+        {
+          "pageid": 59201,
+          "ns": 0,
+          "title": "祖師ヶ谷大蔵駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "そしかやおおくらえき",
+            "kartographer_frames": "1",
+            "page_image_free": "Odakyu_Soshigayaookura_sta_001.jpg",
+            "wikibase_item": "Q4429457"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64316667,
+              "lon": 139.60927778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区祖師谷にある小田急電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 95703,
+          "ns": 0,
+          "title": "繁華街",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はんかかい",
+            "page_image_free": "Ginza-WAKO_at_night.jpg",
+            "wikibase_item": "Q66364404"
+          },
+          "terms": {
+            "description": [
+              "百貨店や専門店、飲食店などの商業施設が多く立ち並び、人が多く集まる地域"
+            ]
+          }
+        },
+        {
+          "pageid": 157088,
+          "ns": 0,
+          "title": "東京都道420号鮫洲大山線",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Metropolitan_Road_Route_420_Pass_the_Nakano_Station.jpg",
+            "wikibase_item": "Q11525793"
+          },
+          "terms": {
+            "description": [
+              "東京都の道路"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:44.265Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 41561,
+          "ns": 0,
+          "title": "三ツ沢公園球技場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みつさわこうえんきゆうきしよう",
+            "page_image_free": "Mitsuzawa4.jpg",
+            "wikibase_item": "Q1749770"
+          },
+          "coordinates": [
+            {
+              "lat": 35.46915556,
+              "lon": 139.60374444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "横浜市神奈川区にある球技場"
+            ]
+          }
+        },
+        {
+          "pageid": 41562,
+          "ns": 0,
+          "title": "御崎公園球技場",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みさきこうえんきゆうきしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Inside_View_of_Kobe_Wing_Stadium.jpg",
+            "wikibase_item": "Q494766"
+          },
+          "coordinates": [
+            {
+              "lat": 34.65670833,
+              "lon": 135.16896389,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神戸市兵庫区にある球技場"
+            ]
+          }
+        },
+        {
+          "pageid": 47208,
+          "ns": 0,
+          "title": "静岡市清水日本平運動公園球技場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しすおかししみすにほんたいらうんとうこうえんきゆうきしよう",
+            "page_image_free": "Nihondaira_stadium20090412a.jpg",
+            "wikibase_item": "Q1320974"
+          },
+          "coordinates": [
+            {
+              "lat": 34.98470278,
+              "lon": 138.48138611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡県静岡市にある球技場"
+            ]
+          }
+        },
+        {
+          "pageid": 50768,
+          "ns": 0,
+          "title": "京都市西京極総合運動公園陸上競技場兼球技場",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きようとしにしきようこくそうこううんとうこうえんりくしようきようきしよう",
+            "page_image_free": "Nishikyogoku170930.jpg",
+            "wikibase_item": "Q7040605"
+          },
+          "coordinates": [
+            {
+              "lat": 34.99347778,
+              "lon": 135.71396111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市にある陸上競技場"
+            ]
+          }
+        },
+        {
+          "pageid": 138313,
+          "ns": 0,
+          "title": "長居球技場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なかいきゆうきしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "NagaiBallField220226.jpg",
+            "wikibase_item": "Q3070472"
+          },
+          "coordinates": [
+            {
+              "lat": 34.61538333,
+              "lon": 135.51665556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪市東住吉区にある球技場"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

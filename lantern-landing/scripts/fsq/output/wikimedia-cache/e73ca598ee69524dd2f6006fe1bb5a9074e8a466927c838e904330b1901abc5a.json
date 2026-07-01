@@ -1,0 +1,138 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:39.562Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 9232,
+          "ns": 0,
+          "title": "Eiffel Tower",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tour_Eiffel_Wikimedia_Commons_(cropped).jpg",
+            "wikibase-shortdesc": "Tower in Paris, France",
+            "wikibase_item": "Q243"
+          },
+          "coordinates": [
+            {
+              "lat": 48.85822222,
+              "lon": 2.2945,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "tower located on the Champ de Mars in Paris, France"
+            ]
+          }
+        },
+        {
+          "pageid": 20989,
+          "ns": 0,
+          "title": "Munich massacre",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Germany_Israel_Olympics_Attack.jpg",
+            "wikibase-shortdesc": "1972 Summer Olympics terrorist attack",
+            "wikibase_item": "Q229007"
+          },
+          "coordinates": [
+            {
+              "lat": 48.17972222,
+              "lon": 11.54916667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Palestinian terror attack during the 1972 Summer Olympics in Munich, West Germany"
+            ]
+          }
+        },
+        {
+          "pageid": 550718,
+          "ns": 0,
+          "title": "Olympic Stadium (Montreal)",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Olympic_Stadium_Montreal_(23761669).jpeg",
+            "wikibase-shortdesc": "Stadium in Montreal, Quebec, Canada",
+            "wikibase_item": "Q285467"
+          },
+          "coordinates": [
+            {
+              "lat": 45.558,
+              "lon": -73.552,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "stadium built for the 1976 Olympic Games in Montreal"
+            ]
+          }
+        },
+        {
+          "pageid": 1636270,
+          "ns": 0,
+          "title": "Bell Tower of Berlin Olympic Stadium",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Olympia_Glockenturm_B-Westend_07-2017.jpg",
+            "wikibase-shortdesc": "Observation tower in Berlin, Germany",
+            "wikibase_item": "Q82424"
+          },
+          "coordinates": [
+            {
+              "lat": 52.51388889,
+              "lon": 13.23166667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "tower"
+            ]
+          }
+        },
+        {
+          "pageid": 19596657,
+          "ns": 0,
+          "title": "Montreal Clock Tower",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Clock Tower, Montreal",
+            "kartographer_frames": "1",
+            "page_image_free": "Montreal_Clock_Tower_and_Jacques_Cartier_Bridge01.JPG",
+            "wikibase-shortdesc": "Clock tower in Canada",
+            "wikibase_item": "Q1496045"
+          },
+          "coordinates": [
+            {
+              "lat": 45.51234444,
+              "lon": -73.54578889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "clock tower"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

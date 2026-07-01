@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:11.531Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1028,
+          "ns": 0,
+          "title": "坂本龍一",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さかもと りゆういち",
+            "page_image_free": "Ryuichi_Sakamoto_side.jpg",
+            "wikibase_item": "Q345494"
+          },
+          "terms": {
+            "description": [
+              "日本の音楽家 (1952-2023)"
+            ]
+          }
+        },
+        {
+          "pageid": 48589,
+          "ns": 0,
+          "title": "四天王寺",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "してんのうし",
+            "kartographer_frames": "1",
+            "page_image_free": "Shitennoji06s3200.jpg",
+            "wikibase_item": "Q339859"
+          },
+          "coordinates": [
+            {
+              "lat": 34.6539,
+              "lon": 135.51645,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪市天王寺区にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 71375,
+          "ns": 0,
+          "title": "東寺",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうし",
+            "kartographer_frames": "1",
+            "page_image_free": "Toji_2015.JPG",
+            "wikibase_item": "Q1046403"
+          },
+          "coordinates": [
+            {
+              "lat": 34.98036111,
+              "lon": 135.74769444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市南区にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 83538,
+          "ns": 0,
+          "title": "萬福寺",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "まんふくし",
+            "page_image_free": "260117_Manpuku-ji_Uji_Kyoto_pref_Japan01s3.jpg",
+            "wikibase_item": "Q576318"
+          },
+          "coordinates": [
+            {
+              "lat": 34.91425556,
+              "lon": 135.80606389,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都府宇治市にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 930643,
+          "ns": 0,
+          "title": "長崎県指定文化財一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふんかさいいちらん",
+            "wikibase_item": "Q11652661"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:44.545Z",
+  "value": {
+    "searchinfo": {
+      "search": "堀切菖蒲園"
+    },
+    "search": [
+      {
+        "id": "Q11427321",
+        "title": "Q11427321",
+        "pageid": 12566093,
+        "concepturi": "http://www.wikidata.org/entity/Q11427321",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11427321",
+        "display": {
+          "label": {
+            "value": "Horikiri Iris Garden",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Katsushika, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Horikiri Iris Garden",
+        "description": "park in Katsushika, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "堀切菖蒲園"
+        },
+        "aliases": [
+          "堀切菖蒲園"
+        ]
+      },
+      {
+        "id": "Q5903250",
+        "title": "Q5903250",
+        "pageid": 5673691,
+        "concepturi": "http://www.wikidata.org/entity/Q5903250",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5903250",
+        "display": {
+          "label": {
+            "value": "Horikiri-Shōbuen Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "railway station in Katsushika, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Horikiri-Shōbuen Station",
+        "description": "railway station in Katsushika, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "堀切菖蒲園駅"
+        },
+        "aliases": [
+          "堀切菖蒲園駅"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

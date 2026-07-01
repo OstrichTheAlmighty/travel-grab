@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:57.060Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 144738,
+          "ns": 0,
+          "title": "ニチレイ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にちれい",
+            "page_image_free": "NICHIREI_Logo.svg",
+            "wikibase_item": "Q4921527"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都中央区にある冷凍食品メーカー、低温物流会社"
+            ]
+          }
+        },
+        {
+          "pageid": 2960238,
+          "ns": 0,
+          "title": "Umios",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "うみおす",
+            "page_image_free": "TAKANAWA_GATEWAY_CITY_THE_LINKPILLAR_1_SOUTH_01.jpg",
+            "wikibase_item": "Q18635633"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63577778,
+              "lon": 139.73963889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の食品・水産会社"
+            ]
+          }
+        },
+        {
+          "pageid": 3548939,
+          "ns": 0,
+          "title": "大都魚類",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たいときよるい",
+            "wikibase_item": "Q28691111"
+          },
+          "terms": {
+            "description": [
+              "豊洲市場の水産卸売会社"
+            ]
+          }
+        },
+        {
+          "pageid": 3755179,
+          "ns": 0,
+          "title": "ホウスイ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ほうすい",
+            "page_image_free": "ホウスイ豊海第二冷蔵庫_Mar_18,_2009.jpg",
+            "wikibase_item": "Q53309049"
+          }
+        },
+        {
+          "pageid": 4131685,
+          "ns": 0,
+          "title": "澤田真里愛",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さわた まりあ",
+            "wikibase_item": "Q95163290"
+          },
+          "terms": {
+            "description": [
+              "日本の舞台女優、歌手、声優"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

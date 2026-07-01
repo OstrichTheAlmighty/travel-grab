@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:00.305Z",
+  "value": {
+    "searchinfo": {
+      "search": "Artizon Museum"
+    },
+    "search": [
+      {
+        "id": "Q913808",
+        "title": "Q913808",
+        "pageid": 864276,
+        "concepturi": "http://www.wikidata.org/entity/Q913808",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q913808",
+        "display": {
+          "label": {
+            "value": "Artizon Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Artizon Museum",
+        "description": "art museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Artizon Museum"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

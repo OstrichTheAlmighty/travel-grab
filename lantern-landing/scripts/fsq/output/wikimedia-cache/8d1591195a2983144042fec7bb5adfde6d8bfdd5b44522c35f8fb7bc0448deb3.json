@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:09.781Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 91187,
+          "ns": 0,
+          "title": "大原美術館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおはらひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Kurashiki_Ohara_Art_Museum02nt3200.jpg",
+            "wikibase_item": "Q2977589"
+          },
+          "coordinates": [
+            {
+              "lat": 34.59611111,
+              "lon": 133.77055556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "岡山県倉敷市にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 158108,
+          "ns": 0,
+          "title": "日曜美術館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にちようひしゆつかん",
+            "wikibase_item": "Q11505482"
+          },
+          "terms": {
+            "description": [
+              "NHKの教養番組"
+            ]
+          }
+        },
+        {
+          "pageid": 720493,
+          "ns": 0,
+          "title": "高梁市成羽美術館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たかはししなりわひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Nariwa-cho_museum01s4000m.jpg",
+            "wikibase_item": "Q11670668"
+          },
+          "coordinates": [
+            {
+              "lat": 34.78072222,
+              "lon": 133.53666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "岡山県高梁市にある美術館、考古学系博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 1039293,
+          "ns": 0,
+          "title": "松岡美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "まつおかひしゆつかん",
+            "page_image_free": "Matsuoka_Museum.jpg",
+            "wikibase_item": "Q11530056"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64,
+              "lon": 139.72,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 1221720,
+          "ns": 0,
+          "title": "岡山県立美術館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おかやまけんりつひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "250505_Okayama_Prefectural_Museum_of_Art_Okayama_Japan01s3.jpg",
+            "wikibase_item": "Q4677150"
+          },
+          "terms": {
+            "description": [
+              "岡山市北区にある美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

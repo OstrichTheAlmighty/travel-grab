@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:39.133Z",
+  "value": {
+    "searchinfo": {
+      "search": "Ariake Colosseum"
+    },
+    "search": [
+      {
+        "id": "Q3299452",
+        "title": "Q3299452",
+        "pageid": 3146518,
+        "concepturi": "http://www.wikidata.org/entity/Q3299452",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3299452",
+        "display": {
+          "label": {
+            "value": "Ariake Coliseum",
+            "language": "en"
+          },
+          "description": {
+            "value": "sporting arena",
+            "language": "en"
+          }
+        },
+        "label": "Ariake Coliseum",
+        "description": "sporting arena",
+        "match": {
+          "type": "label",
+          "language": "nl",
+          "text": "Ariake Colosseum"
+        },
+        "aliases": [
+          "Ariake Colosseum"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

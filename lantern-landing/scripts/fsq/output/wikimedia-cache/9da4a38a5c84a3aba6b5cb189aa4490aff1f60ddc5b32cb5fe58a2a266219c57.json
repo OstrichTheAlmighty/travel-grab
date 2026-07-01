@@ -1,0 +1,130 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:46.619Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 279182,
+          "ns": 0,
+          "title": "沼島",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ぬしま",
+            "kartographer_frames": "1",
+            "page_image_free": "Nushima_1.jpg",
+            "wikibase_item": "Q5366609"
+          },
+          "coordinates": [
+            {
+              "lat": 34.1681,
+              "lon": 134.8258,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の兵庫県・紀伊水道にある島"
+            ]
+          }
+        },
+        {
+          "pageid": 716538,
+          "ns": 0,
+          "title": "汐留駅 (国鉄)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しおとめ",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Shiodome_Station_SL_passage_picture.webp",
+            "wikibase_item": "Q7497865"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66583333,
+              "lon": 139.76138889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて東京都港区にあった日本国有鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 1131895,
+          "ns": 0,
+          "title": "静岡市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しすおかし",
+            "kartographer_frames": "1",
+            "page_image_free": "Higashi-Shizuoka_Panorama_02.jpg",
+            "wikibase_item": "Q174691"
+          },
+          "coordinates": [
+            {
+              "lat": 34.9756,
+              "lon": 138.3825,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 2487740,
+          "ns": 0,
+          "title": "琴浦パーキングエリア",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ことうらはあきんくえりあ",
+            "kartographer_frames": "1",
+            "page_image_free": "Kotoura_PA.JPG",
+            "wikibase_item": "Q1151654"
+          },
+          "coordinates": [
+            {
+              "lat": 35.50216667,
+              "lon": 133.65841667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "鳥取県東伯郡琴浦町にある山陰自動車道のパーキングエリア"
+            ]
+          }
+        },
+        {
+          "pageid": 4632934,
+          "ns": 0,
+          "title": "ファーストペンギン!",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふああすとへんきん",
+            "wikibase_item": "Q113296238"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

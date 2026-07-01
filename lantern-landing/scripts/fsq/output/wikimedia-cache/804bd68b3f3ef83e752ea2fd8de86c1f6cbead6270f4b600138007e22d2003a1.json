@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:16.103Z",
+  "value": {
+    "searchinfo": {
+      "search": "忠犬ハチ公"
+    },
+    "search": [
+      {
+        "id": "Q186486",
+        "title": "Q186486",
+        "pageid": 185252,
+        "concepturi": "http://www.wikidata.org/entity/Q186486",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q186486",
+        "display": {
+          "label": {
+            "value": "Hachikō",
+            "language": "en"
+          },
+          "description": {
+            "value": "Akita",
+            "language": "en"
+          }
+        },
+        "label": "Hachikō",
+        "description": "Akita",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "忠犬ハチ公"
+        },
+        "aliases": [
+          "忠犬ハチ公"
+        ]
+      },
+      {
+        "id": "Q124080352",
+        "title": "Q124080352",
+        "pageid": 118254682,
+        "concepturi": "http://www.wikidata.org/entity/Q124080352",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q124080352",
+        "display": {
+          "label": {
+            "value": "Hachiko",
+            "language": "en"
+          },
+          "description": {
+            "value": "2023 film directed by Xu Ang",
+            "language": "en"
+          }
+        },
+        "label": "Hachiko",
+        "description": "2023 film directed by Xu Ang",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "忠犬ハチ公"
+        },
+        "aliases": [
+          "忠犬ハチ公"
+        ]
+      },
+      {
+        "id": "Q62124995",
+        "title": "Q62124995",
+        "pageid": 61947210,
+        "concepturi": "http://www.wikidata.org/entity/Q62124995",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q62124995",
+        "display": {
+          "label": {
+            "value": "Statue of Hachikō",
+            "language": "en"
+          },
+          "description": {
+            "value": "statue in Shibuya, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Statue of Hachikō",
+        "description": "statue in Shibuya, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "忠犬ハチ公像"
+        },
+        "aliases": [
+          "忠犬ハチ公像"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:11.493Z",
+  "value": {
+    "searchinfo": {
+      "search": "エコルとごし"
+    },
+    "search": [
+      {
+        "id": "Q122216557",
+        "title": "Q122216557",
+        "pageid": 116546381,
+        "concepturi": "http://www.wikidata.org/entity/Q122216557",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q122216557",
+        "display": {
+          "label": {
+            "value": "エコルとごし",
+            "language": "ja"
+          }
+        },
+        "label": "エコルとごし",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "エコルとごし"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

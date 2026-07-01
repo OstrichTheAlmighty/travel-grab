@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:30.847Z",
+  "value": {
+    "searchinfo": {
+      "search": "ワタリウム美術館"
+    },
+    "search": [
+      {
+        "id": "Q3915469",
+        "title": "Q3915469",
+        "pageid": 3735265,
+        "concepturi": "http://www.wikidata.org/entity/Q3915469",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3915469",
+        "display": {
+          "label": {
+            "value": "Watari Museum of Contemporary Art",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Watari Museum of Contemporary Art",
+        "description": "museum in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ワタリウム美術館"
+        },
+        "aliases": [
+          "ワタリウム美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

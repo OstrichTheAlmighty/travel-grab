@@ -1,0 +1,63 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:23.863Z",
+  "value": {
+    "searchinfo": {
+      "search": "スカイデッキ"
+    },
+    "search": [
+      {
+        "id": "Q126417062",
+        "title": "Q126417062",
+        "pageid": 120442998,
+        "concepturi": "http://www.wikidata.org/entity/Q126417062",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q126417062",
+        "display": {
+          "label": {
+            "value": "Sky Deck",
+            "language": "en"
+          },
+          "description": {
+            "value": "outdoor observation deck",
+            "language": "en"
+          }
+        },
+        "label": "Sky Deck",
+        "description": "outdoor observation deck",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "スカイデッキ"
+        },
+        "aliases": [
+          "スカイデッキ"
+        ]
+      },
+      {
+        "id": "Q134436319",
+        "title": "Q134436319",
+        "pageid": 128279069,
+        "concepturi": "http://www.wikidata.org/entity/Q134436319",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q134436319",
+        "display": {
+          "label": {
+            "value": "Skydeck (Chubu International Airport)",
+            "language": "en"
+          }
+        },
+        "label": "Skydeck (Chubu International Airport)",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "スカイデッキ"
+        },
+        "aliases": [
+          "スカイデッキ"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

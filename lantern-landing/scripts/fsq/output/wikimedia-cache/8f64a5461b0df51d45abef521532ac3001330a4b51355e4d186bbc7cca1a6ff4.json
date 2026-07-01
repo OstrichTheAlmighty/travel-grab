@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:34.162Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17977,
+          "ns": 0,
+          "title": "鈴鹿市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すすかし",
+            "kartographer_frames": "1",
+            "page_image_free": "SUZUKA_CIRCUIT_on_26th_November_2022.jpg",
+            "wikibase_item": "Q207311"
+          },
+          "coordinates": [
+            {
+              "lat": 34.88197,
+              "lon": 136.58417,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "三重県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 37566,
+          "ns": 0,
+          "title": "下田市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しもたし",
+            "kartographer_frames": "1",
+            "page_image_free": "Shimoda_2007-02-24.jpg",
+            "wikibase_item": "Q653402"
+          },
+          "coordinates": [
+            {
+              "lat": 34.67953,
+              "lon": 138.94531,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 125288,
+          "ns": 0,
+          "title": "西区 (名古屋市)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にしく",
+            "page_image_free": "Noritake_garden2.jpg",
+            "wikibase_item": "Q1207973"
+          },
+          "coordinates": [
+            {
+              "lat": 35.18908333,
+              "lon": 136.89005556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県名古屋市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 179886,
+          "ns": 0,
+          "title": "稲荷神",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いなりのかみ",
+            "page_image_free": "Fushimiinari-taisha,_torii-2-1.jpg",
+            "wikibase_item": "Q719665"
+          },
+          "terms": {
+            "description": [
+              "日本の神"
+            ]
+          }
+        },
+        {
+          "pageid": 362236,
+          "ns": 0,
+          "title": "稲生物怪録",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いのうもののけろく",
+            "page_image_free": "Seiho_Hitotsume-nyudo.jpg",
+            "wikibase_item": "Q11596744"
+          },
+          "terms": {
+            "description": [
+              "日本の物語"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:11.473Z",
+  "value": {
+    "searchinfo": {
+      "search": "外交史料館"
+    },
+    "search": [
+      {
+        "id": "Q3788463",
+        "title": "Q3788463",
+        "pageid": 3612443,
+        "concepturi": "http://www.wikidata.org/entity/Q3788463",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3788463",
+        "display": {
+          "label": {
+            "value": "Diplomatic Archives of the Ministry of Foreign Affairs of Japan",
+            "language": "en"
+          }
+        },
+        "label": "Diplomatic Archives of the Ministry of Foreign Affairs of Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "外交史料館"
+        },
+        "aliases": [
+          "外交史料館"
+        ]
+      },
+      {
+        "id": "Q16190765",
+        "title": "Q16190765",
+        "pageid": 17817155,
+        "concepturi": "http://www.wikidata.org/entity/Q16190765",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q16190765",
+        "display": {
+          "label": {
+            "value": "外交史料館",
+            "language": "ja"
+          }
+        },
+        "label": "外交史料館",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "外交史料館"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

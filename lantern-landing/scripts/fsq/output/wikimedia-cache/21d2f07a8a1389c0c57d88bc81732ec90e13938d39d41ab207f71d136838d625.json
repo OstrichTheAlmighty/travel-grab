@@ -1,0 +1,130 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:00.865Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 55,
+          "ns": 0,
+          "title": "台東区",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たいとうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Asakusa_Senso-ji_2021-12_ac_(2).jpg",
+            "wikibase_item": "Q232641"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71261,
+              "lon": 139.77997,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 22648,
+          "ns": 0,
+          "title": "岡崎市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おかさきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Okazakijo-3-cropped.jpg",
+            "wikibase_item": "Q242783"
+          },
+          "coordinates": [
+            {
+              "lat": 34.95472,
+              "lon": 137.17303,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 329887,
+          "ns": 0,
+          "title": "松本市時計博物館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "まつもとしとけいはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Matsumoto_timepiece_museum02n4592.jpg",
+            "wikibase_item": "Q11531031"
+          },
+          "coordinates": [
+            {
+              "lat": 36.233825,
+              "lon": 137.96866944,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長野県松本市にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 391358,
+          "ns": 0,
+          "title": "和時計",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "わとけい",
+            "page_image_free": "Japanese_Lantern_Clock.jpg",
+            "wikibase_item": "Q928843"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸時代から明治初期にかけて製作・使用された時計"
+            ]
+          }
+        },
+        {
+          "pageid": 2256926,
+          "ns": 0,
+          "title": "大名時計博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たいみようとけいはくふつかん",
+            "page_image_free": "大名時計博物館.jpg",
+            "wikibase_item": "Q10856362"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72128,
+              "lon": 139.7662,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

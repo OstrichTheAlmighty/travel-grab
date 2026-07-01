@@ -1,0 +1,43 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:39.162Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 7317,
+          "ns": 0,
+          "title": "ロンドン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ろんとん",
+            "page_image_free": "London_Skyline_(125508655).jpeg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q84"
+          },
+          "terms": {
+            "description": [
+              "イギリスおよびイングランドの首都"
+            ]
+          }
+        },
+        {
+          "pageid": 769107,
+          "ns": 0,
+          "title": "サンアンドレアス (グランド・セフト・オート)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さんあんとれあす",
+            "wikibase_item": "Q2090000"
+          },
+          "terms": {
+            "description": [
+              "架空のアメリカの州"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

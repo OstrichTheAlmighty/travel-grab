@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:21.296Z",
+  "value": {
+    "searchinfo": {
+      "search": "blue-ing!"
+    },
+    "search": [
+      {
+        "id": "Q137685727",
+        "title": "Q137685727",
+        "pageid": 131350520,
+        "concepturi": "http://www.wikidata.org/entity/Q137685727",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q137685727",
+        "display": {
+          "label": {
+            "value": "blue-ing!",
+            "language": "en"
+          },
+          "description": {
+            "value": "facility in Bunkyō, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "blue-ing!",
+        "description": "facility in Bunkyō, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "blue-ing!"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:44.602Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 557189,
+          "ns": 0,
+          "title": "志村けん",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しむら けん",
+            "page_image": "Statue_of_Ken_Shimura_(cropped)_2023-09-10.jpg",
+            "wikibase_item": "Q1320080"
+          },
+          "terms": {
+            "description": [
+              "日本のコメディアン (1950-2020)"
+            ]
+          }
+        },
+        {
+          "pageid": 1497003,
+          "ns": 0,
+          "title": "羽生結弦",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はにゆう ゆつる",
+            "page_image_free": "Hanyu_-_2018_Olympics_(cropped).jpg",
+            "wikibase_item": "Q597023"
+          },
+          "terms": {
+            "description": [
+              "日本のフィギュアスケート選手"
+            ]
+          }
+        },
+        {
+          "pageid": 1556835,
+          "ns": 0,
+          "title": "男子ごはん",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たんしこはん",
+            "wikibase_item": "Q11578132"
+          },
+          "terms": {
+            "description": [
+              "テレビ東京の料理番組 (2008-2025)"
+            ]
+          }
+        },
+        {
+          "pageid": 3939812,
+          "ns": 0,
+          "title": "ニューヨーク市の文化",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にゆうよおくしのふんか",
+            "wikibase_item": "Q903283"
+          }
+        }
+      ]
+    }
+  }
+}

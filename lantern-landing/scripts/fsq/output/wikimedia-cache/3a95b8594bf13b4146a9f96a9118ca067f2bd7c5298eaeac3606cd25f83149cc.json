@@ -1,0 +1,130 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:04.412Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8251,
+          "ns": 0,
+          "title": "江東区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こうとうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tomioka_Hachiman-gu_201708.jpg",
+            "wikibase_item": "Q215175"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67281,
+              "lon": 139.81728,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 52129,
+          "ns": 0,
+          "title": "室蘭市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "むろらんし",
+            "kartographer_frames": "1",
+            "page_image_free": "Muroran_Montage.jpg",
+            "wikibase_item": "Q496667"
+          },
+          "coordinates": [
+            {
+              "lat": 42.31525,
+              "lon": 140.97403,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道の市、胆振総合振興局所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 260346,
+          "ns": 0,
+          "title": "丸大食品",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "まるたいしよくひん",
+            "page_image_free": "Marudai.JPG",
+            "toc": "",
+            "wikibase_item": "Q11368085"
+          },
+          "coordinates": [
+            {
+              "lat": 34.8566,
+              "lon": 135.63862222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の大阪府高槻市にある食品加工メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 1154403,
+          "ns": 0,
+          "title": "駐日外国公館の一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ちゆうにちかいこくこうかんのいちらん",
+            "page_image_free": "Diplomatic_missions_in_Japan.png",
+            "wikibase_item": "Q5360217"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2960238,
+          "ns": 0,
+          "title": "Umios",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "うみおす",
+            "page_image_free": "TAKANAWA_GATEWAY_CITY_THE_LINKPILLAR_1_SOUTH_01.jpg",
+            "wikibase_item": "Q18635633"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63577778,
+              "lon": 139.73963889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の食品・水産会社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

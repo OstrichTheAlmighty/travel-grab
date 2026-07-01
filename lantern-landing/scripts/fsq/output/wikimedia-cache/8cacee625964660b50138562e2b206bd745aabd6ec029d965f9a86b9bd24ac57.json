@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:37:44.236Z",
+  "value": {
+    "searchinfo": {
+      "search": "楠木正成像"
+    },
+    "search": [
+      {
+        "id": "Q99769697",
+        "title": "Q99769697",
+        "pageid": 97663990,
+        "concepturi": "http://www.wikidata.org/entity/Q99769697",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q99769697",
+        "display": {
+          "label": {
+            "value": "Statue of Kusunoki Masashige",
+            "language": "en"
+          },
+          "description": {
+            "value": "statue in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Statue of Kusunoki Masashige",
+        "description": "statue in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "楠木正成像"
+        },
+        "aliases": [
+          "楠木正成像"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:49.314Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4591611,
+          "ns": 0,
+          "title": "北沢又",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きたさわまた",
+            "unexpectedUnconnectedPage": "0"
+          }
+        },
+        {
+          "pageid": 4592527,
+          "ns": 0,
+          "title": "南沢又",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みなみさわまた",
+            "unexpectedUnconnectedPage": "0"
+          }
+        },
+        {
+          "pageid": 4598685,
+          "ns": 0,
+          "title": "南矢野目",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みなみやのめ",
+            "unexpectedUnconnectedPage": "0"
+          }
+        },
+        {
+          "pageid": 4599213,
+          "ns": 0,
+          "title": "丸子 (福島市)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "まりこ",
+            "wikibase_item": "Q118691991"
+          },
+          "terms": {
+            "description": [
+              "福島市の町・字"
+            ]
+          }
+        },
+        {
+          "pageid": 4600353,
+          "ns": 0,
+          "title": "本内 (福島市)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "もとうち",
+            "unexpectedUnconnectedPage": "0"
+          }
+        }
+      ]
+    }
+  }
+}

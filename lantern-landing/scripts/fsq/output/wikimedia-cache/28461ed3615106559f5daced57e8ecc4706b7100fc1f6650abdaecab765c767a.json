@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:18.027Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 51812,
+          "ns": 0,
+          "title": "鈴木善幸",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すすき せんこう",
+            "page_image_free": "Zenkō_Suzuki_19800717.jpg",
+            "wikibase_item": "Q315551"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家(1911-2004)。第70代内閣総理大臣 、農林大臣、厚生大臣、官房長官、郵政大臣。"
+            ]
+          }
+        },
+        {
+          "pageid": 61050,
+          "ns": 0,
+          "title": "海南市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かいなんし",
+            "kartographer_frames": "1",
+            "page_image_free": "241006_Kuroe_Nurimono-kan_cafe_shop_Kainan_Wakayama_pref_Japan01s3.jpg",
+            "wikibase_item": "Q841309"
+          },
+          "coordinates": [
+            {
+              "lat": 34.1575,
+              "lon": 135.23969,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "和歌山県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 113865,
+          "ns": 0,
+          "title": "昆布茶",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こふちや",
+            "page_image_free": "Tsuitachi_Mochi02_1.jpg",
+            "wikibase_item": "Q11511886"
+          },
+          "terms": {
+            "description": [
+              "コンブを乾燥させ細かく刻むか粉末状にしたものに湯をそそいで飲む飲料"
+            ]
+          }
+        },
+        {
+          "pageid": 119469,
+          "ns": 0,
+          "title": "門川町",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かとかわちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "枇榔島（びろうじま）.jpg",
+            "wikibase_item": "Q1205839"
+          },
+          "coordinates": [
+            {
+              "lat": 32.47125,
+              "lon": 131.64611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "宮崎県東臼杵郡の町"
+            ]
+          }
+        },
+        {
+          "pageid": 143706,
+          "ns": 0,
+          "title": "女川町",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おなかわちよう",
+            "page_image_free": "Seapal-Pier_Onagawa.jpg",
+            "wikibase_item": "Q1011185"
+          },
+          "coordinates": [
+            {
+              "lat": 38.44522,
+              "lon": 141.443,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "宮城県牡鹿郡の町"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

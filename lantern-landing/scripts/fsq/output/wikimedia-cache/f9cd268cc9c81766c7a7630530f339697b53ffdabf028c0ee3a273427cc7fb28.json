@@ -1,0 +1,36 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:47.813Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1460831,
+          "ns": 0,
+          "title": "成子天神社",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "なるこてんしんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Naruko-Tenjin-sha_2019e.jpg",
+            "wikibase_item": "Q11495425"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69613889,
+              "lon": 139.69236111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区西新宿にある神社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

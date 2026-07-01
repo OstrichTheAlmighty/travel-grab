@@ -1,0 +1,124 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:48.874Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 148869,
+          "ns": 0,
+          "title": "Tokyo Tower",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Tower_2023.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "Communications and observation tower in Japan",
+            "wikibase_item": "Q183536"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65861111,
+              "lon": 139.74555556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "tower in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 2638104,
+          "ns": 0,
+          "title": "Tokyo Skytree",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Skytree_2014_Ⅲ.jpg",
+            "wikibase-shortdesc": "Broadcasting and observation tower in Japan",
+            "wikibase_item": "Q57965"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7101,
+              "lon": 139.8107,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "tower in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 20060066,
+          "ns": 0,
+          "title": "List of visionary tall buildings and structures",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Visionary tall buildings and structures",
+            "page_image_free": "XSeed4000BurjDubaiComparison.jpg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q1318587"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 21258505,
+          "ns": 0,
+          "title": "Mode Gakuen Cocoon Tower",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "2024_Cocoon_Tower_02_(cropped).jpg",
+            "wikibase-shortdesc": "Skyscraper located in Tokyo",
+            "wikibase_item": "Q1030463"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69166667,
+              "lon": 139.69694444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "building in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 31601318,
+          "ns": 0,
+          "title": "Tokyo Tower (disambiguation)",
+          "index": 4,
+          "pageprops": {
+            "disambiguation": "",
+            "wikibase-shortdesc": "Topics referred to by the same term",
+            "wikibase_item": "Q6902958"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

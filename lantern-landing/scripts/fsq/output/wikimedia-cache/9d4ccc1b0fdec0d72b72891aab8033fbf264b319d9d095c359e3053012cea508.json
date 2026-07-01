@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:30.768Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 24578,
+          "ns": 0,
+          "title": "Pub",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Public House",
+            "page_image_free": "Pub.williams.arp.750pix.jpg",
+            "wikibase-shortdesc": "Establishment that serves alcoholic drinks",
+            "wikibase_item": "Q212198"
+          },
+          "terms": {
+            "description": [
+              "drinking establishment"
+            ]
+          }
+        },
+        {
+          "pageid": 2009597,
+          "ns": 0,
+          "title": "McSorley's Old Ale House",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "McSorley's_Old_Ale_House_001_crop.jpg",
+            "wikibase-shortdesc": "Tavern in New York City",
+            "wikibase_item": "Q4276394"
+          },
+          "coordinates": [
+            {
+              "lat": 40.72871,
+              "lon": -73.98974,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "tavern in New York City"
+            ]
+          }
+        },
+        {
+          "pageid": 7845458,
+          "ns": 0,
+          "title": "McGillin's Olde Ale House",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Mcgillin's Olde Ale House",
+            "page_image_free": "McGillin's_Olde_Ale_House_exterior.jpg",
+            "wikibase-shortdesc": "Historic pub in Philadelphia, Pennsylvania, U.S.",
+            "wikibase_item": "Q6801322"
+          },
+          "coordinates": [
+            {
+              "lat": 39.95022,
+              "lon": -75.16258,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "historic pub in Philadelphia"
+            ]
+          }
+        },
+        {
+          "pageid": 23573283,
+          "ns": 0,
+          "title": "Miller's Ale House",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Miller's_Ale_House,_Tallahassee,_Florida.jpg",
+            "wikibase-shortdesc": "American restaurant and sports bar chain",
+            "wikibase_item": "Q6858987"
+          },
+          "terms": {
+            "description": [
+              "American restaurant and sports bar chain"
+            ]
+          }
+        },
+        {
+          "pageid": 47840874,
+          "ns": 0,
+          "title": "Ale",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Real_Ale_2004-05-09_cropped.jpg",
+            "wikibase-shortdesc": "Type of beer brewed using a warm fermentation method",
+            "wikibase_item": "Q208385"
+          },
+          "terms": {
+            "description": [
+              "type of beer brewed using a warm fermentation method"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

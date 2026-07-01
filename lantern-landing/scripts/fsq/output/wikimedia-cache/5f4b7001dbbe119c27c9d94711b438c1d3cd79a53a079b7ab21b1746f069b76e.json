@@ -1,0 +1,138 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:36.037Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 13823,
+          "ns": 0,
+          "title": "神戸市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こうへし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kobe_montage1.jpg",
+            "wikibase_item": "Q48320"
+          },
+          "coordinates": [
+            {
+              "lat": 34.69017,
+              "lon": 135.19544,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 21116,
+          "ns": 0,
+          "title": "函館市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はこたてし",
+            "kartographer_frames": "1",
+            "page_image_free": "Hakodate_montage.jpg",
+            "wikibase_item": "Q26418"
+          },
+          "coordinates": [
+            {
+              "lat": 41.76867,
+              "lon": 140.72892,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道の市、渡島総合振興局所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 53139,
+          "ns": 0,
+          "title": "上越市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しようえつし",
+            "page_image_free": "Joetsu_Montage.jpg",
+            "wikibase_item": "Q582289"
+          },
+          "coordinates": [
+            {
+              "lat": 37.14786,
+              "lon": 138.23608,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "新潟県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 105713,
+          "ns": 0,
+          "title": "燕市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "つはめし",
+            "page_image_free": "Tsubame_Sanjo_Masaru.jpg",
+            "wikibase_item": "Q571051"
+          },
+          "coordinates": [
+            {
+              "lat": 37.67308,
+              "lon": 138.88222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "新潟県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 2074142,
+          "ns": 0,
+          "title": "群馬県",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "くんまけん",
+            "kartographer_frames": "1",
+            "page_image_free": "Mount_Haruna_view_from_Hokkitsu_Onsen_Tachibana_no_sato_Shiroyama_(cropped).jpg",
+            "wikibase_item": "Q129499"
+          },
+          "coordinates": [
+            {
+              "lat": 36.39,
+              "lon": 139.06,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の都道府県"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

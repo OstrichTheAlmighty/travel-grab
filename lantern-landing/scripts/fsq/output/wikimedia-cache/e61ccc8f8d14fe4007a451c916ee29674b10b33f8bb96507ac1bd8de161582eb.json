@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:20.314Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 45273,
+          "ns": 0,
+          "title": "Infinite loop",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Infinite Loop",
+            "wikibase-shortdesc": "Programming idiom",
+            "wikibase_item": "Q862372"
+          },
+          "terms": {
+            "description": [
+              "programming idiom"
+            ]
+          }
+        },
+        {
+          "pageid": 21838352,
+          "ns": 0,
+          "title": "League of Legends",
+          "index": 5,
+          "pageprops": {
+            "displaytitle": "<i>League of Legends</i>",
+            "page_image_free": "League_of_Legends_2019_vector.svg",
+            "wikibase-badge-Q17437796": "",
+            "wikibase-shortdesc": "Multiplayer video game developed by Riot Games",
+            "wikibase_item": "Q223341"
+          },
+          "terms": {
+            "description": [
+              "2009 multiplayer online battle arena video game"
+            ]
+          }
+        },
+        {
+          "pageid": 25108332,
+          "ns": 0,
+          "title": "List of stock characters",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Stock characters",
+            "notoc": "",
+            "page_image_free": "Four_Commedia_dell’Arte_Figures_claude-gillot.jpg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q21213748"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 62521417,
+          "ns": 0,
+          "title": "Comedian (artwork)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Comedian",
+            "displaytitle": "<i>Comedian</i> (artwork)",
+            "page_image": "COMEDIAN_banana_artwork.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "2019 artwork by Maurizio Cattelan",
+            "wikibase_item": "Q77715187"
+          },
+          "terms": {
+            "description": [
+              "Maurizio Cattelan artwork"
+            ]
+          }
+        },
+        {
+          "pageid": 65765450,
+          "ns": 0,
+          "title": "Old Chinatown, Los Angeles",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "A_street_in_Chinatown-LCCN2008678098.jpg",
+            "wikibase-shortdesc": "Original location of settlement",
+            "wikibase_item": "Q115821456"
+          },
+          "terms": {
+            "description": [
+              "original location of settlement"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

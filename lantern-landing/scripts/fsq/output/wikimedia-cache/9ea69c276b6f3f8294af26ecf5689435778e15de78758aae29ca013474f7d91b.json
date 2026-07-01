@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:12.145Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1234,
+          "ns": 0,
+          "title": "フルーツバスケット (漫画)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふるうつはすけつと",
+            "wikibase_item": "Q216204"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画シリーズ"
+            ]
+          }
+        },
+        {
+          "pageid": 51229,
+          "ns": 0,
+          "title": "カキノキ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かき",
+            "page_image_free": "Kaki.JPG",
+            "wikibase_item": "Q158482"
+          },
+          "terms": {
+            "description": [
+              "ツツジ目カキノキ科の落葉樹"
+            ]
+          }
+        },
+        {
+          "pageid": 151046,
+          "ns": 0,
+          "title": "パッションフルーツ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はつしよんふるうつ",
+            "page_image_free": "Passion_fruit_red2.jpg",
+            "wikibase_item": "Q156790"
+          }
+        },
+        {
+          "pageid": 325406,
+          "ns": 0,
+          "title": "山梨県笛吹川フルーツ公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やまなしけんふえふえきかわふるうつこうえん",
+            "page_image_free": "笛吹市フルーツ公園_-_panoramio.jpg",
+            "wikibase_item": "Q15506069"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70222222,
+              "lon": 138.66527778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "山梨県山梨市にある都市公園"
+            ]
+          }
+        },
+        {
+          "pageid": 3068303,
+          "ns": 0,
+          "title": "仮面ライダー×仮面ライダー ドライブ&鎧武 MOVIE大戦フルスロットル",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かめんらいたあかめんらいたあとらいふあんとかいむ むうひいたいせんふるすろつとる",
+            "wikibase_item": "Q18226136"
+          },
+          "terms": {
+            "description": [
+              "日本の映画"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:30.091Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 54819,
+          "ns": 0,
+          "title": "安田善次郎",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やすた せんしろう",
+            "page_image_free": "Zenjiro_Yasuda.jpg",
+            "wikibase_item": "Q3571972"
+          },
+          "terms": {
+            "description": [
+              "日本の実業家"
+            ]
+          }
+        },
+        {
+          "pageid": 67824,
+          "ns": 0,
+          "title": "明治安田生命保険",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "めいしやすたせいめいほけん",
+            "page_image_free": "Meiji_Yasuda_Life_Insurance_Company_Head_Office_2018_-_2.jpg",
+            "wikibase_item": "Q174081"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67922222,
+              "lon": 139.76230556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の生命保険会社"
+            ]
+          }
+        },
+        {
+          "pageid": 90399,
+          "ns": 0,
+          "title": "東京都庭園美術館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようとていえんひしゆつかん",
+            "page_image_free": "Tokyo_Metropolitan_Teien_Art_Museum.jpg",
+            "wikibase_item": "Q743773"
+          },
+          "coordinates": [
+            {
+              "lat": 35.636862,
+              "lon": 139.719269,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 791938,
+          "ns": 0,
+          "title": "旧岩崎邸庭園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きゆういわさきていていえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Former_Iwasaki_Family_House_and_Garden_2010.jpg",
+            "wikibase_item": "Q1358767"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70972222,
+              "lon": 139.76777778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1086590,
+          "ns": 0,
+          "title": "旧安田庭園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きゆうやすたていえん",
+            "page_image_free": "Kyuyasudateien02.JPG",
+            "wikibase_item": "Q11511031"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69836111,
+              "lon": 139.79369444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区にある大名庭園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:43.751Z",
+  "value": {
+    "searchinfo": {
+      "search": "Answer"
+    },
+    "search": [
+      {
+        "id": "Q11189462",
+        "title": "Q11189462",
+        "pageid": 12359753,
+        "concepturi": "http://www.wikidata.org/entity/Q11189462",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11189462",
+        "display": {
+          "label": {
+            "value": "Answer",
+            "language": "en"
+          },
+          "description": {
+            "value": "album by Tokyo Ska Paradise Orchestra",
+            "language": "en"
+          }
+        },
+        "label": "Answer",
+        "description": "album by Tokyo Ska Paradise Orchestra",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Answer"
+        }
+      },
+      {
+        "id": "Q1920566",
+        "title": "Q1920566",
+        "pageid": 1850332,
+        "concepturi": "http://www.wikidata.org/entity/Q1920566",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1920566",
+        "display": {
+          "label": {
+            "value": "reply",
+            "language": "en"
+          },
+          "description": {
+            "value": "response to a question",
+            "language": "en"
+          }
+        },
+        "label": "reply",
+        "description": "response to a question",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "answers"
+        },
+        "aliases": [
+          "answers"
+        ]
+      },
+      {
+        "id": "Q847386",
+        "title": "Q847386",
+        "pageid": 799387,
+        "concepturi": "http://www.wikidata.org/entity/Q847386",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q847386",
+        "display": {
+          "label": {
+            "value": "Noriyuki Makihara",
+            "language": "en"
+          },
+          "description": {
+            "value": "Japanese singer-songwriter",
+            "language": "en"
+          }
+        },
+        "label": "Noriyuki Makihara",
+        "description": "Japanese singer-songwriter",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "ANSWER"
+        },
+        "aliases": [
+          "ANSWER"
+        ]
+      },
+      {
+        "id": "Q1471321",
+        "title": "Q1471321",
+        "pageid": 1409349,
+        "concepturi": "http://www.wikidata.org/entity/Q1471321",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1471321",
+        "display": {
+          "label": {
+            "value": "The Answer",
+            "language": "en"
+          },
+          "description": {
+            "value": "Northern Irish band",
+            "language": "en"
+          }
+        },
+        "label": "The Answer",
+        "description": "Northern Irish band",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "Answer"
+        },
+        "aliases": [
+          "Answer"
+        ]
+      },
+      {
+        "id": "Q2472038",
+        "title": "Q2472038",
+        "pageid": 2387589,
+        "concepturi": "http://www.wikidata.org/entity/Q2472038",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2472038",
+        "display": {
+          "label": {
+            "value": "Answer",
+            "language": "en"
+          },
+          "description": {
+            "value": "2009 studio album by Angela Aki",
+            "language": "en"
+          }
+        },
+        "label": "Answer",
+        "description": "2009 studio album by Angela Aki",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Answer"
+        }
+      },
+      {
+        "id": "Q11189460",
+        "title": "Q11189460",
+        "pageid": 12359751,
+        "concepturi": "http://www.wikidata.org/entity/Q11189460",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11189460",
+        "display": {
+          "label": {
+            "value": "Answer",
+            "language": "en"
+          },
+          "description": {
+            "value": "album by Supercar",
+            "language": "en"
+          }
+        },
+        "label": "Answer",
+        "description": "album by Supercar",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Answer"
+        }
+      },
+      {
+        "id": "Q3618371",
+        "title": "Q3618371",
+        "pageid": 3446305,
+        "concepturi": "http://www.wikidata.org/entity/Q3618371",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3618371",
+        "display": {
+          "label": {
+            "value": "Answer",
+            "language": "en"
+          },
+          "description": {
+            "value": "2007 single by Flow",
+            "language": "en"
+          }
+        },
+        "label": "Answer",
+        "description": "2007 single by Flow",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Answer"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

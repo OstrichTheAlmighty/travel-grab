@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:45.341Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1088528,
+          "ns": 0,
+          "title": "Tokyo Disneyland",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Disneyland_Cinderella_Castle_2023-07-02.jpg",
+            "wikibase-shortdesc": "Theme park in Chiba, Japan",
+            "wikibase_item": "Q843997"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63277778,
+              "lon": 139.88055556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "theme park in Japan, owned by The Oriental Land Company"
+            ]
+          }
+        },
+        {
+          "pageid": 1611688,
+          "ns": 0,
+          "title": "Frontierland",
+          "index": 1,
+          "pageprops": {
+            "toc": "",
+            "wikibase-shortdesc": "Themed part of Disney park",
+            "wikibase_item": "Q732575"
+          },
+          "terms": {
+            "description": [
+              "themed land at Disney theme parks"
+            ]
+          }
+        },
+        {
+          "pageid": 10842077,
+          "ns": 0,
+          "title": "List of Tokyo Disneyland attractions",
+          "index": 5,
+          "pageprops": {
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q6600320"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 49326993,
+          "ns": 0,
+          "title": "SS Westernland",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Westernland",
+            "displaytitle": "SS <i>Westernland</i>",
+            "page_image_free": "RMS_Regina.jpg",
+            "wikibase-shortdesc": "Steamship launched in 1917",
+            "wikibase_item": "Q1269741"
+          },
+          "terms": {
+            "description": [
+              "steamship launched in 1917"
+            ]
+          }
+        },
+        {
+          "pageid": 79308603,
+          "ns": 0,
+          "title": "SS Westernland (1883)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Westernland (1883)",
+            "displaytitle": "SS <i>Westernland</i> (1883)",
+            "page_image_free": "Antonio_Nicolo_Gasparo_Jacobsen,_The_Ship_S.S._Westernland_At_Sea_(1894).jpg",
+            "wikibase-shortdesc": "Belgian ocean liner",
+            "wikibase_item": "Q2565041"
+          },
+          "terms": {
+            "description": [
+              "Belgian steamboat launched in 1883"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:27.792Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 910804,
+          "ns": 0,
+          "title": "東洋大学白山キャンパス",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうようたいかくはくさん",
+            "wikibase_item": "Q11527635"
+          },
+          "terms": {
+            "description": [
+              "東洋大学のキャンパス"
+            ]
+          }
+        },
+        {
+          "pageid": 2858000,
+          "ns": 0,
+          "title": "路線バスで寄り道の旅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ろせんはすてよりみちのたひ",
+            "wikibase_item": "Q17215794"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ紀行番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

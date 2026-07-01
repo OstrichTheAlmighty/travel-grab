@@ -1,0 +1,62 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:15.357Z",
+  "value": {
+    "searchinfo": {
+      "search": "落合中央公園"
+    },
+    "search": [
+      {
+        "id": "Q11620561",
+        "title": "Q11620561",
+        "pageid": 12760967,
+        "concepturi": "http://www.wikidata.org/entity/Q11620561",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11620561",
+        "display": {
+          "label": {
+            "value": "落合中央公園",
+            "language": "ja"
+          },
+          "description": {
+            "value": "park in Japan",
+            "language": "en"
+          }
+        },
+        "label": "落合中央公園",
+        "description": "park in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "落合中央公園"
+        }
+      },
+      {
+        "id": "Q42311604",
+        "title": "Q42311604",
+        "pageid": 43593840,
+        "concepturi": "http://www.wikidata.org/entity/Q42311604",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q42311604",
+        "display": {
+          "label": {
+            "value": "落合中央公園",
+            "language": "ja"
+          },
+          "description": {
+            "value": "park in Shinjuku, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "落合中央公園",
+        "description": "park in Shinjuku, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "落合中央公園"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

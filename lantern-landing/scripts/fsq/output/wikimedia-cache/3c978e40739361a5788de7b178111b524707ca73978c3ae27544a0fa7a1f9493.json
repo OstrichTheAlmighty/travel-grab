@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:22.474Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17637,
+          "ns": 0,
+          "title": "縁日",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "えんにち",
+            "wikibase_item": "Q985655"
+          },
+          "terms": {
+            "description": [
+              "神仏の降誕、示現、誓願などの縁のある日"
+            ]
+          }
+        },
+        {
+          "pageid": 55681,
+          "ns": 0,
+          "title": "地蔵菩薩",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しそうほさつ",
+            "page_image_free": "Jizo_Bosatsu_Horyuji.JPG",
+            "wikibase_item": "Q604687"
+          },
+          "terms": {
+            "description": [
+              "仏教の信仰対象である菩薩の一尊"
+            ]
+          }
+        },
+        {
+          "pageid": 105814,
+          "ns": 0,
+          "title": "小須戸町",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こすとまち",
+            "page_image_free": "Central_Kosudo_March2020.jpg",
+            "wikibase_item": "Q6433610"
+          },
+          "coordinates": [
+            {
+              "lat": 37.75561,
+              "lon": 139.07114,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の新潟県中蒲原郡にあった町"
+            ]
+          }
+        },
+        {
+          "pageid": 171844,
+          "ns": 0,
+          "title": "荒川遊園地前停留場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あらかわゆうえんちまえ",
+            "kartographer_frames": "1",
+            "page_image_free": "Toden-arakawa-yuenchimae-platform.jpg",
+            "wikibase_item": "Q11618626"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75066667,
+              "lon": 139.75772222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都荒川区西尾久にある都電荒川線の停留場"
+            ]
+          }
+        },
+        {
+          "pageid": 1854246,
+          "ns": 0,
+          "title": "願成寺 (横浜市)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かんしようし よこはまし",
+            "kartographer_frames": "1",
+            "page_image_free": "Ganjyou-ji.JPG",
+            "wikibase_item": "Q11665151"
+          },
+          "terms": {
+            "description": [
+              "西区にある寺院"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

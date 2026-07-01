@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:52.484Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 5292,
+          "ns": 0,
+          "title": "松尾芭蕉",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "まつお はしよう",
+            "page_image_free": "Basho_by_Morikawa_Kyoriku_(1656-1715).jpg",
+            "wikibase_item": "Q5676"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸時代前期の俳諧師 (1644-1694)"
+            ]
+          }
+        },
+        {
+          "pageid": 113493,
+          "ns": 0,
+          "title": "文学館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふんかくかん",
+            "wikibase_item": "Q1865249"
+          },
+          "terms": {
+            "description": [
+              "作家や文学運動に関する品々を集めた博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 1283362,
+          "ns": 0,
+          "title": "常盤 (江東区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ときわ",
+            "kartographer_frames": "1",
+            "page_image_free": "Basho_kinenkan.jpg",
+            "wikibase_item": "Q11481476"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1348890,
+          "ns": 0,
+          "title": "芭蕉翁記念館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はしようおうきねんかん",
+            "kartographer_frames": "1",
+            "page_image_free": "芭蕉翁記念館_1.JPG",
+            "wikibase_item": "Q11614941"
+          },
+          "coordinates": [
+            {
+              "lat": 34.76991667,
+              "lon": 136.12966667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "三重県伊賀市の上野公園にある記念館"
+            ]
+          }
+        },
+        {
+          "pageid": 2060737,
+          "ns": 0,
+          "title": "山寺芭蕉記念館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やまてらはしようきねんかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Yamadera_Basho_Museum_220718.jpg",
+            "wikibase_item": "Q11467772"
+          },
+          "coordinates": [
+            {
+              "lat": 38.30952778,
+              "lon": 140.43897222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "山形県山形市にある記念館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

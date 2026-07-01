@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:14.751Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 5938,
+          "ns": 0,
+          "title": "日本の仏教",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふつきよう",
+            "page_image_free": "Japanese_Buddhist_flag.svg",
+            "wikibase_item": "Q736311"
+          },
+          "terms": {
+            "description": [
+              "日本における仏教"
+            ]
+          }
+        },
+        {
+          "pageid": 53981,
+          "ns": 0,
+          "title": "豊田市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とよたし",
+            "kartographer_frames": "2",
+            "page_image_free": "TMC_Headquarters_Building,_Toyota-cho_Toyota_2019.jpg",
+            "wikibase_item": "Q201117"
+          },
+          "coordinates": [
+            {
+              "lat": 35.08242,
+              "lon": 137.15633,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 152079,
+          "ns": 0,
+          "title": "佛教大学",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふつきよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Bukkyo_University_2017_a.jpg",
+            "wikibase_item": "Q4986990"
+          },
+          "coordinates": [
+            {
+              "lat": 35.04333333,
+              "lon": 135.73719444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市北区に本部を置く私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 1170424,
+          "ns": 0,
+          "title": "台湾の仏教",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Taiwanese_Buddhist_Monk_Bamboo_Hat_Close.jpeg",
+            "wikibase_item": "Q712510"
+          }
+        },
+        {
+          "pageid": 1462683,
+          "ns": 0,
+          "title": "大正大学",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たいしようたいかく",
+            "page_image_free": "Taisho_University_Sugamo_Campus.JPG",
+            "wikibase_item": "Q912375"
+          },
+          "coordinates": [
+            {
+              "lat": 35.74266667,
+              "lon": 139.72697222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の私立大学"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:33.168Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 19164,
+          "ns": 0,
+          "title": "日本国憲法第9条",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にほんこくけんほう009",
+            "page_image_free": "Go-shichi_no_kiri_crest_2.svg",
+            "wikibase_item": "Q712737"
+          },
+          "terms": {
+            "description": [
+              "「国際平和」指向および、国際紛争解決手段としての戦争の「放棄」を規定する日本国憲法の条文"
+            ]
+          }
+        },
+        {
+          "pageid": 36525,
+          "ns": 0,
+          "title": "巣鴨拘置所",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "すかもこうちしよ",
+            "page_image_free": "Sugamo-Prison-Tokyo-1949.png",
+            "wikibase_item": "Q699579"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73041667,
+              "lon": 139.71847222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "第二次大戦後の戦犯を収容した拘置所"
+            ]
+          }
+        },
+        {
+          "pageid": 57358,
+          "ns": 0,
+          "title": "ルーテル教会",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "るうてるきようかい",
+            "wikibase_item": "Q75809"
+          },
+          "terms": {
+            "description": [
+              "プロテスタントに分類されるキリスト教の教派"
+            ]
+          }
+        },
+        {
+          "pageid": 712271,
+          "ns": 0,
+          "title": "慰霊碑",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いれいひ",
+            "page_image_free": "Cenotaph_Hiroshima.jpg",
+            "wikibase_item": "Q321053"
+          },
+          "terms": {
+            "description": [
+              "戦争、災害、事故などにより亡くなった人の霊を慰めるために建立された石碑"
+            ]
+          }
+        },
+        {
+          "pageid": 3086681,
+          "ns": 0,
+          "title": "広島平和記念資料館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひろしまへいわきねんしりようかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Hiroshima_Peace_Memorial_Museum_2008_01.JPG",
+            "wikibase_item": "Q1200076"
+          },
+          "coordinates": [
+            {
+              "lat": 34.39147222,
+              "lon": 132.45305556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "広島県広島市中区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

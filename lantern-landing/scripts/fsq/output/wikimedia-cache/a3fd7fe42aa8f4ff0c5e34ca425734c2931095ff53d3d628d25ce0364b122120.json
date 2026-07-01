@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:46:00.610Z",
+  "value": {
+    "searchinfo": {
+      "search": "カブトニオイガメ"
+    },
+    "search": [
+      {
+        "id": "Q225397",
+        "title": "Q225397",
+        "pageid": 219965,
+        "concepturi": "http://www.wikidata.org/entity/Q225397",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q225397",
+        "display": {
+          "label": {
+            "value": "Sternotherus carinatus",
+            "language": "en"
+          },
+          "description": {
+            "value": "species of reptile",
+            "language": "en"
+          }
+        },
+        "label": "Sternotherus carinatus",
+        "description": "species of reptile",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "カブトニオイガメ"
+        },
+        "aliases": [
+          "カブトニオイガメ"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

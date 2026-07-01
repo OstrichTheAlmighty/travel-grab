@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:45.801Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 24637,
+          "ns": 0,
+          "title": "玉川上水駅",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たまかわしようすい",
+            "kartographer_frames": "1",
+            "page_image_free": "Tamagawajosui-Sta_20200524.jpg",
+            "wikibase_item": "Q842489"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73194444,
+              "lon": 139.41825,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都東大和市と立川市にある西武鉄道・多摩都市モノレールの駅"
+            ]
+          }
+        },
+        {
+          "pageid": 60406,
+          "ns": 0,
+          "title": "玉川上水",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たまかわしようすい",
+            "page_image_free": "TamagawaJosui_fromMikageBridge.JPG",
+            "wikibase_item": "Q1014298"
+          },
+          "terms": {
+            "description": [
+              "江戸市中への飲料水が流れていた上水道"
+            ]
+          }
+        },
+        {
+          "pageid": 103083,
+          "ns": 0,
+          "title": "井の頭恩賜公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いのかしらおんしこうえん",
+            "page_image_free": "Mitaka_Inokashira_Park_In_Spring_1.JPG",
+            "wikibase_item": "Q1200884"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70083333,
+              "lon": 139.57416667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 3201734,
+          "ns": 0,
+          "title": "品川用水",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しなかわようすい",
+            "wikibase_item": "Q20044794"
+          }
+        },
+        {
+          "pageid": 4020450,
+          "ns": 0,
+          "title": "玉川上水緑道",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たまかわしようすいりよくち",
+            "page_image_free": "Western_Tokyo.svg",
+            "wikibase_item": "Q85882353"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68019444,
+              "lon": 139.52591667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

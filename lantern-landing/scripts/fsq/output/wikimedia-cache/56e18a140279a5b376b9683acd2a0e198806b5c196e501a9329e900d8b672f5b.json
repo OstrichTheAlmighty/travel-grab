@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:16.048Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4097,
+          "ns": 0,
+          "title": "南方熊楠",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みなかた くまくす",
+            "page_image_free": "Minakata-Kumagusu.jpg",
+            "wikibase_item": "Q6862791"
+          },
+          "terms": {
+            "description": [
+              "日本の博物学者、生物学者、民俗学者 (1867-1941)"
+            ]
+          }
+        },
+        {
+          "pageid": 11800,
+          "ns": 0,
+          "title": "川越市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かわこえし",
+            "kartographer_frames": "1",
+            "page_image_free": "TokiNoKane_Kawagoe_2013Feb.JPG",
+            "wikibase_item": "Q319740"
+          },
+          "coordinates": [
+            {
+              "lat": 35.92514,
+              "lon": 139.48578,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 22648,
+          "ns": 0,
+          "title": "岡崎市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おかさきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Okazakijo-3-cropped.jpg",
+            "wikibase_item": "Q242783"
+          },
+          "coordinates": [
+            {
+              "lat": 34.95472,
+              "lon": 137.17303,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 77578,
+          "ns": 0,
+          "title": "箕輪町",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みのわまち",
+            "page_image_free": "Akasoba-no-sato.jpg",
+            "wikibase_item": "Q1346975"
+          },
+          "coordinates": [
+            {
+              "lat": 35.91503,
+              "lon": 137.98192,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長野県上伊那郡の町"
+            ]
+          }
+        },
+        {
+          "pageid": 2637282,
+          "ns": 0,
+          "title": "唐沢富太郎",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "からさわ とみたろう",
+            "wikibase_item": "Q11418600"
+          },
+          "terms": {
+            "description": [
+              "日本の教員"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:10.325Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 2328224,
+          "ns": 0,
+          "title": "自然災害伝承碑",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しせんさいかいてんしようひ",
+            "page_image_free": "関東大震災顕彰碑.jpg",
+            "wikibase_item": "Q11567059"
+          },
+          "terms": {
+            "description": [
+              "大規模な自然災害の状況や教訓を後世に伝え残すために作られた石碑やモニュメント"
+            ]
+          }
+        },
+        {
+          "pageid": 4271984,
+          "ns": 0,
+          "title": "波除碑",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なみよけひ",
+            "page_image_free": "Namiyokehi(Susaki_shrine)_Koto-ku_Tokyo.jpg",
+            "wikibase_item": "Q109360094"
+          }
+        }
+      ]
+    }
+  }
+}

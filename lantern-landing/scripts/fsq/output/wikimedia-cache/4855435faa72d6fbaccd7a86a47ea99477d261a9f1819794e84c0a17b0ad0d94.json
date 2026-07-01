@@ -1,0 +1,132 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:27.341Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 30057,
+          "ns": 0,
+          "title": "Tokyo",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Capital and most populous city in Japan",
+            "wikibase_item": "Q1490"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68972222,
+              "lon": 139.69222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "capital and largest city of Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 615202,
+          "ns": 0,
+          "title": "Kisho Kurokawa",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Kurokawa, Kisho",
+            "page_image_free": "黒川紀章.jpg",
+            "wikibase-shortdesc": "Japanese Metabolist architect (1934–2007)",
+            "wikibase_item": "Q358502"
+          },
+          "terms": {
+            "description": [
+              "Japanese architect (1934-2007)"
+            ]
+          }
+        },
+        {
+          "pageid": 1743486,
+          "ns": 0,
+          "title": "Tokyo National Museum",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_National_Museum,_Honkan_2010.jpg",
+            "wikibase-shortdesc": "Art museum in Tokyo, Japan",
+            "wikibase_item": "Q653433"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7189,
+              "lon": 139.7764,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "art museum in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 9017354,
+          "ns": 0,
+          "title": "The National Art Center, Tokyo",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "National Art Center, Tokyo, The",
+            "page_image_free": "The_National_Art_Center_,_Tokyo_-_panoramio_(1).jpg",
+            "wikibase-shortdesc": "Art museum in Tokyo, Japan",
+            "wikibase_item": "Q1362638"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66528,
+              "lon": 139.72634,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "art museum in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 10768325,
+          "ns": 0,
+          "title": "National Museum of Modern Art, Tokyo",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "National_Museum_of_Modern_Art_Tokyo.jpg",
+            "wikibase-shortdesc": "Art museum in Tokyo, Japan",
+            "wikibase_item": "Q1359908"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69055556,
+              "lon": 139.75472222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Art museum in Tokyo, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

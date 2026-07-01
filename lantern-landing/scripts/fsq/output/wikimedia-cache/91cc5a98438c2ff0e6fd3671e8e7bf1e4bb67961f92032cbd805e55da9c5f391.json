@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:32.633Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 15167,
+          "ns": 0,
+          "title": "インターネットサービスプロバイダ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いんたあねつとさあひすふろはいた",
+            "wikibase_item": "Q11371"
+          },
+          "terms": {
+            "description": [
+              "インターネットへのアクセスを提供する組織・企業"
+            ]
+          }
+        },
+        {
+          "pageid": 25281,
+          "ns": 0,
+          "title": "NTT東日本",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "えぬていていひかしにほん",
+            "page_image_free": "Ntt-east_head-office.JPG",
+            "wikibase_item": "Q11527212"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68344444,
+              "lon": 139.68780556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の特殊会社"
+            ]
+          }
+        },
+        {
+          "pageid": 196403,
+          "ns": 0,
+          "title": "東京オペラシティ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようおへらしてい",
+            "page_image_free": "Tokyo_Opera_City_Tower.JPG",
+            "wikibase_item": "Q1201889"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68309,
+              "lon": 139.68707,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区にある複合文化施設"
+            ]
+          }
+        },
+        {
+          "pageid": 404305,
+          "ns": 0,
+          "title": "NTTインターコミュニケーション・センター",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いんたあこみゆにけえしよんせんたあ",
+            "page_image_free": "NTT_ICC_entrance.jpg",
+            "wikibase_item": "Q3788869"
+          },
+          "coordinates": [
+            {
+              "lat": 35.683,
+              "lon": 139.68680556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区の東京オペラシティにある美術館・博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 4300670,
+          "ns": 0,
+          "title": "田中良治",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たなか りようし",
+            "wikibase_item": "Q105711519"
+          }
+        }
+      ]
+    }
+  }
+}

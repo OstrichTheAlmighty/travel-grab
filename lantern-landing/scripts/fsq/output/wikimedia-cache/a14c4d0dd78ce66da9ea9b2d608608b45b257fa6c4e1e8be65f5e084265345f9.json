@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:18.827Z",
+  "value": {
+    "searchinfo": {
+      "search": "千住本氷川神社"
+    },
+    "search": [
+      {
+        "id": "Q11405346",
+        "title": "Q11405346",
+        "pageid": 12543994,
+        "concepturi": "http://www.wikidata.org/entity/Q11405346",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11405346",
+        "display": {
+          "label": {
+            "value": "Senju Moto Hikawa Shrine",
+            "language": "en"
+          },
+          "description": {
+            "value": "Shinto shrine in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Senju Moto Hikawa Shrine",
+        "description": "Shinto shrine in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "千住本氷川神社"
+        },
+        "aliases": [
+          "千住本氷川神社"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

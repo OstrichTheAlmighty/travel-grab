@@ -1,0 +1,123 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:16.799Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 10741,
+          "ns": 0,
+          "title": "練馬区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ねりまく",
+            "kartographer_frames": "1",
+            "page_image_free": "三宝寺池と厳島神社（2021年5月）.jpg",
+            "wikibase_item": "Q232655"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73553,
+              "lon": 139.65169,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 33752,
+          "ns": 0,
+          "title": "上野恩賜公園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "うえのおんしこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "上野公園航空写真1984.jpg",
+            "wikibase_item": "Q746216"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71222222,
+              "lon": 139.77111111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 140113,
+          "ns": 0,
+          "title": "光が丘 (練馬区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひかりかおか",
+            "kartographer_frames": "1",
+            "page_image_free": "Nerima_hikarigaoka_7chome_2009.JPG",
+            "wikibase_item": "Q11388203"
+          },
+          "terms": {
+            "description": [
+              "東京都練馬区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 567933,
+          "ns": 0,
+          "title": "国際興業バス練馬営業所",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こくさいこうきようはすねりまえいきようしよ",
+            "page_image_free": "Kokusai-nerima.JPG",
+            "wikibase_item": "Q11422572"
+          },
+          "terms": {
+            "description": [
+              "東京都練馬区北町に位置する国際興業バスの営業所"
+            ]
+          }
+        },
+        {
+          "pageid": 1827235,
+          "ns": 0,
+          "title": "中央区 (相模原市)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ちゆうおうく",
+            "kartographer_frames": "1",
+            "page_image_free": "外観（斜）.jpg",
+            "wikibase_item": "Q1132074"
+          },
+          "coordinates": [
+            {
+              "lat": 35.57141667,
+              "lon": 139.37313889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県相模原市の行政区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

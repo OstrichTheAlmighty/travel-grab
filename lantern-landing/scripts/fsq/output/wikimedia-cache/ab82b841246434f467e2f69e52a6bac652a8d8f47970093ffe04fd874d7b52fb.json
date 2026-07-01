@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:08.388Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18792,
+          "ns": 0,
+          "title": "文京区",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふんきようく",
+            "kartographer_frames": "1",
+            "page_image_free": "Akamon,_University_of_Tokyo_2019.jpg",
+            "wikibase_item": "Q212713"
+          },
+          "coordinates": [
+            {
+              "lat": 35.708,
+              "lon": 139.75225,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 28214,
+          "ns": 0,
+          "title": "めぐりん (台東区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めくりん",
+            "page_image_free": "Megurin-1094-south.JPG",
+            "wikibase_item": "Q11279668"
+          },
+          "terms": {
+            "description": [
+              "東京都台東区のコミュニティバス"
+            ]
+          }
+        },
+        {
+          "pageid": 28727,
+          "ns": 0,
+          "title": "森鷗外",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "もり おうかい",
+            "page_image_free": "Mori_Ogai_in_the_atelier_of_Sculptor_Takeishi_Kozaburo_in_1916.jpg",
+            "wikibase_item": "Q356960"
+          },
+          "terms": {
+            "description": [
+              "日本の作家、陸軍軍医 (1862-1922)"
+            ]
+          }
+        },
+        {
+          "pageid": 112129,
+          "ns": 0,
+          "title": "東京都電車",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようとてんしや",
+            "page_image_free": "Toden8800_4colors_20101225.jpg",
+            "wikibase_item": "Q7814005"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都交通局が運営する路面電車路線"
+            ]
+          }
+        },
+        {
+          "pageid": 234646,
+          "ns": 0,
+          "title": "東京都交通局7500形電車",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようとこうつうきよく7500かたてんしや",
+            "page_image_free": "Toden_7514_PB252386.jpg",
+            "wikibase_item": "Q11525229"
+          },
+          "terms": {
+            "description": [
+              "東京都交通局の路面電車車両"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

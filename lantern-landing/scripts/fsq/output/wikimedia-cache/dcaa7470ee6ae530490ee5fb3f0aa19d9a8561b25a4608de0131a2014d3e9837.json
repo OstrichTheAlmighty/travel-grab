@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:42.328Z",
+  "value": {
+    "searchinfo": {
+      "search": "味の素食の文化センター"
+    },
+    "search": [
+      {
+        "id": "Q20042951",
+        "title": "Q20042951",
+        "pageid": 21713295,
+        "concepturi": "http://www.wikidata.org/entity/Q20042951",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q20042951",
+        "display": {
+          "label": {
+            "value": "Ajinomoto Foundation for Dietary Culture",
+            "language": "en"
+          },
+          "description": {
+            "value": "facility in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Ajinomoto Foundation for Dietary Culture",
+        "description": "facility in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "味の素食の文化センター"
+        },
+        "aliases": [
+          "味の素食の文化センター"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

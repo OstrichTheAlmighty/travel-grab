@@ -1,0 +1,51 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:30.984Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 2796508,
+          "ns": 0,
+          "title": "DJポリス",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ていしえいほりす",
+            "wikibase_item": "Q17217012"
+          },
+          "terms": {
+            "description": [
+              "ユーモラスな言葉を交え雑踏警備を行ったある警視庁機動隊員に対する愛称"
+            ]
+          }
+        },
+        {
+          "pageid": 3929420,
+          "ns": 0,
+          "title": "渋谷スクランブル交差点",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しふやすくらんふるこうさてん",
+            "page_image_free": "2018_Shibuya_Crossing.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q21083961"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6595,
+              "lon": 139.70055,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある交差点"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

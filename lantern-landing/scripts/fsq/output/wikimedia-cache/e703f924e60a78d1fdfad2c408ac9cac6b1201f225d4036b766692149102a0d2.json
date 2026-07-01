@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:13.824Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 136148,
+          "ns": 0,
+          "title": "Tokyo Disney Resort",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Disneyland_(1-1_crop).jpg",
+            "wikibase-shortdesc": "Theme park and vacation resort in Chiba, Japan",
+            "wikibase_item": "Q605492"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62972222,
+              "lon": 139.88277778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Disney resort in Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 1088528,
+          "ns": 0,
+          "title": "Tokyo Disneyland",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Disneyland_Cinderella_Castle_2023-07-02.jpg",
+            "wikibase-shortdesc": "Theme park in Chiba, Japan",
+            "wikibase_item": "Q843997"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63277778,
+              "lon": 139.88055556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "theme park in Japan, owned by The Oriental Land Company"
+            ]
+          }
+        },
+        {
+          "pageid": 9577701,
+          "ns": 0,
+          "title": "Disney Resort Line",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "DRL-TypeC121-wiki.jpg",
+            "wikibase-shortdesc": "Monorail line at the Tokyo Disney Resort",
+            "wikibase_item": "Q1143216"
+          },
+          "terms": {
+            "description": [
+              "monorail line serving as an attraction and mode of transport at the Tokyo Disney Resort"
+            ]
+          }
+        },
+        {
+          "pageid": 23738176,
+          "ns": 0,
+          "title": "Tokyo DisneySea",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_DisneySea_logo.svg",
+            "wikibase-shortdesc": "Theme park in Chiba, Japan",
+            "wikibase_item": "Q1202341"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62666667,
+              "lon": 139.88805556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "theme park in Japan, owned by The Oriental Land Company"
+            ]
+          }
+        },
+        {
+          "pageid": 31181124,
+          "ns": 0,
+          "title": "List of incidents at Tokyo Disney Resort",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Tokyo Disney Resort incidents",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q6014648"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

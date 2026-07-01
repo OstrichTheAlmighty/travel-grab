@@ -1,0 +1,27 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:37.584Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 542023,
+          "ns": 0,
+          "title": "隅田川の渡し",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すみたかわのわたし",
+            "page_image_free": "Sunset_across_the_Ryogoku_bridge_from_the_bank_of_the_Sumida_river_at_Onmagayashi.jpg",
+            "wikibase_item": "Q11658843"
+          },
+          "terms": {
+            "description": [
+              "隅田川にかつて存在した渡し船・渡船場の総称"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

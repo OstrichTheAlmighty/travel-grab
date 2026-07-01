@@ -1,0 +1,100 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:52.432Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4650,
+          "ns": 0,
+          "title": "Black hole",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Black_hole_-_Messier_87_crop_max_res.jpg",
+            "toc": "",
+            "wikibase-badge-Q17437796": "",
+            "wikibase-shortdesc": "Compact astronomical body",
+            "wikibase_item": "Q589"
+          },
+          "terms": {
+            "description": [
+              "astronomical object so massive, that anything falling into it, including light, cannot escape its gravity"
+            ]
+          }
+        },
+        {
+          "pageid": 142537,
+          "ns": 0,
+          "title": "Hole (band)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Hole",
+            "page_image_free": "Hole_Live_at_Public_Assembly_NYC_April_2013.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "American alternative rock band",
+            "wikibase_item": "Q624790"
+          },
+          "terms": {
+            "description": [
+              "American alternative rock band"
+            ]
+          }
+        },
+        {
+          "pageid": 851008,
+          "ns": 0,
+          "title": "Black hole information paradox",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Black_hole_-_Messier_87_crop_max_res.jpg",
+            "wikibase-shortdesc": "Puzzle of disappearance of information in a black hole",
+            "wikibase_item": "Q1471710"
+          },
+          "terms": {
+            "description": [
+              "scientific question of whether information can disappear in a black hole"
+            ]
+          }
+        },
+        {
+          "pageid": 5211226,
+          "ns": 0,
+          "title": "Violet (Hole song)",
+          "index": 5,
+          "pageprops": {
+            "page_image": "Violetcov.jpg",
+            "wikibase-shortdesc": "1995 single by Hole",
+            "wikibase_item": "Q3395353"
+          },
+          "terms": {
+            "description": [
+              "song by American alternative rock band Hole"
+            ]
+          }
+        },
+        {
+          "pageid": 59140506,
+          "ns": 0,
+          "title": "The Match: Tiger vs. Phil",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Match: Tiger vs. Phil",
+            "page_image_free": "Tiger-vs-phil-the-match.png",
+            "wikibase-shortdesc": "Golf tournament",
+            "wikibase_item": "Q60755004"
+          },
+          "terms": {
+            "description": [
+              "golf tournament"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

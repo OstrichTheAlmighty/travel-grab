@@ -1,0 +1,36 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:01.036Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 72628,
+          "ns": 0,
+          "title": "新横浜ラーメン博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しんよこはまらあめんはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Shinyokohama_ramen_museum.jpg",
+            "wikibase_item": "Q864499"
+          },
+          "coordinates": [
+            {
+              "lat": 35.50980556,
+              "lon": 139.6145,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県横浜市港北区にあるフードテーマパーク"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

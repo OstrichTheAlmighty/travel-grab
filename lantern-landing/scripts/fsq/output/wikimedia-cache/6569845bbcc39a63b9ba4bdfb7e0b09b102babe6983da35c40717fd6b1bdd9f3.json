@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:19.094Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 519532,
+          "ns": 0,
+          "title": "屋上庭園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おくしようていえん",
+            "page_image_free": "Hanging_Gardens_of_Babylon.jpg",
+            "wikibase_item": "Q1156696"
+          },
+          "terms": {
+            "description": [
+              "建築物の屋上などに造られた植栽を伴う庭園"
+            ]
+          }
+        },
+        {
+          "pageid": 566944,
+          "ns": 0,
+          "title": "経堂",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きようとう",
+            "kartographer_frames": "1",
+            "page_image_free": "小田急線「経堂」駅南口前_-_panoramio_(1).jpg",
+            "wikibase_item": "Q11606408"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 664348,
+          "ns": 0,
+          "title": "成城コルティ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せいしようこるてい",
+            "page_image_free": "Seijyo_Corty.JPG",
+            "wikibase_item": "Q11495402"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63994444,
+              "lon": 139.59858333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区成城にある小田急グループが運営管理するショッピングモール"
+            ]
+          }
+        },
+        {
+          "pageid": 2343065,
+          "ns": 0,
+          "title": "経堂コルティ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きようとうこるてい",
+            "page_image_free": "KyodoCorty.jpg",
+            "wikibase_item": "Q11606409"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6515,
+              "lon": 139.63575,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区経堂にある小田急グループが運営管理するショッピングモール"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

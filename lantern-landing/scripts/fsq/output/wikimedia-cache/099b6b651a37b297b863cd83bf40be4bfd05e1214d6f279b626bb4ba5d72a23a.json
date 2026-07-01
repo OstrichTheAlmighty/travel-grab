@@ -1,0 +1,78 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:00.422Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 87351,
+          "ns": 0,
+          "title": "アース製薬",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ああすせいやく",
+            "page_image_free": "Earthchem.jpg",
+            "wikibase_item": "Q11285616"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都千代田区にある日用品製造メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 245553,
+          "ns": 0,
+          "title": "エステー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "えすてえ",
+            "page_image_free": "S._T._Logo.png",
+            "wikibase_item": "Q11290062"
+          },
+          "terms": {
+            "description": [
+              "日本の企業"
+            ]
+          }
+        },
+        {
+          "pageid": 516102,
+          "ns": 0,
+          "title": "日経スペシャル カンブリア宮殿",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "につけいすへしやる かんふりあきゆうてん",
+            "wikibase_item": "Q11510183"
+          },
+          "terms": {
+            "description": [
+              "テレビ東京制作のテレビ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 1065395,
+          "ns": 0,
+          "title": "GROWING REED",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "くろおいんくりいと",
+            "wikibase_item": "Q11201918"
+          }
+        },
+        {
+          "pageid": 2989870,
+          "ns": 0,
+          "title": "おへんろ。",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おへんろはちはちあるき",
+            "wikibase_item": "Q17209295"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:53.385Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1027341,
+          "ns": 0,
+          "title": "南砂",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みなみすな",
+            "kartographer_frames": "1",
+            "page_image_free": "Kotolibrary_2.jpg",
+            "wikibase_item": "Q11408313"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

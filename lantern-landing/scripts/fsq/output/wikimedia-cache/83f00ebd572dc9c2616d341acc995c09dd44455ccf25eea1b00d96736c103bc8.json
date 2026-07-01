@@ -1,0 +1,108 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:49.300Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 15740,
+          "ns": 0,
+          "title": "西武ドーム",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "せいふとおむ",
+            "page_image_free": "Seibu_Dome_feb_23_2021_various_16_59_23_418000.jpeg",
+            "wikibase_item": "Q1194822"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7685,
+              "lon": 139.4205,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県所沢市にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 40090,
+          "ns": 0,
+          "title": "横浜スタジアム",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "よこはますたしあむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Yokohama_stadium_2020_wing.jpg",
+            "wikibase_item": "Q1148681"
+          },
+          "coordinates": [
+            {
+              "lat": 35.443428,
+              "lon": 139.6401,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県横浜市中区にある野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 214538,
+          "ns": 0,
+          "title": "フィールドシート",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふいいるとしいと",
+            "page_image_free": "Chiba_Marine_Stadium_FieldWingSeat.jpg",
+            "wikibase_item": "Q11332580"
+          }
+        },
+        {
+          "pageid": 727300,
+          "ns": 0,
+          "title": "ブルペン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふるへん",
+            "page_image_free": "Baseball_bullpen_2004.jpg",
+            "wikibase_item": "Q579478"
+          },
+          "terms": {
+            "description": [
+              "野球場の投球練習場"
+            ]
+          }
+        },
+        {
+          "pageid": 1384627,
+          "ns": 0,
+          "title": "阪神甲子園球場",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はんしんこうしえんきゆうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "202309081549_IMG_3516.jpg",
+            "wikibase_item": "Q959811"
+          },
+          "terms": {
+            "description": [
+              "兵庫県西宮市にある野球場"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

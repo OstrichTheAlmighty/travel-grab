@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:22.316Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 424445,
+          "ns": 0,
+          "title": "Odaiba",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Odaiba_close_up_-_2025_Jan_14_01-27PM.jpeg",
+            "wikibase-shortdesc": "Artificial island in Tokyo Bay, Japan",
+            "wikibase_item": "Q211861"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63,
+              "lon": 139.775,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "town located in Minato-ku, Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 2159245,
+          "ns": 0,
+          "title": "The Lego Group",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Lego Group, the",
+            "page_image_free": "LEGO_logo.svg",
+            "wikibase-shortdesc": "Danish multinational toy company",
+            "wikibase_item": "Q1063455"
+          },
+          "coordinates": [
+            {
+              "lat": 55.73333333,
+              "lon": 9.12083333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Danish toy manufacturer best known for interlocking-brick construction toys"
+            ]
+          }
+        },
+        {
+          "pageid": 9873621,
+          "ns": 0,
+          "title": "Merlin Entertainments",
+          "index": 2,
+          "pageprops": {
+            "wikibase-shortdesc": "British leisure company",
+            "wikibase_item": "Q573278"
+          },
+          "terms": {
+            "description": [
+              "British leisure company"
+            ]
+          }
+        },
+        {
+          "pageid": 24809257,
+          "ns": 0,
+          "title": "Legoland Discovery Centre",
+          "index": 1,
+          "pageprops": {
+            "page_image": "Legoland_Discovery_Centre_logo.svg",
+            "page_image_free": "Legoland_Discovery_Centre_Manchester.JPG",
+            "wikibase-shortdesc": "Indoor family entertainment center chain",
+            "wikibase_item": "Q303439"
+          },
+          "terms": {
+            "description": [
+              "chain of indoor family entertainment centers that are smaller versions of Legoland"
+            ]
+          }
+        },
+        {
+          "pageid": 37531381,
+          "ns": 0,
+          "title": "Legoland Japan Resort",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "3",
+            "kartographer_links": "1",
+            "page_image_free": "LEGOLAND_JAPAN_Entrance,_Kinjofuto_Minato_Ward_Nagoya_2022.jpg",
+            "wikibase-shortdesc": "Amusement park in Minato-ku, Nagoya, Japan",
+            "wikibase_item": "Q29168099"
+          },
+          "coordinates": [
+            {
+              "lat": 35.05055556,
+              "lon": 136.84333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Japanese theme park"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

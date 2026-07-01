@@ -1,0 +1,57 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:54.473Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1752647,
+          "ns": 0,
+          "title": "山本廉",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "やまもと れん",
+            "page_image": "Actor_Ren_Yamamoto_1963.png",
+            "wikibase_item": "Q11469044"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優（1930−2003）"
+            ]
+          }
+        },
+        {
+          "pageid": 2589748,
+          "ns": 0,
+          "title": "NARUTO -ナルト-の登場人物",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なるとのとうしようしんふつ",
+            "wikibase_item": "Q718482"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3982155,
+          "ns": 0,
+          "title": "ガンダムビルドダイバーズRe:RISE",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かんたむひるとたいはあすりらいす",
+            "wikibase_item": "Q66023719"
+          },
+          "terms": {
+            "description": [
+              "日本のWebアニメ作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

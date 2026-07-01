@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:37.771Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 547281,
+          "ns": 0,
+          "title": "聖徳記念絵画館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せいとくきねんかいかかん",
+            "page_image_free": "Meiji_Memorial_Picture_Gallery_tokyo.jpg",
+            "wikibase_item": "Q5153794"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67877778,
+              "lon": 139.71763889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区にある美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

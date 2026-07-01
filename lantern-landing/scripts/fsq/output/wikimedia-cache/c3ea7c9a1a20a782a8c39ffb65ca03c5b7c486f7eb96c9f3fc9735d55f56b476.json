@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:25.734Z",
+  "value": {
+    "searchinfo": {
+      "search": "遠慶"
+    },
+    "search": [
+      {
+        "id": "Q30319449",
+        "title": "Q30319449",
+        "pageid": 31931806,
+        "concepturi": "http://www.wikidata.org/entity/Q30319449",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q30319449",
+        "display": {
+          "label": {
+            "value": "遠慶寺",
+            "language": "ja"
+          },
+          "description": {
+            "value": "Wikimedia disambiguation page",
+            "language": "en"
+          }
+        },
+        "label": "遠慶寺",
+        "description": "Wikimedia disambiguation page",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "遠慶寺"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

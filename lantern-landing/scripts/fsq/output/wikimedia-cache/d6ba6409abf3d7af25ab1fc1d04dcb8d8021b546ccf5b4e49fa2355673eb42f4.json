@@ -1,0 +1,86 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:15.958Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 285343,
+          "ns": 0,
+          "title": "和田博実",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "わた ひろみ",
+            "wikibase_item": "Q11417936"
+          },
+          "terms": {
+            "description": [
+              "日本の野球選手 (1937-2009)"
+            ]
+          }
+        },
+        {
+          "pageid": 995345,
+          "ns": 0,
+          "title": "ラーメン刑事「龍」の殺人推理",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "らあめんけいしりゆうのさつしんすいり",
+            "wikibase_item": "Q11347766"
+          }
+        },
+        {
+          "pageid": 1283123,
+          "ns": 0,
+          "title": "きのしたゆうこ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きのした ゆうこ",
+            "wikibase_item": "Q11264917"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 1731756,
+          "ns": 0,
+          "title": "三匹のおっさん",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さんひきのおつさん",
+            "wikibase_item": "Q10865327"
+          },
+          "terms": {
+            "description": [
+              "日本の小説、およびそれを原作とするドラマ"
+            ]
+          }
+        },
+        {
+          "pageid": 1864609,
+          "ns": 0,
+          "title": "ロースハム",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ろすはむ",
+            "page_image_free": "Pork_loin_ham_2.jpg",
+            "wikibase_item": "Q11350917"
+          },
+          "terms": {
+            "description": [
+              "豚のロース肉を使用したハム"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

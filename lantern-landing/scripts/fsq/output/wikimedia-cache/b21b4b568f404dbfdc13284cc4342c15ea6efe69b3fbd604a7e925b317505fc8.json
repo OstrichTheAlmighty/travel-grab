@@ -1,0 +1,124 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:39.856Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 63150,
+          "ns": 0,
+          "title": "防災",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ほうさい",
+            "page_image_free": "Blocks_-_Pantelleria,_Trapani,_Italy_-_August_15,_2016.jpg",
+            "wikibase_item": "Q1460420"
+          },
+          "terms": {
+            "description": [
+              "災害への備え"
+            ]
+          }
+        },
+        {
+          "pageid": 300297,
+          "ns": 0,
+          "title": "池袋",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いけふくろ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ikebukuro2007.jpg",
+            "wikibase_item": "Q542366"
+          },
+          "terms": {
+            "description": [
+              "東京都豊島区の町名、または池袋駅の周辺地域を含む呼称"
+            ]
+          }
+        },
+        {
+          "pageid": 1635259,
+          "ns": 0,
+          "title": "豊島区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "としまく",
+            "kartographer_frames": "1",
+            "page_image_free": "Sunshine_60_1_Ikebukuro_Tokyo_21_May_2004.jpg",
+            "wikibase_item": "Q236680"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7261,
+              "lon": 139.7167,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 1855048,
+          "ns": 0,
+          "title": "池袋駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いけふくろ",
+            "kartographer_frames": "1",
+            "page_image_free": "East_entrance_of_Ikebukuro_Station_2023-11-09.jpg",
+            "toc": "",
+            "wikibase_item": "Q173919"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72972222,
+              "lon": 139.71086111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある駅"
+            ]
+          }
+        },
+        {
+          "pageid": 4071683,
+          "ns": 0,
+          "title": "池袋防災館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いけふくろほうさいかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Ikebukuro_Fire_Station.JPG",
+            "wikibase_item": "Q85881822"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72805556,
+              "lon": 139.707,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある体験学習施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

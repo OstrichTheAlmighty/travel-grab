@@ -1,0 +1,82 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:08.830Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 347944,
+          "ns": 0,
+          "title": "ユニバース (スーパーマーケット)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ゆにはあす",
+            "page_image_free": "Universe-supermarket.jpg",
+            "wikibase_item": "Q11345716"
+          },
+          "terms": {
+            "description": [
+              "青森県八戸市に本社を置くスーパーマーケットチェーン"
+            ]
+          }
+        },
+        {
+          "pageid": 890973,
+          "ns": 0,
+          "title": "わたなべ生鮮館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "わたなへせいせんかん",
+            "wikibase_item": "Q11281879"
+          }
+        },
+        {
+          "pageid": 1072144,
+          "ns": 0,
+          "title": "ニュー三久",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にゆうさんきゆう",
+            "page_image_free": "New_Sankyu_Fushimidai.jpg",
+            "wikibase_item": "Q11325013"
+          }
+        },
+        {
+          "pageid": 3207303,
+          "ns": 0,
+          "title": "大久保佳代子",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおくほ かよこ",
+            "wikibase_item": "Q2028527"
+          },
+          "terms": {
+            "description": [
+              "日本のお笑い芸人"
+            ]
+          }
+        },
+        {
+          "pageid": 4653899,
+          "ns": 0,
+          "title": "千原ジュニアの愛知あたりまえワールド☆〜あなたの街に新仰天!〜",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちはらしゆにあのあいちあたりまえわあるとあなたのまちにしんきようてん",
+            "wikibase_item": "Q113702575"
+          },
+          "terms": {
+            "description": [
+              "テレビ愛知のバラエティ番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

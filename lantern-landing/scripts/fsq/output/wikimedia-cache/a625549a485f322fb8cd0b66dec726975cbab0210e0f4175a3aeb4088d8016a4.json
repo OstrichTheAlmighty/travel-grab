@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:43.028Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 48086,
+          "ns": 0,
+          "title": "東京農工大学",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようのうこうたいかく",
+            "page_image_free": "Tokyo_University_of_Agriculture_and_Technology.jpg",
+            "wikibase_item": "Q1301275"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68397222,
+              "lon": 139.47863889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都府中市に本部がある国立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 137548,
+          "ns": 0,
+          "title": "東京農業大学",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようのうきようたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "TUA_university.jpg",
+            "wikibase_item": "Q909974"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64108333,
+              "lon": 139.63208333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 566120,
+          "ns": 0,
+          "title": "東京農業大学短期大学部",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようのうきようたいかくたんき",
+            "page_image_free": "Tokyonogyouniv.jpg",
+            "wikibase_item": "Q11525169"
+          },
+          "terms": {
+            "description": [
+              "廃止された大学"
+            ]
+          }
+        },
+        {
+          "pageid": 1554242,
+          "ns": 0,
+          "title": "東京大学",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Yasuda_Auditorium_-_Tokyo_University_3.jpg",
+            "wikibase_item": "Q7842"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71333333,
+              "lon": 139.76222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある国立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 3889130,
+          "ns": 0,
+          "title": "2019年の野球",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "2019ねんのやきゆう",
+            "wikibase_item": "Q56283850"
+          }
+        }
+      ]
+    }
+  }
+}

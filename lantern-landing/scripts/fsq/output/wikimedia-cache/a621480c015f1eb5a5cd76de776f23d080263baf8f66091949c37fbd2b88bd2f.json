@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:56.778Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 382478,
+          "ns": 0,
+          "title": "式亭三馬",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しきてい さんは",
+            "page_image_free": "Shikitei_Sanba.jpg",
+            "wikibase_item": "Q1032912"
+          },
+          "terms": {
+            "description": [
+              "1776-1822, 江戸時代後期の地本作家、薬屋、浮世絵師"
+            ]
+          }
+        },
+        {
+          "pageid": 2604259,
+          "ns": 0,
+          "title": "アド・ミュージアム東京",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あとみゆうしあむとうきよう",
+            "page_image_free": "Japan_Tokyo_Yamanote_loop_location_map.svg",
+            "wikibase_item": "Q11284141"
+          },
+          "coordinates": [
+            {
+              "lat": 35.664333,
+              "lon": 139.762222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区のカレッタ汐留にある、広告をテーマにした博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 3056576,
+          "ns": 0,
+          "title": "吉田秀雄",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "よした ひてお",
+            "page_image_free": "Portrait_of_Yoshida_Hideo_-_July_30_1953_-_Kimura_Ihei.png",
+            "wikibase_item": "Q11414039"
+          },
+          "terms": {
+            "description": [
+              "日本の実業家"
+            ]
+          }
+        },
+        {
+          "pageid": 3322147,
+          "ns": 0,
+          "title": "広告電通賞",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こうこくてんつうしよう",
+            "wikibase_item": "Q22130663"
+          }
+        },
+        {
+          "pageid": 3571910,
+          "ns": 0,
+          "title": "ブリヂストン・HELMZ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふりちすとんへるむす",
+            "page_image_free": "Helmz_H1_2009.jpg",
+            "wikibase_item": "Q28958311"
+          }
+        }
+      ]
+    }
+  }
+}

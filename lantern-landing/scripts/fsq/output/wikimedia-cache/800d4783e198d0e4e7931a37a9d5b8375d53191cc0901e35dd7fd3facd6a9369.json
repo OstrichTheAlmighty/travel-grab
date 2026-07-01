@@ -1,0 +1,188 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:24.036Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京国立近代美術館"
+    },
+    "search": [
+      {
+        "id": "Q1359908",
+        "title": "Q1359908",
+        "pageid": 1299491,
+        "concepturi": "http://www.wikidata.org/entity/Q1359908",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1359908",
+        "display": {
+          "label": {
+            "value": "The National Museum of Modern Art, Tokyo",
+            "language": "en"
+          },
+          "description": {
+            "value": "Art museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "The National Museum of Modern Art, Tokyo",
+        "description": "Art museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京国立近代美術館"
+        },
+        "aliases": [
+          "東京国立近代美術館"
+        ]
+      },
+      {
+        "id": "Q113480135",
+        "title": "Q113480135",
+        "pageid": 108254882,
+        "concepturi": "http://www.wikidata.org/entity/Q113480135",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q113480135",
+        "display": {
+          "label": {
+            "value": "東京国立近代美術館",
+            "language": "ja"
+          }
+        },
+        "label": "東京国立近代美術館",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京国立近代美術館"
+        }
+      },
+      {
+        "id": "Q101001030",
+        "title": "Q101001030",
+        "pageid": 98480498,
+        "concepturi": "http://www.wikidata.org/entity/Q101001030",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q101001030",
+        "display": {
+          "label": {
+            "value": "National Crafts Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Kanazawa, Ishikawa, Japan",
+            "language": "en"
+          }
+        },
+        "label": "National Crafts Museum",
+        "description": "museum in Kanazawa, Ishikawa, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "東京国立近代美術館工芸館"
+        },
+        "aliases": [
+          "東京国立近代美術館工芸館"
+        ]
+      },
+      {
+        "id": "Q29570263",
+        "title": "Q29570263",
+        "pageid": 31216071,
+        "concepturi": "http://www.wikidata.org/entity/Q29570263",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q29570263",
+        "display": {
+          "label": {
+            "value": "The National Film Center",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Japan",
+            "language": "en"
+          }
+        },
+        "label": "The National Film Center",
+        "description": "museum in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京国立近代美術館フィルムセンター"
+        },
+        "aliases": [
+          "東京国立近代美術館フィルムセンター"
+        ]
+      },
+      {
+        "id": "Q140073172",
+        "title": "Q140073172",
+        "pageid": 133516384,
+        "concepturi": "http://www.wikidata.org/entity/Q140073172",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q140073172",
+        "display": {
+          "label": {
+            "value": "Crafts Gallery, The National Museum of Modern Art, Tokyo",
+            "language": "en"
+          },
+          "description": {
+            "value": "former museum in Chiyoda, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Crafts Gallery, The National Museum of Modern Art, Tokyo",
+        "description": "former museum in Chiyoda, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京国立近代美術館工芸館"
+        },
+        "aliases": [
+          "東京国立近代美術館工芸館"
+        ]
+      },
+      {
+        "id": "Q111646817",
+        "title": "Q111646817",
+        "pageid": 106583892,
+        "concepturi": "http://www.wikidata.org/entity/Q111646817",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q111646817",
+        "display": {
+          "label": {
+            "value": "The National Museum of Modern Art, Tokyo ? Repository",
+            "language": "en"
+          }
+        },
+        "label": "The National Museum of Modern Art, Tokyo ? Repository",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京国立近代美術館リポジトリ"
+        },
+        "aliases": [
+          "東京国立近代美術館リポジトリ"
+        ]
+      },
+      {
+        "id": "Q113478675",
+        "title": "Q113478675",
+        "pageid": 108253436,
+        "concepturi": "http://www.wikidata.org/entity/Q113478675",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q113478675",
+        "display": {
+          "label": {
+            "value": "東京国立近代美術館研究紀要",
+            "language": "ja"
+          }
+        },
+        "label": "東京国立近代美術館研究紀要",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京国立近代美術館研究紀要"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

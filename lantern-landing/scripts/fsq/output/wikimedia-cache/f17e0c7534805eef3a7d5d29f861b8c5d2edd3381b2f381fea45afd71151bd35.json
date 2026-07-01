@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:29.005Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17784,
+          "ns": 0,
+          "title": "東京理科大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようりか",
+            "page_image_free": "TokyoUniversityOfScience-Kagurazaka.jpg",
+            "wikibase_item": "Q1069994"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69938889,
+              "lon": 139.74138889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 132472,
+          "ns": 0,
+          "title": "ピーター・フランクル",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふらんくる ひいたあ",
+            "page_image_free": "PeterFrankl.jpg",
+            "wikibase_item": "Q718082"
+          },
+          "terms": {
+            "description": [
+              "ハンガリー出身の数学者、日本における大道芸人(1953年生)"
+            ]
+          }
+        },
+        {
+          "pageid": 206395,
+          "ns": 0,
+          "title": "秋山仁",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あきやま しん",
+            "page_image_free": "Jin_Akiyama_cropped_2_Jin_Akiyama_and_Andres_Navarro_20181001.jpg",
+            "wikibase_item": "Q11594937"
+          },
+          "terms": {
+            "description": [
+              "日本の数学者、教育者"
+            ]
+          }
+        },
+        {
+          "pageid": 523651,
+          "ns": 0,
+          "title": "たけしのコマ大数学科",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たけしのこまねちたいかくすうかくか",
+            "wikibase_item": "Q11270915"
+          }
+        },
+        {
+          "pageid": 1635101,
+          "ns": 0,
+          "title": "東京理科大学近代科学資料館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようりかたいかくきんたいかかくしりようかん",
+            "page_image_free": "Ridai_Museum_of_Modern_Science.JPG",
+            "wikibase_item": "Q11525035"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区にある大学施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

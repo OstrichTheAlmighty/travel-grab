@@ -1,0 +1,49 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:44.836Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 23441,
+          "ns": 0,
+          "title": "キク",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きく",
+            "page_image_free": "Kiku_yellow01.jpg",
+            "wikibase_item": "Q15530181"
+          },
+          "terms": {
+            "description": [
+              "キク科キク属の植物"
+            ]
+          }
+        },
+        {
+          "pageid": 388795,
+          "ns": 0,
+          "title": "阪神間モダニズム",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はんしんかんもたにすむ",
+            "page_image_free": "Hankyu_Umeda_Osaka_Japan_June_2005_A.jpg",
+            "wikibase_item": "Q5651123"
+          }
+        },
+        {
+          "pageid": 2333096,
+          "ns": 0,
+          "title": "肥後六花",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひころつか",
+            "page_image_free": "Higo_camellia_in_Kumamoto_Castle_201104091515.png",
+            "wikibase_item": "Q11611567"
+          }
+        }
+      ]
+    }
+  }
+}

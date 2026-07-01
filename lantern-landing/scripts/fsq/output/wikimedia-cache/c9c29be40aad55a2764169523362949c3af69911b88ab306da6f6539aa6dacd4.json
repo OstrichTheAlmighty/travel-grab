@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:23.394Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4156,
+          "ns": 0,
+          "title": "週刊ヤングジャンプ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しゆうかんやんくしやんふ",
+            "page_image_free": "Weekly_Young_Jump_logo.png",
+            "wikibase_item": "Q1367841"
+          },
+          "terms": {
+            "description": [
+              "集英社が発行する日本の漫画雑誌"
+            ]
+          }
+        },
+        {
+          "pageid": 29423,
+          "ns": 0,
+          "title": "北海道方言",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ほつかいとうほうけん",
+            "wikibase_item": "Q3139212"
+          },
+          "terms": {
+            "description": [
+              "日本の北海道の方言のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 172261,
+          "ns": 0,
+          "title": "林家たい平",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はやしや たいへい",
+            "page_image_free": "林家たい平.png",
+            "wikibase_item": "Q11532941"
+          },
+          "terms": {
+            "description": [
+              "落語家"
+            ]
+          }
+        },
+        {
+          "pageid": 3915368,
+          "ns": 0,
+          "title": "トリニクって何の肉!?",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とりにくつてなんのにく",
+            "wikibase_item": "Q65235073"
+          },
+          "terms": {
+            "description": [
+              "朝日放送テレビ制作のバラエティ番組 (2019 - 2022)"
+            ]
+          }
+        },
+        {
+          "pageid": 3922771,
+          "ns": 0,
+          "title": "矢埜愛茉",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "やの えま",
+            "page_image_free": "矢埜愛茉さん_2026年5月10日フレッシュフェス撮影会ニテ.jpg",
+            "wikibase_item": "Q63131313"
+          },
+          "terms": {
+            "description": [
+              "日本のAV女優、元グラビアアイドル、女優 (1996-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

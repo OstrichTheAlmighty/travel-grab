@@ -1,0 +1,94 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:57.893Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 92566,
+          "ns": 0,
+          "title": "小林幸子",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こはやし さちこ",
+            "page_image_free": "Tsuru.costume.jpg",
+            "wikibase_item": "Q440472"
+          },
+          "terms": {
+            "description": [
+              "日本の女性歌手、女優、タレント (1953-)"
+            ]
+          }
+        },
+        {
+          "pageid": 415905,
+          "ns": 0,
+          "title": "ストロング小林",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こはやし すとろんく",
+            "wikibase_item": "Q11312513"
+          },
+          "terms": {
+            "description": [
+              "日本の元プロレスラー、俳優、タレント（1940−2021）"
+            ]
+          }
+        },
+        {
+          "pageid": 501772,
+          "ns": 0,
+          "title": "小林公平",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こはやし こうへい",
+            "page_image_free": "小林公平氏.jpg",
+            "wikibase_item": "Q11461417"
+          },
+          "terms": {
+            "description": [
+              "日本の実業家、作詞家"
+            ]
+          }
+        },
+        {
+          "pageid": 552866,
+          "ns": 0,
+          "title": "麻美ゆま",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あさみ ゆま",
+            "page_image_free": "Asami_Yuma.jpg",
+            "wikibase_item": "Q937359"
+          },
+          "terms": {
+            "description": [
+              "日本のタレント、歌手、作家、元AV女優"
+            ]
+          }
+        },
+        {
+          "pageid": 3271186,
+          "ns": 0,
+          "title": "渡辺麻友",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "わたなへ まゆ",
+            "page_image_free": "Mayu_Watanabe_Sends_Greetings_for_JKT48_Request_Hour_2016.jpg",
+            "wikibase_item": "Q187662"
+          },
+          "terms": {
+            "description": [
+              "日本の元女優、歌手、アイドル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

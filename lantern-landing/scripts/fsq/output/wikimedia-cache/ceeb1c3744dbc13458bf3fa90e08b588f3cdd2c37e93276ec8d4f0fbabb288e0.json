@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:48.669Z",
+  "value": {
+    "searchinfo": {
+      "search": "東武博物館"
+    },
+    "search": [
+      {
+        "id": "Q3915461",
+        "title": "Q3915461",
+        "pageid": 3735257,
+        "concepturi": "http://www.wikidata.org/entity/Q3915461",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3915461",
+        "display": {
+          "label": {
+            "value": "Tobu Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "railway museum in Sumida, Tokyo Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tobu Museum",
+        "description": "railway museum in Sumida, Tokyo Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東武博物館"
+        },
+        "aliases": [
+          "東武博物館"
+        ]
+      },
+      {
+        "id": "Q5753733",
+        "title": "Q5753733",
+        "pageid": 5522527,
+        "concepturi": "http://www.wikidata.org/entity/Q5753733",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5753733",
+        "display": {
+          "label": {
+            "value": "Higashi-Mukōjima Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "railway station in Sumida, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Higashi-Mukōjima Station",
+        "description": "railway station in Sumida, Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "東武博物館 下車駅"
+        },
+        "aliases": [
+          "東武博物館 下車駅"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

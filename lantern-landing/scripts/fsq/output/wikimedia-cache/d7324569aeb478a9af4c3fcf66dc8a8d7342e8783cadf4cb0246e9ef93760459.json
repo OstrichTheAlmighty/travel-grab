@@ -1,0 +1,108 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:23.442Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3277,
+          "ns": 0,
+          "title": "真言宗",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しんこんしゆう",
+            "page_image_free": "Kobo_Daishi_(Taisanji_Matsuyama).jpg",
+            "wikibase_item": "Q550182"
+          },
+          "terms": {
+            "description": [
+              "空海によって9世紀初頭に開かれた大乗仏教の宗派"
+            ]
+          }
+        },
+        {
+          "pageid": 27557,
+          "ns": 0,
+          "title": "清和源氏",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せいわけんし",
+            "page_image_free": "Sasa_Rindo.svg",
+            "wikibase_item": "Q2164991"
+          },
+          "terms": {
+            "description": [
+              "第56代清和天皇の皇子・諸王を祖とする源氏氏族"
+            ]
+          }
+        },
+        {
+          "pageid": 94646,
+          "ns": 0,
+          "title": "神社本庁",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しんしやほんちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Association_of_Shinto_Shrines_2010.jpg",
+            "wikibase_item": "Q908077"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67944444,
+              "lon": 139.70277778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都渋谷区にある、日本の神社を包括する宗教法人"
+            ]
+          }
+        },
+        {
+          "pageid": 236499,
+          "ns": 0,
+          "title": "諏訪神社",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "すわしんしや",
+            "page_image_free": "諏訪大社上社本宮_拝殿・拝所_-_Suwa_Taisha_Honmiya.jpg",
+            "wikibase_item": "Q2370082"
+          }
+        },
+        {
+          "pageid": 454132,
+          "ns": 0,
+          "title": "竈山神社",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かまやましんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Kamayama-jinja_haiden.JPG",
+            "wikibase_item": "Q11597743"
+          },
+          "coordinates": [
+            {
+              "lat": 34.201,
+              "lon": 135.20444444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "和歌山市にある神社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:31.657Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 23852,
+          "ns": 0,
+          "title": "ドイツ民主共和国",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "といつみんしゆきようわこく",
+            "page_image_free": "Flag_of_the_German_Democratic_Republic.svg",
+            "wikibase_item": "Q16957"
+          },
+          "terms": {
+            "description": [
+              "1949年から1990年まで中央ヨーロッパに存在した国"
+            ]
+          }
+        },
+        {
+          "pageid": 178375,
+          "ns": 0,
+          "title": "鉄道博物館の一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "てつとうはくふつかんのいちらん",
+            "wikibase_item": "Q1863365"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1974854,
+          "ns": 0,
+          "title": "ベルリン",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "へるりん",
+            "kartographer_frames": "1",
+            "page_image_free": "Berlin_Montage_2022.png",
+            "wikibase_item": "Q64"
+          },
+          "coordinates": [
+            {
+              "lat": 52.51638889,
+              "lon": 13.3775,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "ドイツの首都"
+            ]
+          }
+        },
+        {
+          "pageid": 3007863,
+          "ns": 0,
+          "title": "ドイツ連邦軍軍事史博物館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "といつれんほうくんくんししはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Logo_MHM_Dresden.svg",
+            "wikibase_item": "Q459416"
+          }
+        },
+        {
+          "pageid": 3185124,
+          "ns": 0,
+          "title": "バルド国立博物館での銃乱射事件",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はるとこくりつはくふつかんてのしゆうらんしやしけん",
+            "wikibase_item": "Q19613356"
+          }
+        }
+      ]
+    }
+  }
+}

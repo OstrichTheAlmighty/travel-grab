@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:48.313Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 36651,
+          "ns": 0,
+          "title": "ESP",
+          "index": 1,
+          "pageprops": {
+            "disambiguation": "",
+            "toc": "",
+            "wikibase-shortdesc": "Topics referred to by the same term",
+            "wikibase_item": "Q218265"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        },
+        {
+          "pageid": 37585,
+          "ns": 0,
+          "title": "Museum",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Museo_Chileno_de_Arte_Precolombino_-_2020_-_10.jpg",
+            "wikibase-shortdesc": "Institution preserving and interpreting collections or heritage",
+            "wikibase_item": "Q33506"
+          },
+          "terms": {
+            "description": [
+              "institution that holds artifacts and other objects of scientific, artistic, cultural, historical, or other importance"
+            ]
+          }
+        },
+        {
+          "pageid": 451121,
+          "ns": 0,
+          "title": "AFC Bournemouth",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "AFC Bournemouth",
+            "page_image": "AFC_Bournemouth_(2013).svg",
+            "wikibase-shortdesc": "Association football club in Bournemouth, England",
+            "wikibase_item": "Q19568"
+          },
+          "terms": {
+            "description": [
+              "association football club in Bournemouth, England"
+            ]
+          }
+        },
+        {
+          "pageid": 679782,
+          "ns": 0,
+          "title": "Uruguay national football team",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Uruguay National Football Team",
+            "wikibase-shortdesc": "Men's association football team",
+            "wikibase_item": "Q134916"
+          },
+          "terms": {
+            "description": [
+              "men's national association football team representing AUF"
+            ]
+          }
+        },
+        {
+          "pageid": 83266395,
+          "ns": 0,
+          "title": "2026 European heatwaves",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Heat waves, European 2026",
+            "page_image_free": "Hot_surfaces_during_Europe's_heatwave_'seen'_by_Sentinel-3_ESA522397.jpg",
+            "wikibase_item": "Q139961792"
+          },
+          "terms": {
+            "description": [
+              "heat waves affecting Europe in 2026"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

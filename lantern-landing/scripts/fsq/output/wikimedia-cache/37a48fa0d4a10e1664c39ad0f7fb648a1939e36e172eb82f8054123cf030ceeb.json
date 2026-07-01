@@ -1,0 +1,82 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:24.741Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 31528,
+          "ns": 0,
+          "title": "あたしンち",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あたしんち",
+            "wikibase_item": "Q703261"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画作品"
+            ]
+          }
+        },
+        {
+          "pageid": 1017360,
+          "ns": 0,
+          "title": "まめっち",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "まめつち",
+            "page_image": "バンダイキャラクターストリートまめっち.jpg",
+            "wikibase_item": "Q11278513"
+          }
+        },
+        {
+          "pageid": 1529557,
+          "ns": 0,
+          "title": "ももいろクローバーZ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ももいろくろおはあせつと",
+            "page_image_free": "Momoiro_Clover_Z_logo.png",
+            "wikibase_item": "Q1070606"
+          },
+          "terms": {
+            "description": [
+              "日本の女性アイドルグループ"
+            ]
+          }
+        },
+        {
+          "pageid": 1648705,
+          "ns": 0,
+          "title": "ちはやふる",
+          "index": 1,
+          "pageprops": {
+            "wikibase_item": "Q182469"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 2033436,
+          "ns": 0,
+          "title": "えいがでとーじょー! たまごっち ドキドキ! うちゅーのまいごっち!?",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "えいかてとおしよおたまこつちときときうちゆうのまいこつち",
+            "page_image_free": "B747-446D(JA8905)_@OKA_ROAH_(800042166).jpg",
+            "wikibase_item": "Q3980552"
+          }
+        }
+      ]
+    }
+  }
+}

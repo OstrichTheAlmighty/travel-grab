@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:36.717Z",
+  "value": {
+    "searchinfo": {
+      "search": "佐藤美術館"
+    },
+    "search": [
+      {
+        "id": "Q11384365",
+        "title": "Q11384365",
+        "pageid": 12522755,
+        "concepturi": "http://www.wikidata.org/entity/Q11384365",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11384365",
+        "display": {
+          "label": {
+            "value": "Sato Museum of Art",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Sato Museum of Art",
+        "description": "museum in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "佐藤美術館"
+        },
+        "aliases": [
+          "佐藤美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

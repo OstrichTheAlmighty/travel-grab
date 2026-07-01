@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:44.782Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 86571,
+          "ns": 0,
+          "title": "白樺派",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しらかはは",
+            "page_image_free": "Shirakaba_first_issue.jpg",
+            "wikibase_item": "Q1007854"
+          },
+          "terms": {
+            "description": [
+              "日本の文芸思潮のひとつ、およびその理念・作風を共有する一連の作家"
+            ]
+          }
+        },
+        {
+          "pageid": 451433,
+          "ns": 0,
+          "title": "新しき村",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あたらしきむら",
+            "kartographer_frames": "1",
+            "page_image_free": "Atarashiki-mura_Entrance.JPG",
+            "wikibase_item": "Q4812812"
+          },
+          "coordinates": [
+            {
+              "lat": 35.92980556,
+              "lon": 139.32455556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "武者小路実篤が、理想郷を求めて宮崎県と埼玉県内に設立した団体。一般財団法人。"
+            ]
+          }
+        },
+        {
+          "pageid": 982472,
+          "ns": 0,
+          "title": "神代植物公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しんたいしよくふつこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Jindai_Botanical_Garden-2.jpg",
+            "wikibase_item": "Q606827"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67111111,
+              "lon": 139.54611111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の植物園"
+            ]
+          }
+        },
+        {
+          "pageid": 1319756,
+          "ns": 0,
+          "title": "武者小路実篤",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "むしやのこうし さねあつ",
+            "page_image_free": "Saneatsu_Mushanokōji.jpg",
+            "wikibase_item": "Q684481"
+          },
+          "terms": {
+            "description": [
+              "日本の小説家 (1885-1976)"
+            ]
+          }
+        },
+        {
+          "pageid": 3515727,
+          "ns": 0,
+          "title": "文豪とアルケミスト",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふんこうとあるけみすと",
+            "wikibase_item": "Q28686422"
+          },
+          "terms": {
+            "description": [
+              "EXNOAが配信しているブラウザゲーム"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

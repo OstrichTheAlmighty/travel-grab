@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:22.964Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 38605,
+          "ns": 0,
+          "title": "横浜ランドマークタワー",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "よこはまらんとまあくたわあ",
+            "page_image_free": "Yokohama_Landmark_Tower_202207.jpg",
+            "wikibase_item": "Q587108"
+          },
+          "coordinates": [
+            {
+              "lat": 35.45459167,
+              "lon": 139.63147222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "横浜市の超高層ビル"
+            ]
+          }
+        },
+        {
+          "pageid": 121839,
+          "ns": 0,
+          "title": "大槌町",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おおつちちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Hourai_Islnd_in_Otsuchi.jpg",
+            "wikibase_item": "Q386411"
+          },
+          "coordinates": [
+            {
+              "lat": 39.35825,
+              "lon": 141.89944,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "岩手県上閉伊郡の町"
+            ]
+          }
+        },
+        {
+          "pageid": 1307433,
+          "ns": 0,
+          "title": "なら・シルクロード博覧会",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ならしるくろおとはくらんかい",
+            "wikibase_item": "Q11274532"
+          },
+          "terms": {
+            "description": [
+              "1988年に日本の奈良県奈良市で開催された博覧会"
+            ]
+          }
+        },
+        {
+          "pageid": 3056173,
+          "ns": 0,
+          "title": "日本遺産",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にほんいさん",
+            "page_image_free": "260516_Kadocho_Yuasa_Wakayama_pref_Japan05s3.jpg",
+            "wikibase_item": "Q18382798"
+          },
+          "terms": {
+            "description": [
+              "文化庁の文化財保護制度。各地方の複数の文化財で構成される歴史・文化的ストーリーを文化庁が「日本遺産」として認定する。"
+            ]
+          }
+        },
+        {
+          "pageid": 4529340,
+          "ns": 0,
+          "title": "佐渡島の金山",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さとのきんさん",
+            "displaytitle": "佐渡島の金山",
+            "kartographer_frames": "1",
+            "page_image_free": "Sadokinzan-doyunowareto_01.JPG",
+            "wikibase_item": "Q11248197"
+          },
+          "terms": {
+            "description": [
+              "新潟県佐渡市にある世界遺産"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

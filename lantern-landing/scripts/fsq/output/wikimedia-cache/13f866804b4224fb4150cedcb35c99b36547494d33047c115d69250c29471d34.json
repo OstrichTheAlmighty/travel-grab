@@ -1,0 +1,209 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:10.880Z",
+  "value": {
+    "searchinfo": {
+      "search": "ミッキー"
+    },
+    "search": [
+      {
+        "id": "Q19819798",
+        "title": "Q19819798",
+        "pageid": 21422064,
+        "concepturi": "http://www.wikidata.org/entity/Q19819798",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q19819798",
+        "display": {
+          "label": {
+            "value": "Mickey",
+            "language": "en"
+          },
+          "description": {
+            "value": "male given name",
+            "language": "en"
+          }
+        },
+        "label": "Mickey",
+        "description": "male given name",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ミッキー"
+        },
+        "aliases": [
+          "ミッキー"
+        ]
+      },
+      {
+        "id": "Q6838889",
+        "title": "Q6838889",
+        "pageid": 6691481,
+        "concepturi": "http://www.wikidata.org/entity/Q6838889",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6838889",
+        "display": {
+          "label": {
+            "value": "Micky",
+            "language": "en"
+          },
+          "description": {
+            "value": "male given name",
+            "language": "en"
+          }
+        },
+        "label": "Micky",
+        "description": "male given name",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ミッキー"
+        },
+        "aliases": [
+          "ミッキー"
+        ]
+      },
+      {
+        "id": "Q257424",
+        "title": "Q257424",
+        "pageid": 249777,
+        "concepturi": "http://www.wikidata.org/entity/Q257424",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q257424",
+        "display": {
+          "label": {
+            "value": "Mickey",
+            "language": "en"
+          },
+          "description": {
+            "value": "song written and composed by Mike Chapman and Nicky Chinn, originally recorded by Racey in 1979",
+            "language": "en"
+          }
+        },
+        "label": "Mickey",
+        "description": "song written and composed by Mike Chapman and Nicky Chinn, originally recorded by Racey in 1979",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ミッキー"
+        },
+        "aliases": [
+          "ミッキー"
+        ]
+      },
+      {
+        "id": "Q3311843",
+        "title": "Q3311843",
+        "pageid": 3158085,
+        "concepturi": "http://www.wikidata.org/entity/Q3311843",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3311843",
+        "display": {
+          "label": {
+            "value": "Mickey",
+            "language": "en"
+          },
+          "description": {
+            "value": "1918 film by James Young, F. Richard Jones",
+            "language": "en"
+          }
+        },
+        "label": "Mickey",
+        "description": "1918 film by James Young, F. Richard Jones",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ミッキー"
+        },
+        "aliases": [
+          "ミッキー"
+        ]
+      },
+      {
+        "id": "Q37217747",
+        "title": "Q37217747",
+        "pageid": 38595525,
+        "concepturi": "http://www.wikidata.org/entity/Q37217747",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q37217747",
+        "display": {
+          "label": {
+            "value": "Mickey",
+            "language": "en"
+          },
+          "description": {
+            "value": "family name",
+            "language": "en"
+          }
+        },
+        "label": "Mickey",
+        "description": "family name",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ミッキー"
+        },
+        "aliases": [
+          "ミッキー"
+        ]
+      },
+      {
+        "id": "Q1073080",
+        "title": "Q1073080",
+        "pageid": 1021523,
+        "concepturi": "http://www.wikidata.org/entity/Q1073080",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1073080",
+        "display": {
+          "label": {
+            "value": "Mickey Finn",
+            "language": "en"
+          },
+          "description": {
+            "value": "use of psychoactive drugs to incapacitate someone without or against their consent, especially to commit an additional crime",
+            "language": "en"
+          }
+        },
+        "label": "Mickey Finn",
+        "description": "use of psychoactive drugs to incapacitate someone without or against their consent, especially to commit an additional crime",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ミッキー・フィン"
+        },
+        "aliases": [
+          "ミッキー・フィン"
+        ]
+      },
+      {
+        "id": "Q61794976",
+        "title": "Q61794976",
+        "pageid": 61630293,
+        "concepturi": "http://www.wikidata.org/entity/Q61794976",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q61794976",
+        "display": {
+          "label": {
+            "value": "Mickie",
+            "language": "en"
+          },
+          "description": {
+            "value": "male given name",
+            "language": "en"
+          }
+        },
+        "label": "Mickie",
+        "description": "male given name",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ミッキー"
+        },
+        "aliases": [
+          "ミッキー"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

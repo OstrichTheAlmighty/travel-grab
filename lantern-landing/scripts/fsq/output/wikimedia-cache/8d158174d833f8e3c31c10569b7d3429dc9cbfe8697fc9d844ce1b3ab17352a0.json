@@ -1,0 +1,65 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:47.977Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "geosearch": [
+        {
+          "pageid": 12576753,
+          "ns": 0,
+          "title": "Q11437923",
+          "lat": 35.580556,
+          "lon": 139.760111,
+          "dist": 276.9,
+          "primary": true
+        },
+        {
+          "pageid": 12664875,
+          "ns": 0,
+          "title": "Q11525002",
+          "lat": 35.583975,
+          "lon": 139.760653,
+          "dist": 326.4,
+          "primary": true
+        },
+        {
+          "pageid": 12667641,
+          "ns": 0,
+          "title": "Q11527752",
+          "lat": 35.58728611111111,
+          "lon": 139.76587777777777,
+          "dist": 683.3,
+          "primary": true
+        },
+        {
+          "pageid": 12309437,
+          "ns": 0,
+          "title": "Q11103663",
+          "lat": 35.58361111111111,
+          "lon": 139.75555555555556,
+          "dist": 695.6,
+          "primary": true
+        },
+        {
+          "pageid": 12576779,
+          "ns": 0,
+          "title": "Q11437948",
+          "lat": 35.573894,
+          "lon": 139.769825,
+          "dist": 1068.1,
+          "primary": true
+        },
+        {
+          "pageid": 12576655,
+          "ns": 0,
+          "title": "Q11437825",
+          "lat": 35.587972,
+          "lon": 139.75375,
+          "dist": 1082.8,
+          "primary": true
+        }
+      ]
+    }
+  }
+}

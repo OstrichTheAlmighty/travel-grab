@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:56.079Z",
+  "value": {
+    "searchinfo": {
+      "search": "菊池寛実記念智美術館"
+    },
+    "search": [
+      {
+        "id": "Q19340630",
+        "title": "Q19340630",
+        "pageid": 20947406,
+        "concepturi": "http://www.wikidata.org/entity/Q19340630",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q19340630",
+        "display": {
+          "label": {
+            "value": "Kikuchi Kanjitsu Memorial Tomo Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum for contemporary Japanese ceramic art",
+            "language": "en"
+          }
+        },
+        "label": "Kikuchi Kanjitsu Memorial Tomo Museum",
+        "description": "museum for contemporary Japanese ceramic art",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "菊池寛実記念智美術館"
+        },
+        "aliases": [
+          "菊池寛実記念智美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

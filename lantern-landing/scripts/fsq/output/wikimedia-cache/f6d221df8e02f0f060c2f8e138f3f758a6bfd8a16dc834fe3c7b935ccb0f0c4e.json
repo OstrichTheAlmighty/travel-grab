@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:37.086Z",
+  "value": {
+    "searchinfo": {
+      "search": "いちごはうす"
+    },
+    "search": [
+      {
+        "id": "Q11259512",
+        "title": "Q11259512",
+        "pageid": 12404175,
+        "concepturi": "http://www.wikidata.org/entity/Q11259512",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11259512",
+        "display": {
+          "label": {
+            "value": "いちごはうす",
+            "language": "ja"
+          },
+          "description": {
+            "value": "Japanese illustrator",
+            "language": "en"
+          }
+        },
+        "label": "いちごはうす",
+        "description": "Japanese illustrator",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "いちごはうす"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

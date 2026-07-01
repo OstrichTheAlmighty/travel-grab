@@ -1,0 +1,87 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:45.120Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 420994,
+          "ns": 0,
+          "title": "LOVE OR NOTHING",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "らうおあなつしんく",
+            "wikibase_item": "Q11229555"
+          },
+          "terms": {
+            "description": [
+              "中島みゆきのアルバム"
+            ]
+          }
+        },
+        {
+          "pageid": 1727251,
+          "ns": 0,
+          "title": "Listen To The Music",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "りつすんとうさみゆしつく1",
+            "wikibase_item": "Q11230203"
+          }
+        },
+        {
+          "pageid": 1977881,
+          "ns": 0,
+          "title": "アイトラー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あいとら",
+            "page_image_free": "Demophon_Aithra_Staatliche_Antikensammlungen_2687.jpg",
+            "wikibase_item": "Q11921121"
+          },
+          "terms": {
+            "description": [
+              "ギリシア神話の登場人物"
+            ]
+          }
+        },
+        {
+          "pageid": 4136360,
+          "ns": 0,
+          "title": "宮崎県を舞台とした作品一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みやさきけんをふたいとしたさくひんいちらん",
+            "wikibase_item": "Q97310838"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 4303109,
+          "ns": 0,
+          "title": "苦海浄土",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "くかいしようと",
+            "page_image_free": "Fukuchinochi_2F_ac_(1).jpg",
+            "wikibase_item": "Q105377920"
+          },
+          "terms": {
+            "description": [
+              "石牟礼道子の長編小説"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

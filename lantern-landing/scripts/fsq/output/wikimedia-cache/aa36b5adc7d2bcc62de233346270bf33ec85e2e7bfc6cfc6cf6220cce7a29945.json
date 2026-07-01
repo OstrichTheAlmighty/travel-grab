@@ -1,0 +1,130 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:25.599Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 19887,
+          "ns": 0,
+          "title": "国立歴史民俗博物館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こくりつれきしみんそくはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "National_Museum_of_Japanese_History_2008(cropped).jpg",
+            "wikibase_item": "Q3330690"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72449722,
+              "lon": 140.21908056,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県佐倉市にある日本の歴史、民俗学、考古学について総合的に研究・展示する歴史博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 20031,
+          "ns": 0,
+          "title": "東京国立博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようこくりつはくふつかん",
+            "page_image_free": "Tokyo_National_Museum,_Honkan_2010.jpg",
+            "wikibase_item": "Q653433"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71905556,
+              "lon": 139.77666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある国立博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 83836,
+          "ns": 0,
+          "title": "京都国立博物館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きようとこくりつはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Kyoto_National_Museum_2009.jpg",
+            "wikibase_item": "Q147286"
+          },
+          "coordinates": [
+            {
+              "lat": 34.98994444,
+              "lon": 135.77311111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市にある国立博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 447088,
+          "ns": 0,
+          "title": "屏風",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひようふ",
+            "page_image_free": "Byobu.jpg",
+            "wikibase_item": "Q1144689"
+          },
+          "terms": {
+            "description": [
+              "部屋の仕切りや装飾に用いる家具"
+            ]
+          }
+        },
+        {
+          "pageid": 815403,
+          "ns": 0,
+          "title": "山梨県立博物館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "やまなしけんりつはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Yamanashi_Prefectural_Museum.jpg",
+            "wikibase_item": "Q11469696"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64036667,
+              "lon": 138.64855556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "山梨県笛吹市にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

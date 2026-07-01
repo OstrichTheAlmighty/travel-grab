@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:35.210Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 13232,
+          "ns": 0,
+          "title": "集英社",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しゆうえいしや",
+            "page_image_free": "Shueisha_Logo.svg",
+            "wikibase_item": "Q844822"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69469444,
+              "lon": 139.758,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都千代田区にある出版社"
+            ]
+          }
+        },
+        {
+          "pageid": 52824,
+          "ns": 0,
+          "title": "小田急グループ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おたきゆうくるうふ",
+            "page_image_free": "Shinjuku-Daiichi-Life-Building-01.jpg",
+            "wikibase_item": "Q7077250"
+          },
+          "terms": {
+            "description": [
+              "小田急電鉄傘下の企業集団"
+            ]
+          }
+        },
+        {
+          "pageid": 134896,
+          "ns": 0,
+          "title": "西麻布",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にしあさふ",
+            "kartographer_frames": "1",
+            "page_image_free": "Fuji-Film-Head-Office-01.jpg",
+            "wikibase_item": "Q5358662"
+          },
+          "terms": {
+            "description": [
+              "東京都港区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 2894852,
+          "ns": 0,
+          "title": "虎ノ門ヒルズ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とらのもんひるす",
+            "page_image_free": "虎ノ門ヒルズ全景2022.jpg",
+            "wikibase_item": "Q16724433"
+          },
+          "terms": {
+            "description": [
+              "東京都港区のビル群"
+            ]
+          }
+        },
+        {
+          "pageid": 3446580,
+          "ns": 0,
+          "title": "アークヒルズ仙石山森タワー",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ああくひるすせんこくやまもりたわ",
+            "page_image_free": "Ark_Hills_Sengokuyama_Mori_Tower.jpg",
+            "wikibase_item": "Q24036205"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66338889,
+              "lon": 139.74180556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区の超高層ビル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

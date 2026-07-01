@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:18.223Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 410244,
+          "ns": 0,
+          "title": "目黒区美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めくろくひしゆつかん",
+            "page_image_free": "目黒区美術館.jpg",
+            "wikibase_item": "Q3815450"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63486111,
+              "lon": 139.70772222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都目黒区にある美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

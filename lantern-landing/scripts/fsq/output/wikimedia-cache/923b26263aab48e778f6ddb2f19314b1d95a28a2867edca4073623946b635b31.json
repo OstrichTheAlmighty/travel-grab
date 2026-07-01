@@ -1,0 +1,27 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:31.849Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 5171746,
+          "ns": 0,
+          "title": "瓜子",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "くあす",
+            "page_image_free": "Guazi_(sunflower_seeds).jpg",
+            "wikibase_item": "Q28419057"
+          },
+          "terms": {
+            "description": [
+              "中華圏で食べられる種実のスナック菓子"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:30.926Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 153641,
+          "ns": 0,
+          "title": "生類憐れみの令",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しようるいあわれみのれい",
+            "page_image": "中野お囲いの犬の像2.JPG",
+            "wikibase_item": "Q10855187"
+          },
+          "terms": {
+            "description": [
+              "江戸幕府5代将軍徳川綱吉によって制定された動物愛護の法令"
+            ]
+          }
+        },
+        {
+          "pageid": 165248,
+          "ns": 0,
+          "title": "土曜ゴールデン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とようこおるてん",
+            "wikibase_item": "Q11423597"
+          },
+          "terms": {
+            "description": [
+              "テレビ東京の単発特別番組枠"
+            ]
+          }
+        },
+        {
+          "pageid": 476411,
+          "ns": 0,
+          "title": "秦瑞穂",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はた みすほ",
+            "wikibase_item": "Q11596057"
+          },
+          "terms": {
+            "description": [
+              "日本の女優"
+            ]
+          }
+        },
+        {
+          "pageid": 1778099,
+          "ns": 0,
+          "title": "大田区",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-International-Airport_Satellite.jpg",
+            "wikibase_item": "Q217234"
+          },
+          "coordinates": [
+            {
+              "lat": 35.56128,
+              "lon": 139.71603,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 1965436,
+          "ns": 0,
+          "title": "真之真石川流",
+          "index": 3,
+          "pageprops": {
+            "wikibase_item": "Q11582842"
+          }
+        }
+      ]
+    }
+  }
+}

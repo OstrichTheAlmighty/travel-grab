@@ -1,0 +1,89 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:48.186Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 267887,
+          "ns": 0,
+          "title": "JR北海道フレッシュキヨスク",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しえいああるほつかいとうふれつしゆきよすく",
+            "wikibase_item": "Q11402469"
+          },
+          "coordinates": [
+            {
+              "lat": 43.06441667,
+              "lon": 141.35486111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1461244,
+          "ns": 0,
+          "title": "プリキュアデータカードダスシリーズ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふりきゆあてえたかあとたすしりいす",
+            "wikibase_item": "Q11335578"
+          }
+        },
+        {
+          "pageid": 1507586,
+          "ns": 0,
+          "title": "ひたち (列車)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひたち",
+            "page_image_free": "Series-E657-K19_Hitachi-20.jpg",
+            "wikibase_item": "Q5871627"
+          },
+          "terms": {
+            "description": [
+              "東日本旅客鉄道が運行している特別急行列車"
+            ]
+          }
+        },
+        {
+          "pageid": 1957834,
+          "ns": 0,
+          "title": "フレッシュプリキュア!",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふれつしゆふりきゆあ",
+            "wikibase_item": "Q1205226"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビアニメ番組、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 2153370,
+          "ns": 0,
+          "title": "映画 フレッシュプリキュア! おもちゃの国は秘密がいっぱい!?",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふれつしゆふりきゆあおもちやのくにはひみつかいつはい",
+            "wikibase_item": "Q3720630"
+          },
+          "terms": {
+            "description": [
+              "2009年に公開された日本のアニメ映画"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

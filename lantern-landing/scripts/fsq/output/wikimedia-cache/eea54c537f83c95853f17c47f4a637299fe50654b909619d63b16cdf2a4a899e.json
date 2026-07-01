@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:14.999Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 41744,
+          "ns": 0,
+          "title": "世田谷代田駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せたかやたいた",
+            "kartographer_frames": "1",
+            "page_image_free": "Setagayadaita-Sta-202104.jpg",
+            "wikibase_item": "Q4448445"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65819444,
+              "lon": 139.66125,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区代田にある小田急電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 179241,
+          "ns": 0,
+          "title": "臼杵市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "うすきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Buddhism_statue_of_USUKI_(Furuzono)_Oita,JAPAN.JPG",
+            "wikibase_item": "Q845792"
+          },
+          "coordinates": [
+            {
+              "lat": 33.12611,
+              "lon": 131.80525,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大分県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 815539,
+          "ns": 0,
+          "title": "代田 (世田谷区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たいた",
+            "kartographer_frames": "1",
+            "page_image_free": "Setagayadaita-sta-201509.JPG",
+            "wikibase_item": "Q11378283"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 3727017,
+          "ns": 0,
+          "title": "高橋通敏",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たかはし みちとし",
+            "wikibase_item": "Q48759244"
+          },
+          "terms": {
+            "description": [
+              "日本の外交官、国際政治学者、外交評論家"
+            ]
+          }
+        },
+        {
+          "pageid": 3911142,
+          "ns": 0,
+          "title": "齋田萬蔵",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さいた まんそう",
+            "wikibase_item": "Q62085510"
+          }
+        }
+      ]
+    }
+  }
+}

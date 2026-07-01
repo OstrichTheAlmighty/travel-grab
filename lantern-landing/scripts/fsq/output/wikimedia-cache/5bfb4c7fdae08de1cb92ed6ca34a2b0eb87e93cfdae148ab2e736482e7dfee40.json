@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:42.020Z",
+  "value": {
+    "searchinfo": {
+      "search": "BABY CENTER"
+    },
+    "search": [
+      {
+        "id": "Q139838414",
+        "title": "Q139838414",
+        "pageid": 133290948,
+        "concepturi": "http://www.wikidata.org/entity/Q139838414",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q139838414",
+        "display": {
+          "label": {
+            "value": "Baby Center",
+            "language": "en"
+          },
+          "description": {
+            "value": "school in Bauru, São Paulo, Brazil",
+            "language": "en"
+          }
+        },
+        "label": "Baby Center",
+        "description": "school in Bauru, São Paulo, Brazil",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Baby Center"
+        }
+      },
+      {
+        "id": "Q140082300",
+        "title": "Q140082300",
+        "pageid": 133525551,
+        "concepturi": "http://www.wikidata.org/entity/Q140082300",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q140082300",
+        "display": {
+          "label": {
+            "value": "Baby Center",
+            "language": "en"
+          },
+          "description": {
+            "value": "school in Belo Horizonte",
+            "language": "en"
+          }
+        },
+        "label": "Baby Center",
+        "description": "school in Belo Horizonte",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Baby Center"
+        }
+      },
+      {
+        "id": "Q52975868",
+        "title": "Q52975868",
+        "pageid": 53743954,
+        "concepturi": "http://www.wikidata.org/entity/Q52975868",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q52975868",
+        "display": {
+          "label": {
+            "value": "Baby Center",
+            "language": "en"
+          },
+          "description": {
+            "value": "kindergarten in Terni, Terni, Umbria, Italy",
+            "language": "en"
+          }
+        },
+        "label": "Baby Center",
+        "description": "kindergarten in Terni, Terni, Umbria, Italy",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Baby Center"
+        }
+      },
+      {
+        "id": "Q140018401",
+        "title": "Q140018401",
+        "pageid": 133462955,
+        "concepturi": "http://www.wikidata.org/entity/Q140018401",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q140018401",
+        "display": {
+          "label": {
+            "value": "Baby Center Bercario e Maternal",
+            "language": "en"
+          },
+          "description": {
+            "value": "school in Jundiaí",
+            "language": "en"
+          }
+        },
+        "label": "Baby Center Bercario e Maternal",
+        "description": "school in Jundiaí",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Baby Center Bercario e Maternal"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

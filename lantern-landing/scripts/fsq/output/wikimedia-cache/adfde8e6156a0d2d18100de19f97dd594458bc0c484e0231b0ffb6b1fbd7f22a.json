@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:36.761Z",
+  "value": {
+    "searchinfo": {
+      "search": "平成つつじ公園"
+    },
+    "search": [
+      {
+        "id": "Q42312797",
+        "title": "Q42312797",
+        "pageid": 43595032,
+        "concepturi": "http://www.wikidata.org/entity/Q42312797",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q42312797",
+        "display": {
+          "label": {
+            "value": "平成つつじ公園",
+            "language": "ja"
+          },
+          "description": {
+            "value": "park in Nerima, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "平成つつじ公園",
+        "description": "park in Nerima, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "平成つつじ公園"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

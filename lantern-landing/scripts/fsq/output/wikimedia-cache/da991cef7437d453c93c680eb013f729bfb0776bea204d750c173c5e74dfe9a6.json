@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:11.731Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18986,
+          "ns": 0,
+          "title": "荒川区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あらかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "Entsuji_(Arakawa)_08.jpg",
+            "wikibase_item": "Q232624"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73611,
+              "lon": 139.78339,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 694381,
+          "ns": 0,
+          "title": "ふるさと創生事業",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふるさとそうせいしきよう",
+            "wikibase_item": "Q11277299"
+          },
+          "terms": {
+            "description": [
+              "1988年から1989年にかけて、日本政府が各市区町村に対し地域振興のために1億円を交付した政策"
+            ]
+          }
+        },
+        {
+          "pageid": 799446,
+          "ns": 0,
+          "title": "荒川弘",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あらかわ ひろむ",
+            "wikibase_item": "Q230962"
+          },
+          "terms": {
+            "description": [
+              "日本の女性漫画家"
+            ]
+          }
+        },
+        {
+          "pageid": 2826018,
+          "ns": 0,
+          "title": "民謡魂 ふるさとの歌",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みんようたましいふるさとのうた",
+            "wikibase_item": "Q17215207"
+          }
+        },
+        {
+          "pageid": 4485559,
+          "ns": 0,
+          "title": "荒川区立図書館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あらかわくりつとしよかん",
+            "page_image_free": "Yuinomori_Arakawa.jpg",
+            "wikibase_item": "Q109595938"
+          }
+        }
+      ]
+    }
+  }
+}

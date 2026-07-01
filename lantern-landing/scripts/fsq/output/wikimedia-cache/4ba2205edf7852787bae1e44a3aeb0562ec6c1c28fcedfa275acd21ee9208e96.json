@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:24.917Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 135258,
+          "ns": 0,
+          "title": "ひみつのアッコちゃん",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひみつのあつこちやん",
+            "toc": "",
+            "wikibase_item": "Q650264"
+          },
+          "terms": {
+            "description": [
+              "赤塚不二夫による日本の漫画"
+            ]
+          }
+        },
+        {
+          "pageid": 147911,
+          "ns": 0,
+          "title": "クレヨンしんちゃん 嵐を呼ぶ モーレツ!オトナ帝国の逆襲",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "くれよんしんちやんあらしをよふもおれつおとなていこくのきやくしゆう",
+            "wikibase_item": "Q1186464"
+          },
+          "terms": {
+            "description": [
+              "2001年に公開された日本のアニメ映画"
+            ]
+          }
+        },
+        {
+          "pageid": 571581,
+          "ns": 0,
+          "title": "山本圭一郎",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やまもと けいいちろう",
+            "wikibase_item": "Q11468964"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 726278,
+          "ns": 0,
+          "title": "WATER BOYS2",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "うおおたあほおいす",
+            "wikibase_item": "Q632486"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 753585,
+          "ns": 0,
+          "title": "純ちゃんの応援歌",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しゆんちやんのおうえんか",
+            "wikibase_item": "Q11605390"
+          },
+          "terms": {
+            "description": [
+              "1988年後期のNHK連続テレビ小説第41作"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:36.186Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 69104,
+          "ns": 0,
+          "title": "セイコーエプソン",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "せいこうえふそん",
+            "graph-data-sources": "inline:19\n\ninline:20\n\ninline:60",
+            "page_image_free": "Seiko_Epson_headquarters_north_2.jpg",
+            "wikibase_item": "Q159614"
+          },
+          "terms": {
+            "description": [
+              "長野県諏訪市にある情報関連機器、精密機器メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 119078,
+          "ns": 0,
+          "title": "日本の企業一覧 (金属製品)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんのききよういちらん きんそくせいひん",
+            "wikibase_item": "Q11505762"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1516335,
+          "ns": 0,
+          "title": "日産自動車",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "につさんしとうしや",
+            "page_image_free": "Nissan_Yokohama.jpg",
+            "wikibase_item": "Q20165"
+          },
+          "coordinates": [
+            {
+              "lat": 35.46348333,
+              "lon": 139.62614444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の自動車メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 2476746,
+          "ns": 0,
+          "title": "日本バイリーン",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にほんはいりん",
+            "wikibase_item": "Q11506741"
+          }
+        },
+        {
+          "pageid": 3972862,
+          "ns": 0,
+          "title": "SE計画",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えすいいけいかく",
+            "wikibase_item": "Q85867183"
+          },
+          "terms": {
+            "description": [
+              "ガンダムシリーズの用語"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:49.751Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 3719686,
+          "ns": 0,
+          "title": "Stadio Arechi",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Arechi_6_ottobre.jpg",
+            "wikibase-shortdesc": "Stadium in Salerno, Italy",
+            "wikibase_item": "Q2300150"
+          },
+          "coordinates": [
+            {
+              "lat": 40.645,
+              "lon": 14.82388889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "football stadium in Salerno, Italy"
+            ]
+          }
+        },
+        {
+          "pageid": 36133974,
+          "ns": 0,
+          "title": "US Salernitana 1919",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Salernitana",
+            "page_image": "US_Salernitana_1919_logo.svg",
+            "page_image_free": "Salernitana_through_the_ages_2025.jpg",
+            "wikibase-shortdesc": "Association football club in Italy",
+            "wikibase_item": "Q847587"
+          },
+          "terms": {
+            "description": [
+              "association football club based in Salerno, Italy"
+            ]
+          }
+        },
+        {
+          "pageid": 39880774,
+          "ns": 0,
+          "title": "Arcore railway station",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Stazione_di_Arcore_ristrutturata_1.JPG",
+            "wikibase-shortdesc": "Railway station in Italy",
+            "wikibase_item": "Q3968893"
+          },
+          "coordinates": [
+            {
+              "lat": 45.62375,
+              "lon": 9.32291667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "railway station in Italy"
+            ]
+          }
+        },
+        {
+          "pageid": 64759790,
+          "ns": 0,
+          "title": "Fidenza railway station",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Fidenza station",
+            "page_image_free": "Piazzale_Stazione_Fidenza.jpg",
+            "wikibase-shortdesc": "Railway station in Fidenza, Italy",
+            "wikibase_item": "Q3969603"
+          },
+          "coordinates": [
+            {
+              "lat": 44.8676,
+              "lon": 10.0632,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "railway station in Italy"
+            ]
+          }
+        },
+        {
+          "pageid": 79307996,
+          "ns": 0,
+          "title": "2025 World Rugby U20 Championship",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "World Rugby U20 Championship, 2025",
+            "page_image_free": "World_Rugby_U20_Championship_2025_Final_Day-211.jpg",
+            "wikibase-shortdesc": "Rugby union tournament",
+            "wikibase_item": "Q133289482"
+          },
+          "terms": {
+            "description": [
+              "rugby union tournament"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

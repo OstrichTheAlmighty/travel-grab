@@ -1,0 +1,70 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:23.396Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 153138,
+          "ns": 0,
+          "title": "サンリオピューロランド",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さんりおひゆうろらんと",
+            "kartographer_frames": "1",
+            "page_image_free": "2024_Sanrio_Puroland_(1).jpg",
+            "wikibase_item": "Q1133851"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62461111,
+              "lon": 139.42913889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都多摩市にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 633566,
+          "ns": 0,
+          "title": "キッザニア東京",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きつさにあとうきよう",
+            "page_image_free": "KidZania_Tokyo.jpg",
+            "wikibase_item": "Q5363436"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65583333,
+              "lon": 139.79194444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区豊洲にある体験型商業施設"
+            ]
+          }
+        },
+        {
+          "pageid": 646540,
+          "ns": 0,
+          "title": "キッザニア",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きつさにあ",
+            "wikibase_item": "Q866049"
+          }
+        }
+      ]
+    }
+  }
+}

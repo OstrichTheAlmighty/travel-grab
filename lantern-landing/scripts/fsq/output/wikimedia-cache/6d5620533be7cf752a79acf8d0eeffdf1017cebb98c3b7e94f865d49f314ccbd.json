@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:38.137Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 20031,
+          "ns": 0,
+          "title": "東京国立博物館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようこくりつはくふつかん",
+            "page_image_free": "Tokyo_National_Museum,_Honkan_2010.jpg",
+            "wikibase_item": "Q653433"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71905556,
+              "lon": 139.77666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある国立博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 27802,
+          "ns": 0,
+          "title": "切手",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きつて",
+            "noindex": "",
+            "page_image_free": "Penny_black.jpg",
+            "wikibase_item": "Q37930"
+          },
+          "terms": {
+            "description": [
+              "郵便料金を事前に納めた証拠として郵便物に貼る証紙"
+            ]
+          }
+        },
+        {
+          "pageid": 385448,
+          "ns": 0,
+          "title": "切手の博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きつてのはくふつかん",
+            "page_image_free": "Kitte_no_Hakubutsukan.JPG",
+            "wikibase_item": "Q11396206"
+          },
+          "coordinates": [
+            {
+              "lat": 35.718278,
+              "lon": 139.705806,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 849879,
+          "ns": 0,
+          "title": "記念切手",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きねんきつて",
+            "page_image_free": "SM-Peru-1871.jpg",
+            "wikibase_item": "Q1756502"
+          }
+        },
+        {
+          "pageid": 1642960,
+          "ns": 0,
+          "title": "クリスマス切手",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "くりすますきつて",
+            "noindex": "",
+            "page_image_free": "1919-2_Christmas_Seal.jpg",
+            "wikibase_item": "Q1145210"
+          }
+        }
+      ]
+    }
+  }
+}

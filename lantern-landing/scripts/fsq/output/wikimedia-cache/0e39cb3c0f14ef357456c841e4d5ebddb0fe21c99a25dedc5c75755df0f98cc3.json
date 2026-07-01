@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:34.537Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4063,
+          "ns": 0,
+          "title": "テーマパーク",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "てえまはあく",
+            "page_image_free": "USJ_2018.09-24.jpg",
+            "wikibase_item": "Q2416723"
+          },
+          "terms": {
+            "description": [
+              "観光施設"
+            ]
+          }
+        },
+        {
+          "pageid": 5694,
+          "ns": 0,
+          "title": "ハリー・ポッターシリーズ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はりいほつたあしりいす",
+            "page_image_free": "Harry_Potter_wordmark.svg",
+            "wikibase_item": "Q8337"
+          },
+          "terms": {
+            "description": [
+              "イギリスの小説作品シリーズ、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 11709,
+          "ns": 0,
+          "title": "豊島園駅",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "としまえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Seibu_toshimaen_sta_2023.jpg",
+            "wikibase_item": "Q906947"
+          },
+          "coordinates": [
+            {
+              "lat": 35.74194444,
+              "lon": 139.64794444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都練馬区にある西武豊島線の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 3435193,
+          "ns": 0,
+          "title": "ハリー・ポッター (映画シリーズ)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はりいほつたあ",
+            "page_image_free": "Harry_Potter_wordmark.svg",
+            "wikibase_item": "Q216930"
+          },
+          "terms": {
+            "description": [
+              "イギリス、アメリカのファンタジー映画シリーズ"
+            ]
+          }
+        },
+        {
+          "pageid": 4572094,
+          "ns": 0,
+          "title": "ワーナーブラザース スタジオツアーロンドン-メイキング・オブ・ハリー・ポッター",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "わあなあふらさあすすたしおつああろんとんめいきんくおふはりいほつたあ",
+            "page_image_free": "Warner_Bros._Studio_Tour_London_The_Making_of_Harry_Potter_logo.svg",
+            "wikibase_item": "Q27924395"
+          },
+          "coordinates": [
+            {
+              "lat": 51.69333333,
+              "lon": -0.41972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "イギリスの観光施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

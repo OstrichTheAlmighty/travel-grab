@@ -1,0 +1,118 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:11.211Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 50148,
+          "ns": 0,
+          "title": "東映",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうえい",
+            "page_image_free": "Kyobashi_Edogrand_2019.jpg",
+            "wikibase_item": "Q1066018"
+          },
+          "terms": {
+            "description": [
+              "日本の映画会社"
+            ]
+          }
+        },
+        {
+          "pageid": 571335,
+          "ns": 0,
+          "title": "東映東京撮影所",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうえいとうきようさつえいしよ",
+            "page_image_free": "Toei_Tokyo_Studios_west_gate_2024-07-21.jpg",
+            "wikibase_item": "Q11527257"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75402778,
+              "lon": 139.59480556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都練馬区にある東映の撮影所"
+            ]
+          }
+        },
+        {
+          "pageid": 2052201,
+          "ns": 0,
+          "title": "東映アニメーション",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうえいあにめえしよん",
+            "page_image_free": "Nakano_Central_Park_E.jpg",
+            "wikibase_item": "Q730179"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70777778,
+              "lon": 139.66291667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都中野区にあるアニメ制作会社"
+            ]
+          }
+        },
+        {
+          "pageid": 2623926,
+          "ns": 0,
+          "title": "長靴猫シリーズ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "なかくつねこしりいす",
+            "wikibase_item": "Q1195553"
+          },
+          "terms": {
+            "description": [
+              "日本のアニメ映画シリーズ"
+            ]
+          }
+        },
+        {
+          "pageid": 3058876,
+          "ns": 0,
+          "title": "東映アニメーションミュージアム",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうえいあにめしよんみゆうしあむ",
+            "page_image_free": "Toei_Animation_Museum_2024-07-21.jpg",
+            "wikibase_item": "Q18337440"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75202778,
+              "lon": 139.59466667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都練馬区にあるミュージアム"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

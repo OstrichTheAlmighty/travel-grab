@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:13.957Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8073,
+          "ns": 0,
+          "title": "新宿区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しんしゆくく",
+            "kartographer_frames": "1",
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "wikibase_item": "Q179645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69389,
+              "lon": 139.70342,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 172288,
+          "ns": 0,
+          "title": "スガキコシステムズ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すかきこしすてむす",
+            "page_image_free": "Sugakico_Systems_headquarters_(2013.09.21)_1.jpg",
+            "wikibase_item": "Q11311370"
+          },
+          "coordinates": [
+            {
+              "lat": 35.17369444,
+              "lon": 136.89491667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "ファストフードチェーンを運営する日本の企業"
+            ]
+          }
+        },
+        {
+          "pageid": 384832,
+          "ns": 0,
+          "title": "名曲喫茶",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "めいきよくきつさ",
+            "page_image_free": "Meikyoku_kissa_Den'en,_Kokubunji,_Tokyo.jpg",
+            "wikibase_item": "Q6810083"
+          },
+          "terms": {
+            "description": [
+              "クラシック音楽を提供する喫茶店"
+            ]
+          }
+        },
+        {
+          "pageid": 2817200,
+          "ns": 0,
+          "title": "米倉千尋",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "よねくら ちひろ",
+            "wikibase_item": "Q840501"
+          },
+          "terms": {
+            "description": [
+              "日本の女性シンガーソングライター (1972-)"
+            ]
+          }
+        },
+        {
+          "pageid": 3545973,
+          "ns": 0,
+          "title": "ミカド (ゲームセンター)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みかと",
+            "kartographer_frames": "3",
+            "page_image_free": "Takadanobaba_Game_Center_Mikado_front_2024-09-05.jpg",
+            "wikibase_item": "Q28690678"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都にあるゲームセンター"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

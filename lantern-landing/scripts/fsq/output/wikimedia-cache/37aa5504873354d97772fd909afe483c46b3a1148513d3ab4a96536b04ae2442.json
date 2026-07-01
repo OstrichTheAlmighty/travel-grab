@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:33.692Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京スカイツリー天望回廊"
+    },
+    "search": [
+      {
+        "id": "Q117066320",
+        "title": "Q117066320",
+        "pageid": 111857030,
+        "concepturi": "http://www.wikidata.org/entity/Q117066320",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q117066320",
+        "display": {
+          "label": {
+            "value": "Tokyo Skytree Tembo Galleria",
+            "language": "en"
+          },
+          "description": {
+            "value": "glass corridor from floor 445 to floor 450 via a sloping corridor",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Skytree Tembo Galleria",
+        "description": "glass corridor from floor 445 to floor 450 via a sloping corridor",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京スカイツリー天望回廊"
+        },
+        "aliases": [
+          "東京スカイツリー天望回廊"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

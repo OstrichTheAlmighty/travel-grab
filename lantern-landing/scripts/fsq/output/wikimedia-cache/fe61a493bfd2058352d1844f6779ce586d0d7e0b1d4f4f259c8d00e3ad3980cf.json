@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:34.412Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 84876,
+          "ns": 0,
+          "title": "小林昭二",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こはやし あきし",
+            "page_image_free": "小林昭二.png",
+            "wikibase_item": "Q3276455"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優、声優（1929-1996）"
+            ]
+          }
+        },
+        {
+          "pageid": 89148,
+          "ns": 0,
+          "title": "地井武男",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちい たけお",
+            "wikibase_item": "Q901825"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優 (1942 - 2012)"
+            ]
+          }
+        },
+        {
+          "pageid": 113043,
+          "ns": 0,
+          "title": "蒔田尚昊",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "まいた しようこう",
+            "wikibase_item": "Q9333739"
+          },
+          "terms": {
+            "description": [
+              "日本の作曲家"
+            ]
+          }
+        },
+        {
+          "pageid": 149571,
+          "ns": 0,
+          "title": "高村光太郎",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たかむら こうたろう",
+            "page_image_free": "Kotaro_Takamura_by_Shigeru_Tamura.jpg",
+            "wikibase_item": "Q1646239"
+          },
+          "terms": {
+            "description": [
+              "日本の詩人、歌人、彫刻家、画家 (1883-1956)"
+            ]
+          }
+        },
+        {
+          "pageid": 615474,
+          "ns": 0,
+          "title": "高村智恵子",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たかむら ちえこ",
+            "page_image_free": "Chieko_Takamura.jpg",
+            "wikibase_item": "Q439401"
+          },
+          "terms": {
+            "description": [
+              "日本の洋画家、紙絵作家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

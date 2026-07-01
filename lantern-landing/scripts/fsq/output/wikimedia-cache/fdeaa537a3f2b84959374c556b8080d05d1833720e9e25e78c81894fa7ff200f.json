@@ -1,0 +1,185 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:13:51.256Z",
+  "value": {
+    "searchinfo": {
+      "search": "Tokyo Disneyland"
+    },
+    "search": [
+      {
+        "id": "Q843997",
+        "title": "Q843997",
+        "pageid": 796132,
+        "concepturi": "http://www.wikidata.org/entity/Q843997",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q843997",
+        "display": {
+          "label": {
+            "value": "Tokyo Disneyland",
+            "language": "en"
+          },
+          "description": {
+            "value": "theme park in Japan, owned by The Oriental Land Company",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Disneyland",
+        "description": "theme park in Japan, owned by The Oriental Land Company",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Disneyland"
+        }
+      },
+      {
+        "id": "Q24953136",
+        "title": "Q24953136",
+        "pageid": 26913292,
+        "concepturi": "http://www.wikidata.org/entity/Q24953136",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q24953136",
+        "display": {
+          "label": {
+            "value": "Tokyo Disneyland: Mickey no Cinderella Shiro Mystery Tour",
+            "language": "en"
+          },
+          "description": {
+            "value": "1995 video game",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Disneyland: Mickey no Cinderella Shiro Mystery Tour",
+        "description": "1995 video game",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Disneyland: Mickey no Cinderella Shiro Mystery Tour"
+        }
+      },
+      {
+        "id": "Q5367499",
+        "title": "Q5367499",
+        "pageid": 5133888,
+        "concepturi": "http://www.wikidata.org/entity/Q5367499",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5367499",
+        "display": {
+          "label": {
+            "value": "Tokyo Disneyland Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "Disney Resort Line station in Urayasu, Chiba prefecture, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Disneyland Station",
+        "description": "Disney Resort Line station in Urayasu, Chiba prefecture, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Disneyland Station"
+        }
+      },
+      {
+        "id": "Q195423",
+        "title": "Q195423",
+        "pageid": 193281,
+        "concepturi": "http://www.wikidata.org/entity/Q195423",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q195423",
+        "display": {
+          "label": {
+            "value": "Tokyo Disneyland Hotel",
+            "language": "en"
+          },
+          "description": {
+            "value": "hotel",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Disneyland Hotel",
+        "description": "hotel",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Disneyland Hotel"
+        }
+      },
+      {
+        "id": "Q1754529",
+        "title": "Q1754529",
+        "pageid": 1687232,
+        "concepturi": "http://www.wikidata.org/entity/Q1754529",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1754529",
+        "display": {
+          "label": {
+            "value": "Main Street Electrical Parade",
+            "language": "en"
+          },
+          "description": {
+            "value": "parade at Disney theme parks",
+            "language": "en"
+          }
+        },
+        "label": "Main Street Electrical Parade",
+        "description": "parade at Disney theme parks",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "Tokyo Disneyland Electrical Parade: DreamLights"
+        },
+        "aliases": [
+          "Tokyo Disneyland Electrical Parade: DreamLights"
+        ]
+      },
+      {
+        "id": "Q7813871",
+        "title": "Q7813871",
+        "pageid": 7746073,
+        "concepturi": "http://www.wikidata.org/entity/Q7813871",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q7813871",
+        "display": {
+          "label": {
+            "value": "Tokyo Disneyland Electrical Parade Dreamlights ~Christmas~",
+            "language": "en"
+          },
+          "description": {
+            "value": "album by Tokyo Disneyland",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Disneyland Electrical Parade Dreamlights ~Christmas~",
+        "description": "album by Tokyo Disneyland",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Disneyland Electrical Parade Dreamlights ~Christmas~"
+        }
+      },
+      {
+        "id": "Q3039229",
+        "title": "Q3039229",
+        "pageid": 2905393,
+        "concepturi": "http://www.wikidata.org/entity/Q3039229",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3039229",
+        "display": {
+          "label": {
+            "value": "Tokyo Disneyland Electrical Parade : DreamLights",
+            "language": "fr"
+          }
+        },
+        "label": "Tokyo Disneyland Electrical Parade : DreamLights",
+        "match": {
+          "type": "alias",
+          "language": "fr",
+          "text": "Tokyo Disneyland Electrical Parade : DreamLights"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

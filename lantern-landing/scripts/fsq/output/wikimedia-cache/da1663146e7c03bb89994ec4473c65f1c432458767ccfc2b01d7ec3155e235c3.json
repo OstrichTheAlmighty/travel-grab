@@ -1,0 +1,100 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:31.076Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 360405,
+          "ns": 0,
+          "title": "History of Tokyo",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Tokyo_special_wards_map.svg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q2510783"
+          },
+          "terms": {
+            "description": [
+              "history of the capital city of Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 387730,
+          "ns": 0,
+          "title": "Fujiko Fujio",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Fujio, Fujiko",
+            "page_image": "Fujiko_Fujio.jpg",
+            "page_image_free": "Fujikots-en.png",
+            "wikibase-shortdesc": "Pen name of Japanese manga writing duo",
+            "wikibase_item": "Q3376801"
+          },
+          "terms": {
+            "description": [
+              "pen name of manga artists FUJIMOTO Hiroshi and ABIKO Motoo, until 1988/2"
+            ]
+          }
+        },
+        {
+          "pageid": 37435835,
+          "ns": 0,
+          "title": "Ureo Egawa",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Egawa, Ureo",
+            "page_image_free": "EgawaUreo.jpg",
+            "wikibase-shortdesc": "Japanese actor (1902–1970)",
+            "wikibase_item": "Q7900408"
+          },
+          "terms": {
+            "description": [
+              "Japanese actor (1902–1970)"
+            ]
+          }
+        },
+        {
+          "pageid": 52392456,
+          "ns": 0,
+          "title": "Yosuke Tagawa",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Tagawa, Yosuke",
+            "page_image_free": "Yosuke_Tagawa,_2023.jpg",
+            "wikibase-shortdesc": "Japanese actor and singer",
+            "wikibase_item": "Q11443915"
+          },
+          "terms": {
+            "description": [
+              "Japanese actor"
+            ]
+          }
+        },
+        {
+          "pageid": 55834821,
+          "ns": 0,
+          "title": "Iori Kogawa",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Kogawa, Iori",
+            "page_image_free": "Iori-Kogawa-Hitotsunagi1-2022-03-15.jpg",
+            "wikibase-shortdesc": "Japanese pornographic actress (born 1992)",
+            "wikibase_item": "Q11411099"
+          },
+          "terms": {
+            "description": [
+              "Japanese pornographic actress"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

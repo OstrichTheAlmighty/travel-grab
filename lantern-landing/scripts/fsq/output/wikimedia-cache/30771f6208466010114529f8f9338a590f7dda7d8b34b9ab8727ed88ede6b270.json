@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:48.756Z",
+  "value": {
+    "searchinfo": {
+      "search": "駄菓子屋ゲーム博物館"
+    },
+    "search": [
+      {
+        "id": "Q132436275",
+        "title": "Q132436275",
+        "pageid": 126296225,
+        "concepturi": "http://www.wikidata.org/entity/Q132436275",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q132436275",
+        "display": {
+          "label": {
+            "value": "駄菓子屋ゲーム博物館",
+            "language": "ja"
+          }
+        },
+        "label": "駄菓子屋ゲーム博物館",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "駄菓子屋ゲーム博物館"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

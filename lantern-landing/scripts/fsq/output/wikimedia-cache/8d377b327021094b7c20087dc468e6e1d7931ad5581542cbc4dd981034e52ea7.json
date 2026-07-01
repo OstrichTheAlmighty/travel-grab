@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:01.736Z",
+  "value": {
+    "searchinfo": {
+      "search": "トキワ荘マンガミュージアム"
+    },
+    "search": [
+      {
+        "id": "Q96707302",
+        "title": "Q96707302",
+        "pageid": 95258747,
+        "concepturi": "http://www.wikidata.org/entity/Q96707302",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q96707302",
+        "display": {
+          "label": {
+            "value": "Toshima City Tokiwasō Manga Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Toshima, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Toshima City Tokiwasō Manga Museum",
+        "description": "museum in Toshima, Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "トキワ荘マンガミュージアム"
+        },
+        "aliases": [
+          "トキワ荘マンガミュージアム"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:46.136Z",
+  "value": {
+    "searchinfo": {
+      "search": "Tokyo Skytree"
+    },
+    "search": [
+      {
+        "id": "Q57965",
+        "title": "Q57965",
+        "pageid": 60786,
+        "concepturi": "http://www.wikidata.org/entity/Q57965",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q57965",
+        "display": {
+          "label": {
+            "value": "Tokyo Skytree",
+            "language": "en"
+          },
+          "description": {
+            "value": "tower in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Skytree",
+        "description": "tower in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Skytree"
+        }
+      },
+      {
+        "id": "Q900250",
+        "title": "Q900250",
+        "pageid": 851058,
+        "concepturi": "http://www.wikidata.org/entity/Q900250",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q900250",
+        "display": {
+          "label": {
+            "value": "Tokyo Skytree Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "railway station in Sumida, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Skytree Station",
+        "description": "railway station in Sumida, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Skytree Station"
+        }
+      },
+      {
+        "id": "Q11524181",
+        "title": "Q11524181",
+        "pageid": 12664051,
+        "concepturi": "http://www.wikidata.org/entity/Q11524181",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524181",
+        "display": {
+          "label": {
+            "value": "Tokyo Skytree Town",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Skytree Town",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Skytree Town"
+        }
+      },
+      {
+        "id": "Q11524180",
+        "title": "Q11524180",
+        "pageid": 12664050,
+        "concepturi": "http://www.wikidata.org/entity/Q11524180",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524180",
+        "display": {
+          "label": {
+            "value": "Tokyo Skytree East Tower",
+            "language": "en"
+          },
+          "description": {
+            "value": "building in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Skytree East Tower",
+        "description": "building in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Skytree East Tower"
+        }
+      },
+      {
+        "id": "Q117066302",
+        "title": "Q117066302",
+        "pageid": 111857003,
+        "concepturi": "http://www.wikidata.org/entity/Q117066302",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q117066302",
+        "display": {
+          "label": {
+            "value": "Tokyo Skytree Tembo Deck",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Skytree Tembo Deck",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Skytree Tembo Deck"
+        }
+      },
+      {
+        "id": "Q117066320",
+        "title": "Q117066320",
+        "pageid": 111857030,
+        "concepturi": "http://www.wikidata.org/entity/Q117066320",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q117066320",
+        "display": {
+          "label": {
+            "value": "Tokyo Skytree Tembo Galleria",
+            "language": "en"
+          },
+          "description": {
+            "value": "glass corridor from floor 445 to floor 450 via a sloping corridor",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Skytree Tembo Galleria",
+        "description": "glass corridor from floor 445 to floor 450 via a sloping corridor",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Skytree Tembo Galleria"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

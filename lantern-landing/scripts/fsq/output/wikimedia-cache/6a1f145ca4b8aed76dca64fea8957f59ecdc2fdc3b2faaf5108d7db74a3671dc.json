@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:15.502Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 52129,
+          "ns": 0,
+          "title": "室蘭市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "むろらんし",
+            "kartographer_frames": "1",
+            "page_image_free": "Muroran_Montage.jpg",
+            "wikibase_item": "Q496667"
+          },
+          "coordinates": [
+            {
+              "lat": 42.31525,
+              "lon": 140.97403,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道の市、胆振総合振興局所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 81215,
+          "ns": 0,
+          "title": "豊平区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とよひらく",
+            "page_image": "Hitsujigaoka.jpg",
+            "page_image_free": "Toyohira_ward_office.JPG",
+            "wikibase_item": "Q1134225"
+          },
+          "terms": {
+            "description": [
+              "北海道札幌市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 1531745,
+          "ns": 0,
+          "title": "雷電廿六木橋",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "らいてんととろきはし",
+            "kartographer_frames": "1",
+            "page_image_free": "Saitama_raiden_todoroki_spiral.jpg",
+            "wikibase_item": "Q11660216"
+          },
+          "coordinates": [
+            {
+              "lat": 35.95611111,
+              "lon": 138.90333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県秩父市にあるループ線"
+            ]
+          }
+        },
+        {
+          "pageid": 1691666,
+          "ns": 0,
+          "title": "東京都の観光地",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようと",
+            "page_image_free": "東京都区部-観光地図-1.jpg",
+            "wikibase_item": "Q10860697"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3948814,
+          "ns": 0,
+          "title": "渋谷スクランブルスクエア",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しふやすくらんふるすくえあ",
+            "page_image_free": "SHIBUYA_SCRAMBLE_SQUARE_East_Tower.jpg",
+            "wikibase_item": "Q64026922"
+          },
+          "terms": {
+            "description": [
+              "東京都渋谷区の超高層ビル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

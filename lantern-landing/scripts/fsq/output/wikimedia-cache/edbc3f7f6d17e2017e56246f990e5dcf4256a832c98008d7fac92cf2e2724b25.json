@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:26.186Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 77127,
+          "ns": 0,
+          "title": "早慶戦",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "そうけいせん",
+            "wikibase_item": "Q11511381"
+          },
+          "terms": {
+            "description": [
+              "日本の学校対抗戦"
+            ]
+          }
+        },
+        {
+          "pageid": 2249139,
+          "ns": 0,
+          "title": "柳慶遠",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "りゆう けいえん",
+            "wikibase_item": "Q19855121"
+          }
+        },
+        {
+          "pageid": 2459478,
+          "ns": 0,
+          "title": "禅林墨跡",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せんりん ほくせき",
+            "page_image_free": "Inkajo.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q891235"
+          },
+          "terms": {
+            "description": [
+              "禅林高僧の真跡"
+            ]
+          }
+        },
+        {
+          "pageid": 2758569,
+          "ns": 0,
+          "title": "慶應義塾大学",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "けいおうきしゆくたいかく",
+            "page_image_free": "Old_Keio_University_Library_3.jpg",
+            "wikibase_item": "Q815432"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64894444,
+              "lon": 139.74291667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 4202773,
+          "ns": 0,
+          "title": "慶遠府",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "けいえんふ",
+            "page_image_free": "庆远府位置图1820.svg",
+            "wikibase_item": "Q11062754"
+          }
+        }
+      ]
+    }
+  }
+}

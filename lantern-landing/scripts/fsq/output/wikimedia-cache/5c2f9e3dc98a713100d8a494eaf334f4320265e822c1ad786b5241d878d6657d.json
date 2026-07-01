@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:34.275Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 290271,
+          "ns": 0,
+          "title": "Mitsui",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "MITSUI2.png",
+            "wikibase-shortdesc": "Japanese multinational corporate group (keiretsu)",
+            "wikibase_item": "Q899122"
+          },
+          "terms": {
+            "description": [
+              "business"
+            ]
+          }
+        },
+        {
+          "pageid": 569890,
+          "ns": 0,
+          "title": "Masamune",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Masamune_Portrait.jpg",
+            "wikibase-shortdesc": "Japanese swordsmith (c.1264–1343)",
+            "wikibase_item": "Q708935"
+          },
+          "terms": {
+            "description": [
+              "Japanese swordsmith"
+            ]
+          }
+        },
+        {
+          "pageid": 4043651,
+          "ns": 0,
+          "title": "Mitsui family",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Japanese_crest_Yotumeyui.svg",
+            "wikibase-shortdesc": "Japanese merchant family",
+            "wikibase_item": "Q950465"
+          },
+          "terms": {
+            "description": [
+              "Japanese family"
+            ]
+          }
+        },
+        {
+          "pageid": 27136206,
+          "ns": 0,
+          "title": "Mitsui Memorial Museum",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Mitsui_Main_Building_2009.jpg",
+            "wikibase-shortdesc": "Art museum in Tokyo, Japan",
+            "wikibase_item": "Q864700"
+          },
+          "terms": {
+            "description": [
+              "art museum"
+            ]
+          }
+        },
+        {
+          "pageid": 29426078,
+          "ns": 0,
+          "title": "Nihonbashi Mitsui Tower",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Nihonbashi_Mitsui_Tower.jpg",
+            "wikibase-shortdesc": "Skyscraper in Japan",
+            "wikibase_item": "Q3125027"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68694444,
+              "lon": 139.77305556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "building in Chuo-ku, Tokyo, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

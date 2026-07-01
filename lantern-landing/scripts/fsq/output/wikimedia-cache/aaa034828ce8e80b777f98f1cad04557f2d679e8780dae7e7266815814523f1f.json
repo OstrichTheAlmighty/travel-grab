@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:04.696Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 72649,
+          "ns": 0,
+          "title": "池袋ウエストゲートパーク",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "いけふくろうえすとけえとはあく",
+            "wikibase_item": "Q1050442"
+          },
+          "terms": {
+            "description": [
+              "日本の小説シリーズ作品"
+            ]
+          }
+        },
+        {
+          "pageid": 269243,
+          "ns": 0,
+          "title": "ウォーターゲート事件",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "うおおたあけえとしけん",
+            "page_image_free": "Watergate.jpg",
+            "wikibase_item": "Q42761"
+          },
+          "terms": {
+            "description": [
+              "アメリカの政治スキャンダル"
+            ]
+          }
+        },
+        {
+          "pageid": 1204864,
+          "ns": 0,
+          "title": "ライオンズゲート",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "らいおんすけえと",
+            "wikibase_item": "Q515869"
+          },
+          "terms": {
+            "description": [
+              "アメリカのエンターテインメント企業"
+            ]
+          }
+        },
+        {
+          "pageid": 1340581,
+          "ns": 0,
+          "title": "オープン・ザ・トライアングルゲート王座",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおふんさとらいあんくるけえとおうさ",
+            "wikibase_item": "Q7096447"
+          }
+        },
+        {
+          "pageid": 2700615,
+          "ns": 0,
+          "title": "JRゲートタワー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しえいああるけえとたわあ",
+            "kartographer_frames": "1",
+            "page_image_free": "View_of_Buildings_of_JR_GATE_TOWER,_Meieki_3-chome,_Nakamura_Ward_Nagoya_City_2023.jpg",
+            "wikibase_item": "Q11415297"
+          },
+          "coordinates": [
+            {
+              "lat": 35.17208333,
+              "lon": 136.88277778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "名古屋市中村区にある超高層ビル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

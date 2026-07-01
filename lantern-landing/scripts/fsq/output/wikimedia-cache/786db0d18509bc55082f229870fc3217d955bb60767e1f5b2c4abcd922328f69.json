@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:40.815Z",
+  "value": {
+    "searchinfo": {
+      "search": "清澄庭園"
+    },
+    "search": [
+      {
+        "id": "Q4388146",
+        "title": "Q4388146",
+        "pageid": 4191556,
+        "concepturi": "http://www.wikidata.org/entity/Q4388146",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q4388146",
+        "display": {
+          "label": {
+            "value": "Kiyosumi Garden",
+            "language": "en"
+          },
+          "description": {
+            "value": "traditional Japanese stroll garden located in Fukagawa, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Kiyosumi Garden",
+        "description": "traditional Japanese stroll garden located in Fukagawa, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "清澄庭園"
+        },
+        "aliases": [
+          "清澄庭園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:11.418Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 361740,
+          "ns": 0,
+          "title": "GYAO!",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きやお",
+            "page_image_free": "GYAO_logo.svg",
+            "wikibase_item": "Q11221992"
+          },
+          "terms": {
+            "description": [
+              "日本の動画配信サービス"
+            ]
+          }
+        },
+        {
+          "pageid": 631184,
+          "ns": 0,
+          "title": "日本の小説家一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にほんのしようせつかいちらん",
+            "notoc": "",
+            "wikibase_item": "Q11505919"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3369357,
+          "ns": 0,
+          "title": "ハルジオンが咲く頃",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はるしおんかさくころ",
+            "wikibase_item": "Q22918937"
+          },
+          "terms": {
+            "description": [
+              "乃木坂46の14枚目シングル"
+            ]
+          }
+        },
+        {
+          "pageid": 3591737,
+          "ns": 0,
+          "title": "富山県中央植物園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とやまけんちゆうおうしよくふつえん",
+            "page_image_free": "Gthumb.svg",
+            "wikibase_item": "Q4948424"
+          },
+          "coordinates": [
+            {
+              "lat": 36.66191667,
+              "lon": 137.18172222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

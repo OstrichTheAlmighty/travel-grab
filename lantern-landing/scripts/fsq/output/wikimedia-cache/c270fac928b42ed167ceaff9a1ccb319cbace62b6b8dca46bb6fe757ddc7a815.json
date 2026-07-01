@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:23.492Z",
+  "value": {
+    "searchinfo": {
+      "search": "山種美術館"
+    },
+    "search": [
+      {
+        "id": "Q3329572",
+        "title": "Q3329572",
+        "pageid": 3174427,
+        "concepturi": "http://www.wikidata.org/entity/Q3329572",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3329572",
+        "display": {
+          "label": {
+            "value": "Yamatane Museum of Art",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Yamatane Museum of Art",
+        "description": "museum in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "山種美術館"
+        },
+        "aliases": [
+          "山種美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

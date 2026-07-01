@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:49.960Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 58863,
+          "ns": 0,
+          "title": "ヨークベニマル",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "よおくへにまる",
+            "page_image_free": "York_Benimaru_Headquarters_from_Big-i.jpg",
+            "wikibase_item": "Q11346199"
+          },
+          "coordinates": [
+            {
+              "lat": 37.39558333,
+              "lon": 140.39363889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本のスーパーマーケットチェーン"
+            ]
+          }
+        },
+        {
+          "pageid": 138802,
+          "ns": 0,
+          "title": "イオン東北",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いおんとうほく",
+            "page_image_free": "Headquarters_of_AEON_Tohoku_Co.Ltd.jpg",
+            "wikibase_item": "Q11340439"
+          },
+          "terms": {
+            "description": [
+              "日本の秋田県秋田市にある、イオングループの企業"
+            ]
+          }
+        },
+        {
+          "pageid": 543186,
+          "ns": 0,
+          "title": "厚木市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あつきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Atsugi-Ayumibashi-Nightview.jpg",
+            "wikibase_item": "Q389711"
+          },
+          "coordinates": [
+            {
+              "lat": 35.4431,
+              "lon": 139.3625,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 959167,
+          "ns": 0,
+          "title": "過去に存在したイトーヨーカ堂の店舗",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かこにそんさいしたいとうようかとうのてんほ",
+            "wikibase_item": "Q20042704"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 4099190,
+          "ns": 0,
+          "title": "西武の店舗一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せいふのてんほいちらん",
+            "kartographer_frames": "2",
+            "page_image_free": "Seibu_logo.svg",
+            "wikibase_item": "Q97311747"
+          },
+          "terms": {
+            "description": [
+              "ウィキペディアの一覧ページ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

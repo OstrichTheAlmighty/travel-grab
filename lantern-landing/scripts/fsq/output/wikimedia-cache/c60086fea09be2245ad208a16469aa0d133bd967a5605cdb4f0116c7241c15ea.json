@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:15.259Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4191,
+          "ns": 0,
+          "title": "芸術家",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "けいしゆつか",
+            "wikibase_item": "Q847689"
+          },
+          "terms": {
+            "description": [
+              "芸術作品を創作・表現する人"
+            ]
+          }
+        },
+        {
+          "pageid": 69581,
+          "ns": 0,
+          "title": "大道芸",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たいとうけい",
+            "page_image_free": "Kitano-cho_open_space_Kobe_Japan01s3.jpg",
+            "wikibase_item": "Q823571"
+          },
+          "terms": {
+            "description": [
+              "路上や街頭などで行われる芸能の総称"
+            ]
+          }
+        },
+        {
+          "pageid": 410688,
+          "ns": 0,
+          "title": "森山大道",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "もりやま たいとう",
+            "page_image_free": "DaidoMoriyamaBySebastianMayer.jpg",
+            "wikibase_item": "Q1157532"
+          },
+          "terms": {
+            "description": [
+              "日本の写真家 (1938-)"
+            ]
+          }
+        },
+        {
+          "pageid": 565055,
+          "ns": 0,
+          "title": "芸術選奨",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "けいしゆつせんしよう",
+            "wikibase_item": "Q11615995"
+          },
+          "terms": {
+            "description": [
+              "文化庁主催の芸術家の顕彰制度"
+            ]
+          }
+        },
+        {
+          "pageid": 716740,
+          "ns": 0,
+          "title": "GA 芸術科アートデザインクラス",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しいええけいしゆつかああとてさいんくらす",
+            "wikibase_item": "Q1074213"
+          },
+          "terms": {
+            "description": [
+              "きゆづきさとこによる漫画作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

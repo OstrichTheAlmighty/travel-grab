@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:20.135Z",
+  "value": {
+    "searchinfo": {
+      "search": "北の丸公園"
+    },
+    "search": [
+      {
+        "id": "Q1075966",
+        "title": "Q1075966",
+        "pageid": 1024334,
+        "concepturi": "http://www.wikidata.org/entity/Q1075966",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1075966",
+        "display": {
+          "label": {
+            "value": "Kitanomaru Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "town located in Chiyoda-ku, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Kitanomaru Park",
+        "description": "town located in Chiyoda-ku, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "北の丸公園"
+        },
+        "aliases": [
+          "北の丸公園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

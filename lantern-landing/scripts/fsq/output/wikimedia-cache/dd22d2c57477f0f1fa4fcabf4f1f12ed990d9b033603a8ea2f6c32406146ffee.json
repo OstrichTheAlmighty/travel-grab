@@ -1,0 +1,86 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:08.373Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 5778,
+          "ns": 0,
+          "title": "リカちゃん",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "りかちやん",
+            "wikibase_item": "Q2756890"
+          },
+          "terms": {
+            "description": [
+              "タカラトミー製の着せ替え人形"
+            ]
+          }
+        },
+        {
+          "pageid": 38238,
+          "ns": 0,
+          "title": "ちびまる子ちゃん",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちひまるこちやん",
+            "wikibase_item": "Q701050"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 74170,
+          "ns": 0,
+          "title": "ののちゃん",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ののちやん",
+            "wikibase_item": "Q16164175"
+          },
+          "terms": {
+            "description": [
+              "いしいひさいちの4コマ漫画"
+            ]
+          }
+        },
+        {
+          "pageid": 231259,
+          "ns": 0,
+          "title": "のんちゃんのり弁",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "のんちやんのりへん",
+            "wikibase_item": "Q5358318"
+          },
+          "terms": {
+            "description": [
+              "入江喜和によるテレビシリーズ"
+            ]
+          }
+        },
+        {
+          "pageid": 478541,
+          "ns": 0,
+          "title": "夕焼けの松ちゃん浜ちゃん",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ゆうやけのまつちやんはまちやん",
+            "page_image_free": "Osaka_NGK.JPG",
+            "wikibase_item": "Q11430257"
+          }
+        }
+      ]
+    }
+  }
+}

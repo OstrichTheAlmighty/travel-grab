@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:37.240Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 105699,
+          "ns": 0,
+          "title": "新発田市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しはたし",
+            "kartographer_frames": "1",
+            "page_image_free": "Shibata_Montage.png",
+            "wikibase_item": "Q601950"
+          },
+          "coordinates": [
+            {
+              "lat": 37.94792,
+              "lon": 139.32728,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "新潟県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 370767,
+          "ns": 0,
+          "title": "林家木久蔵 (2代目)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はやしや きくそう02",
+            "page_image_free": "中陰蔦.jpg",
+            "wikibase_item": "Q11532967"
+          },
+          "terms": {
+            "description": [
+              "日本の落語家、二代目林家木久蔵"
+            ]
+          }
+        },
+        {
+          "pageid": 2764117,
+          "ns": 0,
+          "title": "半田裕典",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はんた ゆうすけ",
+            "wikibase_item": "Q11407093"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 3292501,
+          "ns": 0,
+          "title": "アキラ100%",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あきらひやくはあせんと",
+            "page_image_free": "Akira_100_Percent_2017.jpg",
+            "wikibase_item": "Q22123227"
+          },
+          "terms": {
+            "description": [
+              "日本のお笑いタレント、2017年R-1ぐらんぷり優勝者"
+            ]
+          }
+        },
+        {
+          "pageid": 4431944,
+          "ns": 0,
+          "title": "真犯人フラグ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しんはんにんふらく",
+            "wikibase_item": "Q108071612"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

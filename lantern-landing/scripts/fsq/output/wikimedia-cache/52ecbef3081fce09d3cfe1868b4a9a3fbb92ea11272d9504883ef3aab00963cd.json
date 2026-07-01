@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:36.494Z",
+  "value": {
+    "searchinfo": {
+      "search": "一葉記念館"
+    },
+    "search": [
+      {
+        "id": "Q11353179",
+        "title": "Q11353179",
+        "pageid": 12491030,
+        "concepturi": "http://www.wikidata.org/entity/Q11353179",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11353179",
+        "display": {
+          "label": {
+            "value": "Ichiyo Memorial Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Taitō, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Ichiyo Memorial Museum",
+        "description": "museum in Taitō, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "一葉記念館"
+        },
+        "aliases": [
+          "一葉記念館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

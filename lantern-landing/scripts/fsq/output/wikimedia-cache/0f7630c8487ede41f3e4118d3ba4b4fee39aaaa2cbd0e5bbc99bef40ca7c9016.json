@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:00.630Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 102263,
+          "ns": 0,
+          "title": "スルメイカ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "するめいか",
+            "page_image_free": "Todarodes_pacificus_ruler.jpg",
+            "wikibase_item": "Q780352"
+          },
+          "terms": {
+            "description": [
+              "ツツイカ目アカイカ科の動物"
+            ]
+          }
+        },
+        {
+          "pageid": 120657,
+          "ns": 0,
+          "title": "松浦市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "まつうらし",
+            "kartographer_frames": "1",
+            "page_image_free": "Armor_of_Matsura_Navy_at_Tsukinokawa_Road_Park.jpg",
+            "wikibase_item": "Q850465"
+          },
+          "coordinates": [
+            {
+              "lat": 33.34097,
+              "lon": 129.70911,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長崎県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 357262,
+          "ns": 0,
+          "title": "目黒のさんま",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めくろのさんま",
+            "wikibase_item": "Q11581614"
+          },
+          "terms": {
+            "description": [
+              "落語の演目のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 860822,
+          "ns": 0,
+          "title": "小ねぎ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こねき",
+            "page_image_free": "Sliced_green_onion_by_Joshua_Rappeneker.jpg",
+            "wikibase_item": "Q11458750"
+          }
+        },
+        {
+          "pageid": 1599810,
+          "ns": 0,
+          "title": "三津の朝市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みつのあさいち",
+            "wikibase_item": "Q11356290"
+          }
+        }
+      ]
+    }
+  }
+}

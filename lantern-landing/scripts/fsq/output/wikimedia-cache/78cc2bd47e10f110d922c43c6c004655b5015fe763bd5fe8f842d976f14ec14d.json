@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:07.131Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 167761,
+          "ns": 0,
+          "title": "東京都道・埼玉県道63号青梅入間線",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようととうさいたまけんとう063",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Metropolitan_Road_No.63_Ome-Imai.jpg",
+            "wikibase_item": "Q11525860"
+          },
+          "terms": {
+            "description": [
+              "東京都と埼玉県の道路"
+            ]
+          }
+        },
+        {
+          "pageid": 1479142,
+          "ns": 0,
+          "title": "真土大塚山古墳",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しんとおおつかやまこふん",
+            "page_image_free": "Shindo_Otsukayama_Kofun,_funkyu.jpg",
+            "wikibase_item": "Q11582920"
+          },
+          "coordinates": [
+            {
+              "lat": 35.35872222,
+              "lon": 139.34855556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1879970,
+          "ns": 0,
+          "title": "鑓水",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やりみす",
+            "page_image_free": "Yzrimizu_Tx-re.jpg",
+            "wikibase_item": "Q11651358"
+          },
+          "terms": {
+            "description": [
+              "東京都八王子市の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 1980909,
+          "ns": 0,
+          "title": "大塚山公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおつかやまこうえん",
+            "page_image_free": "Otukayama.JPG",
+            "wikibase_item": "Q11434028"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62479722,
+              "lon": 139.348875,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 3273971,
+          "ns": 0,
+          "title": "北野台",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きたのたい",
+            "page_image_free": "Kitanodai.jpg",
+            "wikibase_item": "Q21018959"
+          }
+        }
+      ]
+    }
+  }
+}

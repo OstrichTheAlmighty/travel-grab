@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:13.397Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 45336,
+          "ns": 0,
+          "title": "日の出町",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひのてまち",
+            "page_image_free": "Hinode_seiundo.jpg",
+            "wikibase_item": "Q1154806"
+          },
+          "coordinates": [
+            {
+              "lat": 35.74211,
+              "lon": 139.25736,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都西多摩郡の町"
+            ]
+          }
+        },
+        {
+          "pageid": 117814,
+          "ns": 0,
+          "title": "下総橘駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しもうさたちはな",
+            "kartographer_frames": "1",
+            "page_image_free": "JR_Narita_Line_Shimōsa-Tachibana_Station_building.jpg",
+            "wikibase_item": "Q7497065"
+          },
+          "coordinates": [
+            {
+              "lat": 35.81866667,
+              "lon": 140.70227778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県香取郡東庄町石出にある東日本旅客鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 122630,
+          "ns": 0,
+          "title": "北軽井沢",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きたかるいさわ",
+            "page_image_free": "Map_of_Gunma_Prefecture_Ja.svg",
+            "wikibase_item": "Q11404113"
+          },
+          "terms": {
+            "description": [
+              "群馬県長野原町の大字"
+            ]
+          }
+        },
+        {
+          "pageid": 1632197,
+          "ns": 0,
+          "title": "大和野菜",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やまとやさい",
+            "page_image_free": "Nara_Heirloom_Vegetables_restaurant_in_Nara-machi.JPG",
+            "wikibase_item": "Q11433594"
+          },
+          "terms": {
+            "description": [
+              "奈良県農林部が認定した野菜の分類"
+            ]
+          }
+        },
+        {
+          "pageid": 2228612,
+          "ns": 0,
+          "title": "山梨県の観光地",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "やまなしけん",
+            "page_image_free": "Mt.Fuji_from_misaka_pass_4.jpg",
+            "wikibase_item": "Q11469645"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

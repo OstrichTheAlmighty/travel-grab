@@ -1,0 +1,743 @@
+{
+  "city": "Tokyo",
+  "release": "2026-06-17.0",
+  "overturePath": "scripts/overture/output/tokyo-2026-06-17-0.json",
+  "generatedAt": "2026-06-28T19:33:28.549Z",
+  "googleTotalInDb": 1074,
+  "googleFetched": 1074,
+  "googlePagesFetched": 2,
+  "googleInsideBbox": 1039,
+  "googleOutsideBbox": 35,
+  "totalOverture": 1534,
+  "bbox": {
+    "confirmedMatches": 2,
+    "possibleMatches": 0,
+    "rejectedNearMatches": 271,
+    "overtureOnly": 1532,
+    "googleOnly": 1037,
+    "confirmedMatchRate": 0.001303780964797914,
+    "possibleMatchRate": 0,
+    "confirmedExamples": [
+      {
+        "ov": "Kyu-Shiba-rikyu Gardens",
+        "g": "Kyū Shiba-rikyū Gardens",
+        "dist": 3.327224350223099,
+        "confidence": 1
+      },
+      {
+        "ov": "Kyu-Furukawa Gardens",
+        "g": "Kyu-Furukawa Gardens",
+        "dist": 25.157350572460288,
+        "confidence": 1
+      }
+    ],
+    "possibleExamples": [],
+    "rejectedExamples": [
+      {
+        "ov": "ジラソーレ",
+        "g": "Kushiwakamaru",
+        "dist": 60.66672476410321,
+        "reason": "cat_match:food; dist:61m; proximity_only"
+      },
+      {
+        "ov": "サウンドスタジオノア恵比寿店",
+        "g": "Itasoba Kaoriya Ebisu",
+        "dist": 64.96434034897663,
+        "reason": "dist:65m; proximity_only"
+      },
+      {
+        "ov": "松濤スタジオ",
+        "g": "Fuglen Tokyo",
+        "dist": 70.114088449037,
+        "reason": "dist:70m; proximity_only"
+      },
+      {
+        "ov": "マーチャオζ新宿店",
+        "g": "Sake stanD Rin（SAKE BAR）",
+        "dist": 60.566095743680215,
+        "reason": "cat_conflict:culture≠nightlife; dist:61m; proximity_only"
+      },
+      {
+        "ov": "Loft Plus One",
+        "g": "BAR PSY",
+        "dist": 34.84884528054885,
+        "reason": "weak_google_name; cat_conflict:culture≠nightlife; dist:35m; proximity_only"
+      },
+      {
+        "ov": "カレイド",
+        "g": "T2 SHINJUKU (Nightclub)",
+        "dist": 20.553935996646345,
+        "reason": "cat_conflict:culture≠nightlife; dist:21m; proximity_only"
+      },
+      {
+        "ov": "GINZA Kabukiza【木挽町広場】",
+        "g": "GINZA syabuki",
+        "dist": 229.93110082595052,
+        "reason": "token_jaccard:0.25; dist:230m"
+      },
+      {
+        "ov": "クロサワバイオリンお茶の水店",
+        "g": "NARU Jazz Livehouse",
+        "dist": 51.777909332986056,
+        "reason": "cat_conflict:culture≠nightlife; dist:52m; proximity_only"
+      },
+      {
+        "ov": "カイトバル",
+        "g": "Bar TRENCH",
+        "dist": 48.80272766804638,
+        "reason": "dist:49m; proximity_only"
+      },
+      {
+        "ov": "ドミノ・ピザ目黒本町店",
+        "g": "plant-planet Gakugei Daigaku",
+        "dist": 61.468655193742265,
+        "reason": "cat_match:food; dist:61m; proximity_only"
+      },
+      {
+        "ov": "代官山 T-Site Garden Gallery",
+        "g": "Tsutaya Books Daikanyama",
+        "dist": 71.86629510180222,
+        "reason": "dist:72m; proximity_only"
+      },
+      {
+        "ov": "肉汁餃子のダンダダン 明大前店",
+        "g": "Seoul Garden",
+        "dist": 58.50455143381453,
+        "reason": "cat_match:food; dist:59m; proximity_only"
+      },
+      {
+        "ov": "フォトスタジオNice Pic！原宿店",
+        "g": "Curry Up",
+        "dist": 15.761528232539282,
+        "reason": "dist:16m; proximity_only"
+      },
+      {
+        "ov": "レフカダ新宿",
+        "g": "Sushi Restaurant FUJIYAMA TOKYO Shinjuku East",
+        "dist": 45.90728081786948,
+        "reason": "dist:46m; proximity_only"
+      },
+      {
+        "ov": "工 たくみ",
+        "g": "Sushi no Midori",
+        "dist": 18.73959291348412,
+        "reason": "cat_match:food; dist:19m; proximity_only"
+      },
+      {
+        "ov": "陶芸ドットコム",
+        "g": "THAI STREET FOOD",
+        "dist": 67.89802753376003,
+        "reason": "weak_google_name; dist:68m; proximity_only"
+      },
+      {
+        "ov": "花柳美嘉千代日本舞踊教室",
+        "g": "SECRETO",
+        "dist": 4.551181198996843,
+        "reason": "weak_google_name; dist:5m; proximity_only"
+      },
+      {
+        "ov": "中むら",
+        "g": "REONA Sushi Tokyo - Unique & Immersive Omakase Experience",
+        "dist": 74.13021607946784,
+        "reason": "dist:74m; proximity_only"
+      },
+      {
+        "ov": "侊心会（光心会）仏像彫刻・木彫刻教室",
+        "g": "TEMPURA OKARIYA TOKYO",
+        "dist": 41.099332418644956,
+        "reason": "weak_google_name; dist:41m; proximity_only"
+      },
+      {
+        "ov": "アトリエ　フォワイエ",
+        "g": "Bar TRENCH",
+        "dist": 65.86530716140366,
+        "reason": "cat_conflict:culture≠nightlife; dist:66m; proximity_only"
+      },
+      {
+        "ov": "ホリプロ / HoriPro Inc.",
+        "g": "Tonki",
+        "dist": 46.85860377972139,
+        "reason": "dist:47m; proximity_only"
+      },
+      {
+        "ov": "JACK麻布十番",
+        "g": "1 OAK TOKYO",
+        "dist": 50.97555280972055,
+        "reason": "cat_conflict:culture≠nightlife; dist:51m; proximity_only"
+      },
+      {
+        "ov": "観世文庫",
+        "g": "The Head Spa Tokyo Harajuku Annex",
+        "dist": 5.944272023667051,
+        "reason": "dist:6m; proximity_only"
+      },
+      {
+        "ov": "明治神宮外苑軟式球場",
+        "g": "Sekaido Shinjuku",
+        "dist": 72.36079485135406,
+        "reason": "cat_match:culture; dist:72m; proximity_only"
+      },
+      {
+        "ov": "アスミック･エースエンタテインメント",
+        "g": "Ginza SOBA-SHIRAISHI",
+        "dist": 51.76468705986657,
+        "reason": "dist:52m; proximity_only"
+      },
+      {
+        "ov": "千秋工房陶芸教室",
+        "g": "Tempura Miyashiro",
+        "dist": 76.46592350873308,
+        "reason": "dist:76m; proximity_only"
+      },
+      {
+        "ov": "釜元たん米衛",
+        "g": "Nagasaki Tempura Kouten Ebisu",
+        "dist": 60.76112732005935,
+        "reason": "cat_match:food; dist:61m; proximity_only"
+      },
+      {
+        "ov": "下北窯 ひまつぶし隠れ家",
+        "g": "No Room For Squares - Jazz",
+        "dist": 62.07042682888603,
+        "reason": "cat_conflict:culture≠nightlife; dist:62m; proximity_only"
+      },
+      {
+        "ov": "原宿占い館塔里木（タリム）",
+        "g": "capybaraonsen moffu tokyo",
+        "dist": 48.76830274527756,
+        "reason": "dist:49m; proximity_only"
+      },
+      {
+        "ov": "水曜日のアリス 東京",
+        "g": "BASO OMOTESANDO",
+        "dist": 79.37358155331249,
+        "reason": "weak_google_name; cat_match:food; dist:79m; proximity_only"
+      }
+    ],
+    "overtureOnlyExamples": [
+      {
+        "name": "TOMIZ 富澤商店",
+        "category": "food"
+      },
+      {
+        "name": "おつけもの慶　川崎アゼリア店",
+        "category": "food"
+      },
+      {
+        "name": "大田文化の森　多目的室スペース虹",
+        "category": "culture"
+      },
+      {
+        "name": "天然酵母パンの店 サンセリテ 北の小麦",
+        "category": "food"
+      },
+      {
+        "name": "煎茶堂東京",
+        "category": "food"
+      },
+      {
+        "name": "ジラソーレ",
+        "category": "food"
+      },
+      {
+        "name": "サウンドスタジオノア恵比寿店",
+        "category": "culture"
+      },
+      {
+        "name": "ノアスタジオ学芸大店",
+        "category": "culture"
+      },
+      {
+        "name": "ロマーノ　麻布十番",
+        "category": "food"
+      },
+      {
+        "name": "スタジオノア　野方",
+        "category": "culture"
+      },
+      {
+        "name": "サウンドスタジオ　ノア　中野店",
+        "category": "culture"
+      },
+      {
+        "name": "松濤スタジオ",
+        "category": "culture"
+      },
+      {
+        "name": "マーチャオζ新宿店",
+        "category": "culture"
+      },
+      {
+        "name": "Loft Plus One",
+        "category": "culture"
+      },
+      {
+        "name": "カレイド",
+        "category": "culture"
+      },
+      {
+        "name": "いけばな草月流　Ikebana Sogetsu",
+        "category": "culture"
+      },
+      {
+        "name": "味ノマチダヤ",
+        "category": "food"
+      },
+      {
+        "name": "神楽坂銘茶楽山飯田橋ラムラ店",
+        "category": "food"
+      },
+      {
+        "name": "池坊東京会館（ikebana ikenobo）",
+        "category": "culture"
+      },
+      {
+        "name": "梶原いろは亭",
+        "category": "culture"
+      },
+      {
+        "name": "北区文化芸術活動拠点 ココキタ",
+        "category": "culture"
+      },
+      {
+        "name": "GINZA Kabukiza【木挽町広場】",
+        "category": "culture"
+      },
+      {
+        "name": "箱根駅伝大手町発着点",
+        "category": "culture"
+      },
+      {
+        "name": "クロサワバイオリンお茶の水店",
+        "category": "culture"
+      },
+      {
+        "name": "おりがみ会館",
+        "category": "culture"
+      },
+      {
+        "name": "下町焼きそば 銀ちゃん 上野広小路店",
+        "category": "food"
+      },
+      {
+        "name": "アリックス",
+        "category": "food"
+      },
+      {
+        "name": "カゴメ株式会社東京",
+        "category": "food"
+      },
+      {
+        "name": "ジェイズスタジオ浦安店",
+        "category": "culture"
+      },
+      {
+        "name": "How House West",
+        "category": "culture"
+      }
+    ],
+    "googleOnlyExamples": [
+      {
+        "name": "Tokyo Disneyland",
+        "category": "adventure"
+      },
+      {
+        "name": "Tokyo DisneySea",
+        "category": "adventure"
+      },
+      {
+        "name": "teamLab Planets TOKYO DMM",
+        "category": "adventure"
+      },
+      {
+        "name": "The Making of Harry Potter - Warner Bros. Studio Tour Tokyo",
+        "category": "adventure"
+      },
+      {
+        "name": "Tokyo Tower",
+        "category": "adventure"
+      },
+      {
+        "name": "Azabudai Hills",
+        "category": "nature"
+      },
+      {
+        "name": "Signature",
+        "category": "luxury"
+      },
+      {
+        "name": "Ginza Itoya",
+        "category": "food"
+      },
+      {
+        "name": "ART AQUARIUM MUSEUM",
+        "category": "culture"
+      },
+      {
+        "name": "Creative Museum Tokyo",
+        "category": "culture"
+      },
+      {
+        "name": "Sekaido Shinjuku",
+        "category": "culture"
+      },
+      {
+        "name": "Mitsubishi Ichigokan Museum",
+        "category": "culture"
+      },
+      {
+        "name": "GINZA TSUTAYA BOOKS",
+        "category": "culture"
+      },
+      {
+        "name": "Ginza Sony Park",
+        "category": "culture"
+      },
+      {
+        "name": "21_21 Design Sight",
+        "category": "culture"
+      },
+      {
+        "name": "teamLab Borderless: MORI Building DIGITAL ART MUSEUM",
+        "category": "adventure"
+      },
+      {
+        "name": "Narisawa",
+        "category": "luxury"
+      },
+      {
+        "name": "Yamatane Museum of Art",
+        "category": "culture"
+      },
+      {
+        "name": "Roppongi Tsutaya Books",
+        "category": "nightlife"
+      },
+      {
+        "name": "Panasonic Shiodome Museum of Art",
+        "category": "culture"
+      },
+      {
+        "name": "Gallery AaMo",
+        "category": "culture"
+      },
+      {
+        "name": "Azabudai Hills Gallery",
+        "category": "culture"
+      },
+      {
+        "name": "Spiral",
+        "category": "culture"
+      },
+      {
+        "name": "Tokyo Station Gallery",
+        "category": "culture"
+      },
+      {
+        "name": "MUZA Kawasaki Symphony Hall",
+        "category": "culture"
+      },
+      {
+        "name": "Sensō-ji",
+        "category": "adventure"
+      },
+      {
+        "name": "Tokyo Skytree",
+        "category": "adventure"
+      },
+      {
+        "name": "Tokyo Dome",
+        "category": "culture"
+      },
+      {
+        "name": "Meiji Jingu",
+        "category": "culture"
+      },
+      {
+        "name": "Shibuya Crossing",
+        "category": "adventure"
+      }
+    ]
+  },
+  "full": {
+    "confirmedMatches": 2,
+    "possibleMatches": 0,
+    "googleOnlyInsideBbox": 1037,
+    "googleOnlyOutsideBbox": 35,
+    "googleOutsideBboxExamples": [
+      {
+        "name": "Sanrio Puroland",
+        "category": "adventure"
+      },
+      {
+        "name": "Yomiuri Land",
+        "category": "adventure"
+      },
+      {
+        "name": "Yokohama Hakkeijima Sea Paradise",
+        "category": "adventure"
+      },
+      {
+        "name": "Tobu Zoo",
+        "category": "adventure"
+      },
+      {
+        "name": "Yokohama Anpanman Children's Museum",
+        "category": "adventure"
+      },
+      {
+        "name": "Tokyo German Village",
+        "category": "adventure"
+      },
+      {
+        "name": "Tokyo Fuji Museum",
+        "category": "culture"
+      },
+      {
+        "name": "Kurkku Fields",
+        "category": "culture"
+      },
+      {
+        "name": "Yokohama Chinatown",
+        "category": "culture"
+      },
+      {
+        "name": "Yokohama Red Brick Warehouse",
+        "category": "culture"
+      },
+      {
+        "name": "Kotoku-in",
+        "category": "culture"
+      },
+      {
+        "name": "Snoopy Museum Tokyo",
+        "category": "culture"
+      },
+      {
+        "name": "Enoshima Aquarium",
+        "category": "adventure"
+      },
+      {
+        "name": "CupNoodles Museum",
+        "category": "culture"
+      },
+      {
+        "name": "The Railway Museum",
+        "category": "culture"
+      },
+      {
+        "name": "Kodomonokuni",
+        "category": "adventure"
+      },
+      {
+        "name": "Tokyo Coffee Roastery Cafe",
+        "category": "food"
+      },
+      {
+        "name": "Hotel New Otani Makuhari",
+        "category": "nightlife"
+      },
+      {
+        "name": "Breezbay Hotel Resort & Spa",
+        "category": "nightlife"
+      },
+      {
+        "name": "Billboard Live YOKOHAMA",
+        "category": "nightlife"
+      },
+      {
+        "name": "Zoorasia Yokohama Zoological Gardens",
+        "category": "adventure"
+      },
+      {
+        "name": "Tama Zoological Park",
+        "category": "adventure"
+      },
+      {
+        "name": "Mitsui Outlet Park Kisarazu",
+        "category": "culture"
+      },
+      {
+        "name": "LaLaport TOKYO-BAY",
+        "category": "culture"
+      },
+      {
+        "name": "Grandberry Park",
+        "category": "culture"
+      },
+      {
+        "name": "AEON MALL Makuhari New City",
+        "category": "culture"
+      },
+      {
+        "name": "LaLaport Fujimi",
+        "category": "culture"
+      },
+      {
+        "name": "Mitsui Outlet Park Iruma",
+        "category": "culture"
+      },
+      {
+        "name": "Edo-Tokyo Open Air Architectural Museum",
+        "category": "culture"
+      },
+      {
+        "name": "Tonogayato Garden",
+        "category": "culture"
+      }
+    ]
+  },
+  "overtureCategoryCoverage": {
+    "food": 485,
+    "culture": 1049
+  },
+  "googleCategoryCoverage": {
+    "adventure": 66,
+    "nature": 70,
+    "luxury": 67,
+    "food": 496,
+    "culture": 169,
+    "nightlife": 184,
+    "hidden_gems": 22
+  },
+  "overtureWithPhotos": 0,
+  "googleWithPhotos": 1074,
+  "overtureWithRatings": 0,
+  "googleWithRatings": 1074,
+  "estimatedGoogleFallbackRequired": 1532,
+  "attractionCoverage": [
+    {
+      "name": "Senso-ji",
+      "finding": "not_in_overture",
+      "lat": 35.7147,
+      "lng": 139.7967,
+      "note": "Not found in retained Overture places. Possible causes: filtered by relevance filter, absent from Overture dataset, or name variant not matching any alias."
+    },
+    {
+      "name": "Meiji Shrine",
+      "finding": "found_and_retained",
+      "matchedTitle": "明治神宮外苑軟式球場",
+      "matchedId": "b984e7b6-f6d9-4db5-9188-f878a2fb7c22",
+      "lat": 35.69059944152832,
+      "lng": 139.7060089111328
+    },
+    {
+      "name": "Tokyo Skytree",
+      "finding": "not_in_overture",
+      "lat": 35.7101,
+      "lng": 139.8107,
+      "note": "Not found in retained Overture places. Possible causes: filtered by relevance filter, absent from Overture dataset, or name variant not matching any alias."
+    },
+    {
+      "name": "Tokyo Tower",
+      "finding": "found_and_retained",
+      "matchedTitle": "東京タワーの似顔絵屋さん チームタワーズ",
+      "matchedId": "fbaaf990-a25a-4c2f-a333-06ae61e2013a",
+      "lat": 35.65862846374512,
+      "lng": 139.74541473388672
+    },
+    {
+      "name": "Shibuya Crossing",
+      "finding": "not_in_overture",
+      "lat": 35.6595,
+      "lng": 139.7004,
+      "note": "Not found in retained Overture places. Possible causes: filtered by relevance filter, absent from Overture dataset, or name variant not matching any alias."
+    },
+    {
+      "name": "Imperial Palace",
+      "finding": "found_and_retained",
+      "matchedTitle": "皇居東御苑",
+      "matchedId": "2061659b-8c41-4c52-b2e3-fcee3e0e9dc5",
+      "lat": 35.68581581115723,
+      "lng": 139.7566680908203
+    },
+    {
+      "name": "Ueno Park",
+      "finding": "not_in_overture",
+      "lat": 35.7141,
+      "lng": 139.7741,
+      "note": "Not found in retained Overture places. Possible causes: filtered by relevance filter, absent from Overture dataset, or name variant not matching any alias."
+    },
+    {
+      "name": "Tokyo National Museum",
+      "finding": "not_in_overture",
+      "lat": 35.7188,
+      "lng": 139.7762,
+      "note": "Not found in retained Overture places. Possible causes: filtered by relevance filter, absent from Overture dataset, or name variant not matching any alias."
+    },
+    {
+      "name": "teamLab Planets",
+      "finding": "found_and_retained",
+      "matchedTitle": "teamLab / チームラボ",
+      "matchedId": "8d408f62-f163-4178-8a85-2baaf497e502",
+      "lat": 35.70430374145508,
+      "lng": 139.75650024414062
+    },
+    {
+      "name": "Tsukiji Outer Market",
+      "finding": "not_in_overture",
+      "lat": 35.6654,
+      "lng": 139.7706,
+      "note": "Not found in retained Overture places. Possible causes: filtered by relevance filter, absent from Overture dataset, or name variant not matching any alias."
+    },
+    {
+      "name": "Shinjuku Gyoen",
+      "finding": "found_and_retained",
+      "matchedTitle": "新宿御苑 新宿門",
+      "matchedId": "2357599f-8b0e-4d67-b445-b35ecaeff55f",
+      "lat": 35.68833351135254,
+      "lng": 139.7074966430664
+    },
+    {
+      "name": "Akihabara",
+      "finding": "found_and_retained",
+      "matchedTitle": "アイランド秋葉原店",
+      "matchedId": "98742569-fc5d-4588-9dd3-c6cc2b97a361",
+      "lat": 35.70074653625488,
+      "lng": 139.77184295654297
+    },
+    {
+      "name": "Harajuku",
+      "finding": "found_and_retained",
+      "matchedTitle": "フォトスタジオNice Pic！原宿店",
+      "matchedId": "06aa357f-fdf4-49da-a879-bdaf1f055ff7",
+      "lat": 35.67460060119629,
+      "lng": 139.70769500732422
+    },
+    {
+      "name": "Odaiba",
+      "finding": "found_and_retained",
+      "matchedTitle": "Odaiba ,Giant Sky Wheel",
+      "matchedId": "1b4859b2-c13c-4d06-86de-f253ce0d4e92",
+      "lat": 35.6265926361084,
+      "lng": 139.78260803222656
+    },
+    {
+      "name": "Ghibli Museum",
+      "finding": "not_in_overture",
+      "lat": 35.6963,
+      "lng": 139.5702,
+      "note": "Not found in retained Overture places. Possible causes: filtered by relevance filter, absent from Overture dataset, or name variant not matching any alias."
+    },
+    {
+      "name": "Tokyo Disneyland",
+      "finding": "found_and_retained",
+      "matchedTitle": "Resort Tokyo Disneyland",
+      "matchedId": "92522a96-b1b1-4889-83e6-3f59bc4976ee",
+      "lat": 35.62630271911621,
+      "lng": 139.87468719482422
+    },
+    {
+      "name": "Tokyo DisneySea",
+      "finding": "not_in_overture",
+      "lat": 35.6267,
+      "lng": 139.8856,
+      "note": "Not found in retained Overture places. Possible causes: filtered by relevance filter, absent from Overture dataset, or name variant not matching any alias."
+    }
+  ],
+  "isReliable": false,
+  "reliabilityNotes": [
+    "271 proximity candidates were rejected — the old matcher would have counted these as false matches",
+    "Only 9/17 major Tokyo attractions found in retained Overture data — check relevance filter or Overture coverage gaps"
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:22.712Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 80123,
+          "ns": 0,
+          "title": "東京都美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようとひしゆつかん",
+            "page_image_free": "Toukyoutoartmuseum.jpg",
+            "wikibase_item": "Q864957"
+          },
+          "terms": {
+            "description": [
+              "東京都台東区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 90399,
+          "ns": 0,
+          "title": "東京都庭園美術館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようとていえんひしゆつかん",
+            "page_image_free": "Tokyo_Metropolitan_Teien_Art_Museum.jpg",
+            "wikibase_item": "Q743773"
+          },
+          "coordinates": [
+            {
+              "lat": 35.636862,
+              "lon": 139.719269,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 201053,
+          "ns": 0,
+          "title": "現代美術",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "けんたいひしゆつ",
+            "page_image_free": "Dona_i_Ocell.JPG",
+            "wikibase_item": "Q186030"
+          },
+          "terms": {
+            "description": [
+              "既存の美術の枠組みから大きく外れており、伝統破壊的なアバンギャルド性のある20世紀以降の作品"
+            ]
+          }
+        },
+        {
+          "pageid": 291476,
+          "ns": 0,
+          "title": "妹島和世",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せしま かすよ",
+            "page_image_free": "Kazuyo_Sejima_mg_5000.jpg",
+            "wikibase_item": "Q253350"
+          },
+          "terms": {
+            "description": [
+              "日本の建築家 (1956-)"
+            ]
+          }
+        },
+        {
+          "pageid": 380487,
+          "ns": 0,
+          "title": "山本悍右",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "やまもと かんすけ",
+            "page_image_free": "KansukeYamamotoPicture.jpg",
+            "wikibase_item": "Q5102948"
+          },
+          "terms": {
+            "description": [
+              "日本の前衛芸術家・写真家・詩人・編集者・出版者（1914–1987）"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

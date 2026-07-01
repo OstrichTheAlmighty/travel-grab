@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:21.428Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17082,
+          "ns": 0,
+          "title": "高雄市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たかお",
+            "kartographer_frames": "1",
+            "page_image_free": "Kaohsiung_Skyline_2020_(cropped).jpg",
+            "wikibase_item": "Q181557"
+          },
+          "coordinates": [
+            {
+              "lat": 22.63333333,
+              "lon": 120.26666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "中華民国の直轄市"
+            ]
+          }
+        },
+        {
+          "pageid": 45366,
+          "ns": 0,
+          "title": "国立西が丘サッカー場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こくりつにしかおかさつかしよう",
+            "page_image_free": "Nishigaoka_Stadium_1.JPG",
+            "wikibase_item": "Q7040543"
+          },
+          "terms": {
+            "description": [
+              "東京都北区にあるサッカー場"
+            ]
+          }
+        },
+        {
+          "pageid": 57465,
+          "ns": 0,
+          "title": "駒澤大学",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こまさわたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Komazawa_main.JPG",
+            "wikibase_item": "Q910518"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62888889,
+              "lon": 139.65808333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都世田谷区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 63482,
+          "ns": 0,
+          "title": "大谷大学",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおたに",
+            "page_image_free": "Otani_University.jpg",
+            "wikibase_item": "Q386203"
+          },
+          "coordinates": [
+            {
+              "lat": 35.043,
+              "lon": 135.75811111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市北区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 158272,
+          "ns": 0,
+          "title": "仏教美術",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふつきようひしゆつ",
+            "page_image_free": "Gandhara_Buddha_(tnm).jpeg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q1001041"
+          },
+          "terms": {
+            "description": [
+              "仏教信仰に基づいた礼拝対象、あるいはそれら活動のための美術"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

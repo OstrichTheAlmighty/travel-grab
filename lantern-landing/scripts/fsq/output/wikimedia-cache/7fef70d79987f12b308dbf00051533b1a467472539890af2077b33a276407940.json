@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:52.806Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 106051,
+          "ns": 0,
+          "title": "松平信綱",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "まつたいら のふつな",
+            "page_image_free": "Matsudaira_Nobutsuna_Shönen_Rekishi.png",
+            "wikibase_item": "Q6788056"
+          },
+          "terms": {
+            "description": [
+              "江戸時代前期の大名で武蔵国忍藩主、同川越藩藩主。老中。"
+            ]
+          }
+        },
+        {
+          "pageid": 108506,
+          "ns": 0,
+          "title": "銭座",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せにさ",
+            "page_image_free": "銭座・亀戸銭座跡・1.jpg",
+            "wikibase_item": "Q11650266"
+          },
+          "terms": {
+            "description": [
+              "江戸時代に銭貨を鋳造した組織あるいは機関"
+            ]
+          }
+        },
+        {
+          "pageid": 233229,
+          "ns": 0,
+          "title": "亀戸",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かめいと",
+            "kartographer_frames": "1",
+            "page_image_free": "JR_Kameido_sta_001.jpg",
+            "wikibase_item": "Q11370950"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 288750,
+          "ns": 0,
+          "title": "三都",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さんと",
+            "page_image_free": "Nihonbashi_bridge_in_Edo.jpg",
+            "wikibase_item": "Q11357620"
+          },
+          "terms": {
+            "description": [
+              "江戸時代の三大都市"
+            ]
+          }
+        },
+        {
+          "pageid": 1316718,
+          "ns": 0,
+          "title": "業平",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なりひら",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q11541371"
+          },
+          "terms": {
+            "description": [
+              "東京都墨田区の地名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

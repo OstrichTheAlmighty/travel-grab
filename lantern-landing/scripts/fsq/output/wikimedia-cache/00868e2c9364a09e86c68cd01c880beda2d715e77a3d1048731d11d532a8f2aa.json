@@ -1,0 +1,196 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:30.853Z",
+  "value": {
+    "searchinfo": {
+      "search": "国立公文書館"
+    },
+    "search": [
+      {
+        "id": "Q1072875",
+        "title": "Q1072875",
+        "pageid": 1021326,
+        "concepturi": "http://www.wikidata.org/entity/Q1072875",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1072875",
+        "display": {
+          "label": {
+            "value": "National Archives of Japan",
+            "language": "en"
+          },
+          "description": {
+            "value": "national archives of Japan",
+            "language": "en"
+          }
+        },
+        "label": "National Archives of Japan",
+        "description": "national archives of Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "国立公文書館"
+        },
+        "aliases": [
+          "国立公文書館"
+        ]
+      },
+      {
+        "id": "Q6970416",
+        "title": "Q6970416",
+        "pageid": 6839964,
+        "concepturi": "http://www.wikidata.org/entity/Q6970416",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6970416",
+        "display": {
+          "label": {
+            "value": "National Archives Building",
+            "language": "en"
+          },
+          "description": {
+            "value": "building on Pennsylvania Avenue NW, Washington, D.C., which serves as the public records depository for the United States",
+            "language": "en"
+          }
+        },
+        "label": "National Archives Building",
+        "description": "building on Pennsylvania Avenue NW, Washington, D.C., which serves as the public records depository for the United States",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "国立公文書館本館"
+        },
+        "aliases": [
+          "国立公文書館本館"
+        ]
+      },
+      {
+        "id": "Q392703",
+        "title": "Q392703",
+        "pageid": 373565,
+        "concepturi": "http://www.wikidata.org/entity/Q392703",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q392703",
+        "display": {
+          "label": {
+            "value": "UK National Archives",
+            "language": "en"
+          },
+          "description": {
+            "value": "repository of archival information for the United Kingdom",
+            "language": "en"
+          }
+        },
+        "label": "UK National Archives",
+        "description": "repository of archival information for the United Kingdom",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "国立公文書館 (イギリス)"
+        },
+        "aliases": [
+          "国立公文書館 (イギリス)"
+        ]
+      },
+      {
+        "id": "Q38945047",
+        "title": "Q38945047",
+        "pageid": 40304715,
+        "concepturi": "http://www.wikidata.org/entity/Q38945047",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q38945047",
+        "display": {
+          "label": {
+            "value": "National Archives at College Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "major facility of the United States National Archives and Record Administration (NARA) in College Park, Maryland",
+            "language": "en"
+          }
+        },
+        "label": "National Archives at College Park",
+        "description": "major facility of the United States National Archives and Record Administration (NARA) in College Park, Maryland",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "国立公文書館II"
+        },
+        "aliases": [
+          "国立公文書館II"
+        ]
+      },
+      {
+        "id": "Q29896325",
+        "title": "Q29896325",
+        "pageid": 31523367,
+        "concepturi": "http://www.wikidata.org/entity/Q29896325",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q29896325",
+        "display": {
+          "label": {
+            "value": "National Archives Identifier",
+            "language": "en"
+          },
+          "description": {
+            "value": "identifier for the United States National Archives and Records Administration's online catalog",
+            "language": "en"
+          }
+        },
+        "label": "National Archives Identifier",
+        "description": "identifier for the United States National Archives and Records Administration's online catalog",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "国立公文書館識別子"
+        },
+        "aliases": [
+          "国立公文書館識別子"
+        ]
+      },
+      {
+        "id": "Q11421226",
+        "title": "Q11421226",
+        "pageid": 12559985,
+        "concepturi": "http://www.wikidata.org/entity/Q11421226",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11421226",
+        "display": {
+          "label": {
+            "value": "National Archives Act",
+            "language": "en"
+          }
+        },
+        "label": "National Archives Act",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "国立公文書館法"
+        },
+        "aliases": [
+          "国立公文書館法"
+        ]
+      },
+      {
+        "id": "Q116149195",
+        "title": "Q116149195",
+        "pageid": 110859670,
+        "concepturi": "http://www.wikidata.org/entity/Q116149195",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q116149195",
+        "display": {
+          "label": {
+            "value": "国立公文書館ヘルシンキ事務所",
+            "language": "ja"
+          }
+        },
+        "label": "国立公文書館ヘルシンキ事務所",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "国立公文書館ヘルシンキ事務所"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

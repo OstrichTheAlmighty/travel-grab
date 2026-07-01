@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:42.240Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1657364,
+          "ns": 0,
+          "title": "アリエルのグロット",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ありえるのくろつと",
+            "wikibase_item": "Q2163213"
+          },
+          "terms": {
+            "description": [
+              "ディズニーパークにあるアトラクション"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

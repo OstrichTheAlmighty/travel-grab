@@ -1,0 +1,177 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:13.050Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京ディズニーリゾート"
+    },
+    "search": [
+      {
+        "id": "Q605492",
+        "title": "Q605492",
+        "pageid": 570041,
+        "concepturi": "http://www.wikidata.org/entity/Q605492",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q605492",
+        "display": {
+          "label": {
+            "value": "Tokyo Disney Resort",
+            "language": "en"
+          },
+          "description": {
+            "value": "Disney resort in Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Disney Resort",
+        "description": "Disney resort in Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ディズニーリゾート"
+        },
+        "aliases": [
+          "東京ディズニーリゾート"
+        ]
+      },
+      {
+        "id": "Q13495689",
+        "title": "Q13495689",
+        "pageid": 15173304,
+        "concepturi": "http://www.wikidata.org/entity/Q13495689",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q13495689",
+        "display": {
+          "label": {
+            "value": "Template:Tokyo Disney Resort",
+            "language": "en"
+          },
+          "description": {
+            "value": "Wikimedia template",
+            "language": "en"
+          }
+        },
+        "label": "Template:Tokyo Disney Resort",
+        "description": "Wikimedia template",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ディズニーリゾート"
+        },
+        "aliases": [
+          "東京ディズニーリゾート"
+        ]
+      },
+      {
+        "id": "Q109362198",
+        "title": "Q109362198",
+        "pageid": 104524906,
+        "concepturi": "http://www.wikidata.org/entity/Q109362198",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q109362198",
+        "display": {
+          "label": {
+            "value": "Tokyo Disney Resort Toy Story Hotel",
+            "language": "en"
+          },
+          "description": {
+            "value": "hotel at Tokyo Disney Resort, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Disney Resort Toy Story Hotel",
+        "description": "hotel at Tokyo Disney Resort, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ディズニーリゾート・トイ・ストーリーホテル"
+        },
+        "aliases": [
+          "東京ディズニーリゾート・トイ・ストーリーホテル"
+        ]
+      },
+      {
+        "id": "Q11524293",
+        "title": "Q11524293",
+        "pageid": 12664163,
+        "concepturi": "http://www.wikidata.org/entity/Q11524293",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524293",
+        "display": {
+          "label": {
+            "value": "東京ディズニーリゾートTIMES",
+            "language": "ja"
+          }
+        },
+        "label": "東京ディズニーリゾートTIMES",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ディズニーリゾートTIMES"
+        }
+      },
+      {
+        "id": "Q11524296",
+        "title": "Q11524296",
+        "pageid": 12664166,
+        "concepturi": "http://www.wikidata.org/entity/Q11524296",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524296",
+        "display": {
+          "label": {
+            "value": "東京ディズニーリゾートのテレビ番組",
+            "language": "ja"
+          }
+        },
+        "label": "東京ディズニーリゾートのテレビ番組",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ディズニーリゾートのテレビ番組"
+        }
+      },
+      {
+        "id": "Q11524297",
+        "title": "Q11524297",
+        "pageid": 12664167,
+        "concepturi": "http://www.wikidata.org/entity/Q11524297",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524297",
+        "display": {
+          "label": {
+            "value": "東京ディズニーリゾートのメディア",
+            "language": "ja"
+          }
+        },
+        "label": "東京ディズニーリゾートのメディア",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ディズニーリゾートのメディア"
+        }
+      },
+      {
+        "id": "Q117455432",
+        "title": "Q117455432",
+        "pageid": 112218258,
+        "concepturi": "http://www.wikidata.org/entity/Q117455432",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q117455432",
+        "display": {
+          "label": {
+            "value": "東京ディズニーリゾート40周年“ドリームゴーラウンド”",
+            "language": "ja"
+          }
+        },
+        "label": "東京ディズニーリゾート40周年“ドリームゴーラウンド”",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ディズニーリゾート40周年“ドリームゴーラウンド”"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

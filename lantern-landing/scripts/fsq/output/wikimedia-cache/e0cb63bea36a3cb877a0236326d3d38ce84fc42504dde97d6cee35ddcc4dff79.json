@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:21.775Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 15422,
+          "ns": 0,
+          "title": "List of Internet top-level domains",
+          "index": 2,
+          "pageprops": {
+            "toc": "",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q318153"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 93825,
+          "ns": 0,
+          "title": "Monsanto",
+          "index": 3,
+          "pageprops": {
+            "toc": "",
+            "wikibase-shortdesc": "American agribusiness corporation (1901–2018)",
+            "wikibase_item": "Q207983"
+          },
+          "terms": {
+            "description": [
+              "American multinational agricultural biotechnology, seed, and agrochemical company"
+            ]
+          }
+        },
+        {
+          "pageid": 7746391,
+          "ns": 0,
+          "title": "Denialism",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Climate_March_0281_(34210341852).jpg",
+            "wikibase-shortdesc": "Rejecting scientific or historical consensus",
+            "wikibase_item": "Q10567262"
+          },
+          "terms": {
+            "description": [
+              "denial of basic facts and concepts that are accepted by the scientific consensus"
+            ]
+          }
+        },
+        {
+          "pageid": 29560452,
+          "ns": 0,
+          "title": "The arts",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Arts",
+            "page_image_free": "Gauguin,_Paul_-_Still_Life_with_Profile_of_Laval_-_Google_Art_Project.jpg",
+            "wikibase-shortdesc": "Creative human and cultural expression",
+            "wikibase_item": "Q2018526"
+          },
+          "terms": {
+            "description": [
+              "group of creative disciplines in which human expression and creativity, usually influenced by culture (use Q2018526 for the general concept of art)"
+            ]
+          }
+        },
+        {
+          "pageid": 77617798,
+          "ns": 0,
+          "title": "Chronological list of operatic sopranos",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Maria_Callas_1958.jpg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q130395139"
+          }
+        }
+      ]
+    }
+  }
+}

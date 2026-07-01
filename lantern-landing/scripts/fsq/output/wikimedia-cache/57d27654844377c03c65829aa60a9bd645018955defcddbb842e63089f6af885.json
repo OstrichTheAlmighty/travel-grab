@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:14.635Z",
+  "value": {
+    "searchinfo": {
+      "search": "齋田記念館"
+    },
+    "search": [
+      {
+        "id": "Q140211319",
+        "title": "Q140211319",
+        "pageid": 133648897,
+        "concepturi": "http://www.wikidata.org/entity/Q140211319",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q140211319",
+        "display": {
+          "label": {
+            "value": "Saita Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Setagaya, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Saita Museum",
+        "description": "museum in Setagaya, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "齋田記念館"
+        },
+        "aliases": [
+          "齋田記念館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

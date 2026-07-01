@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:26.666Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1281134,
+          "ns": 0,
+          "title": "運動公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "うんとうこうえん",
+            "wikibase_item": "Q16363669"
+          },
+          "terms": {
+            "description": [
+              "都市公園の一種で主に運動用"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:47.243Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 37540,
+          "ns": 0,
+          "title": "地下鉄成増駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちかてつなります",
+            "kartographer_frames": "1",
+            "page_image_free": "Chikatetsunarimasu-Sta-4.JPG",
+            "wikibase_item": "Q80506"
+          },
+          "coordinates": [
+            {
+              "lat": 35.77652778,
+              "lon": 139.63152778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都板橋区にある東京地下鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 66288,
+          "ns": 0,
+          "title": "成増駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なります",
+            "kartographer_frames": "1",
+            "page_image_free": "Narimasu_station.jpg",
+            "wikibase_item": "Q6965958"
+          },
+          "coordinates": [
+            {
+              "lat": 35.77763889,
+              "lon": 139.63288889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都板橋区成増にある東武鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 425036,
+          "ns": 0,
+          "title": "瀬尾公治",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せお こうし",
+            "wikibase_item": "Q3089616"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画家"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 921260,
+          "ns": 0,
+          "title": "成増",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "なります",
+            "kartographer_frames": "1",
+            "page_image_free": "NarimasuSkipVillage.jpg",
+            "wikibase_item": "Q11495416"
+          },
+          "terms": {
+            "description": [
+              "東京都板橋区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

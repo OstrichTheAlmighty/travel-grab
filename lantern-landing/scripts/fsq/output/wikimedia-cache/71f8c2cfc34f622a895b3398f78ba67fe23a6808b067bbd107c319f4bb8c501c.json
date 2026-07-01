@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:22.915Z",
+  "value": {
+    "searchinfo": {
+      "search": "NTTドコモ歴史展示スクエア"
+    },
+    "search": [
+      {
+        "id": "Q11236089",
+        "title": "Q11236089",
+        "pageid": 12385665,
+        "concepturi": "http://www.wikidata.org/entity/Q11236089",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11236089",
+        "display": {
+          "label": {
+            "value": "NTT DoCoMo Sumida Building",
+            "language": "en"
+          }
+        },
+        "label": "NTT DoCoMo Sumida Building",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "NTTドコモ歴史展示スクエア"
+        },
+        "aliases": [
+          "NTTドコモ歴史展示スクエア"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

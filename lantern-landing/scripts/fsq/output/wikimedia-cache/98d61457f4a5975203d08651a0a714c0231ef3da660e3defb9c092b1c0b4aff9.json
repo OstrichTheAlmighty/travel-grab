@@ -1,0 +1,197 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:37.385Z",
+  "value": {
+    "searchinfo": {
+      "search": "Statue of Liberty"
+    },
+    "search": [
+      {
+        "id": "Q9202",
+        "title": "Q9202",
+        "pageid": 10561,
+        "concepturi": "http://www.wikidata.org/entity/Q9202",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q9202",
+        "display": {
+          "label": {
+            "value": "Statue of Liberty",
+            "language": "en"
+          },
+          "description": {
+            "value": "monument in New York",
+            "language": "en"
+          }
+        },
+        "label": "Statue of Liberty",
+        "description": "monument in New York",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Statue of Liberty"
+        }
+      },
+      {
+        "id": "Q359939",
+        "title": "Q359939",
+        "pageid": 343174,
+        "concepturi": "http://www.wikidata.org/entity/Q359939",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q359939",
+        "display": {
+          "label": {
+            "value": "Statue of Liberty National Monument",
+            "language": "en"
+          },
+          "description": {
+            "value": "United States national monument",
+            "language": "en"
+          }
+        },
+        "label": "Statue of Liberty National Monument",
+        "description": "United States national monument",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Statue of Liberty National Monument"
+        }
+      },
+      {
+        "id": "Q3968681",
+        "title": "Q3968681",
+        "pageid": 3784284,
+        "concepturi": "http://www.wikidata.org/entity/Q3968681",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3968681",
+        "display": {
+          "label": {
+            "value": "Statue of Liberty",
+            "language": "en"
+          },
+          "description": {
+            "value": "1978 single by XTC",
+            "language": "en"
+          }
+        },
+        "label": "Statue of Liberty",
+        "description": "1978 single by XTC",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Statue of Liberty"
+        }
+      },
+      {
+        "id": "Q103309040",
+        "title": "Q103309040",
+        "pageid": 99298199,
+        "concepturi": "http://www.wikidata.org/entity/Q103309040",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q103309040",
+        "display": {
+          "label": {
+            "value": "Statue of Liberty",
+            "language": "en"
+          },
+          "description": {
+            "value": "print by Akira Kurosaki",
+            "language": "en"
+          }
+        },
+        "label": "Statue of Liberty",
+        "description": "print by Akira Kurosaki",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Statue of Liberty"
+        }
+      },
+      {
+        "id": "Q87581502",
+        "title": "Q87581502",
+        "pageid": 86823410,
+        "concepturi": "http://www.wikidata.org/entity/Q87581502",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q87581502",
+        "display": {
+          "label": {
+            "value": "🗽",
+            "language": "en"
+          },
+          "description": {
+            "value": "Unicode character (U+1F5FD) depicting the Statue of Liberty",
+            "language": "en"
+          }
+        },
+        "label": "🗽",
+        "description": "Unicode character (U+1F5FD) depicting the Statue of Liberty",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "STATUE OF LIBERTY"
+        },
+        "aliases": [
+          "STATUE OF LIBERTY"
+        ]
+      },
+      {
+        "id": "Q319821",
+        "title": "Q319821",
+        "pageid": 307241,
+        "concepturi": "http://www.wikidata.org/entity/Q319821",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q319821",
+        "display": {
+          "label": {
+            "value": "Liberty Island",
+            "language": "en"
+          },
+          "description": {
+            "value": "island in the Upper New York Bay, United States",
+            "language": "en"
+          }
+        },
+        "label": "Liberty Island",
+        "description": "island in the Upper New York Bay, United States",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "Statue of Liberty World Heritage Site"
+        },
+        "aliases": [
+          "Statue of Liberty World Heritage Site"
+        ]
+      },
+      {
+        "id": "Q3064968",
+        "title": "Q3064968",
+        "pageid": 2929567,
+        "concepturi": "http://www.wikidata.org/entity/Q3064968",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3064968",
+        "display": {
+          "label": {
+            "value": "Statua della Libertà",
+            "language": "en"
+          },
+          "description": {
+            "value": "statue located in San Marino (City)",
+            "language": "en"
+          }
+        },
+        "label": "Statua della Libertà",
+        "description": "statue located in San Marino (City)",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "Statue of Liberty"
+        },
+        "aliases": [
+          "Statue of Liberty"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

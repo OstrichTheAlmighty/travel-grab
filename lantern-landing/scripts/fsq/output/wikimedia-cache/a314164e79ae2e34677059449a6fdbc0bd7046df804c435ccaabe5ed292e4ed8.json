@@ -1,0 +1,108 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:55.267Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 55,
+          "ns": 0,
+          "title": "台東区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たいとうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Asakusa_Senso-ji_2021-12_ac_(2).jpg",
+            "wikibase_item": "Q232641"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71261,
+              "lon": 139.77997,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 697313,
+          "ns": 0,
+          "title": "根岸 (台東区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ねきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Taito-Ku_Calligraphy_Museum.JPG",
+            "wikibase_item": "Q11536292"
+          },
+          "terms": {
+            "description": [
+              "東京都台東区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1206776,
+          "ns": 0,
+          "title": "三体石経",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さんたいせつけい",
+            "page_image_free": "Three_scripts_Stone_Classics.jpg",
+            "wikibase_item": "Q9379390"
+          }
+        },
+        {
+          "pageid": 1215997,
+          "ns": 0,
+          "title": "中村不折",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なかむら ふせつ",
+            "page_image_free": "Nakamura_Fusetsu_03.jpg",
+            "wikibase_item": "Q3335331"
+          },
+          "terms": {
+            "description": [
+              "1866-1943, 明治～昭和期の洋画家、書家"
+            ]
+          }
+        },
+        {
+          "pageid": 1972563,
+          "ns": 0,
+          "title": "台東区立書道博物館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たいとうくりつしよとうはくふつかん",
+            "page_image_free": "Taito-Ku_Calligraphy_Museum.JPG",
+            "wikibase_item": "Q11411955"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72469444,
+              "lon": 139.77644444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある日中の書道に関する博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

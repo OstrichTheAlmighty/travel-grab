@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:10.344Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 63865,
+          "ns": 0,
+          "title": "築地市場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "つきしいちは",
+            "page_image_free": "2018_Tsukiji_fish_market.jpg",
+            "wikibase_item": "Q859471"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66138889,
+              "lon": 139.76972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて東京都中央区築地に存在した公設卸売市場"
+            ]
+          }
+        },
+        {
+          "pageid": 63869,
+          "ns": 0,
+          "title": "日本の電力会社",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "てんりよくかいしや",
+            "page_image_free": "TEPCO_HQ.jpg",
+            "wikibase_item": "Q6634640"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 85154,
+          "ns": 0,
+          "title": "シラウオ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しらうお",
+            "page_image_free": "Salangichthys_microdon.gif",
+            "wikibase_item": "Q134852"
+          },
+          "terms": {
+            "description": [
+              "キュウリウオ目シラウオ科の魚"
+            ]
+          }
+        },
+        {
+          "pageid": 659285,
+          "ns": 0,
+          "title": "中央区 (東京都)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちゆうおうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Ginza-WAKO_at_night.jpg",
+            "wikibase_item": "Q212704"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67058,
+              "lon": 139.77197,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 3614478,
+          "ns": 0,
+          "title": "地方卸売市場",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ちほうおろしうりししよう",
+            "wikibase_item": "Q30937289"
+          }
+        }
+      ]
+    }
+  }
+}

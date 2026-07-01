@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:33.425Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 169626,
+          "ns": 0,
+          "title": "実践女子大学",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しつせんしよしたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Jissen_Women's_University_Osakaue_Campus02.jpg",
+            "wikibase_item": "Q6203214"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67161389,
+              "lon": 139.38979444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京の私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 1680143,
+          "ns": 0,
+          "title": "北海道の観光地",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ほつかいとう",
+            "page_image_free": "Hokkaido,_Japan,_Lake_Mashū,_2008.jpg",
+            "wikibase_item": "Q11402453"
+          },
+          "terms": {
+            "description": [
+              "ウィキぺディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3110397,
+          "ns": 0,
+          "title": "住吉村 (兵庫県)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "すみよしむら",
+            "wikibase_item": "Q18700218"
+          },
+          "coordinates": [
+            {
+              "lat": 34.75492,
+              "lon": 135.24969,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の兵庫県武庫郡にあった村"
+            ]
+          }
+        },
+        {
+          "pageid": 3519602,
+          "ns": 0,
+          "title": "村山龍平記念館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "むらやまりようへいきねんかん",
+            "page_image_free": "Ryohei_Murayama_Memorial_Museum_2021-11_ac_(1).jpg",
+            "wikibase_item": "Q28686836"
+          },
+          "terms": {
+            "description": [
+              "三重県玉城町にある文化施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

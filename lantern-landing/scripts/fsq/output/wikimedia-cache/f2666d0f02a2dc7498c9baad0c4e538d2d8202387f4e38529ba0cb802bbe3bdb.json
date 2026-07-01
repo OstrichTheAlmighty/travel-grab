@@ -1,0 +1,132 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:26.216Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 294236,
+          "ns": 0,
+          "title": "Meiji Shrine",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Meiji_Jingu_2023-3.jpg",
+            "wikibase-shortdesc": "Shinto shrine in Tokyo, Japan",
+            "wikibase_item": "Q287165"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67611111,
+              "lon": 139.69916667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Shinto shrine in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 1356175,
+          "ns": 0,
+          "title": "Chichibunomiya Rugby Stadium",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Chichibunomiya3.JPG",
+            "wikibase-shortdesc": "Rugby stadium in Tokyo, Japan",
+            "wikibase_item": "Q631237"
+          },
+          "terms": {
+            "description": [
+              "rugby stadium in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 1906462,
+          "ns": 0,
+          "title": "Meiji Jingu Stadium",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image": "Meiji_Jingu_Stadium_logo.jpg",
+            "page_image_free": "Meiji_Jingu_Stadium_aerial_view.jpg",
+            "wikibase-shortdesc": "Baseball stadium in Shinjuku, Tokyo, Japan",
+            "wikibase_item": "Q944559"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67452778,
+              "lon": 139.71705556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "baseball stadium in Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 22967725,
+          "ns": 0,
+          "title": "Meiji Jingu Gaien Stadium",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "1933_Meiji_Jingu_Sports_Festival_01.jpg",
+            "wikibase-shortdesc": "Former stadium in Tokyo",
+            "wikibase_item": "Q6810037"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67805556,
+              "lon": 139.71472222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "demolished stadium in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 64227538,
+          "ns": 0,
+          "title": "Meiji Shrine Outer Garden",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Jingu_Gaien_Ginkgo_Street_in_Autumn_5.jpg",
+            "wikibase-shortdesc": "Garden in Tokyo, Japan",
+            "wikibase_item": "Q6631448"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6775,
+              "lon": 139.71833333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "garden in Tokyo, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:31.282Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 147739,
+          "ns": 0,
+          "title": "Shibuya",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Shibuya_skyline_from_Tokyu_Plaza_in_Omotesando,_Harajuku,_Tokyo,_2024_May.jpg",
+            "wikibase-shortdesc": "Special ward in Tokyo, Japan",
+            "wikibase_item": "Q193638"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65944444,
+              "lon": 139.70055556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "special ward in the Tokyo Metropolis in Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 62473330,
+          "ns": 0,
+          "title": "Shibuya Crossing",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Shibuya_Crossing,_Aerial.jpg",
+            "wikibase-shortdesc": "Scramble crossing in Tokyo",
+            "wikibase_item": "Q21083961"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6595,
+              "lon": 139.70056,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "scramble crossing in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 66174045,
+          "ns": 0,
+          "title": "Alice in Borderland (TV series)",
+          "index": 4,
+          "pageprops": {
+            "displaytitle": "<i>Alice in Borderland</i> (TV series)",
+            "page_image": "Alice_in_Borderland_title_card.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "Japanese sci-fi television series",
+            "wikibase_item": "Q103967305"
+          },
+          "terms": {
+            "description": [
+              "2020 Japanese television series"
+            ]
+          }
+        },
+        {
+          "pageid": 68423534,
+          "ns": 0,
+          "title": "August 2021 Tokyo stabbings",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Tokyo stabbings, 2021",
+            "page_image_free": "Odakyu_5000_Series_(2_Generations)_5051F_ver.2.jpg",
+            "wikibase-shortdesc": "2021 mass stabbing incident in Tokyo, Japan",
+            "wikibase_item": "Q107999435"
+          },
+          "terms": {
+            "description": [
+              "2021 mass stabbing incident in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 70987062,
+          "ns": 0,
+          "title": "Sugar (2024 TV series)",
+          "index": 3,
+          "pageprops": {
+            "displaytitle": "<i>Sugar</i> (2024 TV series)",
+            "wikibase-shortdesc": "American mystery drama television series",
+            "wikibase_item": "Q113696648"
+          },
+          "terms": {
+            "description": [
+              "American crime drama television series"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

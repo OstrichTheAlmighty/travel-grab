@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:32.897Z",
+  "value": {
+    "searchinfo": {
+      "search": "Nezu Museum"
+    },
+    "search": [
+      {
+        "id": "Q1047097",
+        "title": "Q1047097",
+        "pageid": 996164,
+        "concepturi": "http://www.wikidata.org/entity/Q1047097",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1047097",
+        "display": {
+          "label": {
+            "value": "Nezu Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum",
+            "language": "en"
+          }
+        },
+        "label": "Nezu Museum",
+        "description": "art museum",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Nezu Museum"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:23.509Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 30993,
+          "ns": 0,
+          "title": "井上和彦 (声優)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いのうえ かすひこ",
+            "wikibase_item": "Q225654"
+          },
+          "terms": {
+            "description": [
+              "日本の声優"
+            ]
+          }
+        },
+        {
+          "pageid": 404908,
+          "ns": 0,
+          "title": "忠実屋",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ちゆうしつや",
+            "page_image_free": "Chujitsuya_logo.svg",
+            "wikibase_item": "Q11491306"
+          },
+          "terms": {
+            "description": [
+              "かつて存在した日本のスーパーマーケット"
+            ]
+          }
+        },
+        {
+          "pageid": 3558575,
+          "ns": 0,
+          "title": "過去に存在した関東地区のダイエーの店舗",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かこにそんさいしたたいえいのてんほ かんとう",
+            "wikibase_item": "Q30922747"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 4136750,
+          "ns": 0,
+          "title": "ジャニーズJr.",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しやにいすしゆにあ",
+            "wikibase_item": "Q1154268"
+          },
+          "terms": {
+            "description": [
+              "STARTO ENTERTAINMENT（旧：ジャニーズ事務所）所属の未デビューのタレント"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

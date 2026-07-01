@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:20.001Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 10717,
+          "ns": 0,
+          "title": "埼玉西武ライオンズ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さいたませいふらいおんす",
+            "page_image_free": "Seibu_lions_insignia.svg",
+            "wikibase_item": "Q325819"
+          },
+          "terms": {
+            "description": [
+              "日本のプロ野球チーム"
+            ]
+          }
+        },
+        {
+          "pageid": 18098,
+          "ns": 0,
+          "title": "福井市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふくいし",
+            "kartographer_frames": "1",
+            "page_image_free": "Fukui_montage.jpg",
+            "wikibase_item": "Q201618"
+          },
+          "coordinates": [
+            {
+              "lat": 36.06406,
+              "lon": 136.21958,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福井県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 147936,
+          "ns": 0,
+          "title": "ライブドアベースボール",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "らいふとあへえすほおる",
+            "wikibase_item": "Q11346544"
+          }
+        },
+        {
+          "pageid": 1654144,
+          "ns": 0,
+          "title": "前橋市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "まえはしし",
+            "kartographer_frames": "1",
+            "page_image_free": "Maebashi_Montage.jpg",
+            "wikibase_item": "Q201613"
+          },
+          "coordinates": [
+            {
+              "lat": 36.3895,
+              "lon": 139.06344,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "群馬県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 2893720,
+          "ns": 0,
+          "title": "東急バス",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきゆうはす",
+            "page_image_free": "Tokyuikejiriohasib.jpg",
+            "wikibase_item": "Q11526982"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64969444,
+              "lon": 139.68871667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都目黒区にあるバス事業者"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

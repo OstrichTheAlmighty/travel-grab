@@ -1,0 +1,116 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:10.431Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 210175,
+          "ns": 0,
+          "title": "共和町",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きようわちよう",
+            "page_image_free": "Mt_CHISE_4.JPG",
+            "wikibase_item": "Q1354347"
+          },
+          "coordinates": [
+            {
+              "lat": 42.98042,
+              "lon": 140.61117,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道岩内郡の町"
+            ]
+          }
+        },
+        {
+          "pageid": 370421,
+          "ns": 0,
+          "title": "市民農園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しみんのうえん",
+            "page_image_free": "高砂市の市民農園.jpg",
+            "wikibase_item": "Q48743711"
+          }
+        },
+        {
+          "pageid": 505055,
+          "ns": 0,
+          "title": "マザー牧場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "まさあほくしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "羊の大行進.jpg",
+            "wikibase_item": "Q575499"
+          },
+          "coordinates": [
+            {
+              "lat": 35.24602778,
+              "lon": 139.93483333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県富津市にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 509836,
+          "ns": 0,
+          "title": "農場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "のうしよう",
+            "page_image_free": "Mozet_(Belgique),_la_ferme_de_Baseille..jpg",
+            "wikibase_item": "Q131596"
+          },
+          "terms": {
+            "description": [
+              "農業の基本単位"
+            ]
+          }
+        },
+        {
+          "pageid": 1054787,
+          "ns": 0,
+          "title": "青洲の里",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せいしゆうのさと",
+            "kartographer_frames": "1",
+            "page_image_free": "Seishu_Hanaoka01n.jpg",
+            "wikibase_item": "Q11662592"
+          },
+          "coordinates": [
+            {
+              "lat": 34.28119,
+              "lon": 135.44114,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "和歌山県紀の川市にある公園・テーマパークなどの総称、道の駅を併設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

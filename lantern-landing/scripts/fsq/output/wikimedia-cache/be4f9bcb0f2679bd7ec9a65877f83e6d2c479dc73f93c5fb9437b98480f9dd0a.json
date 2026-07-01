@@ -1,0 +1,29 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:21.306Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 2286693,
+          "ns": 0,
+          "title": "鉄飛坂",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "てつひさか",
+            "wikibase_item": "Q11649806"
+          },
+          "coordinates": [
+            {
+              "lat": 35.61325,
+              "lon": 139.68044444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

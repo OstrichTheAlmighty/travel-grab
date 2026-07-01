@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import Anthropic from "@anthropic-ai/sdk";
+import { canSpend, recordGoogleUsage, recordServerCacheHit } from "@/lib/activities/google-usage";
 
 // POST /api/activities/review-insights
 // Body: { placeId, placeName, category, reviews: [{text, rating}] }
@@ -45,13 +47,14 @@ export async function POST(req: NextRequest) {
   // Cache hit
   const hit = cache.get(placeId);
   if (hit && Date.now() - hit.ts < CACHE_TTL) {
+    recordServerCacheHit();
     console.log(`[review-insights] cache hit placeId="${placeId}"`);
     return NextResponse.json(hit.insights);
   }
 
-  const apiKey = (process.env.OPENAI_API_KEY ?? "").trim();
+  const apiKey = (process.env.ANTHROPIC_API_KEY ?? "").trim();
   if (!apiKey) {
-    return NextResponse.json({ error: "OpenAI not configured" }, { status: 503 });
+    return NextResponse.json({ error: "Anthropic API key not configured" }, { status: 503 });
   }
 
   if (reviews.length === 0) {
@@ -59,6 +62,10 @@ export async function POST(req: NextRequest) {
       guestsLove: [], watchOut: [], bestFor: [], tips: [], limited: true,
     };
     return NextResponse.json(empty);
+  }
+
+  if (!canSpend("review_insights") || !recordGoogleUsage("review_insights")) {
+    return NextResponse.json({ downgraded: true, capReached: true }, { status: 200 });
   }
 
   const isLimited = reviews.length < 3;
@@ -92,34 +99,15 @@ REVIEWS (${reviews.length}):
 ${reviewBlock}`;
 
   try {
-    const controller = new AbortController();
-    const tid = setTimeout(() => controller.abort(), 15000);
-
-    const resp = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      signal: controller.signal,
-      headers: {
-        "Content-Type":  "application/json",
-        "Authorization": `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model:           "gpt-4o-mini",
-        temperature:     0.3,
-        max_tokens:      600,
-        response_format: { type: "json_object" },
-        messages:        [{ role: "user", content: prompt }],
-      }),
+    const client = new Anthropic({ apiKey });
+    const msg = await client.messages.create({
+      model:      "claude-haiku-4-5-20251001",
+      max_tokens: 600,
+      system:     "You respond only with valid JSON objects matching the exact shape requested. No markdown, no explanation.",
+      messages:   [{ role: "user", content: prompt }],
     });
 
-    clearTimeout(tid);
-
-    if (!resp.ok) {
-      console.error(`[review-insights] OpenAI HTTP ${resp.status}`);
-      return NextResponse.json({ error: "AI generation failed" }, { status: 502 });
-    }
-
-    const data   = await resp.json() as { choices?: Array<{ message?: { content?: string } }> };
-    const raw    = (data.choices?.[0]?.message?.content ?? "").trim();
+    const raw    = (msg.content[0]?.type === "text" ? msg.content[0].text : "").trim();
     const parsed = JSON.parse(raw) as Partial<ReviewInsights>;
 
     const insights: ReviewInsights = {
@@ -137,7 +125,7 @@ ${reviewBlock}`;
     );
     return NextResponse.json(insights);
   } catch (err) {
-    console.error("[review-insights] error:", err instanceof Error ? err.message : String(err));
+    console.error("[review-insights] Claude error:", err instanceof Error ? err.message : String(err));
     return NextResponse.json({ error: "Failed to generate insights" }, { status: 502 });
   }
 }

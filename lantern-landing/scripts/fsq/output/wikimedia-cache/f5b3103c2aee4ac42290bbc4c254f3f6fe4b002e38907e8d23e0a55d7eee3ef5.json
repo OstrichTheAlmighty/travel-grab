@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:51.315Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 21208,
+          "ns": 0,
+          "title": "皇居",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こうきよ",
+            "kartographer_frames": "1",
+            "page_image_free": "Kokyo0057.jpg",
+            "wikibase_item": "Q500681"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6825,
+              "lon": 139.75277778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある天皇の住居"
+            ]
+          }
+        },
+        {
+          "pageid": 1625413,
+          "ns": 0,
+          "title": "明治天皇",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "めいしてんのう",
+            "page_image_free": "Emperor_Meiji_in_1873.jpg",
+            "wikibase_item": "Q174231"
+          },
+          "terms": {
+            "description": [
+              "日本の第122代天皇 (1852-1912)"
+            ]
+          }
+        },
+        {
+          "pageid": 2757259,
+          "ns": 0,
+          "title": "江戸城三十六見附",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えとしようさんしゆうろくみつけ",
+            "wikibase_item": "Q11551006"
+          },
+          "terms": {
+            "description": [
+              "江戸城に置かれた主な見附36か所"
+            ]
+          }
+        },
+        {
+          "pageid": 3953783,
+          "ns": 0,
+          "title": "和田倉橋",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "わたくらはし",
+            "page_image_free": "和田倉橋_風景.jpg",
+            "wikibase_item": "Q65252239"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68355556,
+              "lon": 139.76186111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある橋"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

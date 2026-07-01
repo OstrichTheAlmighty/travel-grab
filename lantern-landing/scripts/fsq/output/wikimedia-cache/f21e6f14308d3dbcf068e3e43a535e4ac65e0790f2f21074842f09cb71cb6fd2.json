@@ -1,0 +1,90 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:14.730Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 156128,
+          "ns": 0,
+          "title": "ど根性ガエル",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とこんしようかえる",
+            "wikibase_item": "Q4388674"
+          },
+          "terms": {
+            "description": [
+              "吉沢やすみによる日本の連載漫画"
+            ]
+          }
+        },
+        {
+          "pageid": 1962963,
+          "ns": 0,
+          "title": "エンタの神様",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "えんたのかみさま",
+            "wikibase_item": "Q11291381"
+          },
+          "terms": {
+            "description": [
+              "日本テレビのお笑い・バラエティ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 2781020,
+          "ns": 0,
+          "title": "渡辺いっけい",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "わたなへ いつけい",
+            "wikibase_item": "Q3792515"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優"
+            ]
+          }
+        },
+        {
+          "pageid": 3753174,
+          "ns": 0,
+          "title": "なりゆき街道旅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "なりゆきかいとうたひ",
+            "wikibase_item": "Q55522937"
+          },
+          "terms": {
+            "description": [
+              "フジテレビ系列の旅バラエティ番組 (2018 - )"
+            ]
+          }
+        },
+        {
+          "pageid": 4394145,
+          "ns": 0,
+          "title": "漂着者",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひようちやくしや",
+            "wikibase_item": "Q107258426"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

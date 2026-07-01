@@ -1,0 +1,86 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:37:39.626Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 25305,
+          "ns": 0,
+          "title": "タコ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たこ",
+            "page_image_free": "Octopoda_montage.jpg",
+            "wikibase_item": "Q40152"
+          },
+          "terms": {
+            "description": [
+              "頭足綱鞘形亜綱八腕形上目の八腕形目に分類される軟体動物の総称"
+            ]
+          }
+        },
+        {
+          "pageid": 2615854,
+          "ns": 0,
+          "title": "ティンツフィールド",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ていんつふいいると",
+            "page_image_free": "Tyntesfield_2016-03.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q3695427"
+          },
+          "terms": {
+            "description": [
+              "ヴィクトリア朝に建てられたゴシック・リヴァイヴァル建築の邸宅およびその地所"
+            ]
+          }
+        },
+        {
+          "pageid": 4002757,
+          "ns": 0,
+          "title": "2021年のテレビ (日本)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "2021ねんのてれひにほん",
+            "toc": "",
+            "wikibase_item": "Q86732706"
+          }
+        },
+        {
+          "pageid": 4390501,
+          "ns": 0,
+          "title": "キン肉マンの登場人物",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きんにくまんのとうしようしんふつ",
+            "page_image": "Nerima_Oizumi-animegate_Chronological_table_Kinnikuman_1.jpg",
+            "wikibase_item": "Q3900211"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 4742818,
+          "ns": 0,
+          "title": "国道246号横断デッキ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こくとう246こうおうたんてつき",
+            "wikibase_item": "Q135033895"
+          },
+          "terms": {
+            "description": [
+              "東京都渋谷区にある歩道橋"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

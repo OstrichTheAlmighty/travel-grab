@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:27.060Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 30057,
+          "ns": 0,
+          "title": "Tokyo",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Capital and most populous city in Japan",
+            "wikibase_item": "Q1490"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68972222,
+              "lon": 139.69222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "capital and largest city of Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 3532842,
+          "ns": 0,
+          "title": "List of tallest structures in Tokyo",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "List Of Tallest Structures In Tokyo",
+            "page_image_free": "Tokyo_Skyline20210123.jpg",
+            "wikibase-badge-Q17506997": "",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q2460405"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 52431253,
+          "ns": 0,
+          "title": "Itabashi Traffic Park",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Itabashitrafficpark.JPG",
+            "wikibase-shortdesc": "Park in Itabashi, Tokyo, Japan",
+            "wikibase_item": "Q28154518"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7462757,
+              "lon": 139.6948284,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "park in Itabashi-ku, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 74994688,
+          "ns": 0,
+          "title": "Stardom New Blood",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Stardom New Blood",
+            "wikibase-shortdesc": "Professional wrestling pay-per-view event series",
+            "wikibase_item": "Q123116314"
+          },
+          "terms": {
+            "description": [
+              "professional wrestling pay-per-view event series"
+            ]
+          }
+        },
+        {
+          "pageid": 81852475,
+          "ns": 0,
+          "title": "2026 in professional wrestling",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Wrestling_-_Sikeston,_MO_1938_-_1.jpg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q138529278"
+          }
+        }
+      ]
+    }
+  }
+}

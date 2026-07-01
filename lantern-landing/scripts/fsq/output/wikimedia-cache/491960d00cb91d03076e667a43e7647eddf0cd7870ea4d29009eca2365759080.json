@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:45.389Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 458484,
+          "ns": 0,
+          "title": "竹の塚",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たけのつか",
+            "kartographer_frames": "1",
+            "page_image_free": "Takenotsuka_Station_East_2022.jpg",
+            "wikibase_item": "Q11598641"
+          },
+          "terms": {
+            "description": [
+              "東京都足立区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 549459,
+          "ns": 0,
+          "title": "足立区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あたちく",
+            "kartographer_frames": "1",
+            "page_image_free": "Nishiarai_Daishi.jpg",
+            "wikibase_item": "Q213464"
+          },
+          "coordinates": [
+            {
+              "lat": 35.77494,
+              "lon": 139.80436,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 690560,
+          "ns": 0,
+          "title": "文教大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふんきよう",
+            "page_image_free": "Bunkyo_University_Koshigaya_Campus.JPG",
+            "wikibase_item": "Q4997802"
+          },
+          "coordinates": [
+            {
+              "lat": 35.90494444,
+              "lon": 139.77366667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 1271264,
+          "ns": 0,
+          "title": "東保木間",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひかしほきま",
+            "kartographer_frames": "1",
+            "page_image_free": "Adachi_sogo_sports_center_entrance_2014-2.jpg",
+            "wikibase_item": "Q30921911"
+          },
+          "terms": {
+            "description": [
+              "東京都足立区の町"
+            ]
+          }
+        },
+        {
+          "pageid": 3007757,
+          "ns": 0,
+          "title": "足立区総合スポーツセンター",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あたちくそうこうすほおつせんたあ",
+            "page_image_free": "Adachi_sogo_sports_center_entrance_2014-2.jpg",
+            "wikibase_item": "Q17227755"
+          },
+          "coordinates": [
+            {
+              "lat": 35.79219444,
+              "lon": 139.81366667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都足立区にあるスポーツ施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

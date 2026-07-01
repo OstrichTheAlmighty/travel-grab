@@ -1,0 +1,196 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:28.437Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京ドーム"
+    },
+    "search": [
+      {
+        "id": "Q733748",
+        "title": "Q733748",
+        "pageid": 689979,
+        "concepturi": "http://www.wikidata.org/entity/Q733748",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q733748",
+        "display": {
+          "label": {
+            "value": "Tokyo Dome",
+            "language": "en"
+          },
+          "description": {
+            "value": "indoor stadium in Bunkyō, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Dome",
+        "description": "indoor stadium in Bunkyō, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ドーム"
+        },
+        "aliases": [
+          "東京ドーム"
+        ]
+      },
+      {
+        "id": "Q2439074",
+        "title": "Q2439074",
+        "pageid": 2355900,
+        "concepturi": "http://www.wikidata.org/entity/Q2439074",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2439074",
+        "display": {
+          "label": {
+            "value": "Tokyo Dome Corporation",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Dome Corporation",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ドーム"
+        },
+        "aliases": [
+          "東京ドーム"
+        ]
+      },
+      {
+        "id": "Q11524325",
+        "title": "Q11524325",
+        "pageid": 12664195,
+        "concepturi": "http://www.wikidata.org/entity/Q11524325",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524325",
+        "display": {
+          "label": {
+            "value": "Tokyo Dome",
+            "language": "en"
+          },
+          "description": {
+            "value": "unit of area and volume",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Dome",
+        "description": "unit of area and volume",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ドーム"
+        },
+        "aliases": [
+          "東京ドーム"
+        ]
+      },
+      {
+        "id": "Q564554",
+        "title": "Q564554",
+        "pageid": 531538,
+        "concepturi": "http://www.wikidata.org/entity/Q564554",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q564554",
+        "display": {
+          "label": {
+            "value": "Tokyo Dome City",
+            "language": "en"
+          },
+          "description": {
+            "value": "entertainment complex in Bunkyo, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Dome City",
+        "description": "entertainment complex in Bunkyo, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ドームシティ"
+        },
+        "aliases": [
+          "東京ドームシティ"
+        ]
+      },
+      {
+        "id": "Q564646",
+        "title": "Q564646",
+        "pageid": 531623,
+        "concepturi": "http://www.wikidata.org/entity/Q564646",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q564646",
+        "display": {
+          "label": {
+            "value": "Tokyo Dome City Attractions",
+            "language": "en"
+          },
+          "description": {
+            "value": "amusement park in Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Dome City Attractions",
+        "description": "amusement park in Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ドームシティアトラクションズ"
+        },
+        "aliases": [
+          "東京ドームシティアトラクションズ"
+        ]
+      },
+      {
+        "id": "Q3530524",
+        "title": "Q3530524",
+        "pageid": 3361298,
+        "concepturi": "http://www.wikidata.org/entity/Q3530524",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3530524",
+        "display": {
+          "label": {
+            "value": "Tokyo Dome Hotel",
+            "language": "en"
+          },
+          "description": {
+            "value": "building in Bunkyo-ku, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Dome Hotel",
+        "description": "building in Bunkyo-ku, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ドームホテル"
+        },
+        "aliases": [
+          "東京ドームホテル"
+        ]
+      },
+      {
+        "id": "Q11277314",
+        "title": "Q11277314",
+        "pageid": 12418590,
+        "concepturi": "http://www.wikidata.org/entity/Q11277314",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11277314",
+        "display": {
+          "label": {
+            "value": "東京ドームふるさと祭り",
+            "language": "ja"
+          }
+        },
+        "label": "東京ドームふるさと祭り",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "東京ドームふるさと祭り"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:14.432Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 22410,
+          "ns": 0,
+          "title": "興行収入",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こうきようしゆうにゆう",
+            "page_image_free": "Ohio_Theatre_booth.jpg",
+            "wikibase_item": "Q21707777"
+          },
+          "terms": {
+            "description": [
+              "映画や演劇が得た劇場収入"
+            ]
+          }
+        },
+        {
+          "pageid": 69069,
+          "ns": 0,
+          "title": "サンテレビボックス席",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さんてれひほつくすせき",
+            "page_image_free": "熱血！タイガース党_(3664714372).jpg",
+            "wikibase_item": "Q11305714"
+          },
+          "terms": {
+            "description": [
+              "サンテレビのプロ野球中継番組"
+            ]
+          }
+        },
+        {
+          "pageid": 169769,
+          "ns": 0,
+          "title": "演劇集団キャラメルボックス",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "えんけきしゆうたんきやらめるほつくす",
+            "wikibase_item": "Q11565438"
+          },
+          "terms": {
+            "description": [
+              "日本の劇団"
+            ]
+          }
+        },
+        {
+          "pageid": 289952,
+          "ns": 0,
+          "title": "京都劇場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きようとけきしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Kyoto_Theater.JPG",
+            "wikibase_item": "Q11374868"
+          },
+          "coordinates": [
+            {
+              "lat": 34.985937,
+              "lon": 135.760162,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都府京都市下京区の京都駅構内にある劇場"
+            ]
+          }
+        },
+        {
+          "pageid": 326114,
+          "ns": 0,
+          "title": "プレイガイド",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふれいかいと",
+            "wikibase_item": "Q7243180"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:00.636Z",
+  "value": {
+    "searchinfo": {
+      "search": "Shin-Yokohama Ramen Museum"
+    },
+    "search": [
+      {
+        "id": "Q864499",
+        "title": "Q864499",
+        "pageid": 815900,
+        "concepturi": "http://www.wikidata.org/entity/Q864499",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q864499",
+        "display": {
+          "label": {
+            "value": "Shin-Yokohama Raumen Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "amusement park",
+            "language": "en"
+          }
+        },
+        "label": "Shin-Yokohama Raumen Museum",
+        "description": "amusement park",
+        "match": {
+          "type": "label",
+          "language": "ff",
+          "text": "Shin-Yokohama Rāmen Museum"
+        },
+        "aliases": [
+          "Shin-Yokohama Rāmen Museum"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

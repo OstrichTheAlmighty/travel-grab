@@ -1,0 +1,124 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:00.823Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 301591,
+          "ns": 0,
+          "title": "Grand Central Terminal",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "3",
+            "page_image_free": "Image-Grand_central_Station_Outside_Night_2.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "Railway terminal in Manhattan, New York",
+            "wikibase_item": "Q11290"
+          },
+          "coordinates": [
+            {
+              "lat": 40.7528,
+              "lon": -73.9772,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "railway terminal in New York City"
+            ]
+          }
+        },
+        {
+          "pageid": 10240076,
+          "ns": 0,
+          "title": "Grand Central Hall",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "MethodistGrandCentralHallLiverpool.jpg",
+            "wikibase-shortdesc": "Building in Liverpool, England",
+            "wikibase_item": "Q5594403"
+          },
+          "coordinates": [
+            {
+              "lat": 53.404,
+              "lon": -2.9767,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "building in Liverpool, England"
+            ]
+          }
+        },
+        {
+          "pageid": 29257566,
+          "ns": 0,
+          "title": "Eataly",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Eataly_-_logo_(Italy,_2004).svg",
+            "wikibase-shortdesc": "Chain of large Italian marketplaces",
+            "wikibase_item": "Q3046645"
+          },
+          "terms": {
+            "description": [
+              "chain of large Italian marketplaces"
+            ]
+          }
+        },
+        {
+          "pageid": 79563360,
+          "ns": 0,
+          "title": "Grand Central Bowl",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Grand_Central_Public_Market_-_Portland_Oregon.jpg",
+            "wikibase-shortdesc": "Bowling alley and restaurant in Portland, Oregon, U.S.",
+            "wikibase_item": "Q133850426"
+          },
+          "coordinates": [
+            {
+              "lat": 45.5171,
+              "lon": -122.6574,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "bowling alley and restaurant in Portland, Oregon, U.S"
+            ]
+          }
+        },
+        {
+          "pageid": 81143038,
+          "ns": 0,
+          "title": "Grand Central Market",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Grand_central_market.jpg",
+            "wikibase-shortdesc": "Public market in Downtown Los Angeles",
+            "wikibase_item": "Q136955229"
+          },
+          "terms": {
+            "description": [
+              "public market in Downtown Los Angeles"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

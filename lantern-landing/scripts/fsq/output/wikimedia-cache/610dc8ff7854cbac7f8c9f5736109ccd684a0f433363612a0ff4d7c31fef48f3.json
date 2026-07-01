@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:24.431Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 5856,
+          "ns": 0,
+          "title": "会津藩",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あいつはん",
+            "page_image_free": "March_2011_The_Aizu-Wakamatsu_Castle.jpg",
+            "wikibase_item": "Q4389944"
+          },
+          "terms": {
+            "description": [
+              "陸奥会津郡を中心とした藩"
+            ]
+          }
+        },
+        {
+          "pageid": 25591,
+          "ns": 0,
+          "title": "仙台藩",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せんたいはん",
+            "page_image_free": "Sendai_castle01s3872.jpg",
+            "wikibase_item": "Q1062182"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸時代に、陸奥国に所在した藩"
+            ]
+          }
+        },
+        {
+          "pageid": 26102,
+          "ns": 0,
+          "title": "長州藩",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちようしゆうはん",
+            "page_image_free": "Hagi_Castle_and_Mount_Shizuki.jpg",
+            "wikibase_item": "Q876267"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸時代に、長門国・周防国に所在した藩"
+            ]
+          }
+        },
+        {
+          "pageid": 153474,
+          "ns": 0,
+          "title": "米沢藩",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "よねさわはん",
+            "page_image_free": "Yonezawa_uesugi_keizu.jpg",
+            "wikibase_item": "Q1037948"
+          },
+          "terms": {
+            "description": [
+              "出羽国に所在した藩"
+            ]
+          }
+        },
+        {
+          "pageid": 1438571,
+          "ns": 0,
+          "title": "江戸藩邸",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えとはんてい",
+            "page_image_free": "Matsudaira_residence_Edo_P2.jpg",
+            "wikibase_item": "Q11551112"
+          },
+          "terms": {
+            "description": [
+              "江戸時代に江戸に置かれた藩の屋敷"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

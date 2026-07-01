@@ -1,0 +1,140 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:21.504Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 30777,
+          "ns": 0,
+          "title": "横浜国際総合競技場",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "よこはまこくさいそうこうきようきしよう",
+            "kartographer_links": "1",
+            "page_image_free": "Nissan_International_Stadium_Yokohama.jpg",
+            "wikibase_item": "Q116601"
+          },
+          "coordinates": [
+            {
+              "lat": 35.51028056,
+              "lon": 139.60616389,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "横浜市にある陸上競技場"
+            ]
+          }
+        },
+        {
+          "pageid": 36572,
+          "ns": 0,
+          "title": "東京スタジアム (多目的スタジアム)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようすたしあむ",
+            "kartographer_links": "1",
+            "page_image_free": "AJINOMOTO_Studium_entrance_202509.jpg",
+            "wikibase_item": "Q412824"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66416667,
+              "lon": 139.52722222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都調布市にある多目的スタジアム"
+            ]
+          }
+        },
+        {
+          "pageid": 149255,
+          "ns": 0,
+          "title": "国立代々木競技場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こくりつよよききようきしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Yoyogi-National-First-Gymnasium-01.jpg",
+            "wikibase_item": "Q1069457"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66775,
+              "lon": 139.70013889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にあるスポーツ施設"
+            ]
+          }
+        },
+        {
+          "pageid": 1535845,
+          "ns": 0,
+          "title": "海の森公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "うみのもりこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "スロープを進んで公園中心部へ入る.jpg",
+            "wikibase_item": "Q11558624"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60733333,
+              "lon": 139.80816667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 3917389,
+          "ns": 0,
+          "title": "海の森水上競技場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "うみのもりすいしようきようきしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Gate_Bridge_20260607.jpg",
+            "wikibase_item": "Q41795362"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60413889,
+              "lon": 139.81194444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区にある漕艇場"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

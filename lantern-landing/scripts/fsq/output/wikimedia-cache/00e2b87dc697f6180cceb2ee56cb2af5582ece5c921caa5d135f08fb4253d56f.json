@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:17.171Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1089536,
+          "ns": 0,
+          "title": "過去に存在したジャスコの店舗",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かこにそんさいしたしやすこのてんほ",
+            "wikibase_item": "Q11640534"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

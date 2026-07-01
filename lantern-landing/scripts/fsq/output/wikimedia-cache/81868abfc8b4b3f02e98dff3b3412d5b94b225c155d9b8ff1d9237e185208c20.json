@@ -1,0 +1,49 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:29.655Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1924015,
+          "ns": 0,
+          "title": "喜代村",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きよむら",
+            "wikibase_item": "Q11419050"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66655556,
+              "lon": 139.77011111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の寿司店チェーン"
+            ]
+          }
+        },
+        {
+          "pageid": 2454388,
+          "ns": 0,
+          "title": "マツコの知らない世界",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "まつこのしらないせかい",
+            "wikibase_item": "Q11340560"
+          },
+          "terms": {
+            "description": [
+              "TBSテレビのトークバラエティ番組 (2011-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

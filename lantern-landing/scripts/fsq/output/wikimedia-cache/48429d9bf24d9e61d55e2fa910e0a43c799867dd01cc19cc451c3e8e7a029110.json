@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:38.753Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1494357,
+          "ns": 0,
+          "title": "たばこと塩の博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たはことしおのはくふつかん",
+            "page_image_free": "Tobacco_&_Salt_Museum_(Tokyo).JPG",
+            "wikibase_item": "Q11271253"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70580556,
+              "lon": 139.80852778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

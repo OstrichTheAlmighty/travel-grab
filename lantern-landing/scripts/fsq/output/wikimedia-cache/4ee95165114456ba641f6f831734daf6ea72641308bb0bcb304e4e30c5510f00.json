@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:34.359Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 335935,
+          "ns": 0,
+          "title": "Bunkyō",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Bunkyo, Tokyo",
+            "page_image_free": "Tokyo_Dome_2007-12.jpg",
+            "wikibase-shortdesc": "Special ward in Kantō, Japan",
+            "wikibase_item": "Q212713"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71666667,
+              "lon": 139.75,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "special ward in the Tokyo Metropolis in Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 1619933,
+          "ns": 0,
+          "title": "Woodblock printing",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Jingangjing.jpg",
+            "wikibase-shortdesc": "Early printing technique using carved wooden blocks",
+            "wikibase_item": "Q1261053"
+          },
+          "terms": {
+            "description": [
+              "early printing technique"
+            ]
+          }
+        },
+        {
+          "pageid": 8193466,
+          "ns": 0,
+          "title": "Woodblock printing in Japan",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Tsunami_by_hokusai_19th_century.jpg",
+            "wikibase-shortdesc": "Ancient technique for reproducing images or text",
+            "wikibase_item": "Q1192525"
+          },
+          "terms": {
+            "description": [
+              "ancient technique for reproducing images or text"
+            ]
+          }
+        },
+        {
+          "pageid": 15025584,
+          "ns": 0,
+          "title": "List of museums in Tokyo",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Ad_Museum_Tokyo.JPG",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q3735824"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 29548572,
+          "ns": 0,
+          "title": "Printing Museum, Tokyo",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Toppan_building.jpg",
+            "wikibase-shortdesc": "Museum in Tokyo, Japan",
+            "wikibase_item": "Q994083"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70933333,
+              "lon": 139.74161111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "museum in Tokyo"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

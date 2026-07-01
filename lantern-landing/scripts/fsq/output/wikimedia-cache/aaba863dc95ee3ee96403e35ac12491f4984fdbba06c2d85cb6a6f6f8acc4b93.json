@@ -1,0 +1,42 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:26.027Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 2137009,
+          "ns": 0,
+          "title": "黒沢ともよ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "くろさわ ともよ",
+            "wikibase_item": "Q1955926"
+          },
+          "terms": {
+            "description": [
+              "日本の女優、女性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 2714678,
+          "ns": 0,
+          "title": "甘城ブリリアントパーク",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あまきふりりあんとはあく",
+            "page_image_free": "Amagi_Brilliant_Park_logo.png",
+            "wikibase_item": "Q11574256"
+          },
+          "terms": {
+            "description": [
+              "賀東招二により、KADOKAWAから刊行されていた日本のライトノベルシリーズ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

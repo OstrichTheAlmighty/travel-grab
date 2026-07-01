@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:29.395Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 38225,
+          "ns": 0,
+          "title": "小鳥谷駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こすや",
+            "kartographer_frames": "1",
+            "page_image_free": "IGR_Kozuya_Station_building,_Iwate_Pref.jpg",
+            "wikibase_item": "Q6435394"
+          },
+          "coordinates": [
+            {
+              "lat": 40.17097222,
+              "lon": 141.30770833,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "岩手県二戸郡一戸町小鳥谷にあるIGRいわて銀河鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 107716,
+          "ns": 0,
+          "title": "当麻駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうま",
+            "kartographer_frames": "1",
+            "page_image_free": "JR_Sekihoku-Main-Line_Toma_Station_building.jpg",
+            "wikibase_item": "Q7862702"
+          },
+          "coordinates": [
+            {
+              "lat": 43.82555556,
+              "lon": 142.517,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道上川郡当麻町にある北海道旅客鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 201909,
+          "ns": 0,
+          "title": "地産地消",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ちさんちしよう",
+            "wikibase_item": "Q2674120"
+          },
+          "terms": {
+            "description": [
+              "その地域で生産されたものをその地域で消費すること"
+            ]
+          }
+        },
+        {
+          "pageid": 2883452,
+          "ns": 0,
+          "title": "産地直送",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さんちちよくそう",
+            "wikibase_item": "Q17992255"
+          }
+        },
+        {
+          "pageid": 2978873,
+          "ns": 0,
+          "title": "直接販売",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちよくせつはんはい",
+            "wikibase_item": "Q5280224"
+          },
+          "terms": {
+            "description": [
+              "マーケティング用語"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

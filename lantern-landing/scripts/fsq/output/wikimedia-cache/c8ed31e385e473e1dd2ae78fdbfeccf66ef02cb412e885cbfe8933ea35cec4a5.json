@@ -1,0 +1,65 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:46.745Z",
+  "value": {
+    "searchinfo": {
+      "search": "風景式庭園"
+    },
+    "search": [
+      {
+        "id": "Q15077303",
+        "title": "Q15077303",
+        "pageid": 16740742,
+        "concepturi": "http://www.wikidata.org/entity/Q15077303",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q15077303",
+        "display": {
+          "label": {
+            "value": "landscape garden",
+            "language": "en"
+          },
+          "description": {
+            "value": "naturalitic, park-like type of garden developed in the 18th century as a reaction to the formal garden",
+            "language": "en"
+          }
+        },
+        "label": "landscape garden",
+        "description": "naturalitic, park-like type of garden developed in the 18th century as a reaction to the formal garden",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "風景式庭園"
+        },
+        "aliases": [
+          "風景式庭園"
+        ]
+      },
+      {
+        "id": "Q24887393",
+        "title": "Q24887393",
+        "pageid": 26848143,
+        "concepturi": "http://www.wikidata.org/entity/Q24887393",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q24887393",
+        "display": {
+          "label": {
+            "value": "風景式庭園",
+            "language": "ja"
+          },
+          "description": {
+            "value": "Wikimedia disambiguation page",
+            "language": "en"
+          }
+        },
+        "label": "風景式庭園",
+        "description": "Wikimedia disambiguation page",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "風景式庭園"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

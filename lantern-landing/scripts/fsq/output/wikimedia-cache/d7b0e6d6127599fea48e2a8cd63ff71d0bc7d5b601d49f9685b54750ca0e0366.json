@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:26.487Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 21116,
+          "ns": 0,
+          "title": "函館市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はこたてし",
+            "kartographer_frames": "1",
+            "page_image_free": "Hakodate_montage.jpg",
+            "wikibase_item": "Q26418"
+          },
+          "coordinates": [
+            {
+              "lat": 41.76867,
+              "lon": 140.72892,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道の市、渡島総合振興局所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 35426,
+          "ns": 0,
+          "title": "浦安市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "うらやすし",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_disney_resort.jpg",
+            "wikibase_item": "Q319729"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65314,
+              "lon": 139.902,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 55768,
+          "ns": 0,
+          "title": "東区 (札幌市)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひかしくさつほろし",
+            "page_image_free": "Moerenuma_Park_Sea_fountain_-_モエレ沼公園_海の噴水_-_panoramio.jpg",
+            "wikibase_item": "Q1134006"
+          },
+          "terms": {
+            "description": [
+              "北海道札幌市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 2111264,
+          "ns": 0,
+          "title": "郡元 (鹿児島市)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こおりもと",
+            "kartographer_frames": "1",
+            "page_image_free": "KagoshimaUniversity-01-001.jpg",
+            "wikibase_item": "Q11643103"
+          },
+          "coordinates": [
+            {
+              "lat": 31.56322,
+              "lon": 130.54203,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "鹿児島市の町"
+            ]
+          }
+        },
+        {
+          "pageid": 2159718,
+          "ns": 0,
+          "title": "横浜人形の家",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "よこはまにんきようのいえ",
+            "kartographer_frames": "1",
+            "page_image_free": "YokohamaDollHouse.JPG",
+            "wikibase_item": "Q11262871"
+          },
+          "coordinates": [
+            {
+              "lat": 35.44316667,
+              "lon": 139.65211111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県横浜市中区山下町にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

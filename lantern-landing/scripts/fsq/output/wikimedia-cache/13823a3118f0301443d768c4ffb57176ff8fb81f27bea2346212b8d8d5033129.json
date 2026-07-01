@@ -1,0 +1,65 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:31.694Z",
+  "value": {
+    "searchinfo": {
+      "search": "尾崎士郎記念館"
+    },
+    "search": [
+      {
+        "id": "Q124685558",
+        "title": "Q124685558",
+        "pageid": 118840601,
+        "concepturi": "http://www.wikidata.org/entity/Q124685558",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q124685558",
+        "display": {
+          "label": {
+            "value": "Shiro Ozaki Memorial Museum (Nishio)",
+            "language": "en"
+          },
+          "description": {
+            "value": "literature museum in Nishio, Aichi, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Shiro Ozaki Memorial Museum (Nishio)",
+        "description": "literature museum in Nishio, Aichi, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "尾崎士郎記念館 (西尾市)"
+        },
+        "aliases": [
+          "尾崎士郎記念館 (西尾市)"
+        ]
+      },
+      {
+        "id": "Q56352436",
+        "title": "Q56352436",
+        "pageid": 56291408,
+        "concepturi": "http://www.wikidata.org/entity/Q56352436",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q56352436",
+        "display": {
+          "label": {
+            "value": "尾崎士郎記念館",
+            "language": "ja"
+          },
+          "description": {
+            "value": "Wikimedia disambiguation page",
+            "language": "en"
+          }
+        },
+        "label": "尾崎士郎記念館",
+        "description": "Wikimedia disambiguation page",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "尾崎士郎記念館"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

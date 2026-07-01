@@ -1,0 +1,46 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:50.447Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 2755488,
+          "ns": 0,
+          "title": "目黒天空庭園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めくろてんくうていえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Meguro_Sky_Garden_20130506_009.jpg",
+            "wikibase_item": "Q11581649"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65047222,
+              "lon": 139.688,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都目黒区大橋にある屋上庭園、区立公園"
+            ]
+          }
+        },
+        {
+          "pageid": 2934345,
+          "ns": 0,
+          "title": "エンジョイ・シンプル・イングリッシュ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "えんしよいしんふるいんくりつしゆ",
+            "wikibase_item": "Q17220386"
+          }
+        }
+      ]
+    }
+  }
+}

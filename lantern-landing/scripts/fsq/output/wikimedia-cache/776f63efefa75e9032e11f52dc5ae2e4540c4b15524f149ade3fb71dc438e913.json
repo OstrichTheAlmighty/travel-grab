@@ -1,0 +1,61 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:17.396Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 25565,
+          "ns": 0,
+          "title": "おくのほそ道",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おくのほそみち",
+            "wikibase_item": "Q1287971"
+          },
+          "terms": {
+            "description": [
+              "元禄時代に活動した俳人松尾芭蕉による紀行文集"
+            ]
+          }
+        },
+        {
+          "pageid": 374476,
+          "ns": 0,
+          "title": "街道てくてく旅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かいとうてくてくたひ",
+            "wikibase_item": "Q11626277"
+          }
+        },
+        {
+          "pageid": 1063825,
+          "ns": 0,
+          "title": "素盞雄神社 (荒川区)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "すさのおしんしや あらかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "Susano_jinnjya.JPG",
+            "wikibase_item": "Q11605642"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73722222,
+              "lon": 139.79611111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都荒川区の神社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

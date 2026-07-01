@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:45.135Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 178378,
+          "ns": 0,
+          "title": "電車とバスの博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "てんしやとはすのはくふつかん",
+            "page_image_free": "Tokyu_Train_and_Bus_Museum.jpg",
+            "wikibase_item": "Q11660619"
+          },
+          "terms": {
+            "description": [
+              "神奈川県川崎市宮前区にある鉄道保存展示施設"
+            ]
+          }
+        },
+        {
+          "pageid": 524559,
+          "ns": 0,
+          "title": "小樽市総合博物館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おたるしそうこうはくふつかん",
+            "page_image_free": "Otaru_city_museum_main_entrance.jpg",
+            "wikibase_item": "Q11462160"
+          },
+          "coordinates": [
+            {
+              "lat": 43.21133333,
+              "lon": 141.00147222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道小樽市にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 1060918,
+          "ns": 0,
+          "title": "鉄道博物館 (さいたま市)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "てつとうはくふつかん",
+            "page_image_free": "Logo_of_Railway_museum(Saitama).svg",
+            "wikibase_item": "Q846106"
+          },
+          "coordinates": [
+            {
+              "lat": 35.920556,
+              "lon": 139.618333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県さいたま市大宮区にある鉄道博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 2605454,
+          "ns": 0,
+          "title": "原鉄道模型博物館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はらてつとうもけいはくふつかん",
+            "page_image_free": "Hara_Model_Railway_Museum_entrance_20120711.jpg",
+            "wikibase_item": "Q5653524"
+          },
+          "coordinates": [
+            {
+              "lat": 35.46305556,
+              "lon": 139.62472222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県横浜市にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:08.052Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 82241,
+          "ns": 0,
+          "title": "ピーター・パン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひいたあはん",
+            "page_image_free": "Peter_pan_1911_pipes.jpg",
+            "wikibase_item": "Q3435337"
+          },
+          "terms": {
+            "description": [
+              "ジェームス・マシュー・バリーによるイギリスの小説"
+            ]
+          }
+        },
+        {
+          "pageid": 601082,
+          "ns": 0,
+          "title": "ピーターパンの冒険",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひいたあはんのほうけん",
+            "wikibase_item": "Q702046"
+          },
+          "terms": {
+            "description": [
+              "1989年に放送された日本のテレビアニメ"
+            ]
+          }
+        },
+        {
+          "pageid": 631056,
+          "ns": 0,
+          "title": "ピーター・パン (1953年の映画)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひいたあはん",
+            "page_image_free": "Peter_Pan_(1953_poster).jpg",
+            "wikibase_item": "Q270470"
+          },
+          "terms": {
+            "description": [
+              "1953年のアメリカのアニメーション映画"
+            ]
+          }
+        },
+        {
+          "pageid": 1028696,
+          "ns": 0,
+          "title": "ピーター・パン2 ネバーランドの秘密",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひいたあはん2ねはあらんとのひみつ",
+            "wikibase_item": "Q610262"
+          },
+          "terms": {
+            "description": [
+              "2002年のディズニーのアニメーション映画"
+            ]
+          }
+        },
+        {
+          "pageid": 2031954,
+          "ns": 0,
+          "title": "ピーター・パン (キャラクター)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひいたあはん",
+            "page_image_free": "Peter_Pan_by_nk.svg",
+            "wikibase_item": "Q107190"
+          }
+        }
+      ]
+    }
+  }
+}

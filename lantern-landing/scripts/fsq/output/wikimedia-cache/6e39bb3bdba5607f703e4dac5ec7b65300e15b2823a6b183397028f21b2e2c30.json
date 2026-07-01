@@ -1,0 +1,185 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:46.227Z",
+  "value": {
+    "searchinfo": {
+      "search": "模造"
+    },
+    "search": [
+      {
+        "id": "Q6004178",
+        "title": "Q6004178",
+        "pageid": 5783931,
+        "concepturi": "http://www.wikidata.org/entity/Q6004178",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6004178",
+        "display": {
+          "label": {
+            "value": "imitation pearl",
+            "language": "en"
+          },
+          "description": {
+            "value": "globe resembling a pearl, often made from inexpensive materials",
+            "language": "en"
+          }
+        },
+        "label": "imitation pearl",
+        "description": "globe resembling a pearl, often made from inexpensive materials",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "模造真珠"
+        },
+        "aliases": [
+          "模造真珠"
+        ]
+      },
+      {
+        "id": "Q7659318",
+        "title": "Q7659318",
+        "pageid": 7582447,
+        "concepturi": "http://www.wikidata.org/entity/Q7659318",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q7659318",
+        "display": {
+          "label": {
+            "value": "Sword replica",
+            "language": "en"
+          },
+          "description": {
+            "value": "type of weapon replica",
+            "language": "en"
+          }
+        },
+        "label": "Sword replica",
+        "description": "type of weapon replica",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "模造刀"
+        },
+        "aliases": [
+          "模造刀"
+        ]
+      },
+      {
+        "id": "Q11121320",
+        "title": "Q11121320",
+        "pageid": 12319718,
+        "concepturi": "http://www.wikidata.org/entity/Q11121320",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11121320",
+        "display": {
+          "label": {
+            "value": "模造王女騒動記 フェイク・フェイク",
+            "language": "ja"
+          },
+          "description": {
+            "value": "book by Ichirō Sakaki",
+            "language": "en"
+          }
+        },
+        "label": "模造王女騒動記 フェイク・フェイク",
+        "description": "book by Ichirō Sakaki",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "模造王女騒動記 フェイク・フェイク"
+        }
+      },
+      {
+        "id": "Q18235740",
+        "title": "Q18235740",
+        "pageid": 19764740,
+        "concepturi": "http://www.wikidata.org/entity/Q18235740",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q18235740",
+        "display": {
+          "label": {
+            "value": "The Imitation Crystal",
+            "language": "en"
+          }
+        },
+        "label": "The Imitation Crystal",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "模造クリスタル"
+        },
+        "aliases": [
+          "模造クリスタル"
+        ]
+      },
+      {
+        "id": "Q11542279",
+        "title": "Q11542279",
+        "pageid": 12682214,
+        "concepturi": "http://www.wikidata.org/entity/Q11542279",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11542279",
+        "display": {
+          "label": {
+            "value": "模造紙",
+            "language": "ja"
+          }
+        },
+        "label": "模造紙",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "模造紙"
+        }
+      },
+      {
+        "id": "Q56351880",
+        "title": "Q56351880",
+        "pageid": 56290853,
+        "concepturi": "http://www.wikidata.org/entity/Q56351880",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q56351880",
+        "display": {
+          "label": {
+            "value": "模造拳銃",
+            "language": "ja"
+          }
+        },
+        "label": "模造拳銃",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "模造拳銃"
+        }
+      },
+      {
+        "id": "Q116847800",
+        "title": "Q116847800",
+        "pageid": 111607882,
+        "concepturi": "http://www.wikidata.org/entity/Q116847800",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q116847800",
+        "display": {
+          "label": {
+            "value": "reproduction (derivative object)",
+            "language": "en"
+          },
+          "description": {
+            "value": "copy of an art image, art object, decorative art, or other valued image or object, made without intent to deceive; with regard to art images, it includes photographic reproductions",
+            "language": "en"
+          }
+        },
+        "label": "reproduction (derivative object)",
+        "description": "copy of an art image, art object, decorative art, or other valued image or object, made without intent to deceive; with regard to art images, it includes photographic reproductions",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "模造品"
+        },
+        "aliases": [
+          "模造品"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

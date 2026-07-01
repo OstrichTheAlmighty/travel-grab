@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:41.041Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 28414,
+          "ns": 0,
+          "title": "福光町",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふくみつまち",
+            "page_image_free": "IOX-AROSA_(6984536175).jpg",
+            "wikibase_item": "Q5507667"
+          },
+          "coordinates": [
+            {
+              "lat": 36.55747,
+              "lon": 136.87544,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の富山県西礪波郡にあった町"
+            ]
+          }
+        },
+        {
+          "pageid": 71136,
+          "ns": 0,
+          "title": "原宿",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はらしゆく",
+            "page_image_free": "Takeshita_st.jpg",
+            "wikibase_item": "Q746573"
+          },
+          "terms": {
+            "description": [
+              "東京都渋谷区の一地区"
+            ]
+          }
+        },
+        {
+          "pageid": 77482,
+          "ns": 0,
+          "title": "一関市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いちのせきし",
+            "kartographer_frames": "1",
+            "page_image_free": "230727_Genbikei_Ichinoseki_Iwate_pref_Japan03s3.jpg",
+            "wikibase_item": "Q390817"
+          },
+          "coordinates": [
+            {
+              "lat": 38.93472,
+              "lon": 141.12658,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "岩手県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 100729,
+          "ns": 0,
+          "title": "志村喬",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しむら たかし",
+            "page_image_free": "Shin-Eiga-1947-June-1.jpg",
+            "wikibase_item": "Q40070"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優 (1905-1982)"
+            ]
+          }
+        },
+        {
+          "pageid": 2052642,
+          "ns": 0,
+          "title": "粕壁宿",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かすかへしゅく",
+            "page_image_free": "Kasukabe_Higashiya_Tanura_Head_Office_1.JPG",
+            "wikibase_item": "Q24898728"
+          }
+        }
+      ]
+    }
+  }
+}

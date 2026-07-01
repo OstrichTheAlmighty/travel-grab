@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:16.225Z",
+  "value": {
+    "searchinfo": {
+      "search": "Hachiko Statue"
+    },
+    "search": [
+      {
+        "id": "Q62124995",
+        "title": "Q62124995",
+        "pageid": 61947210,
+        "concepturi": "http://www.wikidata.org/entity/Q62124995",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q62124995",
+        "display": {
+          "label": {
+            "value": "Statue of Hachikō",
+            "language": "en"
+          },
+          "description": {
+            "value": "statue in Shibuya, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Statue of Hachikō",
+        "description": "statue in Shibuya, Tokyo",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "Hachiko statue"
+        },
+        "aliases": [
+          "Hachiko statue"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

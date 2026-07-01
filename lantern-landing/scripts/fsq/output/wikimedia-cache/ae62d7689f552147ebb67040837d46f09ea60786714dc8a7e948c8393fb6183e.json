@@ -1,0 +1,116 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:28.598Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 419,
+          "ns": 0,
+          "title": "長崎県",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "なかさきけん",
+            "kartographer_frames": "1",
+            "page_image_free": "Nagasaki-Glover-Garden-5415.jpg",
+            "wikibase_item": "Q169376"
+          },
+          "coordinates": [
+            {
+              "lat": 32.75,
+              "lon": 129.8675,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の都道府県"
+            ]
+          }
+        },
+        {
+          "pageid": 28429,
+          "ns": 0,
+          "title": "笠岡市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かさおかし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kasaoka_City_Horseshoe_Crab_Museum_-_Apr_12,_2007.jpg",
+            "wikibase_item": "Q863739"
+          },
+          "coordinates": [
+            {
+              "lat": 34.50714,
+              "lon": 133.50736,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "岡山県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 304561,
+          "ns": 0,
+          "title": "相鉄ローゼン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "そうてつろおせん",
+            "page_image_free": "Sotetsu_Rosen_Shonandai_001.JPG",
+            "wikibase_item": "Q11582450"
+          },
+          "terms": {
+            "description": [
+              "相模鉄道系列のスーパーマーケット"
+            ]
+          }
+        },
+        {
+          "pageid": 2534189,
+          "ns": 0,
+          "title": "福島第一原子力発電所事故の影響",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふくしまたいいちけんしりよくはつてんしよしこのえいきよう",
+            "wikibase_item": "Q898678"
+          }
+        },
+        {
+          "pageid": 4386406,
+          "ns": 0,
+          "title": "上越あるるん村",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しようえつあるるんむら",
+            "kartographer_frames": "1",
+            "page_image_free": "Joetsu_Arurunmura_Farmer’s_Market_April2022.jpg",
+            "wikibase_item": "Q107026604"
+          },
+          "coordinates": [
+            {
+              "lat": 37.1475,
+              "lon": 138.25111111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の新潟県上越市の商業施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

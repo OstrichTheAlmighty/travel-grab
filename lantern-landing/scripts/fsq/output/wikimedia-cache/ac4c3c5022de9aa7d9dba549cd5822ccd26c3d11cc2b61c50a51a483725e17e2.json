@@ -1,0 +1,94 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:07.216Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 28022,
+          "ns": 0,
+          "title": "吉田松陰",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "よした しよういん",
+            "page_image_free": "Yoshida_Shoin2.jpg",
+            "wikibase_item": "Q559747"
+          },
+          "terms": {
+            "description": [
+              "日本の志士・思想家 (1830-1859)"
+            ]
+          }
+        },
+        {
+          "pageid": 45655,
+          "ns": 0,
+          "title": "久坂玄瑞",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "くさか けんすい",
+            "page_image_free": "Genzui_Kusaka.jpg",
+            "wikibase_item": "Q5360999"
+          },
+          "terms": {
+            "description": [
+              "日本の志士 (1840-1864)"
+            ]
+          }
+        },
+        {
+          "pageid": 437638,
+          "ns": 0,
+          "title": "奈良本辰也",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ならもと たつや",
+            "wikibase_item": "Q11445118"
+          },
+          "terms": {
+            "description": [
+              "日本の歴史家"
+            ]
+          }
+        },
+        {
+          "pageid": 457387,
+          "ns": 0,
+          "title": "松陰神社",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しよういんしんしや",
+            "kartographer_frames": "2",
+            "wikibase_item": "Q11532416"
+          },
+          "terms": {
+            "description": [
+              "山口県萩市と東京都世田谷区にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 2503485,
+          "ns": 0,
+          "title": "佐久間象山",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さくま しようさん",
+            "page_image_free": "Sakuma_Shozan.jpg",
+            "wikibase_item": "Q739298"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸時代後期の松代藩士、兵学者・朱子学者・思想家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

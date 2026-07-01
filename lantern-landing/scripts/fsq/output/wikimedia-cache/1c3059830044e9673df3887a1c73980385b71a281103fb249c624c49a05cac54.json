@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:39.558Z",
+  "value": {
+    "searchinfo": {
+      "search": "池袋防災館"
+    },
+    "search": [
+      {
+        "id": "Q85881822",
+        "title": "Q85881822",
+        "pageid": 85152264,
+        "concepturi": "http://www.wikidata.org/entity/Q85881822",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q85881822",
+        "display": {
+          "label": {
+            "value": "Ikebukuro Life Safety Learning Center",
+            "language": "en"
+          }
+        },
+        "label": "Ikebukuro Life Safety Learning Center",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "池袋防災館"
+        },
+        "aliases": [
+          "池袋防災館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:33.050Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8073,
+          "ns": 0,
+          "title": "新宿区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しんしゆくく",
+            "kartographer_frames": "1",
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "wikibase_item": "Q179645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69389,
+              "lon": 139.70342,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 8251,
+          "ns": 0,
+          "title": "江東区",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こうとうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tomioka_Hachiman-gu_201708.jpg",
+            "wikibase_item": "Q215175"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67281,
+              "lon": 139.81728,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 21295,
+          "ns": 0,
+          "title": "公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こうえん",
+            "page_image_free": "Fountain_Yoyogipark.JPG",
+            "wikibase_item": "Q22698"
+          },
+          "terms": {
+            "description": [
+              "公衆の憩いや自然保存の目的に使われる公開された場所"
+            ]
+          }
+        },
+        {
+          "pageid": 659285,
+          "ns": 0,
+          "title": "中央区 (東京都)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちゆうおうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Ginza-WAKO_at_night.jpg",
+            "wikibase_item": "Q212704"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67058,
+              "lon": 139.77197,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 1105490,
+          "ns": 0,
+          "title": "港南 (東京都港区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こうなん",
+            "kartographer_frames": "1",
+            "page_image_free": "Shinagawa_inter_city.jpg",
+            "wikibase_item": "Q11563057"
+          },
+          "terms": {
+            "description": [
+              "東京都港区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

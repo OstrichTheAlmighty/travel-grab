@@ -1,0 +1,125 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:46.789Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 41969,
+          "ns": 0,
+          "title": "東京メトロポリタンテレビジョン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようめとろほりたんてれひしよん",
+            "page_image_free": "Tokyo_Metropolitan_Television_20201129.jpg",
+            "wikibase_item": "Q115146"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68473889,
+              "lon": 139.74392778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある放送事業者"
+            ]
+          }
+        },
+        {
+          "pageid": 47228,
+          "ns": 0,
+          "title": "とうきょうスカイツリー駅",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようすかいつりいえき",
+            "kartographer_frames": "1",
+            "page_image_free": "Gthumb.svg",
+            "wikibase_item": "Q900250"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71036111,
+              "lon": 139.80902778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区押上一丁目にある東武鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 179940,
+          "ns": 0,
+          "title": "東京スカイツリー",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようすかいつりい",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Skytree_2014_Ⅲ.jpg",
+            "wikibase_item": "Q57965"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71013889,
+              "lon": 139.81083333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区の電波塔"
+            ]
+          }
+        },
+        {
+          "pageid": 1854535,
+          "ns": 0,
+          "title": "東武タワースカイツリー",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうふたわすかいつり",
+            "page_image_free": "Tokyo_Skytree_East_Tower_2012.JPG",
+            "wikibase_item": "Q11527482"
+          }
+        },
+        {
+          "pageid": 2263299,
+          "ns": 0,
+          "title": "東京スカイツリータウン",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようすかいつりいたうん",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Soramachi_2012.JPG",
+            "wikibase_item": "Q11524181"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70991667,
+              "lon": 139.80986111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区の複合施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

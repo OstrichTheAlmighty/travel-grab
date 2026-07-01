@@ -1,0 +1,82 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:52.003Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 20061,
+          "ns": 0,
+          "title": "トロント",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とろんと",
+            "page_image_free": "Montage_of_Toronto_7.jpg",
+            "wikibase_item": "Q172"
+          },
+          "terms": {
+            "description": [
+              "カナダ最大の都市"
+            ]
+          }
+        },
+        {
+          "pageid": 145518,
+          "ns": 0,
+          "title": "アメリカンウォーターフロント",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あめりかんうおおたあふろんと",
+            "wikibase_item": "Q674795"
+          },
+          "terms": {
+            "description": [
+              "東京ディズニーシーのテーマポート"
+            ]
+          }
+        },
+        {
+          "pageid": 487187,
+          "ns": 0,
+          "title": "ハーバーサイド・クリスマス",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はあはあさいとくりすます",
+            "wikibase_item": "Q11327309"
+          }
+        },
+        {
+          "pageid": 493656,
+          "ns": 0,
+          "title": "東京ディズニーシーのサービス施設の一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいしいのさあひすしせついちらん",
+            "wikibase_item": "Q11524254"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3092674,
+          "ns": 0,
+          "title": "マンハッタン・ウォーターフロント・グリーンウェイ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "まんはつたんうおたふろんとけとうえい",
+            "page_image_free": "HRGW_busy_jeh.JPG",
+            "wikibase_item": "Q6749328"
+          }
+        }
+      ]
+    }
+  }
+}

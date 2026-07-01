@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:24.652Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京ゲーテ記念館"
+    },
+    "search": [
+      {
+        "id": "Q20041605",
+        "title": "Q20041605",
+        "pageid": 21711951,
+        "concepturi": "http://www.wikidata.org/entity/Q20041605",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q20041605",
+        "display": {
+          "label": {
+            "value": "Goethe Archive Tokyo",
+            "language": "en"
+          },
+          "description": {
+            "value": "library in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Goethe Archive Tokyo",
+        "description": "library in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ゲーテ記念館"
+        },
+        "aliases": [
+          "東京ゲーテ記念館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

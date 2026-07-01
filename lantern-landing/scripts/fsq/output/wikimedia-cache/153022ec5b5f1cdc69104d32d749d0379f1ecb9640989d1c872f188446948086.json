@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:28.338Z",
+  "value": {
+    "searchinfo": {
+      "search": "太田姫稲荷神社"
+    },
+    "search": [
+      {
+        "id": "Q11444172",
+        "title": "Q11444172",
+        "pageid": 12583484,
+        "concepturi": "http://www.wikidata.org/entity/Q11444172",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11444172",
+        "display": {
+          "label": {
+            "value": "Ōtahime Inari Shrine",
+            "language": "en"
+          },
+          "description": {
+            "value": "Shinto shrine in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Ōtahime Inari Shrine",
+        "description": "Shinto shrine in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "太田姫稲荷神社"
+        },
+        "aliases": [
+          "太田姫稲荷神社"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

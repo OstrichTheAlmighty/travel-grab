@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:53.188Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 147734,
+          "ns": 0,
+          "title": "Shinjuku",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "wikibase-shortdesc": "Special ward in Kantō, Japan",
+            "wikibase_item": "Q179645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70138889,
+              "lon": 139.70972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "special ward in the Tokyo Metropolis, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 5533829,
+          "ns": 0,
+          "title": "Jessie (Toy Story)",
+          "index": 2,
+          "pageprops": {
+            "displaytitle": "Jessie (<i>Toy Story</i>)",
+            "page_image_free": "Jessie_at_Shanghai_Toy_Story_Land_(cropped).jpg",
+            "wikibase-shortdesc": "Character in the Toy Story franchise",
+            "wikibase_item": "Q2200623"
+          },
+          "terms": {
+            "description": [
+              "Toy Story character"
+            ]
+          }
+        },
+        {
+          "pageid": 8928720,
+          "ns": 0,
+          "title": "Woody (Toy Story)",
+          "index": 4,
+          "pageprops": {
+            "displaytitle": "Woody (<i>Toy Story</i>)",
+            "page_image_free": "Woody_at_Toy_Story_Land,_Hong_Kong.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "Character in the Toy Story franchise",
+            "wikibase_item": "Q2290907"
+          },
+          "terms": {
+            "description": [
+              "fictional toy cowboy character from Disney and Pixar's Toy Story franchise"
+            ]
+          }
+        },
+        {
+          "pageid": 12850624,
+          "ns": 0,
+          "title": "Toy museum",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "NatFarmToyMuseum2.JPG",
+            "wikibase-shortdesc": "Type of museum with a collection of toys",
+            "wikibase_item": "Q2310465"
+          },
+          "terms": {
+            "description": [
+              "type of museum with a collection of toys"
+            ]
+          }
+        },
+        {
+          "pageid": 16810634,
+          "ns": 0,
+          "title": "Museum of Tin Toys",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Tintoy_museum.JPG",
+            "wikibase-shortdesc": "Toy museum in Yokohama, Japan",
+            "wikibase_item": "Q5363525"
+          },
+          "coordinates": [
+            {
+              "lat": 35.43831389,
+              "lon": 139.65439444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Toy museum in Yokohama, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

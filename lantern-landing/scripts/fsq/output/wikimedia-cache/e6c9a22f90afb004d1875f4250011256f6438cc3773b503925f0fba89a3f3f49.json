@@ -1,0 +1,167 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:32.682Z",
+  "value": {
+    "searchinfo": {
+      "search": "郵政博物館"
+    },
+    "search": [
+      {
+        "id": "Q2106220",
+        "title": "Q2106220",
+        "pageid": 2032698,
+        "concepturi": "http://www.wikidata.org/entity/Q2106220",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2106220",
+        "display": {
+          "label": {
+            "value": "postal museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "type of museum, focussed on the history of postal services",
+            "language": "en"
+          }
+        },
+        "label": "postal museum",
+        "description": "type of museum, focussed on the history of postal services",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "郵政博物館"
+        },
+        "aliases": [
+          "郵政博物館"
+        ]
+      },
+      {
+        "id": "Q5116373",
+        "title": "Q5116373",
+        "pageid": 4889838,
+        "concepturi": "http://www.wikidata.org/entity/Q5116373",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5116373",
+        "display": {
+          "label": {
+            "value": "Chunghwa Postal Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "postal museum in Taipei",
+            "language": "en"
+          }
+        },
+        "label": "Chunghwa Postal Museum",
+        "description": "postal museum in Taipei",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "郵政博物館"
+        },
+        "aliases": [
+          "郵政博物館"
+        ]
+      },
+      {
+        "id": "Q17225229",
+        "title": "Q17225229",
+        "pageid": 18822137,
+        "concepturi": "http://www.wikidata.org/entity/Q17225229",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q17225229",
+        "display": {
+          "label": {
+            "value": "Postal Museum Japan",
+            "language": "en"
+          }
+        },
+        "label": "Postal Museum Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "郵政博物館"
+        },
+        "aliases": [
+          "郵政博物館"
+        ]
+      },
+      {
+        "id": "Q12608957",
+        "title": "Q12608957",
+        "pageid": 13909856,
+        "concepturi": "http://www.wikidata.org/entity/Q12608957",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q12608957",
+        "display": {
+          "label": {
+            "value": "郵政博物館",
+            "language": "ja"
+          }
+        },
+        "label": "郵政博物館",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "郵政博物館"
+        }
+      },
+      {
+        "id": "Q60849717",
+        "title": "Q60849717",
+        "pageid": 60704728,
+        "concepturi": "http://www.wikidata.org/entity/Q60849717",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q60849717",
+        "display": {
+          "label": {
+            "value": "postal museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "Wikimedia disambiguation page",
+            "language": "en"
+          }
+        },
+        "label": "postal museum",
+        "description": "Wikimedia disambiguation page",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "郵政博物館"
+        },
+        "aliases": [
+          "郵政博物館"
+        ]
+      },
+      {
+        "id": "Q96651583",
+        "title": "Q96651583",
+        "pageid": 95221055,
+        "concepturi": "http://www.wikidata.org/entity/Q96651583",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q96651583",
+        "display": {
+          "label": {
+            "value": "Chunghwa Postal Museum Library",
+            "language": "en"
+          },
+          "description": {
+            "value": "library in Zhongzheng District, Taiwan",
+            "language": "en"
+          }
+        },
+        "label": "Chunghwa Postal Museum Library",
+        "description": "library in Zhongzheng District, Taiwan",
+        "match": {
+          "type": "alias",
+          "language": "zh-hant",
+          "text": "郵政博物館圖書室"
+        },
+        "aliases": [
+          "郵政博物館圖書室"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

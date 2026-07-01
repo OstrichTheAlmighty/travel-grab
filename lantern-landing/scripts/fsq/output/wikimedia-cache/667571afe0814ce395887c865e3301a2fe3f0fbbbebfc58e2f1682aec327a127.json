@@ -1,0 +1,27 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:32.080Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 45366,
+          "ns": 0,
+          "title": "国立西が丘サッカー場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こくりつにしかおかさつかしよう",
+            "page_image_free": "Nishigaoka_Stadium_1.JPG",
+            "wikibase_item": "Q7040543"
+          },
+          "terms": {
+            "description": [
+              "東京都北区にあるサッカー場"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

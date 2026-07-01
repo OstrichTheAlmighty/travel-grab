@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:39.269Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 148415,
+          "ns": 0,
+          "title": "Studio Ghibli",
+          "index": 3,
+          "pageprops": {
+            "page_image": "Studio_Ghibli_logo.svg",
+            "page_image_free": "Studio_Ghibli_studio_3.jpg",
+            "wikibase-shortdesc": "Japanese animation studio",
+            "wikibase_item": "Q182950"
+          },
+          "terms": {
+            "description": [
+              "Japanese animation studio"
+            ]
+          }
+        },
+        {
+          "pageid": 1958732,
+          "ns": 0,
+          "title": "Ghibli Museum",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Ghibli_Museum_2024.JPG",
+            "wikibase-shortdesc": "Art museum in Mitaka, Tokyo, Japan",
+            "wikibase_item": "Q947907"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69623333,
+              "lon": 139.57043056,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "art museum in Mitaka, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 11608568,
+          "ns": 0,
+          "title": "Ghibli Museum Library",
+          "index": 5,
+          "pageprops": {
+            "wikibase-shortdesc": "Collection of works by Studio Ghibli",
+            "wikibase_item": "Q936841"
+          },
+          "terms": {
+            "description": [
+              "collection of works by Studio Ghibli"
+            ]
+          }
+        },
+        {
+          "pageid": 52487868,
+          "ns": 0,
+          "title": "List of Studio Ghibli works",
+          "index": 2,
+          "pageprops": {
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q28154809"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 70299689,
+          "ns": 0,
+          "title": "Ghibli Park",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "wikibase-shortdesc": "Studio Ghibli-themed amusement park in Nagakute, Japan",
+            "wikibase_item": "Q97125735"
+          },
+          "coordinates": [
+            {
+              "lat": 35.1725,
+              "lon": 137.0898,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Park facility in Aichi Prefecture, Japan, themed with Studio Ghibli films"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

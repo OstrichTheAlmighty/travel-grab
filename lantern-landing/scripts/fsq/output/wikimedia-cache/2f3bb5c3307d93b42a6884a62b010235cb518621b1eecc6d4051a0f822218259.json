@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:14.184Z",
+  "value": {
+    "searchinfo": {
+      "search": "第五福竜丸展示館"
+    },
+    "search": [
+      {
+        "id": "Q11525586",
+        "title": "Q11525586",
+        "pageid": 12665462,
+        "concepturi": "http://www.wikidata.org/entity/Q11525586",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11525586",
+        "display": {
+          "label": {
+            "value": "Daigo Fukuryu Maru Exhibition Hall",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Daigo Fukuryu Maru Exhibition Hall",
+        "description": "museum in Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "第五福竜丸展示館"
+        },
+        "aliases": [
+          "第五福竜丸展示館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

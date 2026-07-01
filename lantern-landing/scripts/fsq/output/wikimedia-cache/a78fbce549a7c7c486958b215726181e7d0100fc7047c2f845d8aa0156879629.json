@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:19.868Z",
+  "value": {
+    "searchinfo": {
+      "search": "大田区総合体育館"
+    },
+    "search": [
+      {
+        "id": "Q11437869",
+        "title": "Q11437869",
+        "pageid": 12576699,
+        "concepturi": "http://www.wikidata.org/entity/Q11437869",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11437869",
+        "display": {
+          "label": {
+            "value": "Ota City General Gymnasium",
+            "language": "en"
+          },
+          "description": {
+            "value": "Multi-purpose gymnasium",
+            "language": "en"
+          }
+        },
+        "label": "Ota City General Gymnasium",
+        "description": "Multi-purpose gymnasium",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "大田区総合体育館"
+        },
+        "aliases": [
+          "大田区総合体育館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

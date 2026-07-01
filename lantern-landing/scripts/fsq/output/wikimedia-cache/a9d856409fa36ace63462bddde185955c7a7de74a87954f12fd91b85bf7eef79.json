@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:43.910Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 38238,
+          "ns": 0,
+          "title": "ちびまる子ちゃん",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちひまるこちやん",
+            "wikibase_item": "Q701050"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 124721,
+          "ns": 0,
+          "title": "不二家",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふしや",
+            "page_image_free": "Ginza_FUJIYA_2006.jpg",
+            "wikibase_item": "Q858452"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都文京区にある食品メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 940984,
+          "ns": 0,
+          "title": "横浜アンパンマンこどもミュージアム",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "よこはまあんはんまんこともみゆうしあむ",
+            "page_image_free": "Yokohama_Anpanman_Children's_Museum_2019_-_03.jpg",
+            "wikibase_item": "Q2496472"
+          },
+          "coordinates": [
+            {
+              "lat": 35.46305556,
+              "lon": 139.62872222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県横浜市西区にある子ども向け博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 2818767,
+          "ns": 0,
+          "title": "映画ドラえもん 新・のび太の大魔境 〜ペコと5人の探検隊〜",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とらえもんしんのひたのたいまきようへこと5にんのたんけんたい",
+            "wikibase_item": "Q14228505"
+          },
+          "terms": {
+            "description": [
+              "2014年の日本のアニメーション映画"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

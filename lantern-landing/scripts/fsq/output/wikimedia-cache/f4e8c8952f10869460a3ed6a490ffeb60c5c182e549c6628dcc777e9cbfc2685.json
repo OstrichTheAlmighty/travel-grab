@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:33.963Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18727,
+          "ns": 0,
+          "title": "熱田神宮",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あつたしんくう",
+            "kartographer_frames": "1",
+            "page_image_free": "Atsuta-jingu_Shrine_Haiden,_Jingu_Atsuta_Ward_Nagoya_2023.jpg",
+            "wikibase_item": "Q482065"
+          },
+          "coordinates": [
+            {
+              "lat": 35.12736111,
+              "lon": 136.90866667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "名古屋市熱田区にある名神大社"
+            ]
+          }
+        },
+        {
+          "pageid": 538299,
+          "ns": 0,
+          "title": "高良大社",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こうらたいしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Koura-taisha,_nakamon.jpg",
+            "wikibase_item": "Q715647"
+          },
+          "coordinates": [
+            {
+              "lat": 33.30161111,
+              "lon": 130.56588889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福岡県久留米市の高良山にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 557162,
+          "ns": 0,
+          "title": "鎌倉氏",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かまくらし",
+            "page_image_free": "Japanese_crest_Maru_ni_Umebachi.svg",
+            "wikibase_item": "Q11650931"
+          },
+          "terms": {
+            "description": [
+              "相模国鎌倉郡を中心に勢力を伸ばした武士団"
+            ]
+          }
+        },
+        {
+          "pageid": 1541400,
+          "ns": 0,
+          "title": "天満大自在天神",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "てんまんたいしさいてんしん",
+            "page_image_free": "Sugawara-no-Michizane-Praying-on-Tenpaizan-by-Kobayashi-Eitaku-1880.jpg",
+            "wikibase_item": "Q1753428"
+          },
+          "terms": {
+            "description": [
+              "菅原道真を神格化した呼称"
+            ]
+          }
+        },
+        {
+          "pageid": 1758861,
+          "ns": 0,
+          "title": "清水寺",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きよみすてら",
+            "kartographer_frames": "1",
+            "page_image_free": "Kiyomizu-dera,_Kyoto,_November_2016_-02.jpg",
+            "wikibase_item": "Q221716"
+          },
+          "coordinates": [
+            {
+              "lat": 34.99483056,
+              "lon": 135.78500278,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市東山区にある仏教寺院"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

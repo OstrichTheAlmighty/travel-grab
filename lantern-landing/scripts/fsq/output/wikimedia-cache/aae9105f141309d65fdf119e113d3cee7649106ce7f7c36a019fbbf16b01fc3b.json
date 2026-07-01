@@ -1,0 +1,108 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:39.724Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 164640,
+          "ns": 0,
+          "title": "Steffi Graf",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Graf, Steffi",
+            "page_image_free": "Steffi_Graf_in_Hamburg_2010_(cropped).jpg",
+            "wikibase-shortdesc": "German tennis player (born 1969)",
+            "wikibase_item": "Q11662"
+          },
+          "terms": {
+            "description": [
+              "German tennis player"
+            ]
+          }
+        },
+        {
+          "pageid": 4244269,
+          "ns": 0,
+          "title": "Ariake Coliseum",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Ariake_Tennis_no_Mori_Kōen_1.jpg",
+            "wikibase-shortdesc": "Indoor sporting arena in Japan",
+            "wikibase_item": "Q3299452"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6364,
+              "lon": 139.7903,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "sporting arena"
+            ]
+          }
+        },
+        {
+          "pageid": 25219685,
+          "ns": 0,
+          "title": "Into the New World Tour",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Girls' Generation Asia Tour Into the New World",
+            "page_image": "Intothenewworldtour.jpg",
+            "wikibase-shortdesc": "2009–10 concert tour by Girls' Generation",
+            "wikibase_item": "Q562721"
+          },
+          "terms": {
+            "description": [
+              "2009–10 concert tour by Girls' Generation"
+            ]
+          }
+        },
+        {
+          "pageid": 29258380,
+          "ns": 0,
+          "title": "Hoot (EP)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Hoot",
+            "displaytitle": "<i>Hoot</i> (EP)",
+            "page_image": "SNSD_Hoot.jpg",
+            "wikibase-shortdesc": "2010 EP by Girls' Generation",
+            "wikibase_item": "Q482856"
+          },
+          "terms": {
+            "description": [
+              "2010 EP by Girls' Generation"
+            ]
+          }
+        },
+        {
+          "pageid": 64686303,
+          "ns": 0,
+          "title": "Junto Nakatani",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Nakatani, Junto",
+            "wikibase-shortdesc": "Japanese boxer (born 1998)",
+            "wikibase_item": "Q97959573"
+          },
+          "terms": {
+            "description": [
+              "Japanese boxer"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:53.183Z",
+  "value": {
+    "searchinfo": {
+      "search": "ジャンピン・ジェリーフィッシュ"
+    },
+    "search": [
+      {
+        "id": "Q1929942",
+        "title": "Q1929942",
+        "pageid": 1859649,
+        "concepturi": "http://www.wikidata.org/entity/Q1929942",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1929942",
+        "display": {
+          "label": {
+            "value": "Jumpin' Jellyfish",
+            "language": "en"
+          },
+          "description": {
+            "value": "attraction at Disney theme parks",
+            "language": "en"
+          }
+        },
+        "label": "Jumpin' Jellyfish",
+        "description": "attraction at Disney theme parks",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ジャンピン・ジェリーフィッシュ"
+        },
+        "aliases": [
+          "ジャンピン・ジェリーフィッシュ"
+        ]
+      },
+      {
+        "id": "Q6600319",
+        "title": "Q6600319",
+        "pageid": 6427083,
+        "concepturi": "http://www.wikidata.org/entity/Q6600319",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6600319",
+        "display": {
+          "label": {
+            "value": "list of Tokyo DisneySea attractions",
+            "language": "en"
+          },
+          "description": {
+            "value": "Wikimedia list article",
+            "language": "en"
+          }
+        },
+        "label": "list of Tokyo DisneySea attractions",
+        "description": "Wikimedia list article",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ジャンピン・ジェリーフィッシュ"
+        },
+        "aliases": [
+          "ジャンピン・ジェリーフィッシュ"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

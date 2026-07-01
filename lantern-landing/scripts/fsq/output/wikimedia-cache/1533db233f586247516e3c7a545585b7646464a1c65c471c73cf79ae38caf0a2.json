@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:12.581Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8833389,
+          "ns": 0,
+          "title": "Archives Nationales (France)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Archives Nationales (France)",
+            "kartographer_frames": "1",
+            "page_image_free": "Hôtel_de_Soubise,_Paris_31_August_2009.jpg",
+            "wikibase-shortdesc": "National archives",
+            "wikibase_item": "Q182542"
+          },
+          "terms": {
+            "description": [
+              "national archives of France"
+            ]
+          }
+        },
+        {
+          "pageid": 19264004,
+          "ns": 0,
+          "title": "Ministry of Foreign Affairs (Serbia)",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "wikibase-shortdesc": "Government ministry of Serbia",
+            "wikibase_item": "Q2198916"
+          },
+          "terms": {
+            "description": [
+              "Foreign Affairs Ministry of Serbia"
+            ]
+          }
+        },
+        {
+          "pageid": 30543147,
+          "ns": 0,
+          "title": "Diplomatic Archives of the Ministry of Foreign Affairs of Japan",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Exhibition_hall_of_the_Diplomatic_Record_Office_Japan.JPG",
+            "wikibase_item": "Q3788463"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6612963,
+              "lon": 139.7371973,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 75048830,
+          "ns": 0,
+          "title": "State Archives of Milan",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Palazzo_del_Senato_-_1608_-_facciata_di_F.M.Ricchino_-_Milano.JPG",
+            "wikibase-shortdesc": "State archival institution in Milan, Italy",
+            "wikibase_item": "Q16321278"
+          },
+          "coordinates": [
+            {
+              "lat": 45.4703,
+              "lon": 9.1989,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "state archive in Italy"
+            ]
+          }
+        },
+        {
+          "pageid": 77468609,
+          "ns": 0,
+          "title": "Diplomatic Archives of Serbia",
+          "index": 1,
+          "pageprops": {
+            "wikibase-shortdesc": "Archives of the Ministry of Foreign Affairs of Serbia",
+            "wikibase_item": "Q129077998"
+          },
+          "terms": {
+            "description": [
+              "archive in Belgrade"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

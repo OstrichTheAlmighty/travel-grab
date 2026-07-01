@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:17:53.144Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 53389,
+          "ns": 0,
+          "title": "上京区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かみきようく",
+            "kartographer_frames": "1",
+            "page_image_free": "Kyoto_Imperial_Palace,_South_view_20130811.jpg",
+            "wikibase_item": "Q1321824"
+          },
+          "coordinates": [
+            {
+              "lat": 35.02972222,
+              "lon": 135.75666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都府京都市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 147809,
+          "ns": 0,
+          "title": "表千家",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おもてせんけ",
+            "page_image_free": "Koma_omotesenke_somenuki.jpg",
+            "wikibase_item": "Q3278052"
+          },
+          "terms": {
+            "description": [
+              "茶道流派の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 281204,
+          "ns": 0,
+          "title": "西日本短期大学附属高等学校",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にしにほんたんきたいかくふそく",
+            "kartographer_frames": "1",
+            "page_image_free": "西日本短期大学附属高等学校.jpg",
+            "wikibase_item": "Q11628407"
+          },
+          "coordinates": [
+            {
+              "lat": 33.21822222,
+              "lon": 130.53438889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福岡県八女市にある高等学校"
+            ]
+          }
+        },
+        {
+          "pageid": 443919,
+          "ns": 0,
+          "title": "茶道",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さとう",
+            "page_image_free": "Outdoor_Tea_Ceremony.jpg",
+            "wikibase_item": "Q202298"
+          },
+          "terms": {
+            "description": [
+              "湯を沸かし、茶を点て、茶を振る舞う行為"
+            ]
+          }
+        },
+        {
+          "pageid": 1621167,
+          "ns": 0,
+          "title": "福井市愛宕坂茶道美術館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふくいしあたこさかさとうひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Fukui_City_Atagozaka_Tea_Ceremony_Museum01bs3200.jpg",
+            "wikibase_item": "Q11591305"
+          },
+          "coordinates": [
+            {
+              "lat": 36.05998889,
+              "lon": 136.21113333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福井県福井市にある美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

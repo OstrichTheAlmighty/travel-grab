@@ -1,0 +1,82 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:15.829Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 679257,
+          "ns": 0,
+          "title": "中川翔子",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "なかかわ しようこ",
+            "page_image_free": "警察庁令和３年犯罪被害者週間ポスター中川翔子CC-BY4.0(cropped).png",
+            "wikibase_item": "Q685028"
+          },
+          "terms": {
+            "description": [
+              "日本の女性バラエティアイドル、マルチタレント、歌手 (1985-)"
+            ]
+          }
+        },
+        {
+          "pageid": 1751212,
+          "ns": 0,
+          "title": "鉄道むすめ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "てつとうむすめ",
+            "page_image_free": "Tetsudo_Musume_Logo.svg",
+            "wikibase_item": "Q11649648"
+          },
+          "terms": {
+            "description": [
+              "日本のキャラクターコンテンツ"
+            ]
+          }
+        },
+        {
+          "pageid": 2251737,
+          "ns": 0,
+          "title": "2011年の音楽",
+          "index": 3,
+          "pageprops": {
+            "wikibase_item": "Q2332508"
+          }
+        },
+        {
+          "pageid": 2656371,
+          "ns": 0,
+          "title": "2015年のテレビ (日本)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "2015ねんのてれひ につほん",
+            "toc": "",
+            "wikibase_item": "Q11187129"
+          }
+        },
+        {
+          "pageid": 3395032,
+          "ns": 0,
+          "title": "My Hair is Bad",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "まいへあいすはつと",
+            "wikibase_item": "Q24862409"
+          },
+          "terms": {
+            "description": [
+              "日本のスリーピース・ロックバンド"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

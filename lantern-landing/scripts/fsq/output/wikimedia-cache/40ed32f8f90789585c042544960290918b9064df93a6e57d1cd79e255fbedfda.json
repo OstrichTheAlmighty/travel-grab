@@ -1,0 +1,42 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:20.815Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 25305,
+          "ns": 0,
+          "title": "タコ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たこ",
+            "page_image_free": "Octopoda_montage.jpg",
+            "wikibase_item": "Q40152"
+          },
+          "terms": {
+            "description": [
+              "頭足綱鞘形亜綱八腕形上目の八腕形目に分類される軟体動物の総称"
+            ]
+          }
+        },
+        {
+          "pageid": 565631,
+          "ns": 0,
+          "title": "博士と助手〜細かすぎて伝わらないモノマネ選手権〜",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はかせとしよしゆこまかすきてつたわらないものまねせんしゆけん",
+            "wikibase_item": "Q11408915"
+          },
+          "terms": {
+            "description": [
+              "日本のフジテレビ制作のテレビ番組『とんねるずのみなさんのおかげでした』内のコーナー"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

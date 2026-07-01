@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:15.819Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 167943,
+          "ns": 0,
+          "title": "クリスマスの音楽一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "くりすますのおんかくいちらん",
+            "page_image_free": "Santa-eop2.jpg",
+            "wikibase_item": "Q1862250"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 254559,
+          "ns": 0,
+          "title": "クリスマス",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "くりすます",
+            "page_image_free": "Gifts_xmas.jpg",
+            "wikibase_item": "Q19809"
+          },
+          "terms": {
+            "description": [
+              "12月25日にイエスの誕生を祝う日"
+            ]
+          }
+        },
+        {
+          "pageid": 801320,
+          "ns": 0,
+          "title": "クリスマスマーケット",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "くりすますまあけつと",
+            "page_image_free": "Toulouse_Christmas_market_DSC02662.jpg",
+            "wikibase_item": "Q57607"
+          },
+          "terms": {
+            "description": [
+              "ドイツやオーストリアの都市の広場で行われるイベント"
+            ]
+          }
+        },
+        {
+          "pageid": 2267702,
+          "ns": 0,
+          "title": "クリスマス・イヴ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "くりすますいふ",
+            "page_image_free": "Julaftonen_av_Carl_Larsson_1904.jpg",
+            "wikibase_item": "Q106010"
+          },
+          "terms": {
+            "description": [
+              "クリスマスの前夜に行われる祝い"
+            ]
+          }
+        },
+        {
+          "pageid": 2268796,
+          "ns": 0,
+          "title": "クリスマスツリー",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "くりすますつり",
+            "page_image_free": "Rockefeller_Center_christmas_tree.jpg",
+            "wikibase_item": "Q47128"
+          },
+          "terms": {
+            "description": [
+              "クリスマスのために飾り付けられる木"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:08.414Z",
+  "value": {
+    "searchinfo": {
+      "search": "farmers market"
+    },
+    "search": [
+      {
+        "id": "Q4412657",
+        "title": "Q4412657",
+        "pageid": 4214604,
+        "concepturi": "http://www.wikidata.org/entity/Q4412657",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q4412657",
+        "display": {
+          "label": {
+            "value": "Farmers Market",
+            "language": "en"
+          },
+          "description": {
+            "value": "Norwegian musical group",
+            "language": "en"
+          }
+        },
+        "label": "Farmers Market",
+        "description": "Norwegian musical group",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Farmers Market"
+        }
+      },
+      {
+        "id": "Q1522620",
+        "title": "Q1522620",
+        "pageid": 1459668,
+        "concepturi": "http://www.wikidata.org/entity/Q1522620",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1522620",
+        "display": {
+          "label": {
+            "value": "farmers' market",
+            "language": "en"
+          },
+          "description": {
+            "value": "market featuring foods sold directly by farmers to consumers",
+            "language": "en"
+          }
+        },
+        "label": "farmers' market",
+        "description": "market featuring foods sold directly by farmers to consumers",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "farmers market"
+        },
+        "aliases": [
+          "farmers market"
+        ]
+      },
+      {
+        "id": "Q17770685",
+        "title": "Q17770685",
+        "pageid": 19374012,
+        "concepturi": "http://www.wikidata.org/entity/Q17770685",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q17770685",
+        "display": {
+          "label": {
+            "value": "Farmers Market",
+            "language": "en"
+          },
+          "description": {
+            "value": "2000 self-titled studio album by Farmers Market",
+            "language": "en"
+          }
+        },
+        "label": "Farmers Market",
+        "description": "2000 self-titled studio album by Farmers Market",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Farmers Market"
+        }
+      },
+      {
+        "id": "Q19057767",
+        "title": "Q19057767",
+        "pageid": 20618740,
+        "concepturi": "http://www.wikidata.org/entity/Q19057767",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q19057767",
+        "display": {
+          "label": {
+            "value": "Farmers Market",
+            "language": "en"
+          },
+          "description": {
+            "value": "episode of Parks and Recreation (S6 E12)",
+            "language": "en"
+          }
+        },
+        "label": "Farmers Market",
+        "description": "episode of Parks and Recreation (S6 E12)",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Farmers Market"
+        }
+      },
+      {
+        "id": "Q108502699",
+        "title": "Q108502699",
+        "pageid": 103751548,
+        "concepturi": "http://www.wikidata.org/entity/Q108502699",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q108502699",
+        "display": {
+          "label": {
+            "value": "Farmers Market",
+            "language": "en"
+          },
+          "description": {
+            "value": "building",
+            "language": "en"
+          }
+        },
+        "label": "Farmers Market",
+        "description": "building",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Farmers Market"
+        }
+      },
+      {
+        "id": "Q5435794",
+        "title": "Q5435794",
+        "pageid": 5197982,
+        "concepturi": "http://www.wikidata.org/entity/Q5435794",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5435794",
+        "display": {
+          "label": {
+            "value": "Farmers Market",
+            "language": "en"
+          },
+          "description": {
+            "value": "historic public market located at York, Pennsylvania",
+            "language": "en"
+          }
+        },
+        "label": "Farmers Market",
+        "description": "historic public market located at York, Pennsylvania",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Farmers Market"
+        }
+      },
+      {
+        "id": "Q126013067",
+        "title": "Q126013067",
+        "pageid": 120092518,
+        "concepturi": "http://www.wikidata.org/entity/Q126013067",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q126013067",
+        "display": {
+          "label": {
+            "value": "San Diego State University Farmers Market",
+            "language": "en"
+          },
+          "description": {
+            "value": "The weekly SDSU Farmers' Market began in September 2009 with only eight food vendors. It has since blossomed, with more than 16 vendors offering a variety of culinary delights from across different cultures every Thursday.",
+            "language": "en"
+          }
+        },
+        "label": "San Diego State University Farmers Market",
+        "description": "The weekly SDSU Farmers' Market began in September 2009 with only eight food vendors. It has since blossomed, with more than 16 vendors offering a variety of culinary delights from across different cultures every Thursday.",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "Farmers Market"
+        },
+        "aliases": [
+          "Farmers Market"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:33:20.433Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 130972,
+          "ns": 0,
+          "title": "東京ドームシティ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようとおむしてい",
+            "page_image_free": "TokyoDome8945.jpg",
+            "wikibase_item": "Q564554"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70561111,
+              "lon": 139.75188889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある都市型レジャー施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

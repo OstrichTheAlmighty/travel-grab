@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:40.310Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 7440514,
+          "ns": 0,
+          "title": "Tokyo Photographic Art Museum",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Tokyo_Metropolitan_Museum_of_Photography_entrance_2011_January.jpg",
+            "wikibase-shortdesc": "Photographic art museum in Meguro, Tokyo",
+            "wikibase_item": "Q862884"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6417,
+              "lon": 139.7132,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "photography museum in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 13521375,
+          "ns": 0,
+          "title": "Ryūichi Amano",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Amano, Ryuichi",
+            "wikibase-shortdesc": "Japanese photographer",
+            "wikibase_item": "Q7385620"
+          },
+          "terms": {
+            "description": [
+              "Japanese photographer"
+            ]
+          }
+        },
+        {
+          "pageid": 66558683,
+          "ns": 0,
+          "title": "Mao Ishikawa",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Ishikawa, Mao",
+            "page_image_free": "Mao_Ishikawa,_Okinawan_photographer.jpg",
+            "wikibase-shortdesc": "Okinawan photographer (born 1953)",
+            "wikibase_item": "Q15992450"
+          },
+          "terms": {
+            "description": [
+              "Japanese photographer (born 1953)"
+            ]
+          }
+        },
+        {
+          "pageid": 82344489,
+          "ns": 0,
+          "title": "Shinkō shashin",
+          "index": 3,
+          "pageprops": {
+            "wikibase-shortdesc": "Japanese modernist \"New Photography\" movement of the 1930s",
+            "wikibase_item": "Q11503992"
+          },
+          "terms": {
+            "description": [
+              "Japanese photographic movement (1930s–1940s)"
+            ]
+          }
+        },
+        {
+          "pageid": 82694500,
+          "ns": 0,
+          "title": "Avant-Garde Rising: The Photographic Vanguard in Modern Japan",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Avant-Garde Rising The Photographic Vanguard in Modern Japan",
+            "displaytitle": "<i>Avant-Garde Rising: The Photographic Vanguard in Modern Japan</i>",
+            "wikibase-shortdesc": "2022 exhibition at the Tokyo Photographic Art Museum",
+            "wikibase_item": "Q138993765"
+          },
+          "terms": {
+            "description": [
+              "2022 exhibition at the Tokyo Photographic Art Museum"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

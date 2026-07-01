@@ -1,0 +1,138 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:47.161Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 121469,
+          "ns": 0,
+          "title": "野川公園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "のかわこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "都立野川公園入り口付近0001.jpg",
+            "wikibase_item": "Q6983548"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68016667,
+              "lon": 139.52569444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 148401,
+          "ns": 0,
+          "title": "小金井公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こかねいこうえん",
+            "page_image_free": "Western_Tokyo.svg",
+            "wikibase_item": "Q2856049"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71444444,
+              "lon": 139.51888889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 312942,
+          "ns": 0,
+          "title": "兵庫県立赤穂海浜公園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひようこけんりつあこうかいひんこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "141115_Hyogo_prefectural_Ako_Seaside_Park_Japan06n.jpg",
+            "wikibase_item": "Q11393120"
+          },
+          "coordinates": [
+            {
+              "lat": 34.73377778,
+              "lon": 134.39672222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県赤穂市にある公園"
+            ]
+          }
+        },
+        {
+          "pageid": 464351,
+          "ns": 0,
+          "title": "青葉の森公園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あおはのもりこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Aobanomori_Park_20120409_009.jpg",
+            "wikibase_item": "Q11662714"
+          },
+          "coordinates": [
+            {
+              "lat": 35.59673889,
+              "lon": 140.14022778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県千葉市中央区にある千葉県立の都市公園（広域公園）"
+            ]
+          }
+        },
+        {
+          "pageid": 2360857,
+          "ns": 0,
+          "title": "川口市立グリーンセンター",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かわくちしりつくりいんせんたあ",
+            "page_image_free": "Kawaguchi_Kawaguchi_Green_Center_Main_Gate_1.JPG",
+            "wikibase_item": "Q6379501"
+          },
+          "coordinates": [
+            {
+              "lat": 35.84586111,
+              "lon": 139.72627778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県川口市にある植物園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

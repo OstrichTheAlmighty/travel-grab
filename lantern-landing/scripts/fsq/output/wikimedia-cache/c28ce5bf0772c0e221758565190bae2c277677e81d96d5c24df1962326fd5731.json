@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:48.228Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 72562,
+          "ns": 0,
+          "title": "座席",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "させき",
+            "wikibase_item": "Q2207370"
+          },
+          "terms": {
+            "description": [
+              "座るためのもの"
+            ]
+          }
+        },
+        {
+          "pageid": 155999,
+          "ns": 0,
+          "title": "シートベルト",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しとへると",
+            "page_image_free": "Crash_test_dummy_with_three-point_seat_belt_(cropped).jpg",
+            "wikibase_item": "Q200403"
+          },
+          "terms": {
+            "description": [
+              "からだを座席に固定するためのベルト"
+            ]
+          }
+        },
+        {
+          "pageid": 267380,
+          "ns": 0,
+          "title": "エントリーシート",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "えんとりいしいと",
+            "wikibase_item": "Q676108"
+          }
+        },
+        {
+          "pageid": 555913,
+          "ns": 0,
+          "title": "グリーンシート",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "くりんしと",
+            "wikibase_item": "Q11300537"
+          },
+          "terms": {
+            "description": [
+              "日本のかつてあった非上場企業の株式などの売買制度"
+            ]
+          }
+        },
+        {
+          "pageid": 1366969,
+          "ns": 0,
+          "title": "全日本空輸",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せんにほんくうゆ",
+            "page_image_free": "Boeing_787_N1015B_ANA_Airlines_(27611880663)_(cropped).jpg",
+            "wikibase_item": "Q204284"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66536111,
+              "lon": 139.76102778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある航空会社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

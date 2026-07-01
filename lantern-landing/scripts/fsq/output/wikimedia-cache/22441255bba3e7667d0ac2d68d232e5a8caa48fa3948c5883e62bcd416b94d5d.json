@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:48.545Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 16500,
+          "ns": 0,
+          "title": "明治神宮野球場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めいししんくうやきゆうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "明治神宮野球場_2025年2月8日の東京_202502081229_IMG_5901.jpg",
+            "wikibase_item": "Q944559"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67457222,
+              "lon": 139.71713611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区にある野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 46196,
+          "ns": 0,
+          "title": "東京スタジアム (野球場)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようすたしあむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_stadium_aerial_photograph_1974.jpg",
+            "wikibase_item": "Q7813995"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73611111,
+              "lon": 139.79194444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて日本の東京都荒川区に存在した野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 62124,
+          "ns": 0,
+          "title": "明治神宮",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "めいししんくう",
+            "kartographer_frames": "1",
+            "page_image_free": "Courtyard_of_Meiji_Shrine_20190717.jpg",
+            "wikibase_item": "Q287165"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67611111,
+              "lon": 139.69916667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 63852,
+          "ns": 0,
+          "title": "駒澤野球場",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こまさわやきゆうしよう",
+            "page_image_free": "Komazawa_Stadium_1955.jpg",
+            "wikibase_item": "Q11668425"
+          },
+          "terms": {
+            "description": [
+              "かつて東京都世田谷区にあった野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 1237044,
+          "ns": 0,
+          "title": "日本生命球場",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんせいめいきゆうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Nippon_Seimei_Stadium_aerialphotograph.jpg",
+            "wikibase_item": "Q11508611"
+          },
+          "coordinates": [
+            {
+              "lat": 34.68098333,
+              "lon": 135.53113056,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて大阪市中央区にあった野球場"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

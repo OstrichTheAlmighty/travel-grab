@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:09.437Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 26026,
+          "ns": 0,
+          "title": "愛新覚羅溥儀",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あいしんかくら ふき",
+            "page_image_free": "溥仪.jpg",
+            "wikibase_item": "Q185152"
+          },
+          "terms": {
+            "description": [
+              "中国の皇族、第12代清国皇帝、初代満洲国皇帝 (1906-1967)"
+            ]
+          }
+        },
+        {
+          "pageid": 28918,
+          "ns": 0,
+          "title": "立教大学",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "りつきようたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Rikkyo_University_1.jpg",
+            "wikibase_item": "Q1143235"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7305,
+              "lon": 139.70394444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 102318,
+          "ns": 0,
+          "title": "湯島聖堂",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ゆしませいとう",
+            "page_image_free": "Yushima_Seido6.jpg",
+            "wikibase_item": "Q1760591"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70083,
+              "lon": 139.76639,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある史跡"
+            ]
+          }
+        },
+        {
+          "pageid": 123969,
+          "ns": 0,
+          "title": "昌平坂学問所",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しようへいさかかくもんしよ",
+            "wikibase_item": "Q4059219"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸幕府直轄の教学機関、施設"
+            ]
+          }
+        },
+        {
+          "pageid": 1205486,
+          "ns": 0,
+          "title": "服部宇之吉",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はつとり うのきち",
+            "page_image_free": "服部宇之吉.jpg",
+            "wikibase_item": "Q11092269"
+          },
+          "terms": {
+            "description": [
+              "日本の中国哲学者"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

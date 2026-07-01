@@ -1,0 +1,98 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:47.557Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 370300,
+          "ns": 0,
+          "title": "東京都道253号保谷狭山自然公園自転車道線",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようととう253",
+            "page_image_free": "西東京市向台町_多摩湖自転車歩行者道_20250507.jpg",
+            "wikibase_item": "Q11525775"
+          },
+          "terms": {
+            "description": [
+              "東京都の道路"
+            ]
+          }
+        },
+        {
+          "pageid": 612461,
+          "ns": 0,
+          "title": "下高井戸",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しもたかいと",
+            "kartographer_frames": "1",
+            "page_image_free": "玉川上水第三公園.jpg",
+            "wikibase_item": "Q11361505"
+          },
+          "terms": {
+            "description": [
+              "東京都杉並区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1690273,
+          "ns": 0,
+          "title": "杉並区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すきなみく",
+            "kartographer_frames": "1",
+            "page_image_free": "2018_Kōenji.jpg",
+            "wikibase_item": "Q232631"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6995,
+              "lon": 139.63642,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 2374458,
+          "ns": 0,
+          "title": "下高井戸おおぞら公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しもたかいとおおそらこうえん",
+            "wikibase_item": "Q11525916"
+          },
+          "terms": {
+            "description": [
+              "東京都杉並区にある公園"
+            ]
+          }
+        },
+        {
+          "pageid": 3140562,
+          "ns": 0,
+          "title": "遊び場 (杉並区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あそひは",
+            "wikibase_item": "Q20042963"
+          }
+        }
+      ]
+    }
+  }
+}

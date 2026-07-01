@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:54.662Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 23894,
+          "ns": 0,
+          "title": "漫才師一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "まんさいしいちらん",
+            "notoc": "",
+            "wikibase_item": "Q11565550"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 44787,
+          "ns": 0,
+          "title": "東京ミュウミュウ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようみゆうみゆう",
+            "page_image_free": "Tokyo_Mew_Mew_New_-_Anime_logo.png",
+            "wikibase_item": "Q392125"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 1378505,
+          "ns": 0,
+          "title": "春日俊彰",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かすか としあき",
+            "wikibase_item": "Q6135754"
+          },
+          "terms": {
+            "description": [
+              "日本のお笑いタレント"
+            ]
+          }
+        },
+        {
+          "pageid": 2218884,
+          "ns": 0,
+          "title": "吉本興業所属タレント一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "よしもとこうきようしよそくたれんといちらん",
+            "wikibase_item": "Q11413203"
+          },
+          "terms": {
+            "description": [
+              "吉本興業所属のタレントリスト"
+            ]
+          }
+        },
+        {
+          "pageid": 3997976,
+          "ns": 0,
+          "title": "ミュークルドリーミー",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みゆうくるとりいみい",
+            "wikibase_item": "Q85874146"
+          },
+          "terms": {
+            "description": [
+              "日本の企業・サンリオによるキャラクター、テレビアニメ作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

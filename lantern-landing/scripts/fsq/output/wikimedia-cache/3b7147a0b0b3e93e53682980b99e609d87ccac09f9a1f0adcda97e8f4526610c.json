@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:52.283Z",
+  "value": {
+    "searchinfo": {
+      "search": "白根記念渋谷区郷土博物館・文学館"
+    },
+    "search": [
+      {
+        "id": "Q21019078",
+        "title": "Q21019078",
+        "pageid": 23070528,
+        "concepturi": "http://www.wikidata.org/entity/Q21019078",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q21019078",
+        "display": {
+          "label": {
+            "value": "Shibuya Folk and Literary Shirane Memorial Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Shibuya, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Shibuya Folk and Literary Shirane Memorial Museum",
+        "description": "museum in Shibuya, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "白根記念渋谷区郷土博物館・文学館"
+        },
+        "aliases": [
+          "白根記念渋谷区郷土博物館・文学館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:17.318Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 13167,
+          "ns": 0,
+          "title": "宮部みゆき",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みやへ みゆき",
+            "wikibase_item": "Q290021"
+          },
+          "terms": {
+            "description": [
+              "日本の小説家"
+            ]
+          }
+        },
+        {
+          "pageid": 152644,
+          "ns": 0,
+          "title": "大日本印刷",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たいにつほんいんさつ",
+            "page_image_free": "Headquarters_building_of_Dai_Nippon_Printing_Co.jpg",
+            "wikibase_item": "Q1157511"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都新宿区にある印刷会社"
+            ]
+          }
+        },
+        {
+          "pageid": 862497,
+          "ns": 0,
+          "title": "市谷加賀町",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いちかやかかちよう",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q11480704"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 4222664,
+          "ns": 0,
+          "title": "宮内初太郎",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みやうち はつたろう",
+            "wikibase_item": "Q100454625"
+          }
+        },
+        {
+          "pageid": 5152755,
+          "ns": 0,
+          "title": "市谷の杜 本と活字館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いちかやのもり ほんとかつしかん",
+            "kartographer_frames": "1",
+            "page_image_free": "市谷の杜_本と活字館_202510.jpg",
+            "wikibase_item": "Q140025038"
+          }
+        }
+      ]
+    }
+  }
+}

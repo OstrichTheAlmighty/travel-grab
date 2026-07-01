@@ -1,0 +1,55 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:34.172Z",
+  "value": {
+    "searchinfo": {
+      "search": "グリーンファーム"
+    },
+    "search": [
+      {
+        "id": "Q11300572",
+        "title": "Q11300572",
+        "pageid": 12440146,
+        "concepturi": "http://www.wikidata.org/entity/Q11300572",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11300572",
+        "display": {
+          "label": {
+            "value": "グリーンファーム",
+            "language": "ja"
+          }
+        },
+        "label": "グリーンファーム",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "グリーンファーム"
+        }
+      },
+      {
+        "id": "Q122071274",
+        "title": "Q122071274",
+        "pageid": 116401829,
+        "concepturi": "http://www.wikidata.org/entity/Q122071274",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q122071274",
+        "display": {
+          "label": {
+            "value": "Roadside station Green Farm Tateyama",
+            "language": "en"
+          }
+        },
+        "label": "Roadside station Green Farm Tateyama",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "グリーンファーム館山"
+        },
+        "aliases": [
+          "グリーンファーム館山"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

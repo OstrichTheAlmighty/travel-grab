@@ -1,0 +1,85 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:21.192Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 368963,
+          "ns": 0,
+          "title": "福田悠太",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふくた ゆうた",
+            "wikibase_item": "Q11594162"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優、ふぉ〜ゆ〜のメンバー"
+            ]
+          }
+        },
+        {
+          "pageid": 646391,
+          "ns": 0,
+          "title": "だめんず・うぉ〜か〜",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ためんすうおおかあ",
+            "wikibase_item": "Q11271595"
+          }
+        },
+        {
+          "pageid": 962053,
+          "ns": 0,
+          "title": "ぉ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "お",
+            "wikibase_item": "Q11261151"
+          },
+          "terms": {
+            "description": [
+              "日本語の仮名のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 3145797,
+          "ns": 0,
+          "title": "ふぉ〜ゆ〜",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふおゆう",
+            "wikibase_item": "Q22123502"
+          },
+          "terms": {
+            "description": [
+              "日本の4人組男性アイドルグループ"
+            ]
+          }
+        },
+        {
+          "pageid": 3836620,
+          "ns": 0,
+          "title": "リトルフォレストフェロォ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "りとるふおれすとふえろお",
+            "wikibase_item": "Q60985585"
+          },
+          "terms": {
+            "description": [
+              "サンリオのキャラクター群"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

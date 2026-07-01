@@ -1,0 +1,78 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:13.648Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 80675,
+          "ns": 0,
+          "title": "萬代橋",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はんたいはし",
+            "kartographer_frames": "1",
+            "page_image_free": "Bandaibashi-Bridge_20130929.JPG",
+            "wikibase_item": "Q4854329"
+          },
+          "terms": {
+            "description": [
+              "新潟県新潟市中央区を流れる信濃川に架かる国道7号の道路橋"
+            ]
+          }
+        },
+        {
+          "pageid": 191213,
+          "ns": 0,
+          "title": "大橋ジャンクション",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおはししやんくしよん",
+            "kartographer_frames": "1",
+            "page_image_free": "大橋ジャンクション.jpg",
+            "wikibase_item": "Q10936071"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65208333,
+              "lon": 139.68741667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都目黒区にある首都高速道路3号渋谷線と中央環状線を結ぶジャンクション"
+            ]
+          }
+        },
+        {
+          "pageid": 262403,
+          "ns": 0,
+          "title": "新潟みなとトンネル",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にいかたみなととんねる",
+            "kartographer_frames": "1",
+            "page_image_free": "Entrance_of_Niigata_Minato_Tunnel.jpg",
+            "wikibase_item": "Q11502787"
+          },
+          "coordinates": [
+            {
+              "lat": 37.94405556,
+              "lon": 139.066,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "新潟市中央区にある水底道路トンネル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

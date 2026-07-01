@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:04.915Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8251,
+          "ns": 0,
+          "title": "江東区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こうとうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tomioka_Hachiman-gu_201708.jpg",
+            "wikibase_item": "Q215175"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67281,
+              "lon": 139.81728,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 42103,
+          "ns": 0,
+          "title": "深川市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふかかわし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kunimi_pass.JPG",
+            "wikibase_item": "Q817268"
+          },
+          "coordinates": [
+            {
+              "lat": 43.72325,
+              "lon": 142.05358,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道の市"
+            ]
+          }
+        },
+        {
+          "pageid": 286847,
+          "ns": 0,
+          "title": "都営バス深川営業所",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とえいはすふかかわえいきようしよ",
+            "page_image_free": "Tobus_fukagawa-dept.jpg",
+            "wikibase_item": "Q11643515"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64383333,
+              "lon": 139.80266667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区にある東京都交通局のバス営業所"
+            ]
+          }
+        },
+        {
+          "pageid": 328395,
+          "ns": 0,
+          "title": "山下貴史",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "やました たかふみ",
+            "page_image_free": "北海道深川市_市長_山下貴史.jpg",
+            "wikibase_item": "Q11466070"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家"
+            ]
+          }
+        },
+        {
+          "pageid": 3481831,
+          "ns": 0,
+          "title": "深川和征",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふかかわ かすまさ",
+            "wikibase_item": "Q27150892"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

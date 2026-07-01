@@ -1,0 +1,88 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:41.344Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 5601,
+          "ns": 0,
+          "title": "絶縁ゲートバイポーラトランジスタ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せつえんけえとはいほうらとらんしすた",
+            "page_image_free": "IGBT_3300V_1200A_Mitsubishi.jpg",
+            "wikibase_item": "Q176110"
+          }
+        },
+        {
+          "pageid": 16412,
+          "ns": 0,
+          "title": "ゲートボール",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "けえとほおる",
+            "page_image_free": "GBTOP.jpg",
+            "wikibase_item": "Q1148950"
+          },
+          "terms": {
+            "description": [
+              "日本発祥の球技"
+            ]
+          }
+        },
+        {
+          "pageid": 269243,
+          "ns": 0,
+          "title": "ウォーターゲート事件",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "うおおたあけえとしけん",
+            "page_image_free": "Watergate.jpg",
+            "wikibase_item": "Q42761"
+          },
+          "terms": {
+            "description": [
+              "アメリカの政治スキャンダル"
+            ]
+          }
+        },
+        {
+          "pageid": 1204864,
+          "ns": 0,
+          "title": "ライオンズゲート",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "らいおんすけえと",
+            "wikibase_item": "Q515869"
+          },
+          "terms": {
+            "description": [
+              "アメリカのエンターテインメント企業"
+            ]
+          }
+        },
+        {
+          "pageid": 1832865,
+          "ns": 0,
+          "title": "DRAGON GATE",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とらこんけえと",
+            "wikibase_item": "Q717248"
+          },
+          "terms": {
+            "description": [
+              "日本のプロレス団体"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

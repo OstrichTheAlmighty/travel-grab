@@ -1,0 +1,137 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:27.529Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 75129,
+          "ns": 0,
+          "title": "Madison Square Garden",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Madison_Square_Garden_(MSG)_-_Full_(48124330357).jpg",
+            "wikibase-shortdesc": "Multi-purpose indoor arena in New York City, U.S.",
+            "wikibase_item": "Q186125"
+          },
+          "coordinates": [
+            {
+              "lat": 40.75055556,
+              "lon": -73.99361111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "multi-purpose indoor arena in New York City, located in Midtown Manhattan between 7th and 8th Avenues from 31st to 33rd Streets"
+            ]
+          }
+        },
+        {
+          "pageid": 302201,
+          "ns": 0,
+          "title": "Midtown Manhattan",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "West_side_of_Manhattan_from_Hudson_Commons_(95103p).jpg",
+            "wikibase-shortdesc": "Neighborhood and central business district in New York City",
+            "wikibase_item": "Q11249"
+          },
+          "coordinates": [
+            {
+              "lat": 40.7547,
+              "lon": -73.9842,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "central business district in New York City, USA"
+            ]
+          }
+        },
+        {
+          "pageid": 768632,
+          "ns": 0,
+          "title": "Midtown Atlanta",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "AMidtownATL202511-0126.jpg",
+            "wikibase-shortdesc": "Neighborhood in Fulton County, Georgia, United States",
+            "wikibase_item": "Q6843071"
+          },
+          "coordinates": [
+            {
+              "lat": 33.7868014,
+              "lon": -84.3795169,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "neighborhood in Atlanta, Georgia, United States"
+            ]
+          }
+        },
+        {
+          "pageid": 2662839,
+          "ns": 0,
+          "title": "Tokyo Midtown",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Midtown.2.JPG",
+            "wikibase-shortdesc": "Mixed-use development in Japan",
+            "wikibase_item": "Q1364393"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66583333,
+              "lon": 139.73111111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "buildings complex in Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 73834002,
+          "ns": 0,
+          "title": "Midtown Beer Garden",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Portland,_Oregon,_March_24,_2025_-_41_(cropped).jpg",
+            "wikibase-shortdesc": "Food carts in Portland, Oregon, U.S.",
+            "wikibase_item": "Q118967300"
+          },
+          "coordinates": [
+            {
+              "lat": 45.5211,
+              "lon": -122.6761,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "food carts in Portland, Oregon, U.S"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

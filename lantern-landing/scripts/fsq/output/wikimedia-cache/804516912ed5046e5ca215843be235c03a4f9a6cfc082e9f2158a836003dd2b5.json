@@ -1,0 +1,88 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:13.691Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 123910,
+          "ns": 0,
+          "title": "W-inds.",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ういんす",
+            "displaytitle": "w-inds.",
+            "wikibase_item": "Q307319"
+          },
+          "terms": {
+            "description": [
+              "日本のダンス&ボーカルユニット"
+            ]
+          }
+        },
+        {
+          "pageid": 2097544,
+          "ns": 0,
+          "title": "私立恵比寿中学",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しりつえひすちゆうかく",
+            "wikibase_item": "Q1336013"
+          },
+          "terms": {
+            "description": [
+              "日本の8人組ガールズグループ (2009-)"
+            ]
+          }
+        },
+        {
+          "pageid": 2257270,
+          "ns": 0,
+          "title": "友達の唄 (BUMP OF CHICKENの曲)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ともたちのうた",
+            "wikibase_item": "Q11410382"
+          }
+        },
+        {
+          "pageid": 2825780,
+          "ns": 0,
+          "title": "小室哲哉",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こむろ てつや",
+            "page_image_free": "MTV_VMAJ_2014_Tetsuya_Komuro_(cropped).jpg",
+            "wikibase_item": "Q719205"
+          },
+          "terms": {
+            "description": [
+              "日本のミュージシャン、ソングライター、音楽プロデューサー"
+            ]
+          }
+        },
+        {
+          "pageid": 2827436,
+          "ns": 0,
+          "title": "MAN WITH A MISSION",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "まんういすあみつしよん",
+            "page_image_free": "Japan_Expo_13_-_MAN_WITH_A_MISSION_-_2012-0705-_P1400914.jpg",
+            "wikibase_item": "Q3844218"
+          },
+          "terms": {
+            "description": [
+              "日本のロックバンド"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

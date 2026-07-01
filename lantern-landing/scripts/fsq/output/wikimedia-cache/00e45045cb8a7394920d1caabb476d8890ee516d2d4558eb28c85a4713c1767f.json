@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:44.386Z",
+  "value": {
+    "searchinfo": {
+      "search": "高麗博物館"
+    },
+    "search": [
+      {
+        "id": "Q6149067",
+        "title": "Q6149067",
+        "pageid": 5943578,
+        "concepturi": "http://www.wikidata.org/entity/Q6149067",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6149067",
+        "display": {
+          "label": {
+            "value": "Koryo Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Kaesong, North Korea",
+            "language": "en"
+          }
+        },
+        "label": "Koryo Museum",
+        "description": "museum in Kaesong, North Korea",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "高麗博物館"
+        },
+        "aliases": [
+          "高麗博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

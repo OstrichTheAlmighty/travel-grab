@@ -1,0 +1,75 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:09.361Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 116980,
+          "ns": 0,
+          "title": "阿久悠",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あく ゆう",
+            "wikibase_item": "Q1092277"
+          },
+          "terms": {
+            "description": [
+              "日本の作詞家、放送作家 (1937-2007)"
+            ]
+          }
+        },
+        {
+          "pageid": 3643519,
+          "ns": 0,
+          "title": "時代をつくった男 阿久悠物語",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "したいをつくったおとこあくゆうものかたり",
+            "wikibase_item": "Q38277787"
+          }
+        },
+        {
+          "pageid": 4596133,
+          "ns": 0,
+          "title": "あやとり (美空ひばりの曲)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あやとり",
+            "wikibase_item": "Q119346015"
+          },
+          "terms": {
+            "description": [
+              "美空ひばりの曲"
+            ]
+          }
+        },
+        {
+          "pageid": 4596135,
+          "ns": 0,
+          "title": "なつかしい場面",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なつかしいはめん",
+            "wikibase_item": "Q124497432"
+          }
+        },
+        {
+          "pageid": 4596144,
+          "ns": 0,
+          "title": "それでも私は生きている",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "それてもわたしはいきている",
+            "wikibase_item": "Q119346101"
+          }
+        }
+      ]
+    }
+  }
+}

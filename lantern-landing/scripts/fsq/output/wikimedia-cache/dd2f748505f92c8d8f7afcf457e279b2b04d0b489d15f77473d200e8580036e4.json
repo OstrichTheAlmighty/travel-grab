@@ -1,0 +1,21 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:40.448Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 636055,
+          "ns": 0,
+          "title": "フォートレス・エクスプロレーション",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふおおとれすえくすふろれえしよん",
+            "wikibase_item": "Q11332978"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:34.349Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 53117,
+          "ns": 0,
+          "title": "高円寺駅",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こうえんし",
+            "kartographer_frames": "1",
+            "page_image_free": "Koenji_station_southgate_2018.jpg",
+            "wikibase_item": "Q801056"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70538889,
+              "lon": 139.64986111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都杉並区高円寺南にある東日本旅客鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 59201,
+          "ns": 0,
+          "title": "祖師ヶ谷大蔵駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "そしかやおおくらえき",
+            "kartographer_frames": "1",
+            "page_image_free": "Odakyu_Soshigayaookura_sta_001.jpg",
+            "wikibase_item": "Q4429457"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64316667,
+              "lon": 139.60927778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区祖師谷にある小田急電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 95703,
+          "ns": 0,
+          "title": "繁華街",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はんかかい",
+            "page_image_free": "Ginza-WAKO_at_night.jpg",
+            "wikibase_item": "Q66364404"
+          },
+          "terms": {
+            "description": [
+              "百貨店や専門店、飲食店などの商業施設が多く立ち並び、人が多く集まる地域"
+            ]
+          }
+        },
+        {
+          "pageid": 124050,
+          "ns": 0,
+          "title": "高円寺",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こうえんし",
+            "wikibase_item": "Q3180833"
+          },
+          "terms": {
+            "description": [
+              "東京都杉並区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

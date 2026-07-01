@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:17.991Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 275186,
+          "ns": 0,
+          "title": "The Haunted Mansion",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Haunted Mansion, The",
+            "page_image_free": "The_Haunted_Mansion_logo.svg",
+            "wikibase-shortdesc": "Disney dark ride attraction",
+            "wikibase_item": "Q2030983"
+          },
+          "terms": {
+            "description": [
+              "dark ride type at Disney theme parks"
+            ]
+          }
+        },
+        {
+          "pageid": 288052,
+          "ns": 0,
+          "title": "Pirates of the Caribbean (attraction)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Pirates Of The Caribbean (Attraction)",
+            "page_image_free": "Pirates_of_the_Caribbean_(attraction)_logo.svg",
+            "wikibase-shortdesc": "Dark ride at Disney theme parks",
+            "wikibase_item": "Q1713564"
+          },
+          "terms": {
+            "description": [
+              "dark ride type at Disney theme parks"
+            ]
+          }
+        },
+        {
+          "pageid": 1009444,
+          "ns": 0,
+          "title": "Main Street Electrical Parade",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Main_Street_Electrical_Parade_-_Casey_Junior_2022.jpg",
+            "wikibase-shortdesc": "Parade at Disney theme parks",
+            "wikibase_item": "Q1754529"
+          },
+          "terms": {
+            "description": [
+              "parade at Disney theme parks"
+            ]
+          }
+        },
+        {
+          "pageid": 19498174,
+          "ns": 0,
+          "title": "Cars Toons",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Cars Toons",
+            "displaytitle": "<i>Cars Toons</i>",
+            "page_image": "Cars_Toons_-_Mater's_Tall_Tales_(logo).png",
+            "wikibase-shortdesc": "American animated short series by Pixar",
+            "wikibase_item": "Q665908"
+          },
+          "terms": {
+            "description": [
+              "American series of computer animated short films, started 2008"
+            ]
+          }
+        },
+        {
+          "pageid": 29384054,
+          "ns": 0,
+          "title": "List of incidents at Disneyland Resort",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Incidents at Disneyland Resort",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q6014636"
+          },
+          "terms": {
+            "description": [
+              "amusement park incidents or accidents"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

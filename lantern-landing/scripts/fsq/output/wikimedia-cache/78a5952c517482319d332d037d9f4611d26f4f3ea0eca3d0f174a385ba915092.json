@@ -1,0 +1,139 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:40.699Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1046,
+          "ns": 0,
+          "title": "弘前市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひろさきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Hirosaki_Montage.jpg",
+            "wikibase_item": "Q194087"
+          },
+          "coordinates": [
+            {
+              "lat": 40.60311,
+              "lon": 140.46383,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "青森県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 428611,
+          "ns": 0,
+          "title": "道の駅那須高原友愛の森",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みちのえきなすこうけんゆうあいのもり",
+            "kartographer_frames": "1",
+            "page_image_free": "Michinoeki_nasukogen_yuai_no_mori.jpg",
+            "wikibase_item": "Q11641527"
+          },
+          "coordinates": [
+            {
+              "lat": 37.04086,
+              "lon": 140.01394,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "栃木県那須郡那須町にある栃木県道17号の道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 925451,
+          "ns": 0,
+          "title": "道の駅ライスランドふかがわ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みちのえきらいすらんとふかかわ",
+            "kartographer_frames": "1",
+            "page_image_free": "Michinoeki_Rice_Land_Fukagawa.jpg",
+            "wikibase_item": "Q11641071"
+          },
+          "coordinates": [
+            {
+              "lat": 43.6995,
+              "lon": 142.07067,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道深川市にある国道12号の道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 1272572,
+          "ns": 0,
+          "title": "道の駅うつのみや ろまんちっく村",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みちのえきうつのみやろまんちつくむら",
+            "kartographer_frames": "1",
+            "page_image_free": "Michinoeki_Romanticmura.JPG",
+            "wikibase_item": "Q11640658"
+          },
+          "coordinates": [
+            {
+              "lat": 36.6333,
+              "lon": 139.8314,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "栃木県宇都宮市にある国道293号の道の駅・公園"
+            ]
+          }
+        },
+        {
+          "pageid": 2233943,
+          "ns": 0,
+          "title": "ヨーデルの森",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "よおてるのもり",
+            "page_image_free": "Yodel_Forest_Kamikawa_Town.JPG",
+            "wikibase_item": "Q11262664"
+          },
+          "coordinates": [
+            {
+              "lat": 35.13719444,
+              "lon": 134.79127778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県神崎郡神河町にある町立の農業公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

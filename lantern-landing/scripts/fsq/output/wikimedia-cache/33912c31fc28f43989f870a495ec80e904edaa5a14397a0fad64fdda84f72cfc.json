@@ -1,0 +1,27 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:49.415Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 2210599,
+          "ns": 0,
+          "title": "戸栗美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とくりひしゆつかん",
+            "page_image_free": "Toguri_Museum_of_Art_2010.jpg",
+            "wikibase_item": "Q11496415"
+          },
+          "terms": {
+            "description": [
+              "東京都渋谷区にある美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

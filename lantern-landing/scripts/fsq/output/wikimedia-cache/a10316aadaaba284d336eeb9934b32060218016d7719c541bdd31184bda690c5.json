@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:27.025Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 191213,
+          "ns": 0,
+          "title": "大橋ジャンクション",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おおはししやんくしよん",
+            "kartographer_frames": "1",
+            "page_image_free": "大橋ジャンクション.jpg",
+            "wikibase_item": "Q10936071"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65208333,
+              "lon": 139.68741667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都目黒区にある首都高速道路3号渋谷線と中央環状線を結ぶジャンクション"
+            ]
+          }
+        },
+        {
+          "pageid": 519532,
+          "ns": 0,
+          "title": "屋上庭園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おくしようていえん",
+            "page_image_free": "Hanging_Gardens_of_Babylon.jpg",
+            "wikibase_item": "Q1156696"
+          },
+          "terms": {
+            "description": [
+              "建築物の屋上などに造られた植栽を伴う庭園"
+            ]
+          }
+        },
+        {
+          "pageid": 3276873,
+          "ns": 0,
+          "title": "松戸市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "まつとし",
+            "kartographer_frames": "1",
+            "page_image_free": "Matsudo_montage.jpg",
+            "wikibase_item": "Q320943"
+          },
+          "coordinates": [
+            {
+              "lat": 35.78764,
+              "lon": 139.90317,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 5209325,
+          "ns": 0,
+          "title": "銚子市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちようしし",
+            "kartographer_frames": "1",
+            "page_image_free": "Choshi_Montage_2.jpg",
+            "wikibase_item": "Q694317"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73463889,
+              "lon": 140.82677778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県の市"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

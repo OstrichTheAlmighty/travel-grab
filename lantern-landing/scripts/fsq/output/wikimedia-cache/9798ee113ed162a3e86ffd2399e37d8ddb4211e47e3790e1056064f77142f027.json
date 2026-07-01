@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:49:05.710Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 122531,
+          "ns": 0,
+          "title": "ウォルト・ディズニー・カンパニー",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "うおるとていすにいかんはにい",
+            "page_image_free": "The_Walt_Disney_company_logo.svg",
+            "wikibase_item": "Q7414"
+          },
+          "terms": {
+            "description": [
+              "アメリカ合衆国の多国籍メディア・コングロマリット"
+            ]
+          }
+        },
+        {
+          "pageid": 211186,
+          "ns": 0,
+          "title": "ディズニー・チャンネル",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ていすにいちやんねる",
+            "page_image_free": "2024_Disney_Channel_text_logo.svg",
+            "wikibase_item": "Q178837"
+          },
+          "terms": {
+            "description": [
+              "ウォルト・ディズニー・テレビジョンが運営しているエンターテインメント専門チャンネル"
+            ]
+          }
+        },
+        {
+          "pageid": 486600,
+          "ns": 0,
+          "title": "東京ディズニーランドで終了したエンターテイメントの一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようていすにらんとてしゆうりようしたえんたあていめんとのいちらん",
+            "wikibase_item": "Q11524279"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 531956,
+          "ns": 0,
+          "title": "東京ディズニーリゾートの花火の一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいりそおとのはなひ",
+            "wikibase_item": "Q11524300"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 553603,
+          "ns": 0,
+          "title": "東京ディズニーリゾートのメディアの一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいりそおとのめていあ",
+            "wikibase_item": "Q11524297"
+          },
+          "terms": {
+            "description": [
+              "東京ディズニーリゾートのCD"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

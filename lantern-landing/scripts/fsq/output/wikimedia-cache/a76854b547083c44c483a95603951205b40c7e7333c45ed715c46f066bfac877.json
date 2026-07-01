@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:29.941Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 87329,
+          "ns": 0,
+          "title": "種痘",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しゆとう",
+            "page_image_free": "Smallpox_vaccine_injection.jpg",
+            "wikibase_item": "Q1037810"
+          },
+          "terms": {
+            "description": [
+              "天然痘の予防接種"
+            ]
+          }
+        },
+        {
+          "pageid": 96016,
+          "ns": 0,
+          "title": "箕作阮甫",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みつくり けんほ",
+            "page_image_free": "Mitsukuri_Genpo.jpg",
+            "wikibase_item": "Q6532054"
+          },
+          "terms": {
+            "description": [
+              "日本の武士、藩士、蘭学者"
+            ]
+          }
+        },
+        {
+          "pageid": 230412,
+          "ns": 0,
+          "title": "東松島市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひかしまつしまし",
+            "kartographer_frames": "1",
+            "page_image_free": "Mt._Ootakamori_01.jpg",
+            "wikibase_item": "Q511872"
+          },
+          "coordinates": [
+            {
+              "lat": 38.42639,
+              "lon": 141.21108,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "宮城県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 846216,
+          "ns": 0,
+          "title": "大槻俊斎",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおつき しゆんさい",
+            "page_image_free": "大槻俊斎.jpg",
+            "wikibase_item": "Q6531055"
+          },
+          "terms": {
+            "description": [
+              "日本の医師"
+            ]
+          }
+        },
+        {
+          "pageid": 2230529,
+          "ns": 0,
+          "title": "三井記念病院",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みついきねんひよういん",
+            "page_image_free": "Mitsui_Memorial_Hospital-1.JPG",
+            "wikibase_item": "Q11354313"
+          },
+          "terms": {
+            "description": [
+              "東京都千代田区にある医療機関"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

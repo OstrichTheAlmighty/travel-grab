@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:38.438Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 12688,
+          "ns": 0,
+          "title": "浮世絵",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "うきよえ",
+            "page_image_free": "MASANOBU-Theater.jpg",
+            "wikibase_item": "Q185905"
+          },
+          "terms": {
+            "description": [
+              "絵画のジャンル"
+            ]
+          }
+        },
+        {
+          "pageid": 50644,
+          "ns": 0,
+          "title": "大垣市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおかきし",
+            "kartographer_frames": "1",
+            "page_image_free": "船町港跡.jpg",
+            "wikibase_item": "Q384926"
+          },
+          "coordinates": [
+            {
+              "lat": 35.35994,
+              "lon": 136.61269,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "岐阜県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 140647,
+          "ns": 0,
+          "title": "日本の老舗一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんのしにせいちらん",
+            "wikibase_item": "Q11506070"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 161398,
+          "ns": 0,
+          "title": "蔦屋重三郎",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "つたや しゆうさふろう",
+            "page_image_free": "Tsutaya_juuzaburou.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q3541685"
+          },
+          "terms": {
+            "description": [
+              "日本の版元"
+            ]
+          }
+        },
+        {
+          "pageid": 1804784,
+          "ns": 0,
+          "title": "長野 (長野市)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "なかの",
+            "page_image_free": "Zenkoji_Temple_Hondo.jpg",
+            "wikibase_item": "Q11654093"
+          },
+          "terms": {
+            "description": [
+              "日本の長野県長野市の大字"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

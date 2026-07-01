@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:31.951Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 98018,
+          "ns": 0,
+          "title": "港区 (名古屋市)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みなとく",
+            "page_image_free": "Port_of_Nagoya_Public_Aquarium1.jpg",
+            "wikibase_item": "Q1207982"
+          },
+          "coordinates": [
+            {
+              "lat": 35.10775,
+              "lon": 136.88552778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県名古屋市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 223277,
+          "ns": 0,
+          "title": "外国人居留地",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かいこくしんきよりゆうち",
+            "page_image_free": "Kobe_bund_Japan_1872.jpg",
+            "wikibase_item": "Q11430357"
+          },
+          "terms": {
+            "description": [
+              "外国人の居留および交易区域として特に定めた一定地域"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 659285,
+          "ns": 0,
+          "title": "中央区 (東京都)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちゆうおうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Ginza-WAKO_at_night.jpg",
+            "wikibase_item": "Q212704"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67058,
+              "lon": 139.77197,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 1772445,
+          "ns": 0,
+          "title": "山本安英",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "やまもと やすえ",
+            "page_image_free": "Yamamoto_Yasue.JPG",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q11468994"
+          },
+          "terms": {
+            "description": [
+              "日本の女優 (1902-1993)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

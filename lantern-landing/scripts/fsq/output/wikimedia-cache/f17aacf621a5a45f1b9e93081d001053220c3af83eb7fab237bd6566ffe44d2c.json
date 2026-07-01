@@ -1,0 +1,84 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:13.559Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 59718,
+          "ns": 0,
+          "title": "ネクタイ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ねくたい",
+            "page_image_free": "Krawaty.jpg",
+            "wikibase_item": "Q44416"
+          }
+        },
+        {
+          "pageid": 792846,
+          "ns": 0,
+          "title": "斑入り",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふいり",
+            "page_image_free": "VariegatedHollyBush.jpg",
+            "wikibase_item": "Q1779564"
+          }
+        },
+        {
+          "pageid": 1120285,
+          "ns": 0,
+          "title": "四神",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ししん",
+            "page_image_free": "청룡_조선고적도보.jpg",
+            "wikibase_item": "Q1073260"
+          },
+          "terms": {
+            "description": [
+              "中国の霊獣"
+            ]
+          }
+        },
+        {
+          "pageid": 1282914,
+          "ns": 0,
+          "title": "こばと。",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こはと",
+            "wikibase_item": "Q1060036"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画"
+            ]
+          }
+        },
+        {
+          "pageid": 3710384,
+          "ns": 0,
+          "title": "やぐフェス",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "やくふえす",
+            "page_image_free": "YAGUFES20171203CIMG6976.jpg",
+            "wikibase_item": "Q48754592"
+          },
+          "terms": {
+            "description": [
+              "日本の音楽フェス、音楽番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

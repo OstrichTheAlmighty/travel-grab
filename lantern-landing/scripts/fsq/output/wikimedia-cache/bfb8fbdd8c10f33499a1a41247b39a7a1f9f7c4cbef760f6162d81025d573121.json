@@ -1,0 +1,50 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:16.096Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 7303,
+          "ns": 0,
+          "title": "サクラ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さくら",
+            "wikibase_item": "Q871991"
+          },
+          "terms": {
+            "description": [
+              "バラ目バラ科の樹木、およびその花"
+            ]
+          }
+        },
+        {
+          "pageid": 4512258,
+          "ns": 0,
+          "title": "染井吉野桜記念公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "そめいよしのさくらきねんこうえん",
+            "page_image_free": "Map_Tokyo_special_wards.svg",
+            "wikibase_item": "Q111822282"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73688889,
+              "lon": 139.74683333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある都市公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

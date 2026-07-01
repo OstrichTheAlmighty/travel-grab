@@ -1,0 +1,85 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:33.648Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 486600,
+          "ns": 0,
+          "title": "東京ディズニーランドで終了したエンターテイメントの一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようていすにらんとてしゆうりようしたえんたあていめんとのいちらん",
+            "wikibase_item": "Q11524279"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 518626,
+          "ns": 0,
+          "title": "クリスマス・ファンタジー",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "くりすますふあんたしい",
+            "wikibase_item": "Q11299317"
+          },
+          "terms": {
+            "description": [
+              "東京ディズニーランドで行われたスペシャルイベントの総称 (1983-2017)"
+            ]
+          }
+        },
+        {
+          "pageid": 847726,
+          "ns": 0,
+          "title": "ミュージック・フェスティバル・プログラム",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みゆうしつくふえすていはるふろくらむ",
+            "wikibase_item": "Q11342720"
+          }
+        },
+        {
+          "pageid": 1676187,
+          "ns": 0,
+          "title": "東京ディズニーランドで終了したステージショーの一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいらんとのしゆうりようしたれすてえししよう",
+            "wikibase_item": "Q11524286"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2402194,
+          "ns": 0,
+          "title": "東京ディズニーランドのグリーティングの一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "くりいていんく",
+            "wikibase_item": "Q11524281"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

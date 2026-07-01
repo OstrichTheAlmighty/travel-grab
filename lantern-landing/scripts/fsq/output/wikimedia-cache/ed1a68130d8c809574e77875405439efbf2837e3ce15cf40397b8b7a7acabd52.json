@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:23.893Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 49407,
+          "ns": 0,
+          "title": "徹子の部屋",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "てつこのへや",
+            "page_image_free": "Tetsuko_no_Heya.jpg",
+            "wikibase_item": "Q8013081"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ朝日の帯番組・トーク番組 (1976-)"
+            ]
+          }
+        },
+        {
+          "pageid": 70467,
+          "ns": 0,
+          "title": "MBSラジオ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "えむひいえすらしお",
+            "page_image_free": "MBS_media_holdings_headquarters_in_201909_001.jpg",
+            "wikibase_item": "Q11231233"
+          },
+          "terms": {
+            "description": [
+              "近畿広域圏のJRN・NRN系列ラジオ局"
+            ]
+          }
+        },
+        {
+          "pageid": 681078,
+          "ns": 0,
+          "title": "マシンガンズ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ましんかんす",
+            "page_image_free": "マシンガンズの2人.jpg",
+            "wikibase_item": "Q11340161"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71060833,
+              "lon": 139.69213333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本のお笑いコンビ"
+            ]
+          }
+        },
+        {
+          "pageid": 2629942,
+          "ns": 0,
+          "title": "SDN48",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えすていいえぬふおおていいえいと",
+            "page_image_free": "Gthumb.svg",
+            "wikibase_item": "Q181584"
+          },
+          "terms": {
+            "description": [
+              "日本の女性アイドルグループ (2009-2012)"
+            ]
+          }
+        },
+        {
+          "pageid": 2955044,
+          "ns": 0,
+          "title": "新田ひより",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "につた ひより",
+            "wikibase_item": "Q17212219"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:34.580Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3393,
+          "ns": 0,
+          "title": "三越",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みつこし",
+            "page_image_free": "Mitsukoshi_Nihonbashi_main_store_9.jpg",
+            "wikibase_item": "Q1065598"
+          },
+          "terms": {
+            "description": [
+              "日本の百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 98446,
+          "ns": 0,
+          "title": "中尾隆聖",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なかお りゆうせい",
+            "page_image_free": "Ryūsei_Nakao_(38122888406).jpg",
+            "wikibase_item": "Q1352269"
+          },
+          "terms": {
+            "description": [
+              "日本の声優、俳優、歌手"
+            ]
+          }
+        },
+        {
+          "pageid": 371904,
+          "ns": 0,
+          "title": "栗生明",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "くりゆう あきら",
+            "wikibase_item": "Q4701152"
+          },
+          "terms": {
+            "description": [
+              "日本の建築家  (1947-)"
+            ]
+          }
+        },
+        {
+          "pageid": 1608145,
+          "ns": 0,
+          "title": "松田実里",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "まつた みさと",
+            "wikibase_item": "Q11532043"
+          },
+          "terms": {
+            "description": [
+              "日本のタレント"
+            ]
+          }
+        },
+        {
+          "pageid": 2750917,
+          "ns": 0,
+          "title": "フェアリー日本橋",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふえありいにつほんはし",
+            "page_image_free": "フェアリー日本橋.JPG",
+            "wikibase_item": "Q11332614"
+          },
+          "terms": {
+            "description": [
+              "日本の女子プロレスラー"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

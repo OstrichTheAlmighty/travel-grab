@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:05.671Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 213286,
+          "ns": 0,
+          "title": "札幌第一高等学校",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さつほろたいいち",
+            "kartographer_frames": "1",
+            "page_image_free": "札幌第一高等学校校舎.jpg",
+            "wikibase_item": "Q11521464"
+          },
+          "coordinates": [
+            {
+              "lat": 43.02663889,
+              "lon": 141.39647222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "札幌市にある私立高校"
+            ]
+          }
+        },
+        {
+          "pageid": 361740,
+          "ns": 0,
+          "title": "GYAO!",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きやお",
+            "page_image_free": "GYAO_logo.svg",
+            "wikibase_item": "Q11221992"
+          },
+          "terms": {
+            "description": [
+              "日本の動画配信サービス"
+            ]
+          }
+        },
+        {
+          "pageid": 1069686,
+          "ns": 0,
+          "title": "小橋知子",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こはし ともこ",
+            "wikibase_item": "Q11462195"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優 (1980-)"
+            ]
+          }
+        },
+        {
+          "pageid": 1644118,
+          "ns": 0,
+          "title": "メゾネット",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めそねつと",
+            "page_image_free": "Wright_Model_F_Duplex.jpg",
+            "wikibase_item": "Q6453233"
+          }
+        },
+        {
+          "pageid": 4227056,
+          "ns": 0,
+          "title": "東京ポートシティ竹芝",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようほおとしていたけしは",
+            "page_image_free": "TOKYO_PORTCITY_TAKESHIBA_OFFICE_TOWER.jpg",
+            "wikibase_item": "Q109360038"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65511111,
+              "lon": 139.76061111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある複合施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

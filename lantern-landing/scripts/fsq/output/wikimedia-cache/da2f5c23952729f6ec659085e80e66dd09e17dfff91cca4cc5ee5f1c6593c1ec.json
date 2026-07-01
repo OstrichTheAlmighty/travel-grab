@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:38.306Z",
+  "value": {
+    "searchinfo": {
+      "search": "たばこと塩の博物館"
+    },
+    "search": [
+      {
+        "id": "Q11271253",
+        "title": "Q11271253",
+        "pageid": 12413490,
+        "concepturi": "http://www.wikidata.org/entity/Q11271253",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11271253",
+        "display": {
+          "label": {
+            "value": "Tobacco and Salt Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "Museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tobacco and Salt Museum",
+        "description": "Museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "たばこと塩の博物館"
+        },
+        "aliases": [
+          "たばこと塩の博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

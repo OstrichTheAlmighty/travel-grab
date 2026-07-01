@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:19.468Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 93242,
+          "ns": 0,
+          "title": "露天商",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ろてんしよう",
+            "page_image_free": "Street.hawker.in.rome.arp.jpg",
+            "wikibase_item": "Q3555589"
+          },
+          "terms": {
+            "description": [
+              "露天（屋外や青空の下）で商売をする者"
+            ]
+          }
+        },
+        {
+          "pageid": 631582,
+          "ns": 0,
+          "title": "笹塚 (渋谷区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ささつか",
+            "kartographer_frames": "1",
+            "page_image_free": "笹塚-18.JPG",
+            "wikibase_item": "Q11602515"
+          },
+          "terms": {
+            "description": [
+              "東京都渋谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1394988,
+          "ns": 0,
+          "title": "広谷順子",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひろたに しゆんこ",
+            "wikibase_item": "Q11485731"
+          },
+          "terms": {
+            "description": [
+              "日本の歌手、作曲家 (1956-2020)"
+            ]
+          }
+        },
+        {
+          "pageid": 1672998,
+          "ns": 0,
+          "title": "角川つばさ文庫",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かとかわつはさふんこ",
+            "wikibase_item": "Q11630713"
+          },
+          "terms": {
+            "description": [
+              "児童書レーベル"
+            ]
+          }
+        },
+        {
+          "pageid": 1801453,
+          "ns": 0,
+          "title": "上原 (渋谷区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "うえはら",
+            "kartographer_frames": "1",
+            "page_image_free": "Jasrac_head_office_shibuya.JPG",
+            "wikibase_item": "Q11358538"
+          },
+          "terms": {
+            "description": [
+              "東京都渋谷区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

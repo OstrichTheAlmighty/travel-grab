@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:07.080Z",
+  "value": {
+    "searchinfo": {
+      "search": "かむろ坂公園"
+    },
+    "search": [
+      {
+        "id": "Q42311976",
+        "title": "Q42311976",
+        "pageid": 43594212,
+        "concepturi": "http://www.wikidata.org/entity/Q42311976",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q42311976",
+        "display": {
+          "label": {
+            "value": "かむろ坂公園",
+            "language": "ja"
+          },
+          "description": {
+            "value": "park in Shinagawa, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "かむろ坂公園",
+        "description": "park in Shinagawa, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "かむろ坂公園"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

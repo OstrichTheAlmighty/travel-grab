@@ -1,0 +1,21 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:30.827Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 3139381,
+          "ns": 0,
+          "title": "英国一家、日本を食べる",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えいこくいつか にほんをたへる",
+            "wikibase_item": "Q20038952"
+          }
+        }
+      ]
+    }
+  }
+}

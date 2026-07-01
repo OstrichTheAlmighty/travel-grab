@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:19.177Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1111609,
+          "ns": 0,
+          "title": "各務原市立中央図書館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かかみかはらしりつちゆうおうとしよかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Kakamigahara-City-Chuou-Library-1.jpg",
+            "wikibase_item": "Q11412327"
+          },
+          "coordinates": [
+            {
+              "lat": 35.40005556,
+              "lon": 136.84266667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "岐阜県各務原市にある公共図書館"
+            ]
+          }
+        },
+        {
+          "pageid": 1193458,
+          "ns": 0,
+          "title": "中央区役所 (東京都)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちゆうおうくやくしよ",
+            "page_image_free": "Chuo_Ward_Office,_Tokyo_(2006.05).jpg",
+            "wikibase_item": "Q11363626"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67058333,
+              "lon": 139.772,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1576407,
+          "ns": 0,
+          "title": "白河中央スマートインターチェンジ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しらかわちゆうおうすまあといんたあちえんし",
+            "page_image_free": "Shirakawa_Chuo_SmartIC_120623_01.jpg",
+            "wikibase_item": "Q11579951"
+          },
+          "coordinates": [
+            {
+              "lat": 37.14702778,
+              "lon": 140.22033333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福島県白河市にある東北自動車道のインターチェンジ"
+            ]
+          }
+        },
+        {
+          "pageid": 2825700,
+          "ns": 0,
+          "title": "中央区立図書館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ちゆうおうくりつとしよかん",
+            "wikibase_item": "Q17214141"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区にある公共図書館"
+            ]
+          }
+        },
+        {
+          "pageid": 3319096,
+          "ns": 0,
+          "title": "日本のインターチェンジ一覧 ま行",
+          "index": 5,
+          "pageprops": {
+            "wikibase_item": "Q21652521"
+          }
+        }
+      ]
+    }
+  }
+}

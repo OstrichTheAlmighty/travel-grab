@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:03.425Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 45324,
+          "ns": 0,
+          "title": "Hogwarts",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Studio_model_of_Hogwarts_at_Leavesden_Studios.jpg",
+            "wikibase-shortdesc": "Fictional school in ''Harry Potter''",
+            "wikibase_item": "Q174097"
+          },
+          "terms": {
+            "description": [
+              "fictional Scottish school of magic from the Harry Potter universe"
+            ]
+          }
+        },
+        {
+          "pageid": 353317,
+          "ns": 0,
+          "title": "The Lady and the Unicorn",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Lady and the Unicorn, The",
+            "displaytitle": "<i>The Lady and the Unicorn</i>",
+            "page_image_free": "(Toulouse)_Mon_seul_désir_(La_Dame_à_la_licorne)_-_Musée_de_Cluny_Paris.jpg",
+            "wikibase-shortdesc": "Set of six French tapestries depicting unicorns created around 1500",
+            "wikibase_item": "Q2289754"
+          },
+          "terms": {
+            "description": [
+              "Collection of medieval tapestries, Musée national du Moyen Âge, Paris"
+            ]
+          }
+        },
+        {
+          "pageid": 670407,
+          "ns": 0,
+          "title": "Harry Potter and the Order of the Phoenix (film)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Harry Potter and the Order of the Phoenix (Film)",
+            "displaytitle": "<i>Harry Potter and the Order of the Phoenix</i> (film)",
+            "page_image": "Harry_Potter_and_the_Order_of_the_Phoenix_poster.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "2007 fantasy film directed by David Yates",
+            "wikibase_item": "Q102235"
+          },
+          "terms": {
+            "description": [
+              "2007 film directed by David Yates"
+            ]
+          }
+        },
+        {
+          "pageid": 7629286,
+          "ns": 0,
+          "title": "Harry Potter (film series)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Harry Potter (Film Series)",
+            "displaytitle": "<i>Harry Potter</i> (film series)",
+            "page_image_free": "Harry_Potter_logo.svg",
+            "wikibase-shortdesc": "Fantasy film series",
+            "wikibase_item": "Q216930"
+          },
+          "terms": {
+            "description": [
+              "film series of eight fantasy films from 2001–2011 based on the novels of the same name by writer J. K. Rowling"
+            ]
+          }
+        },
+        {
+          "pageid": 9622422,
+          "ns": 0,
+          "title": "Caput Draconis",
+          "index": 4,
+          "pageprops": {
+            "disambiguation": "",
+            "wikibase-shortdesc": "Topics referred to by the same term",
+            "wikibase_item": "Q5037146"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

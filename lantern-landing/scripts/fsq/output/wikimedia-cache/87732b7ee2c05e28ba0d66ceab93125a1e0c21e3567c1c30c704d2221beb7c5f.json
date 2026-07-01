@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:52.794Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 62779,
+          "ns": 0,
+          "title": "野川 (東京都)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "のかわ",
+            "kartographer_frames": "3",
+            "page_image_free": "調布市佐須町_野川、大橋_20260404.jpg",
+            "wikibase_item": "Q11645427"
+          },
+          "terms": {
+            "description": [
+              "東京都の川"
+            ]
+          }
+        },
+        {
+          "pageid": 123148,
+          "ns": 0,
+          "title": "国道133号",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こくとう133",
+            "kartographer_frames": "1",
+            "page_image_free": "R016-2-006.jpg",
+            "wikibase_item": "Q6156773"
+          },
+          "terms": {
+            "description": [
+              "神奈川県を通る一般国道"
+            ]
+          }
+        },
+        {
+          "pageid": 507568,
+          "ns": 0,
+          "title": "かながわの橋100選",
+          "index": 5,
+          "pageprops": {
+            "wikibase_item": "Q11264011"
+          }
+        },
+        {
+          "pageid": 1303638,
+          "ns": 0,
+          "title": "三橋 (さいたま市)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みはし",
+            "page_image_free": "Shin-Omiya_bypass,Mihashi5.JPG",
+            "wikibase_item": "Q11355996"
+          },
+          "terms": {
+            "description": [
+              "埼玉県さいたま市大宮区および西区の町丁"
+            ]
+          }
+        },
+        {
+          "pageid": 2742108,
+          "ns": 0,
+          "title": "和泉川 (神奈川県)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いすみかわ",
+            "kartographer_frames": "3",
+            "page_image_free": "Izumi_River_in_Yokohama.jpg",
+            "wikibase_item": "Q11417786"
+          },
+          "terms": {
+            "description": [
+              "神奈川県横浜市の川"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

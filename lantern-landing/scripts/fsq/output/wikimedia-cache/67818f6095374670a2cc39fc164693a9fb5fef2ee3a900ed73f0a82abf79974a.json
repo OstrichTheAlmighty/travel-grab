@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:45:50.006Z",
+  "value": {
+    "searchinfo": {
+      "search": "アートアクアリウム美術館 GINZA"
+    },
+    "search": [
+      {
+        "id": "Q116921556",
+        "title": "Q116921556",
+        "pageid": 111685109,
+        "concepturi": "http://www.wikidata.org/entity/Q116921556",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q116921556",
+        "display": {
+          "label": {
+            "value": "Art Aquarium Museum",
+            "language": "en"
+          }
+        },
+        "label": "Art Aquarium Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "アートアクアリウム美術館 GINZA"
+        },
+        "aliases": [
+          "アートアクアリウム美術館 GINZA"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

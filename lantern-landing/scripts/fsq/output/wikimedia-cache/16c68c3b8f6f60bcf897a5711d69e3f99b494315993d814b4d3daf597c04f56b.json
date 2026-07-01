@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:12.441Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 258785,
+          "ns": 0,
+          "title": "世田谷区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "せたかやく",
+            "kartographer_frames": "1",
+            "page_image_free": "Seijo_namikimichi_231011.jpg",
+            "wikibase_item": "Q231645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64656,
+              "lon": 139.65322,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 651205,
+          "ns": 0,
+          "title": "菊池容斎",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きくち ようさい",
+            "page_image_free": "Kikuchi_Yōsai.jpg",
+            "wikibase_item": "Q700019"
+          },
+          "terms": {
+            "description": [
+              "1788-1878, 幕末～明治時代初期の絵師"
+            ]
+          }
+        },
+        {
+          "pageid": 1154018,
+          "ns": 0,
+          "title": "世田谷 (世田谷区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せたかや",
+            "kartographer_frames": "1",
+            "page_image_free": "Setagaya_Ward_Office_2009.jpg",
+            "wikibase_item": "Q11362055"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 3419053,
+          "ns": 0,
+          "title": "世田谷代官屋敷",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せたかやたいかんやしき",
+            "page_image_free": "世田谷代官屋敷の表門.jpg",
+            "wikibase_item": "Q24859574"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64138889,
+              "lon": 139.64766667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区にある、彦根藩の代官大場家の役宅"
+            ]
+          }
+        },
+        {
+          "pageid": 4536548,
+          "ns": 0,
+          "title": "世田谷区立郷土資料館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せたかやくりつきようとしりようかん",
+            "page_image_free": "Setagaya_Museum_of_History.JPG",
+            "wikibase_item": "Q104708389"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64122222,
+              "lon": 139.64722222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

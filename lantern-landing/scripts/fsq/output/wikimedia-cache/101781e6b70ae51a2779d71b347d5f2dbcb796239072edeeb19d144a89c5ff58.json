@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:43.888Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8731,
+          "ns": 0,
+          "title": "江戸",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "えと",
+            "wikibase_item": "Q215646"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸幕府の拠点都市"
+            ]
+          }
+        },
+        {
+          "pageid": 63865,
+          "ns": 0,
+          "title": "築地市場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "つきしいちは",
+            "page_image_free": "2018_Tsukiji_fish_market.jpg",
+            "wikibase_item": "Q859471"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66138889,
+              "lon": 139.76972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて東京都中央区築地に存在した公設卸売市場"
+            ]
+          }
+        },
+        {
+          "pageid": 103335,
+          "ns": 0,
+          "title": "築地",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "つきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Tsukiji_2015.jpg",
+            "wikibase_item": "Q1201337"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 659285,
+          "ns": 0,
+          "title": "中央区 (東京都)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ちゆうおうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Ginza-WAKO_at_night.jpg",
+            "wikibase_item": "Q212704"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67058,
+              "lon": 139.77197,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 1438571,
+          "ns": 0,
+          "title": "江戸藩邸",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "えとはんてい",
+            "page_image_free": "Matsudaira_residence_Edo_P2.jpg",
+            "wikibase_item": "Q11551112"
+          },
+          "terms": {
+            "description": [
+              "江戸時代に江戸に置かれた藩の屋敷"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

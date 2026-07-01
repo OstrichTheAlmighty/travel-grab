@@ -1,0 +1,119 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:29.433Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18792,
+          "ns": 0,
+          "title": "文京区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふんきようく",
+            "kartographer_frames": "1",
+            "page_image_free": "Akamon,_University_of_Tokyo_2019.jpg",
+            "wikibase_item": "Q212713"
+          },
+          "coordinates": [
+            {
+              "lat": 35.708,
+              "lon": 139.75225,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 354211,
+          "ns": 0,
+          "title": "藤田観光",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふしたかんこう",
+            "wikibase_item": "Q11624896"
+          },
+          "terms": {
+            "description": [
+              "東京都文京区関口に本社を置く企業"
+            ]
+          }
+        },
+        {
+          "pageid": 560053,
+          "ns": 0,
+          "title": "椿山荘",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちんさんそう",
+            "kartographer_frames": "1",
+            "page_image_free": "Chinzansou.jpg",
+            "wikibase_item": "Q4404495"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71222222,
+              "lon": 139.72611111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある庭園"
+            ]
+          }
+        },
+        {
+          "pageid": 1138933,
+          "ns": 0,
+          "title": "ホテル椿山荘東京",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ほてるちんさんそうとうきよう",
+            "page_image_free": "Chinzansou.jpg",
+            "wikibase_item": "Q5911367"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71111111,
+              "lon": 139.72694444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にあるホテル"
+            ]
+          }
+        },
+        {
+          "pageid": 1559784,
+          "ns": 0,
+          "title": "伊藤邦衛",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いとう くにえ",
+            "wikibase_item": "Q10314798"
+          },
+          "terms": {
+            "description": [
+              "日本の建築家 (1924-2016)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

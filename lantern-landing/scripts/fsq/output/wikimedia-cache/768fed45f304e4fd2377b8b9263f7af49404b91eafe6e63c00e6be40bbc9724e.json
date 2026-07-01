@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:07.654Z",
+  "value": {
+    "searchinfo": {
+      "search": "保善寺"
+    },
+    "search": [
+      {
+        "id": "Q97310648",
+        "title": "Q97310648",
+        "pageid": 95741379,
+        "concepturi": "http://www.wikidata.org/entity/Q97310648",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q97310648",
+        "display": {
+          "label": {
+            "value": "Hozen-ji Temple",
+            "language": "en"
+          },
+          "description": {
+            "value": "temple in Nakano-ku, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Hozen-ji Temple",
+        "description": "temple in Nakano-ku, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "保善寺"
+        },
+        "aliases": [
+          "保善寺"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

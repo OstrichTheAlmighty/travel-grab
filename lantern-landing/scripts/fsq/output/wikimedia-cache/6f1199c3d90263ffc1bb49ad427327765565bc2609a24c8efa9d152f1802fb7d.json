@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:20.783Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 32918,
+          "ns": 0,
+          "title": "近鉄百貨店",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きんてつひやつかてん",
+            "page_image_free": "Abeno_Harukas_Osaka_Japan01-r.jpg",
+            "wikibase_item": "Q6414357"
+          },
+          "coordinates": [
+            {
+              "lat": 34.64605556,
+              "lon": 135.51347222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 63211,
+          "ns": 0,
+          "title": "若本規夫",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "わかもと のりお",
+            "page_image_free": "Norio_Wakamoto.jpg",
+            "wikibase_item": "Q943062"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優 (1945-)"
+            ]
+          }
+        },
+        {
+          "pageid": 805074,
+          "ns": 0,
+          "title": "バンプレストオリジナルの機動兵器一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はんふれすとおりしなるのきとうへいきいちらん",
+            "wikibase_item": "Q6586041"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2281149,
+          "ns": 0,
+          "title": "TIGER & BUNNY",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たいかああんとはにい",
+            "wikibase_item": "Q1201022"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビアニメ番組、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 2808085,
+          "ns": 0,
+          "title": "古川慎",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふるかわ まこと",
+            "wikibase_item": "Q11411149"
+          },
+          "terms": {
+            "description": [
+              "日本の声優、歌手"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

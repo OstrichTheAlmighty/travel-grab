@@ -1,0 +1,43 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:10.377Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 4097,
+          "ns": 0,
+          "title": "南方熊楠",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みなかた くまくす",
+            "page_image_free": "Minakata-Kumagusu.jpg",
+            "wikibase_item": "Q6862791"
+          },
+          "terms": {
+            "description": [
+              "日本の博物学者、生物学者、民俗学者 (1867-1941)"
+            ]
+          }
+        },
+        {
+          "pageid": 378023,
+          "ns": 0,
+          "title": "望月圭介",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "もちつき けいすけ",
+            "page_image_free": "Keisuke_mochizuki.jpg",
+            "wikibase_item": "Q3183689"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家 (1867-1941)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

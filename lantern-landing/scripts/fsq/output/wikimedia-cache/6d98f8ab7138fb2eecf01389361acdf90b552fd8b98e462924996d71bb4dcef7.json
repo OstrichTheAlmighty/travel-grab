@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:09.555Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 11237,
+          "ns": 0,
+          "title": "FA Cup",
+          "index": 1,
+          "pageprops": {
+            "page_image": "FA_Cup_logo_(2020).svg",
+            "wikibase-shortdesc": "Association football tournament",
+            "wikibase_item": "Q11151"
+          },
+          "terms": {
+            "description": [
+              "annual knockout football competition"
+            ]
+          }
+        },
+        {
+          "pageid": 95323,
+          "ns": 0,
+          "title": "Solfège",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Solfege",
+            "wikibase-shortdesc": "Musical pitch reference system",
+            "wikibase_item": "Q159563"
+          },
+          "terms": {
+            "description": [
+              "system of describing and teaching notes of a musical scale"
+            ]
+          }
+        },
+        {
+          "pageid": 165813,
+          "ns": 0,
+          "title": "Manchester City F.C.",
+          "index": 5,
+          "pageprops": {
+            "page_image": "Manchester_City_FC_badge.svg",
+            "wikibase-badge-Q17437796": "",
+            "wikibase-shortdesc": "Association football club in England",
+            "wikibase_item": "Q50602"
+          },
+          "terms": {
+            "description": [
+              "association football club in Manchester, England"
+            ]
+          }
+        },
+        {
+          "pageid": 14692370,
+          "ns": 0,
+          "title": "History of the FA Cup",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "History Of The Fa Cup",
+            "wikibase-shortdesc": "Aspect of footballing history",
+            "wikibase_item": "Q5869421"
+          },
+          "terms": {
+            "description": [
+              "aspect of history"
+            ]
+          }
+        },
+        {
+          "pageid": 47933486,
+          "ns": 0,
+          "title": "FaZe Clan",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Faze_Clan.svg",
+            "toc": "",
+            "wikibase-shortdesc": "Professional esports and former entertainment organization",
+            "wikibase_item": "Q21161576"
+          },
+          "terms": {
+            "description": [
+              "esports organization based in Los Angeles, California, USA"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

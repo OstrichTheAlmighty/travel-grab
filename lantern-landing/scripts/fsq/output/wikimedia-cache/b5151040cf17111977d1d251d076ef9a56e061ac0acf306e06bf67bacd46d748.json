@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:19.505Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 401,
+          "ns": 0,
+          "title": "滋賀県",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しかけん",
+            "page_image_free": "Chikubusumajinja01s3200.jpg",
+            "wikibase_item": "Q131358"
+          },
+          "coordinates": [
+            {
+              "lat": 35.00436,
+              "lon": 135.8685,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の都道府県"
+            ]
+          }
+        },
+        {
+          "pageid": 14281,
+          "ns": 0,
+          "title": "季語一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きこいちらん",
+            "toc": "",
+            "wikibase_item": "Q6624638"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 226985,
+          "ns": 0,
+          "title": "かすみがうら市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かすみかうらし",
+            "kartographer_frames": "1",
+            "page_image_free": "Lake_Kasumigaura_from_Kasumigaura_City_01.jpg",
+            "wikibase_item": "Q772817"
+          },
+          "coordinates": [
+            {
+              "lat": 36.15175,
+              "lon": 140.23711,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "茨城県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 533307,
+          "ns": 0,
+          "title": "佐竹義重 (十八代当主)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さたけ よししけ",
+            "page_image_free": "佐竹義重（佐竹氏第18代）の位署と花押.jpg",
+            "wikibase_item": "Q1133798"
+          },
+          "terms": {
+            "description": [
+              "戦国時代から江戸時代初期の武将。常陸国の戦国大名。佐竹氏18代。常陸介"
+            ]
+          }
+        },
+        {
+          "pageid": 1502449,
+          "ns": 0,
+          "title": "現代恐怖サスペンス",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "けんたいきようふさすへんす",
+            "wikibase_item": "Q11573407"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:35.983Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 277080,
+          "ns": 0,
+          "title": "兵庫県立淡路夢舞台温室あわじグリーン館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひようこけんりつあわしゆめふたいおんしつあわしくりいんかん",
+            "kartographer_frames": "1",
+            "page_image_free": "MPMOP11s3.jpg",
+            "wikibase_item": "Q848820"
+          },
+          "coordinates": [
+            {
+              "lat": 34.56177778,
+              "lon": 135.00841667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県淡路市にある屋内植物園"
+            ]
+          }
+        },
+        {
+          "pageid": 510250,
+          "ns": 0,
+          "title": "夢の島熱帯植物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ゆめのしまねつたいしよくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Yumenoshima_Tropical_Greenhouse_Dome.jpg",
+            "wikibase_item": "Q4388023"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65125,
+              "lon": 139.82944444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区の夢の島公園にある植物園"
+            ]
+          }
+        },
+        {
+          "pageid": 540907,
+          "ns": 0,
+          "title": "夢の島公園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ゆめのしまこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Akahata_Matsuri_02.jpg",
+            "wikibase_item": "Q11431452"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65108333,
+              "lon": 139.82777778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1243927,
+          "ns": 0,
+          "title": "夢の島",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ゆめのしま",
+            "kartographer_frames": "1",
+            "page_image_free": "Yumenoshima_Stadium_1.JPG",
+            "wikibase_item": "Q11431451"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 3935851,
+          "ns": 0,
+          "title": "板橋区立熱帯環境植物館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いたはしくりつねつたいかんきようしよくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Itabashi_Botanical_Garden_2019-02-27_(01).jpg",
+            "wikibase_item": "Q9011001"
+          },
+          "coordinates": [
+            {
+              "lat": 35.79194444,
+              "lon": 139.66411111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都板橋区にある室内植物園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

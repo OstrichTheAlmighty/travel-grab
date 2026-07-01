@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:06.732Z",
+  "value": {
+    "searchinfo": {
+      "search": "The University Art Museum, Tokyo University of The Art"
+    },
+    "search": [
+      {
+        "id": "Q11525123",
+        "title": "Q11525123",
+        "pageid": 12664997,
+        "concepturi": "http://www.wikidata.org/entity/Q11525123",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11525123",
+        "display": {
+          "label": {
+            "value": "The University Art Museum, Tokyo University of the Arts",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Toride, Ibaraki and Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "The University Art Museum, Tokyo University of the Arts",
+        "description": "museum in Toride, Ibaraki and Tokyo",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "The University Art Museum, Tokyo University of the Arts"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

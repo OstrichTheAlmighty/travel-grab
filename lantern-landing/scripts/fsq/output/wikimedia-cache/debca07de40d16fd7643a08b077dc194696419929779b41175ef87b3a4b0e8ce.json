@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:09.997Z",
+  "value": {
+    "searchinfo": {
+      "search": "荏原 畠山美術館"
+    },
+    "search": [
+      {
+        "id": "Q3330210",
+        "title": "Q3330210",
+        "pageid": 3175031,
+        "concepturi": "http://www.wikidata.org/entity/Q3330210",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3330210",
+        "display": {
+          "label": {
+            "value": "Ebara Hatakeyama Museum of Art",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum in Shirokanedai Minato-ku Tokyo Japan",
+            "language": "en"
+          }
+        },
+        "label": "Ebara Hatakeyama Museum of Art",
+        "description": "art museum in Shirokanedai Minato-ku Tokyo Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "荏原 畠山美術館"
+        },
+        "aliases": [
+          "荏原 畠山美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

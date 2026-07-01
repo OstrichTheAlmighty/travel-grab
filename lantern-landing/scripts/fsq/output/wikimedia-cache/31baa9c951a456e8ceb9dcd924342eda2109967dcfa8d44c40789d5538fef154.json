@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:31.115Z",
+  "value": {
+    "searchinfo": {
+      "search": "世田谷美術館"
+    },
+    "search": [
+      {
+        "id": "Q3892314",
+        "title": "Q3892314",
+        "pageid": 3713871,
+        "concepturi": "http://www.wikidata.org/entity/Q3892314",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3892314",
+        "display": {
+          "label": {
+            "value": "Setagaya Art Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Setagaya Art Museum",
+        "description": "art museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "世田谷美術館"
+        },
+        "aliases": [
+          "世田谷美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

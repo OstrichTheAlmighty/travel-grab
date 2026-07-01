@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:14.967Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8251,
+          "ns": 0,
+          "title": "江東区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こうとうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tomioka_Hachiman-gu_201708.jpg",
+            "wikibase_item": "Q215175"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67281,
+              "lon": 139.81728,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 23631,
+          "ns": 0,
+          "title": "佐賀市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さかし",
+            "kartographer_frames": "3",
+            "page_image_free": "Saga_Montage.jpg",
+            "wikibase_item": "Q209766"
+          },
+          "coordinates": [
+            {
+              "lat": 33.2635,
+              "lon": 130.30083,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "佐賀県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 149180,
+          "ns": 0,
+          "title": "三井E&S",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みついいあんとえす",
+            "page_image_free": "MITSUI_E&S_Logo.svg",
+            "wikibase_item": "Q6883239"
+          },
+          "terms": {
+            "description": [
+              "日本の重工業メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 254373,
+          "ns": 0,
+          "title": "寿司",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すし",
+            "page_image_free": "Various_sushi,_beautiful_October_night_at_midnight.jpg",
+            "wikibase_item": "Q46383"
+          },
+          "terms": {
+            "description": [
+              "米飯と主に魚介類を組み合わせた日本料理"
+            ]
+          }
+        },
+        {
+          "pageid": 1054587,
+          "ns": 0,
+          "title": "江戸前の旬",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "えとまえのしゆん",
+            "wikibase_item": "Q11550996"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画作品、テレビドラマ番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:18.923Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4694,
+          "ns": 0,
+          "title": "ジュビロ磐田",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しゆひろいわた",
+            "graph-data-sources": "inline:36\n\ninline:24",
+            "page_image_free": "Yamahastafium05161.JPG",
+            "wikibase_item": "Q855401"
+          },
+          "terms": {
+            "description": [
+              "日本のサッカークラブ"
+            ]
+          }
+        },
+        {
+          "pageid": 1384627,
+          "ns": 0,
+          "title": "阪神甲子園球場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はんしんこうしえんきゆうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "202309081549_IMG_3516.jpg",
+            "wikibase_item": "Q959811"
+          },
+          "terms": {
+            "description": [
+              "兵庫県西宮市にある野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 1790929,
+          "ns": 0,
+          "title": "サッカー",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さつかあ",
+            "page_image_free": "Germany_and_Argentina_face_off_in_the_final_of_the_World_Cup_2014_04_crop.jpg",
+            "wikibase_item": "Q2736"
+          },
+          "terms": {
+            "description": [
+              "チームスポーツ"
+            ]
+          }
+        },
+        {
+          "pageid": 1812613,
+          "ns": 0,
+          "title": "ドリームクラブ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とりいむくらふ",
+            "wikibase_item": "Q5306338"
+          },
+          "terms": {
+            "description": [
+              "2009年のディースリー・パブリッシャーの恋愛シミュレーションゲーム"
+            ]
+          }
+        },
+        {
+          "pageid": 1892137,
+          "ns": 0,
+          "title": "日韓クラブチャンピオンシップ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "につかんくらふちやんひおんしつふ",
+            "wikibase_item": "Q16057848"
+          }
+        }
+      ]
+    }
+  }
+}

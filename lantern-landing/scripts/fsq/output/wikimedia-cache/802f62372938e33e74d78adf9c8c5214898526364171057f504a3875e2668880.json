@@ -1,0 +1,128 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:43.502Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 450,
+          "ns": 0,
+          "title": "和歌山県",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "わかやまけん",
+            "kartographer_frames": "1",
+            "page_image_free": "Nachi_Falls_201908-2.jpg",
+            "wikibase_item": "Q131314"
+          },
+          "coordinates": [
+            {
+              "lat": 34.22603,
+              "lon": 135.1675,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の都道府県"
+            ]
+          }
+        },
+        {
+          "pageid": 91346,
+          "ns": 0,
+          "title": "園城寺",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おんしようし",
+            "page_image_free": "Mii-dera_Otsu_Shiga_pref01s5s4592.jpg",
+            "wikibase_item": "Q1756307"
+          },
+          "coordinates": [
+            {
+              "lat": 35.01335833,
+              "lon": 135.85285,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "滋賀県大津市にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 111197,
+          "ns": 0,
+          "title": "瀧泉寺",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "りゆうせんし",
+            "page_image_free": "Meguro-fudou-hondou.jpg",
+            "wikibase_item": "Q6587237"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62861111,
+              "lon": 139.70805556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都目黒区の仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 537408,
+          "ns": 0,
+          "title": "静岡県指定文化財一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふんかさいいちらん",
+            "wikibase_item": "Q11663088"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1153067,
+          "ns": 0,
+          "title": "青龍寺 (土佐市)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しようりゆうし",
+            "kartographer_frames": "1",
+            "page_image_free": "Syouryuzi_03.jpg",
+            "wikibase_item": "Q11662839"
+          },
+          "coordinates": [
+            {
+              "lat": 33.426,
+              "lon": 133.45080556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "高知県土佐市にある寺院、四国八十八箇所霊場の第三十六番札所"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

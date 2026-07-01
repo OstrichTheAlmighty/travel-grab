@@ -1,0 +1,87 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:43:01.850Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 189189,
+          "ns": 0,
+          "title": "白石町",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しろいしちよう",
+            "page_image_free": "歌垣公園_-_panoramio.jpg",
+            "wikibase_item": "Q1206958"
+          },
+          "coordinates": [
+            {
+              "lat": 33.18106,
+              "lon": 130.14344,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "佐賀県杵島郡の町"
+            ]
+          }
+        },
+        {
+          "pageid": 360535,
+          "ns": 0,
+          "title": "マルナカ (チェーンストア)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "まるなか",
+            "page_image_free": "Marunaka田町.jpg",
+            "wikibase_item": "Q11341399"
+          },
+          "terms": {
+            "description": [
+              "イオングループのフジが展開するスーパーマーケットの店舗ブランド"
+            ]
+          }
+        },
+        {
+          "pageid": 1238387,
+          "ns": 0,
+          "title": "ラブ&ファイト",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "らふあんとふあいと",
+            "wikibase_item": "Q11347272"
+          }
+        },
+        {
+          "pageid": 1700870,
+          "ns": 0,
+          "title": "ラクセーヌ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "らくせえぬ",
+            "kartographer_frames": "1",
+            "page_image_free": "ラクセーヌ_02.jpg",
+            "wikibase_item": "Q11346670"
+          }
+        },
+        {
+          "pageid": 2546089,
+          "ns": 0,
+          "title": "ぼくのまち わたしのまち",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ほくのまちわたしのまち",
+            "wikibase_item": "Q11277952"
+          }
+        }
+      ]
+    }
+  }
+}

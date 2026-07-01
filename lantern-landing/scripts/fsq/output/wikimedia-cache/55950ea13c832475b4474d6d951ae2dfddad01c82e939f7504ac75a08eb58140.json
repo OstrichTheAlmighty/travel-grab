@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:24.659Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 19839,
+          "ns": 0,
+          "title": "東京国立近代美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようこくりつきんたいひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "National_Museum_of_Modern_Art_Tokyo.jpg",
+            "wikibase_item": "Q1359908"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69050833,
+              "lon": 139.75465278,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北の丸公園にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 164868,
+          "ns": 0,
+          "title": "美術館の一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひしゆつかんのいちらん",
+            "toc": "",
+            "wikibase_item": "Q6606159"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 188753,
+          "ns": 0,
+          "title": "日本の文化",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にほんのふんか",
+            "page_image_free": "Rukujogosho_hanami.jpg",
+            "wikibase_item": "Q831454"
+          },
+          "terms": {
+            "description": [
+              "日本における文化"
+            ]
+          }
+        },
+        {
+          "pageid": 380487,
+          "ns": 0,
+          "title": "山本悍右",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やまもと かんすけ",
+            "page_image_free": "KansukeYamamotoPicture.jpg",
+            "wikibase_item": "Q5102948"
+          },
+          "terms": {
+            "description": [
+              "日本の前衛芸術家・写真家・詩人・編集者・出版者（1914–1987）"
+            ]
+          }
+        },
+        {
+          "pageid": 930769,
+          "ns": 0,
+          "title": "DOCOMOMO",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とこもも",
+            "wikibase_item": "Q286911"
+          },
+          "terms": {
+            "description": [
+              "近代運動の建物や遺跡、近隣地域の記録と保存を専門とする国際組織。またはその日本支部。"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

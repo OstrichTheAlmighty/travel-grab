@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:23.937Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 53803,
+          "ns": 0,
+          "title": "IBC岩手放送",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あいひしいわてほうそう",
+            "page_image_free": "Iwate_Ibc_logo.svg",
+            "wikibase_item": "Q843452"
+          },
+          "coordinates": [
+            {
+              "lat": 39.69858333,
+              "lon": 141.16161111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "岩手県のTBSテレビ系列局、およびJRN・NRN系列ラジオ局"
+            ]
+          }
+        },
+        {
+          "pageid": 472739,
+          "ns": 0,
+          "title": "名古屋大学の人物一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なこや",
+            "wikibase_item": "Q11414905"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 700958,
+          "ns": 0,
+          "title": "ドキュメント72時間",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ときゆめんとななしゆうにしかん",
+            "page_image_free": "Documentary_72_hours_2015-1.jpg",
+            "wikibase_item": "Q11322583"
+          },
+          "terms": {
+            "description": [
+              "NHK総合テレビで放送されているドキュメンタリー番組"
+            ]
+          }
+        },
+        {
+          "pageid": 1906024,
+          "ns": 0,
+          "title": "空から日本を見てみよう",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "そらからにほんをみてみよう",
+            "wikibase_item": "Q11597289"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 4677853,
+          "ns": 0,
+          "title": "2023年の日本",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "2023ねんのにほん",
+            "page_image_free": "Flag_of_Japan.svg",
+            "wikibase_item": "Q114875570"
+          }
+        }
+      ]
+    }
+  }
+}

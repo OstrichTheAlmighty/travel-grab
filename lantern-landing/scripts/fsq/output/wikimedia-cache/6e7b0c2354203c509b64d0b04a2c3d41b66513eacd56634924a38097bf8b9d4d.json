@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:24.882Z",
+  "value": {
+    "searchinfo": {
+      "search": "新宿歴史博物館"
+    },
+    "search": [
+      {
+        "id": "Q11501857",
+        "title": "Q11501857",
+        "pageid": 12641541,
+        "concepturi": "http://www.wikidata.org/entity/Q11501857",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11501857",
+        "display": {
+          "label": {
+            "value": "Shinjuku Historical Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "archive organization in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Shinjuku Historical Museum",
+        "description": "archive organization in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "新宿歴史博物館"
+        },
+        "aliases": [
+          "新宿歴史博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:53.741Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 11248,
+          "ns": 0,
+          "title": "成城学園前駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せいしようかくえんまええき",
+            "kartographer_frames": "1",
+            "page_image_free": "OER_Seijogakuen-Mae_Station_North.JPG",
+            "wikibase_item": "Q4448389"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64,
+              "lon": 139.59888889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区成城にある小田急電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 90579,
+          "ns": 0,
+          "title": "世田谷美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せたかやひゆつかん",
+            "page_image_free": "Setagaya_Art_Museum.jpg",
+            "wikibase_item": "Q3892314"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63158889,
+              "lon": 139.62189722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区の砧公園にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 258785,
+          "ns": 0,
+          "title": "世田谷区",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せたかやく",
+            "kartographer_frames": "1",
+            "page_image_free": "Seijo_namikimichi_231011.jpg",
+            "wikibase_item": "Q231645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64656,
+              "lon": 139.65322,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 541597,
+          "ns": 0,
+          "title": "成城",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "せいしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Seijouniv2012055.jpg",
+            "wikibase_item": "Q11251371"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1676539,
+          "ns": 0,
+          "title": "水野哲",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みすの てつ",
+            "wikibase_item": "Q11549364"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優、歌手"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

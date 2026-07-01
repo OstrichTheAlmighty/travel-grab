@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:43.250Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 41597,
+          "ns": 0,
+          "title": "ヤマト運輸",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "やまとうんゆ",
+            "page_image_free": "Yamato_Holdings_headquarters,_at_Ginza,_Chuo,_Tokyo_(2019-01-02)_04.jpg",
+            "toc": "",
+            "wikibase_item": "Q6584353"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67063889,
+              "lon": 139.77055556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の運送会社"
+            ]
+          }
+        },
+        {
+          "pageid": 369825,
+          "ns": 0,
+          "title": "ダイエー",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たいええ",
+            "page_image_free": "Daiei_logo.svg",
+            "wikibase_item": "Q3543891"
+          },
+          "terms": {
+            "description": [
+              "日本のスーパーマーケットを運営する企業"
+            ]
+          }
+        },
+        {
+          "pageid": 691347,
+          "ns": 0,
+          "title": "徳島市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とくしまし",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokushima_Montage2.jpg",
+            "wikibase_item": "Q207309"
+          },
+          "coordinates": [
+            {
+              "lat": 34.07028,
+              "lon": 134.55494,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "徳島県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 1928145,
+          "ns": 0,
+          "title": "慶應義塾大学の人物一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "けいおうきしゆくのしんふついちらん",
+            "wikibase_item": "Q11495144"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1932509,
+          "ns": 0,
+          "title": "船橋市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふなはしし",
+            "kartographer_frames": "1",
+            "page_image_free": "Funabashi_montage.jpg",
+            "wikibase_item": "Q271417"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69456,
+              "lon": 139.98256,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県の市"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

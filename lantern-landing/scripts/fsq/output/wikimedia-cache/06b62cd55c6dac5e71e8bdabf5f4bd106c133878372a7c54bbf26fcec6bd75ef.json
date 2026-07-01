@@ -1,0 +1,94 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:38.466Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 39703,
+          "ns": 0,
+          "title": "細川氏",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほそかわし",
+            "page_image_free": "Japanese_Crest_Hosokawa_Kuyou.svg",
+            "wikibase_item": "Q2736120"
+          },
+          "terms": {
+            "description": [
+              "日本の氏族"
+            ]
+          }
+        },
+        {
+          "pageid": 534468,
+          "ns": 0,
+          "title": "大名庭園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たいみようていえん",
+            "page_image_free": "Genkyuen10s3200.jpg",
+            "wikibase_item": "Q11433351"
+          },
+          "terms": {
+            "description": [
+              "江戸時代に大名が江戸や地元で築造した庭園"
+            ]
+          }
+        },
+        {
+          "pageid": 1041082,
+          "ns": 0,
+          "title": "肥後細川庭園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひこほそかわていえん",
+            "page_image_free": "Shin-Edogawa_Garden_(1).jpg",
+            "wikibase_item": "Q3162465"
+          },
+          "terms": {
+            "description": [
+              "東京都文京区にある公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1438571,
+          "ns": 0,
+          "title": "江戸藩邸",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "えとはんてい",
+            "page_image_free": "Matsudaira_residence_Edo_P2.jpg",
+            "wikibase_item": "Q11551112"
+          },
+          "terms": {
+            "description": [
+              "江戸時代に江戸に置かれた藩の屋敷"
+            ]
+          }
+        },
+        {
+          "pageid": 1559784,
+          "ns": 0,
+          "title": "伊藤邦衛",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いとう くにえ",
+            "wikibase_item": "Q10314798"
+          },
+          "terms": {
+            "description": [
+              "日本の建築家 (1924-2016)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

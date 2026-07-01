@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:36.995Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 148882,
+          "ns": 0,
+          "title": "Harajuku",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "JRE-Harajuku-Station-07.jpg",
+            "wikibase-shortdesc": "District in Shibuya, Tokyo, Japan",
+            "wikibase_item": "Q746573"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6685,
+              "lon": 139.7054,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "District in Shibuya, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 20343826,
+          "ns": 0,
+          "title": "Yasutaka Nakata",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Nakata, Yasutaka",
+            "page_image_free": "Yasutaka_Nakata.JPG",
+            "wikibase-shortdesc": "Japanese music producer and DJ",
+            "wikibase_item": "Q1196321"
+          },
+          "terms": {
+            "description": [
+              "Japanese music producer and DJ"
+            ]
+          }
+        },
+        {
+          "pageid": 32586579,
+          "ns": 0,
+          "title": "Kyary Pamyu Pamyu",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Pamyu Pamyu, Kyary",
+            "page_image_free": "Kyary_Pamyu_Pamyu_20120707_Japan_Expo_01.jpg",
+            "wikibase-shortdesc": "Japanese singer and model",
+            "wikibase_item": "Q242300"
+          },
+          "terms": {
+            "description": [
+              "Japanese singer, model and talent"
+            ]
+          }
+        },
+        {
+          "pageid": 46671643,
+          "ns": 0,
+          "title": "Kuu Kuu Harajuku",
+          "index": 2,
+          "pageprops": {
+            "displaytitle": "<i>Kuu Kuu Harajuku</i>",
+            "page_image": "Kuu_Kuu_Harajuku_character_logo.png",
+            "wikibase-shortdesc": "Children's animated television series",
+            "wikibase_item": "Q21539910"
+          },
+          "terms": {
+            "description": [
+              "animated television series"
+            ]
+          }
+        },
+        {
+          "pageid": 51853617,
+          "ns": 0,
+          "title": "List of Kuu Kuu Harajuku episodes",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Kuu Kuu Harajuku episodes, List of",
+            "displaytitle": "List of <i>Kuu Kuu Harajuku</i> episodes",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q33125813"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

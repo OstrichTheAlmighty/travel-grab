@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:30.465Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4605,
+          "ns": 0,
+          "title": "ウンシュウミカン",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "うんしゆうみかん",
+            "page_image_free": "Citrus_unshiu_20101127_c.jpg",
+            "wikibase_item": "Q875262"
+          },
+          "terms": {
+            "description": [
+              "ムクロジ目ミカン科ミカン属の常緑低木"
+            ]
+          }
+        },
+        {
+          "pageid": 19838,
+          "ns": 0,
+          "title": "栃木市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とちきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Tochigi_City_Montage.jpg",
+            "wikibase_item": "Q44830"
+          },
+          "coordinates": [
+            {
+              "lat": 36.38244,
+              "lon": 139.73414,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "栃木県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 209364,
+          "ns": 0,
+          "title": "さくら市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さくらし",
+            "kartographer_frames": "1",
+            "page_image_free": "Entrance_to_Kitsuregawa_Onsen.JPG",
+            "wikibase_item": "Q696394"
+          },
+          "coordinates": [
+            {
+              "lat": 36.68528,
+              "lon": 139.96642,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "栃木県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 265215,
+          "ns": 0,
+          "title": "蕎麦",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "そは",
+            "page_image_free": "Mori-soba_002.jpg",
+            "wikibase_item": "Q753910"
+          },
+          "terms": {
+            "description": [
+              "そば粉で作られた麺および料理"
+            ]
+          }
+        },
+        {
+          "pageid": 1723605,
+          "ns": 0,
+          "title": "栃木県出身の人物一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とちきけんしゆつしんのしんふついちらん",
+            "wikibase_item": "Q6632822"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

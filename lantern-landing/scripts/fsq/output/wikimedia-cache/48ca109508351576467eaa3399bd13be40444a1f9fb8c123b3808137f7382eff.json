@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:35.138Z",
+  "value": {
+    "searchinfo": {
+      "search": "フロア350"
+    },
+    "search": [
+      {
+        "id": "Q117066302",
+        "title": "Q117066302",
+        "pageid": 111857003,
+        "concepturi": "http://www.wikidata.org/entity/Q117066302",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q117066302",
+        "display": {
+          "label": {
+            "value": "Tokyo Skytree Tembo Deck",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Skytree Tembo Deck",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "フロア350"
+        },
+        "aliases": [
+          "フロア350"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

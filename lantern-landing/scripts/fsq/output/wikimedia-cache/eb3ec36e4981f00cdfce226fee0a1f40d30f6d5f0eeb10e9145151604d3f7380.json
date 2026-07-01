@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:05.553Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 122130,
+          "ns": 0,
+          "title": "中岡慎太郎",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "なかおか しんたろう",
+            "page_image_free": "Nakaoka_Shintaro_1866.jpg",
+            "wikibase_item": "Q3138626"
+          },
+          "terms": {
+            "description": [
+              "日本の尊攘討幕派志士"
+            ]
+          }
+        },
+        {
+          "pageid": 221790,
+          "ns": 0,
+          "title": "品川弥二郎",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しなかわ やしろう",
+            "page_image_free": "Yajiro_Shinagawa.jpg",
+            "wikibase_item": "Q7398823"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家"
+            ]
+          }
+        },
+        {
+          "pageid": 814180,
+          "ns": 0,
+          "title": "平田東助",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひらた とうすけ",
+            "page_image_free": "Hirata_Tosuke.jpg",
+            "wikibase_item": "Q3136218"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家 (1849-1925)"
+            ]
+          }
+        },
+        {
+          "pageid": 970202,
+          "ns": 0,
+          "title": "九段南",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "くたんみなみ",
+            "kartographer_frames": "1",
+            "page_image_free": "CBC_Tokyo_Branch_office_Chiyoda-kaikan.JPG",
+            "wikibase_item": "Q3346530"
+          },
+          "terms": {
+            "description": [
+              "東京都千代田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 2643843,
+          "ns": 0,
+          "title": "本山白雲",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "もとやま はくうん",
+            "wikibase_item": "Q11520196"
+          },
+          "terms": {
+            "description": [
+              "日本の彫刻家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

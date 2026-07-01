@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:29.314Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 152351,
+          "ns": 0,
+          "title": "日系人",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "につけいしん",
+            "wikibase_item": "Q1373538"
+          },
+          "terms": {
+            "description": [
+              "日本国外に永住権や国籍を持ち民族的なルーツを日本にもつ集団"
+            ]
+          }
+        },
+        {
+          "pageid": 331586,
+          "ns": 0,
+          "title": "ベルク (企業)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "へるく",
+            "page_image_free": "Belc_Co.,Ltd_1.jpg",
+            "wikibase_item": "Q11337090"
+          },
+          "terms": {
+            "description": [
+              "日本の埼玉県を中心に展開するスーパーマーケットチェーン"
+            ]
+          }
+        },
+        {
+          "pageid": 345916,
+          "ns": 0,
+          "title": "ドナ・バーク",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はあく とな",
+            "wikibase_item": "Q2504729"
+          }
+        },
+        {
+          "pageid": 1201269,
+          "ns": 0,
+          "title": "大湊 (伊勢市)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおみなと",
+            "page_image_free": "Ominato,_Ise.Ckk-83-1_c11_30.jpg",
+            "wikibase_item": "Q11437524"
+          },
+          "terms": {
+            "description": [
+              "日本の三重県伊勢市にある町丁"
+            ]
+          }
+        },
+        {
+          "pageid": 1808684,
+          "ns": 0,
+          "title": "パラオ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はらお",
+            "page_image_free": "Flag_of_Palau.svg",
+            "wikibase_item": "Q695"
+          },
+          "coordinates": [
+            {
+              "lat": 7.34972222,
+              "lon": 134.50972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "太平洋の島国"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

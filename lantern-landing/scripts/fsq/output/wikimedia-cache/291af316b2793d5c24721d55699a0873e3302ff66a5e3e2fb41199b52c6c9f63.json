@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:02.855Z",
+  "value": {
+    "searchinfo": {
+      "search": "Aさんの庭"
+    },
+    "search": [
+      {
+        "id": "Q18990855",
+        "title": "Q18990855",
+        "pageid": 20548315,
+        "concepturi": "http://www.wikidata.org/entity/Q18990855",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q18990855",
+        "display": {
+          "label": {
+            "value": "A-san's Garden",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Suginami-ku, Japan",
+            "language": "en"
+          }
+        },
+        "label": "A-san's Garden",
+        "description": "park in Suginami-ku, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "Aさんの庭"
+        },
+        "aliases": [
+          "Aさんの庭"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

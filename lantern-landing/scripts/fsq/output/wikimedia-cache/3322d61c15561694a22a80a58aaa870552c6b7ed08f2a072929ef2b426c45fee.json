@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:13.140Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 155508,
+          "ns": 0,
+          "title": "Van Gogh Museum",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Logo_-_Van_Gogh_Museum.png",
+            "wikibase-shortdesc": "National art museum in the Netherlands",
+            "wikibase_item": "Q224124"
+          },
+          "coordinates": [
+            {
+              "lat": 52.3583,
+              "lon": 4.8811,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "art museum in Amsterdam, Netherlands"
+            ]
+          }
+        },
+        {
+          "pageid": 57419079,
+          "ns": 0,
+          "title": "Immersive theater",
+          "index": 5,
+          "pageprops": {
+            "wikibase-shortdesc": "Theater modality in which audiences are immersed within the performance itself",
+            "wikibase_item": "Q55647935"
+          },
+          "terms": {
+            "description": [
+              "Theater modality in which audiences are immersed within the performance itself"
+            ]
+          }
+        },
+        {
+          "pageid": 76129918,
+          "ns": 0,
+          "title": "Mercer Labs Museum of Art and Technology",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Mercer-Labs-Manhattan-NYC-Photo-Courtesy-Mercer-Labs-4.jpg",
+            "wikibase-shortdesc": "Museum in New York City",
+            "wikibase_item": "Q125545245"
+          },
+          "coordinates": [
+            {
+              "lat": 40.71061,
+              "lon": -74.01083,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Museum in New York City, US"
+            ]
+          }
+        },
+        {
+          "pageid": 79724845,
+          "ns": 0,
+          "title": "Sarajevo VRX Immersive Museum",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Sarajevo_VRX_Immersive_Museum.jpg",
+            "wikibase-shortdesc": "Virtual reality museum in Sarajevo, Bosnia and Herzegovina",
+            "wikibase_item": "Q134303183"
+          },
+          "terms": {
+            "description": [
+              "virtual reality museum in Sarajevo, Bosnia and Herzegovina"
+            ]
+          }
+        },
+        {
+          "pageid": 81579813,
+          "ns": 0,
+          "title": "Sarajevo Safari",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Pazi_Snajper.jpg",
+            "wikibase-shortdesc": "War tourism during the siege of Sarajevo (1992–1996)",
+            "wikibase_item": "Q136766883"
+          },
+          "terms": {
+            "description": [
+              "alleged \"war tourism\" phenomenon that took place during the Siege of Sarajevo"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

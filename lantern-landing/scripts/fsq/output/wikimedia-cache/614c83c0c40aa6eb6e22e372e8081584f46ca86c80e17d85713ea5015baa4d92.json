@@ -1,0 +1,83 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:27.257Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 32008,
+          "ns": 0,
+          "title": "植物工場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しよくふつこうしよう",
+            "page_image_free": "桑の水耕栽培をされているストリームさんにて_(37776549804).jpg",
+            "wikibase_item": "Q7201524"
+          },
+          "terms": {
+            "description": [
+              "閉鎖的または半閉鎖的な人工空間で植物を計画的に栽培するシステム"
+            ]
+          }
+        },
+        {
+          "pageid": 1246142,
+          "ns": 0,
+          "title": "南山中学校・高等学校",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なんさんちゆうかつこうこうとうかつこう",
+            "kartographer_frames": "1",
+            "page_image_free": "Nanzan_Gakuen.jpg",
+            "wikibase_item": "Q11407744"
+          },
+          "terms": {
+            "description": [
+              "名古屋市の私立中学校・高等学校"
+            ]
+          }
+        },
+        {
+          "pageid": 1410878,
+          "ns": 0,
+          "title": "趣味の園芸 やさいの時間",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しゆみのえんけいやさいのしかん",
+            "wikibase_item": "Q11636719"
+          }
+        },
+        {
+          "pageid": 2387691,
+          "ns": 0,
+          "title": "ハーブ園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はあふえん",
+            "wikibase_item": "Q3522256"
+          }
+        },
+        {
+          "pageid": 2786557,
+          "ns": 0,
+          "title": "岩野祥子",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いわの さちこ",
+            "wikibase_item": "Q16264376"
+          },
+          "terms": {
+            "description": [
+              "日本の科学者 (1975-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

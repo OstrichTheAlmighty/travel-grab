@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:12.437Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 82173,
+          "ns": 0,
+          "title": "江崎グリコ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "えさきくりこ",
+            "page_image_free": "Ezaki_Glico_Newoffice_2021.jpg",
+            "wikibase_item": "Q391534"
+          },
+          "terms": {
+            "description": [
+              "日本の大手食品メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 480726,
+          "ns": 0,
+          "title": "東京ディズニーシーのショップの一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいしいのしよつふ",
+            "wikibase_item": "Q11524256"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 943364,
+          "ns": 0,
+          "title": "東京ディズニーランドのショップの一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいらんとのしよつふ",
+            "wikibase_item": "Q11524284"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1770748,
+          "ns": 0,
+          "title": "トイ・ストーリー・マニア!",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "といすとおりいまにあ",
+            "page_image_free": "Toy_Story_Midway_Mania!_logo.svg",
+            "wikibase_item": "Q474993"
+          },
+          "terms": {
+            "description": [
+              "世界のディズニーパークにあるアトラクション"
+            ]
+          }
+        },
+        {
+          "pageid": 3040300,
+          "ns": 0,
+          "title": "東京ディズニーランド",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいらんと",
+            "page_image_free": "Japan_Tokyo_keiyo_location_map.svg",
+            "wikibase_item": "Q843997"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63277778,
+              "lon": 139.88055556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県浦安市にあるテーマパーク"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

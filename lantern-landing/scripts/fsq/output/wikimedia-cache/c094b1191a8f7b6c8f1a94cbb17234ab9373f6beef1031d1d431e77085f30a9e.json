@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:16.507Z",
+  "value": {
+    "searchinfo": {
+      "search": "新左近川親水公園"
+    },
+    "search": [
+      {
+        "id": "Q134488947",
+        "title": "Q134488947",
+        "pageid": 128326587,
+        "concepturi": "http://www.wikidata.org/entity/Q134488947",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q134488947",
+        "display": {
+          "label": {
+            "value": "新左近川親水公園",
+            "language": "ja"
+          }
+        },
+        "label": "新左近川親水公園",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "新左近川親水公園"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

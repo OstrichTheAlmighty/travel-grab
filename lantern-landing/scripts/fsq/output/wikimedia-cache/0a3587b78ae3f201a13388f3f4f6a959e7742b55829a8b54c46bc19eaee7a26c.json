@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:52.138Z",
+  "value": {
+    "searchinfo": {
+      "search": "芭蕉記念館"
+    },
+    "search": [
+      {
+        "id": "Q809981",
+        "title": "Q809981",
+        "pageid": 762881,
+        "concepturi": "http://www.wikidata.org/entity/Q809981",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q809981",
+        "display": {
+          "label": {
+            "value": "Bashō Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Kōtō, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Bashō Museum",
+        "description": "museum in Kōtō, Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "芭蕉記念館"
+        },
+        "aliases": [
+          "芭蕉記念館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

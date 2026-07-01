@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:19.691Z",
+  "value": {
+    "searchinfo": {
+      "search": "世田谷文学館"
+    },
+    "search": [
+      {
+        "id": "Q11362100",
+        "title": "Q11362100",
+        "pageid": 12500086,
+        "concepturi": "http://www.wikidata.org/entity/Q11362100",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11362100",
+        "display": {
+          "label": {
+            "value": "Setagaya Literary Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Setagaya, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Setagaya Literary Museum",
+        "description": "museum in Setagaya, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "世田谷文学館"
+        },
+        "aliases": [
+          "世田谷文学館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

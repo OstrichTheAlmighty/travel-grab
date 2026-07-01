@@ -1,0 +1,67 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:09.973Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 10741,
+          "ns": 0,
+          "title": "練馬区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ねりまく",
+            "kartographer_frames": "1",
+            "page_image_free": "三宝寺池と厳島神社（2021年5月）.jpg",
+            "wikibase_item": "Q232655"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73553,
+              "lon": 139.65169,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 3619433,
+          "ns": 0,
+          "title": "二軒目どうする?〜ツマミのハナシ〜",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にけんめとうするつまみのはなし",
+            "wikibase_item": "Q48744460"
+          },
+          "terms": {
+            "description": [
+              "テレビ東京の深夜バラエティ (2017-)"
+            ]
+          }
+        },
+        {
+          "pageid": 5132753,
+          "ns": 0,
+          "title": "福岡県出身の人物一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふくおかけん",
+            "toc": "",
+            "wikibase_item": "Q11592463"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

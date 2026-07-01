@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:16.084Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 228097,
+          "ns": 0,
+          "title": "たけしくん、ハイ!",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たけしくん はい",
+            "wikibase_item": "Q11270907"
+          },
+          "terms": {
+            "description": [
+              "1984年のビートたけしの短編エッセイ集"
+            ]
+          }
+        },
+        {
+          "pageid": 234799,
+          "ns": 0,
+          "title": "錦野旦",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にしきの あきら",
+            "wikibase_item": "Q11650573"
+          },
+          "terms": {
+            "description": [
+              "日本の歌手 (1948-)"
+            ]
+          }
+        },
+        {
+          "pageid": 279228,
+          "ns": 0,
+          "title": "藤田嗣治",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふした つくはる",
+            "page_image_free": "1930_Tsuguharu_Fujita.jpg",
+            "wikibase_item": "Q261846"
+          },
+          "terms": {
+            "description": [
+              "フランスの画家、彫刻家 (1886-1968)"
+            ]
+          }
+        },
+        {
+          "pageid": 707386,
+          "ns": 0,
+          "title": "吉田義夫",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "よした よしお",
+            "page_image": "Actor_Yoshio_Yoshida_1958.png",
+            "wikibase_item": "Q11414065"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優 (1911-1986)"
+            ]
+          }
+        },
+        {
+          "pageid": 1783261,
+          "ns": 0,
+          "title": "3年B組金八先生の生徒一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さんねんひいくみきんはちせんせいのせいといちらん",
+            "wikibase_item": "Q11187732"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

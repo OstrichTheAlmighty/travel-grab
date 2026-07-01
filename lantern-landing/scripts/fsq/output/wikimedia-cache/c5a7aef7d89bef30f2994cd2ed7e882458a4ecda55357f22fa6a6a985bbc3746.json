@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:18.841Z",
+  "value": {
+    "searchinfo": {
+      "search": "大村益次郎銅像"
+    },
+    "search": [
+      {
+        "id": "Q135929636",
+        "title": "Q135929636",
+        "pageid": 129666245,
+        "concepturi": "http://www.wikidata.org/entity/Q135929636",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q135929636",
+        "display": {
+          "label": {
+            "value": "Statue of Ōmura Masujirō",
+            "language": "en"
+          }
+        },
+        "label": "Statue of Ōmura Masujirō",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "大村益次郎銅像"
+        },
+        "aliases": [
+          "大村益次郎銅像"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

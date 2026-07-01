@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:40.565Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 125055,
+          "ns": 0,
+          "title": "北青山",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きたあおやま",
+            "kartographer_frames": "1",
+            "page_image_free": "Aoyama-Omotesando-01.jpg",
+            "wikibase_item": "Q11404504"
+          },
+          "terms": {
+            "description": [
+              "東京都港区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 212215,
+          "ns": 0,
+          "title": "白井暁彦",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しらい あきひこ",
+            "wikibase_item": "Q11579382"
+          },
+          "terms": {
+            "description": [
+              "日本の工学者"
+            ]
+          }
+        },
+        {
+          "pageid": 708214,
+          "ns": 0,
+          "title": "青山 (東京都港区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あおやま",
+            "page_image_free": "JP-Tokyo-Meiji-Jingu-Gaien-Park-Entrance-Street.JPG",
+            "wikibase_item": "Q1193420"
+          },
+          "terms": {
+            "description": [
+              "東京都港区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 1825942,
+          "ns": 0,
+          "title": "テピア",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "てひあ",
+            "page_image_free": "Tepia_2009_(2).jpg",
+            "wikibase_item": "Q11319358"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6731,
+              "lon": 139.7172,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある技術の展示施設やホールなどからなる複合施設"
+            ]
+          }
+        },
+        {
+          "pageid": 2815083,
+          "ns": 0,
+          "title": "市川真人",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "いちかわ まこと",
+            "wikibase_item": "Q16264129"
+          },
+          "terms": {
+            "description": [
+              "日本の文芸評論家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

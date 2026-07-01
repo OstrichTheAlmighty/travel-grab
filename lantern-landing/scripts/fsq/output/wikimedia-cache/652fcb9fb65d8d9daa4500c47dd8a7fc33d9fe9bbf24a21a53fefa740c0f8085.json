@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:52.431Z",
+  "value": {
+    "searchinfo": {
+      "search": "祖師谷公園"
+    },
+    "search": [
+      {
+        "id": "Q11588519",
+        "title": "Q11588519",
+        "pageid": 12728490,
+        "concepturi": "http://www.wikidata.org/entity/Q11588519",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11588519",
+        "display": {
+          "label": {
+            "value": "Soshigaya Park",
+            "language": "en"
+          }
+        },
+        "label": "Soshigaya Park",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "祖師谷公園"
+        },
+        "aliases": [
+          "祖師谷公園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

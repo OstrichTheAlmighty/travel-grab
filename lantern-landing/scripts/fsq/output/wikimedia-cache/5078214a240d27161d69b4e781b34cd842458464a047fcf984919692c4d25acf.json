@@ -1,0 +1,86 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:06.934Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 271205,
+          "ns": 0,
+          "title": "じゃじゃ馬ならし (テレビドラマ)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しやしやうまならし",
+            "wikibase_item": "Q11269396"
+          }
+        },
+        {
+          "pageid": 353055,
+          "ns": 0,
+          "title": "荒巻淳",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あらまき あつし",
+            "page_image_free": "Atsushi_Aramaki_1956_Scan10008.JPG",
+            "wikibase_item": "Q487573"
+          },
+          "terms": {
+            "description": [
+              "日本の野球選手(1926-1971)"
+            ]
+          }
+        },
+        {
+          "pageid": 1050313,
+          "ns": 0,
+          "title": "葛西稔",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かさい みのる",
+            "wikibase_item": "Q11621008"
+          },
+          "terms": {
+            "description": [
+              "日本の元プロ野球選手"
+            ]
+          }
+        },
+        {
+          "pageid": 3021878,
+          "ns": 0,
+          "title": "大ノ濱勝治",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおのはま かつし",
+            "wikibase_item": "Q17361289"
+          },
+          "terms": {
+            "description": [
+              "日本の力士 (1909-1979)"
+            ]
+          }
+        },
+        {
+          "pageid": 3696829,
+          "ns": 0,
+          "title": "庶務行員 多加賀主水が許さない",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しよむこういん たかかもんとかゆるさない",
+            "wikibase_item": "Q48751047"
+          },
+          "terms": {
+            "description": [
+              "日本の小説作品、テレビドラマ番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

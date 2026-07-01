@@ -1,12 +1,51 @@
 "use client";
 
-import { useState, useMemo, useRef, useEffect, useCallback } from "react";
+import { useState, useMemo, useRef, useEffect, useCallback, useReducer } from "react";
 import { readTripStore, updateTripStore } from "@/lib/trip-store";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { fetchWithAuth } from "@/lib/fetch-with-auth";
 import UsageBanner from "@/app/components/UsageBanner";
 import type { Activity, Badge, Category } from "./data/types";
 import { supabase } from "@/lib/supabase";
+import { activityPhotoUrl, fetchGooglePlaceDetail } from "@/lib/activities/google-place-client";
+import type {
+  GooglePlaceDetail as PlaceDetail,
+} from "@/lib/activities/google-place-details";
+import { mergeGalleryPhotos } from "@/lib/activities/google-place-details";
+import {
+  beginGoogleModalTrace,
+  finishGoogleModalTrace,
+  recordGoogleModalTrace,
+} from "@/lib/activities/google-modal-trace";
+import {
+  INITIAL_ACTIVITY_LOAD_STATE,
+  activityLoadReducer,
+  activityResultMatchesDestination,
+  classifyActivitySearchResponse,
+  deriveActivityPageState,
+  type ActivitySearchApiResponse,
+  type ActivitySearchResult,
+} from "@/lib/activities/activity-search-state";
+import {
+  parsePlaceModalMode,
+  shouldFetchDirectPlaceDetails,
+  shouldLoadPlacesUIKit,
+  type PlaceModalMode,
+} from "@/lib/activities/google-place-modal-mode";
+import {
+  buildTravelGrabRecommendations,
+  type TravelGrabRecommendationContext,
+} from "@/lib/activities/travelgrab-recommendations";
+
+const GooglePlaceUIKit = dynamic(() => import("./GooglePlaceUIKit"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex min-h-48 items-center justify-center rounded-xl border border-gray-200 bg-gray-50 text-xs text-gray-600">
+      Loading Google Places UI Kit…
+    </div>
+  ),
+});
 
 // ── Filter config ─────────────────────────────────────────────────────────────
 
@@ -85,19 +124,9 @@ function lsGetDestination(key: string): unknown | null {
   } catch { return null; }
 }
 
-function lsSetDestination(key: string, result: unknown): void {
-  try {
-    const raw = localStorage.getItem(LS_CACHE_KEY);
-    const cache: LsCache = raw ? (JSON.parse(raw) as LsCache) : {};
-    cache[key] = { result, ts: Date.now() };
-    // Evict oldest entries beyond limit
-    const keys = Object.keys(cache);
-    if (keys.length > LS_CACHE_MAX) {
-      const oldest = keys.sort((a, b) => cache[a].ts - cache[b].ts)[0];
-      delete cache[oldest];
-    }
-    localStorage.setItem(LS_CACHE_KEY, JSON.stringify(cache));
-  } catch { /* quota — ignore */ }
+function lsSetDestination(_key: string, _result: unknown): void {
+  // Legacy destination caches remain readable until a later migration, but new
+  // Google-derived activity/photo payloads are not written to persistent storage.
 }
 
 // ── Supabase → Activity mapping ───────────────────────────────────────────────
@@ -322,7 +351,7 @@ function ActivityCard({
         {hasPhoto && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={`/api/activities/photo?name=${encodeURIComponent(activity.photoRef!)}`}
+            src={activityPhotoUrl(activity.photoRef!, 800)}
             alt={activity.title}
             loading="lazy"
             className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-105 ${imgLoaded ? "opacity-100" : "opacity-0"}`}
@@ -480,37 +509,6 @@ interface ReviewInsights {
   bestFor:    string[];
   tips:       string[];
   limited:    boolean;
-}
-
-// ── Place Detail type (mirrors /api/activities/place response) ────────────────
-
-interface PlaceReview {
-  name?: string;
-  relativePublishTimeDescription?: string;
-  rating?: number;
-  text?: { text: string; languageCode?: string };
-  authorAttribution?: { displayName?: string; uri?: string; photoUri?: string };
-  publishTime?: string;
-  googleMapsUri?: string;
-}
-
-interface PlaceDetail {
-  id: string;
-  displayName?: { text: string };
-  photos?: Array<{ name: string; widthPx?: number; heightPx?: number }>;
-  rating?: number;
-  userRatingCount?: number;
-  formattedAddress?: string;
-  shortFormattedAddress?: string;
-  types?: string[];
-  regularOpeningHours?: { openNow?: boolean; weekdayDescriptions?: string[] };
-  priceLevel?: string;
-  websiteUri?: string;
-  googleMapsUri?: string;
-  nationalPhoneNumber?: string;
-  internationalPhoneNumber?: string;
-  editorialSummary?: { text: string };
-  reviews?: PlaceReview[];
 }
 
 // ── Practical-tip helpers (all labeled as estimated in the UI) ────────────────
@@ -698,19 +696,29 @@ function ActivityDetailModal({
   loading,
   insights,
   insightsLoading,
+  onLoadGallery,
+  onLoadReviews,
   onClose,
+  presentation = "drawer",
 }: {
   activity: Activity;
   detail: PlaceDetail | null;
   loading: boolean;
   insights: ReviewInsights | null;
   insightsLoading: boolean;
+  onLoadGallery: () => void;
+  onLoadReviews: () => void;
   onClose: () => void;
+  presentation?: "drawer" | "embedded";
 }) {
   const [activePhoto,   setActivePhoto]   = useState(0);
   const [showHours,     setShowHours]     = useState(false);
   const [reviewFilter,  setReviewFilter]  = useState<"all" | "5" | "4" | "lte3">("all");
   const [reviewSearch,  setReviewSearch]  = useState("");
+  const [heroFailed,    setHeroFailed]    = useState(false);
+  const reviewSectionRef = useRef<HTMLDivElement | null>(null);
+  const modalScrollRef = useRef<HTMLDivElement | null>(null);
+  const requestedReviews = useRef(false);
 
   // Close on Escape and lock body scroll
   useEffect(() => {
@@ -730,13 +738,28 @@ function ActivityDetailModal({
     setReviewSearch("");
   }, [detail]);
 
+  useEffect(() => {
+    requestedReviews.current = false;
+    const node = reviewSectionRef.current;
+    const scrollRoot = modalScrollRef.current;
+    if (!node || !scrollRoot || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting) && !requestedReviews.current) {
+        requestedReviews.current = true;
+        onLoadReviews();
+      }
+    }, { root: scrollRoot, rootMargin: "160px 0px" });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [activity.id, onLoadReviews]);
+
   // Resolve fields — prefer detail data, fall back to card data
   const photos        = detail?.photos ?? (activity.photoRef ? [{ name: activity.photoRef }] : []);
   const name          = detail?.displayName?.text ?? activity.title;
   const rating        = detail?.rating        ?? activity.rating;
   const reviewCount   = detail?.userRatingCount ?? activity.reviewCount;
   const address       = detail?.formattedAddress ?? detail?.shortFormattedAddress ?? activity.neighborhood;
-  const summary       = detail?.editorialSummary?.text ?? activity.description;
+  const summary       = activity.description;
   const openNow       = detail?.regularOpeningHours?.openNow ?? activity.openNow;
   const hours         = detail?.regularOpeningHours?.weekdayDescriptions ?? [];
   const types         = detail?.types ?? [];
@@ -744,18 +767,24 @@ function ActivityDetailModal({
   const googleMapsUri = detail?.googleMapsUri ?? activity.googleMapsUri;
   const phone         = detail?.nationalPhoneNumber ?? detail?.internationalPhoneNumber;
 
+  useEffect(() => setHeroFailed(false), [photos[activePhoto]?.name]);
+
   return (
     <>
       {/* Backdrop */}
-      <div
-        className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm"
-        onClick={onClose}
-        aria-hidden="true"
-      />
+      {presentation === "drawer" && (
+        <div
+          className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm"
+          onClick={onClose}
+          aria-hidden="true"
+        />
+      )}
 
       {/* Slide-in panel (mirrors hotel research panel) */}
       <div
-        className="fixed inset-y-0 right-0 z-50 w-full max-w-full lg:max-w-[720px] bg-gray-50 border-l border-gray-200 flex flex-col shadow-2xl overflow-hidden"
+        className={presentation === "drawer"
+          ? "fixed inset-y-0 right-0 z-50 w-full max-w-full lg:max-w-[720px] bg-gray-50 border-l border-gray-200 flex flex-col shadow-2xl overflow-hidden"
+          : "relative h-full min-h-[70vh] w-full bg-gray-50 border border-gray-200 flex flex-col overflow-hidden"}
         role="dialog"
         aria-modal="true"
         aria-label={name}
@@ -775,20 +804,55 @@ function ActivityDetailModal({
         </div>
 
         {/* ── Scrollable content ── */}
-        <div className="flex-1 overflow-y-auto">
+        <div ref={modalScrollRef} className="flex-1 overflow-y-auto">
 
           {/* Photo gallery — show immediately from card data, upgrade when detail loads */}
           {photos.length > 0 ? (
             <div>
               {/* Main photo */}
-              <div className="relative h-64 sm:h-80 bg-gray-50 overflow-hidden">
+              <div className="relative h-64 sm:h-80 overflow-hidden" style={{ background: activity.gradient }}>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-7xl select-none">{activity.emoji}</span>
+                </div>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  key={photos[activePhoto]?.name}
-                  src={`/api/activities/photo?name=${encodeURIComponent(photos[activePhoto]?.name ?? "")}&w=1200`}
-                  alt={`${name} — photo ${activePhoto + 1}`}
-                  className="w-full h-full object-cover"
-                />
+                {!heroFailed && (
+                  <img
+                    key={photos[activePhoto]?.name}
+                    src={activityPhotoUrl(photos[activePhoto]?.name ?? "", 1200)}
+                    alt={`${name} — photo ${activePhoto + 1}`}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    onClick={onLoadGallery}
+                    onLoad={() => recordGoogleModalTrace({ type: "photo", resource: photos[activePhoto]?.name ?? "", width: 1200, outcome: "loaded" })}
+                    onError={() => {
+                      setHeroFailed(true);
+                      recordGoogleModalTrace({ type: "photo", resource: photos[activePhoto]?.name ?? "", width: 1200, outcome: "failed" });
+                      recordGoogleModalTrace({ type: "fallback", fallback: "activity_gradient" });
+                    }}
+                  />
+                )}
+                {photos.length === 1 && (
+                  <button
+                    type="button"
+                    onClick={onLoadGallery}
+                    className="absolute bottom-3 left-3 rounded-full bg-black/55 px-3 py-1.5 text-[10px] font-semibold text-white backdrop-blur-sm"
+                  >
+                    View gallery
+                  </button>
+                )}
+                {photos[activePhoto]?.authorAttributions?.length ? (
+                  <p className="absolute bottom-3 right-3 max-w-[60%] rounded bg-black/60 px-2 py-1 text-[9px] text-white">
+                    Photo: {photos[activePhoto].authorAttributions!.map((author, index) => (
+                      <span key={author.uri ?? index}>
+                        {index > 0 ? ", " : ""}
+                        {author.uri ? (
+                          <a href={author.uri} target="_blank" rel="noopener noreferrer" className="underline">
+                            {author.displayName ?? `Contributor ${index + 1}`}
+                          </a>
+                        ) : (author.displayName ?? `Contributor ${index + 1}`)}
+                      </span>
+                    ))}
+                  </p>
+                ) : null}
                 {/* Nav arrows */}
                 {photos.length > 1 && (
                   <>
@@ -826,17 +890,24 @@ function ActivityDetailModal({
                     <button
                       key={photo.name}
                       onClick={() => setActivePhoto(i)}
-                      className={`flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden border-2 transition-all ${
+                      className={`relative flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden border-2 transition-all ${
                         i === activePhoto
                           ? "border-teal-500/70 opacity-100"
                           : "border-transparent opacity-45 hover:opacity-75"
                       }`}
+                      style={{ background: activity.gradient }}
                     >
+                      <span className="absolute inset-0 flex items-center justify-center text-xl">{activity.emoji}</span>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={`/api/activities/photo?name=${encodeURIComponent(photo.name)}&w=120`}
+                        src={activityPhotoUrl(photo.name, 120)}
                         alt={`Thumbnail ${i + 1}`}
-                        className="w-full h-full object-cover"
+                        className="absolute inset-0 w-full h-full object-cover"
+                        onLoad={() => recordGoogleModalTrace({ type: "photo", resource: photo.name, width: 120, outcome: "loaded" })}
+                        onError={(event) => {
+                          event.currentTarget.style.display = "none";
+                          recordGoogleModalTrace({ type: "photo", resource: photo.name, width: 120, outcome: "failed" });
+                        }}
                       />
                     </button>
                   ))}
@@ -1112,7 +1183,7 @@ function ActivityDetailModal({
               const countLt3 = allReviews.filter((r) => (r.rating ?? 0) <= 3).length;
 
               return (
-                <div>
+                <div ref={reviewSectionRef}>
                   <div className="text-[9px] font-black uppercase tracking-widest text-gray-700 mb-2">
                     Review sample
                   </div>
@@ -1292,6 +1363,16 @@ function ActivityDetailModal({
 
         {/* ── Sticky footer CTAs ── */}
         <div className="flex-shrink-0 p-4 border-t border-gray-200 bg-gray-50/95 backdrop-blur-sm">
+          <p className="mb-2 text-center text-[9px] text-gray-500">
+            Place data © Google
+            {detail?.attributions?.map((attribution, index) => (
+              attribution.providerUri ? (
+                <a key={`${attribution.providerUri}-${index}`} href={attribution.providerUri} target="_blank" rel="noopener noreferrer" className="ml-1 underline">
+                  {attribution.provider ?? "Data provider"}
+                </a>
+              ) : <span key={index} className="ml-1">{attribution.provider}</span>
+            ))}
+          </p>
           <div className="flex gap-2">
             {googleMapsUri ? (
               <a
@@ -1323,6 +1404,323 @@ function ActivityDetailModal({
           </div>
         </div>
 
+      </div>
+    </>
+  );
+}
+
+function UIKitActivityModal({
+  activity,
+  saved,
+  onToggleSave,
+  onClose,
+  embedded = false,
+}: {
+  activity: Activity;
+  saved: boolean;
+  onToggleSave: () => void;
+  onClose: () => void;
+  embedded?: boolean;
+}) {
+  useEffect(() => {
+    if (embedded) return;
+    function onKey(event: KeyboardEvent) { if (event.key === "Escape") onClose(); }
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [embedded, onClose]);
+
+  return (
+    <>
+      {!embedded && (
+        <div className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
+      )}
+      <div
+        className={embedded
+          ? "relative h-full min-h-[70vh] w-full overflow-hidden border border-gray-200 bg-white flex flex-col"
+          : "fixed inset-y-0 right-0 z-50 w-full max-w-full lg:max-w-[720px] overflow-hidden border-l border-gray-200 bg-white flex flex-col shadow-2xl"}
+        role="dialog"
+        aria-modal={!embedded}
+        aria-label={`${activity.title} — Google Places UI Kit`}
+      >
+        <div className="flex flex-shrink-0 items-center gap-3 border-b border-gray-200 bg-white/95 px-5 py-3 backdrop-blur-sm">
+          <div className="min-w-0 flex-1">
+            <span className="block text-[9px] font-black uppercase tracking-widest text-blue-600">Google Places UI Kit</span>
+            <h2 className="truncate text-sm font-bold text-gray-900">{activity.title}</h2>
+          </div>
+          <button
+            type="button"
+            onClick={onToggleSave}
+            aria-label={saved ? "Remove from saved" : "Save activity"}
+            className={`flex h-8 items-center gap-1.5 rounded-lg border px-2.5 text-[11px] font-semibold transition-colors ${
+              saved ? "border-red-200 bg-red-50 text-red-700" : "border-gray-200 bg-white text-gray-700 hover:bg-gray-50"
+            }`}
+          >
+            <IconHeart filled={saved} className="h-3.5 w-3.5" />
+            {saved ? "Saved" : "Save"}
+          </button>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+          >
+            <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div className="flex-1 overflow-y-auto bg-white p-4 sm:p-5">
+          {activity.placeId ? (
+            <GooglePlaceUIKit placeId={activity.placeId} />
+          ) : (
+            <div className="rounded-xl border border-gray-200 bg-gray-50 p-6 text-center">
+              <p className="text-sm font-semibold text-gray-800">Google comparison unavailable for this activity.</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </>
+  );
+}
+
+function HybridActivityModal({
+  activity,
+  recommendationContext,
+  saved,
+  onToggleSave,
+  onClose,
+}: {
+  activity: Activity;
+  recommendationContext?: TravelGrabRecommendationContext;
+  saved: boolean;
+  onToggleSave: () => void;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    function onKey(event: KeyboardEvent) { if (event.key === "Escape") onClose(); }
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  const planningType = {
+    food: "restaurant",
+    nightlife: "bar",
+    culture: "museum",
+    adventure: "amusement_park",
+    nature: "park",
+    luxury: "tourist_attraction",
+    hidden_gems: "tourist_attraction",
+  }[activity.category];
+  const catalogSignals = [...activity.tags, planningType];
+  const recommendations = buildTravelGrabRecommendations(activity, recommendationContext);
+
+  return (
+    <>
+      <div className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
+      <div
+        className="fixed inset-0 z-50 overflow-y-auto p-2 sm:p-5"
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${activity.title} — TravelGrab hybrid place details`}
+        data-testid="hybrid-activity-modal"
+      >
+        <div className="mx-auto flex min-h-full max-w-[1120px] items-center justify-center">
+          <div className="max-h-[calc(100vh-1rem)] w-full overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl sm:max-h-[calc(100vh-2.5rem)]">
+            <header className="flex items-center gap-3 border-b border-gray-200 bg-white/95 px-5 py-4 backdrop-blur-sm sm:px-6">
+              <div className="min-w-0 flex-1">
+                <span className={`inline-flex rounded-full border px-2.5 py-1 text-[9px] font-black uppercase tracking-widest ${CATEGORY_BADGE[activity.category]}`}>
+                  {CATEGORY_LABEL[activity.category]}
+                </span>
+                <h2 className="mt-2 truncate text-xl font-bold tracking-tight text-gray-950 sm:text-2xl">{activity.title}</h2>
+              </div>
+              <button
+                type="button"
+                onClick={onToggleSave}
+                aria-label={saved ? "Remove from saved" : "Save activity"}
+                className={`flex h-9 items-center gap-1.5 rounded-lg border px-3 text-xs font-semibold transition-colors ${
+                  saved ? "border-red-200 bg-red-50 text-red-700" : "border-gray-200 bg-white text-gray-700 hover:bg-gray-50"
+                }`}
+              >
+                <IconHeart filled={saved} className="h-4 w-4" />
+                {saved ? "Saved" : "Save"}
+              </button>
+              <button
+                type="button"
+                onClick={onClose}
+                aria-label="Close"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 text-gray-600 transition-colors hover:bg-gray-50 hover:text-gray-900"
+              >
+                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              </button>
+            </header>
+
+            <div className="max-h-[calc(100vh-6.5rem)] overflow-y-auto bg-gray-50/60">
+              <div className="grid grid-cols-1 gap-0 lg:grid-cols-[minmax(0,1fr)_380px]">
+                <main className="min-w-0 space-y-6 p-5 sm:p-7 lg:p-8" data-testid="hybrid-editorial-content">
+                  <section>
+                    <p className="text-[10px] font-black uppercase tracking-[0.18em] text-teal-700">TravelGrab overview</p>
+                    <p className="mt-3 text-[15px] leading-7 text-gray-700">{activity.description}</p>
+                    <div className="mt-4 flex flex-wrap gap-2 text-xs text-gray-600">
+                      <span className="rounded-full border border-gray-200 bg-white px-3 py-1.5">{activity.neighborhood}</span>
+                      <span className="rounded-full border border-gray-200 bg-white px-3 py-1.5">{activity.duration}</span>
+                      <span className="rounded-full border border-gray-200 bg-white px-3 py-1.5">{activity.isFree ? "Free" : activity.price}</span>
+                    </div>
+                  </section>
+
+                  <section className="rounded-2xl border border-teal-200 bg-teal-50/70 p-5">
+                    <h3 className="text-sm font-bold text-teal-950">Why Visit</h3>
+                    <p className="mt-2 text-sm leading-6 text-teal-900">{activity.whyVisit}</p>
+                  </section>
+
+                  <section>
+                    <h3 className="text-sm font-bold text-gray-950">Practical Tips</h3>
+                    <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                      <div className="rounded-xl border border-gray-200 bg-white p-4">
+                        <p className="text-[10px] font-bold uppercase tracking-wider text-gray-500">Time to allow</p>
+                        <p className="mt-1.5 text-sm font-semibold text-gray-900">{activity.duration}</p>
+                      </div>
+                      <div className="rounded-xl border border-gray-200 bg-white p-4">
+                        <p className="text-[10px] font-bold uppercase tracking-wider text-gray-500">Best time · estimated</p>
+                        <p className="mt-1.5 text-sm font-semibold text-gray-900">{getBestTime(catalogSignals)}</p>
+                      </div>
+                      <div className="rounded-xl border border-gray-200 bg-white p-4">
+                        <p className="text-[10px] font-bold uppercase tracking-wider text-gray-500">Crowds · catalog estimate</p>
+                        <p className="mt-1.5 text-sm leading-5 text-gray-700">{getCrowdLevel(activity.reviewCount)}</p>
+                      </div>
+                      <div className="rounded-xl border border-gray-200 bg-white p-4">
+                        <p className="text-[10px] font-bold uppercase tracking-wider text-gray-500">Good for</p>
+                        <p className="mt-1.5 text-sm leading-5 text-gray-700">{getGoodFor(activity.badges, catalogSignals)}</p>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section data-testid="travelgrab-recommendations">
+                    <div>
+                      <h3 className="text-sm font-bold text-gray-950">TravelGrab Recommendations</h3>
+                      <p className="mt-1 text-xs leading-5 text-gray-500">Planning guidance from TravelGrab catalog and trip-preference signals.</p>
+                    </div>
+                    <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                      {recommendations.map((recommendation) => (
+                        <article key={recommendation.id} className="rounded-xl border border-gray-200 bg-white p-4">
+                          <p className="text-[10px] font-bold uppercase tracking-wider text-teal-700">{recommendation.label}</p>
+                          <p className="mt-1.5 text-sm leading-5 text-gray-700">{recommendation.text}</p>
+                        </article>
+                      ))}
+                    </div>
+                  </section>
+
+                  <section className="flex flex-col gap-3 rounded-2xl border border-gray-200 bg-white p-5 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <h3 className="text-sm font-bold text-gray-950">Planning a day around this place?</h3>
+                      <p className="mt-1 text-xs leading-5 text-gray-600">Save it to your TravelGrab shortlist, then add it to an itinerary.</p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={onToggleSave}
+                      className="flex-shrink-0 rounded-xl bg-teal-500 px-4 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-teal-600"
+                    >
+                      {saved ? "Saved for planning" : "Save for itinerary"}
+                    </button>
+                  </section>
+                </main>
+
+                <aside
+                  className="min-w-0 border-t border-gray-200 bg-white p-4 sm:p-5 lg:border-l lg:border-t-0"
+                  aria-label="Current Google place information"
+                  data-testid="hybrid-google-panel"
+                >
+                  <div className="mb-3 px-1">
+                    <p className="text-[10px] font-black uppercase tracking-[0.16em] text-gray-500">Current place information</p>
+                    <p className="mt-1 text-xs text-gray-500">Photos, hours, contact details and reviews from Google</p>
+                  </div>
+                  {activity.placeId ? (
+                    <GooglePlaceUIKit placeId={activity.placeId} contentMode="hybrid" />
+                  ) : (
+                    <div className="rounded-xl border border-gray-200 bg-gray-50 p-6 text-center">
+                      <p className="text-sm font-semibold text-gray-800">Google comparison unavailable for this activity.</p>
+                    </div>
+                  )}
+                </aside>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function ActivityModalComparison({
+  activity,
+  detail,
+  loading,
+  insights,
+  insightsLoading,
+  saved,
+  onToggleSave,
+  onLoadGallery,
+  onLoadReviews,
+  onClose,
+}: {
+  activity: Activity;
+  detail: PlaceDetail | null;
+  loading: boolean;
+  insights: ReviewInsights | null;
+  insightsLoading: boolean;
+  saved: boolean;
+  onToggleSave: () => void;
+  onLoadGallery: () => void;
+  onLoadReviews: () => void;
+  onClose: () => void;
+}) {
+  return (
+    <>
+      <div className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
+      <div className="fixed inset-0 z-50 overflow-y-auto bg-gray-100/95 p-2 sm:p-4" role="dialog" aria-modal="true" aria-label={`${activity.title} modal comparison`}>
+        <div className="mx-auto grid min-h-full max-w-[1500px] grid-cols-1 gap-3 lg:h-[calc(100vh-2rem)] lg:grid-cols-2">
+          <section className="flex min-h-[75vh] min-w-0 flex-col overflow-hidden rounded-2xl bg-white shadow-xl lg:min-h-0">
+            <div className="flex-shrink-0 border-b border-gray-200 bg-gray-900 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-white">
+              TravelGrab direct modal
+            </div>
+            <div className="min-h-0 flex-1">
+              <ActivityDetailModal
+                activity={activity}
+                detail={detail}
+                loading={loading}
+                insights={insights}
+                insightsLoading={insightsLoading}
+                onLoadGallery={onLoadGallery}
+                onLoadReviews={onLoadReviews}
+                onClose={onClose}
+                presentation="embedded"
+              />
+            </div>
+          </section>
+          <section className="flex min-h-[75vh] min-w-0 flex-col overflow-hidden rounded-2xl bg-white shadow-xl lg:min-h-0">
+            <div className="flex-shrink-0 border-b border-gray-200 bg-blue-600 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-white">
+              Google Places UI Kit
+            </div>
+            <div className="min-h-0 flex-1">
+              <UIKitActivityModal
+                activity={activity}
+                saved={saved}
+                onToggleSave={onToggleSave}
+                onClose={onClose}
+                embedded
+              />
+            </div>
+          </section>
+        </div>
       </div>
     </>
   );
@@ -1560,65 +1958,73 @@ function DestinationSearch({
   );
 }
 
-// ── Empty / Error states ──────────────────────────────────────────────────────
+// ── Explicit page states ──────────────────────────────────────────────────────
 
-function EmptyState({ filter }: { filter: FilterId }) {
-  if (filter === "saved") {
-    return (
-      <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">
-        <div className="text-5xl mb-4">🤍</div>
-        <h3 className="text-base font-bold text-gray-700 mb-2">No saved places yet</h3>
-        <p className="text-[13px] text-gray-700 max-w-xs mb-2">
-          Tap the ♥ on any activity to save it. Saved places stay here on this browser — no account needed.
-        </p>
-      </div>
-    );
-  }
+function CityNotBuiltState({ city, onSearchAnother }: { city: string; onSearchAnother: () => void }) {
   return (
     <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">
-      <div className="text-5xl mb-4">🔍</div>
-      <h3 className="text-base font-bold text-gray-700 mb-2">No activities found</h3>
-      <p className="text-[13px] text-gray-700">
-        {filter === "free"
-          ? "No free activities available for this destination."
-          : filter === "browse_all"
-          ? "No activities have been loaded yet."
-          : `No ${FILTERS.find((f) => f.id === filter)?.label ?? filter} activities in the results.`}
+      <div className="text-5xl mb-4">🗺️</div>
+      <h3 className="text-base font-bold text-gray-800 mb-2">
+        TravelGrab activities are not available in {city || "this city"} yet
+      </h3>
+      <p className="text-[13px] text-gray-600 mb-5 max-w-md leading-relaxed">
+        We’re currently expanding our curated activity coverage. Search another destination to explore available recommendations.
       </p>
+      <button
+        onClick={onSearchAnother}
+        className="px-5 py-2.5 rounded-xl bg-teal-500 text-white text-sm font-semibold hover:bg-teal-600 transition-colors"
+      >
+        Search another city
+      </button>
     </div>
   );
 }
 
-function EmptySearchState({
+function EmptyResultsState({
+  city,
   query,
   activeFilter,
-  onClearFilter,
+  onClear,
 }: {
+  city: string;
   query: string;
   activeFilter: FilterId;
-  onClearFilter: () => void;
+  onClear: () => void;
 }) {
-  const isFiltered = activeFilter !== "all" && activeFilter !== "browse_all" && activeFilter !== "saved";
-  const filterLabel = FILTERS.find((f) => f.id === activeFilter)?.label ?? String(activeFilter);
+  const filterLabel = FILTERS.find((filter) => filter.id === activeFilter)?.label;
+  const hasQuery = query.trim().length > 0;
+  const hasFilter = activeFilter !== "all" && activeFilter !== "browse_all";
+  const title = activeFilter === "saved"
+    ? "No saved places match this view"
+    : hasQuery
+      ? `No activities match “${query.trim()}”`
+      : `No ${filterLabel?.toLowerCase() ?? "activities"} match these filters`;
+
   return (
     <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">
       <div className="text-5xl mb-4">🔍</div>
-      <h3 className="text-base font-bold text-gray-700 mb-2">
-        {isFiltered ? `No "${query}" results in ${filterLabel}` : `No results for "${query}"`}
-      </h3>
-      <p className="text-[13px] text-gray-700 mb-4">
-        {isFiltered
-          ? "This search term might match a different category."
-          : "Try a different search term or browse by category."}
+      <h3 className="text-base font-bold text-gray-800 mb-2">{title}</h3>
+      <p className="text-[13px] text-gray-600 mb-5 max-w-sm">
+        The {city} catalog is available, but no activities match the current search or filters.
       </p>
-      {isFiltered && (
+      {(hasQuery || hasFilter) && (
         <button
-          onClick={onClearFilter}
-          className="px-4 py-2 rounded-lg bg-gray-50 border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-700 transition-all"
+          onClick={onClear}
+          className="px-5 py-2 rounded-xl bg-gray-50 border border-gray-200 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition-colors"
         >
-          Search all categories
+          Clear search and filters
         </button>
       )}
+    </div>
+  );
+}
+
+function IdleState() {
+  return (
+    <div className="col-span-full flex flex-col items-center justify-center py-16 text-center">
+      <div className="text-4xl mb-3">📍</div>
+      <h3 className="text-base font-bold text-gray-800 mb-1">Search for a destination</h3>
+      <p className="text-[13px] text-gray-600">Enter a city above to explore its available activities.</p>
     </div>
   );
 }
@@ -1895,21 +2301,6 @@ function ItineraryModal({
 
 // ── Main Component ────────────────────────────────────────────────────────────
 
-interface SearchResult {
-  activities: Activity[];
-  city: string;
-  country: string;
-  source?: string;
-  inventoryStatus?: "building" | "ready";
-  inventorySize?: number;
-  inventoryProgress?: { completed: number; total: number };
-  _debug?: {
-    cacheSource:   string;
-    apiCallsMade:  number;
-    entriesLoaded: number;
-  };
-}
-
 export default function ActivitySearch() {
   const [destination,        setDestination]        = useState("Tokyo, Japan");
   const [activityQuery,      setActivityQuery]      = useState("");
@@ -1918,10 +2309,12 @@ export default function ActivitySearch() {
   const [savedIds,           setSavedIds]           = useState<Set<string>>(new Set());
   const [savedMeta,          setSavedMeta]          = useState<Record<string, { title: string; category: string; neighborhood: string; duration: string; rating: number; photoRef?: string; lat?: number; lng?: number; city?: string }>>({});
   const [tripCities,         setTripCities]         = useState<string[]>([]); // city stops from itinerary
+  const [tripRecommendationContext, setTripRecommendationContext] = useState<TravelGrabRecommendationContext>();
   const [showItineraryModal, setShowItineraryModal] = useState(false);
-  const [loading,            setLoading]            = useState(false);
-  const [error,              setError]              = useState<string | null>(null);
-  const [result,             setResult]             = useState<SearchResult | null>(null);
+  const [loadState, dispatchLoad] = useReducer(activityLoadReducer, INITIAL_ACTIVITY_LOAD_STATE);
+  const { status: requestState, result, error, requestedDestination } = loadState;
+  const loading = requestState === "loading";
+  const [page, setPage] = useState(1);
 
   // ── Detail modal state ──
   const [modalActivity,      setModalActivity]      = useState<Activity | null>(null);
@@ -1929,8 +2322,20 @@ export default function ActivitySearch() {
   const [modalLoading,       setModalLoading]       = useState(false);
   const [modalInsights,      setModalInsights]      = useState<ReviewInsights | null>(null);
   const [modalInsightsLoading, setModalInsightsLoading] = useState(false);
-  const detailsCache  = useRef(new Map<string, PlaceDetail>());
+  const [placeModalMode, setPlaceModalMode] = useState<PlaceModalMode>("direct");
   const insightsCache = useRef(new Map<string, ReviewInsights | null>());
+  const clientCache = useRef(new Map<string, ActivitySearchResult>());
+  const pollingRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const requestSequenceRef = useRef(0);
+  const requestAbortRef = useRef<AbortController | null>(null);
+  const requestedDestinationRef = useRef(INITIAL_ACTIVITY_LOAD_STATE.requestedDestination);
+
+  useEffect(() => {
+    const updateMode = () => setPlaceModalMode(parsePlaceModalMode(window.location.search));
+    updateMode();
+    window.addEventListener("popstate", updateMode);
+    return () => window.removeEventListener("popstate", updateMode);
+  }, []);
 
   // Mount — load saved activities, preload session cache, prefill from trip store
   useEffect(() => {
@@ -1948,7 +2353,7 @@ export default function ActivitySearch() {
         const k = sessionStorage.key(i);
         if (k?.startsWith("tg_act_")) {
           const raw = sessionStorage.getItem(k);
-          if (raw) clientCache.current.set(k.slice(7), JSON.parse(raw) as SearchResult);
+          if (raw) clientCache.current.set(k.slice(7), JSON.parse(raw) as ActivitySearchResult);
         }
       }
     } catch { /* ignore */ }
@@ -1957,6 +2362,16 @@ export default function ActivitySearch() {
     let initialDest = "Tokyo, Japan";
     try {
       const trip = readTripStore();
+      if (trip) {
+        setTripRecommendationContext({
+          travelStyles: trip.travelStyles,
+          pace: trip.pace,
+          travelers: trip.travelers,
+          firstTime: trip.firstTime,
+          startDate: trip.startDate,
+          returnDate: trip.returnDate,
+        });
+      }
       if (trip?.cityStops.length) {
         const cities = trip.cityStops.map((c) => c.city).filter(Boolean);
         if (cities.length > 1) setTripCities(cities);
@@ -1980,39 +2395,48 @@ export default function ActivitySearch() {
 
   useEffect(() => {
     try {
-      localStorage.setItem("travelgrab:saved-activities-data", JSON.stringify(savedMeta));
+      const persistenceSafe = Object.fromEntries(
+        Object.entries(savedMeta).map(([id, { photoRef: _legacyPhotoRef, ...meta }]) => [id, meta]),
+      );
+      localStorage.setItem("travelgrab:saved-activities-data", JSON.stringify(persistenceSafe));
     } catch { /* ignore quota errors */ }
   }, [savedMeta]);
 
-  // Client-side cache keyed by lowercased destination — cleared when inventory finishes building
-  const clientCache = useRef(new Map<string, SearchResult>());
-  const pollingRef  = useRef<ReturnType<typeof setInterval> | null>(null);
-
   const fetchActivities = useCallback(async (dest: string, skipCache = false) => {
     const key = dest.trim().toLowerCase();
+    const requestId = ++requestSequenceRef.current;
+    requestAbortRef.current?.abort();
+    const controller = new AbortController();
+    requestAbortRef.current = controller;
+
+    const previousKey = requestedDestinationRef.current.trim().toLowerCase();
+    const destinationChanged = key !== previousKey;
+    requestedDestinationRef.current = dest.trim();
+    dispatchLoad({ type: "start", requestId, destination: dest.trim() });
+    setResultPageDefaults(destinationChanged);
+
     if (!skipCache) {
       // 1. In-memory (fastest — same session, survives re-renders)
       const mem = clientCache.current.get(key);
-      if (mem) {
-        setResult(mem);
-        setError(null);
+      if (mem && activityResultMatchesDestination(mem, dest)) {
+        dispatchLoad({ type: "loaded", requestId, result: mem });
+        requestAbortRef.current = null;
         return;
+      } else if (mem) {
+        clientCache.current.delete(key);
+        try { sessionStorage.removeItem(`tg_act_${key}`); } catch { /* ignore */ }
       }
       // 2. localStorage (survives page reloads and cold Vercel starts, 24h TTL)
       const persisted = lsGetDestination(key);
-      if (persisted) {
+      if (persisted && activityResultMatchesDestination(persisted as ActivitySearchResult, dest)) {
         console.log(`[activities] ls cache hit: ${key}`);
-        const r = persisted as SearchResult;
+        const r = persisted as ActivitySearchResult;
         clientCache.current.set(key, r);
-        setResult(r);
-        setError(null);
+        dispatchLoad({ type: "loaded", requestId, result: r });
+        requestAbortRef.current = null;
         return;
       }
     }
-
-    setLoading(true);
-    setError(null);
-    if (!skipCache) setActivityQuery(""); // clear activity search when switching destinations
 
     try {
       // 4. Supabase database — fast query, zero Google API cost
@@ -2025,11 +2449,13 @@ export default function ActivitySearch() {
           .limit(200)
           .order("title", { ascending: true });
 
+        if (requestId !== requestSequenceRef.current) return;
+
         if (sbError) {
           console.warn("[activities] Supabase query failed:", sbError.message);
         } else if (rows && rows.length > 0) {
           const activities = (rows as SupabaseRow[]).map(rowToActivity);
-          const r: SearchResult = {
+          const r: ActivitySearchResult = {
             activities,
             city:            cityName,
             country:         dest.includes(",") ? dest.split(",").slice(1).join(",").trim() : "",
@@ -2039,28 +2465,32 @@ export default function ActivitySearch() {
           };
           clientCache.current.set(key, r);
           lsSetDestination(key, r);
-          setResult(r);
-          setError(null);
-          return; // finally { setLoading(false) } handles cleanup
+          dispatchLoad({ type: "loaded", requestId, result: r });
+          return;
         }
         // No rows → fall through to Google Places API
       }
 
       // 5. Google Places API
-      const res  = await fetchWithAuth(`/api/activities/search?destination=${encodeURIComponent(dest.trim())}`);
-      const data = await res.json() as {
-        activities?: Activity[]; city?: string; country?: string; source?: string; error?: string;
-        limitReached?: boolean;
-        inventoryStatus?: "building" | "ready"; inventorySize?: number;
-        inventoryProgress?: { completed: number; total: number };
-        _debug?: { cacheSource: string; apiCallsMade: number; entriesLoaded: number };
-      };
+      const res = await fetchWithAuth(
+        `/api/activities/search?destination=${encodeURIComponent(dest.trim())}`,
+        { signal: controller.signal },
+      );
+      const data = await res.json() as ActivitySearchApiResponse;
+
+      if (requestId !== requestSequenceRef.current) return;
+
+      const responseState = classifyActivitySearchResponse(res.ok, data);
+      if (responseState === "city_not_built") {
+        dispatchLoad({ type: "city_not_built", requestId });
+        return;
+      }
 
       if (res.status === 429 && data.limitReached) throw new Error(data.error ?? "Daily limit reached. Resets at midnight UTC.");
-      if (!res.ok || data.error) throw new Error(data.error ?? `HTTP ${res.status}`);
-      if (!data.activities?.length) throw new Error("No activities found for this destination.");
+      if (responseState === "request_failed") throw new Error(data.error ?? `HTTP ${res.status}`);
+      if (!data.activities) throw new Error("The activity response was incomplete.");
 
-      const r: SearchResult = {
+      const r: ActivitySearchResult = {
         activities:        data.activities,
         city:              data.city    ?? dest.split(",")[0].trim(),
         country:           data.country ?? dest.split(",").pop()?.trim() ?? "",
@@ -2072,7 +2502,7 @@ export default function ActivitySearch() {
       };
 
       clientCache.current.set(key, r);
-      setResult(r);
+      dispatchLoad({ type: "loaded", requestId, result: r });
       // Persist so revisiting the page (or a cold server start) shows results instantly
       if (r.inventoryStatus !== "building") {
         try { sessionStorage.setItem(`tg_act_${key}`, JSON.stringify(r)); } catch { /* quota */ }
@@ -2080,12 +2510,31 @@ export default function ActivitySearch() {
         console.log(`[activities] ls cache set: ${key}`);
       }
     } catch (err) {
+      if (controller.signal.aborted || requestId !== requestSequenceRef.current) return;
       const msg = err instanceof Error ? err.message : "An unexpected error occurred.";
-      setError(msg);
+      dispatchLoad({ type: "request_failed", requestId, error: msg });
     } finally {
-      setLoading(false);
+      if (requestId === requestSequenceRef.current && requestAbortRef.current === controller) {
+        requestAbortRef.current = null;
+      }
     }
   }, []);
+
+  function setResultPageDefaults(destinationChanged: boolean) {
+    setPage(1);
+    setModalActivity(null);
+    setModalDetail(null);
+    setModalLoading(false);
+    setModalInsights(null);
+    setModalInsightsLoading(false);
+    if (destinationChanged) {
+      setActivityQuery("");
+      setActiveFilter("all");
+      setActiveSubTag(null);
+    }
+  }
+
+  useEffect(() => () => requestAbortRef.current?.abort(), []);
 
   // Poll inventory status while it's building; refresh once it's ready
   useEffect(() => {
@@ -2095,21 +2544,24 @@ export default function ActivitySearch() {
     }
 
     const cityKey = result.city.toLowerCase();
+    const pollRequestId = loadState.requestId;
+    const pollDestination = requestedDestination;
     pollingRef.current = setInterval(async () => {
       try {
         const res  = await fetch(`/api/activities/inventory/status?city=${encodeURIComponent(cityKey)}`);
         if (!res.ok) return;
         const data = await res.json() as { status: string; count: number };
+        if (pollRequestId !== requestSequenceRef.current) return;
 
         if (data.status === "ready") {
           clearInterval(pollingRef.current!);
           pollingRef.current = null;
           // Clear stale cache entry and re-fetch the full inventory
-          clientCache.current.delete(destination.trim().toLowerCase());
-          void fetchActivities(destination, true);
+          clientCache.current.delete(pollDestination.trim().toLowerCase());
+          void fetchActivities(pollDestination, true);
         } else {
           // Update the live count without re-fetching all activities
-          setResult((prev) => prev ? { ...prev, inventorySize: data.count } : prev);
+          dispatchLoad({ type: "update_inventory_size", requestId: pollRequestId, size: data.count });
         }
       } catch { /* ignore network errors during polling */ }
     }, 3000);
@@ -2117,7 +2569,7 @@ export default function ActivitySearch() {
     return () => {
       if (pollingRef.current) { clearInterval(pollingRef.current); pollingRef.current = null; }
     };
-  }, [result?.inventoryStatus, result?.city, destination, fetchActivities]);
+  }, [result?.inventoryStatus, result?.city, requestedDestination, loadState.requestId, fetchActivities]);
 
   function handleSearch(overrideValue?: string) {
     const dest = (overrideValue ?? destination).trim();
@@ -2142,7 +2594,6 @@ export default function ActivitySearch() {
             neighborhood: activity.neighborhood,
             duration:     activity.duration,
             rating:       activity.rating,
-            photoRef:     activity.photoRef,
             lat:          activity.lat,
             lng:          activity.lng,
             city:         destination,  // current search city — used for multi-city itinerary assignment
@@ -2172,6 +2623,7 @@ export default function ActivitySearch() {
 
     setModalInsightsLoading(true);
     try {
+      recordGoogleModalTrace({ type: "insights", outcome: "requested" });
       const res = await fetch("/api/activities/review-insights", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -2184,44 +2636,68 @@ export default function ActivitySearch() {
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json() as ReviewInsights;
+      if (!Array.isArray(data.guestsLove) || !Array.isArray(data.watchOut) || !Array.isArray(data.bestFor) || !Array.isArray(data.tips)) {
+        insightsCache.current.set(placeId, null);
+        setModalInsights(null);
+        recordGoogleModalTrace({ type: "insights", outcome: "failed" });
+        return;
+      }
       insightsCache.current.set(placeId, data);
       setModalInsights(data);
+      recordGoogleModalTrace({ type: "insights", outcome: "received" });
     } catch (err) {
       console.warn("[review-insights] fetch failed:", err instanceof Error ? err.message : String(err));
       insightsCache.current.set(placeId, null);
       setModalInsights(null);
+      recordGoogleModalTrace({ type: "insights", outcome: "failed" });
     } finally {
       setModalInsightsLoading(false);
     }
   }
 
   async function openDetails(activity: Activity) {
+    beginGoogleModalTrace(activity.id, activity.placeId ?? "");
     setModalActivity(activity);
     setModalDetail(null);
     setModalInsights(null);
     setModalInsightsLoading(false);
 
-    const placeId = activity.placeId;
-    if (!placeId) return; // show modal with card data only
+    let effectivePlaceId = activity.placeId;
 
-    // Load from detail cache or fetch
-    const cached = detailsCache.current.get(placeId);
-    if (cached) {
-      setModalDetail(cached);
-      // Insights may already be cached too
-      void fetchInsights(placeId, cached, activity);
-      return;
+    // FSQ activity without a cached Google Place ID — resolve it lazily
+    if (!effectivePlaceId && activity.id.startsWith("fsq:") && activity.lat && activity.lng) {
+      const fsqId = activity.id.replace("fsq:", "");
+      try {
+        const resp = await fetch(
+          `/api/activities/resolve-place?name=${encodeURIComponent(activity.title)}&lat=${activity.lat}&lng=${activity.lng}&fsq_id=${encodeURIComponent(fsqId)}`,
+        );
+        if (resp.ok) {
+          const resolved = await resp.json() as { googlePlaceId?: string; photoUrl?: string };
+          if (resolved.googlePlaceId) {
+            effectivePlaceId = resolved.googlePlaceId;
+            setModalActivity((prev) =>
+              prev
+                ? {
+                    ...prev,
+                    placeId: effectivePlaceId,
+                    photoRef: prev.photoRef ?? resolved.photoUrl ?? undefined,
+                  }
+                : prev,
+            );
+          }
+        }
+      } catch {
+        // Non-fatal: modal shows with card data only
+      }
     }
+
+    if (!effectivePlaceId) return;
+    if (!shouldFetchDirectPlaceDetails(placeModalMode)) return; // UI Kit loads its own verified Place ID details.
 
     setModalLoading(true);
     try {
-      const res  = await fetch(`/api/activities/place?id=${encodeURIComponent(placeId)}`);
-      if (!res.ok) throw new Error("Failed to load place details");
-      const data = await res.json() as PlaceDetail;
-      detailsCache.current.set(placeId, data);
-      setModalDetail(data);
-      // Fetch insights concurrently once we have the reviews
-      void fetchInsights(placeId, data, activity);
+      const data = await fetchGooglePlaceDetail(effectivePlaceId, "modal_standard");
+      if (data) setModalDetail(data);
     } catch {
       // Non-fatal: modal still shows with card-level data
       setModalDetail(null);
@@ -2230,7 +2706,36 @@ export default function ActivitySearch() {
     }
   }
 
+  const loadModalGallery = useCallback(async () => {
+    if (!shouldFetchDirectPlaceDetails(placeModalMode)) return;
+    const placeId = modalActivity?.placeId;
+    if (!placeId) return;
+    const gallery = await fetchGooglePlaceDetail(placeId, "modal_gallery");
+    if (gallery) {
+      setModalDetail((current) => current
+        ? { ...current, photos: mergeGalleryPhotos(current.photos, gallery.photos) }
+        : gallery);
+    }
+  }, [modalActivity?.placeId, placeModalMode]);
+
+  const loadModalReviews = useCallback(async () => {
+    if (!shouldFetchDirectPlaceDetails(placeModalMode)) return;
+    const activity = modalActivity;
+    const placeId = activity?.placeId;
+    if (!activity || !placeId) return;
+    recordGoogleModalTrace({ type: "reviews", outcome: "requested" });
+    const reviews = await fetchGooglePlaceDetail(placeId, "modal_rich_reviews");
+    if (!reviews) {
+      recordGoogleModalTrace({ type: "reviews", outcome: "failed" });
+      return;
+    }
+    recordGoogleModalTrace({ type: "reviews", outcome: "received" });
+    setModalDetail((current) => ({ ...(current ?? { id: placeId }), ...reviews }));
+    await fetchInsights(placeId, reviews, activity);
+  }, [modalActivity, placeModalMode]);
+
   function closeDetails() {
+    finishGoogleModalTrace();
     setModalActivity(null);
     setModalDetail(null);
     setModalLoading(false);
@@ -2307,21 +2812,45 @@ export default function ActivitySearch() {
   }, [isSearching, activeFilter, activityQuery, fullDataset, featured, activeSubTag, savedIds]);
 
   // Pagination — reset page whenever the view changes
-  const [page, setPage] = useState(1);
   useEffect(() => { setPage(1); }, [viewBase]);
 
   const PAGE_SIZE = 24;
   const displayed = viewBase.slice(0, page * PAGE_SIZE);
   const hasMore   = displayed.length < viewBase.length;
 
-  const city    = result?.city    ?? destination.split(",")[0].trim();
-  const country = result?.country ?? destination.split(",").pop()?.trim() ?? "";
+  const pageState = deriveActivityPageState(
+    requestState,
+    result !== null,
+    displayed.length,
+  );
+
+  const city    = result?.city    ?? requestedDestination.split(",")[0].trim();
+  const country = result?.country ?? requestedDestination.split(",").slice(1).join(",").trim();
 
   // All saved activities from the current dataset (for modal list + sticky bar)
   const savedActivities = useMemo(
     () => fullDataset.filter((a) => savedIds.has(a.id)),
     [fullDataset, savedIds],
   );
+
+  function clearSearchAndFilters() {
+    setActivityQuery("");
+    setActiveFilter("all");
+    setActiveSubTag(null);
+    setPage(1);
+  }
+
+  function searchAnotherCity() {
+    requestAbortRef.current?.abort();
+    const requestId = ++requestSequenceRef.current;
+    requestedDestinationRef.current = "";
+    setDestination("");
+    clearSearchAndFilters();
+    dispatchLoad({ type: "reset", requestId, destination: "" });
+  }
+
+  const showInventoryControls = pageState === "loaded" || pageState === "empty_search_results";
+  const loadPlacesUIKit = shouldLoadPlacesUIKit(placeModalMode, modalActivity !== null);
 
   return (
     <div className="min-h-screen bg-white text-gray-900">
@@ -2354,15 +2883,21 @@ export default function ActivitySearch() {
         <div className="pt-12 pb-8 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-4 py-1.5 text-[11px] font-semibold text-gray-700 mb-5">
             <span className={`w-1.5 h-1.5 rounded-full ${
-              loading ? "bg-amber-400 animate-pulse" :
+              pageState === "loading" ? "bg-amber-400 animate-pulse" :
               result?.inventoryStatus === "building" ? "bg-amber-400 animate-pulse" :
-              "bg-lantern-mint animate-pulse"
+              pageState === "request_failed" ? "bg-red-400" :
+              pageState === "city_not_built" ? "bg-gray-400" :
+              "bg-lantern-mint"
             }`} />
-            {loading
+            {pageState === "loading"
               ? "Indexing city…"
               : result?.inventoryStatus === "building"
                 ? `Indexing ${city} — ${(result.inventorySize ?? 0).toLocaleString()} places found so far…`
-                : result
+                : pageState === "city_not_built"
+                  ? `${city || "This city"} is not available yet`
+                  : pageState === "request_failed"
+                    ? "Activity search could not be completed"
+                    : result
                   ? `${(result.inventorySize ?? result.activities.length).toLocaleString()} places indexed in ${city}`
                   : "Discover experiences"}
             {process.env.NODE_ENV !== "production" && result?._debug && (
@@ -2374,9 +2909,9 @@ export default function ActivitySearch() {
             )}
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight leading-tight mb-3">
-            Discover the best of{" "}
+            {pageState === "idle" ? "Discover activities in " : "Discover the best of "}
             <span className="bg-gradient-to-r from-lantern-violet via-lantern-blue to-lantern-mint bg-clip-text text-transparent">
-              {city}{country ? `, ${country}` : ""}
+              {city ? `${city}${country ? `, ${country}` : ""}` : "your next destination"}
             </span>
           </h1>
           <p className="text-gray-700 text-base max-w-md mx-auto">
@@ -2425,23 +2960,26 @@ export default function ActivitySearch() {
           />
         </div>
 
-        {/* ── Activity search ── */}
-        <div className="mb-6">
-          <ActivitySearchInput value={activityQuery} onChange={setActivityQuery} />
-        </div>
+        {/* Inventory-specific search and filters never remain visible for another city. */}
+        {showInventoryControls && (
+          <>
+            <div className="mb-6">
+              <ActivitySearchInput value={activityQuery} onChange={setActivityQuery} />
+            </div>
 
-        {/* ── Category filter strip ── */}
-        <div className="mb-4">
-          <CategoryFilter
-            active={activeFilter}
-            onChange={setActiveFilter}
-            counts={counts}
-            savedCount={savedIds.size}
-          />
-        </div>
+            <div className="mb-4">
+              <CategoryFilter
+                active={activeFilter}
+                onChange={setActiveFilter}
+                counts={counts}
+                savedCount={savedIds.size}
+              />
+            </div>
+          </>
+        )}
 
         {/* ── Sub-category chips (within a category, hidden in Featured / search mode) ── */}
-        {!isSearching && activeFilter !== "all" && subTagCounts.size > 0 && (
+        {showInventoryControls && !isSearching && activeFilter !== "all" && subTagCounts.size > 0 && (
           <div
             className="flex gap-2 overflow-x-auto pb-1 mb-4"
             style={{ scrollbarWidth: "none" } as React.CSSProperties}
@@ -2477,7 +3015,7 @@ export default function ActivitySearch() {
         )}
 
         {/* ── Result count ── */}
-        {result && !loading && (
+        {result && pageState !== "loading" && (
           <div className="flex items-center justify-between mb-5">
             <p className="text-[12px] text-gray-700">
               {isSearching
@@ -2504,11 +3042,20 @@ export default function ActivitySearch() {
 
         {/* ── Grid ── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-          {loading ? (
+          {pageState === "loading" ? (
             Array.from({ length: 9 }).map((_, i) => <SkeletonCard key={i} />)
-          ) : error ? (
-            <ErrorState message={error} onRetry={() => fetchActivities(destination)} />
-          ) : displayed.length > 0 ? (
+          ) : pageState === "city_not_built" ? (
+            <CityNotBuiltState city={city} onSearchAnother={searchAnotherCity} />
+          ) : pageState === "request_failed" ? (
+            <ErrorState message={error ?? "The activity request failed."} onRetry={() => fetchActivities(requestedDestination, true)} />
+          ) : pageState === "empty_search_results" ? (
+            <EmptyResultsState
+              city={city}
+              query={activityQuery}
+              activeFilter={activeFilter}
+              onClear={clearSearchAndFilters}
+            />
+          ) : pageState === "loaded" ? (
             displayed.map((activity) => (
               <ActivityCard
                 key={activity.id}
@@ -2518,19 +3065,13 @@ export default function ActivitySearch() {
                 onViewDetails={() => openDetails(activity)}
               />
             ))
-          ) : isSearching ? (
-            <EmptySearchState
-              query={activityQuery}
-              activeFilter={activeFilter}
-              onClearFilter={() => setActiveFilter("all")}
-            />
           ) : (
-            <EmptyState filter={activeFilter} />
+            <IdleState />
           )}
         </div>
 
         {/* ── Load more ── */}
-        {!loading && hasMore && (
+        {pageState === "loaded" && hasMore && (
           <div className="flex flex-col items-center gap-2 mt-10">
             <button
               onClick={() => setPage((p) => p + 1)}
@@ -2544,13 +3085,46 @@ export default function ActivitySearch() {
       </main>
 
       {/* ── Detail modal ── */}
-      {modalActivity && (
+      {modalActivity && placeModalMode === "direct" && (
         <ActivityDetailModal
           activity={modalActivity}
           detail={modalDetail}
           loading={modalLoading}
           insights={modalInsights}
           insightsLoading={modalInsightsLoading}
+          onLoadGallery={loadModalGallery}
+          onLoadReviews={loadModalReviews}
+          onClose={closeDetails}
+        />
+      )}
+      {modalActivity && placeModalMode === "ui-kit" && loadPlacesUIKit && (
+        <UIKitActivityModal
+          activity={modalActivity}
+          saved={savedIds.has(modalActivity.id)}
+          onToggleSave={() => toggleSave(modalActivity)}
+          onClose={closeDetails}
+        />
+      )}
+      {modalActivity && placeModalMode === "hybrid" && loadPlacesUIKit && (
+        <HybridActivityModal
+          activity={modalActivity}
+          recommendationContext={tripRecommendationContext}
+          saved={savedIds.has(modalActivity.id)}
+          onToggleSave={() => toggleSave(modalActivity)}
+          onClose={closeDetails}
+        />
+      )}
+      {modalActivity && placeModalMode === "comparison" && loadPlacesUIKit && (
+        <ActivityModalComparison
+          activity={modalActivity}
+          detail={modalDetail}
+          loading={modalLoading}
+          insights={modalInsights}
+          insightsLoading={modalInsightsLoading}
+          saved={savedIds.has(modalActivity.id)}
+          onToggleSave={() => toggleSave(modalActivity)}
+          onLoadGallery={loadModalGallery}
+          onLoadReviews={loadModalReviews}
           onClose={closeDetails}
         />
       )}

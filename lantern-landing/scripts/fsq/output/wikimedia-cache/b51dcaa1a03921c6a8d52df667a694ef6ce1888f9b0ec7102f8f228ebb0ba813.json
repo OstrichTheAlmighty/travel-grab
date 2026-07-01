@@ -1,0 +1,94 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:37:48.424Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3739,
+          "ns": 0,
+          "title": "観音菩薩",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かんのんほさつ",
+            "page_image_free": "Sanjusangendo_Thousand-armed_Kannon.JPG",
+            "wikibase_item": "Q193849"
+          },
+          "terms": {
+            "description": [
+              "仏教の菩薩の一尊"
+            ]
+          }
+        },
+        {
+          "pageid": 6250,
+          "ns": 0,
+          "title": "アテーナー",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あてえなあ",
+            "page_image_free": "Varvakeion_Athena.jpg",
+            "wikibase_item": "Q37122"
+          },
+          "terms": {
+            "description": [
+              "ギリシア神話の女神、オリュンポス十二神"
+            ]
+          }
+        },
+        {
+          "pageid": 28998,
+          "ns": 0,
+          "title": "テミス",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "てみす",
+            "page_image_free": "0029MAN-Themis.jpg",
+            "wikibase_item": "Q159168"
+          },
+          "terms": {
+            "description": [
+              "ギリシア神話の女神"
+            ]
+          }
+        },
+        {
+          "pageid": 327867,
+          "ns": 0,
+          "title": "デジタル・デビル物語 女神転生II",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "てしたるてひるすとおりい めかみてんせい2",
+            "wikibase_item": "Q521272"
+          },
+          "terms": {
+            "description": [
+              "1990年に発売された日本のコンピューターゲーム"
+            ]
+          }
+        },
+        {
+          "pageid": 4113885,
+          "ns": 0,
+          "title": "女神橋",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "めかみはし",
+            "page_image_free": "Megami-bashi_02.jpg",
+            "wikibase_item": "Q90105492"
+          },
+          "terms": {
+            "description": [
+              "横浜市の橋"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

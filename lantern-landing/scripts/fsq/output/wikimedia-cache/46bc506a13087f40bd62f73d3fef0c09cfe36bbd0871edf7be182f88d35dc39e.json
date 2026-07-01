@@ -1,0 +1,100 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:08.982Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 78142,
+          "ns": 0,
+          "title": "薬局",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やつきよく",
+            "page_image_free": "Farmacia-japonesa092.jpg",
+            "wikibase_item": "Q13107184"
+          },
+          "terms": {
+            "description": [
+              "薬剤師が調剤を行い販売または授与をする施設"
+            ]
+          }
+        },
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 1123176,
+          "ns": 0,
+          "title": "日本橋本町",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんはしほんちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Route_316_-04.jpg",
+            "wikibase_item": "Q11508336"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 2786499,
+          "ns": 0,
+          "title": "Daiichi Sankyo くすりミュージアム",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たいいちさんきようくすりみゆうしあむ",
+            "page_image_free": "Daiichi_sankyo_kusuri_museum.jpg",
+            "wikibase_item": "Q17224188"
+          },
+          "coordinates": [
+            {
+              "lat": 35.688472,
+              "lon": 139.775694,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都中央区にある企業博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 3106851,
+          "ns": 0,
+          "title": "くすり博物館",
+          "index": 5,
+          "pageprops": {
+            "disambiguation": "",
+            "wikibase_item": "Q18701258"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの曖昧さ回避ページ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

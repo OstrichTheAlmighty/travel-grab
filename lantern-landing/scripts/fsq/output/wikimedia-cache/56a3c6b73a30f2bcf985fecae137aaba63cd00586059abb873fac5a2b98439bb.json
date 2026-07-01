@@ -1,0 +1,108 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:07.916Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 21302,
+          "ns": 0,
+          "title": "貨幣",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かへい",
+            "page_image_free": "Billets_de_5000.jpg",
+            "wikibase_item": "Q1368"
+          },
+          "terms": {
+            "description": [
+              "物やサービスの交換・流通に用いられる媒介物。または硬貨(coin)。"
+            ]
+          }
+        },
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 158707,
+          "ns": 0,
+          "title": "韓国銀行",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かんこくきんこう",
+            "page_image_free": "BOK_main_office3.jpg",
+            "wikibase_item": "Q485531"
+          },
+          "coordinates": [
+            {
+              "lat": 37.562,
+              "lon": 126.980661,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "韓国の中央銀行"
+            ]
+          }
+        },
+        {
+          "pageid": 305472,
+          "ns": 0,
+          "title": "貨幣博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かへいはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Japan_Currency_Museum.jpg",
+            "wikibase_item": "Q865607"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68536806,
+              "lon": 139.77179694,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都中央区の日本銀行金融研究所内にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 493890,
+          "ns": 0,
+          "title": "貨幣学",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かへいかく",
+            "page_image_free": "Assorted_United_States_coins.jpg",
+            "wikibase_item": "Q631286"
+          }
+        }
+      ]
+    }
+  }
+}

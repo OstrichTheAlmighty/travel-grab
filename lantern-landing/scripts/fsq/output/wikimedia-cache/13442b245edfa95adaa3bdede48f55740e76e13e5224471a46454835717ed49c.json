@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:27.001Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 21842,
+          "ns": 0,
+          "title": "白浜町 (千葉県)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しらはままち",
+            "page_image_free": "Nojimasakitodai0.jpg",
+            "wikibase_item": "Q1951937"
+          },
+          "coordinates": [
+            {
+              "lat": 34.90819,
+              "lon": 139.89922,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の千葉県安房郡にあった町"
+            ]
+          }
+        },
+        {
+          "pageid": 48579,
+          "ns": 0,
+          "title": "東海大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうかいたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokaidai.svg",
+            "wikibase_item": "Q963709"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66444444,
+              "lon": 139.68452778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 280473,
+          "ns": 0,
+          "title": "開陽丸",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かいようまる",
+            "page_image_free": "Warship_Kaiyo_Maru_in_Dordrecht_August_1866.png",
+            "wikibase_item": "Q3005167"
+          }
+        },
+        {
+          "pageid": 1277019,
+          "ns": 0,
+          "title": "峯山海軍航空隊",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みねやまかいくんこうくうたい",
+            "page_image_free": "Mineyama_Naval_Aviation_(2).jpg",
+            "wikibase_item": "Q11476126"
+          }
+        },
+        {
+          "pageid": 1860772,
+          "ns": 0,
+          "title": "福岡市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふくおかし",
+            "kartographer_frames": "1",
+            "page_image_free": "Fukuoka_City_-_Montage_-_01.JPG",
+            "wikibase_item": "Q26600"
+          },
+          "coordinates": [
+            {
+              "lat": 33.59014,
+              "lon": 130.40172,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福岡県庁所在地"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:48.766Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1028,
+          "ns": 0,
+          "title": "坂本龍一",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さかもと りゆういち",
+            "page_image_free": "Ryuichi_Sakamoto_side.jpg",
+            "wikibase_item": "Q345494"
+          },
+          "terms": {
+            "description": [
+              "日本の音楽家 (1952-2023)"
+            ]
+          }
+        },
+        {
+          "pageid": 3275585,
+          "ns": 0,
+          "title": "じゅん散歩",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しゆんさんほ",
+            "toc": "",
+            "wikibase_item": "Q22123635"
+          },
+          "terms": {
+            "description": [
+              "テレビ朝日系列の紀行番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:16.486Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 30057,
+          "ns": 0,
+          "title": "Tokyo",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Capital and most populous city in Japan",
+            "wikibase_item": "Q1490"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68972222,
+              "lon": 139.69222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "capital and largest city of Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 4328973,
+          "ns": 0,
+          "title": "Tokyo Metropolitan Gymnasium",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tōkyō_Taiikukan_Japan.jpg",
+            "wikibase-shortdesc": "Sporting complex in Sendagaya, Shibuya, Tokyo, Japan",
+            "wikibase_item": "Q1066903"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6797,
+              "lon": 139.7125,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "sports arena"
+            ]
+          }
+        },
+        {
+          "pageid": 78405028,
+          "ns": 0,
+          "title": "2025 Summer Deaflympics",
+          "index": 5,
+          "pageprops": {
+            "page_image": "2025_Summer_Deaflympics.png",
+            "wikibase-shortdesc": "25th Summer Deaflympics",
+            "wikibase_item": "Q113953193"
+          },
+          "terms": {
+            "description": [
+              "25th edition of the event, in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 79218223,
+          "ns": 0,
+          "title": "2025 Judo Grand Slam Tokyo",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "2025 Judo Grand Slam Tokyo",
+            "wikibase-shortdesc": "Judo competition",
+            "wikibase_item": "Q130318377"
+          },
+          "terms": {
+            "description": [
+              "judo competition"
+            ]
+          }
+        },
+        {
+          "pageid": 79642296,
+          "ns": 0,
+          "title": "2025 Japan Open",
+          "index": 2,
+          "pageprops": {
+            "toc": "",
+            "wikibase-shortdesc": "Badminton tournament in Japan",
+            "wikibase_item": "Q111201787"
+          },
+          "terms": {
+            "description": [
+              "badminton championships"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

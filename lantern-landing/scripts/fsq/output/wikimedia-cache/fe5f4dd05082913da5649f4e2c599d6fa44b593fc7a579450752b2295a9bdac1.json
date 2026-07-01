@@ -1,0 +1,82 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:11.681Z",
+  "value": {
+    "searchinfo": {
+      "search": "Diplomatic Archives"
+    },
+    "search": [
+      {
+        "id": "Q2860452",
+        "title": "Q2860452",
+        "pageid": 2738871,
+        "concepturi": "http://www.wikidata.org/entity/Q2860452",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2860452",
+        "display": {
+          "label": {
+            "value": "Diplomatic Archives",
+            "language": "en"
+          },
+          "description": {
+            "value": "French diplomatic archives",
+            "language": "en"
+          }
+        },
+        "label": "Diplomatic Archives",
+        "description": "French diplomatic archives",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Diplomatic Archives"
+        }
+      },
+      {
+        "id": "Q129077998",
+        "title": "Q129077998",
+        "pageid": 123051616,
+        "concepturi": "http://www.wikidata.org/entity/Q129077998",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q129077998",
+        "display": {
+          "label": {
+            "value": "Diplomatic Archives of the Ministry of Foreign Affairs of Serbia",
+            "language": "en"
+          },
+          "description": {
+            "value": "archive in Belgrade",
+            "language": "en"
+          }
+        },
+        "label": "Diplomatic Archives of the Ministry of Foreign Affairs of Serbia",
+        "description": "archive in Belgrade",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Diplomatic Archives of the Ministry of Foreign Affairs of Serbia"
+        }
+      },
+      {
+        "id": "Q3788463",
+        "title": "Q3788463",
+        "pageid": 3612443,
+        "concepturi": "http://www.wikidata.org/entity/Q3788463",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3788463",
+        "display": {
+          "label": {
+            "value": "Diplomatic Archives of the Ministry of Foreign Affairs of Japan",
+            "language": "en"
+          }
+        },
+        "label": "Diplomatic Archives of the Ministry of Foreign Affairs of Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Diplomatic Archives of the Ministry of Foreign Affairs of Japan"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

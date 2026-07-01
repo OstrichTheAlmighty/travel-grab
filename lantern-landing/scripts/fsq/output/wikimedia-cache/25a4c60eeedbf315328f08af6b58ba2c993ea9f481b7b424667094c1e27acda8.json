@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:10.342Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 380421,
+          "ns": 0,
+          "title": "岡部昌幸",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おかへ まさゆき",
+            "wikibase_item": "Q11473842"
+          },
+          "terms": {
+            "description": [
+              "日本の美術評論家 (1957-)"
+            ]
+          }
+        },
+        {
+          "pageid": 729119,
+          "ns": 0,
+          "title": "荏原 畠山美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えはらはたけやまひしゆつかん",
+            "page_image_free": "荏原_畠山美術館本館入口.jpg",
+            "wikibase_item": "Q3330210"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63230556,
+              "lon": 139.72688889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区白金台2丁目にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 1569462,
+          "ns": 0,
+          "title": "富山市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とやまし",
+            "kartographer_frames": "1",
+            "page_image_free": "Toyama_montage_0.png",
+            "wikibase_item": "Q204266"
+          },
+          "coordinates": [
+            {
+              "lat": 36.69592,
+              "lon": 137.21369,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "富山県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 1596036,
+          "ns": 0,
+          "title": "港区 (東京都)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みなとく",
+            "kartographer_frames": "1",
+            "page_image_free": "20110405-TokyoTower-Sakura01.jpg",
+            "wikibase_item": "Q190088"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65803,
+              "lon": 139.75153,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 1904810,
+          "ns": 0,
+          "title": "畠山一清",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はたけやま いつせい",
+            "page_image_free": "Hatakeyama_Isse.JPG",
+            "wikibase_item": "Q11578608"
+          },
+          "terms": {
+            "description": [
+              "荏原製作所の創立者"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

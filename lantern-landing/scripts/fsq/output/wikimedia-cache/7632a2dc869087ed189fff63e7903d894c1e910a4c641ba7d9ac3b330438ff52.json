@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:45.930Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8208,
+          "ns": 0,
+          "title": "千葉市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ちはし",
+            "kartographer_frames": "1",
+            "page_image_free": "Chiba_City_montage.jpg",
+            "wikibase_item": "Q170616"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60728,
+              "lon": 140.10636,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 389569,
+          "ns": 0,
+          "title": "豊田市美術館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とよたしひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Toyota_Municipal_Museum_of_Art,_Kozakahon-machi_Toyota_2012.JPG",
+            "wikibase_item": "Q4461630"
+          },
+          "terms": {
+            "description": [
+              "愛知県豊田市にある市立の現代美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 430623,
+          "ns": 0,
+          "title": "浦添市美術館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "うらそえしひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Urasoe_Art_Museum01n3104.jpg",
+            "wikibase_item": "Q11558303"
+          },
+          "coordinates": [
+            {
+              "lat": 26.24991667,
+              "lon": 127.71947222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "沖縄県浦添市にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 1142797,
+          "ns": 0,
+          "title": "日中友好会館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "につちゆうゆうこうかいかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Koraku_International_Building.JPG",
+            "wikibase_item": "Q11504783"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70408333,
+              "lon": 139.74783333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日中友好七団体の一つである、日本の公益財団法人"
+            ]
+          }
+        },
+        {
+          "pageid": 1542064,
+          "ns": 0,
+          "title": "佐藤太清",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さとう たいせい",
+            "wikibase_item": "Q11383894"
+          },
+          "terms": {
+            "description": [
+              "日本の画家 (1913-2004)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

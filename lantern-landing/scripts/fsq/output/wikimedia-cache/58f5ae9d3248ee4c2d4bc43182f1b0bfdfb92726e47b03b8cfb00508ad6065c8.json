@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:28.018Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京新宿ベジフル株式会社"
+    },
+    "search": [
+      {
+        "id": "Q120197359",
+        "title": "Q120197359",
+        "pageid": 114654571,
+        "concepturi": "http://www.wikidata.org/entity/Q120197359",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q120197359",
+        "display": {
+          "label": {
+            "value": "Tokyo Shinjuku Vegefru Co., Ltd.",
+            "language": "en"
+          },
+          "description": {
+            "value": "Vegetable and fruits wholesaler of Yodobashi market",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Shinjuku Vegefru Co., Ltd.",
+        "description": "Vegetable and fruits wholesaler of Yodobashi market",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "東京新宿ベジフル株式会社"
+        },
+        "aliases": [
+          "東京新宿ベジフル株式会社"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

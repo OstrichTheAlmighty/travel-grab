@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:00.499Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 84530,
+          "ns": 0,
+          "title": "木材",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "もくさい",
+            "page_image_free": "Kotanimokuzai.JPG",
+            "wikibase_item": "Q287"
+          },
+          "terms": {
+            "description": [
+              "材料・原料として用いるために伐採された樹木の幹の部分"
+            ]
+          }
+        },
+        {
+          "pageid": 271562,
+          "ns": 0,
+          "title": "新木場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しんきは",
+            "kartographer_frames": "1",
+            "page_image_free": "14号地第2貯木場.jpg",
+            "wikibase_item": "Q11502514"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 374431,
+          "ns": 0,
+          "title": "合板",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こうはん",
+            "page_image_free": "Spruce_plywood.JPG",
+            "wikibase_item": "Q219803"
+          },
+          "terms": {
+            "description": [
+              "複数の木板を貼り合わせて作られる板材"
+            ]
+          }
+        },
+        {
+          "pageid": 2543440,
+          "ns": 0,
+          "title": "木材・合板博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "もくさいこうはんはくふつかん",
+            "kartographer_frames": "2",
+            "page_image_free": "Shinkiba_Tower_01.JPG",
+            "wikibase_item": "Q11518627"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64574722,
+              "lon": 139.83184167,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区にある施設"
+            ]
+          }
+        },
+        {
+          "pageid": 4347224,
+          "ns": 0,
+          "title": "木材産業",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "もくさいさんきよう",
+            "wikibase_item": "Q995609"
+          },
+          "terms": {
+            "description": [
+              "木を切り、加工して、売る産業"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:27.235Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 69280,
+          "ns": 0,
+          "title": "上原ひろみ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "うえはら ひろみ",
+            "page_image_free": "Hiromi_Uehara_-_Jazz_na_Starowce_-_1.jpg",
+            "wikibase_item": "Q233453"
+          },
+          "terms": {
+            "description": [
+              "日本の女性ジャズピアニスト、作曲家 (1979-)"
+            ]
+          }
+        },
+        {
+          "pageid": 332127,
+          "ns": 0,
+          "title": "恵比寿ガーデンプレイス",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えひすかあてんふれいす",
+            "page_image_free": "Ebisu_Garden_Palace_from_Tokyo_Tower_cropped.jpg",
+            "wikibase_item": "Q11259433"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6422,
+              "lon": 139.7142,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区の複合施設"
+            ]
+          }
+        },
+        {
+          "pageid": 583985,
+          "ns": 0,
+          "title": "ELEKTEL",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "えれきてる",
+            "wikibase_item": "Q11197608"
+          }
+        },
+        {
+          "pageid": 1139188,
+          "ns": 0,
+          "title": "ウェスティンホテル東京",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "うえすていんほてるとうきよう",
+            "page_image_free": "Westin_Hotel_Tokyo.jpg",
+            "wikibase_item": "Q11288499"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6415,
+              "lon": 139.71536111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都目黒区にあるホテル"
+            ]
+          }
+        },
+        {
+          "pageid": 3067841,
+          "ns": 0,
+          "title": "DJ OSSHY",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ていいしえいおつしい",
+            "wikibase_item": "Q11497731"
+          }
+        }
+      ]
+    }
+  }
+}

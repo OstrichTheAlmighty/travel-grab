@@ -1,0 +1,134 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:01.255Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 10910,
+          "ns": 0,
+          "title": "四街道市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "よつかいとうし",
+            "kartographer_frames": "1",
+            "page_image_free": "Yotsukaidojujiro.jpg",
+            "wikibase_item": "Q429373"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66978,
+              "lon": 140.16794,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 88547,
+          "ns": 0,
+          "title": "善通寺",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せんつうし",
+            "kartographer_frames": "1",
+            "page_image_free": "Zentuji20220412_1a.jpg",
+            "wikibase_item": "Q787035"
+          },
+          "coordinates": [
+            {
+              "lat": 34.22511111,
+              "lon": 133.77413889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "香川県善通寺市にある寺院、四国八十八箇所霊場の第七十五番札所"
+            ]
+          }
+        },
+        {
+          "pageid": 1328293,
+          "ns": 0,
+          "title": "稲荷山宿",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いなりやましゆく",
+            "page_image_free": "Inariyama-juku_Kurashikan_1.jpg",
+            "wikibase_item": "Q11596867"
+          },
+          "coordinates": [
+            {
+              "lat": 36.53844,
+              "lon": 138.1048,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1513212,
+          "ns": 0,
+          "title": "宝寿寺",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほうしゆし",
+            "kartographer_frames": "1",
+            "page_image_free": "Houzyuzi02.jpg",
+            "wikibase_item": "Q11452530"
+          },
+          "coordinates": [
+            {
+              "lat": 33.89733333,
+              "lon": 133.11494444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛媛県西条市にある寺院、四国八十八箇所霊場の第六十二番札所"
+            ]
+          }
+        },
+        {
+          "pageid": 1513554,
+          "ns": 0,
+          "title": "大興寺 (三豊市)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たいこうし",
+            "kartographer_frames": "1",
+            "page_image_free": "Daikouzi_03.jpg",
+            "wikibase_item": "Q11438586"
+          },
+          "coordinates": [
+            {
+              "lat": 34.10219444,
+              "lon": 133.71916667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "香川県三豊市にある寺院、四国八十八箇所霊場の第六十七番札所"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:30.956Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 32032,
+          "ns": 0,
+          "title": "日本科学未来館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんかかくみらいかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Miraikan_logo.svg",
+            "wikibase_item": "Q656957"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区青海にある科学館"
+            ]
+          }
+        },
+        {
+          "pageid": 69249,
+          "ns": 0,
+          "title": "ASIMO",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あしも",
+            "wikibase_item": "Q297769"
+          },
+          "terms": {
+            "description": [
+              "世界初の本格的な二足歩行ロボット"
+            ]
+          }
+        },
+        {
+          "pageid": 166385,
+          "ns": 0,
+          "title": "金子隆一 (サイエンスライター)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かねこ りゆういち",
+            "wikibase_item": "Q11646891"
+          },
+          "terms": {
+            "description": [
+              "サイエンスライター、SF研究家"
+            ]
+          }
+        },
+        {
+          "pageid": 1382165,
+          "ns": 0,
+          "title": "ビョーク",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひよおく",
+            "page_image_free": "Bjork_RAH210916-4_(cropped).jpg",
+            "wikibase_item": "Q42455"
+          },
+          "terms": {
+            "description": [
+              "アイスランドの女性シンガーソングライター (1965-)"
+            ]
+          }
+        },
+        {
+          "pageid": 2813724,
+          "ns": 0,
+          "title": "落合陽一",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おちあい よういち",
+            "page_image_free": "Yoichi_Ochiai_20221002_(cropped).jpg",
+            "wikibase_item": "Q16265041"
+          },
+          "terms": {
+            "description": [
+              "日本の研究者、メディアアーティスト、実業家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

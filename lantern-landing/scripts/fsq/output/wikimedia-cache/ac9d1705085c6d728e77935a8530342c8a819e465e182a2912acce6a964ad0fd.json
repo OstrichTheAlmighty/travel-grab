@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:40.392Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 173589,
+          "ns": 0,
+          "title": "デヴォン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "てうおん",
+            "page_image_free": "Devon_UK_locator_map_2010.svg",
+            "wikibase_item": "Q23156"
+          },
+          "terms": {
+            "description": [
+              "イングランドの州"
+            ]
+          }
+        },
+        {
+          "pageid": 244043,
+          "ns": 0,
+          "title": "インフラストラクチャー",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いんふらすとらくちあ",
+            "wikibase_item": "Q121359"
+          },
+          "terms": {
+            "description": [
+              "社会に役立つ設備・システム"
+            ]
+          }
+        },
+        {
+          "pageid": 858813,
+          "ns": 0,
+          "title": "杉山恒太郎",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すきやま こうたろう",
+            "wikibase_item": "Q11521898"
+          }
+        },
+        {
+          "pageid": 2121918,
+          "ns": 0,
+          "title": "シンガポール",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しんかほおる",
+            "page_image_free": "Flag_of_Singapore.svg",
+            "wikibase_item": "Q334"
+          },
+          "coordinates": [
+            {
+              "lat": 1.3,
+              "lon": 103.8,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東南アジアの国"
+            ]
+          }
+        },
+        {
+          "pageid": 3103356,
+          "ns": 0,
+          "title": "三井住友銀行本店ビルディング",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みついすみともきんこうほんてんひるていんく",
+            "page_image_free": "SMBC_Head_Office_Building_2024.jpg",
+            "wikibase_item": "Q17349580"
+          },
+          "coordinates": [
+            {
+              "lat": 35.685,
+              "lon": 139.76238889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区のビル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

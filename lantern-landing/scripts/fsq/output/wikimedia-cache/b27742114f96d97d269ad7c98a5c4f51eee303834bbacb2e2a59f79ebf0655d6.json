@@ -1,0 +1,85 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:03.794Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 127964,
+          "ns": 0,
+          "title": "1997年の音楽",
+          "index": 4,
+          "pageprops": {
+            "wikibase_item": "Q2354899"
+          }
+        },
+        {
+          "pageid": 480726,
+          "ns": 0,
+          "title": "東京ディズニーシーのショップの一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいしいのしよつふ",
+            "wikibase_item": "Q11524256"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1148174,
+          "ns": 0,
+          "title": "トロイ・ドナヒュー",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "となひゆう とろい",
+            "page_image_free": "Troy_Donahue_Hawaiian_Eye_1959.jpg",
+            "wikibase_item": "Q516035"
+          },
+          "terms": {
+            "description": [
+              "アメリカの俳優 (1936-2001)"
+            ]
+          }
+        },
+        {
+          "pageid": 3948879,
+          "ns": 0,
+          "title": "ファンタジースプリングス",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふあんたしいすふりんくす",
+            "wikibase_item": "Q65046459"
+          },
+          "terms": {
+            "description": [
+              "東京ディズニーシーのテーマポート"
+            ]
+          }
+        },
+        {
+          "pageid": 5048053,
+          "ns": 0,
+          "title": "ジャーニー・トゥ・ファンタジースプリングス",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しやあにいとうふあんたしいすふりんくす",
+            "wikibase_item": "Q133308708"
+          },
+          "terms": {
+            "description": [
+              "ファンタジースプリングスのテーマソング"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

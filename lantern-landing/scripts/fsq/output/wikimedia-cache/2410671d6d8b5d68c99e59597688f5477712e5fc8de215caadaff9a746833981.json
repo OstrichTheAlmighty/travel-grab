@@ -1,0 +1,195 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:36.525Z",
+  "value": {
+    "searchinfo": {
+      "search": "コートヤード"
+    },
+    "search": [
+      {
+        "id": "Q1141173",
+        "title": "Q1141173",
+        "pageid": 1087861,
+        "concepturi": "http://www.wikidata.org/entity/Q1141173",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1141173",
+        "display": {
+          "label": {
+            "value": "Marriott International",
+            "language": "en"
+          },
+          "description": {
+            "value": "international hospitality company in Bethesda, Maryland, United States",
+            "language": "en"
+          }
+        },
+        "label": "Marriott International",
+        "description": "international hospitality company in Bethesda, Maryland, United States",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "コートヤード・バイ・マリオット"
+        },
+        "aliases": [
+          "コートヤード・バイ・マリオット"
+        ]
+      },
+      {
+        "id": "Q1053170",
+        "title": "Q1053170",
+        "pageid": 1002128,
+        "concepturi": "http://www.wikidata.org/entity/Q1053170",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1053170",
+        "display": {
+          "label": {
+            "value": "Courtyard by Marriott",
+            "language": "en"
+          },
+          "description": {
+            "value": "mid-scale business hotel chain run by Marriott International",
+            "language": "en"
+          }
+        },
+        "label": "Courtyard by Marriott",
+        "description": "mid-scale business hotel chain run by Marriott International",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "コートヤード・バイ・マリオット"
+        },
+        "aliases": [
+          "コートヤード・バイ・マリオット"
+        ]
+      },
+      {
+        "id": "Q2595527",
+        "title": "Q2595527",
+        "pageid": 2504054,
+        "concepturi": "http://www.wikidata.org/entity/Q2595527",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2595527",
+        "display": {
+          "label": {
+            "value": "Wuxi Maoye City - Marriott Hotel",
+            "language": "en"
+          },
+          "description": {
+            "value": "skyscraper in Wuxi",
+            "language": "en"
+          }
+        },
+        "label": "Wuxi Maoye City - Marriott Hotel",
+        "description": "skyscraper in Wuxi",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "コートヤード バイ マリオット無錫"
+        },
+        "aliases": [
+          "コートヤード バイ マリオット無錫"
+        ]
+      },
+      {
+        "id": "Q5178795",
+        "title": "Q5178795",
+        "pageid": 4949677,
+        "concepturi": "http://www.wikidata.org/entity/Q5178795",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5178795",
+        "display": {
+          "label": {
+            "value": "Courtyard Theatre",
+            "language": "en"
+          },
+          "description": {
+            "value": "former theatre in Stratford-upon-Avon, England",
+            "language": "en"
+          }
+        },
+        "label": "Courtyard Theatre",
+        "description": "former theatre in Stratford-upon-Avon, England",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "コートヤード・シアター"
+        },
+        "aliases": [
+          "コートヤード・シアター"
+        ]
+      },
+      {
+        "id": "Q11303383",
+        "title": "Q11303383",
+        "pageid": 12442693,
+        "concepturi": "http://www.wikidata.org/entity/Q11303383",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11303383",
+        "display": {
+          "label": {
+            "value": "Courtyard by Marriott Tokyo Ginza Hotel",
+            "language": "en"
+          },
+          "description": {
+            "value": "hotel in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Courtyard by Marriott Tokyo Ginza Hotel",
+        "description": "hotel in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "コートヤード・マリオット東京銀座ホテル"
+        },
+        "aliases": [
+          "コートヤード・マリオット東京銀座ホテル"
+        ]
+      },
+      {
+        "id": "Q112674635",
+        "title": "Q112674635",
+        "pageid": 107549323,
+        "concepturi": "http://www.wikidata.org/entity/Q112674635",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q112674635",
+        "display": {
+          "label": {
+            "value": "Courtyard by Marriott Nagoya",
+            "language": "en"
+          }
+        },
+        "label": "Courtyard by Marriott Nagoya",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "コートヤード・バイ・マリオット名古屋"
+        },
+        "aliases": [
+          "コートヤード・バイ・マリオット名古屋"
+        ]
+      },
+      {
+        "id": "Q130649641",
+        "title": "Q130649641",
+        "pageid": 124580096,
+        "concepturi": "http://www.wikidata.org/entity/Q130649641",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q130649641",
+        "display": {
+          "label": {
+            "value": "コートヤード・バイ・マリオット福井",
+            "language": "ja"
+          }
+        },
+        "label": "コートヤード・バイ・マリオット福井",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "コートヤード・バイ・マリオット福井"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

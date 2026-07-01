@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:10.714Z",
+  "value": {
+    "searchinfo": {
+      "search": "蘆花公園"
+    },
+    "search": [
+      {
+        "id": "Q11625161",
+        "title": "Q11625161",
+        "pageid": 12765596,
+        "concepturi": "http://www.wikidata.org/entity/Q11625161",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11625161",
+        "display": {
+          "label": {
+            "value": "Roka Kōshun-en",
+            "language": "en"
+          }
+        },
+        "label": "Roka Kōshun-en",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "蘆花公園"
+        },
+        "aliases": [
+          "蘆花公園"
+        ]
+      },
+      {
+        "id": "Q2717793",
+        "title": "Q2717793",
+        "pageid": 2612280,
+        "concepturi": "http://www.wikidata.org/entity/Q2717793",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2717793",
+        "display": {
+          "label": {
+            "value": "Roka-kōen Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "railway station in Setagaya, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Roka-kōen Station",
+        "description": "railway station in Setagaya, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "zh",
+          "text": "蘆花公園站"
+        },
+        "aliases": [
+          "蘆花公園站"
+        ]
+      },
+      {
+        "id": "Q107124663",
+        "title": "Q107124663",
+        "pageid": 102372974,
+        "concepturi": "http://www.wikidata.org/entity/Q107124663",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q107124663",
+        "display": {
+          "label": {
+            "value": "Kōen Roka",
+            "language": "en"
+          },
+          "description": {
+            "value": "novelist in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Kōen Roka",
+        "description": "novelist in Japan",
+        "match": {
+          "type": "label",
+          "language": "zh",
+          "text": "蘆花公園"
+        },
+        "aliases": [
+          "蘆花公園"
+        ]
+      },
+      {
+        "id": "Q11614920",
+        "title": "Q11614920",
+        "pageid": 12755281,
+        "concepturi": "http://www.wikidata.org/entity/Q11614920",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11614920",
+        "display": {
+          "label": {
+            "value": "蘆花公園團地",
+            "language": "zh"
+          }
+        },
+        "label": "蘆花公園團地",
+        "match": {
+          "type": "label",
+          "language": "zh",
+          "text": "蘆花公園團地"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:18:00.974Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 253338,
+          "ns": 0,
+          "title": "明治神宮外苑",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めいししんくうかいえん",
+            "page_image_free": "Jingu_gaien_air.jpg",
+            "wikibase_item": "Q6631448"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区・港区にある洋風庭園"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1501262,
+          "ns": 0,
+          "title": "コトブキ (企業)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ことふき",
+            "wikibase_item": "Q11302265"
+          },
+          "terms": {
+            "description": [
+              "企業"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

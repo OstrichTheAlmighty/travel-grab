@@ -1,0 +1,194 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:48.223Z",
+  "value": {
+    "searchinfo": {
+      "search": "Main Entrance"
+    },
+    "search": [
+      {
+        "id": "Q20774219",
+        "title": "Q20774219",
+        "pageid": 22519780,
+        "concepturi": "http://www.wikidata.org/entity/Q20774219",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q20774219",
+        "display": {
+          "label": {
+            "value": "Main Entrance",
+            "language": "en"
+          },
+          "description": {
+            "value": "painting by Loïs Mailou Jones",
+            "language": "en"
+          }
+        },
+        "label": "Main Entrance",
+        "description": "painting by Loïs Mailou Jones",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Main Entrance"
+        }
+      },
+      {
+        "id": "Q112969952",
+        "title": "Q112969952",
+        "pageid": 107815619,
+        "concepturi": "http://www.wikidata.org/entity/Q112969952",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q112969952",
+        "display": {
+          "label": {
+            "value": "main entrance",
+            "language": "en"
+          },
+          "description": {
+            "value": "pattern",
+            "language": "en"
+          }
+        },
+        "label": "main entrance",
+        "description": "pattern",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "main entrance"
+        }
+      },
+      {
+        "id": "Q1591334",
+        "title": "Q1591334",
+        "pageid": 1526867,
+        "concepturi": "http://www.wikidata.org/entity/Q1591334",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1591334",
+        "display": {
+          "label": {
+            "value": "front door",
+            "language": "en"
+          },
+          "description": {
+            "value": "access door of a house",
+            "language": "en"
+          }
+        },
+        "label": "front door",
+        "description": "access door of a house",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "main entrance door"
+        },
+        "aliases": [
+          "main entrance door"
+        ]
+      },
+      {
+        "id": "Q53228996",
+        "title": "Q53228996",
+        "pageid": 53887906,
+        "concepturi": "http://www.wikidata.org/entity/Q53228996",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q53228996",
+        "display": {
+          "label": {
+            "value": "Main entrance",
+            "language": "en"
+          },
+          "description": {
+            "value": "building in the Czech Republic",
+            "language": "en"
+          }
+        },
+        "label": "Main entrance",
+        "description": "building in the Czech Republic",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Main entrance"
+        }
+      },
+      {
+        "id": "Q126698286",
+        "title": "Q126698286",
+        "pageid": 120714421,
+        "concepturi": "http://www.wikidata.org/entity/Q126698286",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q126698286",
+        "display": {
+          "label": {
+            "value": "Main Entrance",
+            "language": "en"
+          },
+          "description": {
+            "value": "gate in Belfast, County Antrim, Northern Ireland",
+            "language": "en"
+          }
+        },
+        "label": "Main Entrance",
+        "description": "gate in Belfast, County Antrim, Northern Ireland",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Main Entrance"
+        }
+      },
+      {
+        "id": "Q56319274",
+        "title": "Q56319274",
+        "pageid": 56257854,
+        "concepturi": "http://www.wikidata.org/entity/Q56319274",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q56319274",
+        "display": {
+          "label": {
+            "value": "salle des pas perdus",
+            "language": "en"
+          },
+          "description": {
+            "value": "wide vestibule or hall leading to the various offices in a building open to the public",
+            "language": "en"
+          }
+        },
+        "label": "salle des pas perdus",
+        "description": "wide vestibule or hall leading to the various offices in a building open to the public",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "main entrance hall"
+        },
+        "aliases": [
+          "main entrance hall"
+        ]
+      },
+      {
+        "id": "Q106856961",
+        "title": "Q106856961",
+        "pageid": 102121872,
+        "concepturi": "http://www.wikidata.org/entity/Q106856961",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q106856961",
+        "display": {
+          "label": {
+            "value": "Main Entrance, S. Zeno, Verona, Italy",
+            "language": "en"
+          },
+          "description": {
+            "value": "painting by Joseph Lindon Smith",
+            "language": "en"
+          }
+        },
+        "label": "Main Entrance, S. Zeno, Verona, Italy",
+        "description": "painting by Joseph Lindon Smith",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Main Entrance, S. Zeno, Verona, Italy"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

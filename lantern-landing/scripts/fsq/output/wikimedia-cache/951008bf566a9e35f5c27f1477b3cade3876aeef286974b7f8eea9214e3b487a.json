@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:35.674Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 19686,
+          "ns": 0,
+          "title": "別府市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "へつふし",
+            "kartographer_frames": "1",
+            "page_image_free": "Beppu_Montage_2.jpg",
+            "wikibase_item": "Q273880"
+          },
+          "coordinates": [
+            {
+              "lat": 33.28461,
+              "lon": 131.49128,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大分県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 32900,
+          "ns": 0,
+          "title": "大丸",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たいまる",
+            "page_image_free": "DAIMARU_Shinsaibashi_Store_Main_Building.jpg",
+            "wikibase_item": "Q3012112"
+          },
+          "terms": {
+            "description": [
+              "日本の百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 36392,
+          "ns": 0,
+          "title": "岩田屋",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いわたや",
+            "kartographer_frames": "2",
+            "wikibase_item": "Q6100771"
+          },
+          "terms": {
+            "description": [
+              "福岡市に本店を置く百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 285839,
+          "ns": 0,
+          "title": "十字屋 (百貨店)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しゆうしや",
+            "wikibase_item": "Q11404993"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66638889,
+              "lon": 139.81597222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "閉店した百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 2007199,
+          "ns": 0,
+          "title": "ラーメン",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "らあめん",
+            "page_image_free": "Shoyu_Ramen（Tokyo_Ramen）_-_01.jpg",
+            "wikibase_item": "Q234646"
+          },
+          "terms": {
+            "description": [
+              "日本の麺料理"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

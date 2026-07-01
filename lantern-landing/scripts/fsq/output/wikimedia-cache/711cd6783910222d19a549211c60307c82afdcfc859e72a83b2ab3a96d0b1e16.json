@@ -1,0 +1,89 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:43.235Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 10158,
+          "ns": 0,
+          "title": "蒸気機関車",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しようききかんしや",
+            "wikibase_item": "Q171043"
+          },
+          "terms": {
+            "description": [
+              "蒸気機関を動力とする機関車"
+            ]
+          }
+        },
+        {
+          "pageid": 16513,
+          "ns": 0,
+          "title": "国鉄D51形蒸気機関車",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こくてつD51",
+            "page_image_free": "D51498-080929.jpg",
+            "wikibase_item": "Q986144"
+          },
+          "terms": {
+            "description": [
+              "鉄道省・日本国有鉄道の蒸気機関車"
+            ]
+          }
+        },
+        {
+          "pageid": 33210,
+          "ns": 0,
+          "title": "国鉄C12形蒸気機関車",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こくてつC12かたしようききかんしや",
+            "page_image_free": "JNR_C12_41.jpg",
+            "wikibase_item": "Q17361108"
+          },
+          "terms": {
+            "description": [
+              "鉄道省・日本国有鉄道の蒸気機関車"
+            ]
+          }
+        },
+        {
+          "pageid": 80725,
+          "ns": 0,
+          "title": "国鉄C62形蒸気機関車",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こくてつC62かたしようききかんしや",
+            "page_image_free": "SL-Steam-go.jpg",
+            "wikibase_item": "Q1037997"
+          },
+          "terms": {
+            "description": [
+              "日本国有鉄道の蒸気機関車"
+            ]
+          }
+        },
+        {
+          "pageid": 516430,
+          "ns": 0,
+          "title": "国鉄400形蒸気機関車",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こくてつ0400",
+            "page_image_free": "Locomotive_4_of_Seibu_Railway.JPG",
+            "wikibase_item": "Q10915890"
+          }
+        }
+      ]
+    }
+  }
+}

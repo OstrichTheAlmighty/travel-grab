@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:29.278Z",
+  "value": {
+    "searchinfo": {
+      "search": "芝浦南ふ頭公園"
+    },
+    "search": [
+      {
+        "id": "Q11614683",
+        "title": "Q11614683",
+        "pageid": 12755041,
+        "concepturi": "http://www.wikidata.org/entity/Q11614683",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11614683",
+        "display": {
+          "label": {
+            "value": "Shibaura Minami Port Park",
+            "language": "en"
+          }
+        },
+        "label": "Shibaura Minami Port Park",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "芝浦南ふ頭公園"
+        },
+        "aliases": [
+          "芝浦南ふ頭公園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

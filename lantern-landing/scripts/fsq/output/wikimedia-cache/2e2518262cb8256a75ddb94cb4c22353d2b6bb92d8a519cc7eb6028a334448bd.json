@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:31.898Z",
+  "value": {
+    "searchinfo": {
+      "search": "Ajinomoto Field Nishigaoka"
+    },
+    "search": [
+      {
+        "id": "Q7040543",
+        "title": "Q7040543",
+        "pageid": 6927947,
+        "concepturi": "http://www.wikidata.org/entity/Q7040543",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q7040543",
+        "display": {
+          "label": {
+            "value": "Nishigaoka Soccer Stadium",
+            "language": "en"
+          },
+          "description": {
+            "value": "building in Nishigaoka, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Nishigaoka Soccer Stadium",
+        "description": "building in Nishigaoka, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "es",
+          "text": "Ajinomoto field Nishigaoka"
+        },
+        "aliases": [
+          "Ajinomoto field Nishigaoka"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

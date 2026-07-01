@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:12.675Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 20031,
+          "ns": 0,
+          "title": "東京国立博物館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようこくりつはくふつかん",
+            "page_image_free": "Tokyo_National_Museum,_Honkan_2010.jpg",
+            "wikibase_item": "Q653433"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71905556,
+              "lon": 139.77666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある国立博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 431672,
+          "ns": 0,
+          "title": "東洋製罐",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうようせいかん",
+            "page_image_free": "Toyo_Seikan_Group_company_logo.svg",
+            "wikibase_item": "Q7830631"
+          }
+        },
+        {
+          "pageid": 4088895,
+          "ns": 0,
+          "title": "大崎フォレストビルディング",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおさきふおれすとひるていんく",
+            "kartographer_frames": "1",
+            "page_image_free": "Osaki_forest_building_2014.jpg",
+            "wikibase_item": "Q86744816"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62436111,
+              "lon": 139.72952778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 4359686,
+          "ns": 0,
+          "title": "防衛食容器",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ほうえいしよくようき",
+            "page_image_free": "Boueishoku-youki_01.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q106625823"
+          },
+          "terms": {
+            "description": [
+              "陶磁器製の真空容器"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

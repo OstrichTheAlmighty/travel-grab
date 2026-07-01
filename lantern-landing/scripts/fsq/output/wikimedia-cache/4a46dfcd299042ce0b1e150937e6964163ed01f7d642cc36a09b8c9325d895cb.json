@@ -1,0 +1,87 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:30.450Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 72070,
+          "ns": 0,
+          "title": "美山加恋",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みやま かれん",
+            "wikibase_item": "Q5368648"
+          },
+          "terms": {
+            "description": [
+              "日本の女優、声優"
+            ]
+          }
+        },
+        {
+          "pageid": 701327,
+          "ns": 0,
+          "title": "東京ガールズコレクション",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようかるすこれくしよん",
+            "page_image_free": "Mizuki_Yamamoto_in_TGC_2014S／S.JPG",
+            "wikibase_item": "Q1057567"
+          },
+          "terms": {
+            "description": [
+              "日本のファッションイベント"
+            ]
+          }
+        },
+        {
+          "pageid": 1268652,
+          "ns": 0,
+          "title": "魔法少女リリカルなのは サウンドステージ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "まほうしようしよりりかるなのはさうんとすてえし",
+            "wikibase_item": "Q6138044"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2123414,
+          "ns": 0,
+          "title": "CNBLUE",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しいえぬふるう",
+            "page_image_free": "정용화,_강민혁,_이정신_술취향_CNBLUE_씨엔블루_인터뷰.jpg",
+            "wikibase_item": "Q483172"
+          },
+          "terms": {
+            "description": [
+              "韓国のロックバンド"
+            ]
+          }
+        },
+        {
+          "pageid": 2773412,
+          "ns": 0,
+          "title": "ポケモンスクランブル U",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ほけもんすくらんふるゆう",
+            "wikibase_item": "Q7208771"
+          }
+        }
+      ]
+    }
+  }
+}

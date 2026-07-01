@@ -1,0 +1,87 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:14.918Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 436761,
+          "ns": 0,
+          "title": "ネイサン・レイン",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "れいん ねいさん",
+            "page_image_free": "NathanLane2018_(cropped).jpg",
+            "wikibase_item": "Q491264"
+          }
+        },
+        {
+          "pageid": 725995,
+          "ns": 0,
+          "title": "夜を往け",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "よるをゆけ",
+            "wikibase_item": "Q8055858"
+          },
+          "terms": {
+            "description": [
+              "中島みゆきのアルバム"
+            ]
+          }
+        },
+        {
+          "pageid": 3140856,
+          "ns": 0,
+          "title": "ジョン・T・ドレーパー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とれえはあ しよん",
+            "page_image_free": "20151004_Captain_Crunch_at_Maker_Faire_Berlin_IMG_1282_by_sebaso.jpg",
+            "wikibase_item": "Q712546"
+          },
+          "terms": {
+            "description": [
+              "アメリカ合衆国のプログラマ"
+            ]
+          }
+        },
+        {
+          "pageid": 3834680,
+          "ns": 0,
+          "title": "ジャック・ライアン (テレビドラマ)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しやつくらいあん",
+            "wikibase_item": "Q27062250"
+          },
+          "terms": {
+            "description": [
+              "アメリカの連続ドラマ番組 (2018-2023)"
+            ]
+          }
+        },
+        {
+          "pageid": 3864023,
+          "ns": 0,
+          "title": "目撃!超逆転スクープ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "もくけきちようきやくてんすくうふ",
+            "wikibase_item": "Q60987318"
+          },
+          "terms": {
+            "description": [
+              "フジテレビ系列のバラエティ番組（2018年-）"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

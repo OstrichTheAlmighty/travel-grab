@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:35.649Z",
+  "value": {
+    "searchinfo": {
+      "search": "オカムラいすの博物館"
+    },
+    "search": [
+      {
+        "id": "Q17224098",
+        "title": "Q17224098",
+        "pageid": 18820819,
+        "concepturi": "http://www.wikidata.org/entity/Q17224098",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q17224098",
+        "display": {
+          "label": {
+            "value": "Okamura Chair Museum",
+            "language": "en"
+          }
+        },
+        "label": "Okamura Chair Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "オカムラいすの博物館"
+        },
+        "aliases": [
+          "オカムラいすの博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

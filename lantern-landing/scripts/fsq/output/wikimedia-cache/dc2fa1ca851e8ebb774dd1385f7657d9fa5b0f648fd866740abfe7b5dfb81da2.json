@@ -1,0 +1,116 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:47.449Z",
+  "value": {
+    "searchinfo": {
+      "search": "ファンタジーランド"
+    },
+    "search": [
+      {
+        "id": "Q2441096",
+        "title": "Q2441096",
+        "pageid": 2357850,
+        "concepturi": "http://www.wikidata.org/entity/Q2441096",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2441096",
+        "display": {
+          "label": {
+            "value": "Fantasyland",
+            "language": "en"
+          },
+          "description": {
+            "value": "themed land at Disney theme parks",
+            "language": "en"
+          }
+        },
+        "label": "Fantasyland",
+        "description": "themed land at Disney theme parks",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ファンタジーランド"
+        },
+        "aliases": [
+          "ファンタジーランド"
+        ]
+      },
+      {
+        "id": "Q49970784",
+        "title": "Q49970784",
+        "pageid": 50970620,
+        "concepturi": "http://www.wikidata.org/entity/Q49970784",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q49970784",
+        "display": {
+          "label": {
+            "value": "Fantasyland",
+            "language": "en"
+          },
+          "description": {
+            "value": "part of Tokyo Disneyland, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Fantasyland",
+        "description": "part of Tokyo Disneyland, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ファンタジーランド"
+        },
+        "aliases": [
+          "ファンタジーランド"
+        ]
+      },
+      {
+        "id": "Q3066622",
+        "title": "Q3066622",
+        "pageid": 2931142,
+        "concepturi": "http://www.wikidata.org/entity/Q3066622",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3066622",
+        "display": {
+          "label": {
+            "value": "Fantasyland Theater",
+            "language": "en"
+          },
+          "description": {
+            "value": "outdoor theater at Disneyland",
+            "language": "en"
+          }
+        },
+        "label": "Fantasyland Theater",
+        "description": "outdoor theater at Disneyland",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ファンタジーランド・シアター"
+        },
+        "aliases": [
+          "ファンタジーランド・シアター"
+        ]
+      },
+      {
+        "id": "Q85873246",
+        "title": "Q85873246",
+        "pageid": 85143836,
+        "concepturi": "http://www.wikidata.org/entity/Q85873246",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q85873246",
+        "display": {
+          "label": {
+            "value": "ファンタジーランド・フォレストシアター",
+            "language": "ja"
+          }
+        },
+        "label": "ファンタジーランド・フォレストシアター",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ファンタジーランド・フォレストシアター"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

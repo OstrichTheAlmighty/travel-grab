@@ -1,0 +1,62 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:24.717Z",
+  "value": {
+    "searchinfo": {
+      "search": "What Museum"
+    },
+    "search": [
+      {
+        "id": "Q128931626",
+        "title": "Q128931626",
+        "pageid": 122906946,
+        "concepturi": "http://www.wikidata.org/entity/Q128931626",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q128931626",
+        "display": {
+          "label": {
+            "value": "What museums do we want in France in the future?",
+            "language": "en"
+          },
+          "description": {
+            "value": "scholarly article",
+            "language": "en"
+          }
+        },
+        "label": "What museums do we want in France in the future?",
+        "description": "scholarly article",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "What museums do we want in France in the future?"
+        }
+      },
+      {
+        "id": "Q131284534",
+        "title": "Q131284534",
+        "pageid": 125178580,
+        "concepturi": "http://www.wikidata.org/entity/Q131284534",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q131284534",
+        "display": {
+          "label": {
+            "value": "What museums for Africa in the third millennium?",
+            "language": "en"
+          },
+          "description": {
+            "value": "journal article from 'Museum International' published in 1989",
+            "language": "en"
+          }
+        },
+        "label": "What museums for Africa in the third millennium?",
+        "description": "journal article from 'Museum International' published in 1989",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "What museums for Africa in the third millennium?"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:47.083Z",
+  "value": {
+    "searchinfo": {
+      "search": "立花大正民家園"
+    },
+    "search": [
+      {
+        "id": "Q29570254",
+        "title": "Q29570254",
+        "pageid": 31216062,
+        "concepturi": "http://www.wikidata.org/entity/Q29570254",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q29570254",
+        "display": {
+          "label": {
+            "value": "Tachibana Taishō Minkaen (Former Koyama Residence)",
+            "language": "en"
+          }
+        },
+        "label": "Tachibana Taishō Minkaen (Former Koyama Residence)",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "立花大正民家園 旧小山家住宅"
+        },
+        "aliases": [
+          "立花大正民家園 旧小山家住宅"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

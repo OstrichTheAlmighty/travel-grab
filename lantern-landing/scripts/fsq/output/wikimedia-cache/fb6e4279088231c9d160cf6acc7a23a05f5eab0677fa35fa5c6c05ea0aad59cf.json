@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:19.803Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 333537,
+          "ns": 0,
+          "title": "女王蜂 (横溝正史)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しよおうはち",
+            "wikibase_item": "Q11446530"
+          },
+          "terms": {
+            "description": [
+              "横溝正史による日本の小説"
+            ]
+          }
+        },
+        {
+          "pageid": 595755,
+          "ns": 0,
+          "title": "大楠道代",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおくす みちよ",
+            "page_image_free": "Hyoten-1966-1-cropped.jpg",
+            "wikibase_item": "Q3545474"
+          },
+          "terms": {
+            "description": [
+              "日本の女優"
+            ]
+          }
+        },
+        {
+          "pageid": 698354,
+          "ns": 0,
+          "title": "鏑木創",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かふらき はしめ",
+            "wikibase_item": "Q11651197"
+          },
+          "terms": {
+            "description": [
+              "1926-, 作曲家、編曲家。"
+            ]
+          }
+        },
+        {
+          "pageid": 2396062,
+          "ns": 0,
+          "title": "Sada City",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さたしてい",
+            "wikibase_item": "Q11245417"
+          }
+        },
+        {
+          "pageid": 4874867,
+          "ns": 0,
+          "title": "若い時計台",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "わかいとけいたい",
+            "page_image": "若い時計台.JPG",
+            "page_image_free": "Map_Tokyo_special_wards.svg",
+            "wikibase_item": "Q134972411"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67247222,
+              "lon": 139.76216667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

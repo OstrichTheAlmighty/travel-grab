@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:48.529Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 82173,
+          "ns": 0,
+          "title": "江崎グリコ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "えさきくりこ",
+            "page_image_free": "Ezaki_Glico_Newoffice_2021.jpg",
+            "wikibase_item": "Q391534"
+          },
+          "terms": {
+            "description": [
+              "日本の大手食品メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 91762,
+          "ns": 0,
+          "title": "ハウス食品",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はうすしよくひん",
+            "page_image_free": "House_headoffice.jpg",
+            "wikibase_item": "Q841510"
+          },
+          "terms": {
+            "description": [
+              "日本の大阪府東大阪市、東京都千代田区にある食品メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 148303,
+          "ns": 0,
+          "title": "エスビー食品",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "えすひいしよくひん",
+            "page_image_free": "S_&_B_foods_headquarters,_at_Nihonbashi-Kabutocho,_Chuo,_Tokyo_(2019-01-02)_02.jpg",
+            "wikibase_item": "Q11290090"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67875,
+              "lon": 139.77561111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都中央区にある食品メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 257808,
+          "ns": 0,
+          "title": "クラシエフーズ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "くらしえふうす",
+            "wikibase_item": "Q11298928"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都港区にある菓子メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 2630265,
+          "ns": 0,
+          "title": "好好!キョンシーガール〜東京電視台戦記〜",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はおはおきよんしいかあるとうきようてんしたいせんき",
+            "wikibase_item": "Q11446666"
+          }
+        }
+      ]
+    }
+  }
+}

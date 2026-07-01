@@ -1,0 +1,130 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:42.414Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 16926,
+          "ns": 0,
+          "title": "下高井戸駅",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しもたかいとえき",
+            "kartographer_frames": "1",
+            "page_image_free": "KTR_Shimotakaido_station_South.jpg",
+            "wikibase_item": "Q994285"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66611111,
+              "lon": 139.64138889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区松原にある京王電鉄・東急電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 17819,
+          "ns": 0,
+          "title": "中野区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "なかのく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tetsugakudo_Park(Philosophy_Hall_Park)_-_哲学堂公園_-_panoramio_(1).jpg",
+            "wikibase_item": "Q234087"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70728,
+              "lon": 139.66375,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 626968,
+          "ns": 0,
+          "title": "幡ヶ谷",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はたかや",
+            "kartographer_frames": "1",
+            "page_image_free": "Hatagaya_Station_Entrance_and_ELV.jpg",
+            "wikibase_item": "Q5680881"
+          },
+          "terms": {
+            "description": [
+              "東京都渋谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 688105,
+          "ns": 0,
+          "title": "林試の森公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "りんしのもりこうえん",
+            "page_image_free": "Rinshi_no_mori_park_meguro_shinagawa.JPG",
+            "wikibase_item": "Q11533314"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62494444,
+              "lon": 139.7035,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1838770,
+          "ns": 0,
+          "title": "大盛寺",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たいせいし",
+            "page_image_free": "Daisei-ji,_Mitaka.jpg",
+            "wikibase_item": "Q11438058"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69888889,
+              "lon": 139.57444444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都三鷹市井の頭にある天台宗の寺院"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

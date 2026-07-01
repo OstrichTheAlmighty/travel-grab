@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:46.837Z",
+  "value": {
+    "searchinfo": {
+      "search": "GATE 8"
+    },
+    "search": [
+      {
+        "id": "Q1300064",
+        "title": "Q1300064",
+        "pageid": 1240128,
+        "concepturi": "http://www.wikidata.org/entity/Q1300064",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1300064",
+        "display": {
+          "label": {
+            "value": "Gate 88",
+            "language": "en"
+          },
+          "description": {
+            "value": "Freeware video game",
+            "language": "en"
+          }
+        },
+        "label": "Gate 88",
+        "description": "Freeware video game",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Gate 88"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

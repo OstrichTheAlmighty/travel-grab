@@ -1,0 +1,90 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:51.049Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 145518,
+          "ns": 0,
+          "title": "アメリカンウォーターフロント",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あめりかんうおおたあふろんと",
+            "wikibase_item": "Q674795"
+          },
+          "terms": {
+            "description": [
+              "東京ディズニーシーのテーマポート"
+            ]
+          }
+        },
+        {
+          "pageid": 480726,
+          "ns": 0,
+          "title": "東京ディズニーシーのショップの一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいしいのしよつふ",
+            "wikibase_item": "Q11524256"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 486695,
+          "ns": 0,
+          "title": "ウォーターフロントパーク",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "うおたあふろんとはあく",
+            "wikibase_item": "Q11288783"
+          },
+          "terms": {
+            "description": [
+              "東京ディズニーシーにある広場"
+            ]
+          }
+        },
+        {
+          "pageid": 586692,
+          "ns": 0,
+          "title": "ディズニーシー・エレクトリックレールウェイ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ていすにいしいえれくとりつくれえるうえい",
+            "wikibase_item": "Q11320079"
+          },
+          "terms": {
+            "description": [
+              "東京ディズニーシーにあるアトラクション"
+            ]
+          }
+        },
+        {
+          "pageid": 586825,
+          "ns": 0,
+          "title": "ディズニーシー・トランジットスチーマーライン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とらんしつとすちいまあらいん",
+            "wikibase_item": "Q11320082"
+          },
+          "terms": {
+            "description": [
+              "東京ディズニーシーにあるアトラクション"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

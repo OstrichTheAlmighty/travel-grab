@@ -1,0 +1,108 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:10.866Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 142575,
+          "ns": 0,
+          "title": "野球殿堂 (日本)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やきゆうてんとう",
+            "page_image_free": "Tokyo_Dome-3a.jpg",
+            "wikibase_item": "Q496733"
+          },
+          "terms": {
+            "description": [
+              "日本のプロ野球関係者の功績を称える殿堂"
+            ]
+          }
+        },
+        {
+          "pageid": 148747,
+          "ns": 0,
+          "title": "野球殿堂博物館 (日本)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やきゆうてんとうはくふつかん",
+            "page_image_free": "Baseball_Hall_of_Fame_and_Museum_(Japan)_Entrance.jpg",
+            "wikibase_item": "Q1134380"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70565833,
+              "lon": 139.75191389,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区の東京ドームにある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 402077,
+          "ns": 0,
+          "title": "殿堂",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "てんとう",
+            "page_image_free": "Walhalla_aussen.jpg",
+            "wikibase_item": "Q1046088"
+          }
+        },
+        {
+          "pageid": 420931,
+          "ns": 0,
+          "title": "アメリカ野球殿堂",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あめりかやきゆうてんとう",
+            "kartographer_frames": "1",
+            "page_image_free": "National_Baseball_Hall_of_Fame_and_Museum,_Cooperstown,_NY.jpg",
+            "wikibase_item": "Q809892"
+          },
+          "coordinates": [
+            {
+              "lat": 42.70032222,
+              "lon": -74.92368889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "アメリカ・ニューヨークのクーパーズタウンにある野球専門の博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 2001963,
+          "ns": 0,
+          "title": "アメリカ野球殿堂表彰者の一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あめりかやきゆうてんとうひようしようしやのいちらん",
+            "page_image_free": "Baseball_Hall_of_Fame_Plaque_Gallery.jpg",
+            "toc": "",
+            "wikibase_item": "Q649861"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

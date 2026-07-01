@@ -1,0 +1,119 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:13.607Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 413,
+          "ns": 0,
+          "title": "栃木県",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とちきけん",
+            "page_image_free": "Nikko_toshogu_shrine.jpg",
+            "wikibase_item": "Q44843"
+          },
+          "coordinates": [
+            {
+              "lat": 36.56556,
+              "lon": 139.88353,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の都道府県"
+            ]
+          }
+        },
+        {
+          "pageid": 35384,
+          "ns": 0,
+          "title": "回転寿司",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かいてんすし",
+            "graph-data-sources": "inline:10",
+            "wikibase_item": "Q1230557"
+          },
+          "terms": {
+            "description": [
+              "日本で一般的な寿司の提供方式"
+            ]
+          }
+        },
+        {
+          "pageid": 285839,
+          "ns": 0,
+          "title": "十字屋 (百貨店)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しゆうしや",
+            "wikibase_item": "Q11404993"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66638889,
+              "lon": 139.81597222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "閉店した百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 1832047,
+          "ns": 0,
+          "title": "チェーンストア",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ちええんすとあ",
+            "page_image_free": "Franchising(Fujio_food_system,ccc,YELLOW_HAT_LLC,Seria,McDonald's_Company_(Japan),_Ltd.P8148155.JPG",
+            "wikibase_item": "Q507619"
+          },
+          "terms": {
+            "description": [
+              "ブランドと中央管理を共有し、通常は標準化されたビジネス方法と慣行を持つ小売店"
+            ]
+          }
+        },
+        {
+          "pageid": 1842138,
+          "ns": 0,
+          "title": "宇都宮市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "うつのみやし",
+            "kartographer_frames": "1",
+            "page_image_free": "Utsunomiya_montage.jpg",
+            "wikibase_item": "Q200589"
+          },
+          "coordinates": [
+            {
+              "lat": 36.55511,
+              "lon": 139.88256,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "栃木県庁所在地"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

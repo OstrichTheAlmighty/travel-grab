@@ -1,0 +1,36 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:29.752Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 852212,
+          "ns": 0,
+          "title": "横浜市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "よこはまし",
+            "kartographer_frames": "1",
+            "page_image_free": "Minato_Mirai_In_Blue_(cropped).jpg",
+            "wikibase_item": "Q38283"
+          },
+          "coordinates": [
+            {
+              "lat": 35.45033,
+              "lon": 139.63422,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の神奈川県にある政令指定都市"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

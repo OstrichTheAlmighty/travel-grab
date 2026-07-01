@@ -1,0 +1,36 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:18.305Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 2165303,
+          "ns": 0,
+          "title": "下町風俗資料館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "したまちふうそくしりようかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Shitamachi-museum-ueno-japan.jpg",
+            "wikibase_item": "Q3915464"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7102,
+              "lon": 139.7726,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

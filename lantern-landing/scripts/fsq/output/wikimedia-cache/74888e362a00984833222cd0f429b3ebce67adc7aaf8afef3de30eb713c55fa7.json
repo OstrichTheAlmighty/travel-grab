@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:20.676Z",
+  "value": {
+    "searchinfo": {
+      "search": "佃まちかど展示館"
+    },
+    "search": [
+      {
+        "id": "Q109166065",
+        "title": "Q109166065",
+        "pageid": 104363664,
+        "concepturi": "http://www.wikidata.org/entity/Q109166065",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q109166065",
+        "display": {
+          "label": {
+            "value": "Tsukuda Machikado Museum",
+            "language": "en"
+          }
+        },
+        "label": "Tsukuda Machikado Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "佃まちかど展示館"
+        },
+        "aliases": [
+          "佃まちかど展示館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

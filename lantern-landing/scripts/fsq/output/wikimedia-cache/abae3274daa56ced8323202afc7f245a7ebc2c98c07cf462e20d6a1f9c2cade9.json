@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:01.989Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 20031,
+          "ns": 0,
+          "title": "東京国立博物館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようこくりつはくふつかん",
+            "page_image_free": "Tokyo_National_Museum,_Honkan_2010.jpg",
+            "wikibase_item": "Q653433"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71905556,
+              "lon": 139.77666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある国立博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 36305,
+          "ns": 0,
+          "title": "日本刀",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にほんとう",
+            "page_image_free": "Antique_Japanese_(samurai)_katana_met_museum.jpg",
+            "wikibase_item": "Q1768697"
+          },
+          "terms": {
+            "description": [
+              "日本固有の鍛冶製法による刀類の総称"
+            ]
+          }
+        },
+        {
+          "pageid": 904167,
+          "ns": 0,
+          "title": "備前長船刀剣博物館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひせんおさふねとうけんはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Bizen_Osafune_Japanese_sword_Museum_1.jpg",
+            "wikibase_item": "Q11387350"
+          },
+          "coordinates": [
+            {
+              "lat": 34.72166667,
+              "lon": 134.10694444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "岡山県瀬戸内市にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 3132407,
+          "ns": 0,
+          "title": "刀剣乱舞",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうけんらんふ",
+            "wikibase_item": "Q20155508"
+          },
+          "terms": {
+            "description": [
+              "日本刀を擬人化した「刀剣男士」を収集・強化する刀剣育成シミュレーションゲーム"
+            ]
+          }
+        },
+        {
+          "pageid": 3234879,
+          "ns": 0,
+          "title": "刀剣博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうけんはくふつかん",
+            "kartographer_frames": "2",
+            "page_image_free": "Japanese_Sword_Museum-1a1.jpg",
+            "wikibase_item": "Q3329874"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69894444,
+              "lon": 139.79363889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

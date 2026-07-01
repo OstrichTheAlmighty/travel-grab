@@ -1,0 +1,116 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:05.651Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 55,
+          "ns": 0,
+          "title": "台東区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たいとうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Asakusa_Senso-ji_2021-12_ac_(2).jpg",
+            "wikibase_item": "Q232641"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71261,
+              "lon": 139.77997,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 66021,
+          "ns": 0,
+          "title": "横山大観",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "よこやま たいかん",
+            "page_image_free": "Yokoyama_Taikan_(1950).jpg",
+            "wikibase_item": "Q2034441"
+          },
+          "terms": {
+            "description": [
+              "日本の画家 (1868-1958)"
+            ]
+          }
+        },
+        {
+          "pageid": 2184568,
+          "ns": 0,
+          "title": "光ミュージアム",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひかるみゆうしあむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Hikari_museum.jpg",
+            "wikibase_item": "Q5760427"
+          },
+          "coordinates": [
+            {
+              "lat": 36.15631944,
+              "lon": 137.23402222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 2457626,
+          "ns": 0,
+          "title": "中村貞以",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なかむら ていい",
+            "page_image": "Nakamura_Teii.jpg",
+            "wikibase_item": "Q11366023"
+          },
+          "terms": {
+            "description": [
+              "1900-1982, 日本画家"
+            ]
+          }
+        },
+        {
+          "pageid": 3569222,
+          "ns": 0,
+          "title": "横山大観記念館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "よこやまたいかんきねんかん",
+            "page_image_free": "Yokoyama_Taikan_Memorial_Hall.JPG",
+            "wikibase_item": "Q30925115"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71216667,
+              "lon": 139.76825,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区池之端にある記念館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

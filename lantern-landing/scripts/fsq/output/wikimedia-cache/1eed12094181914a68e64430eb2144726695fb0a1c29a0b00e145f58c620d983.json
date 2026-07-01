@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:38.095Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 385574,
+          "ns": 0,
+          "title": "催馬楽",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さいはら",
+            "page_image_free": "Saibara_Sheet_Nabeshima.jpg",
+            "wikibase_item": "Q1428885"
+          },
+          "terms": {
+            "description": [
+              "平安時代に隆盛した古代歌謡"
+            ]
+          }
+        },
+        {
+          "pageid": 869134,
+          "ns": 0,
+          "title": "MUSIC JAPAN",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みゆうしつくしやはん",
+            "page_image_free": "Logo_mj.png",
+            "wikibase_item": "Q5367829"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ音楽番組"
+            ]
+          }
+        },
+        {
+          "pageid": 1529557,
+          "ns": 0,
+          "title": "ももいろクローバーZ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ももいろくろおはあせつと",
+            "page_image_free": "Momoiro_Clover_Z_logo.png",
+            "wikibase_item": "Q1070606"
+          },
+          "terms": {
+            "description": [
+              "日本の女性アイドルグループ"
+            ]
+          }
+        },
+        {
+          "pageid": 1690743,
+          "ns": 0,
+          "title": "サイプレス上野とロベルト吉野",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さいふれすうえのとろへるとよしの",
+            "page_image_free": "Saipuresuueno-roberutoyoshino-live-2018-12-9.jpg",
+            "wikibase_item": "Q11304204"
+          },
+          "terms": {
+            "description": [
+              "日本のヒップホップグループ"
+            ]
+          }
+        },
+        {
+          "pageid": 2381056,
+          "ns": 0,
+          "title": "歌いもの",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "うたいもの",
+            "page_image_free": "IYO_GIRE_Wakan_roeishu1.JPG",
+            "wikibase_item": "Q11544988"
+          },
+          "terms": {
+            "description": [
+              "歌うことを目的とした日本の伝統音楽"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

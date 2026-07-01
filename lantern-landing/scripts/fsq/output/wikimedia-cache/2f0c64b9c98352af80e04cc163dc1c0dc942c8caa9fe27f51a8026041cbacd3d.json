@@ -1,0 +1,108 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:46.285Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 593330,
+          "ns": 0,
+          "title": "List of Japanese actresses",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Japanese actresses",
+            "notoc": "",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q1862467"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 14835376,
+          "ns": 0,
+          "title": "Kyoto Seika University",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Kyoto_Seika_University140524NI2.JPG",
+            "wikibase-shortdesc": "Higher education institution in Kyoto Prefecture, Japan",
+            "wikibase_item": "Q858343"
+          },
+          "coordinates": [
+            {
+              "lat": 35.073058,
+              "lon": 135.770867,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "higher education institution in Kyoto Prefecture, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 35970086,
+          "ns": 0,
+          "title": "Maaya Uchida",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Uchida, Maaya",
+            "page_image_free": "Uchida_Maaya_from_\"Komada_-A_Whisky_Family-\"_at_Red_Carpet_of_the_Tokyo_International_Film_Festival_2023_(53348309153)_(cropped).jpg",
+            "wikibase-shortdesc": "Japanese voice actress and singer",
+            "wikibase_item": "Q44552"
+          },
+          "terms": {
+            "description": [
+              "Japanese voice actress and singer"
+            ]
+          }
+        },
+        {
+          "pageid": 66812332,
+          "ns": 0,
+          "title": "Bocchi the Rock!",
+          "index": 1,
+          "pageprops": {
+            "displaytitle": "<i>Bocchi the Rock!</i>",
+            "page_image": "Bocchi_The_Rock!_volume_1_cover.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Japanese manga series",
+            "wikibase_item": "Q65235667"
+          },
+          "terms": {
+            "description": [
+              "Japanese manga series"
+            ]
+          }
+        },
+        {
+          "pageid": 78387458,
+          "ns": 0,
+          "title": "Uglymug, Epicfighter",
+          "index": 4,
+          "pageprops": {
+            "displaytitle": "<i>Uglymug, Epicfighter</i>",
+            "page_image": "Uglymug,_Epicfighter_light_novel_volume_cover.jpg",
+            "wikibase-shortdesc": "Japanese web novel series",
+            "wikibase_item": "Q131277981"
+          },
+          "terms": {
+            "description": [
+              "Japanese web novel series"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

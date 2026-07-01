@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:37:44.560Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 43549,
+          "ns": 0,
+          "title": "楠木正成",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "くすのき まさしけ",
+            "page_image_free": "Kusunoki_Masashige.jpg",
+            "wikibase_item": "Q382234"
+          },
+          "terms": {
+            "description": [
+              "日本の鎌倉～南北朝時代の武将"
+            ]
+          }
+        },
+        {
+          "pageid": 87638,
+          "ns": 0,
+          "title": "観心寺",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かんしんし",
+            "page_image_free": "Kanshinji_Kondou.jpg",
+            "wikibase_item": "Q1088470"
+          },
+          "coordinates": [
+            {
+              "lat": 34.43733333,
+              "lon": 135.59858333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪府河内長野市にある寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 114731,
+          "ns": 0,
+          "title": "楠木正行",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "くすのき まさつら",
+            "page_image_free": "Kusunoki_Masatsura_Ben_no_Naishi_o_sukū_zu_.jpg",
+            "wikibase_item": "Q966298"
+          },
+          "terms": {
+            "description": [
+              "南北朝時代の武将"
+            ]
+          }
+        },
+        {
+          "pageid": 133425,
+          "ns": 0,
+          "title": "湊川神社",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みなとかわしんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Minatogawa_Shrine_Haiden.jpg",
+            "wikibase_item": "Q713188"
+          },
+          "coordinates": [
+            {
+              "lat": 34.68135806,
+              "lon": 135.17543806,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神戸市中央区にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 572145,
+          "ns": 0,
+          "title": "皇居外苑",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こうきよかいえん",
+            "page_image_free": "北の丸公園入り口_-_panoramio_(1).jpg",
+            "wikibase_item": "Q844963"
+          },
+          "terms": {
+            "description": [
+              "東京都千代田区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

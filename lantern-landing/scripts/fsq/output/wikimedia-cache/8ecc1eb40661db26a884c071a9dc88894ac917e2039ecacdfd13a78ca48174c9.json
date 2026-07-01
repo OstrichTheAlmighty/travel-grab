@@ -1,0 +1,209 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:37.130Z",
+  "value": {
+    "searchinfo": {
+      "search": "自由の女神像"
+    },
+    "search": [
+      {
+        "id": "Q9202",
+        "title": "Q9202",
+        "pageid": 10561,
+        "concepturi": "http://www.wikidata.org/entity/Q9202",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q9202",
+        "display": {
+          "label": {
+            "value": "Statue of Liberty",
+            "language": "en"
+          },
+          "description": {
+            "value": "monument in New York",
+            "language": "en"
+          }
+        },
+        "label": "Statue of Liberty",
+        "description": "monument in New York",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "自由の女神像"
+        },
+        "aliases": [
+          "自由の女神像"
+        ]
+      },
+      {
+        "id": "Q1454363",
+        "title": "Q1454363",
+        "pageid": 1392503,
+        "concepturi": "http://www.wikidata.org/entity/Q1454363",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1454363",
+        "display": {
+          "label": {
+            "value": "Liberty Enlightening the World",
+            "language": "en"
+          },
+          "description": {
+            "value": "statue in Paris, France",
+            "language": "en"
+          }
+        },
+        "label": "Liberty Enlightening the World",
+        "description": "statue in Paris, France",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "自由の女神像"
+        },
+        "aliases": [
+          "自由の女神像"
+        ]
+      },
+      {
+        "id": "Q2714997",
+        "title": "Q2714997",
+        "pageid": 2610069,
+        "concepturi": "http://www.wikidata.org/entity/Q2714997",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2714997",
+        "display": {
+          "label": {
+            "value": "replicas of the Statue of Liberty",
+            "language": "en"
+          },
+          "description": {
+            "value": "list of replicas of the statue the Statue of Liberty",
+            "language": "en"
+          }
+        },
+        "label": "replicas of the Statue of Liberty",
+        "description": "list of replicas of the statue the Statue of Liberty",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "自由の女神像"
+        },
+        "aliases": [
+          "自由の女神像"
+        ]
+      },
+      {
+        "id": "Q56546130",
+        "title": "Q56546130",
+        "pageid": 56485671,
+        "concepturi": "http://www.wikidata.org/entity/Q56546130",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q56546130",
+        "display": {
+          "label": {
+            "value": "Goddess of Liberty",
+            "language": "en"
+          },
+          "description": {
+            "value": "Statue atop the Texas State Capitol in Austin, Texas, U.S.",
+            "language": "en"
+          }
+        },
+        "label": "Goddess of Liberty",
+        "description": "Statue atop the Texas State Capitol in Austin, Texas, U.S.",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "自由の女神像"
+        },
+        "aliases": [
+          "自由の女神像"
+        ]
+      },
+      {
+        "id": "Q56670195",
+        "title": "Q56670195",
+        "pageid": 56611453,
+        "concepturi": "http://www.wikidata.org/entity/Q56670195",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q56670195",
+        "display": {
+          "label": {
+            "value": "Statue of Liberty",
+            "language": "en"
+          },
+          "description": {
+            "value": "statue in Seattle, Washington, United States",
+            "language": "en"
+          }
+        },
+        "label": "Statue of Liberty",
+        "description": "statue in Seattle, Washington, United States",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "自由の女神像"
+        },
+        "aliases": [
+          "自由の女神像"
+        ]
+      },
+      {
+        "id": "Q60987334",
+        "title": "Q60987334",
+        "pageid": 60840782,
+        "concepturi": "http://www.wikidata.org/entity/Q60987334",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q60987334",
+        "display": {
+          "label": {
+            "value": "Japan's Biggest Statue of Liberty",
+            "language": "en"
+          },
+          "description": {
+            "value": "monument in Oirase, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Japan's Biggest Statue of Liberty",
+        "description": "monument in Oirase, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "自由の女神像"
+        },
+        "aliases": [
+          "自由の女神像"
+        ]
+      },
+      {
+        "id": "Q106060693",
+        "title": "Q106060693",
+        "pageid": 101383789,
+        "concepturi": "http://www.wikidata.org/entity/Q106060693",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q106060693",
+        "display": {
+          "label": {
+            "value": "Statue of Liberty replica",
+            "language": "en"
+          },
+          "description": {
+            "value": "replica of Statue of Liberty in Odaiba, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Statue of Liberty replica",
+        "description": "replica of Statue of Liberty in Odaiba, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "自由の女神像"
+        },
+        "aliases": [
+          "自由の女神像"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

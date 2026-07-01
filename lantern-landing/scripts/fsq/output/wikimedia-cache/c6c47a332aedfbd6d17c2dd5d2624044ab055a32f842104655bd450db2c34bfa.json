@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:25.091Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 113225,
+          "ns": 0,
+          "title": "東京都道440号落合井草線",
+          "index": 3,
+          "pageprops": {
+            "wikibase_item": "Q11525805"
+          },
+          "terms": {
+            "description": [
+              "東京都の道路"
+            ]
+          }
+        },
+        {
+          "pageid": 113229,
+          "ns": 0,
+          "title": "東京都道245号杉並田無線",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "杉並区井草_井草三丁目信号_20260315.jpg",
+            "wikibase_item": "Q11525769"
+          },
+          "terms": {
+            "description": [
+              "東京都の道路"
+            ]
+          }
+        },
+        {
+          "pageid": 625764,
+          "ns": 0,
+          "title": "井草",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いくさ",
+            "kartographer_frames": "1",
+            "page_image_free": "杉並区井草森公園_-_panoramio.jpg",
+            "wikibase_item": "Q11373755"
+          },
+          "terms": {
+            "description": [
+              "東京都杉並区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 881026,
+          "ns": 0,
+          "title": "井草森公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いくさもりこうえん",
+            "page_image_free": "Igusa_mori_park_suginami_tokyo.JPG",
+            "wikibase_item": "Q11373757"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72722222,
+              "lon": 139.61194444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都杉並区の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1690273,
+          "ns": 0,
+          "title": "杉並区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "すきなみく",
+            "kartographer_frames": "1",
+            "page_image_free": "2018_Kōenji.jpg",
+            "wikibase_item": "Q232631"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6995,
+              "lon": 139.63642,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

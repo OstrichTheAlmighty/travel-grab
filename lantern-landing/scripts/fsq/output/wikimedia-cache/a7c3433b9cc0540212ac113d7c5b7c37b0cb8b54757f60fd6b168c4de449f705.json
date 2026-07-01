@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:40.624Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 123504,
+          "ns": 0,
+          "title": "スタジオドリームメーカー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すたしおとりいむめえかあ",
+            "wikibase_item": "Q11311840"
+          }
+        },
+        {
+          "pageid": 129489,
+          "ns": 0,
+          "title": "ユニバーサル・ピクチャーズ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ゆにはあさるすたしお",
+            "page_image_free": "Universal-Pictures-Logo.svg",
+            "wikibase_item": "Q168383"
+          },
+          "terms": {
+            "description": [
+              "アメリカの映画スタジオ"
+            ]
+          }
+        },
+        {
+          "pageid": 163043,
+          "ns": 0,
+          "title": "ドリームワークス",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とりむわくす",
+            "wikibase_item": "Q192557"
+          },
+          "terms": {
+            "description": [
+              "アメリカの映画制作会社"
+            ]
+          }
+        },
+        {
+          "pageid": 1035143,
+          "ns": 0,
+          "title": "ドリームスタジオ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とりいむすたしお",
+            "wikibase_item": "Q11323251"
+          }
+        },
+        {
+          "pageid": 1269551,
+          "ns": 0,
+          "title": "ユニバーサル・スタジオ・ジャパン",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ゆにはあさるすたしおしやはん",
+            "kartographer_frames": "1",
+            "page_image_free": "Universal_Studios_Japan_2019,08.jpg",
+            "wikibase_item": "Q1375103"
+          },
+          "coordinates": [
+            {
+              "lat": 34.66472222,
+              "lon": 135.43305556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪府大阪市此花区にあるテーマパーク"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

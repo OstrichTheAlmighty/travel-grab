@@ -1,0 +1,86 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:16.028Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 120840,
+          "ns": 0,
+          "title": "ライギョ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "らいきよ",
+            "page_image_free": "Snakehead_-_Channa_argus_2.jpg",
+            "wikibase_item": "Q503788"
+          },
+          "terms": {
+            "description": [
+              "キノボリウオ目タイワンドジョウ科の魚"
+            ]
+          }
+        },
+        {
+          "pageid": 246897,
+          "ns": 0,
+          "title": "スーパーフィッシング グランダー武蔵",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "すうはあふいつしんくくらんたあむさし",
+            "wikibase_item": "Q1151141"
+          },
+          "terms": {
+            "description": [
+              "漫画およびアニメ"
+            ]
+          }
+        },
+        {
+          "pageid": 612608,
+          "ns": 0,
+          "title": "広済堂ホールディングス",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こうさいとうほるてんくす",
+            "wikibase_item": "Q11486377"
+          },
+          "terms": {
+            "description": [
+              "印刷を中核事業とする日本の企業"
+            ]
+          }
+        },
+        {
+          "pageid": 770501,
+          "ns": 0,
+          "title": "講談社BOX",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こうたんしやほつくす",
+            "wikibase_item": "Q4133828"
+          },
+          "terms": {
+            "description": [
+              "講談社が刊行する日本の書籍レーベル"
+            ]
+          }
+        },
+        {
+          "pageid": 1768193,
+          "ns": 0,
+          "title": "藪漕ぎ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "やふこき",
+            "wikibase_item": "Q11625102"
+          }
+        }
+      ]
+    }
+  }
+}

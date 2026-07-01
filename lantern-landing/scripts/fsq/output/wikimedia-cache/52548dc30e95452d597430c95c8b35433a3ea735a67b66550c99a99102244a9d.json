@@ -1,0 +1,128 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:51.775Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17603,
+          "ns": 0,
+          "title": "熊本大学",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "くまもとたいかく",
+            "page_image_free": "Kumamoto_University_Headquarters_building_2021.JPG",
+            "wikibase_item": "Q1148782"
+          },
+          "coordinates": [
+            {
+              "lat": 32.81338889,
+              "lon": 130.72805556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "熊本県熊本市中央区にある国立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 19903,
+          "ns": 0,
+          "title": "国立民族学博物館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こくりつみんそくかくはくふつかん",
+            "page_image_free": "National_museum_of_ethnology_Japan.jpg",
+            "wikibase_item": "Q147157"
+          },
+          "coordinates": [
+            {
+              "lat": 34.81286111,
+              "lon": 135.52968333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の大阪府にある民族学博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 64079,
+          "ns": 0,
+          "title": "國學院大學",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こくかくいんたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Kokugakuin_university_2021.jpg",
+            "wikibase_item": "Q495330"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65563889,
+              "lon": 139.71163889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都渋谷区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 2658911,
+          "ns": 0,
+          "title": "埼玉県の観光地",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さいたまけん",
+            "page_image_free": "Nagatoro2.jpg",
+            "wikibase_item": "Q11426539"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 4329686,
+          "ns": 0,
+          "title": "五島慶太未来創造館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ことうけいたみらいそうそうかん",
+            "page_image_free": "五島慶太未来創造館.jpg",
+            "wikibase_item": "Q109370576"
+          },
+          "coordinates": [
+            {
+              "lat": 36.36994444,
+              "lon": 138.12380556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長野県青木村にある五島慶太に関する展示施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

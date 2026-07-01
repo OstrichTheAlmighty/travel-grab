@@ -1,0 +1,190 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:36.216Z",
+  "value": {
+    "searchinfo": {
+      "search": "お台場"
+    },
+    "search": [
+      {
+        "id": "Q211861",
+        "title": "Q211861",
+        "pageid": 207484,
+        "concepturi": "http://www.wikidata.org/entity/Q211861",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q211861",
+        "display": {
+          "label": {
+            "value": "Odaiba",
+            "language": "en"
+          },
+          "description": {
+            "value": "town located in Minato-ku, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Odaiba",
+        "description": "town located in Minato-ku, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "お台場"
+        },
+        "aliases": [
+          "お台場"
+        ]
+      },
+      {
+        "id": "Q5368576",
+        "title": "Q5368576",
+        "pageid": 5134922,
+        "concepturi": "http://www.wikidata.org/entity/Q5368576",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5368576",
+        "display": {
+          "label": {
+            "value": "Odaiba Marine Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Odaiba Marine Park",
+        "description": "park in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "お台場海浜公園"
+        },
+        "aliases": [
+          "お台場海浜公園"
+        ]
+      },
+      {
+        "id": "Q858883",
+        "title": "Q858883",
+        "pageid": 810464,
+        "concepturi": "http://www.wikidata.org/entity/Q858883",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q858883",
+        "display": {
+          "label": {
+            "value": "Odaiba-kaihinkōen Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "railway station in Minato, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Odaiba-kaihinkōen Station",
+        "description": "railway station in Minato, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "お台場海浜公園駅"
+        },
+        "aliases": [
+          "お台場海浜公園駅"
+        ]
+      },
+      {
+        "id": "Q3349075",
+        "title": "Q3349075",
+        "pageid": 3192401,
+        "concepturi": "http://www.wikidata.org/entity/Q3349075",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3349075",
+        "display": {
+          "label": {
+            "value": "お台場ムーンライトセレナーデ",
+            "language": "ja"
+          },
+          "description": {
+            "value": "1998 single by Yuko Nakazawa",
+            "language": "en"
+          }
+        },
+        "label": "お台場ムーンライトセレナーデ",
+        "description": "1998 single by Yuko Nakazawa",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "お台場ムーンライトセレナーデ"
+        }
+      },
+      {
+        "id": "Q11262953",
+        "title": "Q11262953",
+        "pageid": 12406937,
+        "concepturi": "http://www.wikidata.org/entity/Q11262953",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11262953",
+        "display": {
+          "label": {
+            "value": "Fuji Television events in Odaiba",
+            "language": "en"
+          }
+        },
+        "label": "Fuji Television events in Odaiba",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "お台場合衆国"
+        },
+        "aliases": [
+          "お台場合衆国"
+        ]
+      },
+      {
+        "id": "Q11262955",
+        "title": "Q11262955",
+        "pageid": 12406939,
+        "concepturi": "http://www.wikidata.org/entity/Q11262955",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11262955",
+        "display": {
+          "label": {
+            "value": "お台場探偵羞恥心 ヘキサゴン殺人事件",
+            "language": "ja"
+          }
+        },
+        "label": "お台場探偵羞恥心 ヘキサゴン殺人事件",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "お台場探偵羞恥心 ヘキサゴン殺人事件"
+        }
+      },
+      {
+        "id": "Q11395526",
+        "title": "Q11395526",
+        "pageid": 12534104,
+        "concepturi": "http://www.wikidata.org/entity/Q11395526",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11395526",
+        "display": {
+          "label": {
+            "value": "お台場の女",
+            "language": "ja"
+          },
+          "description": {
+            "value": "2009 single",
+            "language": "en"
+          }
+        },
+        "label": "お台場の女",
+        "description": "2009 single",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "お台場の女"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

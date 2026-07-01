@@ -1,0 +1,118 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:15.542Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18792,
+          "ns": 0,
+          "title": "文京区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふんきようく",
+            "kartographer_frames": "1",
+            "page_image_free": "Akamon,_University_of_Tokyo_2019.jpg",
+            "wikibase_item": "Q212713"
+          },
+          "coordinates": [
+            {
+              "lat": 35.708,
+              "lon": 139.75225,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 113493,
+          "ns": 0,
+          "title": "文学館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふんかくかん",
+            "wikibase_item": "Q1865249"
+          },
+          "terms": {
+            "description": [
+              "作家や文学運動に関する品々を集めた博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 901800,
+          "ns": 0,
+          "title": "日光御成道",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "につこうおなりみち",
+            "page_image_free": "Saitama-ken_géolocalisation_relief.svg",
+            "wikibase_item": "Q3069761"
+          },
+          "terms": {
+            "description": [
+              "江戸時代に整備された脇往還"
+            ]
+          }
+        },
+        {
+          "pageid": 1574213,
+          "ns": 0,
+          "title": "文京公会堂",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふんきようこうかいとう",
+            "wikibase_item": "Q11499746"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70787222,
+              "lon": 139.75242222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて東京都文京区に存在したホール"
+            ]
+          }
+        },
+        {
+          "pageid": 2256917,
+          "ns": 0,
+          "title": "文京ふるさと歴史館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふんきようふるさとれきしかん",
+            "page_image_free": "Furusato_History_Museum,_Bunkyo_01.jpg",
+            "wikibase_item": "Q11499743"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71,
+              "lon": 139.76,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

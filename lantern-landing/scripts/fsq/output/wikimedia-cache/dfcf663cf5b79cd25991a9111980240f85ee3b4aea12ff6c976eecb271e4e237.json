@@ -1,0 +1,90 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:45.801Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 100969,
+          "ns": 0,
+          "title": "日本コカ・コーラ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんこかこおら",
+            "page_image_free": "Coca-Cola_building_-_Japan.jpg",
+            "wikibase_item": "Q11506438"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65830556,
+              "lon": 139.71233333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "ザ コカ・コーラ カンパニーの日本法人"
+            ]
+          }
+        },
+        {
+          "pageid": 118795,
+          "ns": 0,
+          "title": "三国コカ・コーラボトリング",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みくにこかこおらほとりんく",
+            "wikibase_item": "Q11354717"
+          }
+        },
+        {
+          "pageid": 645352,
+          "ns": 0,
+          "title": "コカ・コーラレッドスパークス",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こかこおられつとすはあくす",
+            "wikibase_item": "Q2981203"
+          },
+          "terms": {
+            "description": [
+              "日本の協会ラグビーチーム"
+            ]
+          }
+        },
+        {
+          "pageid": 765698,
+          "ns": 0,
+          "title": "コーラ (飲料)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こおら",
+            "page_image_free": "Glass_cola.jpg",
+            "wikibase_item": "Q134041"
+          },
+          "terms": {
+            "description": [
+              "炭酸飲料のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 2782600,
+          "ns": 0,
+          "title": "月間MVP (日本プロサッカーリーグ)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "けつかんMVP にほんふろさつかありいく",
+            "wikibase_item": "Q17217308"
+          }
+        }
+      ]
+    }
+  }
+}

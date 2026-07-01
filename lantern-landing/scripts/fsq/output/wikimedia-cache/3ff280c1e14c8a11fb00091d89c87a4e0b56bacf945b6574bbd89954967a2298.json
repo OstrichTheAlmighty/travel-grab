@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:24.686Z",
+  "value": {
+    "searchinfo": {
+      "search": "井草森公園"
+    },
+    "search": [
+      {
+        "id": "Q11373757",
+        "title": "Q11373757",
+        "pageid": 12511904,
+        "concepturi": "http://www.wikidata.org/entity/Q11373757",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11373757",
+        "display": {
+          "label": {
+            "value": "Igusamori Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Suginami, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Igusamori Park",
+        "description": "park in Suginami, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "井草森公園"
+        },
+        "aliases": [
+          "井草森公園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:35.175Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 2932001,
+          "ns": 0,
+          "title": "奥澤神社",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おくさわしんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Torii_with_a_straw_snake_in_Okusawa_Shrine.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q17224560"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60539444,
+              "lon": 139.67125278,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "世田谷区奥沢にある神社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

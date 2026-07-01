@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:14.539Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 384938,
+          "ns": 0,
+          "title": "アクアパーク品川",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あくあはあくしなかわ",
+            "kartographer_frames": "1",
+            "page_image_free": "Avatar_The_Way_of_Water_Tokyo_Press_Conference_(52562513647).jpg",
+            "wikibase_item": "Q3055859"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62782889,
+              "lon": 139.73508694,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京の水族館"
+            ]
+          }
+        },
+        {
+          "pageid": 722610,
+          "ns": 0,
+          "title": "ポート・ロイヤル",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ほおとろいやる",
+            "page_image_free": "Old_Port_Royal_-_Project_Gutenberg_eText_19396.png",
+            "wikibase_item": "Q685357"
+          },
+          "coordinates": [
+            {
+              "lat": 17.933771,
+              "lon": -76.841364,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 943340,
+          "ns": 0,
+          "title": "パイレーツ・オブ・カリビアン/ワールド・エンド",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はいれえつおふかりひあん わあるとえんと",
+            "wikibase_item": "Q54274"
+          },
+          "terms": {
+            "description": [
+              "2007年のアメリカのアクション映画"
+            ]
+          }
+        },
+        {
+          "pageid": 1316422,
+          "ns": 0,
+          "title": "パイレーツ・オブ・カリビアン/呪われた海賊たち",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はいれえつおふかりひあん のろわれたかいそくたち",
+            "wikibase_item": "Q46717"
+          },
+          "terms": {
+            "description": [
+              "2003年のアメリカのアクション映画"
+            ]
+          }
+        },
+        {
+          "pageid": 1843764,
+          "ns": 0,
+          "title": "パイレーツ・オブ・カリビアンの登場人物",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はいれえつおふかりひあん",
+            "wikibase_item": "Q998694"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

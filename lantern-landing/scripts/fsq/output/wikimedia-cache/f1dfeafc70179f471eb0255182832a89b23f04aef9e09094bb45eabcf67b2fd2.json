@@ -1,0 +1,118 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:44.663Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 15740,
+          "ns": 0,
+          "title": "西武ドーム",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せいふとおむ",
+            "page_image_free": "Seibu_Dome_feb_23_2021_various_16_59_23_418000.jpeg",
+            "wikibase_item": "Q1194822"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7685,
+              "lon": 139.4205,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県所沢市にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 40470,
+          "ns": 0,
+          "title": "新潟駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にいかた",
+            "kartographer_frames": "1",
+            "page_image_free": "Niigata_Station_Building,_Bandai_Square_and_Bus_Terminal_August2023.jpg",
+            "wikibase_item": "Q701753"
+          },
+          "coordinates": [
+            {
+              "lat": 37.91202778,
+              "lon": 139.06188889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "新潟県新潟市中央区花園にある東日本旅客鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 41570,
+          "ns": 0,
+          "title": "ナゴヤドーム",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なこやとおむ",
+            "page_image_free": "Nagoya_Dome_-_3.jpg",
+            "wikibase_item": "Q929524"
+          },
+          "coordinates": [
+            {
+              "lat": 35.18597778,
+              "lon": 136.94731389,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県名古屋市東区にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 3729560,
+          "ns": 0,
+          "title": "SASUKE",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さすけ",
+            "wikibase_item": "Q835784"
+          },
+          "terms": {
+            "description": [
+              "TBSテレビのスポーツエンタテインメント番組"
+            ]
+          }
+        },
+        {
+          "pageid": 3907610,
+          "ns": 0,
+          "title": "かが屋",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かかや",
+            "wikibase_item": "Q65234383"
+          },
+          "terms": {
+            "description": [
+              "日本のお笑いコンビ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

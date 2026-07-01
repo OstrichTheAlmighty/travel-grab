@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:20.969Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 12688,
+          "ns": 0,
+          "title": "浮世絵",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "うきよえ",
+            "page_image_free": "MASANOBU-Theater.jpg",
+            "wikibase_item": "Q185905"
+          },
+          "terms": {
+            "description": [
+              "絵画のジャンル"
+            ]
+          }
+        },
+        {
+          "pageid": 18583,
+          "ns": 0,
+          "title": "歌川広重",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "うたかわ ひろしけ",
+            "page_image_free": "Memorial_Portrait_of_Hiroshige,_by_Kunisada.jpg",
+            "wikibase_item": "Q200798"
+          },
+          "terms": {
+            "description": [
+              "日本の浮世絵師 (1797-1858)"
+            ]
+          }
+        },
+        {
+          "pageid": 952731,
+          "ns": 0,
+          "title": "歌川国貞",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "うたかわ くにさた",
+            "page_image_free": "Kunisada_shini_e.jpg",
+            "wikibase_item": "Q467427"
+          },
+          "terms": {
+            "description": [
+              "江戸時代の浮世絵師、初代"
+            ]
+          }
+        },
+        {
+          "pageid": 2130476,
+          "ns": 0,
+          "title": "肉筆浮世絵",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にくひつうきよえ",
+            "wikibase_item": "Q3341836"
+          },
+          "terms": {
+            "description": [
+              "浮世絵師が自らの筆で直接絵絹や紙に描いた浮世絵"
+            ]
+          }
+        },
+        {
+          "pageid": 2139658,
+          "ns": 0,
+          "title": "太田記念美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおたきねんひしゆつかん",
+            "page_image_free": "Ota-Memorial-Museum-Harajuku-01.jpg",
+            "wikibase_item": "Q3815442"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66941667,
+              "lon": 139.70488889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

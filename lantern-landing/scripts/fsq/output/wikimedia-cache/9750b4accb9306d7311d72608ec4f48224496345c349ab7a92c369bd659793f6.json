@@ -1,0 +1,209 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:34.121Z",
+  "value": {
+    "searchinfo": {
+      "search": "復元"
+    },
+    "search": [
+      {
+        "id": "Q38127868",
+        "title": "Q38127868",
+        "pageid": 39495610,
+        "concepturi": "http://www.wikidata.org/entity/Q38127868",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q38127868",
+        "display": {
+          "label": {
+            "value": "recovery",
+            "language": "en"
+          },
+          "description": {
+            "value": "process by which something is returned to its former status or position",
+            "language": "en"
+          }
+        },
+        "label": "recovery",
+        "description": "process by which something is returned to its former status or position",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "復元"
+        },
+        "aliases": [
+          "復元"
+        ]
+      },
+      {
+        "id": "Q2428433",
+        "title": "Q2428433",
+        "pageid": 2345793,
+        "concepturi": "http://www.wikidata.org/entity/Q2428433",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2428433",
+        "display": {
+          "label": {
+            "value": "restoration ecology",
+            "language": "en"
+          },
+          "description": {
+            "value": "scientific study of renewing and restoring ecosystems",
+            "language": "en"
+          }
+        },
+        "label": "restoration ecology",
+        "description": "scientific study of renewing and restoring ecosystems",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "復元生態学"
+        },
+        "aliases": [
+          "復元生態学"
+        ]
+      },
+      {
+        "id": "Q55074511",
+        "title": "Q55074511",
+        "pageid": 55148682,
+        "concepturi": "http://www.wikidata.org/entity/Q55074511",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q55074511",
+        "display": {
+          "label": {
+            "value": "reconstructed word",
+            "language": "en"
+          },
+          "description": {
+            "value": "word that is not directly attested, but hypothesized to have existed based on comparative evidence",
+            "language": "en"
+          }
+        },
+        "label": "reconstructed word",
+        "description": "word that is not directly attested, but hypothesized to have existed based on comparative evidence",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "復元語"
+        },
+        "aliases": [
+          "復元語"
+        ]
+      },
+      {
+        "id": "Q625363",
+        "title": "Q625363",
+        "pageid": 588179,
+        "concepturi": "http://www.wikidata.org/entity/Q625363",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q625363",
+        "display": {
+          "label": {
+            "value": "Community of Christ",
+            "language": "en"
+          },
+          "description": {
+            "value": "second-largest denomination in the Latter Day Saint movement",
+            "language": "en"
+          }
+        },
+        "label": "Community of Christ",
+        "description": "second-largest denomination in the Latter Day Saint movement",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "復元末日聖徒イエス・キリスト教会"
+        },
+        "aliases": [
+          "復元末日聖徒イエス・キリスト教会"
+        ]
+      },
+      {
+        "id": "Q75505084",
+        "title": "Q75505084",
+        "pageid": 74995960,
+        "concepturi": "http://www.wikidata.org/entity/Q75505084",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q75505084",
+        "display": {
+          "label": {
+            "value": "restored",
+            "language": "en"
+          },
+          "description": {
+            "value": "state of conservation of a structure or object",
+            "language": "en"
+          }
+        },
+        "label": "restored",
+        "description": "state of conservation of a structure or object",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "復元済み"
+        },
+        "aliases": [
+          "復元済み"
+        ]
+      },
+      {
+        "id": "Q1185557",
+        "title": "Q1185557",
+        "pageid": 1130688,
+        "concepturi": "http://www.wikidata.org/entity/Q1185557",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1185557",
+        "display": {
+          "label": {
+            "value": "restoring force",
+            "language": "en"
+          },
+          "description": {
+            "value": "brings system back toward equilibrium",
+            "language": "en"
+          }
+        },
+        "label": "restoring force",
+        "description": "brings system back toward equilibrium",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "復元力"
+        },
+        "aliases": [
+          "復元力"
+        ]
+      },
+      {
+        "id": "Q3456301",
+        "title": "Q3456301",
+        "pageid": 3292444,
+        "concepturi": "http://www.wikidata.org/entity/Q3456301",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3456301",
+        "display": {
+          "label": {
+            "value": "ship replica",
+            "language": "en"
+          },
+          "description": {
+            "value": "reconstruction of a no longer existing ship",
+            "language": "en"
+          }
+        },
+        "label": "ship replica",
+        "description": "reconstruction of a no longer existing ship",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "復元船"
+        },
+        "aliases": [
+          "復元船"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

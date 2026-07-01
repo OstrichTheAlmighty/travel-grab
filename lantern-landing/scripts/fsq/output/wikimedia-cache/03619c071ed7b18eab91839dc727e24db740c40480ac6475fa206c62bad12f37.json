@@ -1,0 +1,123 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:31.697Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 153138,
+          "ns": 0,
+          "title": "サンリオピューロランド",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さんりおひゆうろらんと",
+            "kartographer_frames": "1",
+            "page_image_free": "2024_Sanrio_Puroland_(1).jpg",
+            "wikibase_item": "Q1133851"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62461111,
+              "lon": 139.42913889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都多摩市にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 371653,
+          "ns": 0,
+          "title": "ハーモニーランド",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はあもにいらんと",
+            "page_image_free": "Harmony_Land_01.jpg",
+            "wikibase_item": "Q11327370"
+          },
+          "coordinates": [
+            {
+              "lat": 33.40161944,
+              "lon": 131.54656944,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大分県速見郡日出町にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 633566,
+          "ns": 0,
+          "title": "キッザニア東京",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きつさにあとうきよう",
+            "page_image_free": "KidZania_Tokyo.jpg",
+            "wikibase_item": "Q5363436"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65583333,
+              "lon": 139.79194444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区豊洲にある体験型商業施設"
+            ]
+          }
+        },
+        {
+          "pageid": 3040300,
+          "ns": 0,
+          "title": "東京ディズニーランド",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいらんと",
+            "page_image_free": "Japan_Tokyo_keiyo_location_map.svg",
+            "wikibase_item": "Q843997"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63277778,
+              "lon": 139.88055556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県浦安市にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 4543338,
+          "ns": 0,
+          "title": "X年後の関係者たち",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "えつくすねんこのかんけいしやたち",
+            "wikibase_item": "Q119343880"
+          },
+          "terms": {
+            "description": [
+              "BS-TBSのバラエティ番組(2021-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

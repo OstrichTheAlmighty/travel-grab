@@ -1,0 +1,82 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:39.610Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1502555,
+          "ns": 0,
+          "title": "緑が丘町 (三木市)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みとりかおか",
+            "page_image_free": "Midorigaokatown_Mikicity_Hyogopref_background.JPG",
+            "wikibase_item": "Q11607737"
+          }
+        },
+        {
+          "pageid": 1629920,
+          "ns": 0,
+          "title": "ダイシン",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たいしん",
+            "page_image_free": "Daishin_Watari_Shop.jpg",
+            "wikibase_item": "Q11316771"
+          },
+          "terms": {
+            "description": [
+              "日本の宮城県仙台市宮城野区に本部を置くホームセンター"
+            ]
+          }
+        },
+        {
+          "pageid": 2060097,
+          "ns": 0,
+          "title": "えびす (曖昧さ回避)",
+          "index": 2,
+          "pageprops": {
+            "disambiguation": "",
+            "wikibase_item": "Q255907"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの曖昧さ回避ページ"
+            ]
+          }
+        },
+        {
+          "pageid": 2375058,
+          "ns": 0,
+          "title": "医療捜査官 財前一二三",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "いりようそうさかんさいせんひふみ",
+            "wikibase_item": "Q11404645"
+          }
+        }
+      ]
+    }
+  }
+}

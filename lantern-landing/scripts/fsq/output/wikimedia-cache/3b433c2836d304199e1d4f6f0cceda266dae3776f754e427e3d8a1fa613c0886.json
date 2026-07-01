@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:27.996Z",
+  "value": {
+    "searchinfo": {
+      "search": "トヨタアリーナ東京"
+    },
+    "search": [
+      {
+        "id": "Q131801357",
+        "title": "Q131801357",
+        "pageid": 125691800,
+        "concepturi": "http://www.wikidata.org/entity/Q131801357",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q131801357",
+        "display": {
+          "label": {
+            "value": "TOYOTA ARENA TOKYO",
+            "language": "en"
+          },
+          "description": {
+            "value": "indoor arena in Koto, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "TOYOTA ARENA TOKYO",
+        "description": "indoor arena in Koto, Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "トヨタアリーナ東京"
+        },
+        "aliases": [
+          "トヨタアリーナ東京"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:49:08.792Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 784687,
+          "ns": 0,
+          "title": "Box office",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Ohio_Theatre_booth.jpg",
+            "wikibase-shortdesc": "Office selling event tickets",
+            "wikibase_item": "Q877435"
+          },
+          "terms": {
+            "description": [
+              "place where tickets are sold to the public for admission to an event"
+            ]
+          }
+        },
+        {
+          "pageid": 3120584,
+          "ns": 0,
+          "title": "TKTS",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Tkts",
+            "page_image_free": "Time_Square_-_TKTS_Stand_(48193461362).jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Theatre ticket booths",
+            "wikibase_item": "Q5356353"
+          },
+          "terms": {
+            "description": [
+              "ticket booth operator"
+            ]
+          }
+        },
+        {
+          "pageid": 4103708,
+          "ns": 0,
+          "title": "Allu Arjun",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Arjun, Allu",
+            "page_image_free": "Allu_Arjun_at_Pushpa_2_The_Rule_meet.jpg",
+            "wikibase-shortdesc": "Indian actor (born 1982)",
+            "wikibase_item": "Q642827"
+          },
+          "terms": {
+            "description": [
+              "Indian actor"
+            ]
+          }
+        },
+        {
+          "pageid": 21969929,
+          "ns": 0,
+          "title": "AS Adema 149–0 SO l'Emyrne",
+          "index": 4,
+          "pageprops": {
+            "wikibase-shortdesc": "Football match",
+            "wikibase_item": "Q1190964"
+          },
+          "terms": {
+            "description": [
+              "association football match"
+            ]
+          }
+        },
+        {
+          "pageid": 30576942,
+          "ns": 0,
+          "title": "Fahadh Faasil",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Faasil, Fahad",
+            "page_image_free": "Fahadh_Faasil_2019.jpg",
+            "wikibase-shortdesc": "Indian actor and producer (born 1982)",
+            "wikibase_item": "Q5429508"
+          },
+          "terms": {
+            "description": [
+              "Indian film actor"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

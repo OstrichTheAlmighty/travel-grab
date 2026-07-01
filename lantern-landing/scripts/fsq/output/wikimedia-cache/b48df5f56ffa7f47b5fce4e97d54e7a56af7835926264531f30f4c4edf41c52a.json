@@ -1,0 +1,209 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:46.492Z",
+  "value": {
+    "searchinfo": {
+      "search": "ラウンジ"
+    },
+    "search": [
+      {
+        "id": "Q1872261",
+        "title": "Q1872261",
+        "pageid": 1802570,
+        "concepturi": "http://www.wikidata.org/entity/Q1872261",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1872261",
+        "display": {
+          "label": {
+            "value": "lounge",
+            "language": "en"
+          },
+          "description": {
+            "value": "waiting area for travellers",
+            "language": "en"
+          }
+        },
+        "label": "lounge",
+        "description": "waiting area for travellers",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ラウンジ"
+        },
+        "aliases": [
+          "ラウンジ"
+        ]
+      },
+      {
+        "id": "Q17218455",
+        "title": "Q17218455",
+        "pageid": 18814024,
+        "concepturi": "http://www.wikidata.org/entity/Q17218455",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q17218455",
+        "display": {
+          "label": {
+            "value": "lounge",
+            "language": "en"
+          },
+          "description": {
+            "value": "club style",
+            "language": "en"
+          }
+        },
+        "label": "lounge",
+        "description": "club style",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ラウンジ"
+        },
+        "aliases": [
+          "ラウンジ"
+        ]
+      },
+      {
+        "id": "Q3441645",
+        "title": "Q3441645",
+        "pageid": 3278714,
+        "concepturi": "http://www.wikidata.org/entity/Q3441645",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3441645",
+        "display": {
+          "label": {
+            "value": "Rouncey",
+            "language": "en"
+          },
+          "description": {
+            "value": "historic term for a type of horse",
+            "language": "en"
+          }
+        },
+        "label": "Rouncey",
+        "description": "historic term for a type of horse",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ラウンシー"
+        },
+        "aliases": [
+          "ラウンシー"
+        ]
+      },
+      {
+        "id": "Q1141081",
+        "title": "Q1141081",
+        "pageid": 1087771,
+        "concepturi": "http://www.wikidata.org/entity/Q1141081",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1141081",
+        "display": {
+          "label": {
+            "value": "lounge music",
+            "language": "en"
+          },
+          "description": {
+            "value": "music genre",
+            "language": "en"
+          }
+        },
+        "label": "lounge music",
+        "description": "music genre",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ラウンジ・ミュージック"
+        },
+        "aliases": [
+          "ラウンジ・ミュージック"
+        ]
+      },
+      {
+        "id": "Q1187616",
+        "title": "Q1187616",
+        "pageid": 1132451,
+        "concepturi": "http://www.wikidata.org/entity/Q1187616",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1187616",
+        "display": {
+          "label": {
+            "value": "nightwear",
+            "language": "en"
+          },
+          "description": {
+            "value": "garments worn at night, especially to sleep in",
+            "language": "en"
+          }
+        },
+        "label": "nightwear",
+        "description": "garments worn at night, especially to sleep in",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ラウンジウェア"
+        },
+        "aliases": [
+          "ラウンジウェア"
+        ]
+      },
+      {
+        "id": "Q4857982",
+        "title": "Q4857982",
+        "pageid": 4640270,
+        "concepturi": "http://www.wikidata.org/entity/Q4857982",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q4857982",
+        "display": {
+          "label": {
+            "value": "lounge car",
+            "language": "en"
+          },
+          "description": {
+            "value": "railway carriage with a restaurant or bar",
+            "language": "en"
+          }
+        },
+        "label": "lounge car",
+        "description": "railway carriage with a restaurant or bar",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ラウンジカー"
+        },
+        "aliases": [
+          "ラウンジカー"
+        ]
+      },
+      {
+        "id": "Q57292546",
+        "title": "Q57292546",
+        "pageid": 57209019,
+        "concepturi": "http://www.wikidata.org/entity/Q57292546",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q57292546",
+        "display": {
+          "label": {
+            "value": "Laungshe Mibaya",
+            "language": "en"
+          },
+          "description": {
+            "value": "princess of Laungshe",
+            "language": "en"
+          }
+        },
+        "label": "Laungshe Mibaya",
+        "description": "princess of Laungshe",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ラウンシェ"
+        },
+        "aliases": [
+          "ラウンシェ"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

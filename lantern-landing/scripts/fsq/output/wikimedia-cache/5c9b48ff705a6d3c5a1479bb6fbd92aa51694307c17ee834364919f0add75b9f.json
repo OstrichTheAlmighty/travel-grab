@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:20.896Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 29369,
+          "ns": 0,
+          "title": "甲府市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こうふし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kofu_montage.jpg",
+            "wikibase_item": "Q201932"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66214,
+              "lon": 138.56822,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "山梨県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 248678,
+          "ns": 0,
+          "title": "グレート・ジンバブエ遺跡",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "くれえとしんはふえいせき",
+            "page_image_free": "Great-Zimbabwe-2.jpg",
+            "wikibase_item": "Q209217"
+          },
+          "coordinates": [
+            {
+              "lat": -20.273063,
+              "lon": 30.934344,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "ジンバブエに存在する石造遺跡"
+            ]
+          }
+        },
+        {
+          "pageid": 1285561,
+          "ns": 0,
+          "title": "水車小屋",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すいしやこや",
+            "page_image_free": "大王わさび園水車小屋・黒澤明「夢」P8138833.jpg",
+            "wikibase_item": "Q185187"
+          },
+          "terms": {
+            "description": [
+              "水車を備えた構造物"
+            ]
+          }
+        },
+        {
+          "pageid": 1377971,
+          "ns": 0,
+          "title": "弥生時代",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "やよいしたい",
+            "wikibase_item": "Q207858"
+          },
+          "terms": {
+            "description": [
+              "日本の歴史的期間"
+            ]
+          }
+        },
+        {
+          "pageid": 3627299,
+          "ns": 0,
+          "title": "鹿児島紡績所",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かこしまほうせきしよ",
+            "wikibase_item": "Q38276680"
+          },
+          "terms": {
+            "description": [
+              "鹿児島県鹿児島市吉野町にあった日本初の紡績工場"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

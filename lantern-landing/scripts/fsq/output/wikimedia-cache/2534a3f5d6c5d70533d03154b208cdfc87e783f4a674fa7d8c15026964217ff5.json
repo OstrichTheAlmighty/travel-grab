@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:22.775Z",
+  "value": {
+    "searchinfo": {
+      "search": "Kyu-Iwasaki-tei Garden"
+    },
+    "search": [
+      {
+        "id": "Q1358767",
+        "title": "Q1358767",
+        "pageid": 1298355,
+        "concepturi": "http://www.wikidata.org/entity/Q1358767",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1358767",
+        "display": {
+          "label": {
+            "value": "Kyu-Iwasaki-tei Garden",
+            "language": "en"
+          },
+          "description": {
+            "value": "park",
+            "language": "en"
+          }
+        },
+        "label": "Kyu-Iwasaki-tei Garden",
+        "description": "park",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Kyu-Iwasaki-tei Garden"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

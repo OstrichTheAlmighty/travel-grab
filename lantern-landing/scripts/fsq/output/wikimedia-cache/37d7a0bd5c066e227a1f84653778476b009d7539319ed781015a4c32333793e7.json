@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:30.894Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 155808,
+          "ns": 0,
+          "title": "ナム・ジュン・パイク",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はいく なむしゆん",
+            "page_image_free": "Paik_Nam_June_(cropped).jpg",
+            "wikibase_item": "Q158056"
+          },
+          "terms": {
+            "description": [
+              "アメリカの現代美術家 (1932-2006)"
+            ]
+          }
+        },
+        {
+          "pageid": 160196,
+          "ns": 0,
+          "title": "草間彌生",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "くさま やよい",
+            "page_image_free": "Yayoi_Kusama_wax_model_at_Louis_Vitton.jpg",
+            "wikibase_item": "Q231121"
+          },
+          "terms": {
+            "description": [
+              "日本の芸術家、小説家 (1929 - )"
+            ]
+          }
+        },
+        {
+          "pageid": 164868,
+          "ns": 0,
+          "title": "美術館の一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひしゆつかんのいちらん",
+            "toc": "",
+            "wikibase_item": "Q6606159"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 718110,
+          "ns": 0,
+          "title": "ワタリウム美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "わたりうむひしゆつかん",
+            "page_image_free": "Watarium.jpg",
+            "wikibase_item": "Q3915469"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67072,
+              "lon": 139.71339,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 3744231,
+          "ns": 0,
+          "title": "Async",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あしんく",
+            "displaytitle": "async",
+            "wikibase_item": "Q48765523"
+          },
+          "terms": {
+            "description": [
+              "坂本龍一のソロアルバム"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

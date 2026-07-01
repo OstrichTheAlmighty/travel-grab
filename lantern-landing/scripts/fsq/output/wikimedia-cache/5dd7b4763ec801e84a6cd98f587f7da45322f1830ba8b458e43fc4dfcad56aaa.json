@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:46.772Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1745,
+          "ns": 0,
+          "title": "電話",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "てんわ",
+            "page_image_free": "Telephoneschematic.gif",
+            "wikibase_item": "Q944584"
+          },
+          "terms": {
+            "description": [
+              "電気信号を利用した音声の遠距離通信に関する技術、産業"
+            ]
+          }
+        },
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 321318,
+          "ns": 0,
+          "title": "逓信総合博物館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ていしんそうこうはくふつかん",
+            "page_image_free": "Communications-Museum-Tokyo.jpg",
+            "wikibase_item": "Q11639480"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68680556,
+              "lon": 139.76686111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にあった企業博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 1873558,
+          "ns": 0,
+          "title": "NTTワールドエンジニアリングマリン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "えぬていていわあるとえんしにありんくまりん",
+            "page_image_free": "NTT_WE_Marin.jpg",
+            "wikibase_item": "Q11236119"
+          }
+        },
+        {
+          "pageid": 3136031,
+          "ns": 0,
+          "title": "NTT技術史料館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えぬていていきしゆつしりようかん",
+            "page_image_free": "NTT_History_Center_of_Technologies.JPG",
+            "wikibase_item": "Q20043894"
+          },
+          "terms": {
+            "description": [
+              "東京都武蔵野市にある企業博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

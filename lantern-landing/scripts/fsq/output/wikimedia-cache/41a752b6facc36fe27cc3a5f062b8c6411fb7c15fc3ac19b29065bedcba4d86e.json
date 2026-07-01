@@ -1,0 +1,195 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:47.973Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京タワー"
+    },
+    "search": [
+      {
+        "id": "Q183536",
+        "title": "Q183536",
+        "pageid": 182570,
+        "concepturi": "http://www.wikidata.org/entity/Q183536",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q183536",
+        "display": {
+          "label": {
+            "value": "Tokyo Tower",
+            "language": "en"
+          },
+          "description": {
+            "value": "tower in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Tower",
+        "description": "tower in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京タワー"
+        },
+        "aliases": [
+          "東京タワー"
+        ]
+      },
+      {
+        "id": "Q431725",
+        "title": "Q431725",
+        "pageid": 407259,
+        "concepturi": "http://www.wikidata.org/entity/Q431725",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q431725",
+        "display": {
+          "label": {
+            "value": "Tokyo Tower",
+            "language": "en"
+          },
+          "description": {
+            "value": "2005 film by Takashi Minamoto",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Tower",
+        "description": "2005 film by Takashi Minamoto",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京タワー"
+        },
+        "aliases": [
+          "東京タワー"
+        ]
+      },
+      {
+        "id": "Q11524219",
+        "title": "Q11524219",
+        "pageid": 12664089,
+        "concepturi": "http://www.wikidata.org/entity/Q11524219",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524219",
+        "display": {
+          "label": {
+            "value": "東京タワー",
+            "language": "ja"
+          },
+          "description": {
+            "value": "album by Flower Companyz",
+            "language": "en"
+          }
+        },
+        "label": "東京タワー",
+        "description": "album by Flower Companyz",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京タワー"
+        }
+      },
+      {
+        "id": "Q129347634",
+        "title": "Q129347634",
+        "pageid": 123319168,
+        "concepturi": "http://www.wikidata.org/entity/Q129347634",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q129347634",
+        "display": {
+          "label": {
+            "value": "東京タワー",
+            "language": "ja"
+          },
+          "description": {
+            "value": "hardback edition (ja)",
+            "language": "en"
+          }
+        },
+        "label": "東京タワー",
+        "description": "hardback edition (ja)",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京タワー"
+        }
+      },
+      {
+        "id": "Q5358546",
+        "title": "Q5358546",
+        "pageid": 5125172,
+        "concepturi": "http://www.wikidata.org/entity/Q5358546",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5358546",
+        "display": {
+          "label": {
+            "value": "Tokyo Tower: Mom and Me, and Sometimes Dad",
+            "language": "en"
+          },
+          "description": {
+            "value": "2007 film by Joji Matsuoka",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Tower: Mom and Me, and Sometimes Dad",
+        "description": "2007 film by Joji Matsuoka",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京タワー 〜オカンとボクと、時々、オトン〜"
+        },
+        "aliases": [
+          "東京タワー 〜オカンとボクと、時々、オトン〜"
+        ]
+      },
+      {
+        "id": "Q11103053",
+        "title": "Q11103053",
+        "pageid": 12309025,
+        "concepturi": "http://www.wikidata.org/entity/Q11103053",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11103053",
+        "display": {
+          "label": {
+            "value": "Tokyo Tower: Mom and Me and Sometimes Dad",
+            "language": "en"
+          },
+          "description": {
+            "value": "book by Lily Franky",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Tower: Mom and Me and Sometimes Dad",
+        "description": "book by Lily Franky",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京タワー 〜オカンとボクと、時々、オトン〜"
+        },
+        "aliases": [
+          "東京タワー 〜オカンとボクと、時々、オトン〜"
+        ]
+      },
+      {
+        "id": "Q11235210",
+        "title": "Q11235210",
+        "pageid": 12384906,
+        "concepturi": "http://www.wikidata.org/entity/Q11235210",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11235210",
+        "display": {
+          "label": {
+            "value": "東京タワー 〜オカンとボクと、時々、オトン〜",
+            "language": "ja"
+          }
+        },
+        "label": "東京タワー 〜オカンとボクと、時々、オトン〜",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京タワー 〜オカンとボクと、時々、オトン〜"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

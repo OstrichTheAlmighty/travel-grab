@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:32.770Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 269336,
+          "ns": 0,
+          "title": "目白",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "めしろ",
+            "kartographer_frames": "1",
+            "page_image_free": "Mejiro_2_chome_in_Toshima.jpg",
+            "wikibase_item": "Q3304792"
+          },
+          "terms": {
+            "description": [
+              "東京都豊島区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 300297,
+          "ns": 0,
+          "title": "池袋",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いけふくろ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ikebukuro2007.jpg",
+            "wikibase_item": "Q542366"
+          },
+          "terms": {
+            "description": [
+              "東京都豊島区の町名、または池袋駅の周辺地域を含む呼称"
+            ]
+          }
+        },
+        {
+          "pageid": 597598,
+          "ns": 0,
+          "title": "西巣鴨町",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にしすかもまち",
+            "wikibase_item": "Q11628207"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73244,
+              "lon": 139.71547,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京府北豊島郡にあった町"
+            ]
+          }
+        },
+        {
+          "pageid": 815668,
+          "ns": 0,
+          "title": "東池袋",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひかしいけふくろ",
+            "kartographer_frames": "1",
+            "page_image_free": "Sunshine_60_Ikebukuro_Tokyo_20070304-01.jpg",
+            "wikibase_item": "Q11527572"
+          },
+          "terms": {
+            "description": [
+              "東京都豊島区の繁華街"
+            ]
+          }
+        },
+        {
+          "pageid": 4099190,
+          "ns": 0,
+          "title": "西武の店舗一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せいふのてんほいちらん",
+            "kartographer_frames": "2",
+            "page_image_free": "Seibu_logo.svg",
+            "wikibase_item": "Q97311747"
+          },
+          "terms": {
+            "description": [
+              "ウィキペディアの一覧ページ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

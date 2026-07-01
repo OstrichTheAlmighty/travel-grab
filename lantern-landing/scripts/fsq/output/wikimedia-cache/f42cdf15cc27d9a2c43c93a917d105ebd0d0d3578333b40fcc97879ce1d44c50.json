@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:15.740Z",
+  "value": {
+    "searchinfo": {
+      "search": "Tokyo Metropolitan Gymnasium"
+    },
+    "search": [
+      {
+        "id": "Q1066903",
+        "title": "Q1066903",
+        "pageid": 1015498,
+        "concepturi": "http://www.wikidata.org/entity/Q1066903",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1066903",
+        "display": {
+          "label": {
+            "value": "Tokyo Metropolitan Gymnasium",
+            "language": "en"
+          },
+          "description": {
+            "value": "sports arena",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Metropolitan Gymnasium",
+        "description": "sports arena",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Metropolitan Gymnasium"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

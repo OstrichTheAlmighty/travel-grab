@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:47.050Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 19239,
+          "ns": 0,
+          "title": "四国八十八箇所",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しこくはちしゆうはちかしよ",
+            "page_image_free": "Ohennrosann_01.jpg",
+            "wikibase_item": "Q1972399"
+          },
+          "terms": {
+            "description": [
+              "四国にある空海（弘法大師）ゆかりの88か所の寺院の総称で、四国霊場のもっとも代表的な札所"
+            ]
+          }
+        },
+        {
+          "pageid": 78794,
+          "ns": 0,
+          "title": "善光寺",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せんこうし",
+            "kartographer_frames": "1",
+            "page_image_free": "Zenkoji_Temple_Hondo.jpg",
+            "wikibase_item": "Q189640"
+          },
+          "coordinates": [
+            {
+              "lat": 36.6617,
+              "lon": 138.18771111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長野県長野市にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 217136,
+          "ns": 0,
+          "title": "灯籠",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうろう",
+            "page_image_free": "Kasuga-dōrō_parts.jpg",
+            "wikibase_item": "Q12012294"
+          },
+          "terms": {
+            "description": [
+              "漢字圏全体でみられる、石製の伝統的な照明器具の1つ"
+            ]
+          }
+        },
+        {
+          "pageid": 1219075,
+          "ns": 0,
+          "title": "九段",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "くたん",
+            "page_image_free": "Kudanzaka_Jinbocho_Nickolai_Cathedral.jpg",
+            "wikibase_item": "Q11370414"
+          },
+          "terms": {
+            "description": [
+              "東京都千代田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 3797724,
+          "ns": 0,
+          "title": "常灯明台",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しようとうみようたい",
+            "kartographer_frames": "1",
+            "page_image_free": "常燈明台.jpeg",
+            "wikibase_item": "Q56345877"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69480556,
+              "lon": 139.74880556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区の靖国通り沿いにある塔"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

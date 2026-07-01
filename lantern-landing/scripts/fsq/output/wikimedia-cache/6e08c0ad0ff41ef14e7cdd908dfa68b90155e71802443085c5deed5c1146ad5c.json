@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:51.925Z",
+  "value": {
+    "searchinfo": {
+      "search": "ぬりえ美術館"
+    },
+    "search": [
+      {
+        "id": "Q29570187",
+        "title": "Q29570187",
+        "pageid": 31215995,
+        "concepturi": "http://www.wikidata.org/entity/Q29570187",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q29570187",
+        "display": {
+          "label": {
+            "value": "The Nurie Museum",
+            "language": "en"
+          }
+        },
+        "label": "The Nurie Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ぬりえ美術館"
+        },
+        "aliases": [
+          "ぬりえ美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

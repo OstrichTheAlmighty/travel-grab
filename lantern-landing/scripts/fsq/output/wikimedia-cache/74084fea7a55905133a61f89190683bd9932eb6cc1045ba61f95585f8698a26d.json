@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:20.151Z",
+  "value": {
+    "searchinfo": {
+      "search": "山本有三記念館"
+    },
+    "search": [
+      {
+        "id": "Q21019634",
+        "title": "Q21019634",
+        "pageid": 23071080,
+        "concepturi": "http://www.wikidata.org/entity/Q21019634",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q21019634",
+        "display": {
+          "label": {
+            "value": "Mitaka City Yūzō Yamamoto Memorial Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Mitaka, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Mitaka City Yūzō Yamamoto Memorial Museum",
+        "description": "museum in Mitaka, Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "山本有三記念館"
+        },
+        "aliases": [
+          "山本有三記念館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

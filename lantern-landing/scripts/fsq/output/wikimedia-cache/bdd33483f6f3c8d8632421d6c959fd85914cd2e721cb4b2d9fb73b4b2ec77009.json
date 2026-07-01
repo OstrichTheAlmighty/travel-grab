@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:06.209Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 43549,
+          "ns": 0,
+          "title": "楠木正成",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "くすのき まさしけ",
+            "page_image_free": "Kusunoki_Masashige.jpg",
+            "wikibase_item": "Q382234"
+          },
+          "terms": {
+            "description": [
+              "日本の鎌倉～南北朝時代の武将"
+            ]
+          }
+        },
+        {
+          "pageid": 180965,
+          "ns": 0,
+          "title": "武雄競輪場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たけおけいりんしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Takeo_keirinjou_entrance.jpg",
+            "wikibase_item": "Q11546636"
+          },
+          "coordinates": [
+            {
+              "lat": 33.18316667,
+              "lon": 130.02438889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "佐賀県にある競輪場"
+            ]
+          }
+        },
+        {
+          "pageid": 454056,
+          "ns": 0,
+          "title": "鬪雞神社",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうけいしんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "251011_Tokei-jinja_Tanabe_Wakayama_prefecture_Japan03s3.jpg",
+            "wikibase_item": "Q11656593"
+          },
+          "coordinates": [
+            {
+              "lat": 33.72969444,
+              "lon": 135.38388889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "田辺市にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 1465390,
+          "ns": 0,
+          "title": "神木",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しんほく",
+            "page_image_free": "Yuki_Shrine_-_giant_Sugi.jpg",
+            "wikibase_item": "Q48743901"
+          },
+          "terms": {
+            "description": [
+              "古神道における神籬としての木や森をさし、神体のこと"
+            ]
+          }
+        },
+        {
+          "pageid": 3390976,
+          "ns": 0,
+          "title": "武雄神社",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たけおしんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Haiden_of_Takeo_Shrine.jpg",
+            "wikibase_item": "Q24859553"
+          },
+          "coordinates": [
+            {
+              "lat": 33.18816667,
+              "lon": 130.02094444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "佐賀県武雄市武雄町にある神社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

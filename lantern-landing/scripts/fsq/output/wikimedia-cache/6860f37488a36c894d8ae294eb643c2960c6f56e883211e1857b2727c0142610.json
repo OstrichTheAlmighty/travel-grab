@@ -1,0 +1,100 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:37.694Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 38605,
+          "ns": 0,
+          "title": "横浜ランドマークタワー",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "よこはまらんとまあくたわあ",
+            "page_image_free": "Yokohama_Landmark_Tower_202207.jpg",
+            "wikibase_item": "Q587108"
+          },
+          "coordinates": [
+            {
+              "lat": 35.45459167,
+              "lon": 139.63147222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "横浜市の超高層ビル"
+            ]
+          }
+        },
+        {
+          "pageid": 2221877,
+          "ns": 0,
+          "title": "フェラーリ・F92A",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふえらありF92A",
+            "page_image_free": "Jean_Alesi.jpg",
+            "wikibase_item": "Q172565"
+          }
+        },
+        {
+          "pageid": 2864517,
+          "ns": 0,
+          "title": "劇場版 HUNTER×HUNTER -The LAST MISSION-",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はんたあはんたあさらすとみつしよん",
+            "wikibase_item": "Q15205223"
+          }
+        },
+        {
+          "pageid": 3490375,
+          "ns": 0,
+          "title": "金松季歩",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かねまつ きほ",
+            "page_image_free": "Kindai_Mahjong_Swimsuit_Festival_(September_22,_2024)IMG_6866.jpg",
+            "wikibase_item": "Q27151100"
+          },
+          "terms": {
+            "description": [
+              "日本のAV女優、元アイドル、グラビアアイドル"
+            ]
+          }
+        },
+        {
+          "pageid": 3904957,
+          "ns": 0,
+          "title": "東京宝塚ビル",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようたからつかひる",
+            "page_image_free": "Tokyo_Takarazuka_Building_20160711.jpg",
+            "wikibase_item": "Q65271271"
+          },
+          "coordinates": [
+            {
+              "lat": 35.673,
+              "lon": 139.75916667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区のビル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

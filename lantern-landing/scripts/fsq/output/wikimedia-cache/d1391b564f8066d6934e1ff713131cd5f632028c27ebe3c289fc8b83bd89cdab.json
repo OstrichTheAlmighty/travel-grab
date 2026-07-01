@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:03.602Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 77949,
+          "ns": 0,
+          "title": "伊東市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いとうし",
+            "kartographer_frames": "1",
+            "page_image_free": "Mount_Ōmuro_(Izu_Peninsula)_&_Mt.Fuji.jpg",
+            "wikibase_item": "Q721163"
+          },
+          "coordinates": [
+            {
+              "lat": 34.96572,
+              "lon": 139.10186,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 93346,
+          "ns": 0,
+          "title": "ウィリアム・アダムス",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あたむす ういりあむ",
+            "page_image_free": "William-Adams-before-Shogun-Tokugawa-Ieyasu.png",
+            "wikibase_item": "Q313866"
+          },
+          "terms": {
+            "description": [
+              "「三浦按針」の名でも知られるイギリスの航海士、貿易家 (1564-1620)"
+            ]
+          }
+        },
+        {
+          "pageid": 182527,
+          "ns": 0,
+          "title": "英学",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "えいかく",
+            "wikibase_item": "Q11616914"
+          },
+          "terms": {
+            "description": [
+              "日本における英語、英語圏諸国に関する学問"
+            ]
+          }
+        },
+        {
+          "pageid": 717334,
+          "ns": 0,
+          "title": "向井忠勝",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "むかい たたかつ",
+            "wikibase_item": "Q711374"
+          },
+          "terms": {
+            "description": [
+              "日本の侍、軍人 (1582-1641)"
+            ]
+          }
+        },
+        {
+          "pageid": 3793555,
+          "ns": 0,
+          "title": "長崎県の観光地",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "なかさきけん",
+            "page_image": "Peace_Statue_of_Nagasaki_20150926.jpeg",
+            "wikibase_item": "Q55530479"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

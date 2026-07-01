@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:30.808Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 95830,
+          "ns": 0,
+          "title": "Kanaloa",
+          "index": 1,
+          "pageprops": {
+            "wikibase-shortdesc": "Hawaiian god of ocean, healing, and long travels",
+            "wikibase_item": "Q6360529"
+          },
+          "terms": {
+            "description": [
+              "Hawaiian god symbolized by the squid or by the octopus, typically associated with Kāne"
+            ]
+          }
+        },
+        {
+          "pageid": 357740,
+          "ns": 0,
+          "title": "Aloha Stadium",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Hawaii's_abandoned_Aloha_Stadium_view_from_roof.jpg",
+            "wikibase-shortdesc": "Former stadium in Hālawa, Hawaii",
+            "wikibase_item": "Q1697292"
+          },
+          "coordinates": [
+            {
+              "lat": 21.373,
+              "lon": -157.93,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "multi-purpose stadium located in Halawa, Hawaii; the largest stadium in Hawaii"
+            ]
+          }
+        },
+        {
+          "pageid": 29323515,
+          "ns": 0,
+          "title": "Kanaloa (disambiguation)",
+          "index": 4,
+          "pageprops": {
+            "disambiguation": "",
+            "wikibase-shortdesc": "Topics referred to by the same term",
+            "wikibase_item": "Q16800624"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        },
+        {
+          "pageid": 41360254,
+          "ns": 0,
+          "title": "Lord Kanaloa",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Lord_Kanaloa_Sprinters_Stakes_2013(IMG1).jpg",
+            "wikibase-shortdesc": "Japanese-bred Thoroughbred racehorse",
+            "wikibase_item": "Q11350999"
+          },
+          "terms": {
+            "description": [
+              "Japanese Thoroughbred racehorse"
+            ]
+          }
+        },
+        {
+          "pageid": 57043091,
+          "ns": 0,
+          "title": "Kanaloa-class freighter",
+          "index": 5,
+          "pageprops": {
+            "wikibase_item": "Q55615636"
+          },
+          "terms": {
+            "description": [
+              "cargo ship design"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:52.723Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 10145,
+          "ns": 0,
+          "title": "野球場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やきゆうしよう",
+            "page_image_free": "SafecoFieldTop.jpg",
+            "wikibase_item": "Q595452"
+          },
+          "terms": {
+            "description": [
+              "野球の試合を行う施設"
+            ]
+          }
+        },
+        {
+          "pageid": 16500,
+          "ns": 0,
+          "title": "明治神宮野球場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "めいししんくうやきゆうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "明治神宮野球場_2025年2月8日の東京_202502081229_IMG_5901.jpg",
+            "wikibase_item": "Q944559"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67457222,
+              "lon": 139.71713611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区にある野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 46197,
+          "ns": 0,
+          "title": "宮城球場",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みやききゆうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Rakuten_Mobile_Park_Miyagi_Entrance.jpg",
+            "wikibase_item": "Q489699"
+          },
+          "coordinates": [
+            {
+              "lat": 38.25620556,
+              "lon": 140.9025,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "宮城県仙台市宮城野区にある野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 137530,
+          "ns": 0,
+          "title": "打者",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たしや",
+            "page_image_free": "North_Middlesex_CC_v_Hampstead_CC_at_Crouch_End,_Haringey,_London_19.jpg",
+            "wikibase_item": "Q810927"
+          },
+          "terms": {
+            "description": [
+              "野球において、投手が投げるボールを、バットを用いて打撃する選手"
+            ]
+          }
+        },
+        {
+          "pageid": 1384627,
+          "ns": 0,
+          "title": "阪神甲子園球場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はんしんこうしえんきゆうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "202309081549_IMG_3516.jpg",
+            "wikibase_item": "Q959811"
+          },
+          "terms": {
+            "description": [
+              "兵庫県西宮市にある野球場"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

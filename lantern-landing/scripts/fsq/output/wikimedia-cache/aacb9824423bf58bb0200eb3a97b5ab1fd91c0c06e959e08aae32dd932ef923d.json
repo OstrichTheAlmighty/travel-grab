@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:50.784Z",
+  "value": {
+    "searchinfo": {
+      "search": "渋沢史料館"
+    },
+    "search": [
+      {
+        "id": "Q11254595",
+        "title": "Q11254595",
+        "pageid": 12400318,
+        "concepturi": "http://www.wikidata.org/entity/Q11254595",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11254595",
+        "display": {
+          "label": {
+            "value": "Shibusawa Memorial Museum",
+            "language": "en"
+          }
+        },
+        "label": "Shibusawa Memorial Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "渋沢史料館"
+        },
+        "aliases": [
+          "渋沢史料館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

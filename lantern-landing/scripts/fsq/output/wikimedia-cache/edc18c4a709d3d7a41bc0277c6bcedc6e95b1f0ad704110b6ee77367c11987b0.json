@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:43.285Z",
+  "value": {
+    "searchinfo": {
+      "search": "草間彌生美術館"
+    },
+    "search": [
+      {
+        "id": "Q65941212",
+        "title": "Q65941212",
+        "pageid": 65570280,
+        "concepturi": "http://www.wikidata.org/entity/Q65941212",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q65941212",
+        "display": {
+          "label": {
+            "value": "Yayoi Kusama Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "Tokyo | Japan",
+            "language": "en"
+          }
+        },
+        "label": "Yayoi Kusama Museum",
+        "description": "Tokyo | Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "草間彌生美術館"
+        },
+        "aliases": [
+          "草間彌生美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

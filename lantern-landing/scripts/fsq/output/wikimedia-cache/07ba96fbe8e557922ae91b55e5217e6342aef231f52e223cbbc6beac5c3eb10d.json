@@ -1,0 +1,118 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:21.945Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 12594,
+          "ns": 0,
+          "title": "墨田区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すみたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Skytree_2014_Ⅲ.jpg",
+            "wikibase_item": "Q235135"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71069,
+              "lon": 139.8015,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 375272,
+          "ns": 0,
+          "title": "向島 (墨田区)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "むこうしま すみたく",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q11415950"
+          },
+          "terms": {
+            "description": [
+              "東京都墨田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 503021,
+          "ns": 0,
+          "title": "向島百花園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "むこうしまひやつかえん",
+            "page_image_free": "Mukojima_Hyakkaen.jpg",
+            "wikibase_item": "Q7076776"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72419444,
+              "lon": 139.81544444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区東向島にある都立庭園"
+            ]
+          }
+        },
+        {
+          "pageid": 544250,
+          "ns": 0,
+          "title": "向島区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "むこうしまく",
+            "wikibase_item": "Q11415958"
+          },
+          "terms": {
+            "description": [
+              "かつて日本の東京府東京市にあった区"
+            ]
+          }
+        },
+        {
+          "pageid": 2121743,
+          "ns": 0,
+          "title": "寺島町",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "てらしままち",
+            "wikibase_item": "Q11457843"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72106,
+              "lon": 139.81831,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京府南葛飾郡にあった町"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

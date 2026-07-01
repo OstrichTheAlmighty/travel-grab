@@ -1,0 +1,62 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:21.803Z",
+  "value": {
+    "searchinfo": {
+      "search": "Nippon Budokan"
+    },
+    "search": [
+      {
+        "id": "Q386246",
+        "title": "Q386246",
+        "pageid": 367529,
+        "concepturi": "http://www.wikidata.org/entity/Q386246",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q386246",
+        "display": {
+          "label": {
+            "value": "Nippon Budōkan",
+            "language": "en"
+          },
+          "description": {
+            "value": "indoor arena located in Chiyoda, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Nippon Budōkan",
+        "description": "indoor arena located in Chiyoda, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Nippon Budōkan"
+        }
+      },
+      {
+        "id": "Q116982889",
+        "title": "Q116982889",
+        "pageid": 111776333,
+        "concepturi": "http://www.wikidata.org/entity/Q116982889",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q116982889",
+        "display": {
+          "label": {
+            "value": "Nippon Budokan",
+            "language": "en"
+          },
+          "description": {
+            "value": "Management operator of Nippon Budokan",
+            "language": "en"
+          }
+        },
+        "label": "Nippon Budokan",
+        "description": "Management operator of Nippon Budokan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Nippon Budokan"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

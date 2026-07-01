@@ -1,0 +1,80 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:40.224Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 79111,
+          "ns": 0,
+          "title": "逆転裁判",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きやくてんさいはん",
+            "wikibase_item": "Q339944"
+          },
+          "terms": {
+            "description": [
+              "日本のゲームソフトシリーズ"
+            ]
+          }
+        },
+        {
+          "pageid": 240134,
+          "ns": 0,
+          "title": "ジョイポリス",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しよいほりす",
+            "wikibase_item": "Q11310533"
+          },
+          "terms": {
+            "description": [
+              "日本のテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 1421459,
+          "ns": 0,
+          "title": "逆転検事",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きやくてんけんし",
+            "wikibase_item": "Q137192318"
+          },
+          "terms": {
+            "description": [
+              "日本のゲームソフトシリーズ"
+            ]
+          }
+        },
+        {
+          "pageid": 2604338,
+          "ns": 0,
+          "title": "ジンテーゼ (企業)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しんてえせ",
+            "wikibase_item": "Q11310983"
+          }
+        },
+        {
+          "pageid": 3401882,
+          "ns": 0,
+          "title": "B-PROJECT",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひいふろしえくと",
+            "wikibase_item": "Q24668320"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:31.308Z",
+  "value": {
+    "searchinfo": {
+      "search": "Dialog In The Dark"
+    },
+    "search": [
+      {
+        "id": "Q457196",
+        "title": "Q457196",
+        "pageid": 431299,
+        "concepturi": "http://www.wikidata.org/entity/Q457196",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q457196",
+        "display": {
+          "label": {
+            "value": "Dialogue in the Dark",
+            "language": "en"
+          },
+          "description": {
+            "value": "social franchise business, Hamburg",
+            "language": "en"
+          }
+        },
+        "label": "Dialogue in the Dark",
+        "description": "social franchise business, Hamburg",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "Dialog in the Dark"
+        },
+        "aliases": [
+          "Dialog in the Dark"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

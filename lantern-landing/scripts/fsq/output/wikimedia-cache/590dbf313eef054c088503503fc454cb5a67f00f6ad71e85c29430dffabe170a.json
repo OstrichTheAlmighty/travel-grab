@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:31.595Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 78283,
+          "ns": 0,
+          "title": "アンリ・ルソー",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "るそお あんり",
+            "page_image_free": "Douanier_Rousseau_Dornac.jpg",
+            "wikibase_item": "Q156386"
+          },
+          "terms": {
+            "description": [
+              "フランスの画家"
+            ]
+          }
+        },
+        {
+          "pageid": 84978,
+          "ns": 0,
+          "title": "五島美術館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ことうひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Gotoh_Museum_2010.jpg",
+            "wikibase_item": "Q2374140"
+          },
+          "coordinates": [
+            {
+              "lat": 35.61230556,
+              "lon": 139.63555556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都世田谷区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 90579,
+          "ns": 0,
+          "title": "世田谷美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せたかやひゆつかん",
+            "page_image_free": "Setagaya_Art_Museum.jpg",
+            "wikibase_item": "Q3892314"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63158889,
+              "lon": 139.62189722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区の砧公園にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 816558,
+          "ns": 0,
+          "title": "素朴派",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "そほくは",
+            "wikibase_item": "Q281108"
+          }
+        },
+        {
+          "pageid": 4678248,
+          "ns": 0,
+          "title": "濱田友緒",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はまた ともお",
+            "wikibase_item": "Q115529808"
+          },
+          "terms": {
+            "description": [
+              "日本の益子焼の陶芸家　濱田庄司の孫 (1967- )"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

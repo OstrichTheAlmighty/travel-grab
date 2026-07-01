@@ -1,0 +1,138 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:02.107Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 459021,
+          "ns": 0,
+          "title": "武蔵野中央公園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "むさしのちゆうおうこうえん",
+            "page_image_free": "Mushashino_tyuo_koen.jpg",
+            "wikibase_item": "Q11546390"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71861111,
+              "lon": 139.55861111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1080554,
+          "ns": 0,
+          "title": "尾久の原公園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おくのはらこうえん",
+            "page_image_free": "Ogu_no_Hara_Park1.JPG",
+            "wikibase_item": "Q6629703"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7515,
+              "lon": 139.77686111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1690273,
+          "ns": 0,
+          "title": "杉並区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すきなみく",
+            "kartographer_frames": "1",
+            "page_image_free": "2018_Kōenji.jpg",
+            "wikibase_item": "Q232631"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6995,
+              "lon": 139.63642,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 2468371,
+          "ns": 0,
+          "title": "国営昭和記念公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こくえいしようわきねんこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "2018_Showa_Memorial_Park_01.jpg",
+            "wikibase_item": "Q3915473"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70741667,
+              "lon": 139.39430556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都にある国営公園"
+            ]
+          }
+        },
+        {
+          "pageid": 3138061,
+          "ns": 0,
+          "title": "桃井原っぱ公園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ももいはらつはこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Momoi_harappa_park_suginami_2015.jpg",
+            "wikibase_item": "Q21019735"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71366667,
+              "lon": 139.60738889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都杉並区にある区立公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:44.587Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 21208,
+          "ns": 0,
+          "title": "皇居",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こうきよ",
+            "kartographer_frames": "1",
+            "page_image_free": "Kokyo0057.jpg",
+            "wikibase_item": "Q500681"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6825,
+              "lon": 139.75277778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある天皇の住居"
+            ]
+          }
+        },
+        {
+          "pageid": 23905,
+          "ns": 0,
+          "title": "皇室",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こうしつ",
+            "page_image_free": "Imperial_Seal_of_Japan.svg",
+            "wikibase_item": "Q909452"
+          },
+          "terms": {
+            "description": [
+              "日本の天皇と皇族で構成される一族"
+            ]
+          }
+        },
+        {
+          "pageid": 158938,
+          "ns": 0,
+          "title": "迎賓館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "けいひんかん",
+            "wikibase_item": "Q52843464"
+          },
+          "terms": {
+            "description": [
+              "外国の高官の接遇を行う施設"
+            ]
+          }
+        },
+        {
+          "pageid": 3268183,
+          "ns": 0,
+          "title": "明仁",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あきひと",
+            "page_image_free": "Emperor_Akihito_(2016).jpg",
+            "wikibase_item": "Q37979"
+          },
+          "terms": {
+            "description": [
+              "日本の第125代天皇 (1933-)"
+            ]
+          }
+        },
+        {
+          "pageid": 3908842,
+          "ns": 0,
+          "title": "王宮の一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おうきゆうのいちらん",
+            "wikibase_item": "Q2370002"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:54.083Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 51583,
+          "ns": 0,
+          "title": "冨田勲",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とみた いさお",
+            "page_image_free": "Isao_Tomita_1977.png",
+            "wikibase_item": "Q546592"
+          },
+          "terms": {
+            "description": [
+              "日本の作曲家、編曲家、シンセサイザー奏者 (1932-2016)"
+            ]
+          }
+        },
+        {
+          "pageid": 84629,
+          "ns": 0,
+          "title": "サントリー美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さんとりいひしゆつかん",
+            "page_image_free": "Tokyo-Midtown-Suntory-Museum-of-Art-01.jpg",
+            "wikibase_item": "Q11249110"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66647222,
+              "lon": 139.73025,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区の東京ミッドタウンにある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 91020,
+          "ns": 0,
+          "title": "SMA",
+          "index": 2,
+          "pageprops": {
+            "disambiguation": "",
+            "wikibase_item": "Q358484"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの曖昧さ回避ページ"
+            ]
+          }
+        },
+        {
+          "pageid": 321555,
+          "ns": 0,
+          "title": "城田優",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しろた ゆう",
+            "wikibase_item": "Q1359676"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優"
+            ]
+          }
+        },
+        {
+          "pageid": 2474624,
+          "ns": 0,
+          "title": "上白石萌音",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かみしらいし もね",
+            "page_image_free": "Mone_Kamishiraishi.jpg",
+            "wikibase_item": "Q11275008"
+          },
+          "terms": {
+            "description": [
+              "日本の女優、タレント、歌手、ナレーター"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:06.134Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1070343,
+          "ns": 0,
+          "title": "総合公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "そうこうこうえん",
+            "wikibase_item": "Q11607562"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2567367,
+          "ns": 0,
+          "title": "柿原徹也",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かきはら てつや",
+            "wikibase_item": "Q708022"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優、歌手"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:07.094Z",
+  "value": {
+    "searchinfo": {
+      "search": "皇居外苑"
+    },
+    "search": [
+      {
+        "id": "Q844963",
+        "title": "Q844963",
+        "pageid": 797050,
+        "concepturi": "http://www.wikidata.org/entity/Q844963",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q844963",
+        "display": {
+          "label": {
+            "value": "Kōkyogaien",
+            "language": "en"
+          },
+          "description": {
+            "value": "town located in Chiyoda-ku, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Kōkyogaien",
+        "description": "town located in Chiyoda-ku, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "皇居外苑"
+        },
+        "aliases": [
+          "皇居外苑"
+        ]
+      },
+      {
+        "id": "Q11581052",
+        "title": "Q11581052",
+        "pageid": 12720991,
+        "concepturi": "http://www.wikidata.org/entity/Q11581052",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11581052",
+        "display": {
+          "label": {
+            "value": "皇居外苑汚物散布事件",
+            "language": "ja"
+          }
+        },
+        "label": "皇居外苑汚物散布事件",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "皇居外苑汚物散布事件"
+        }
+      },
+      {
+        "id": "Q500681",
+        "title": "Q500681",
+        "pageid": 470956,
+        "concepturi": "http://www.wikidata.org/entity/Q500681",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q500681",
+        "display": {
+          "label": {
+            "value": "Tokyo Imperial Palace",
+            "language": "en"
+          },
+          "description": {
+            "value": "main residence of the Emperor of Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Imperial Palace",
+        "description": "main residence of the Emperor of Japan",
+        "match": {
+          "type": "alias",
+          "language": "zh-hans",
+          "text": "皇居外苑"
+        },
+        "aliases": [
+          "皇居外苑"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

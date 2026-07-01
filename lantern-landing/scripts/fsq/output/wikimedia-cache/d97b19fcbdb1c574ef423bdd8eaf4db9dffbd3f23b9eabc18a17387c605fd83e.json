@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:28.943Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 15945,
+          "ns": 0,
+          "title": "東京ドーム",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようとおむ",
+            "page_image_free": "Tokyo_Dome_2007-12.jpg",
+            "wikibase_item": "Q733748"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70583333,
+              "lon": 139.75194444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 130972,
+          "ns": 0,
+          "title": "東京ドームシティ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようとおむしてい",
+            "page_image_free": "TokyoDome8945.jpg",
+            "wikibase_item": "Q564554"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70561111,
+              "lon": 139.75188889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある都市型レジャー施設"
+            ]
+          }
+        },
+        {
+          "pageid": 335387,
+          "ns": 0,
+          "title": "東京ドーム (企業)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようとおむ",
+            "wikibase_item": "Q2439074"
+          },
+          "terms": {
+            "description": [
+              "日本のアミューズメント企業"
+            ]
+          }
+        },
+        {
+          "pageid": 1272191,
+          "ns": 0,
+          "title": "ミーツポート",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みいつほおと",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyodomecity_Meets_Port.jpg",
+            "wikibase_item": "Q3267633"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70303056,
+              "lon": 139.75479722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京ドームシティの商業施設"
+            ]
+          }
+        },
+        {
+          "pageid": 3932580,
+          "ns": 0,
+          "title": "KODA KUMI 10th Anniversary 〜FANTASIA〜 in TOKYO DOME",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こうたくみてんすあにはあさりいふあんたしあいんとうきようとおむ",
+            "wikibase_item": "Q16154791"
+          }
+        }
+      ]
+    }
+  }
+}

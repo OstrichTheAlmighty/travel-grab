@@ -1,0 +1,81 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:45.683Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 237702,
+          "ns": 0,
+          "title": "三宅裕司のワークパラダイス",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みやけゆうしのわあくはらたいす",
+            "wikibase_item": "Q11355101"
+          }
+        },
+        {
+          "pageid": 330675,
+          "ns": 0,
+          "title": "ニワトコ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にわとこ",
+            "page_image_free": "Sambucus_sieboldiana1.JPG",
+            "wikibase_item": "Q7409109"
+          }
+        },
+        {
+          "pageid": 599263,
+          "ns": 0,
+          "title": "遼河はるひ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "りようか はるひ",
+            "wikibase_item": "Q11642656"
+          },
+          "terms": {
+            "description": [
+              "日本の女優、タレント"
+            ]
+          }
+        },
+        {
+          "pageid": 979691,
+          "ns": 0,
+          "title": "日野啓三",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひの けいそう",
+            "wikibase_item": "Q1339265"
+          },
+          "terms": {
+            "description": [
+              "日本の小説家、著作家 (1929-2002)"
+            ]
+          }
+        },
+        {
+          "pageid": 3225924,
+          "ns": 0,
+          "title": "癒し屋キリコの約束",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いやしやきりこのやくそく",
+            "wikibase_item": "Q20043181"
+          },
+          "terms": {
+            "description": [
+              "森沢明夫による文学作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:37:54.354Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 89513,
+          "ns": 0,
+          "title": "キャプテン翼",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きやふてんつはさ",
+            "page_image": "Katsushika_Tokyo_Yotsugi_Station_Captain_Tsubasa_Signboard_1.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q647486"
+          },
+          "terms": {
+            "description": [
+              "高橋陽一による日本のスポーツ漫画"
+            ]
+          }
+        },
+        {
+          "pageid": 132654,
+          "ns": 0,
+          "title": "橋本晃一",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はしもと こういち",
+            "wikibase_item": "Q2312950"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優 (1953-)"
+            ]
+          }
+        },
+        {
+          "pageid": 863937,
+          "ns": 0,
+          "title": "若林源三",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "わかはやし けんそう",
+            "wikibase_item": "Q2248090"
+          },
+          "terms": {
+            "description": [
+              "キャプテン翼の登場人物"
+            ]
+          }
+        },
+        {
+          "pageid": 1674206,
+          "ns": 0,
+          "title": "若林正恭",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "わかはやし まさやす",
+            "wikibase_item": "Q9332121"
+          },
+          "terms": {
+            "description": [
+              "日本のお笑いタレント、司会者"
+            ]
+          }
+        },
+        {
+          "pageid": 2903235,
+          "ns": 0,
+          "title": "キャプテン翼 (アニメ)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きやふてんつはさ",
+            "wikibase_item": "Q954612"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビアニメシリーズ (1983-1986)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

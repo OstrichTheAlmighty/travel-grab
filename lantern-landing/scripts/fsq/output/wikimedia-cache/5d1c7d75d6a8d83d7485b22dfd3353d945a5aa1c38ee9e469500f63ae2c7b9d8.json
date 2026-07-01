@@ -1,0 +1,203 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:13:51.123Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京ディズニーランド"
+    },
+    "search": [
+      {
+        "id": "Q843997",
+        "title": "Q843997",
+        "pageid": 796132,
+        "concepturi": "http://www.wikidata.org/entity/Q843997",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q843997",
+        "display": {
+          "label": {
+            "value": "Tokyo Disneyland",
+            "language": "en"
+          },
+          "description": {
+            "value": "theme park in Japan, owned by The Oriental Land Company",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Disneyland",
+        "description": "theme park in Japan, owned by The Oriental Land Company",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ディズニーランド"
+        },
+        "aliases": [
+          "東京ディズニーランド"
+        ]
+      },
+      {
+        "id": "Q195423",
+        "title": "Q195423",
+        "pageid": 193281,
+        "concepturi": "http://www.wikidata.org/entity/Q195423",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q195423",
+        "display": {
+          "label": {
+            "value": "Tokyo Disneyland Hotel",
+            "language": "en"
+          },
+          "description": {
+            "value": "hotel",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Disneyland Hotel",
+        "description": "hotel",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ディズニーランドホテル"
+        },
+        "aliases": [
+          "東京ディズニーランドホテル"
+        ]
+      },
+      {
+        "id": "Q1754529",
+        "title": "Q1754529",
+        "pageid": 1687232,
+        "concepturi": "http://www.wikidata.org/entity/Q1754529",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1754529",
+        "display": {
+          "label": {
+            "value": "Main Street Electrical Parade",
+            "language": "en"
+          },
+          "description": {
+            "value": "parade at Disney theme parks",
+            "language": "en"
+          }
+        },
+        "label": "Main Street Electrical Parade",
+        "description": "parade at Disney theme parks",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ディズニーランド・エレクトリカルパレード"
+        },
+        "aliases": [
+          "東京ディズニーランド・エレクトリカルパレード"
+        ]
+      },
+      {
+        "id": "Q5367499",
+        "title": "Q5367499",
+        "pageid": 5133888,
+        "concepturi": "http://www.wikidata.org/entity/Q5367499",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5367499",
+        "display": {
+          "label": {
+            "value": "Tokyo Disneyland Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "Disney Resort Line station in Urayasu, Chiba prefecture, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Disneyland Station",
+        "description": "Disney Resort Line station in Urayasu, Chiba prefecture, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ディズニーランド・ステーション駅"
+        },
+        "aliases": [
+          "東京ディズニーランド・ステーション駅"
+        ]
+      },
+      {
+        "id": "Q6600320",
+        "title": "Q6600320",
+        "pageid": 6427084,
+        "concepturi": "http://www.wikidata.org/entity/Q6600320",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6600320",
+        "display": {
+          "label": {
+            "value": "list of Tokyo Disneyland attractions",
+            "language": "en"
+          },
+          "description": {
+            "value": "Wikimedia list article",
+            "language": "en"
+          }
+        },
+        "label": "list of Tokyo Disneyland attractions",
+        "description": "Wikimedia list article",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ディズニーランドのアトラクション"
+        },
+        "aliases": [
+          "東京ディズニーランドのアトラクション"
+        ]
+      },
+      {
+        "id": "Q11524274",
+        "title": "Q11524274",
+        "pageid": 12664144,
+        "concepturi": "http://www.wikidata.org/entity/Q11524274",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524274",
+        "display": {
+          "label": {
+            "value": "東京ディズニーランド ディズニー・ハロウィーン2006",
+            "language": "ja"
+          },
+          "description": {
+            "value": "album by Tokyo Disneyland",
+            "language": "en"
+          }
+        },
+        "label": "東京ディズニーランド ディズニー・ハロウィーン2006",
+        "description": "album by Tokyo Disneyland",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ディズニーランド ディズニー・ハロウィーン2006"
+        }
+      },
+      {
+        "id": "Q11524276",
+        "title": "Q11524276",
+        "pageid": 12664146,
+        "concepturi": "http://www.wikidata.org/entity/Q11524276",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524276",
+        "display": {
+          "label": {
+            "value": "東京ディズニーランド ブレイジング・リズム2005",
+            "language": "ja"
+          },
+          "description": {
+            "value": "album by Tokyo Disneyland",
+            "language": "en"
+          }
+        },
+        "label": "東京ディズニーランド ブレイジング・リズム2005",
+        "description": "album by Tokyo Disneyland",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京ディズニーランド ブレイジング・リズム2005"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

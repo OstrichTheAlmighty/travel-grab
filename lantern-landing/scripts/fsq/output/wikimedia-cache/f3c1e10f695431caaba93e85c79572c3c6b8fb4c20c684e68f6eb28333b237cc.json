@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:16.810Z",
+  "value": {
+    "searchinfo": {
+      "search": "赤坂御用地"
+    },
+    "search": [
+      {
+        "id": "Q11635414",
+        "title": "Q11635414",
+        "pageid": 12775871,
+        "concepturi": "http://www.wikidata.org/entity/Q11635414",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11635414",
+        "display": {
+          "label": {
+            "value": "Akasaka Estate",
+            "language": "en"
+          },
+          "description": {
+            "value": "land in Akasaka, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Akasaka Estate",
+        "description": "land in Akasaka, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "赤坂御用地"
+        },
+        "aliases": [
+          "赤坂御用地"
+        ]
+      },
+      {
+        "id": "Q136670360",
+        "title": "Q136670360",
+        "pageid": 130350219,
+        "concepturi": "http://www.wikidata.org/entity/Q136670360",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q136670360",
+        "display": {
+          "label": {
+            "value": "Odonata Fauna of Akasaka Imperial Gardens, Tokyo: Diversity Sustained by Continuous Maintenance",
+            "language": "en"
+          },
+          "description": {
+            "value": "2023 scientific article",
+            "language": "en"
+          }
+        },
+        "label": "Odonata Fauna of Akasaka Imperial Gardens, Tokyo: Diversity Sustained by Continuous Maintenance",
+        "description": "2023 scientific article",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "赤坂御用地のトンボ相―多様な環境と人の手による維持管理―"
+        },
+        "aliases": [
+          "赤坂御用地のトンボ相―多様な環境と人の手による維持管理―"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

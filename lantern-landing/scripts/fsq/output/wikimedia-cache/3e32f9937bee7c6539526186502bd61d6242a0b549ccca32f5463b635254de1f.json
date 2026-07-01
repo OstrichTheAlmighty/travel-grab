@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:13:58.437Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 48818,
+          "ns": 0,
+          "title": "不動明王",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふとうみようおう",
+            "page_image_free": "Fudō_Myōō.jpg",
+            "wikibase_item": "Q337624"
+          },
+          "terms": {
+            "description": [
+              "明王の一尊"
+            ]
+          }
+        },
+        {
+          "pageid": 94785,
+          "ns": 0,
+          "title": "不動前駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふとうまええき",
+            "kartographer_frames": "1",
+            "page_image_free": "Fudo-mae_Station_various_Dec_26_2020_various_14_18_25_948000.jpeg",
+            "wikibase_item": "Q852869"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62566667,
+              "lon": 139.71341667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区西五反田にある東急電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 111197,
+          "ns": 0,
+          "title": "瀧泉寺",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "りゆうせんし",
+            "page_image_free": "Meguro-fudou-hondou.jpg",
+            "wikibase_item": "Q6587237"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62861111,
+              "lon": 139.70805556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都目黒区の仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 345776,
+          "ns": 0,
+          "title": "目黒",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "めくろ",
+            "disambiguation": "",
+            "toc": "",
+            "wikibase_item": "Q1218664"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの曖昧さ回避ページ"
+            ]
+          }
+        },
+        {
+          "pageid": 345786,
+          "ns": 0,
+          "title": "目黒 (目黒区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "めくろ",
+            "kartographer_frames": "1",
+            "page_image_free": "Meguro_Museum_of_Art,_Tokyo.JPG",
+            "wikibase_item": "Q3541556"
+          },
+          "terms": {
+            "description": [
+              "東京都目黒区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

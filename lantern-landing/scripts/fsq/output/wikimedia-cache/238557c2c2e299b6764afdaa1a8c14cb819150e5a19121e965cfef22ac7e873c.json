@@ -1,0 +1,43 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:10.374Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 2474624,
+          "ns": 0,
+          "title": "上白石萌音",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かみしらいし もね",
+            "page_image_free": "Mone_Kamishiraishi.jpg",
+            "wikibase_item": "Q11275008"
+          },
+          "terms": {
+            "description": [
+              "日本の女優、タレント、歌手、ナレーター"
+            ]
+          }
+        },
+        {
+          "pageid": 3056173,
+          "ns": 0,
+          "title": "日本遺産",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんいさん",
+            "page_image_free": "260516_Kadocho_Yuasa_Wakayama_pref_Japan05s3.jpg",
+            "wikibase_item": "Q18382798"
+          },
+          "terms": {
+            "description": [
+              "文化庁の文化財保護制度。各地方の複数の文化財で構成される歴史・文化的ストーリーを文化庁が「日本遺産」として認定する。"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

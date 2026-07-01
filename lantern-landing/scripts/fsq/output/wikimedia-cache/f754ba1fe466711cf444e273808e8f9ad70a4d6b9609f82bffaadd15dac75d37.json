@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:34.075Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 122195,
+          "ns": 0,
+          "title": "柳生宗矩",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やきゆう むねのり",
+            "page_image_free": "Yagyu_Munenori.jpg",
+            "wikibase_item": "Q631099"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸時代の武将、大名、剣術家"
+            ]
+          }
+        },
+        {
+          "pageid": 135754,
+          "ns": 0,
+          "title": "陸奥圓明流外伝 修羅の刻",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "むつえんめいりゆうかいてんしゆらのとき",
+            "wikibase_item": "Q711218"
+          },
+          "terms": {
+            "description": [
+              "川原正敏による日本の漫画作品"
+            ]
+          }
+        },
+        {
+          "pageid": 226236,
+          "ns": 0,
+          "title": "近藤勇",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こんとう いさみ",
+            "page_image_free": "Kondo_Isami02.jpg",
+            "wikibase_item": "Q467334"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸時代の武士、新選組局長 (1834-1868)"
+            ]
+          }
+        },
+        {
+          "pageid": 1418063,
+          "ns": 0,
+          "title": "金戒光明寺",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こんかいこうみようし",
+            "page_image_free": "170216_Konkaikomyoji_Kyoto_Japan27n.jpg",
+            "wikibase_item": "Q6134090"
+          },
+          "coordinates": [
+            {
+              "lat": 35.01963889,
+              "lon": 135.78802778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市左京区にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 1516212,
+          "ns": 0,
+          "title": "忍者",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にんしや",
+            "page_image_free": "Eight_Hundred_Heroes_of_Our_Country_s_Suikoden_12.jpg",
+            "wikibase_item": "Q9402"
+          },
+          "terms": {
+            "description": [
+              "室町時代から江戸時代の日本で諜報活動・暗殺等を仕事とした者"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

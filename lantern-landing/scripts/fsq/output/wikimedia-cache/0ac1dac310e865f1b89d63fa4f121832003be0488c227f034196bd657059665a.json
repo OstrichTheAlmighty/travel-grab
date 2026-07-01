@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:25.389Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 63865,
+          "ns": 0,
+          "title": "築地市場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "つきしいちは",
+            "page_image_free": "2018_Tsukiji_fish_market.jpg",
+            "wikibase_item": "Q859471"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66138889,
+              "lon": 139.76972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて東京都中央区築地に存在した公設卸売市場"
+            ]
+          }
+        },
+        {
+          "pageid": 474358,
+          "ns": 0,
+          "title": "秋葉原クロスフィールド",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あきははらくろすふいると",
+            "page_image_free": "Akiba43.jpg",
+            "wikibase_item": "Q11595823"
+          },
+          "terms": {
+            "description": [
+              "東京都千代田区にある複合施設"
+            ]
+          }
+        },
+        {
+          "pageid": 1725166,
+          "ns": 0,
+          "title": "秋葉原",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あきははら",
+            "kartographer_frames": "1",
+            "page_image_free": "電気街の夜明け_-_panoramio.jpg",
+            "wikibase_item": "Q418096"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69836,
+              "lon": 139.77313,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区と台東区にまたがる街"
+            ]
+          }
+        },
+        {
+          "pageid": 2436207,
+          "ns": 0,
+          "title": "名古屋市中央卸売市場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "なこやしちゆうおうおろしうりししよう",
+            "kartographer_frames": "1",
+            "kartographer_links": "1",
+            "page_image_free": "Nagoya_City_Chuoh_Wholesale_20140517-01.JPG",
+            "wikibase_item": "Q11414939"
+          },
+          "terms": {
+            "description": [
+              "名古屋市の中央卸売市場"
+            ]
+          }
+        },
+        {
+          "pageid": 2991291,
+          "ns": 0,
+          "title": "神田青果市場",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かんたせいかいちは",
+            "page_image_free": "神田青果市場発祥之碑.jpg",
+            "wikibase_item": "Q60985292"
+          },
+          "terms": {
+            "description": [
+              "かつて東京神田に所在した青果市場。現在の大田市場の前身。"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

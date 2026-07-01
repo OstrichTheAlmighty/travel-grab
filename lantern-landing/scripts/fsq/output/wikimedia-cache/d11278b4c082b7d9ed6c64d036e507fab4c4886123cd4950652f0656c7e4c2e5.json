@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:48.879Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 13823,
+          "ns": 0,
+          "title": "神戸市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こうへし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kobe_montage1.jpg",
+            "wikibase_item": "Q48320"
+          },
+          "coordinates": [
+            {
+              "lat": 34.69017,
+              "lon": 135.19544,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 237068,
+          "ns": 0,
+          "title": "オルゴール",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おるこおる",
+            "page_image_free": "MusicmovementSankyo18notes31SXO1A_36AX01A.JPG",
+            "wikibase_item": "Q1365218"
+          },
+          "terms": {
+            "description": [
+              "自動的に楽曲を演奏する楽器"
+            ]
+          }
+        },
+        {
+          "pageid": 592644,
+          "ns": 0,
+          "title": "つよきす Cool×Sweet",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "つよきすくうるすいいと",
+            "wikibase_item": "Q11272518"
+          }
+        },
+        {
+          "pageid": 1326361,
+          "ns": 0,
+          "title": "笑っていいとも!特大号",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "わらつていいともとくたいこう",
+            "page_image_free": "Studio_Ａlta_Shinjuku.jpg",
+            "wikibase_item": "Q11599555"
+          },
+          "terms": {
+            "description": [
+              "日本のバラエティ番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

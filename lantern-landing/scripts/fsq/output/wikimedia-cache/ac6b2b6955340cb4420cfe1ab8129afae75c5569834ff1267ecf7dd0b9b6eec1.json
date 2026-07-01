@@ -1,0 +1,83 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:08.750Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1338450,
+          "ns": 0,
+          "title": "生活クラブ事業連合生活協同組合連合会",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せいかつくらふしきようしやれんこうきようとうくみあいれんこうかい",
+            "wikibase_item": "Q3477902"
+          },
+          "terms": {
+            "description": [
+              "日本の生活協同組合"
+            ]
+          }
+        },
+        {
+          "pageid": 1796544,
+          "ns": 0,
+          "title": "ジョゼフ・ユーイング・マクドナルド",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "まくとなると しよせふ ゆいんく",
+            "page_image_free": "Joseph_E._McDonald_-_Brady-Handy.jpg",
+            "wikibase_item": "Q436858"
+          }
+        },
+        {
+          "pageid": 1971929,
+          "ns": 0,
+          "title": "日本シエーリング",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんしええりんく",
+            "wikibase_item": "Q11506494"
+          }
+        },
+        {
+          "pageid": 2161567,
+          "ns": 0,
+          "title": "デポー大学",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "てほお",
+            "page_image_free": "Depauwquad.jpg",
+            "wikibase_item": "Q1179599"
+          },
+          "terms": {
+            "description": [
+              "アメリカの私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 2293660,
+          "ns": 0,
+          "title": "アル・オース",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おおす ある",
+            "page_image_free": "Al_Orth.jpg",
+            "wikibase_item": "Q4704574"
+          },
+          "terms": {
+            "description": [
+              "アメリカ合衆国の野球選手 (1872-1948)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:37.099Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 73008,
+          "ns": 0,
+          "title": "グルメシティ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "くるめしてい",
+            "page_image_free": "グルメシティ都島本通店.jpg",
+            "wikibase_item": "Q11300647"
+          }
+        },
+        {
+          "pageid": 971779,
+          "ns": 0,
+          "title": "グルメシティ北海道",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "くるめしていほつかいとう",
+            "wikibase_item": "Q11300649"
+          }
+        },
+        {
+          "pageid": 3211234,
+          "ns": 0,
+          "title": "バナナマンのせっかくグルメ!!",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はななまんのせつかくくるめ",
+            "wikibase_item": "Q20042296"
+          },
+          "terms": {
+            "description": [
+              "日本のバラエティ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 4329790,
+          "ns": 0,
+          "title": "東急グルメフロント",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきゆうくるめふろんと",
+            "wikibase_item": "Q107412062"
+          }
+        },
+        {
+          "pageid": 4399699,
+          "ns": 0,
+          "title": "孤独のグルメ (テレビドラマ)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ことくのくるめ",
+            "wikibase_item": "Q107409856"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ番組シリーズ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

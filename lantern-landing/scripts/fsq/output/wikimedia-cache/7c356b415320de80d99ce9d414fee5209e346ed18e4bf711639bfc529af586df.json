@@ -1,0 +1,90 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:53.434Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 228405,
+          "ns": 0,
+          "title": "トヨタ・ラウム",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とよたらうむ",
+            "wikibase_item": "Q2001722"
+          },
+          "terms": {
+            "description": [
+              "トヨタ自動車のハッチバック型乗用車"
+            ]
+          }
+        },
+        {
+          "pageid": 519662,
+          "ns": 0,
+          "title": "トヨタ・ラクティス",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とよたらくていす",
+            "page_image_free": "Toyota_Ractis_(CP100&CP120)_front.JPG",
+            "wikibase_item": "Q1808738"
+          },
+          "terms": {
+            "description": [
+              "トヨタ自動車のトールワゴン型乗用車"
+            ]
+          }
+        },
+        {
+          "pageid": 1384627,
+          "ns": 0,
+          "title": "阪神甲子園球場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はんしんこうしえんきゆうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "202309081549_IMG_3516.jpg",
+            "wikibase_item": "Q959811"
+          },
+          "terms": {
+            "description": [
+              "兵庫県西宮市にある野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 1691210,
+          "ns": 0,
+          "title": "パノラマエクスプレスアルプス",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はのらまえくすふれすあるふす",
+            "page_image_free": "JNR_panoramaexpress_alps.jpg",
+            "wikibase_item": "Q11329195"
+          }
+        },
+        {
+          "pageid": 2760671,
+          "ns": 0,
+          "title": "ダイハツ・メビウス",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たいはつめひうす",
+            "page_image_free": "DAIHATSU_MEBIUS_ZVW41N_01.JPG",
+            "wikibase_item": "Q11316937"
+          },
+          "terms": {
+            "description": [
+              "ダイハツ工業のステーションワゴン型乗用車"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

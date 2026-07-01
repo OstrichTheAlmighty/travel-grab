@@ -1,0 +1,90 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:40.879Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 15740,
+          "ns": 0,
+          "title": "西武ドーム",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せいふとおむ",
+            "page_image_free": "Seibu_Dome_feb_23_2021_various_16_59_23_418000.jpeg",
+            "wikibase_item": "Q1194822"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7685,
+              "lon": 139.4205,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県所沢市にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 1224024,
+          "ns": 0,
+          "title": "第4アウト",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たいよんあうと",
+            "wikibase_item": "Q5476282"
+          }
+        },
+        {
+          "pageid": 2157641,
+          "ns": 0,
+          "title": "ベースコーチ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "へえすこおち",
+            "page_image_free": "Runner_on_first_at_Citizens_Bank_Park_(2372252062).jpg",
+            "wikibase_item": "Q11337278"
+          }
+        },
+        {
+          "pageid": 2609721,
+          "ns": 0,
+          "title": "振り逃げ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふりにけ",
+            "wikibase_item": "Q1069439"
+          },
+          "terms": {
+            "description": [
+              "野球において、捕手が第3ストライクが宣告された投球を正規に捕球できなかった際に、打者が一塁へ進塁すること"
+            ]
+          }
+        },
+        {
+          "pageid": 3264233,
+          "ns": 0,
+          "title": "走塁放棄",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "そうるいほうき",
+            "wikibase_item": "Q24860942"
+          },
+          "terms": {
+            "description": [
+              "野球やソフトボールの状況"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

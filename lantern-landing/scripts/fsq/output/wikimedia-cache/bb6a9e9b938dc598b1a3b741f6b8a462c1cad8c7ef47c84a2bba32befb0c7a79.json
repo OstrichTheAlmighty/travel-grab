@@ -1,0 +1,80 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:41.278Z",
+  "value": {
+    "searchinfo": {
+      "search": "明治大学博物館"
+    },
+    "search": [
+      {
+        "id": "Q85880847",
+        "title": "Q85880847",
+        "pageid": 85151316,
+        "concepturi": "http://www.wikidata.org/entity/Q85880847",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q85880847",
+        "display": {
+          "label": {
+            "value": "Meiji University Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "crime museum, Archaeological museum, in Chiyoda-ku, Tokyo-to",
+            "language": "en"
+          }
+        },
+        "label": "Meiji University Museum",
+        "description": "crime museum, Archaeological museum, in Chiyoda-ku, Tokyo-to",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "明治大学博物館"
+        },
+        "aliases": [
+          "明治大学博物館"
+        ]
+      },
+      {
+        "id": "Q113478411",
+        "title": "Q113478411",
+        "pageid": 108253174,
+        "concepturi": "http://www.wikidata.org/entity/Q113478411",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q113478411",
+        "display": {
+          "label": {
+            "value": "明治大学博物館研究報告",
+            "language": "ja"
+          }
+        },
+        "label": "明治大学博物館研究報告",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "明治大学博物館研究報告"
+        }
+      },
+      {
+        "id": "Q113478562",
+        "title": "Q113478562",
+        "pageid": 108253324,
+        "concepturi": "http://www.wikidata.org/entity/Q113478562",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q113478562",
+        "display": {
+          "label": {
+            "value": "明治大学博物館年報",
+            "language": "ja"
+          }
+        },
+        "label": "明治大学博物館年報",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "明治大学博物館年報"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

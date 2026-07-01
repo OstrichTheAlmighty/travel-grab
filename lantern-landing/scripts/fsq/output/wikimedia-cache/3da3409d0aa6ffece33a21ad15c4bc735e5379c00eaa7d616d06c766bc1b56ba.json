@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:31.840Z",
+  "value": {
+    "searchinfo": {
+      "search": "大田区立龍子記念館"
+    },
+    "search": [
+      {
+        "id": "Q112192996",
+        "title": "Q112192996",
+        "pageid": 107095845,
+        "concepturi": "http://www.wikidata.org/entity/Q112192996",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q112192996",
+        "display": {
+          "label": {
+            "value": "Ryūshi Memorial Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum in Ōta, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Ryūshi Memorial Museum",
+        "description": "art museum in Ōta, Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "大田区立龍子記念館"
+        },
+        "aliases": [
+          "大田区立龍子記念館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:55.477Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 17097,
+          "ns": 0,
+          "title": "上越線",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しようえつせん",
+            "page_image_free": "Joetsu-Line-Series211-A28.jpg",
+            "wikibase_item": "Q1135061"
+          },
+          "terms": {
+            "description": [
+              "東日本旅客鉄道の鉄道路線"
+            ]
+          }
+        },
+        {
+          "pageid": 3859555,
+          "ns": 0,
+          "title": "有吉ぃぃeeeee!そうだ!今からお前んチでゲームしない?",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ありよしいいいいいそうたいまからおまえんちでけえむしない",
+            "wikibase_item": "Q60987028"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビeスポーツ・ゲーム情報バラエティ番組 (2018-)"
+            ]
+          }
+        },
+        {
+          "pageid": 4468872,
+          "ns": 0,
+          "title": "2022年のテレビドラマ (日本)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "2022ねんのてれひとらまいちらん",
+            "toc": "",
+            "wikibase_item": "Q81418279"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 5145124,
+          "ns": 0,
+          "title": "日本テレビ放送網",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんてれひほうそうもう",
+            "page_image_free": "Nippon_TV_Tower.jpg",
+            "wikibase_item": "Q864910"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66441944,
+              "lon": 139.75991111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある放送事業者"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

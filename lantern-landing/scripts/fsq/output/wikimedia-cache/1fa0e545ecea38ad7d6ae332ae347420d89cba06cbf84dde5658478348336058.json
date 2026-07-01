@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:11.689Z",
+  "value": {
+    "searchinfo": {
+      "search": "熊谷守一美術館"
+    },
+    "search": [
+      {
+        "id": "Q109597345",
+        "title": "Q109597345",
+        "pageid": 104724160,
+        "concepturi": "http://www.wikidata.org/entity/Q109597345",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q109597345",
+        "display": {
+          "label": {
+            "value": "Kumagai Morikazu Museum of Art",
+            "language": "en"
+          }
+        },
+        "label": "Kumagai Morikazu Museum of Art",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "熊谷守一美術館"
+        },
+        "aliases": [
+          "熊谷守一美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

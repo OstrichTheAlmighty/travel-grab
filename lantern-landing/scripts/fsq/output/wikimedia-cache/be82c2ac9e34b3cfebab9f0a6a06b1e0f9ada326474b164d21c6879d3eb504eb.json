@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:05.283Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 92993,
+          "ns": 0,
+          "title": "東京都道11号大田調布線",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようととう011こうおおたちようふせん",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Route_11_-02.jpg",
+            "wikibase_item": "Q11525689"
+          },
+          "terms": {
+            "description": [
+              "東京都の道路"
+            ]
+          }
+        },
+        {
+          "pageid": 345871,
+          "ns": 0,
+          "title": "蒲田",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かまた",
+            "kartographer_frames": "1",
+            "page_image_free": "Kamata_Station.jpg",
+            "wikibase_item": "Q532302"
+          },
+          "terms": {
+            "description": [
+              "東京都大田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1434076,
+          "ns": 0,
+          "title": "北糀谷",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きたこうしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Kitakoujiya_Koyasu-hachiman_Jinja.jpg",
+            "wikibase_item": "Q11403932"
+          },
+          "terms": {
+            "description": [
+              "東京都大田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1778099,
+          "ns": 0,
+          "title": "大田区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おおたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-International-Airport_Satellite.jpg",
+            "wikibase_item": "Q217234"
+          },
+          "coordinates": [
+            {
+              "lat": 35.56128,
+              "lon": 139.71603,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 4370011,
+          "ns": 0,
+          "title": "神姫バス姫路営業所",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しんきはすひめしえいきようしよ",
+            "page_image_free": "Map_of_Hyogo_Prefecture_Ja.svg",
+            "wikibase_item": "Q109361887"
+          },
+          "coordinates": [
+            {
+              "lat": 34.8355797,
+              "lon": 134.6873738,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

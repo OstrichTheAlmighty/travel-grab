@@ -1,0 +1,127 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:23.112Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 7440514,
+          "ns": 0,
+          "title": "Tokyo Photographic Art Museum",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Tokyo_Metropolitan_Museum_of_Photography_entrance_2011_January.jpg",
+            "wikibase-shortdesc": "Photographic art museum in Meguro, Tokyo",
+            "wikibase_item": "Q862884"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6417,
+              "lon": 139.7132,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "photography museum in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 10120741,
+          "ns": 0,
+          "title": "Tokyo Metropolitan Teien Art Museum",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Tokyo_Metropolitan_Teien_Art_Museum_02.jpg",
+            "wikibase-shortdesc": "Art museum in Tokyo, Japan",
+            "wikibase_item": "Q743773"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63688889,
+              "lon": 139.71908333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "museum"
+            ]
+          }
+        },
+        {
+          "pageid": 15025584,
+          "ns": 0,
+          "title": "List of museums in Tokyo",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Ad_Museum_Tokyo.JPG",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q3735824"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 16788840,
+          "ns": 0,
+          "title": "Tokyo Metropolitan Art Museum",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "wikibase-shortdesc": "Museum in Tokyo, Japan",
+            "wikibase_item": "Q864957"
+          },
+          "coordinates": [
+            {
+              "lat": 35.717186,
+              "lon": 139.772776,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "museum in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 30409460,
+          "ns": 0,
+          "title": "Mori Art Museum",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Mori_Art_Museum_-----.png",
+            "wikibase-shortdesc": "Contemporary art museum in Tokyo, Japan",
+            "wikibase_item": "Q4410434"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66050556,
+              "lon": 139.72906667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Contemporary art museum in Tokyo, Japan."
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

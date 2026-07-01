@@ -1,0 +1,82 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:32.409Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 9827,
+          "ns": 0,
+          "title": "鯛",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たい",
+            "page_image_free": "Pagrus_major_Red_seabream_ja01.jpg",
+            "wikibase_item": "Q2013906"
+          },
+          "terms": {
+            "description": [
+              "ニザダイ目タイ科の魚類の総称"
+            ]
+          }
+        },
+        {
+          "pageid": 271205,
+          "ns": 0,
+          "title": "じゃじゃ馬ならし (テレビドラマ)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しやしやうまならし",
+            "wikibase_item": "Q11269396"
+          }
+        },
+        {
+          "pageid": 1484305,
+          "ns": 0,
+          "title": "FNS27時間テレビ (2008年)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "FNS27しかんてれひ2008",
+            "wikibase_item": "Q11199570"
+          },
+          "terms": {
+            "description": [
+              "フジテレビ系列の番組"
+            ]
+          }
+        },
+        {
+          "pageid": 3644574,
+          "ns": 0,
+          "title": "藤山智史",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふしやま ともふみ",
+            "page_image_free": "Tomofumi_Fujiyama_Autograph.jpg",
+            "wikibase_item": "Q38277863"
+          },
+          "terms": {
+            "description": [
+              "日本のサッカー選手 (1994-)"
+            ]
+          }
+        },
+        {
+          "pageid": 3692073,
+          "ns": 0,
+          "title": "ユニバーサル広告社シリーズ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ゆにはあさるこうこくしやしりいす",
+            "wikibase_item": "Q48750155"
+          }
+        }
+      ]
+    }
+  }
+}

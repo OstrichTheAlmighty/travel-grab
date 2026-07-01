@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:44.996Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 29791,
+          "ns": 0,
+          "title": "米子市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "よなこし",
+            "kartographer_frames": "1",
+            "page_image_free": "Yonago_montage_2017.jpg",
+            "wikibase_item": "Q320964"
+          },
+          "coordinates": [
+            {
+              "lat": 35.42817,
+              "lon": 133.33089,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "鳥取県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 519532,
+          "ns": 0,
+          "title": "屋上庭園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おくしようていえん",
+            "page_image_free": "Hanging_Gardens_of_Babylon.jpg",
+            "wikibase_item": "Q1156696"
+          },
+          "terms": {
+            "description": [
+              "建築物の屋上などに造られた植栽を伴う庭園"
+            ]
+          }
+        },
+        {
+          "pageid": 578984,
+          "ns": 0,
+          "title": "日本の百貨店",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にほんのひやつかてん",
+            "page_image_free": "Takashimaya_Nihonbashi_Store_2010.jpg",
+            "wikibase_item": "Q763438"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1691666,
+          "ns": 0,
+          "title": "東京都の観光地",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようと",
+            "page_image_free": "東京都区部-観光地図-1.jpg",
+            "wikibase_item": "Q10860697"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 4099190,
+          "ns": 0,
+          "title": "西武の店舗一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せいふのてんほいちらん",
+            "kartographer_frames": "2",
+            "page_image_free": "Seibu_logo.svg",
+            "wikibase_item": "Q97311747"
+          },
+          "terms": {
+            "description": [
+              "ウィキペディアの一覧ページ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:05.940Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 63297,
+          "ns": 0,
+          "title": "狛江市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こまえし",
+            "page_image_free": "Tamagawa_Ikada_Race.jpg",
+            "wikibase_item": "Q86536"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63478,
+              "lon": 139.57869,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の市"
+            ]
+          }
+        },
+        {
+          "pageid": 260460,
+          "ns": 0,
+          "title": "遠藤綾",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "えんとう あや",
+            "wikibase_item": "Q1369247"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 369825,
+          "ns": 0,
+          "title": "ダイエー",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たいええ",
+            "page_image_free": "Daiei_logo.svg",
+            "wikibase_item": "Q3543891"
+          },
+          "terms": {
+            "description": [
+              "日本のスーパーマーケットを運営する企業"
+            ]
+          }
+        },
+        {
+          "pageid": 1741731,
+          "ns": 0,
+          "title": "銀座",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きんさ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ginza_area_at_dusk_from_Tokyo_Tower.jpg",
+            "wikibase_item": "Q746052"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 2279474,
+          "ns": 0,
+          "title": "大久保瑠美",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおくほ るみ",
+            "wikibase_item": "Q902038"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

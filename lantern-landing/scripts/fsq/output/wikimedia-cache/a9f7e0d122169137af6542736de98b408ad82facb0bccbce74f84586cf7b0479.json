@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:45:52.331Z",
+  "value": {
+    "searchinfo": {
+      "search": "ビッグ・オー"
+    },
+    "search": [
+      {
+        "id": "Q239474",
+        "title": "Q239474",
+        "pageid": 232816,
+        "concepturi": "http://www.wikidata.org/entity/Q239474",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q239474",
+        "display": {
+          "label": {
+            "value": "Big Audio Dynamite",
+            "language": "en"
+          },
+          "description": {
+            "value": "British musical group formed in 1984",
+            "language": "en"
+          }
+        },
+        "label": "Big Audio Dynamite",
+        "description": "British musical group formed in 1984",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ビッグ・オーディオ・ダイナマイト"
+        },
+        "aliases": [
+          "ビッグ・オーディオ・ダイナマイト"
+        ]
+      },
+      {
+        "id": "Q794709",
+        "title": "Q794709",
+        "pageid": 747706,
+        "concepturi": "http://www.wikidata.org/entity/Q794709",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q794709",
+        "display": {
+          "label": {
+            "value": "Big O",
+            "language": "en"
+          },
+          "description": {
+            "value": "Ferris wheel",
+            "language": "en"
+          }
+        },
+        "label": "Big O",
+        "description": "Ferris wheel",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ビッグ・オー (観覧車)"
+        },
+        "aliases": [
+          "ビッグ・オー (観覧車)"
+        ]
+      },
+      {
+        "id": "Q344385",
+        "title": "Q344385",
+        "pageid": 329751,
+        "concepturi": "http://www.wikidata.org/entity/Q344385",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q344385",
+        "display": {
+          "label": {
+            "value": "Big O",
+            "language": "en"
+          },
+          "description": {
+            "value": "Wikimedia disambiguation page",
+            "language": "en"
+          }
+        },
+        "label": "Big O",
+        "description": "Wikimedia disambiguation page",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ビッグ・オー"
+        },
+        "aliases": [
+          "ビッグ・オー"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

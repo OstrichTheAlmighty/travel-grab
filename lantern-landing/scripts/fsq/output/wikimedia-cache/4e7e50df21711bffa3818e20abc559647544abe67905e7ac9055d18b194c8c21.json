@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:31.764Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 301849,
+          "ns": 0,
+          "title": "都営バス江戸川営業所",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とえいはすえとかわえいきようしよ",
+            "page_image_free": "Tobus_edogawa-dept1.jpg",
+            "wikibase_item": "Q11643513"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66786111,
+              "lon": 139.86783333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "江戸川区にある東京都交通局のバス営業所"
+            ]
+          }
+        },
+        {
+          "pageid": 485616,
+          "ns": 0,
+          "title": "東京都道308号千住小松川葛西沖線",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようととう308こうせんしゆこまつかわかさいおきせん",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-r308-shinkoiwa.JPG",
+            "wikibase_item": "Q11525780"
+          },
+          "terms": {
+            "description": [
+              "東京都の道路"
+            ]
+          }
+        },
+        {
+          "pageid": 1104292,
+          "ns": 0,
+          "title": "小松川 (江戸川区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こまつかわ",
+            "kartographer_frames": "1",
+            "page_image_free": "Komatsugawa_1-chome_from_Arakawa-Nakagawa_levee.jpg",
+            "wikibase_item": "Q11461128"
+          },
+          "terms": {
+            "description": [
+              "東京都江戸川区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1105604,
+          "ns": 0,
+          "title": "松島 (江戸川区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "まつしま",
+            "kartographer_frames": "1",
+            "page_image_free": "GREEN_PALACE,_Edogawa.jpg",
+            "wikibase_item": "Q11530092"
+          },
+          "terms": {
+            "description": [
+              "東京都江戸川区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1114889,
+          "ns": 0,
+          "title": "東小松川",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひかしこまつかわ",
+            "kartographer_frames": "1",
+            "page_image_free": "Edogawa-boat-race-course1.jpg",
+            "wikibase_item": "Q11526654"
+          },
+          "terms": {
+            "description": [
+              "東京都江戸川区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

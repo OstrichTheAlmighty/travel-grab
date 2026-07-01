@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:10.889Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17337,
+          "ns": 0,
+          "title": "徳冨蘆花",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とくとみ ろか",
+            "page_image_free": "Tokutomi_Roka.jpg",
+            "wikibase_item": "Q1396764"
+          },
+          "terms": {
+            "description": [
+              "日本の小説家 (1868-1927)"
+            ]
+          }
+        },
+        {
+          "pageid": 57102,
+          "ns": 0,
+          "title": "芦花公園駅",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ろかこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Roka-kōen_station.JPG",
+            "wikibase_item": "Q2717793"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67061111,
+              "lon": 139.60888889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区南烏山にある京王電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 284250,
+          "ns": 0,
+          "title": "蘆花恒春園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ろかこうしゆんえん",
+            "page_image_free": "Rokakosyunen.jpg",
+            "wikibase_item": "Q11625161"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66222222,
+              "lon": 139.61138889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1173312,
+          "ns": 0,
+          "title": "粕谷",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かすや",
+            "kartographer_frames": "1",
+            "page_image_free": "都立蘆花恒春園_-_panoramio.jpg",
+            "wikibase_item": "Q11604497"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 4144132,
+          "ns": 0,
+          "title": "川本昭雄",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かわもと あきお",
+            "wikibase_item": "Q96713969"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:45.456Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 126928,
+          "ns": 0,
+          "title": "魔法のエンジェルスイートミント",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "まほうのえんしえるすいとみんと",
+            "wikibase_item": "Q909422"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビアニメ"
+            ]
+          }
+        },
+        {
+          "pageid": 1619498,
+          "ns": 0,
+          "title": "土山よしき",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "つちやま よしき",
+            "wikibase_item": "Q11423341"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画家"
+            ]
+          }
+        },
+        {
+          "pageid": 2220740,
+          "ns": 0,
+          "title": "帰ってきたウルトラマン マットアロー1号発進命令",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かえつてきたうるとらまんまつとあろおいちこうはつしんめいれい",
+            "wikibase_item": "Q11481220"
+          },
+          "terms": {
+            "description": [
+              "日本の自主制作映画"
+            ]
+          }
+        },
+        {
+          "pageid": 2722948,
+          "ns": 0,
+          "title": "大創産業",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たいそうさんきよう",
+            "page_image_free": "Daiso_Industries_headquarters_20101113.jpg",
+            "wikibase_item": "Q866991"
+          },
+          "terms": {
+            "description": [
+              "広島県東広島市にある100円ショップの運営会社"
+            ]
+          }
+        },
+        {
+          "pageid": 3956616,
+          "ns": 0,
+          "title": "ラネット",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "らねつと",
+            "wikibase_item": "Q65247465"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73255556,
+              "lon": 139.71525,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の携帯電話会社の代理店"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

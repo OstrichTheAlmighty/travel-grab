@@ -1,0 +1,130 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:43.628Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 90579,
+          "ns": 0,
+          "title": "世田谷美術館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せたかやひゆつかん",
+            "page_image_free": "Setagaya_Art_Museum.jpg",
+            "wikibase_item": "Q3892314"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63158889,
+              "lon": 139.62189722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区の砧公園にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 160196,
+          "ns": 0,
+          "title": "草間彌生",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "くさま やよい",
+            "page_image_free": "Yayoi_Kusama_wax_model_at_Louis_Vitton.jpg",
+            "wikibase_item": "Q231121"
+          },
+          "terms": {
+            "description": [
+              "日本の芸術家、小説家 (1929 - )"
+            ]
+          }
+        },
+        {
+          "pageid": 344075,
+          "ns": 0,
+          "title": "松本市美術館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "まつもとしひしゆつかん",
+            "kartographer_frames": "2",
+            "page_image_free": "220728_Matsumoto_City_Museum_of_Art_Japan03s3.jpg",
+            "wikibase_item": "Q11531052"
+          },
+          "coordinates": [
+            {
+              "lat": 36.23161111,
+              "lon": 137.97647222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長野県松本市にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 1519450,
+          "ns": 0,
+          "title": "熊本市現代美術館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "くまもとしけんたいひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Bipuresu_kumanichi-kaikan01s3200.jpg",
+            "wikibase_item": "Q11568021"
+          },
+          "coordinates": [
+            {
+              "lat": 32.80336111,
+              "lon": 130.71102778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "熊本市中央区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 4297422,
+          "ns": 0,
+          "title": "草間彌生美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "くさまやよいひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "YAYOI_KUSAMA_MUSEUM_草間彌生美術館2018sideCIMG3596.jpg",
+            "wikibase_item": "Q65941212"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7032,
+              "lon": 139.72648,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区にある美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

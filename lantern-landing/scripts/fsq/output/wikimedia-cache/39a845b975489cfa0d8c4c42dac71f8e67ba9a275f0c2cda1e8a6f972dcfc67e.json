@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:16.891Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 501104,
+          "ns": 0,
+          "title": "江戸川区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "えとかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "江戸川区花火大会・市川市民納涼花火大会2019.jpg",
+            "wikibase_item": "Q214056"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70664,
+              "lon": 139.86828,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 683112,
+          "ns": 0,
+          "title": "東京都道450号新荒川葛西堤防線",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようととう450",
+            "wikibase_item": "Q11525814"
+          },
+          "terms": {
+            "description": [
+              "東京都の道路"
+            ]
+          }
+        },
+        {
+          "pageid": 1014680,
+          "ns": 0,
+          "title": "親水",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しんすい",
+            "page_image_free": "Furukawa-Shinsui-Park.jpg",
+            "wikibase_item": "Q11630444"
+          },
+          "terms": {
+            "description": [
+              "川などを自然に近い状態に整備し、水に親しむこと"
+            ]
+          }
+        },
+        {
+          "pageid": 1026162,
+          "ns": 0,
+          "title": "総合レクリエーション公園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "そうこうれくりえしよんこうえん",
+            "page_image_free": "Sogo-recreational-park_flower-garden.jpg",
+            "wikibase_item": "Q11607557"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65066667,
+              "lon": 139.87219444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江戸川区にある一大公園群"
+            ]
+          }
+        },
+        {
+          "pageid": 1094334,
+          "ns": 0,
+          "title": "左近川",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さこんかわ",
+            "kartographer_frames": "2",
+            "page_image_free": "Sakon_River_01.JPG",
+            "wikibase_item": "Q11479725"
+          },
+          "terms": {
+            "description": [
+              "東京都江戸川区を流れる水路"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

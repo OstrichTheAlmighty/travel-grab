@@ -1,0 +1,53 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:39.943Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 60600,
+          "ns": 0,
+          "title": "久喜市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "くきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kuki_Chōchin_Matsuri_04.jpg",
+            "wikibase_item": "Q47535"
+          },
+          "coordinates": [
+            {
+              "lat": 36.06208,
+              "lon": 139.66681,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 1177245,
+          "ns": 0,
+          "title": "桜台 (練馬区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さくらたい",
+            "kartographer_frames": "1",
+            "page_image_free": "Senkawa_Dori_cherry_blossom_trees_2026-03-29.jpg",
+            "wikibase_item": "Q11537935"
+          },
+          "terms": {
+            "description": [
+              "東京都練馬区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

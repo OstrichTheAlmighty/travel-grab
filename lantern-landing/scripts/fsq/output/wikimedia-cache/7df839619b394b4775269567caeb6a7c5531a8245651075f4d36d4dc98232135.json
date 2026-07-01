@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:18.980Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 34084,
+          "ns": 0,
+          "title": "ナマズ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なます",
+            "page_image_free": "Silurus.jpg",
+            "wikibase_item": "Q481718"
+          },
+          "terms": {
+            "description": [
+              "ナマズ科に属する硬骨魚類の1種"
+            ]
+          }
+        },
+        {
+          "pageid": 209696,
+          "ns": 0,
+          "title": "東北町",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうほくまち",
+            "kartographer_frames": "1",
+            "page_image_free": "つぼのいしぶみ.JPG",
+            "wikibase_item": "Q1194394"
+          },
+          "coordinates": [
+            {
+              "lat": 40.72789,
+              "lon": 141.25786,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "青森県上北郡の町"
+            ]
+          }
+        },
+        {
+          "pageid": 643988,
+          "ns": 0,
+          "title": "阿多田島",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あたたしま",
+            "kartographer_frames": "1",
+            "page_image_free": "ATATAJIMA_Island_2023.jpg",
+            "wikibase_item": "Q11657359"
+          },
+          "coordinates": [
+            {
+              "lat": 34.19216667,
+              "lon": 132.30769444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "広島県、安芸群島にある島"
+            ]
+          }
+        },
+        {
+          "pageid": 711517,
+          "ns": 0,
+          "title": "吹屋",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふきや",
+            "page_image_free": "Fukiya01s3200.jpg",
+            "wikibase_item": "Q11416500"
+          },
+          "terms": {
+            "description": [
+              "日本の岡山県高梁市成羽町にある地区"
+            ]
+          }
+        },
+        {
+          "pageid": 1916310,
+          "ns": 0,
+          "title": "岩澤重夫",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いわさわ しけお",
+            "page_image_free": "岩澤重夫.jpg",
+            "wikibase_item": "Q11475386"
+          },
+          "terms": {
+            "description": [
+              "1927-2009, 日本画家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

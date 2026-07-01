@@ -1,0 +1,209 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:34.488Z",
+  "value": {
+    "searchinfo": {
+      "search": "原宿"
+    },
+    "search": [
+      {
+        "id": "Q746573",
+        "title": "Q746573",
+        "pageid": 702414,
+        "concepturi": "http://www.wikidata.org/entity/Q746573",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q746573",
+        "display": {
+          "label": {
+            "value": "Harajuku",
+            "language": "en"
+          },
+          "description": {
+            "value": "District in Shibuya, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Harajuku",
+        "description": "District in Shibuya, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "原宿"
+        },
+        "aliases": [
+          "原宿"
+        ]
+      },
+      {
+        "id": "Q3032821",
+        "title": "Q3032821",
+        "pageid": 2899363,
+        "concepturi": "http://www.wikidata.org/entity/Q3032821",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3032821",
+        "display": {
+          "label": {
+            "value": "Hara-juku",
+            "language": "en"
+          },
+          "description": {
+            "value": "one of the stations (shukuba) of the Tōkaidō",
+            "language": "en"
+          }
+        },
+        "label": "Hara-juku",
+        "description": "one of the stations (shukuba) of the Tōkaidō",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "原宿"
+        },
+        "aliases": [
+          "原宿"
+        ]
+      },
+      {
+        "id": "Q11409562",
+        "title": "Q11409562",
+        "pageid": 12548245,
+        "concepturi": "http://www.wikidata.org/entity/Q11409562",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11409562",
+        "display": {
+          "label": {
+            "value": "Harajuku",
+            "language": "en"
+          },
+          "description": {
+            "value": "town located in Totsuka-ku, Yokohama City, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Harajuku",
+        "description": "town located in Totsuka-ku, Yokohama City, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "原宿"
+        },
+        "aliases": [
+          "原宿"
+        ]
+      },
+      {
+        "id": "Q115529068",
+        "title": "Q115529068",
+        "pageid": 110098809,
+        "concepturi": "http://www.wikidata.org/entity/Q115529068",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q115529068",
+        "display": {
+          "label": {
+            "value": "Harajuku",
+            "language": "en"
+          },
+          "description": {
+            "value": "Japanese writer and editor",
+            "language": "en"
+          }
+        },
+        "label": "Harajuku",
+        "description": "Japanese writer and editor",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "原宿"
+        },
+        "aliases": [
+          "原宿"
+        ]
+      },
+      {
+        "id": "Q18457569",
+        "title": "Q18457569",
+        "pageid": 19991658,
+        "concepturi": "http://www.wikidata.org/entity/Q18457569",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q18457569",
+        "display": {
+          "label": {
+            "value": "Harajuku",
+            "language": "en"
+          },
+          "description": {
+            "value": "town located in Midori-ku, Sagamihara, Kanagawa, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Harajuku",
+        "description": "town located in Midori-ku, Sagamihara, Kanagawa, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "原宿"
+        },
+        "aliases": [
+          "原宿"
+        ]
+      },
+      {
+        "id": "Q800894",
+        "title": "Q800894",
+        "pageid": 753814,
+        "concepturi": "http://www.wikidata.org/entity/Q800894",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q800894",
+        "display": {
+          "label": {
+            "value": "Harajuku Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "railway station in Shibuya, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Harajuku Station",
+        "description": "railway station in Shibuya, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "原宿駅"
+        },
+        "aliases": [
+          "原宿駅"
+        ]
+      },
+      {
+        "id": "Q11589265",
+        "title": "Q11589265",
+        "pageid": 12729240,
+        "concepturi": "http://www.wikidata.org/entity/Q11589265",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11589265",
+        "display": {
+          "label": {
+            "value": "Kanagawa Prefectural Road Route 23",
+            "language": "en"
+          },
+          "description": {
+            "value": "road in Kanagawa Prefecture, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Kanagawa Prefectural Road Route 23",
+        "description": "road in Kanagawa Prefecture, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "原宿六ツ浦線"
+        },
+        "aliases": [
+          "原宿六ツ浦線"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

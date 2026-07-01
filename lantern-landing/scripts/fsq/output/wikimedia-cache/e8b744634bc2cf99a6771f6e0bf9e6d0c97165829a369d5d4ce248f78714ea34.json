@@ -1,0 +1,77 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:18:02.511Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2330648,
+          "ns": 0,
+          "title": "本幸拓真",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "もとゆき　たくま",
+            "wikibase_item": "Q11424811"
+          },
+          "terms": {
+            "description": [
+              "日本の男性アナウンサー"
+            ]
+          }
+        },
+        {
+          "pageid": 2556795,
+          "ns": 0,
+          "title": "東京喰種トーキョーグール",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とおきよおくうる",
+            "page_image_free": "Tokyo_Ghoul_Anime_Logo_monochro.jpg",
+            "wikibase_item": "Q11102941"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画、メディアミックス作品"
+            ]
+          }
+        },
+        {
+          "pageid": 3036685,
+          "ns": 0,
+          "title": "お台場新大陸",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おたいはしんたいりく",
+            "page_image_free": "Odaiba-Shin-Tairiku_1408.jpg",
+            "wikibase_item": "Q21018900"
+          }
+        },
+        {
+          "pageid": 3401882,
+          "ns": 0,
+          "title": "B-PROJECT",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひいふろしえくと",
+            "wikibase_item": "Q24668320"
+          }
+        },
+        {
+          "pageid": 3989624,
+          "ns": 0,
+          "title": "DAN DAN Dance!!",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たんたんたんす",
+            "wikibase_item": "Q85864936"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:48.162Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 28918,
+          "ns": 0,
+          "title": "立教大学",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "りつきようたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Rikkyo_University_1.jpg",
+            "wikibase_item": "Q1143235"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7305,
+              "lon": 139.70394444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 63865,
+          "ns": 0,
+          "title": "築地市場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "つきしいちは",
+            "page_image_free": "2018_Tsukiji_fish_market.jpg",
+            "wikibase_item": "Q859471"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66138889,
+              "lon": 139.76972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて東京都中央区築地に存在した公設卸売市場"
+            ]
+          }
+        },
+        {
+          "pageid": 103335,
+          "ns": 0,
+          "title": "築地",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "つきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Tsukiji_2015.jpg",
+            "wikibase_item": "Q1201337"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 526034,
+          "ns": 0,
+          "title": "ヘンリー・フォールズ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふおるす へんり",
+            "page_image_free": "Henry_Faulds.jpg",
+            "wikibase_item": "Q1440128"
+          }
+        },
+        {
+          "pageid": 2025134,
+          "ns": 0,
+          "title": "神戸外国人居留地",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こうへかいこくしんきよりゆうち",
+            "page_image_free": "Kobe_Bund_1979.94.6P01B.jpg",
+            "wikibase-badge-Q17437796": "",
+            "wikibase_item": "Q10131434"
+          },
+          "coordinates": [
+            {
+              "lat": 34.68808333,
+              "lon": 135.19258333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて神戸市にあった外国人居留地"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

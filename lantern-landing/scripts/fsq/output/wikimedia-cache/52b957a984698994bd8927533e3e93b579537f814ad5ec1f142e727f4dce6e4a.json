@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:55.145Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 21295,
+          "ns": 0,
+          "title": "公園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こうえん",
+            "page_image_free": "Fountain_Yoyogipark.JPG",
+            "wikibase_item": "Q22698"
+          },
+          "terms": {
+            "description": [
+              "公衆の憩いや自然保存の目的に使われる公開された場所"
+            ]
+          }
+        },
+        {
+          "pageid": 260278,
+          "ns": 0,
+          "title": "平和の森公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "へいわのもりこうえん",
+            "disambiguation": "",
+            "wikibase_item": "Q11286175"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの曖昧さ回避ページ"
+            ]
+          }
+        },
+        {
+          "pageid": 602244,
+          "ns": 0,
+          "title": "平和島",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "へいわしま",
+            "kartographer_frames": "1",
+            "page_image_free": "Heiwa_island_1989_air.jpg",
+            "wikibase_item": "Q11482235"
+          },
+          "terms": {
+            "description": [
+              "東京都大田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 902608,
+          "ns": 0,
+          "title": "平和の森公園 (大田区)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "へいわのもりこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Heiwa_no_mori_park_ota.JPG",
+            "wikibase_item": "Q11286180"
+          },
+          "coordinates": [
+            {
+              "lat": 35.57861111,
+              "lon": 139.74138889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都大田区の公園など"
+            ]
+          }
+        },
+        {
+          "pageid": 1778099,
+          "ns": 0,
+          "title": "大田区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-International-Airport_Satellite.jpg",
+            "wikibase_item": "Q217234"
+          },
+          "coordinates": [
+            {
+              "lat": 35.56128,
+              "lon": 139.71603,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

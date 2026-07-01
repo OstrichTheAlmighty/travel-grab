@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:38.333Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 47526,
+          "ns": 0,
+          "title": "宮崎市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みやさきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Miyazaki_Montage.jpg",
+            "wikibase_item": "Q204308"
+          },
+          "coordinates": [
+            {
+              "lat": 31.90772,
+              "lon": 131.42019,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "宮崎県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 159476,
+          "ns": 0,
+          "title": "阿久比町",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あくいちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Tōunin2.JPG",
+            "wikibase_item": "Q1203868"
+          },
+          "coordinates": [
+            {
+              "lat": 34.93286,
+              "lon": 136.91533,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県知多郡の町"
+            ]
+          }
+        },
+        {
+          "pageid": 775993,
+          "ns": 0,
+          "title": "高砂 (葛飾区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たかさこ",
+            "kartographer_frames": "1",
+            "page_image_free": "Keisei-takasago-sta-north.jpg",
+            "wikibase_item": "Q11672596"
+          },
+          "terms": {
+            "description": [
+              "東京都葛飾区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1109247,
+          "ns": 0,
+          "title": "東四つ木",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひかしよつき",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q11526377"
+          },
+          "terms": {
+            "description": [
+              "東京都葛飾区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1110283,
+          "ns": 0,
+          "title": "東堀切",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひかしほりきり",
+            "kartographer_frames": "1",
+            "page_image_free": "普賢寺.jpg",
+            "wikibase_item": "Q11526424"
+          },
+          "terms": {
+            "description": [
+              "東京都葛飾区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

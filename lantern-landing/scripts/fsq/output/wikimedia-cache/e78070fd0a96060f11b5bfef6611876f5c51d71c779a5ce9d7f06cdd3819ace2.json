@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:31.837Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 29369,
+          "ns": 0,
+          "title": "甲府市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こうふし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kofu_montage.jpg",
+            "wikibase_item": "Q201932"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66214,
+              "lon": 138.56822,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "山梨県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 53988,
+          "ns": 0,
+          "title": "高知市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こうちし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kochi_montage.jpg",
+            "wikibase_item": "Q200251"
+          },
+          "coordinates": [
+            {
+              "lat": 33.55883,
+              "lon": 133.53122,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "高知県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 565603,
+          "ns": 0,
+          "title": "吉祥寺",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きちしようし",
+            "page_image_free": "Kichijoji_N-gate_Square.JPG",
+            "wikibase_item": "Q287771"
+          },
+          "terms": {
+            "description": [
+              "東京都武蔵野市の広域地名"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1810516,
+          "ns": 0,
+          "title": "熊本市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "くまもとし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kumamoto_Montage.jpg",
+            "wikibase_item": "Q199889"
+          },
+          "coordinates": [
+            {
+              "lat": 32.803,
+              "lon": 130.70786,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "熊本県庁所在地"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

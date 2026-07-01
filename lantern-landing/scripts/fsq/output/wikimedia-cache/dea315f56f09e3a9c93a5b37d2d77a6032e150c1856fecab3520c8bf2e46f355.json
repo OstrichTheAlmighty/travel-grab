@@ -1,0 +1,86 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:01.865Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 109830,
+          "ns": 0,
+          "title": "もやし",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "もやし",
+            "page_image_free": "Moyashi-Mung-bean-sprouts.jpg",
+            "wikibase_item": "Q7635866"
+          }
+        },
+        {
+          "pageid": 139716,
+          "ns": 0,
+          "title": "白組",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しろくみ",
+            "page_image_free": "Shirogumi_Logo.png",
+            "wikibase_item": "Q7684281"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都世田谷区にある総合映像制作プロダクション"
+            ]
+          }
+        },
+        {
+          "pageid": 367264,
+          "ns": 0,
+          "title": "もやしもん",
+          "index": 1,
+          "pageprops": {
+            "wikibase_item": "Q2555837"
+          },
+          "terms": {
+            "description": [
+              "石川雅之による日本の漫画作品"
+            ]
+          }
+        },
+        {
+          "pageid": 1654066,
+          "ns": 0,
+          "title": "もやしもんの登場キャラクター",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "もやしもんのとうしようしんふつ",
+            "wikibase_item": "Q11280171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3245164,
+          "ns": 0,
+          "title": "博史池畠",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひろし いけはた",
+            "wikibase_item": "Q21699046"
+          },
+          "terms": {
+            "description": [
+              "日本のアニメーション監督、演出家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

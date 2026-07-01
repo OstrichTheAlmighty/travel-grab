@@ -1,0 +1,98 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:43.468Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 7699,
+          "ns": 0,
+          "title": "小田原駅",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おたわら",
+            "kartographer_frames": "1",
+            "page_image_free": "161223_Odawara_Station_Odawara_Japan01s3.jpg",
+            "wikibase_item": "Q801290"
+          },
+          "coordinates": [
+            {
+              "lat": 35.25583333,
+              "lon": 139.15555556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県小田原市にある駅"
+            ]
+          }
+        },
+        {
+          "pageid": 30987,
+          "ns": 0,
+          "title": "もんじゃ焼き",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "もんしややき",
+            "page_image_free": "Monjayaki_001.JPG",
+            "wikibase_item": "Q167692"
+          },
+          "terms": {
+            "description": [
+              "鉄板焼きの一種、日本の東京発祥のご当地フード"
+            ]
+          }
+        },
+        {
+          "pageid": 369647,
+          "ns": 0,
+          "title": "月島",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "つきしま",
+            "kartographer_frames": "1",
+            "page_image_free": "20080312-JPN096-Tsukishima.jpg",
+            "wikibase_item": "Q1048979"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3887052,
+          "ns": 0,
+          "title": "横浜の都市デザイン",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "よこはまのとしてさいん",
+            "wikibase_item": "Q60989100"
+          }
+        }
+      ]
+    }
+  }
+}

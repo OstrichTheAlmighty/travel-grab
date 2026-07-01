@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:28.466Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 104368,
+          "ns": 0,
+          "title": "東京臨海副都心",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようりんかいふくとしん",
+            "page_image_free": "Tokyo_waterfront_subcenter_from_aerial_shots.jpg",
+            "wikibase_item": "Q5354225"
+          },
+          "terms": {
+            "description": [
+              "東京都が策定した7番目の副都心で複数の特別区に跨がる442haのエリア"
+            ]
+          }
+        },
+        {
+          "pageid": 115300,
+          "ns": 0,
+          "title": "ヴィーナスフォート",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ういいなすふおおと",
+            "page_image_free": "Venus_Fort_-01.jpg",
+            "wikibase_item": "Q6602400"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62530556,
+              "lon": 139.78061111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区青海のパレットタウン内にあったショッピングモール (1999 - 2022)"
+            ]
+          }
+        },
+        {
+          "pageid": 642816,
+          "ns": 0,
+          "title": "アルバルク東京",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あるはるく",
+            "page_image_free": "TOKYO_FM_『JA全農COUNTDOWN_JAPAN』公開生放送_HELLO!_ARENA_DAY_TOYOTA_ARENA_TOKYO_2025年10月4日の東京_202510041238_DSCN4991.jpg",
+            "wikibase_item": "Q7830743"
+          },
+          "terms": {
+            "description": [
+              "日本のプロバスケットボールチーム"
+            ]
+          }
+        },
+        {
+          "pageid": 771443,
+          "ns": 0,
+          "title": "パレットタウン",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はれつとたうん",
+            "kartographer_frames": "1",
+            "page_image_free": "Palette_Town_Ⅱ.JPG",
+            "wikibase_item": "Q11280640"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62561111,
+              "lon": 139.78108333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区青海にあった複合商業施設"
+            ]
+          }
+        },
+        {
+          "pageid": 891643,
+          "ns": 0,
+          "title": "MEGA WEB",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "めかうえふ",
+            "kartographer_frames": "1",
+            "page_image_free": "MEGAWEB_02.jpg",
+            "wikibase_item": "Q10854652"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62680556,
+              "lon": 139.78252778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区にあるトヨタ自動車のショールーム"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

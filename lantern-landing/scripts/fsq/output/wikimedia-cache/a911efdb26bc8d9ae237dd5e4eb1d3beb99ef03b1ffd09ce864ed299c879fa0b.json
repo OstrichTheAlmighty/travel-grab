@@ -1,0 +1,116 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:45.738Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 68252,
+          "ns": 0,
+          "title": "高山彦九郎",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たかやま ひこくろう",
+            "page_image_free": "Takayama-Hikokurou.jpg",
+            "wikibase_item": "Q7677466"
+          },
+          "terms": {
+            "description": [
+              "1747-1793, 江戸時代後期の尊皇思想家"
+            ]
+          }
+        },
+        {
+          "pageid": 179612,
+          "ns": 0,
+          "title": "竹崎季長",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たけさき すえなか",
+            "page_image_free": "Takezaki_Suenaga.jpg",
+            "wikibase_item": "Q1064936"
+          },
+          "terms": {
+            "description": [
+              "日本の鎌倉時代の武士"
+            ]
+          }
+        },
+        {
+          "pageid": 1180422,
+          "ns": 0,
+          "title": "西公園 (福岡市)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にしこうえん",
+            "kartographer_frames": "2",
+            "page_image_free": "Nishikōen_Chūō-ku_Fukuoka_City_20220920.jpg",
+            "wikibase_item": "Q11627261"
+          },
+          "coordinates": [
+            {
+              "lat": 33.59808333,
+              "lon": 130.37541667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福岡市の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1593396,
+          "ns": 0,
+          "title": "同志社大学今出川キャンパス",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうししやたいかくいまてかわきやんはす",
+            "page_image_free": "Imadegawa_Campus,_Doshisha_University.jpg",
+            "wikibase_item": "Q11414632"
+          },
+          "coordinates": [
+            {
+              "lat": 35.03008333,
+              "lon": 135.76077778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 2795198,
+          "ns": 0,
+          "title": "ペリー上陸記念碑",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "へりいしようりくきねんひ",
+            "page_image_free": "Perry-Zyourikukinenhi1.JPG",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q17216571"
+          },
+          "coordinates": [
+            {
+              "lat": 35.224175,
+              "lon": 139.71203056,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県横須賀市久里浜にある記念碑"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

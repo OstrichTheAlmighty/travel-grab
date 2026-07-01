@@ -1,0 +1,21 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:02.927Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 2634564,
+          "ns": 0,
+          "title": "ウルヴァリン:SAMURAI",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "うるうありん さむらい",
+            "wikibase_item": "Q197491"
+          }
+        }
+      ]
+    }
+  }
+}

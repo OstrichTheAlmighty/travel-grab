@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:32.992Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 36875,
+          "ns": 0,
+          "title": "調布市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちようふし",
+            "kartographer_frames": "1",
+            "page_image_free": "Jindaiji-3.jpg",
+            "wikibase_item": "Q210667"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65058,
+              "lon": 139.54067,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の市"
+            ]
+          }
+        },
+        {
+          "pageid": 57107,
+          "ns": 0,
+          "title": "仙川駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せんかわ",
+            "kartographer_frames": "1",
+            "page_image_free": "Sengawa-Sta.JPG",
+            "wikibase_item": "Q906121"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66230556,
+              "lon": 139.58491667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都調布市仙川町にある京王電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 59201,
+          "ns": 0,
+          "title": "祖師ヶ谷大蔵駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "そしかやおおくらえき",
+            "kartographer_frames": "1",
+            "page_image_free": "Odakyu_Soshigayaookura_sta_001.jpg",
+            "wikibase_item": "Q4429457"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64316667,
+              "lon": 139.60927778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区祖師谷にある小田急電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1168558,
+          "ns": 0,
+          "title": "祖師谷",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "そしかや",
+            "kartographer_frames": "1",
+            "page_image_free": "つりがね池公園_-_panoramio_(5).jpg",
+            "wikibase_item": "Q11588518"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

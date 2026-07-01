@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:30.536Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 39178,
+          "ns": 0,
+          "title": "青森駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あおもり",
+            "kartographer_frames": "1",
+            "page_image_free": "Aomori_Station_Higashiguchi.jpg",
+            "wikibase_item": "Q59516"
+          },
+          "coordinates": [
+            {
+              "lat": 40.82885278,
+              "lon": 140.73469167,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "青森県青森市にある東日本旅客鉄道・青い森鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 61274,
+          "ns": 0,
+          "title": "野辺地駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "のへし",
+            "kartographer_frames": "1",
+            "page_image_free": "Noheji_Station_building,_Aomori_Pref.jpg",
+            "wikibase_item": "Q6393634"
+          },
+          "coordinates": [
+            {
+              "lat": 40.85541944,
+              "lon": 141.11976111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "青森県上北郡野辺地町にある青い森鉄道・東日本旅客鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 91223,
+          "ns": 0,
+          "title": "ジェイアールバス東北",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しえいああるはすとうほく",
+            "page_image_free": "JR-bus-Tohoku-H644-12404.jpg",
+            "wikibase_item": "Q8190558"
+          }
+        },
+        {
+          "pageid": 3271147,
+          "ns": 0,
+          "title": "過去に存在したダイエーのフランチャイズ店舗",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かこにそんさいしたたいえいのふらんちやいすてんほ",
+            "wikibase_item": "Q22123334"
+          }
+        },
+        {
+          "pageid": 3729562,
+          "ns": 0,
+          "title": "青森放送",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あおもりほうそう",
+            "page_image_free": "RAB-Aomori.JPG",
+            "wikibase_item": "Q843656"
+          },
+          "coordinates": [
+            {
+              "lat": 40.81844444,
+              "lon": 140.77119444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "青森県の日本テレビ系列局、およびJRN・NRN系列ラジオ局"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

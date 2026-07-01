@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:51.397Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 16860,
+          "ns": 0,
+          "title": "Japanese sword",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Japanese Sword",
+            "page_image_free": "WLA_haa_Sword_by_Kenji_Nobuhide_Kurihara_MOD.jpg",
+            "wikibase-shortdesc": "Type of traditionally made sword from Japan",
+            "wikibase_item": "Q1768697"
+          },
+          "terms": {
+            "description": [
+              "traditionally made sword from Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 28288,
+          "ns": 0,
+          "title": "Samurai",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Samurai_on_horseback0.jpg",
+            "wikibase-shortdesc": "Japanese warrior class",
+            "wikibase_item": "Q38142"
+          },
+          "terms": {
+            "description": [
+              "military nobility of pre-industrial Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 21318086,
+          "ns": 0,
+          "title": "Japanese armour",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Japanese Armour",
+            "page_image_free": "Samurai-armor-costume-2019-1-4.webm",
+            "wikibase-shortdesc": "Armor originating from Japan",
+            "wikibase_item": "Q3671179"
+          },
+          "terms": {
+            "description": [
+              "armor originating from Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 57447703,
+          "ns": 0,
+          "title": "The Ann and Gabriel Barbier-Mueller Museum",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Armor_and_hand_warmer_display_-_The_Ann_and_Gabriel_Barbier-Mueller_Museum_-_DSC05626.jpg",
+            "wikibase-shortdesc": "Samurai museum in Dallas, Texas",
+            "wikibase_item": "Q53709980"
+          },
+          "coordinates": [
+            {
+              "lat": 32.79194444,
+              "lon": -96.80666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Samurai museum in Dallas, Texas"
+            ]
+          }
+        },
+        {
+          "pageid": 72215654,
+          "ns": 0,
+          "title": "Samurai Museum Berlin",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Inside_Samurai_Museum_Berlin.jpg",
+            "wikibase-shortdesc": "Samurai museum in Berlin Mitte, Germany",
+            "wikibase_item": "Q68106357"
+          },
+          "coordinates": [
+            {
+              "lat": 52.5269,
+              "lon": 13.3953,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "samurai museum in Berlin, Germany"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

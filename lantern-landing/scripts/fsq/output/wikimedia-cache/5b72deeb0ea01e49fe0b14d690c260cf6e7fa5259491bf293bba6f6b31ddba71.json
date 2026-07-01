@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:22.446Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 26204,
+          "ns": 0,
+          "title": "Bunkamura",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふんかむら",
+            "kartographer_frames": "1",
+            "page_image_free": "Bunkamura.JPG",
+            "wikibase_item": "Q583055"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66083333,
+              "lon": 139.695,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある複合文化施設"
+            ]
+          }
+        },
+        {
+          "pageid": 226548,
+          "ns": 0,
+          "title": "金沢21世紀美術館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かなさわにしゆういちせいきひしゆつかん",
+            "page_image_free": "21st_Century_Museum_of_Contemporary_Art,_Kanazawa011.jpg",
+            "wikibase_item": "Q3242206"
+          },
+          "coordinates": [
+            {
+              "lat": 36.56083333,
+              "lon": 136.65819444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "石川県金沢市にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 534468,
+          "ns": 0,
+          "title": "大名庭園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たいみようていえん",
+            "page_image_free": "Genkyuen10s3200.jpg",
+            "wikibase_item": "Q11433351"
+          },
+          "terms": {
+            "description": [
+              "江戸時代に大名が江戸や地元で築造した庭園"
+            ]
+          }
+        },
+        {
+          "pageid": 777869,
+          "ns": 0,
+          "title": "松濤",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しようとう",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Governor's_Guest_House.jpg",
+            "wikibase_item": "Q3482725"
+          },
+          "terms": {
+            "description": [
+              "東京都渋谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1233667,
+          "ns": 0,
+          "title": "渋谷区立松濤美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しふやくりつしようとうひしゆつかん",
+            "page_image_free": "渋谷区立松濤美術館.jpg",
+            "wikibase_item": "Q11561694"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65866667,
+              "lon": 139.69177778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

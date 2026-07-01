@@ -1,0 +1,62 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:21.425Z",
+  "value": {
+    "searchinfo": {
+      "search": "blue-ing"
+    },
+    "search": [
+      {
+        "id": "Q137685727",
+        "title": "Q137685727",
+        "pageid": 131350520,
+        "concepturi": "http://www.wikidata.org/entity/Q137685727",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q137685727",
+        "display": {
+          "label": {
+            "value": "blue-ing!",
+            "language": "en"
+          },
+          "description": {
+            "value": "facility in Bunkyō, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "blue-ing!",
+        "description": "facility in Bunkyō, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "blue-ing!"
+        }
+      },
+      {
+        "id": "Q62105689",
+        "title": "Q62105689",
+        "pageid": 61928321,
+        "concepturi": "http://www.wikidata.org/entity/Q62105689",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q62105689",
+        "display": {
+          "label": {
+            "value": "Blue InGaN/GaN-based Quantum Electroabsorption Modulators",
+            "language": "en"
+          },
+          "description": {
+            "value": "scientific article published in December 2006",
+            "language": "en"
+          }
+        },
+        "label": "Blue InGaN/GaN-based Quantum Electroabsorption Modulators",
+        "description": "scientific article published in December 2006",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Blue InGaN/GaN-based Quantum Electroabsorption Modulators"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

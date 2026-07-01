@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:27.433Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 104641,
+          "ns": 0,
+          "title": "Heinrich Heine",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Heine, Heinrich",
+            "page_image_free": "Heinrich_Heine-Oppenheim.jpg",
+            "wikibase-shortdesc": "German writer and literary critic (1797–1856)",
+            "wikibase_item": "Q44403"
+          },
+          "terms": {
+            "description": [
+              "German poet, writer and literary critic (1797–1856)"
+            ]
+          }
+        },
+        {
+          "pageid": 571614,
+          "ns": 0,
+          "title": "Wacken Open Air",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Nightwish_-_Wacken_Open_Air_2018-3919.jpg",
+            "wikibase-shortdesc": "German heavy metal music festival",
+            "wikibase_item": "Q157845"
+          },
+          "coordinates": [
+            {
+              "lat": 54.02833333,
+              "lon": 9.35611111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "open-air metal music festival in Germany"
+            ]
+          }
+        },
+        {
+          "pageid": 1342270,
+          "ns": 0,
+          "title": "1940 United States House of Representatives elections",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "1940_United_States_House_elections.svg",
+            "wikibase-shortdesc": "House elections for the 77th U.S. Congress",
+            "wikibase_item": "Q5511442"
+          },
+          "terms": {
+            "description": [
+              "House elections for the 77th U.S. Congress"
+            ]
+          }
+        },
+        {
+          "pageid": 54338242,
+          "ns": 0,
+          "title": "1950 in Michigan",
+          "index": 5,
+          "pageprops": {
+            "toc": "",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q30682714"
+          },
+          "terms": {
+            "description": [
+              "overview of Michigan-related events during the year of 1950"
+            ]
+          }
+        },
+        {
+          "pageid": 81357167,
+          "ns": 0,
+          "title": "Japanese conjugation (ren'yōkei base)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Japanese conjugation (ren'yokei base)",
+            "displaytitle": "Japanese conjugation (<i>ren'yōkei</i> base)",
+            "page_image_free": "AMB_Japanese_Verbs.pdf",
+            "toc": "",
+            "wikibase-shortdesc": "Element of Japanese language",
+            "wikibase_item": "Q136697315"
+          },
+          "terms": {
+            "description": [
+              "element of Japanese language"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

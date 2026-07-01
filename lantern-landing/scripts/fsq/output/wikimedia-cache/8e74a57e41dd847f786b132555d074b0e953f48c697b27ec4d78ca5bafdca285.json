@@ -1,0 +1,116 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:54.669Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 40090,
+          "ns": 0,
+          "title": "横浜スタジアム",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "よこはますたしあむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Yokohama_stadium_2020_wing.jpg",
+            "wikibase_item": "Q1148681"
+          },
+          "coordinates": [
+            {
+              "lat": 35.443428,
+              "lon": 139.6401,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県横浜市中区にある野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 110570,
+          "ns": 0,
+          "title": "大阪城公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおさかしようこうえん",
+            "page_image_free": "Osaka_Castle_Park_20071230.jpg",
+            "wikibase_item": "Q150118"
+          },
+          "coordinates": [
+            {
+              "lat": 34.68197222,
+              "lon": 135.53105556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪市の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 359156,
+          "ns": 0,
+          "title": "長崎県警察",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "なかさきけんけいさつ",
+            "page_image_free": "Asahikage.svg",
+            "wikibase_item": "Q11652772"
+          },
+          "terms": {
+            "description": [
+              "長崎県が設置した警察組織"
+            ]
+          }
+        },
+        {
+          "pageid": 407953,
+          "ns": 0,
+          "title": "天王寺公園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "てんのうしこうえん",
+            "kartographer_frames": "2",
+            "page_image_free": "Keitakuen_Garden_and_Abeno_Harukas.jpg",
+            "wikibase_item": "Q5364342"
+          },
+          "coordinates": [
+            {
+              "lat": 34.64985,
+              "lon": 135.51111194,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪府大阪市にある公園"
+            ]
+          }
+        },
+        {
+          "pageid": 5047402,
+          "ns": 0,
+          "title": "鈴木康之 (コピーライター)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すすき やすゆき",
+            "page_image_free": "Yasuyuki.s.jpg",
+            "wikibase_item": "Q134507887"
+          }
+        }
+      ]
+    }
+  }
+}

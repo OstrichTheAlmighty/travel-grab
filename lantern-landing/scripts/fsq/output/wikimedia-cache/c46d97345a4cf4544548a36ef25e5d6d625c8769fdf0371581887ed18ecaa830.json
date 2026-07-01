@@ -1,0 +1,87 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:09.161Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 655,
+          "ns": 0,
+          "title": "水木しげる",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みすき しける",
+            "page_image_free": "Shigeru_Mura_cropped_1_Shigeru_Mura_201011.jpg",
+            "wikibase_item": "Q669049"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画家 (1922-2015)"
+            ]
+          }
+        },
+        {
+          "pageid": 157023,
+          "ns": 0,
+          "title": "少年探偵団 (1975年のテレビドラマ)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しようねんたんていたん",
+            "wikibase_item": "Q11464682"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ"
+            ]
+          }
+        },
+        {
+          "pageid": 335527,
+          "ns": 0,
+          "title": "恐怖新聞",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きようふしんふん",
+            "wikibase_item": "Q11492179"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画、メディアミックス作品、それらに登場する架空の新聞"
+            ]
+          }
+        },
+        {
+          "pageid": 1943258,
+          "ns": 0,
+          "title": "朝日新聞",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あさひしんふん",
+            "page_image_free": "Asahi-Shimbun-First-Issue-Front-Page-January_25-1879.png",
+            "wikibase_item": "Q720503"
+          },
+          "terms": {
+            "description": [
+              "日本の新聞"
+            ]
+          }
+        },
+        {
+          "pageid": 2404213,
+          "ns": 0,
+          "title": "テレビくん",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "てれひくん",
+            "wikibase_item": "Q11319508"
+          }
+        }
+      ]
+    }
+  }
+}

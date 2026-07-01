@@ -1,0 +1,119 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:19.510Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 169904,
+          "ns": 0,
+          "title": "鈴木伸一",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すすき しんいち",
+            "page_image": "Shinichi_Suzuki_monument.JPG",
+            "wikibase_item": "Q11648538"
+          },
+          "terms": {
+            "description": [
+              "日本のアニメーション作家、漫画家"
+            ]
+          }
+        },
+        {
+          "pageid": 422604,
+          "ns": 0,
+          "title": "日本動画協会",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にほんとうかきようかい",
+            "wikibase_item": "Q556694"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70369,
+              "lon": 139.76318917,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都文京区にあるアニメーションに関する社団法人"
+            ]
+          }
+        },
+        {
+          "pageid": 1380237,
+          "ns": 0,
+          "title": "マンガ・アニメミュージアム",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "まんかあにめみゆうしあむ",
+            "wikibase_item": "Q11341528"
+          },
+          "terms": {
+            "description": [
+              "マンガ・アニメをメインテーマとした博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 1474075,
+          "ns": 0,
+          "title": "杉並アニメーションミュージアム",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すきなみあにめえしよんみゆうしあむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Suginami_Kaikan_2024-08-26.jpg",
+            "wikibase_item": "Q11095134"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71044444,
+              "lon": 139.60777778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都杉並区にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 1690273,
+          "ns": 0,
+          "title": "杉並区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "すきなみく",
+            "kartographer_frames": "1",
+            "page_image_free": "2018_Kōenji.jpg",
+            "wikibase_item": "Q232631"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6995,
+              "lon": 139.63642,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

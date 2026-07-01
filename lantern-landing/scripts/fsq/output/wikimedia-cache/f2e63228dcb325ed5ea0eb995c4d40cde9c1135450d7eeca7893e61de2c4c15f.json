@@ -1,0 +1,127 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:01.367Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 37969,
+          "ns": 0,
+          "title": "Ramen",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Shoyu_Ramen（Tokyo_Ramen）_-_01.jpg",
+            "wikibase-shortdesc": "Japanese noodle dish",
+            "wikibase_item": "Q234646"
+          },
+          "terms": {
+            "description": [
+              "Japanese noodle soup of Chinese origin"
+            ]
+          }
+        },
+        {
+          "pageid": 80313,
+          "ns": 0,
+          "title": "Yokohama",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Minato_Mirai.jpg",
+            "wikibase-shortdesc": "Designated city in Kantō, Japan",
+            "wikibase_item": "Q38283"
+          },
+          "coordinates": [
+            {
+              "lat": 35.44416667,
+              "lon": 139.63805556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "designated city in Kanagawa Prefecture, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 148861,
+          "ns": 0,
+          "title": "Shin-Yokohama Ramen Museum",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Shin-Yokohama Ramen Museum",
+            "page_image_free": "Shinyokohama_ramen_museum.jpg",
+            "wikibase-shortdesc": "Restaurant in Yokohama, Japan",
+            "wikibase_item": "Q864499"
+          },
+          "coordinates": [
+            {
+              "lat": 35.509874,
+              "lon": 139.614537,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "amusement park"
+            ]
+          }
+        },
+        {
+          "pageid": 735675,
+          "ns": 0,
+          "title": "Shin-Yokohama Station",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Yokohama_Station.jpg",
+            "wikibase-shortdesc": "Major railway and metro station in Yokohama, Japan",
+            "wikibase_item": "Q801437"
+          },
+          "coordinates": [
+            {
+              "lat": 35.5075,
+              "lon": 139.6175,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "railway station and metro station in Kōhoku ward, Yokohama, Kanagawa prefecture, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 24180937,
+          "ns": 0,
+          "title": "Shin-Yokohama",
+          "index": 4,
+          "pageprops": {
+            "wikibase_item": "Q5359480"
+          },
+          "coordinates": [
+            {
+              "lat": 35.50944444,
+              "lon": 139.61527778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "district located in Kōhoku-ku, Yokohama City, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

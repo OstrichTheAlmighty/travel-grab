@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:55.445Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 28918,
+          "ns": 0,
+          "title": "立教大学",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "りつきようたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Rikkyo_University_1.jpg",
+            "wikibase_item": "Q1143235"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7305,
+              "lon": 139.70394444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 153138,
+          "ns": 0,
+          "title": "サンリオピューロランド",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さんりおひゆうろらんと",
+            "kartographer_frames": "1",
+            "page_image_free": "2024_Sanrio_Puroland_(1).jpg",
+            "wikibase_item": "Q1133851"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62461111,
+              "lon": 139.42913889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都多摩市にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 234375,
+          "ns": 0,
+          "title": "隈研吾",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "くま けんこ",
+            "page_image_free": "Kengo_Kuma.png",
+            "wikibase_item": "Q725462"
+          },
+          "terms": {
+            "description": [
+              "日本の建築家 (1954-)"
+            ]
+          }
+        },
+        {
+          "pageid": 2128273,
+          "ns": 0,
+          "title": "国際ゆめ交流博覧会",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こくさいゆめこうりゆうはくらんかい",
+            "wikibase_item": "Q11422291"
+          }
+        },
+        {
+          "pageid": 2600245,
+          "ns": 0,
+          "title": "日本の命名権導入施設一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にほんのめいめいけんとうにゆうしせついちらん",
+            "wikibase_item": "Q11505817"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

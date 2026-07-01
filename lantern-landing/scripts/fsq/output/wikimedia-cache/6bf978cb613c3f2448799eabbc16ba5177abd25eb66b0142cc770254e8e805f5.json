@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:21.635Z",
+  "value": {
+    "searchinfo": {
+      "search": "LEGOLAND Discovery Center Tokyo"
+    },
+    "search": [
+      {
+        "id": "Q30934236",
+        "title": "Q30934236",
+        "pageid": 32543532,
+        "concepturi": "http://www.wikidata.org/entity/Q30934236",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q30934236",
+        "display": {
+          "label": {
+            "value": "Legoland Discovery Center Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Legoland Discovery Center Tokyo",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Legoland Discovery Center Tokyo"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

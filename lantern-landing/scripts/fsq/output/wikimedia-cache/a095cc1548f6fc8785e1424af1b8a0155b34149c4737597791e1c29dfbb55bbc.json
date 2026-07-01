@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:45.138Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 69104,
+          "ns": 0,
+          "title": "セイコーエプソン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せいこうえふそん",
+            "graph-data-sources": "inline:19\n\ninline:20\n\ninline:60",
+            "page_image_free": "Seiko_Epson_headquarters_north_2.jpg",
+            "wikibase_item": "Q159614"
+          },
+          "terms": {
+            "description": [
+              "長野県諏訪市にある情報関連機器、精密機器メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 80018,
+          "ns": 0,
+          "title": "セイコーグループ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "せいこうくるうふ",
+            "page_image_free": "Ginza-WAKO_at_night.jpg",
+            "wikibase_item": "Q322601"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都中央区にある持株会社"
+            ]
+          }
+        },
+        {
+          "pageid": 206955,
+          "ns": 0,
+          "title": "ナムコミュージアム",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "なむこみゆうしあむ",
+            "wikibase_item": "Q2248626"
+          },
+          "terms": {
+            "description": [
+              "ナムコのクラシックゲームの復刻シリーズ"
+            ]
+          }
+        },
+        {
+          "pageid": 396838,
+          "ns": 0,
+          "title": "セイコーインスツル",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せいこういんすつる",
+            "page_image_free": "Seiko_Instruments,_headquarters.jpg",
+            "wikibase_item": "Q378215"
+          },
+          "terms": {
+            "description": [
+              "日本の精密機器メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 2778204,
+          "ns": 0,
+          "title": "服部金太郎",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はつとり きんたろう",
+            "page_image_free": "Kintarō_Hattori.jpg",
+            "wikibase_item": "Q3197218"
+          },
+          "terms": {
+            "description": [
+              "日本の実業家 (1860-1934)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

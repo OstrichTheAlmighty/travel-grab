@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:26.945Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 84377,
+          "ns": 0,
+          "title": "大倉集古館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおくらしゆうこかん",
+            "page_image_free": "Okura-Shukokan-01.jpg",
+            "wikibase_item": "Q3329598"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66697222,
+              "lon": 139.74333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 100564,
+          "ns": 0,
+          "title": "大倉財閥",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おおくらさいはつ",
+            "page_image_free": "Okuragumi_building_in_Meiji_era.JPG",
+            "wikibase_item": "Q11432448"
+          },
+          "terms": {
+            "description": [
+              "日本の財閥"
+            ]
+          }
+        },
+        {
+          "pageid": 120180,
+          "ns": 0,
+          "title": "普賢菩薩",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふけんほさつ",
+            "page_image_free": "Fugen_Bosatsu.jpg",
+            "wikibase_item": "Q868306"
+          },
+          "terms": {
+            "description": [
+              "菩薩"
+            ]
+          }
+        },
+        {
+          "pageid": 121640,
+          "ns": 0,
+          "title": "大倉喜八郎",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおくら きはちろう",
+            "page_image_free": "Ōkura_Kihachirō.jpg",
+            "wikibase_item": "Q3594034"
+          },
+          "terms": {
+            "description": [
+              "日本の実業家 (1837-1928)"
+            ]
+          }
+        },
+        {
+          "pageid": 212644,
+          "ns": 0,
+          "title": "大倉喜七郎",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおくら きしちろう",
+            "page_image_free": "Kishichiro_Okura.jpg",
+            "wikibase_item": "Q3197461"
+          },
+          "terms": {
+            "description": [
+              "実業家（1882-1963）"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

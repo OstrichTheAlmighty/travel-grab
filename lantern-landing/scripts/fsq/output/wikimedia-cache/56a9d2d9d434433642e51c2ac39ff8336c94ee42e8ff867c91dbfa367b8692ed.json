@@ -1,0 +1,198 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:09.018Z",
+  "value": {
+    "searchinfo": {
+      "search": "C PH"
+    },
+    "search": [
+      {
+        "id": "Q108712127",
+        "title": "Q108712127",
+        "pageid": 103938415,
+        "concepturi": "http://www.wikidata.org/entity/Q108712127",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q108712127",
+        "display": {
+          "label": {
+            "value": "C Phillipi",
+            "language": "en"
+          }
+        },
+        "label": "C Phillipi",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "C Phillipi"
+        }
+      },
+      {
+        "id": "Q54349750",
+        "title": "Q54349750",
+        "pageid": 54599485,
+        "concepturi": "http://www.wikidata.org/entity/Q54349750",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q54349750",
+        "display": {
+          "label": {
+            "value": "Christopher Phillips",
+            "language": "en"
+          },
+          "description": {
+            "value": "Spanish biologist (forensic genetics)",
+            "language": "en"
+          }
+        },
+        "label": "Christopher Phillips",
+        "description": "Spanish biologist (forensic genetics)",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "C Phillips"
+        },
+        "aliases": [
+          "C Phillips"
+        ]
+      },
+      {
+        "id": "Q47504412",
+        "title": "Q47504412",
+        "pageid": 48547482,
+        "concepturi": "http://www.wikidata.org/entity/Q47504412",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q47504412",
+        "display": {
+          "label": {
+            "value": "Charles Phillip Morris",
+            "language": "en"
+          },
+          "description": {
+            "value": "researcher",
+            "language": "en"
+          }
+        },
+        "label": "Charles Phillip Morris",
+        "description": "researcher",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "C Phillip-Morris"
+        },
+        "aliases": [
+          "C Phillip-Morris"
+        ]
+      },
+      {
+        "id": "Q67103830",
+        "title": "Q67103830",
+        "pageid": 66698763,
+        "concepturi": "http://www.wikidata.org/entity/Q67103830",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q67103830",
+        "display": {
+          "label": {
+            "value": "Casandra W. Philipson",
+            "language": "en"
+          },
+          "description": {
+            "value": "researcher",
+            "language": "en"
+          }
+        },
+        "label": "Casandra W. Philipson",
+        "description": "researcher",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "C Philipson"
+        },
+        "aliases": [
+          "C Philipson"
+        ]
+      },
+      {
+        "id": "Q56427736",
+        "title": "Q56427736",
+        "pageid": 56367083,
+        "concepturi": "http://www.wikidata.org/entity/Q56427736",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q56427736",
+        "display": {
+          "label": {
+            "value": "Clarice Phelps",
+            "language": "en"
+          },
+          "description": {
+            "value": "African American nuclear chemist",
+            "language": "en"
+          }
+        },
+        "label": "Clarice Phelps",
+        "description": "African American nuclear chemist",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "C Phelps"
+        },
+        "aliases": [
+          "C Phelps"
+        ]
+      },
+      {
+        "id": "Q56487421",
+        "title": "Q56487421",
+        "pageid": 56425856,
+        "concepturi": "http://www.wikidata.org/entity/Q56487421",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q56487421",
+        "display": {
+          "label": {
+            "value": "Cherdchai Phosri",
+            "language": "en"
+          },
+          "description": {
+            "value": "researcher",
+            "language": "en"
+          }
+        },
+        "label": "Cherdchai Phosri",
+        "description": "researcher",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "C Phosri"
+        },
+        "aliases": [
+          "C Phosri"
+        ]
+      },
+      {
+        "id": "Q135305652",
+        "title": "Q135305652",
+        "pageid": 129050303,
+        "concepturi": "http://www.wikidata.org/entity/Q135305652",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q135305652",
+        "display": {
+          "label": {
+            "value": "C-Pher",
+            "language": "en"
+          },
+          "description": {
+            "value": "Chilean drag queen",
+            "language": "en"
+          }
+        },
+        "label": "C-Pher",
+        "description": "Chilean drag queen",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "C-Pher"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

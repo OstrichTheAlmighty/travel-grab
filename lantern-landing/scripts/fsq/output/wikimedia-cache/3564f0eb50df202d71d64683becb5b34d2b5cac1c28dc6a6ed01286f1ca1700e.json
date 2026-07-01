@@ -1,0 +1,43 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:49.113Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1741731,
+          "ns": 0,
+          "title": "銀座",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きんさ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ginza_area_at_dusk_from_Tokyo_Tower.jpg",
+            "wikibase_item": "Q746052"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 5141159,
+          "ns": 0,
+          "title": "出川哲朗の充電させてもらえませんか?",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "てかわてつろうのしゆうてんさせてもらえませんか",
+            "wikibase_item": "Q22123195"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ東京の旅・バラエティ番組 (2017-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

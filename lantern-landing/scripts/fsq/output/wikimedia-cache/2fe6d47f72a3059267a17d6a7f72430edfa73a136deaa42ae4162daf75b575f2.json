@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:57.582Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 19841,
+          "ns": 0,
+          "title": "美術館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひしゆつかん",
+            "page_image_free": "Basel_-_2017_-_Kunstmuseum_Basel_-_Altbau.jpg",
+            "wikibase_item": "Q207694"
+          },
+          "terms": {
+            "description": [
+              "芸術を展示する建物もしくは空間"
+            ]
+          }
+        },
+        {
+          "pageid": 33931,
+          "ns": 0,
+          "title": "彫刻",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ちようこく",
+            "page_image_free": "Dying_gaul.jpg",
+            "wikibase_item": "Q11634"
+          },
+          "terms": {
+            "description": [
+              "立体形象を造形する視覚芸術の一分野"
+            ]
+          }
+        },
+        {
+          "pageid": 59554,
+          "ns": 0,
+          "title": "ルーヴル美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "るううるひしゆつかん",
+            "page_image_free": "Cour_Napoléon_from_the_northwest_in_2014_(1).jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q19675"
+          },
+          "terms": {
+            "description": [
+              "パリにある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 84216,
+          "ns": 0,
+          "title": "メトロポリタン美術館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "めとろほりたんひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Metropolitan_Museum_of_Art_(The_Met)_-_Central_Park,_NYC.jpg",
+            "wikibase_item": "Q160236"
+          },
+          "coordinates": [
+            {
+              "lat": 40.77944444,
+              "lon": -73.96305556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "ニューヨークにある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 85492,
+          "ns": 0,
+          "title": "ニューヨーク近代美術館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にゆよくきんたいひしゆつかん",
+            "page_image_free": "MoMa_NY_USA_1.jpg",
+            "wikibase_item": "Q188740"
+          },
+          "terms": {
+            "description": [
+              "ニューヨークの美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

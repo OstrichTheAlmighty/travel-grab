@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:40.528Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 32900,
+          "ns": 0,
+          "title": "大丸",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たいまる",
+            "page_image_free": "DAIMARU_Shinsaibashi_Store_Main_Building.jpg",
+            "wikibase_item": "Q3012112"
+          },
+          "terms": {
+            "description": [
+              "日本の百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 34224,
+          "ns": 0,
+          "title": "西友",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せいゆう",
+            "page_image_free": "Seiyu_Kichijoji.jpg",
+            "wikibase_item": "Q3108542"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64188889,
+              "lon": 139.74925,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にあるスーパーマーケットチェーンの運営会社"
+            ]
+          }
+        },
+        {
+          "pageid": 34552,
+          "ns": 0,
+          "title": "イオン (企業)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いおん",
+            "page_image_free": "Aeon_Tower_2(cropped).jpg",
+            "wikibase_item": "Q271413"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65127778,
+              "lon": 140.03830556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の小売業持株会社"
+            ]
+          }
+        },
+        {
+          "pageid": 730655,
+          "ns": 0,
+          "title": "神宮前 (渋谷区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しんくうまえ",
+            "kartographer_frames": "1",
+            "page_image_free": "Omotesando_2007_b.JPG",
+            "wikibase_item": "Q11589465"
+          },
+          "terms": {
+            "description": [
+              "東京都渋谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 731912,
+          "ns": 0,
+          "title": "北雄ラッキー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ほくゆうらつきい",
+            "page_image_free": "Hokuyu-Lucky.Hoshioki-Ekimae01.JPG",
+            "wikibase_item": "Q11404500"
+          },
+          "coordinates": [
+            {
+              "lat": 43.13288889,
+              "lon": 141.21188889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の北海道を中心にスーパーマーケットを経営する企業"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

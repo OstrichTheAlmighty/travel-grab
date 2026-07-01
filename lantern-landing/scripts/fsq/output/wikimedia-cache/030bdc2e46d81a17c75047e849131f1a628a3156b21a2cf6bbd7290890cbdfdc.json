@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:19.647Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 132602,
+          "ns": 0,
+          "title": "江戸川区陸上競技場",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "えとかわくりくしようきようきしよう",
+            "page_image_free": "Edogawa_Stadium_1.JPG",
+            "wikibase_item": "Q5340173"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65517222,
+              "lon": 139.85243333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江戸川区の陸上競技場"
+            ]
+          }
+        },
+        {
+          "pageid": 246142,
+          "ns": 0,
+          "title": "江戸川区球場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えとかわくきゆうしよう",
+            "page_image_free": "Edogawa-city_baseball-studium.jpg",
+            "wikibase_item": "Q11551036"
+          },
+          "coordinates": [
+            {
+              "lat": 33.66177778,
+              "lon": 139.85763889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江戸川区葛西にある球場"
+            ]
+          }
+        },
+        {
+          "pageid": 501104,
+          "ns": 0,
+          "title": "江戸川区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "えとかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "江戸川区花火大会・市川市民納涼花火大会2019.jpg",
+            "wikibase_item": "Q214056"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70664,
+              "lon": 139.86828,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 858921,
+          "ns": 0,
+          "title": "全国高等学校野球選手権東東京大会",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せんこくこうとうかつこうやきゆうせんしゆけんひかしとうきようたいかい",
+            "page_image_free": "Meiji_Jingu_Stadium_2019c.jpg",
+            "wikibase_item": "Q11389801"
+          },
+          "terms": {
+            "description": [
+              "夏の甲子園 東東京予選大会"
+            ]
+          }
+        },
+        {
+          "pageid": 893994,
+          "ns": 0,
+          "title": "西葛西",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にしかさい",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Metro_Nishi-kasai_sta_002.jpg",
+            "wikibase_item": "Q11629467"
+          },
+          "terms": {
+            "description": [
+              "東京都江戸川区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

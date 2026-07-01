@@ -1,0 +1,88 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:13.583Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 14222,
+          "ns": 0,
+          "title": "神社一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しんしやいちらん",
+            "notoc": "",
+            "wikibase_item": "Q2517815"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 221573,
+          "ns": 0,
+          "title": "大川興業",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおかわこうきよう",
+            "wikibase_item": "Q11435197"
+          },
+          "terms": {
+            "description": [
+              "日本のお笑いグループ、東京都港区にある芸能事務所"
+            ]
+          }
+        },
+        {
+          "pageid": 1351454,
+          "ns": 0,
+          "title": "チムニー (居酒屋)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ちむにい",
+            "page_image_free": "Chimney-Group.jpg",
+            "wikibase_item": "Q11318025"
+          },
+          "terms": {
+            "description": [
+              "日本の居酒屋チェーンおよびその運営会社"
+            ]
+          }
+        },
+        {
+          "pageid": 2013129,
+          "ns": 0,
+          "title": "江戸糸あやつり人形座",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "えといとあやつりにんきょうさ",
+            "wikibase_item": "Q11551109"
+          }
+        },
+        {
+          "pageid": 4146013,
+          "ns": 0,
+          "title": "亀戸餃子",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かめいときようさ",
+            "page_image_free": "Kameido_Gyoza_Honten.jpg",
+            "wikibase_item": "Q97280135"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区に本店を置く飲食店"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

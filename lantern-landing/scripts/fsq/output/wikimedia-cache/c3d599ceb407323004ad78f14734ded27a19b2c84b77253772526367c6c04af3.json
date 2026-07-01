@@ -1,0 +1,76 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:55.900Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1055,
+          "ns": 0,
+          "title": "アーバンネットワーク",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ああはんねつとわあく",
+            "page_image_free": "JR-West_Urban_Network_Map.jpg",
+            "wikibase_item": "Q5370577"
+          },
+          "terms": {
+            "description": [
+              "JR西日本が使用していた京阪神都市近郊区間の愛称"
+            ]
+          }
+        },
+        {
+          "pageid": 134731,
+          "ns": 0,
+          "title": "道の駅一覧 か行",
+          "index": 1,
+          "pageprops": {
+            "wikibase_item": "Q11641085"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1497112,
+          "ns": 0,
+          "title": "三ノ宮駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さんのみや",
+            "kartographer_frames": "1",
+            "page_image_free": "JR_三ノ宮駅.jpg",
+            "wikibase_item": "Q14616729"
+          },
+          "coordinates": [
+            {
+              "lat": 34.69483889,
+              "lon": 135.19494167,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県神戸市中央区布引町にある西日本旅客鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 2086822,
+          "ns": 0,
+          "title": "オレたちゴチャ・まぜっ!〜集まれヤンヤン〜",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おれたちこちやませあつまれやんやん",
+            "wikibase_item": "Q11278323"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:02.056Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 66377,
+          "ns": 0,
+          "title": "千駄木駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "せんたき",
+            "kartographer_frames": "1",
+            "page_image_free": "Sendagi-station-Exit1.jpg",
+            "wikibase_item": "Q390662"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72555556,
+              "lon": 139.76325,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある東京地下鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 272758,
+          "ns": 0,
+          "title": "個人美術館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こしんひしゆつかん",
+            "wikibase_item": "Q11387011"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1741590,
+          "ns": 0,
+          "title": "岩田専太郎",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いわた せんたろう",
+            "page_image_free": "Iwata-Sentaro-1.jpg",
+            "wikibase_item": "Q11475475"
+          },
+          "terms": {
+            "description": [
+              "1901-1974, 画家、美術考証家"
+            ]
+          }
+        },
+        {
+          "pageid": 2027029,
+          "ns": 0,
+          "title": "千駄木",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せんたき",
+            "kartographer_frames": "1",
+            "page_image_free": "Mori_Ogai_Memorial_Museum_Sendagi_Bunkyo_Tokyo_Japan_2021.jpg",
+            "wikibase_item": "Q11406891"
+          },
+          "terms": {
+            "description": [
+              "東京都文京区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

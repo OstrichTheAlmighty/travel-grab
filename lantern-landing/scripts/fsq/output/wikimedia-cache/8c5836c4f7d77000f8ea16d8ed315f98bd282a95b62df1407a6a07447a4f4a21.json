@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:24.716Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 87941,
+          "ns": 0,
+          "title": "増上寺",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "そうしようし",
+            "page_image_free": "Zojo-ji_sanmon.jpg",
+            "wikibase_item": "Q249139"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65741667,
+              "lon": 139.74827778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 96552,
+          "ns": 0,
+          "title": "芝公園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しはこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Near_Shiba_Park_Station.jpg",
+            "wikibase_item": "Q42311591"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65638889,
+              "lon": 139.74833333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 473976,
+          "ns": 0,
+          "title": "徳川家霊廟",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とくかわけれいひよう",
+            "page_image_free": "NikkoYomeimonInsideView5200.jpg",
+            "wikibase_item": "Q5358797"
+          },
+          "terms": {
+            "description": [
+              "徳川将軍家歴代の墓所"
+            ]
+          }
+        },
+        {
+          "pageid": 1803190,
+          "ns": 0,
+          "title": "関東地方にある建造物の重要文化財一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しゆうようふんかさい けんそうふつ",
+            "wikibase_item": "Q11655898"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2470390,
+          "ns": 0,
+          "title": "台徳院霊廟",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たいとくいんれいひよう",
+            "page_image_free": "Zojo-ji_Temple_Minata_Tokyo_August_2014_04.JPG",
+            "wikibase_item": "Q10856360"
+          },
+          "terms": {
+            "description": [
+              "東京都港区にある霊廟"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

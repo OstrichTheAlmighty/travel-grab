@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:08.839Z",
+  "value": {
+    "searchinfo": {
+      "search": "Ự Ẩ Ệ"
+    },
+    "search": [
+      {
+        "id": "Q200294",
+        "title": "Q200294",
+        "pageid": 197132,
+        "concepturi": "http://www.wikidata.org/entity/Q200294",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q200294",
+        "display": {
+          "label": {
+            "value": "United Arab Emirates dirham",
+            "language": "en"
+          },
+          "description": {
+            "value": "currency",
+            "language": "en"
+          }
+        },
+        "label": "United Arab Emirates dirham",
+        "description": "currency",
+        "match": {
+          "type": "label",
+          "language": "kn",
+          "text": "u a e note"
+        },
+        "aliases": [
+          "u a e note"
+        ]
+      },
+      {
+        "id": "Q113841396",
+        "title": "Q113841396",
+        "pageid": 108585472,
+        "concepturi": "http://www.wikidata.org/entity/Q113841396",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q113841396",
+        "display": {
+          "label": {
+            "value": "U with bottom notch",
+            "language": "en"
+          },
+          "description": {
+            "value": "phonetic symbol and additional letter of the Latin alphabet",
+            "language": "en"
+          }
+        },
+        "label": "U with bottom notch",
+        "description": "phonetic symbol and additional letter of the Latin alphabet",
+        "match": {
+          "type": "alias",
+          "language": "fr",
+          "text": "U à encoche"
+        },
+        "aliases": [
+          "U à encoche"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:41.325Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8219,
+          "ns": 0,
+          "title": "巣鴨駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すかも",
+            "kartographer_frames": "1",
+            "page_image_free": "Sugamo-Sta-Building.JPG",
+            "wikibase_item": "Q801500"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73347222,
+              "lon": 139.73933333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある東日本旅客鉄道・東京都交通局の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 15529,
+          "ns": 0,
+          "title": "中山道",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "なかせんとう",
+            "page_image_free": "中山道.svg",
+            "wikibase_item": "Q1154479"
+          },
+          "terms": {
+            "description": [
+              "江戸時代の五街道の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 245404,
+          "ns": 0,
+          "title": "高岩寺",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こうかんし",
+            "page_image_free": "BanchouzanKouganji1.jpg",
+            "wikibase_item": "Q6587321"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73570278,
+              "lon": 139.73564722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1858388,
+          "ns": 0,
+          "title": "がんばる商店街77選",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かんはるしようてんかい77せん",
+            "wikibase_item": "Q17210050"
+          }
+        }
+      ]
+    }
+  }
+}

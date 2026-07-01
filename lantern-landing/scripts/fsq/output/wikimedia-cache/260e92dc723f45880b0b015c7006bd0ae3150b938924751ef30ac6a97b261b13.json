@@ -1,0 +1,83 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:52.164Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 175712,
+          "ns": 0,
+          "title": "食肉",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しよくにく",
+            "page_image_free": "FoodMeat.jpg",
+            "wikibase_item": "Q10990"
+          },
+          "terms": {
+            "description": [
+              "食材とする動物の肉"
+            ]
+          }
+        },
+        {
+          "pageid": 739351,
+          "ns": 0,
+          "title": "成型肉",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "せいけいにく",
+            "wikibase_item": "Q7316342"
+          }
+        },
+        {
+          "pageid": 3132043,
+          "ns": 0,
+          "title": "培養肉",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はいようにく",
+            "page_image_free": "First_cultured_hamburger_unfried.png",
+            "wikibase_item": "Q611909"
+          }
+        },
+        {
+          "pageid": 3915368,
+          "ns": 0,
+          "title": "トリニクって何の肉!?",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とりにくつてなんのにく",
+            "wikibase_item": "Q65235073"
+          },
+          "terms": {
+            "description": [
+              "朝日放送テレビ制作のバラエティ番組 (2019 - 2022)"
+            ]
+          }
+        },
+        {
+          "pageid": 4242684,
+          "ns": 0,
+          "title": "代替肉",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たいたいにく",
+            "page_image_free": "Tempe_Burger.jpg",
+            "wikibase_item": "Q1343997"
+          },
+          "terms": {
+            "description": [
+              "従来の家畜肉の代替として作られた食品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

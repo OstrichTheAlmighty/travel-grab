@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:47.791Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 28162,
+          "ns": 0,
+          "title": "村",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "むら",
+            "page_image_free": "Shirakawa_village_-_白川郷_007.jpg",
+            "wikibase_item": "Q4174776"
+          },
+          "terms": {
+            "description": [
+              "日本の行政区画"
+            ]
+          }
+        },
+        {
+          "pageid": 33363,
+          "ns": 0,
+          "title": "市町村",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しちようそん",
+            "wikibase_item": "Q117351913"
+          },
+          "terms": {
+            "description": [
+              "地方公共団体である市・町・村の総称"
+            ]
+          }
+        },
+        {
+          "pageid": 64019,
+          "ns": 0,
+          "title": "檜原村",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひのはらむら",
+            "kartographer_frames": "1",
+            "page_image_free": "Hossawa_Falls.jpg",
+            "wikibase_item": "Q219576"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72681,
+              "lon": 139.14889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都西多摩郡の村"
+            ]
+          }
+        },
+        {
+          "pageid": 200934,
+          "ns": 0,
+          "title": "留寿都村",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "るすつむら",
+            "page_image_free": "Rusutsu_WestMt(200703).jpg",
+            "wikibase_item": "Q1354413"
+          },
+          "coordinates": [
+            {
+              "lat": 42.73733,
+              "lon": 140.87558,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道虻田郡の村"
+            ]
+          }
+        },
+        {
+          "pageid": 3058357,
+          "ns": 0,
+          "title": "おーい!ひろいき村",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おおいひろいきむら",
+            "wikibase_item": "Q18336638"
+          },
+          "terms": {
+            "description": [
+              "日本のフジテレビのバラエティ番組 (2014-2016)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

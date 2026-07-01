@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:57.811Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 57171,
+          "ns": 0,
+          "title": "西永福駅",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にしえいふくえき",
+            "kartographer_frames": "1",
+            "page_image_free": "Nishieifuku-Sta.JPG",
+            "wikibase_item": "Q31589"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67877778,
+              "lon": 139.63538889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都杉並区永福にある京王電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 116339,
+          "ns": 0,
+          "title": "東京都道427号瀬田貫井線",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "瀬田交差点1.jpg",
+            "wikibase_item": "Q11525797"
+          },
+          "terms": {
+            "description": [
+              "東京都の道路"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1690273,
+          "ns": 0,
+          "title": "杉並区",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すきなみく",
+            "kartographer_frames": "1",
+            "page_image_free": "2018_Kōenji.jpg",
+            "wikibase_item": "Q232631"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6995,
+              "lon": 139.63642,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 2817760,
+          "ns": 0,
+          "title": "京王バス永福町営業所",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "けいおうはすえいふくちようえいきようしよ",
+            "page_image_free": "KeioBusHigashi_Eifukucho.jpg",
+            "wikibase_item": "Q11374606"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67663889,
+              "lon": 139.64225,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都杉並区にある京王バスの営業所"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

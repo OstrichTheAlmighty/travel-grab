@@ -1,0 +1,57 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:28.131Z",
+  "value": {
+    "searchinfo": {
+      "search": "TOYOTA ARENA TOKYO"
+    },
+    "search": [
+      {
+        "id": "Q131801357",
+        "title": "Q131801357",
+        "pageid": 125691800,
+        "concepturi": "http://www.wikidata.org/entity/Q131801357",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q131801357",
+        "display": {
+          "label": {
+            "value": "TOYOTA ARENA TOKYO",
+            "language": "en"
+          },
+          "description": {
+            "value": "indoor arena in Koto, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "TOYOTA ARENA TOKYO",
+        "description": "indoor arena in Koto, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "TOYOTA ARENA TOKYO"
+        }
+      },
+      {
+        "id": "Q137926000",
+        "title": "Q137926000",
+        "pageid": 131557844,
+        "concepturi": "http://www.wikidata.org/entity/Q137926000",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q137926000",
+        "display": {
+          "label": {
+            "value": "TOYOTA ARENA TOKYO SUB ARENA",
+            "language": "en"
+          }
+        },
+        "label": "TOYOTA ARENA TOKYO SUB ARENA",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "TOYOTA ARENA TOKYO SUB ARENA"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

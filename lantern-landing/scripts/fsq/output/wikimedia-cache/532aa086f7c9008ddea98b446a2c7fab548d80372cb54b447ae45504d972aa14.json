@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:45:54.564Z",
+  "value": {
+    "searchinfo": {
+      "search": "ジープ島"
+    },
+    "search": [
+      {
+        "id": "Q11311056",
+        "title": "Q11311056",
+        "pageid": 12449901,
+        "concepturi": "http://www.wikidata.org/entity/Q11311056",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11311056",
+        "display": {
+          "label": {
+            "value": "JEEP island",
+            "language": "en"
+          }
+        },
+        "label": "JEEP island",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ジープ島"
+        },
+        "aliases": [
+          "ジープ島"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

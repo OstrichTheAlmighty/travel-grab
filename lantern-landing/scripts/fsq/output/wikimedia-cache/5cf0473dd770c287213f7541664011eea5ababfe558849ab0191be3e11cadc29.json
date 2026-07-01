@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:08.236Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8777,
+          "ns": 0,
+          "title": "福澤諭吉",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふくさわ ゆきち",
+            "page_image_free": "Fukuzawa_Yukichi_1891.jpg",
+            "wikibase_item": "Q355447"
+          },
+          "terms": {
+            "description": [
+              "日本の教育者"
+            ]
+          }
+        },
+        {
+          "pageid": 1200678,
+          "ns": 0,
+          "title": "慶應義塾図書館旧館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "けいおうきしゆくとしよかんきゆうかん",
+            "page_image_free": "Old_Keio_University_Library_3.jpg",
+            "wikibase_item": "Q11495141"
+          },
+          "coordinates": [
+            {
+              "lat": 35.649444,
+              "lon": 139.743806,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区の大学図書館"
+            ]
+          }
+        },
+        {
+          "pageid": 1623064,
+          "ns": 0,
+          "title": "慶應義塾",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かつこうほうしんけいおうきしゆく",
+            "page_image_free": "慶應義塾之目的1896.png",
+            "wikibase_item": "Q6420636"
+          },
+          "terms": {
+            "description": [
+              "日本の学校法人"
+            ]
+          }
+        },
+        {
+          "pageid": 2758569,
+          "ns": 0,
+          "title": "慶應義塾大学",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "けいおうきしゆくたいかく",
+            "page_image_free": "Old_Keio_University_Library_3.jpg",
+            "wikibase_item": "Q815432"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64894444,
+              "lon": 139.74291667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 4124729,
+          "ns": 0,
+          "title": "慶應義塾大学大学院文学研究科・文学部",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "けいおうぎじゅくだいがくだいがくいんぶんがくけんきゅうか・ぶんがくぶ",
+            "wikibase_item": "Q97199595"
+          },
+          "terms": {
+            "description": [
+              "慶應義塾大学日吉・三田キャンパスに設置されている学部・大学院研究科"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

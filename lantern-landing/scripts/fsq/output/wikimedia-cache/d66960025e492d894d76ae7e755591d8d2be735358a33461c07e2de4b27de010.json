@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:33.915Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 20116,
+          "ns": 0,
+          "title": "庚申塔",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こうしんとう",
+            "page_image_free": "Kōshinkuyōtō,_Iseyama,_Fujisawa,_Kanagawa.jpg",
+            "wikibase_item": "Q11486001"
+          },
+          "terms": {
+            "description": [
+              "道教に由来する庚申信仰に基づいて建てられた石塔"
+            ]
+          }
+        },
+        {
+          "pageid": 55981,
+          "ns": 0,
+          "title": "庚申信仰",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こうしんしんこう",
+            "page_image_free": "Brooklyn_Museum_-_Painting_of_Shomen_-_Kongo.jpg",
+            "wikibase_item": "Q3082157"
+          },
+          "terms": {
+            "description": [
+              "日本の民間信仰"
+            ]
+          }
+        },
+        {
+          "pageid": 133774,
+          "ns": 0,
+          "title": "青面金剛",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しようめんこんこう",
+            "wikibase_item": "Q11662826"
+          },
+          "terms": {
+            "description": [
+              "日本仏教における信仰対象"
+            ]
+          }
+        },
+        {
+          "pageid": 385807,
+          "ns": 0,
+          "title": "庚申堂 (奈良市)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こうしんとう なら",
+            "page_image": "Koushindo_Naramachi.jpg",
+            "wikibase_item": "Q11485999"
+          },
+          "coordinates": [
+            {
+              "lat": 34.67697222,
+              "lon": 135.83005556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "奈良市西新屋町にある祠"
+            ]
+          }
+        },
+        {
+          "pageid": 417338,
+          "ns": 0,
+          "title": "三猿",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さんさる",
+            "wikibase_item": "Q835709"
+          }
+        }
+      ]
+    }
+  }
+}

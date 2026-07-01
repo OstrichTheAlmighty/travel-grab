@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:47.715Z",
+  "value": {
+    "searchinfo": {
+      "search": "かちどき 橋の資料館"
+    },
+    "search": [
+      {
+        "id": "Q109160363",
+        "title": "Q109160363",
+        "pageid": 104358164,
+        "concepturi": "http://www.wikidata.org/entity/Q109160363",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q109160363",
+        "display": {
+          "label": {
+            "value": "Kachidoki hashi no shiryōkan",
+            "language": "en"
+          }
+        },
+        "label": "Kachidoki hashi no shiryōkan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "かちどき 橋の資料館"
+        },
+        "aliases": [
+          "かちどき 橋の資料館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

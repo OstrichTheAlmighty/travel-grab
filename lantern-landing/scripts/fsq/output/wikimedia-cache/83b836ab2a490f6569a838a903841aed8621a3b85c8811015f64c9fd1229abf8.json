@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:36.426Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 289313,
+          "ns": 0,
+          "title": "東京大学大学院理学系研究科附属植物園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようたいかくたいかくいんりかくけいけんきゆうかふそくしよくふつえん",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q1064892"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7175,
+              "lon": 139.74652778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京大学の附属施設の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 933724,
+          "ns": 0,
+          "title": "水郷佐原あやめパーク",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すいこうさわらあやめはく",
+            "kartographer_frames": "1",
+            "page_image_free": "Aquatic-plant-garden-irides,sawara,katori-city,japan.JPG",
+            "wikibase_item": "Q4385625"
+          },
+          "coordinates": [
+            {
+              "lat": 35.92801944,
+              "lon": 140.52430833,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県香取市にある植物園"
+            ]
+          }
+        },
+        {
+          "pageid": 982472,
+          "ns": 0,
+          "title": "神代植物公園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しんたいしよくふつこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Jindai_Botanical_Garden-2.jpg",
+            "wikibase_item": "Q606827"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67111111,
+              "lon": 139.54611111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の植物園"
+            ]
+          }
+        },
+        {
+          "pageid": 1018605,
+          "ns": 0,
+          "title": "大阪公立大学附属植物園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おおさかこうりつたいかくふそくしよくふつえん",
+            "page_image_free": "BGFSOCU05s3200.jpg",
+            "wikibase_item": "Q4948449"
+          },
+          "terms": {
+            "description": [
+              "大阪府交野市にある植物園"
+            ]
+          }
+        },
+        {
+          "pageid": 2112314,
+          "ns": 0,
+          "title": "筑波実験植物園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "つくはしつけんしよくふつえん",
+            "page_image_free": "TBG_entrance.jpg",
+            "wikibase_item": "Q3162410"
+          },
+          "terms": {
+            "description": [
+              "茨城県つくば市にある植物の研究機関"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

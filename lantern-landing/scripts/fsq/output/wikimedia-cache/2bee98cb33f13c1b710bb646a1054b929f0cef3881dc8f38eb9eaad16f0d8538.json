@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:39.366Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 709677,
+          "ns": 0,
+          "title": "ポーラ (企業)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ほおら",
+            "page_image_free": "Pola-logo.jpg",
+            "wikibase_item": "Q11339469"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67433333,
+              "lon": 139.76786111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都品川区にある化粧品メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 1697465,
+          "ns": 0,
+          "title": "増田セバスチャン",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ますた せはすちやん",
+            "page_image_free": "27th_Tokyo_International_Film_Festival-_Sebastian_Masuda_from_The_Nutcracker_(15597987796)_(2).jpg",
+            "wikibase_item": "Q11429278"
+          },
+          "terms": {
+            "description": [
+              "日本のアートディレクター (1970-)"
+            ]
+          }
+        },
+        {
+          "pageid": 2007402,
+          "ns": 0,
+          "title": "松尾高弘",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "まつお たかひろ",
+            "wikibase_item": "Q11529718"
+          }
+        },
+        {
+          "pageid": 2043364,
+          "ns": 0,
+          "title": "片山正通",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かたやま まさみち",
+            "wikibase_item": "Q11569617"
+          }
+        },
+        {
+          "pageid": 2792621,
+          "ns": 0,
+          "title": "大成哲",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおなり てつ",
+            "page_image_free": "顔写真_monochrome.jpg",
+            "wikibase_item": "Q13500755"
+          },
+          "terms": {
+            "description": [
+              "日本の彫刻家、現代美術家 (1980-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:53.456Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 415716,
+          "ns": 0,
+          "title": "本店",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ほんてん",
+            "wikibase_item": "Q11520332"
+          },
+          "terms": {
+            "description": [
+              "企業の商業登記上の主たる事業所を指す法律営業所"
+            ]
+          }
+        },
+        {
+          "pageid": 576757,
+          "ns": 0,
+          "title": "千疋屋",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せんひきや",
+            "page_image_free": "Nihonbashi_mitsui_tower01s3872.jpg",
+            "wikibase_item": "Q11251526"
+          },
+          "terms": {
+            "description": [
+              "高級果物専門店"
+            ]
+          }
+        },
+        {
+          "pageid": 1002289,
+          "ns": 0,
+          "title": "日本橋室町",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にほんはしむろまち",
+            "kartographer_frames": "1",
+            "page_image_free": "Mitsukoshimae-eki-1.jpg",
+            "wikibase_item": "Q11508327"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 1025264,
+          "ns": 0,
+          "title": "東都のれん会",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうとのれんかい",
+            "wikibase_item": "Q11528567"
+          }
+        },
+        {
+          "pageid": 1121936,
+          "ns": 0,
+          "title": "日本橋三井タワー",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんはしみついたわあ",
+            "kartographer_frames": "1",
+            "page_image_free": "Nihonbashi_Mitsui_Tower_Lobby_2019.jpg",
+            "wikibase_item": "Q3125027"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68697222,
+              "lon": 139.77305556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都中央区の超高層ビル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

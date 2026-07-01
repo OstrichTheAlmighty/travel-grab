@@ -1,0 +1,100 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:22.000Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 24365,
+          "ns": 0,
+          "title": "Porsche",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Porsche_headquarter_Stuttgart-Zuffenhausen_Werk_II.jpg",
+            "wikibase-shortdesc": "German automobile manufacturer",
+            "wikibase_item": "Q40993"
+          },
+          "terms": {
+            "description": [
+              "German automobile manufacturer specializing in high-performance sports cars, SUVs and sedans, owned by Volkswagen AG"
+            ]
+          }
+        },
+        {
+          "pageid": 196161,
+          "ns": 0,
+          "title": "Kind of Blue",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Kind Of Blue",
+            "displaytitle": "<i>Kind of Blue</i>",
+            "page_image": "Miles_Davis_-_Kind_of_Blue_album_cover.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "1959 studio album by Miles Davis",
+            "wikibase_item": "Q283221"
+          },
+          "terms": {
+            "description": [
+              "1959 studio album by Miles Davis"
+            ]
+          }
+        },
+        {
+          "pageid": 230965,
+          "ns": 0,
+          "title": "ING Group",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Ing Group",
+            "page_image_free": "2020_ING_Bijlmerdreef_106_(1).jpg",
+            "wikibase-shortdesc": "Dutch multinational banking and financial services corporation",
+            "wikibase_item": "Q645708"
+          },
+          "terms": {
+            "description": [
+              "Dutch multinational banking and financial services corporation"
+            ]
+          }
+        },
+        {
+          "pageid": 2211244,
+          "ns": 0,
+          "title": "...ing",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Ing",
+            "displaytitle": "<i>...ing</i>",
+            "page_image": "Ing_poster.jpg",
+            "wikibase-shortdesc": "2003 South Korean film",
+            "wikibase_item": "Q158697"
+          },
+          "terms": {
+            "description": [
+              "2003 film"
+            ]
+          }
+        },
+        {
+          "pageid": 41148787,
+          "ns": 0,
+          "title": "Tangerine Bank",
+          "index": 5,
+          "pageprops": {
+            "wikibase-shortdesc": "Canadian direct bank",
+            "wikibase_item": "Q15238797"
+          },
+          "terms": {
+            "description": [
+              "Canadian direct banking chain"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:39.343Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2913859,
+          "ns": 0,
+          "title": "The Fast and the Furious: Tokyo Drift",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Fast And The Furious, The: Tokyo Drift",
+            "displaytitle": "<i>The Fast and the Furious: Tokyo Drift</i>",
+            "page_image": "Poster_-_Fast_and_Furious_Tokyo_Drift.jpg",
+            "wikibase-shortdesc": "2006 film by Justin Lin",
+            "wikibase_item": "Q213208"
+          },
+          "terms": {
+            "description": [
+              "2006 film directed by Justin Lin"
+            ]
+          }
+        },
+        {
+          "pageid": 4922964,
+          "ns": 0,
+          "title": "Mercedes-Benz C-Class (W204)",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "2008_Mercedes-Benz_C300_4MATIC_Sport_Sedan,_07-29-2022.jpg",
+            "wikibase-shortdesc": "Third generation of Mercedes-Benz C-Class",
+            "wikibase_item": "Q2008468"
+          },
+          "terms": {
+            "description": [
+              "C-Class III"
+            ]
+          }
+        },
+        {
+          "pageid": 21786764,
+          "ns": 0,
+          "title": "Mercedes-Benz SLS AMG",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Mercedes-Benz Sls Amg",
+            "page_image_free": "Mercedes-Benz_SLS_AMG_(C_197)_–_Frontansicht_geöffnet,_10._August_2011,_Düsseldorf.jpg",
+            "wikibase-shortdesc": "2-seater front mid-engine sports car developed by Mercedes-AMG",
+            "wikibase_item": "Q476636"
+          },
+          "terms": {
+            "description": [
+              "car model"
+            ]
+          }
+        },
+        {
+          "pageid": 39397004,
+          "ns": 0,
+          "title": "Mercedes-Benz S-Class (W222)",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Mercedes-Benz_W_222_S_350_Bluetec.JPG",
+            "wikibase-shortdesc": "Sixth generation of Mercedes-Benz S-Class",
+            "wikibase_item": "Q13222076"
+          },
+          "terms": {
+            "description": [
+              "sixth generation S-Class"
+            ]
+          }
+        },
+        {
+          "pageid": 40981922,
+          "ns": 0,
+          "title": "Michael Mauer",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Mauer, Michael",
+            "page_image_free": "Porsche,_GIMS_2018,_Le_Grand-Saconnex_(1X7A0197).jpg",
+            "wikibase-shortdesc": "German automobile designer",
+            "wikibase_item": "Q98893"
+          },
+          "terms": {
+            "description": [
+              "German car designer"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

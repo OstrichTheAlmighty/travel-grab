@@ -1,0 +1,123 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:47.091Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 7827,
+          "ns": 0,
+          "title": "品川区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しなかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "Gate_City_Osaki.jpg",
+            "wikibase_item": "Q233495"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60917,
+              "lon": 139.73017,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の1つ"
+            ]
+          }
+        },
+        {
+          "pageid": 98018,
+          "ns": 0,
+          "title": "港区 (名古屋市)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みなとく",
+            "page_image_free": "Port_of_Nagoya_Public_Aquarium1.jpg",
+            "wikibase_item": "Q1207982"
+          },
+          "coordinates": [
+            {
+              "lat": 35.10775,
+              "lon": 136.88552778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県名古屋市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 319931,
+          "ns": 0,
+          "title": "大井ふ頭中央海浜公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおいふとうちゆうおうかいひんこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Oi_futo_chuo_kaihin_park_entrance.JPG",
+            "wikibase_item": "Q11432120"
+          },
+          "coordinates": [
+            {
+              "lat": 35.59216667,
+              "lon": 139.75280556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 930318,
+          "ns": 0,
+          "title": "八潮 (品川区)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やしお",
+            "kartographer_frames": "1",
+            "page_image_free": "Yashio_3chome_shinagawa_tokyo_2009.JPG",
+            "wikibase_item": "Q11391529"
+          },
+          "terms": {
+            "description": [
+              "東京都品川区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1105490,
+          "ns": 0,
+          "title": "港南 (東京都港区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こうなん",
+            "kartographer_frames": "1",
+            "page_image_free": "Shinagawa_inter_city.jpg",
+            "wikibase_item": "Q11563057"
+          },
+          "terms": {
+            "description": [
+              "東京都港区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

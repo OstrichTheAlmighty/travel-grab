@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:13.037Z",
+  "value": {
+    "searchinfo": {
+      "search": "さくら坂公園"
+    },
+    "search": [
+      {
+        "id": "Q42311539",
+        "title": "Q42311539",
+        "pageid": 43593776,
+        "concepturi": "http://www.wikidata.org/entity/Q42311539",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q42311539",
+        "display": {
+          "label": {
+            "value": "Sakurazaka Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Minato, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Sakurazaka Park",
+        "description": "park in Minato, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "さくら坂公園"
+        },
+        "aliases": [
+          "さくら坂公園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

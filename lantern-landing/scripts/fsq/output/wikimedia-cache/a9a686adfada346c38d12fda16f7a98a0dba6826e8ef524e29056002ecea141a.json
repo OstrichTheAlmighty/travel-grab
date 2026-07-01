@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:23.365Z",
+  "value": {
+    "searchinfo": {
+      "search": "新宿交通公園"
+    },
+    "search": [
+      {
+        "id": "Q11501820",
+        "title": "Q11501820",
+        "pageid": 12641504,
+        "concepturi": "http://www.wikidata.org/entity/Q11501820",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11501820",
+        "display": {
+          "label": {
+            "value": "Niijuku Traffic Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Katsushika, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Niijuku Traffic Park",
+        "description": "park in Katsushika, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "新宿交通公園"
+        },
+        "aliases": [
+          "新宿交通公園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:30.815Z",
+  "value": {
+    "searchinfo": {
+      "search": "キムチ博物館"
+    },
+    "search": [
+      {
+        "id": "Q625781",
+        "title": "Q625781",
+        "pageid": 588561,
+        "concepturi": "http://www.wikidata.org/entity/Q625781",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q625781",
+        "display": {
+          "label": {
+            "value": "Museum Kimchikan",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum",
+            "language": "en"
+          }
+        },
+        "label": "Museum Kimchikan",
+        "description": "museum",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "キムチ博物館"
+        },
+        "aliases": [
+          "キムチ博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

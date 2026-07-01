@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:01.783Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 242257,
+          "ns": 0,
+          "title": "Ginza",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Ginza-WAKO_at_night.jpg",
+            "wikibase-shortdesc": "Shopping, business, and entertainment district in Chuo, Tokyo, Japan",
+            "wikibase_item": "Q746052"
+          },
+          "coordinates": [
+            {
+              "lat": 35.671217,
+              "lon": 139.765007,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "district of Chūō-ku, Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 390131,
+          "ns": 0,
+          "title": "Ginza Line",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Ginza Line",
+            "page_image_free": "Ginza-Line-Series1031.jpg",
+            "wikibase-shortdesc": "Subway line in Tokyo, Japan",
+            "wikibase_item": "Q1073046"
+          },
+          "terms": {
+            "description": [
+              "metro line in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 405251,
+          "ns": 0,
+          "title": "Chūō, Tokyo",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Chuo, Tokyo",
+            "page_image_free": "Tokio_Mandarin_0969_small.JPG",
+            "wikibase-shortdesc": "Special ward in Tokyo, Japan",
+            "wikibase_item": "Q212704"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66666667,
+              "lon": 139.76666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "special ward in the Tokyo Metropolis in Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 5507400,
+          "ns": 0,
+          "title": "Ginza Station",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Ginza-station-ExitA3-after-renewal.jpg",
+            "wikibase-shortdesc": "Metro station in Tokyo, Japan",
+            "wikibase_item": "Q602372"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67123,
+              "lon": 139.765,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "metro station in Chuo, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 5508051,
+          "ns": 0,
+          "title": "Tokyo Expressway",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "wikibase-shortdesc": "Former expressway in Tokyo, Japan",
+            "wikibase_item": "Q1714592"
+          },
+          "terms": {
+            "description": [
+              "former expressway in Tokyo, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

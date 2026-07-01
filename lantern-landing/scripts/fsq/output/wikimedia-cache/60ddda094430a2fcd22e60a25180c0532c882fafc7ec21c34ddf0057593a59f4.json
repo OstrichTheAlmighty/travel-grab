@@ -1,0 +1,125 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:26.020Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 45336,
+          "ns": 0,
+          "title": "日の出町",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひのてまち",
+            "page_image_free": "Hinode_seiundo.jpg",
+            "wikibase_item": "Q1154806"
+          },
+          "coordinates": [
+            {
+              "lat": 35.74211,
+              "lon": 139.25736,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都西多摩郡の町"
+            ]
+          }
+        },
+        {
+          "pageid": 193408,
+          "ns": 0,
+          "title": "菊川市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きくかわし",
+            "kartographer_frames": "1",
+            "page_image_free": "応声教院_-_panoramio_(2).jpg",
+            "wikibase_item": "Q726565"
+          },
+          "coordinates": [
+            {
+              "lat": 34.75775,
+              "lon": 138.08478,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 320576,
+          "ns": 0,
+          "title": "香取市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かとりし",
+            "kartographer_frames": "1",
+            "page_image_free": "Katori_montage.jpg",
+            "wikibase_item": "Q858357"
+          },
+          "coordinates": [
+            {
+              "lat": 35.89772,
+              "lon": 140.49919,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 338370,
+          "ns": 0,
+          "title": "紀の川市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きのかわし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kokawadera-N0176.JPG",
+            "wikibase_item": "Q697002"
+          },
+          "coordinates": [
+            {
+              "lat": 34.2697,
+              "lon": 135.3628,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "和歌山県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 1206332,
+          "ns": 0,
+          "title": "津久井せんべい",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "つくいせんへい",
+            "page_image_free": "Tsukui-senbei.JPG",
+            "wikibase_item": "Q11555905"
+          }
+        }
+      ]
+    }
+  }
+}

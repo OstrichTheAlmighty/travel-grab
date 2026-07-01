@@ -1,0 +1,87 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:00.814Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 85688,
+          "ns": 0,
+          "title": "北原白秋",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きたはら はくしゆう",
+            "page_image_free": "Kitahara_Hakushu.jpg",
+            "wikibase_item": "Q1066026"
+          },
+          "terms": {
+            "description": [
+              "日本の詩人、童謡作家、歌人 (1885 - 1942)"
+            ]
+          }
+        },
+        {
+          "pageid": 709442,
+          "ns": 0,
+          "title": "北原照久",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きたはら てるひさ",
+            "wikibase_item": "Q11401260"
+          }
+        },
+        {
+          "pageid": 1159795,
+          "ns": 0,
+          "title": "北原沙弥香",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きたはら さやか",
+            "wikibase_item": "Q1050949"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優、歌手"
+            ]
+          }
+        },
+        {
+          "pageid": 1493580,
+          "ns": 0,
+          "title": "北原里英",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きたはら りえ",
+            "page_image_free": "Yokohama_International_Film_Festival_2024_Kitahara_Rie_(53868891241).jpg",
+            "wikibase_item": "Q1195876"
+          },
+          "terms": {
+            "description": [
+              "日本の歌手、俳優 (1991-)"
+            ]
+          }
+        },
+        {
+          "pageid": 4511741,
+          "ns": 0,
+          "title": "北原もも",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きたはら もも",
+            "wikibase_item": "Q110403220"
+          },
+          "terms": {
+            "description": [
+              "日本の歌手"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:41.325Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2364,
+          "ns": 0,
+          "title": "アーケードゲーム",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ああけえとけえむ",
+            "page_image_free": "Vg_icon.svg",
+            "wikibase_item": "Q113726751"
+          },
+          "terms": {
+            "description": [
+              "コインを入れると動くゲーム。コンピューターゲームに限らない広義のもの(アーケードゲームのうちコンピューターゲームはQ192851)"
+            ]
+          }
+        },
+        {
+          "pageid": 223786,
+          "ns": 0,
+          "title": "タイムボカン2000 怪盗きらめきマン",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たいむほかんにせんかいとうきらめきまん",
+            "wikibase_item": "Q3543727"
+          },
+          "terms": {
+            "description": [
+              "2000年にテレビ東京系列で放送された日本のテレビアニメ"
+            ]
+          }
+        },
+        {
+          "pageid": 489795,
+          "ns": 0,
+          "title": "ジャズ喫茶",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しやすきつさ",
+            "wikibase_item": "Q11309793"
+          },
+          "terms": {
+            "description": [
+              "主にジャズの音源をかけ､その鑑賞を主目的とする形式の喫茶店"
+            ]
+          }
+        },
+        {
+          "pageid": 1056637,
+          "ns": 0,
+          "title": "喫茶 黒うさぎ〜秘密の小部屋〜",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きつさくろうさきひみつのこへや",
+            "wikibase_item": "Q11419304"
+          }
+        },
+        {
+          "pageid": 1618807,
+          "ns": 0,
+          "title": "Tomorrow (田村ゆかりの曲)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうもろお",
+            "wikibase_item": "Q6127904"
+          }
+        }
+      ]
+    }
+  }
+}

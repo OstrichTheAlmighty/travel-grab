@@ -1,0 +1,66 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:18:05.696Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 633566,
+          "ns": 0,
+          "title": "キッザニア東京",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きつさにあとうきよう",
+            "page_image_free": "KidZania_Tokyo.jpg",
+            "wikibase_item": "Q5363436"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65583333,
+              "lon": 139.79194444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区豊洲にある体験型商業施設"
+            ]
+          }
+        },
+        {
+          "pageid": 2801629,
+          "ns": 0,
+          "title": "日笠陽子",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひかさ ようこ",
+            "wikibase_item": "Q50023"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優、歌手"
+            ]
+          }
+        },
+        {
+          "pageid": 3869113,
+          "ns": 0,
+          "title": "Akane (振付師)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あかね",
+            "displaytitle": "akane (振付師)",
+            "wikibase_item": "Q59552212"
+          },
+          "terms": {
+            "description": [
+              "日本の振付師"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

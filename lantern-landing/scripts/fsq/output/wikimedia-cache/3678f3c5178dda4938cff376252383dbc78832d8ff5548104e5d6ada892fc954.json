@@ -1,0 +1,43 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:55.570Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 91775,
+          "ns": 0,
+          "title": "哪吒",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なた",
+            "page_image_free": "Haw_Par_Villa_28,_Nov_06.JPG",
+            "wikibase_item": "Q547105"
+          },
+          "terms": {
+            "description": [
+              "神話の登場人物"
+            ]
+          }
+        },
+        {
+          "pageid": 1087586,
+          "ns": 0,
+          "title": "蓮根 (板橋区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はすね",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q11621677"
+          },
+          "terms": {
+            "description": [
+              "東京都板橋区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

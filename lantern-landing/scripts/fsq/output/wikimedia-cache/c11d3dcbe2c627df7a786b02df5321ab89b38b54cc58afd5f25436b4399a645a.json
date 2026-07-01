@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:40.755Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 23738176,
+          "ns": 0,
+          "title": "Tokyo DisneySea",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_DisneySea_logo.svg",
+            "wikibase-shortdesc": "Theme park in Chiba, Japan",
+            "wikibase_item": "Q1202341"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62666667,
+              "lon": 139.88805556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "theme park in Japan, owned by The Oriental Land Company"
+            ]
+          }
+        },
+        {
+          "pageid": 31635110,
+          "ns": 0,
+          "title": "Mediterranean Harbor (Tokyo DisneySea)",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Mediterranean_Harbor_(DisneySea)_at_Night_-_Dec_2019.jpg",
+            "wikibase-shortdesc": "Themed land",
+            "wikibase_item": "Q6807052"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62666667,
+              "lon": 139.88805556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "part of Tokyo DisneySea, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 31839846,
+          "ns": 0,
+          "title": "List of Tokyo DisneySea attractions",
+          "index": 5,
+          "pageprops": {
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q6600319"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 54798038,
+          "ns": 0,
+          "title": "Fortress Explorations",
+          "index": 1,
+          "pageprops": {
+            "wikibase-shortdesc": "Walk-through attraction in Tokyo",
+            "wikibase_item": "Q11332978"
+          },
+          "terms": {
+            "description": [
+              "Walk-through attraction at Tokyo DisneySea"
+            ]
+          }
+        },
+        {
+          "pageid": 75152927,
+          "ns": 0,
+          "title": "Adventureland Treehouse",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Adventureland_Treehouse.jpg",
+            "wikibase-shortdesc": "Walk-through treehouse attraction in Disneyland Park",
+            "wikibase_item": "Q124477993"
+          },
+          "terms": {
+            "description": [
+              "walk-through treehouse attraction in Disneyland Park"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

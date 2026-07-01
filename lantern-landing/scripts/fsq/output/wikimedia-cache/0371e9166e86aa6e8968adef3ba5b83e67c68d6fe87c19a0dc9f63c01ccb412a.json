@@ -1,0 +1,89 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:11.134Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 120510,
+          "ns": 0,
+          "title": "江原正士",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "えはら まさし",
+            "wikibase_item": "Q1185197"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 2500629,
+          "ns": 0,
+          "title": "撮らないで下さい!!グラビアアイドル裏物語",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とらないてくたさいくらひああいとるうらものかたり",
+            "wikibase_item": "Q11498759"
+          }
+        },
+        {
+          "pageid": 3212202,
+          "ns": 0,
+          "title": "きぼうのかね商店街",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きほうのかねしようてんかい",
+            "page_image_free": "Kibonokaneshotengai.JPG",
+            "wikibase_item": "Q20043935"
+          },
+          "coordinates": [
+            {
+              "lat": 38.43746111,
+              "lon": 141.43360556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 3377611,
+          "ns": 0,
+          "title": "日本のバンド一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんのはんといちらん",
+            "wikibase_item": "Q24869797"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3909326,
+          "ns": 0,
+          "title": "杉山里穂",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すきやま りほ",
+            "wikibase_item": "Q62085447"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

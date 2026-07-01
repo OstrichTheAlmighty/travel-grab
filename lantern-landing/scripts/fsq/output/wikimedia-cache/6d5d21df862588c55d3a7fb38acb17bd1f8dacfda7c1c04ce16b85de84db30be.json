@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:36.872Z",
+  "value": {
+    "searchinfo": {
+      "search": "すみだ北斎美術館"
+    },
+    "search": [
+      {
+        "id": "Q17220332",
+        "title": "Q17220332",
+        "pageid": 18816302,
+        "concepturi": "http://www.wikidata.org/entity/Q17220332",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q17220332",
+        "display": {
+          "label": {
+            "value": "Sumida Hokusai Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Sumida Hokusai Museum",
+        "description": "museum in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "すみだ北斎美術館"
+        },
+        "aliases": [
+          "すみだ北斎美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

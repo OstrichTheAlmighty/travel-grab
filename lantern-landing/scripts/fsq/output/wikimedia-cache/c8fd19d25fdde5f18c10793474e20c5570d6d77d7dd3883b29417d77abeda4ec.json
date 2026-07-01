@@ -1,0 +1,130 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:42.260Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 387,
+          "ns": 0,
+          "title": "岐阜県",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きふけん",
+            "kartographer_frames": "1",
+            "page_image_free": "Shirakawago.jpg",
+            "wikibase_item": "Q131277"
+          },
+          "coordinates": [
+            {
+              "lat": 35.39119,
+              "lon": 136.72219,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の都道府県"
+            ]
+          }
+        },
+        {
+          "pageid": 42171,
+          "ns": 0,
+          "title": "府中町",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふちゆうちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Mikumari-kyo_20121020-5.JPG",
+            "wikibase_item": "Q1204737"
+          },
+          "coordinates": [
+            {
+              "lat": 34.39258,
+              "lon": 132.50453,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "広島県安芸郡の町"
+            ]
+          }
+        },
+        {
+          "pageid": 58877,
+          "ns": 0,
+          "title": "農業公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "のうきようこうえん",
+            "wikibase_item": "Q11637995"
+          },
+          "terms": {
+            "description": [
+              "自然とのふれあいなどを目的とする施設"
+            ]
+          }
+        },
+        {
+          "pageid": 189607,
+          "ns": 0,
+          "title": "大野町",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおのちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Ono_rose_garden.jpg",
+            "wikibase_item": "Q1203308"
+          },
+          "coordinates": [
+            {
+              "lat": 35.47061,
+              "lon": 136.62756,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "岐阜県揖斐郡の町"
+            ]
+          }
+        },
+        {
+          "pageid": 1913137,
+          "ns": 0,
+          "title": "三木市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Miki_hardware_Festival_15.JPG",
+            "wikibase_item": "Q31238"
+          },
+          "coordinates": [
+            {
+              "lat": 34.79692,
+              "lon": 134.99019,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県の市"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

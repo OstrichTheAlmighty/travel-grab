@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:24.236Z",
+  "value": {
+    "searchinfo": {
+      "search": "旧朝倉家住宅"
+    },
+    "search": [
+      {
+        "id": "Q16944532",
+        "title": "Q16944532",
+        "pageid": 18547232,
+        "concepturi": "http://www.wikidata.org/entity/Q16944532",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q16944532",
+        "display": {
+          "label": {
+            "value": "Kyu Asakura House",
+            "language": "en"
+          },
+          "description": {
+            "value": "building in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Kyu Asakura House",
+        "description": "building in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "旧朝倉家住宅"
+        },
+        "aliases": [
+          "旧朝倉家住宅"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

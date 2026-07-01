@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:57.322Z",
+  "value": {
+    "searchinfo": {
+      "search": "佐伯祐三アトリエ記念館"
+    },
+    "search": [
+      {
+        "id": "Q11382880",
+        "title": "Q11382880",
+        "pageid": 12521245,
+        "concepturi": "http://www.wikidata.org/entity/Q11382880",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11382880",
+        "display": {
+          "label": {
+            "value": "Saeki Yuzo Atelier Museum",
+            "language": "en"
+          }
+        },
+        "label": "Saeki Yuzo Atelier Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "佐伯祐三アトリエ記念館"
+        },
+        "aliases": [
+          "佐伯祐三アトリエ記念館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

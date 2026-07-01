@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:46.921Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 78746,
+          "ns": 0,
+          "title": "東宮御所",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうくうこしよ",
+            "page_image_free": "Samegahashi-mon_Gate_2012_Akasaka_Tokyo_2.JPG",
+            "wikibase_item": "Q1036008"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67638889,
+              "lon": 139.72416667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の皇太子の御所"
+            ]
+          }
+        },
+        {
+          "pageid": 205457,
+          "ns": 0,
+          "title": "御用邸",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こようてい",
+            "wikibase_item": "Q67097832"
+          },
+          "terms": {
+            "description": [
+              "天皇や皇族の別荘"
+            ]
+          }
+        },
+        {
+          "pageid": 302857,
+          "ns": 0,
+          "title": "崇仁親王妃百合子",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たかひとしんのうひ ゆりこ",
+            "page_image_free": "Princess_Mikasa_2012-1-2.jpg",
+            "wikibase_item": "Q1189486"
+          },
+          "terms": {
+            "description": [
+              "日本の女性皇族、三笠宮崇仁親王妃、第2代三笠宮家当主 (1923-2024)"
+            ]
+          }
+        },
+        {
+          "pageid": 426908,
+          "ns": 0,
+          "title": "鷹司和子",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たかつかさ かすこ",
+            "page_image_free": "A0287992_1472024.jpg",
+            "wikibase_item": "Q1030373"
+          },
+          "terms": {
+            "description": [
+              "日本の元女性皇族"
+            ]
+          }
+        },
+        {
+          "pageid": 3644179,
+          "ns": 0,
+          "title": "高輪皇族邸",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たかなわこうそくてい",
+            "page_image_free": "Residence_of_prince_takamatsu.jpg",
+            "wikibase_item": "Q38255023"
+          },
+          "terms": {
+            "description": [
+              "東京都港区にある皇室関連施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

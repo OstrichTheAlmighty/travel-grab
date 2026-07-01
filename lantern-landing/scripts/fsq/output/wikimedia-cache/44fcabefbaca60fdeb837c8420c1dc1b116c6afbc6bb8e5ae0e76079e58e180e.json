@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:37:45.527Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 101061,
+          "ns": 0,
+          "title": "北島三郎",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きたしま さふろう",
+            "page_image_free": "Saburo_Kitajima_IMG_0826-1_20170625.jpg",
+            "wikibase_item": "Q1070572"
+          },
+          "terms": {
+            "description": [
+              "日本の歌手 (1936-)"
+            ]
+          }
+        },
+        {
+          "pageid": 231743,
+          "ns": 0,
+          "title": "外山高士",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とやま たかし",
+            "wikibase_item": "Q11430442"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優 (1930-2022)"
+            ]
+          }
+        },
+        {
+          "pageid": 1037235,
+          "ns": 0,
+          "title": "オジサンズ11",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おしさんすいれふん",
+            "wikibase_item": "Q11291941"
+          },
+          "terms": {
+            "description": [
+              "日本テレビ系列で放送されていたバラエティ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 1584034,
+          "ns": 0,
+          "title": "塗仏の宴 宴の支度",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ぬりほとけのうたけうたけのしたく",
+            "wikibase_item": "Q11428366"
+          },
+          "terms": {
+            "description": [
+              "京極夏彦による文学作品"
+            ]
+          }
+        },
+        {
+          "pageid": 3537115,
+          "ns": 0,
+          "title": "並木塔子",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "なみき とうこ",
+            "page_image_free": "Toko_Namiki,_30th_May_2020.jpg",
+            "wikibase_item": "Q28689212"
+          },
+          "terms": {
+            "description": [
+              "日本の女優、AV女優"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

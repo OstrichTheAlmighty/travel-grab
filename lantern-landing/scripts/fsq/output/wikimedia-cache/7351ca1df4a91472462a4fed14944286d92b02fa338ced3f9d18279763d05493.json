@@ -1,0 +1,197 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:18:08.990Z",
+  "value": {
+    "searchinfo": {
+      "search": "Wild River"
+    },
+    "search": [
+      {
+        "id": "Q20750407",
+        "title": "Q20750407",
+        "pageid": 22496124,
+        "concepturi": "http://www.wikidata.org/entity/Q20750407",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q20750407",
+        "display": {
+          "label": {
+            "value": "Rivière Sauvage",
+            "language": "en"
+          },
+          "description": {
+            "value": "watercourse in Saint-Michel-des-Saints, Quebec, Canada",
+            "language": "en"
+          }
+        },
+        "label": "Rivière Sauvage",
+        "description": "watercourse in Saint-Michel-des-Saints, Quebec, Canada",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "Wild River"
+        },
+        "aliases": [
+          "Wild River"
+        ]
+      },
+      {
+        "id": "Q1480019",
+        "title": "Q1480019",
+        "pageid": 1417941,
+        "concepturi": "http://www.wikidata.org/entity/Q1480019",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1480019",
+        "display": {
+          "label": {
+            "value": "Wild River",
+            "language": "en"
+          },
+          "description": {
+            "value": "1960 film by Elia Kazan",
+            "language": "en"
+          }
+        },
+        "label": "Wild River",
+        "description": "1960 film by Elia Kazan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Wild River"
+        }
+      },
+      {
+        "id": "Q21007801",
+        "title": "Q21007801",
+        "pageid": 23059348,
+        "concepturi": "http://www.wikidata.org/entity/Q21007801",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q21007801",
+        "display": {
+          "label": {
+            "value": "Rivière Sauvage",
+            "language": "en"
+          },
+          "description": {
+            "value": "watercourse in Saint-Romain, Quebec, Canada",
+            "language": "en"
+          }
+        },
+        "label": "Rivière Sauvage",
+        "description": "watercourse in Saint-Romain, Quebec, Canada",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "Wild river"
+        },
+        "aliases": [
+          "Wild river"
+        ]
+      },
+      {
+        "id": "Q21426603",
+        "title": "Q21426603",
+        "pageid": 23472290,
+        "concepturi": "http://www.wikidata.org/entity/Q21426603",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q21426603",
+        "display": {
+          "label": {
+            "value": "Rivière Sauvage",
+            "language": "en"
+          },
+          "description": {
+            "value": "watercourse in Sainte-Marie-de-Blandford, Quebec, Canada",
+            "language": "en"
+          }
+        },
+        "label": "Rivière Sauvage",
+        "description": "watercourse in Sainte-Marie-de-Blandford, Quebec, Canada",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "Wild River"
+        },
+        "aliases": [
+          "Wild River"
+        ]
+      },
+      {
+        "id": "Q3568101",
+        "title": "Q3568101",
+        "pageid": 3396887,
+        "concepturi": "http://www.wikidata.org/entity/Q3568101",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3568101",
+        "display": {
+          "label": {
+            "value": "Wild River",
+            "language": "en"
+          },
+          "description": {
+            "value": "right tributary of Koyukuk River in Alaska",
+            "language": "en"
+          }
+        },
+        "label": "Wild River",
+        "description": "right tributary of Koyukuk River in Alaska",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Wild River"
+        }
+      },
+      {
+        "id": "Q8000958",
+        "title": "Q8000958",
+        "pageid": 7945341,
+        "concepturi": "http://www.wikidata.org/entity/Q8000958",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q8000958",
+        "display": {
+          "label": {
+            "value": "wild river",
+            "language": "en"
+          },
+          "description": {
+            "value": "classification of rivers or river systems",
+            "language": "en"
+          }
+        },
+        "label": "wild river",
+        "description": "classification of rivers or river systems",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "wild river"
+        }
+      },
+      {
+        "id": "Q8000772",
+        "title": "Q8000772",
+        "pageid": 7945143,
+        "concepturi": "http://www.wikidata.org/entity/Q8000772",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q8000772",
+        "display": {
+          "label": {
+            "value": "Wild River",
+            "language": "en"
+          },
+          "description": {
+            "value": "river in New Hampshire and Maine, United States",
+            "language": "en"
+          }
+        },
+        "label": "Wild River",
+        "description": "river in New Hampshire and Maine, United States",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Wild River"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

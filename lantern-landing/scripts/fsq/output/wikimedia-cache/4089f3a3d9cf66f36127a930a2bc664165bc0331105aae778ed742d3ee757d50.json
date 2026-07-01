@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:39.431Z",
+  "value": {
+    "searchinfo": {
+      "search": "平和島公園"
+    },
+    "search": [
+      {
+        "id": "Q11482236",
+        "title": "Q11482236",
+        "pageid": 12621807,
+        "concepturi": "http://www.wikidata.org/entity/Q11482236",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11482236",
+        "display": {
+          "label": {
+            "value": "Heiwajima Park",
+            "language": "en"
+          }
+        },
+        "label": "Heiwajima Park",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "平和島公園"
+        },
+        "aliases": [
+          "平和島公園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

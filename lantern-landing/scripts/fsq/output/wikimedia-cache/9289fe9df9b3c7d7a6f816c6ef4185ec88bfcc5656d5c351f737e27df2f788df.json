@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:47.992Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 5855,
+          "ns": 0,
+          "title": "園芸",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "えんけい",
+            "page_image_free": "House_plants.jpg",
+            "wikibase_item": "Q48803"
+          }
+        },
+        {
+          "pageid": 23441,
+          "ns": 0,
+          "title": "キク",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きく",
+            "page_image_free": "Kiku_yellow01.jpg",
+            "wikibase_item": "Q15530181"
+          },
+          "terms": {
+            "description": [
+              "キク科キク属の植物"
+            ]
+          }
+        },
+        {
+          "pageid": 35618,
+          "ns": 0,
+          "title": "新宿御苑",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しんしゆくきよえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Shinjuku_Gyoen_National_Garden_-_sakura_3.JPG",
+            "wikibase_item": "Q776863"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68527778,
+              "lon": 139.70972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都にある国民公園"
+            ]
+          }
+        },
+        {
+          "pageid": 295591,
+          "ns": 0,
+          "title": "花壇",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かたん",
+            "page_image_free": "Kuekenhoff_001.jpg",
+            "wikibase_item": "Q8564039"
+          },
+          "terms": {
+            "description": [
+              "花などの植物を植栽展示した場所"
+            ]
+          }
+        },
+        {
+          "pageid": 641685,
+          "ns": 0,
+          "title": "古典園芸植物",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こてんえんけいしよくふつ",
+            "page_image_free": "Matumotosenno.jpg",
+            "wikibase_item": "Q11410941"
+          },
+          "terms": {
+            "description": [
+              "日本の伝統的な園芸植物"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:32.660Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 16412,
+          "ns": 0,
+          "title": "ゲートボール",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "けえとほおる",
+            "page_image_free": "GBTOP.jpg",
+            "wikibase_item": "Q1148950"
+          },
+          "terms": {
+            "description": [
+              "日本発祥の球技"
+            ]
+          }
+        },
+        {
+          "pageid": 269243,
+          "ns": 0,
+          "title": "ウォーターゲート事件",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "うおおたあけえとしけん",
+            "page_image_free": "Watergate.jpg",
+            "wikibase_item": "Q42761"
+          },
+          "terms": {
+            "description": [
+              "アメリカの政治スキャンダル"
+            ]
+          }
+        },
+        {
+          "pageid": 601081,
+          "ns": 0,
+          "title": "パワーゲート",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はわあけえと",
+            "page_image_free": "Hino_Ranger_FD2ALBG_Pro_Shift_Select_dial.jpg",
+            "wikibase_item": "Q966459"
+          },
+          "terms": {
+            "description": [
+              "貨物自動車における荷役省力化装置（昇降機）"
+            ]
+          }
+        },
+        {
+          "pageid": 1204864,
+          "ns": 0,
+          "title": "ライオンズゲート",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "らいおんすけえと",
+            "wikibase_item": "Q515869"
+          },
+          "terms": {
+            "description": [
+              "アメリカのエンターテインメント企業"
+            ]
+          }
+        },
+        {
+          "pageid": 1832865,
+          "ns": 0,
+          "title": "DRAGON GATE",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とらこんけえと",
+            "wikibase_item": "Q717248"
+          },
+          "terms": {
+            "description": [
+              "日本のプロレス団体"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

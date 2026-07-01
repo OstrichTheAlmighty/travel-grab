@@ -1,0 +1,129 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:13.952Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 6888,
+          "ns": 0,
+          "title": "都市再生機構",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "としさいせいきこう",
+            "page_image_free": "Yokohama_Island_Tower.jpg",
+            "wikibase_item": "Q11643596"
+          },
+          "coordinates": [
+            {
+              "lat": 35.45013889,
+              "lon": 139.63511111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "国土交通省所管の中期目標管理法人"
+            ]
+          }
+        },
+        {
+          "pageid": 17347,
+          "ns": 0,
+          "title": "天王洲アイル駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "てんのうすあいる",
+            "kartographer_frames": "1",
+            "page_image_free": "Tennozu_isle_sta_south.jpg",
+            "wikibase_item": "Q841425"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62319444,
+              "lon": 139.75047222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の鉄道駅"
+            ]
+          }
+        },
+        {
+          "pageid": 129393,
+          "ns": 0,
+          "title": "プリンスホテル",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふりんすほてる",
+            "page_image_free": "SeibuHD_Diamond_gate_Ikebukuro.jpg",
+            "wikibase_item": "Q7244088"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72672222,
+              "lon": 139.71108333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "西武グループのホテルチェーン"
+            ]
+          }
+        },
+        {
+          "pageid": 1363015,
+          "ns": 0,
+          "title": "東品川",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひかししなかわ",
+            "kartographer_frames": "1",
+            "page_image_free": "品川区立東品川海上公園2009SP-1_-_panoramio.jpg",
+            "wikibase_item": "Q11526367"
+          },
+          "terms": {
+            "description": [
+              "東京都品川区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1462674,
+          "ns": 0,
+          "title": "品川シーサイドフォレスト",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しなかわしいさいとふおれすと",
+            "page_image_free": "Shinagawa_seaside_overview_2009.JPG",
+            "wikibase_item": "Q11418363"
+          },
+          "coordinates": [
+            {
+              "lat": 35.61005556,
+              "lon": 139.74869444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区にある複合施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

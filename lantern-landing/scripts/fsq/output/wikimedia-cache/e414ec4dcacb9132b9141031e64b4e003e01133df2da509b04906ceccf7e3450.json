@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:38.167Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京都虹の下水道館"
+    },
+    "search": [
+      {
+        "id": "Q11625416",
+        "title": "Q11625416",
+        "pageid": 12765851,
+        "concepturi": "http://www.wikidata.org/entity/Q11625416",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11625416",
+        "display": {
+          "label": {
+            "value": "Tokyo Sewerage Museum \"Rainbow\"",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Sewerage Museum \"Rainbow\"",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "東京都虹の下水道館"
+        },
+        "aliases": [
+          "東京都虹の下水道館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

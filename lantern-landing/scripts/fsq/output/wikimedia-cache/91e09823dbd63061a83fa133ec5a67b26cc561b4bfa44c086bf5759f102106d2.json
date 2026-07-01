@@ -1,0 +1,94 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:13:51.703Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 253949,
+          "ns": 0,
+          "title": "トゥーンタウン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とううんたうん",
+            "wikibase_item": "Q2916668"
+          }
+        },
+        {
+          "pageid": 449814,
+          "ns": 0,
+          "title": "東京ディズニーランドホテル",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいらんとほてる",
+            "wikibase_item": "Q195423"
+          },
+          "terms": {
+            "description": [
+              "千葉県浦安市の東京ディズニーリゾートにあるホテル"
+            ]
+          }
+        },
+        {
+          "pageid": 2812351,
+          "ns": 0,
+          "title": "カリブの海賊",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かりふのかいそく",
+            "wikibase_item": "Q1713564"
+          },
+          "terms": {
+            "description": [
+              "ディズニーパークのアトラクション"
+            ]
+          }
+        },
+        {
+          "pageid": 3040300,
+          "ns": 0,
+          "title": "東京ディズニーランド",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいらんと",
+            "page_image_free": "Japan_Tokyo_keiyo_location_map.svg",
+            "wikibase_item": "Q843997"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63277778,
+              "lon": 139.88055556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県浦安市にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 3584233,
+          "ns": 0,
+          "title": "デヴィー・クロケットのカヌー探険",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "てういくろけつとのかぬたんけん",
+            "wikibase_item": "Q3019188"
+          },
+          "terms": {
+            "description": [
+              "ディズニーパークのアトラクション"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

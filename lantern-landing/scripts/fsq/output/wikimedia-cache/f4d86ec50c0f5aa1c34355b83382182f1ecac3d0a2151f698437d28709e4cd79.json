@@ -1,0 +1,90 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:40.410Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 42698,
+          "ns": 0,
+          "title": "速水けんたろう",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はやみ けんたろう",
+            "wikibase_item": "Q11639687"
+          },
+          "terms": {
+            "description": [
+              "日本の歌手、俳優、声優"
+            ]
+          }
+        },
+        {
+          "pageid": 92497,
+          "ns": 0,
+          "title": "ケーブルメディアワイワイ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "けふるめていあわいわい",
+            "page_image_free": "Cable_Media_Waiwai_Nobeoka_2010.JPG",
+            "wikibase_item": "Q11301442"
+          },
+          "coordinates": [
+            {
+              "lat": 32.56883333,
+              "lon": 131.67005556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 978625,
+          "ns": 0,
+          "title": "けんたろうとミクのワイワイキッズ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "けんたろうとみくのわいわいきつす",
+            "wikibase_item": "Q11266015"
+          }
+        },
+        {
+          "pageid": 1724096,
+          "ns": 0,
+          "title": "メダルゲームのタイトル一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "めたるけえむのたいとるいちらん",
+            "wikibase_item": "Q11343715"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2566742,
+          "ns": 0,
+          "title": "あるあるYYテレビ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あるあるわいわいてれひ",
+            "page_image_free": "Aruaru_city.JPG",
+            "wikibase_item": "Q10846465"
+          },
+          "terms": {
+            "description": [
+              "日本のバラエティ番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

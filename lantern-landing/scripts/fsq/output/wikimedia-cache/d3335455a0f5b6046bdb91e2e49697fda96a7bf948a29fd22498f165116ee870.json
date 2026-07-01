@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:51.681Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 25760,
+          "ns": 0,
+          "title": "秩父宮雍仁親王",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちちふのみや やすひとしんのう",
+            "page_image_free": "Chichibunomiya_Yasuhito.jpg",
+            "wikibase_item": "Q700317"
+          },
+          "terms": {
+            "description": [
+              "日本の親王"
+            ]
+          }
+        },
+        {
+          "pageid": 57836,
+          "ns": 0,
+          "title": "日本スポーツ振興センター",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんすほおつしんこうせんたあ",
+            "page_image_free": "Nihon_Seinenkan-1a.jpg",
+            "wikibase_item": "Q11506553"
+          },
+          "terms": {
+            "description": [
+              "日本のスポーツ振興を目的とする独立行政法人"
+            ]
+          }
+        },
+        {
+          "pageid": 148747,
+          "ns": 0,
+          "title": "野球殿堂博物館 (日本)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やきゆうてんとうはくふつかん",
+            "page_image_free": "Baseball_Hall_of_Fame_and_Museum_(Japan)_Entrance.jpg",
+            "wikibase_item": "Q1134380"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70565833,
+              "lon": 139.75191389,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区の東京ドームにある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 1062463,
+          "ns": 0,
+          "title": "秩父宮記念スポーツ博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ちちふのみやきねんすほつはくふつかん",
+            "page_image_free": "Sports_2006_1009.JPG",
+            "wikibase_item": "Q11596124"
+          },
+          "terms": {
+            "description": [
+              "東京都の国立霞ヶ丘競技場にあった博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 1298628,
+          "ns": 0,
+          "title": "スポーツ学部",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "すほつかくふ",
+            "wikibase_item": "Q11313182"
+          }
+        }
+      ]
+    }
+  }
+}

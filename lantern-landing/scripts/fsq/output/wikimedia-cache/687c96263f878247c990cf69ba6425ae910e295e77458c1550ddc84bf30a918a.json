@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:04.499Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 31996,
+          "ns": 0,
+          "title": "船の科学館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふねのかかくかん",
+            "page_image_free": "Museum_of_Maritime_Science-1.jpg",
+            "wikibase_item": "Q1048709"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62033333,
+              "lon": 139.77236111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 32032,
+          "ns": 0,
+          "title": "日本科学未来館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にほんかかくみらいかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Miraikan_logo.svg",
+            "wikibase_item": "Q656957"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区青海にある科学館"
+            ]
+          }
+        },
+        {
+          "pageid": 37214,
+          "ns": 0,
+          "title": "科学館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かかくかん",
+            "page_image_free": "Akashi-Minicipal-Planetarium3387.JPG",
+            "wikibase_item": "Q588140"
+          },
+          "terms": {
+            "description": [
+              "自然科学に関連する展示を行う博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 500893,
+          "ns": 0,
+          "title": "東京都水の科学館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようとみすのかかくかん",
+            "page_image_free": "Tokyo_Science_Pavilion.jpg",
+            "wikibase_item": "Q11525336"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63080556,
+              "lon": 139.7855,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区有明にある東京都水道局が運営する水に関する科学館"
+            ]
+          }
+        },
+        {
+          "pageid": 946532,
+          "ns": 0,
+          "title": "ガスの科学館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かすのかかくかん",
+            "page_image_free": "Gas_Science_Museum_\"Gasutenani\",_at_Toyosu,_Koto,_Tokyo_(2019-01-01).jpg",
+            "wikibase_item": "Q11295937"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65223056,
+              "lon": 139.79252778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区にある東京ガスが運営する科学館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

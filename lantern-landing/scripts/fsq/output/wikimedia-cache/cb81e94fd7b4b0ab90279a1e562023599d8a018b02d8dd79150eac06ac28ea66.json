@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:32.025Z",
+  "value": {
+    "searchinfo": {
+      "search": "NTTインターコミュニケーション・センター"
+    },
+    "search": [
+      {
+        "id": "Q3788869",
+        "title": "Q3788869",
+        "pageid": 3612845,
+        "concepturi": "http://www.wikidata.org/entity/Q3788869",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3788869",
+        "display": {
+          "label": {
+            "value": "NTT InterCommunication Center",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Japan",
+            "language": "en"
+          }
+        },
+        "label": "NTT InterCommunication Center",
+        "description": "museum in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "NTTインターコミュニケーション・センター"
+        },
+        "aliases": [
+          "NTTインターコミュニケーション・センター"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

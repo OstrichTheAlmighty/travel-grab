@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:41.836Z",
+  "value": {
+    "searchinfo": {
+      "search": "神戸町あけぼの公園"
+    },
+    "search": [
+      {
+        "id": "Q42312127",
+        "title": "Q42312127",
+        "pageid": 43594363,
+        "concepturi": "http://www.wikidata.org/entity/Q42312127",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q42312127",
+        "display": {
+          "label": {
+            "value": "神戸町あけぼの公園",
+            "language": "ja"
+          },
+          "description": {
+            "value": "park in Suginami, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "神戸町あけぼの公園",
+        "description": "park in Suginami, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "神戸町あけぼの公園"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

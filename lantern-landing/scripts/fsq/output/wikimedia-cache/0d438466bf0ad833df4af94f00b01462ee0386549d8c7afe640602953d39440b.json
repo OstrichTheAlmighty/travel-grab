@@ -1,0 +1,98 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:23.022Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 15039992,
+          "ns": 0,
+          "title": "KRL Commuterline",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "JR_205-74_12sf_@_Gondangdia_(20230713)_(53329200846).jpg",
+            "wikibase-shortdesc": "Commuter rail system in Greater Jakarta, Indonesia",
+            "wikibase_item": "Q1926929"
+          },
+          "terms": {
+            "description": [
+              "commuter rail system in Indonesia"
+            ]
+          }
+        },
+        {
+          "pageid": 17190687,
+          "ns": 0,
+          "title": "Jakarta MRT",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "2",
+            "page_image_free": "MRTset3.jpg",
+            "wikibase-shortdesc": "Rapid transit system in Jakarta, Indonesia",
+            "wikibase_item": "Q3333785"
+          },
+          "terms": {
+            "description": [
+              "rapid transit system in Jakarta"
+            ]
+          }
+        },
+        {
+          "pageid": 28320395,
+          "ns": 0,
+          "title": "KTM ETS",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Class_93-2_Kampar,_Perak,_Malaysia.jpg",
+            "wikibase-shortdesc": "Malaysian inter-city rail service",
+            "wikibase_item": "Q5357521"
+          },
+          "terms": {
+            "description": [
+              "Malaysian inter-city rail service"
+            ]
+          }
+        },
+        {
+          "pageid": 57588118,
+          "ns": 0,
+          "title": "QR code payment",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "A_woman_paying_at_Ziguangyuan,_Yuanda_Xilu_(20250411135111).jpg",
+            "wikibase-shortdesc": "Barcode-based mobile payment method",
+            "wikibase_item": "Q55630875"
+          },
+          "terms": {
+            "description": [
+              "contactless payment system"
+            ]
+          }
+        },
+        {
+          "pageid": 58609647,
+          "ns": 0,
+          "title": "Jakarta LRT",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Hyundai_Rotem_Jakarta_LRT,_Arriving_at_Boulevard_Utara.jpg",
+            "wikibase-shortdesc": "Light rapid transit system in Jakarta, Indonesia",
+            "wikibase_item": "Q56810702"
+          },
+          "terms": {
+            "description": [
+              "light rapid transit in Jakarta"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

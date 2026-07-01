@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:42.948Z",
+  "value": {
+    "searchinfo": {
+      "search": "講談社 野間記念館"
+    },
+    "search": [
+      {
+        "id": "Q3788846",
+        "title": "Q3788846",
+        "pageid": 3612823,
+        "concepturi": "http://www.wikidata.org/entity/Q3788846",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3788846",
+        "display": {
+          "label": {
+            "value": "Kodansha Noma Memorial Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Kodansha Noma Memorial Museum",
+        "description": "museum in Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "講談社 野間記念館"
+        },
+        "aliases": [
+          "講談社 野間記念館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

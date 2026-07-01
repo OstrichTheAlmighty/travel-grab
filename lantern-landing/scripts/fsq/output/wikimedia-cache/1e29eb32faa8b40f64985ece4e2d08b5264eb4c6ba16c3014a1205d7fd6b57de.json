@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:04.441Z",
+  "value": {
+    "searchinfo": {
+      "search": "洗足池公園"
+    },
+    "search": [
+      {
+        "id": "Q11555793",
+        "title": "Q11555793",
+        "pageid": 12695703,
+        "concepturi": "http://www.wikidata.org/entity/Q11555793",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11555793",
+        "display": {
+          "label": {
+            "value": "Senzoku-ike",
+            "language": "en"
+          },
+          "description": {
+            "value": "lake in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Senzoku-ike",
+        "description": "lake in Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "洗足池公園"
+        },
+        "aliases": [
+          "洗足池公園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

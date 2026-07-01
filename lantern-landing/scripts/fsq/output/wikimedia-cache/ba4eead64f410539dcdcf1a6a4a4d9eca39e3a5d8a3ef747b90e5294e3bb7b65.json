@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:08.188Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 146774,
+          "ns": 0,
+          "title": "徳富蘇峰",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とくとみ そほう",
+            "page_image_free": "Soho_Tokutomi_1_cropped.jpg",
+            "wikibase_item": "Q708794"
+          },
+          "terms": {
+            "description": [
+              "ジャーナリスト (1863-1957)"
+            ]
+          }
+        },
+        {
+          "pageid": 430072,
+          "ns": 0,
+          "title": "尾崎士郎",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おさき しろう",
+            "page_image_free": "Ozaki_Shiro.JPG",
+            "wikibase_item": "Q11465191"
+          },
+          "terms": {
+            "description": [
+              "小説家 (1898-1964)"
+            ]
+          }
+        },
+        {
+          "pageid": 1012911,
+          "ns": 0,
+          "title": "馬込文士村",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "まこめふんしむら",
+            "page_image": "Relief_of_residents_of_magome_writers_village_sanno_ota_2015.jpg",
+            "page_image_free": "Yukio_Mishima.jpg",
+            "wikibase_item": "Q11668083"
+          },
+          "terms": {
+            "description": [
+              "大正後期から昭和初期にかけて、現在の東京都大田区で多くの文士が暮らしていた地域"
+            ]
+          }
+        },
+        {
+          "pageid": 1426446,
+          "ns": 0,
+          "title": "山王 (大田区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さんのう",
+            "kartographer_frames": "1",
+            "page_image_free": "Sannō_Benten_Pond_-_panoramio.jpg",
+            "wikibase_item": "Q11470028"
+          },
+          "terms": {
+            "description": [
+              "東京都大田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 4702776,
+          "ns": 0,
+          "title": "山王草堂記念館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さんのうそうとうきねんかん",
+            "wikibase_item": "Q116564594"
+          },
+          "terms": {
+            "description": [
+              "徳富蘇峰の旧宅を保存する東京都大田区の施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

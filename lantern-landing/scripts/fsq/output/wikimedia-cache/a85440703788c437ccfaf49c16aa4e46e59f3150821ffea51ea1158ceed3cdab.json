@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:24.723Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18189,
+          "ns": 0,
+          "title": "お化け屋敷",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おはけやしき",
+            "page_image_free": "Obake_Yashiki.jpg",
+            "wikibase_item": "Q1139917"
+          },
+          "terms": {
+            "description": [
+              "日本の娯楽施設"
+            ]
+          }
+        },
+        {
+          "pageid": 34586,
+          "ns": 0,
+          "title": "東京ドームシティアトラクションズ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようとおむしていあとらくしよんす",
+            "page_image_free": "Tokyo-dome_air.jpg",
+            "wikibase_item": "Q564646"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70522222,
+              "lon": 139.754,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区の遊園地"
+            ]
+          }
+        },
+        {
+          "pageid": 140967,
+          "ns": 0,
+          "title": "ラクーア",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "らくうあ",
+            "kartographer_frames": "1",
+            "page_image_free": "LaQua(Tokyo_Dome_City_).jpg",
+            "wikibase_item": "Q5368622"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70711111,
+              "lon": 139.75280556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京ドームシティ内のスパを中心とした商業施設"
+            ]
+          }
+        },
+        {
+          "pageid": 1418119,
+          "ns": 0,
+          "title": "零 (ゲーム)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せろ",
+            "wikibase_item": "Q586400"
+          },
+          "terms": {
+            "description": [
+              "日本のホラーゲームシリーズ"
+            ]
+          }
+        },
+        {
+          "pageid": 2492242,
+          "ns": 0,
+          "title": "菅原道真",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "すかわら の みちさね",
+            "page_image_free": "束帯天神像.png",
+            "wikibase_item": "Q382005"
+          },
+          "terms": {
+            "description": [
+              "日本の公卿・学者・文人"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

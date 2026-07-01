@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:25.204Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 135321,
+          "ns": 0,
+          "title": "ART-SCHOOL",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ああとすくうる",
+            "wikibase_item": "Q2864510"
+          },
+          "terms": {
+            "description": [
+              "日本のロックバンド"
+            ]
+          }
+        },
+        {
+          "pageid": 167166,
+          "ns": 0,
+          "title": "10-FEET",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "てんふいいと",
+            "wikibase_item": "Q3596928"
+          },
+          "terms": {
+            "description": [
+              "日本のスリーピースロックバンド (1997-)"
+            ]
+          }
+        },
+        {
+          "pageid": 195141,
+          "ns": 0,
+          "title": "The pillows",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひろうす",
+            "displaytitle": "the pillows",
+            "page_image_free": "The_Pillows_Band.jpg",
+            "wikibase_item": "Q615120"
+          },
+          "terms": {
+            "description": [
+              "日本のオルタナティヴ・ロックバンド"
+            ]
+          }
+        },
+        {
+          "pageid": 586315,
+          "ns": 0,
+          "title": "第3次スーパーロボット大戦α 終焉の銀河へ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たい3しすうはあろほつとたいせんあるふあしゆうえんのきんかへ",
+            "wikibase_item": "Q1986745"
+          },
+          "terms": {
+            "description": [
+              "日本のコンピュータゲーム"
+            ]
+          }
+        },
+        {
+          "pageid": 2876707,
+          "ns": 0,
+          "title": "フルカワユタカ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふるかわ ゆたか",
+            "wikibase_item": "Q17214628"
+          },
+          "terms": {
+            "description": [
+              "日本のミュージシャン"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

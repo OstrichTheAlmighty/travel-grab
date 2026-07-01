@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:21.596Z",
+  "value": {
+    "searchinfo": {
+      "search": "大森貝塚"
+    },
+    "search": [
+      {
+        "id": "Q11436418",
+        "title": "Q11436418",
+        "pageid": 12575231,
+        "concepturi": "http://www.wikidata.org/entity/Q11436418",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11436418",
+        "display": {
+          "label": {
+            "value": "Omori Shell Mounds",
+            "language": "en"
+          },
+          "description": {
+            "value": "Midden in tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Omori Shell Mounds",
+        "description": "Midden in tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "大森貝塚"
+        },
+        "aliases": [
+          "大森貝塚"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

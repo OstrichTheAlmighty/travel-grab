@@ -1,0 +1,100 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:12.391Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 159052,
+          "ns": 0,
+          "title": "牛乳石鹸共進社",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きゆうにゆうせつけんきようしんしや",
+            "page_image_free": "Cow_Brand_Soap_Kyoshinsha_Co.,_Ltd._headquarters.jpg",
+            "wikibase_item": "Q11570068"
+          },
+          "terms": {
+            "description": [
+              "日本の大阪府大阪市にあるトイレタリー企業"
+            ]
+          }
+        },
+        {
+          "pageid": 254551,
+          "ns": 0,
+          "title": "福岡県",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふくおかけん",
+            "kartographer_frames": "1",
+            "page_image_free": "20100719_Dazaifu_Tenmangu_Shrine_3328.jpg",
+            "wikibase_item": "Q123258"
+          },
+          "coordinates": [
+            {
+              "lat": 33.6061,
+              "lon": 130.4181,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の都道府県"
+            ]
+          }
+        },
+        {
+          "pageid": 633566,
+          "ns": 0,
+          "title": "キッザニア東京",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きつさにあとうきよう",
+            "page_image_free": "KidZania_Tokyo.jpg",
+            "wikibase_item": "Q5363436"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65583333,
+              "lon": 139.79194444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区豊洲にある体験型商業施設"
+            ]
+          }
+        },
+        {
+          "pageid": 1750277,
+          "ns": 0,
+          "title": "キッザニア甲子園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きつさにあこうしえん",
+            "page_image_free": "Kizzania.jpg",
+            "wikibase_item": "Q5358677"
+          },
+          "coordinates": [
+            {
+              "lat": 34.71686111,
+              "lon": 135.36386111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "体験型商業施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

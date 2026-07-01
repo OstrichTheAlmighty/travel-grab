@@ -1,0 +1,133 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:08.447Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8587,
+          "ns": 0,
+          "title": "名古屋市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "なこやし",
+            "kartographer_frames": "1",
+            "page_image_free": "View_of_Westward_from_Sky_Deck_MIRAI360,_Nishiki_Naka_Ward_Nagoya_2022.jpg",
+            "wikibase_item": "Q11751"
+          },
+          "coordinates": [
+            {
+              "lat": 35.1814,
+              "lon": 136.9064,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 33752,
+          "ns": 0,
+          "title": "上野恩賜公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "うえのおんしこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "上野公園航空写真1984.jpg",
+            "wikibase_item": "Q746216"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71222222,
+              "lon": 139.77111111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 734888,
+          "ns": 0,
+          "title": "伊豆シャボテン動物公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いすしやほてんとうふつこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "伊豆シャボテン公園.jpg",
+            "wikibase_item": "Q11380531"
+          },
+          "coordinates": [
+            {
+              "lat": 34.90722222,
+              "lon": 139.10083333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡県伊東市にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 1323531,
+          "ns": 0,
+          "title": "上目黒",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かみめくろ",
+            "kartographer_frames": "1",
+            "page_image_free": "Nakameguro_Station.jpg",
+            "wikibase_item": "Q11359962"
+          },
+          "terms": {
+            "description": [
+              "東京都目黒区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1378874,
+          "ns": 0,
+          "title": "三重県",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みえけん",
+            "kartographer_frames": "1",
+            "page_image_free": "JP-Mie-Ise-Grand-Shrine-Main-Gate.jpg",
+            "toc": "",
+            "wikibase_item": "Q128196"
+          },
+          "coordinates": [
+            {
+              "lat": 34.73025,
+              "lon": 136.50867,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の都道府県"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

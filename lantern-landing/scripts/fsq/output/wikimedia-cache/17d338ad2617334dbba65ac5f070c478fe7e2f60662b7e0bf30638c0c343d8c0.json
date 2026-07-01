@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:22.620Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8251,
+          "ns": 0,
+          "title": "江東区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こうとうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tomioka_Hachiman-gu_201708.jpg",
+            "wikibase_item": "Q215175"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67281,
+              "lon": 139.81728,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 112129,
+          "ns": 0,
+          "title": "東京都電車",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようとてんしや",
+            "page_image_free": "Toden8800_4colors_20101225.jpg",
+            "wikibase_item": "Q7814005"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都交通局が運営する路面電車路線"
+            ]
+          }
+        },
+        {
+          "pageid": 125183,
+          "ns": 0,
+          "title": "緑地",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "りよくち",
+            "page_image_free": "堀之内緑道.JPG",
+            "wikibase_item": "Q22652"
+          },
+          "terms": {
+            "description": [
+              "都市で空地を空地のまま存続させることを目的に確保した土地"
+            ]
+          }
+        },
+        {
+          "pageid": 1027341,
+          "ns": 0,
+          "title": "南砂",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みなみすな",
+            "kartographer_frames": "1",
+            "page_image_free": "Kotolibrary_2.jpg",
+            "wikibase_item": "Q11408313"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 2107313,
+          "ns": 0,
+          "title": "都電砂町線",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とてんすなまちせん",
+            "wikibase_item": "Q11643877"
+          }
+        }
+      ]
+    }
+  }
+}

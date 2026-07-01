@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:45:51.000Z",
+  "value": {
+    "searchinfo": {
+      "search": "朝倉彫塑館"
+    },
+    "search": [
+      {
+        "id": "Q11517304",
+        "title": "Q11517304",
+        "pageid": 12657119,
+        "concepturi": "http://www.wikidata.org/entity/Q11517304",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11517304",
+        "display": {
+          "label": {
+            "value": "Asakura Museum of Sculpture",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Asakura Museum of Sculpture",
+        "description": "art museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "朝倉彫塑館"
+        },
+        "aliases": [
+          "朝倉彫塑館"
+        ]
+      },
+      {
+        "id": "Q140365479",
+        "title": "Q140365479",
+        "pageid": 133803236,
+        "concepturi": "http://www.wikidata.org/entity/Q140365479",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q140365479",
+        "display": {
+          "label": {
+            "value": "Former Asakura Fumio Garden",
+            "language": "en"
+          },
+          "description": {
+            "value": "garden in Taitō, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Former Asakura Fumio Garden",
+        "description": "garden in Taitō, Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "朝倉彫塑館の庭園"
+        },
+        "aliases": [
+          "朝倉彫塑館の庭園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

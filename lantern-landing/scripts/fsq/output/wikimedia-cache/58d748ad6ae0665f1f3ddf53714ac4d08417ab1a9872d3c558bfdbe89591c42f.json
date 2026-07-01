@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:16.144Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 19385,
+          "ns": 0,
+          "title": "小樽市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おたるし",
+            "page_image_free": "Otaru_Montage.jpg",
+            "wikibase_item": "Q242108"
+          },
+          "coordinates": [
+            {
+              "lat": 43.19072,
+              "lon": 140.99436,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道の市"
+            ]
+          }
+        },
+        {
+          "pageid": 56482,
+          "ns": 0,
+          "title": "魚津市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "うおつし",
+            "kartographer_frames": "1",
+            "page_image_free": "Uozu_montage_2019.png",
+            "wikibase_item": "Q819613"
+          },
+          "coordinates": [
+            {
+              "lat": 36.82731,
+              "lon": 137.40917,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "富山県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 1080527,
+          "ns": 0,
+          "title": "地方記者・立花陽介",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちほうきしやたちはなようすけ",
+            "wikibase_item": "Q11424421"
+          }
+        },
+        {
+          "pageid": 3859555,
+          "ns": 0,
+          "title": "有吉ぃぃeeeee!そうだ!今からお前んチでゲームしない?",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ありよしいいいいいそうたいまからおまえんちでけえむしない",
+            "wikibase_item": "Q60987028"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビeスポーツ・ゲーム情報バラエティ番組 (2018-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,546 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:30:03.194Z",
+  "value": {
+    "entities": {
+      "Q98280550": {
+        "type": "item",
+        "id": "Q98280550",
+        "labels": {
+          "en": {
+            "language": "en",
+            "value": "station located in a cut"
+          }
+        },
+        "descriptions": {
+          "en": {
+            "language": "en",
+            "value": "type of station"
+          }
+        },
+        "aliases": {
+          "en": [
+            {
+              "language": "en",
+              "value": "station located within a cut"
+            },
+            {
+              "language": "en",
+              "value": "station located in a cutting"
+            },
+            {
+              "language": "en",
+              "value": "station located within a cutting"
+            },
+            {
+              "language": "en",
+              "value": "station located in cut"
+            },
+            {
+              "language": "en",
+              "value": "station located in cutting"
+            },
+            {
+              "language": "en",
+              "value": "Open cut"
+            }
+          ]
+        },
+        "claims": {
+          "P279": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P279",
+                "hash": "091465d25edf59640a16bd12267f451d82133c37",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 12819564,
+                    "id": "Q12819564"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "id": "Q98280550$5f102ce7-41c4-833b-aca6-a4f4c79d86e4",
+              "rank": "normal"
+            }
+          ],
+          "P276": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P276",
+                "hash": "80dce26f4ccdfd300224cf4c1bf1bb71fd2b88df",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 1308978,
+                    "id": "Q1308978"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "id": "Q98280550$aea86f25-4832-222a-5aa2-feab351e42e9",
+              "rank": "normal"
+            }
+          ]
+        },
+        "sitelinks": {}
+      },
+      "Q98456664": {
+        "type": "item",
+        "id": "Q98456664",
+        "labels": {
+          "en": {
+            "language": "en",
+            "value": "confectionery store chain"
+          },
+          "ja": {
+            "language": "ja",
+            "value": "菓子店舗チェーン"
+          }
+        },
+        "descriptions": {
+          "en": {
+            "language": "en",
+            "value": "group of confectionery stores marketed under a common brand"
+          }
+        },
+        "aliases": {
+          "en": [
+            {
+              "language": "en",
+              "value": "confectionery retail chain"
+            },
+            {
+              "language": "en",
+              "value": "confectionery chain"
+            }
+          ],
+          "ja": [
+            {
+              "language": "ja",
+              "value": "ケーキ店チェーン"
+            }
+          ]
+        },
+        "claims": {
+          "P279": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P279",
+                "hash": "6cd9daaf6e7906c54720561de778ec8e0a3ba5db",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 98555051,
+                    "id": "Q98555051"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "id": "Q98456664$d014d713-432c-5384-bc63-991a0eeb9aca",
+              "rank": "normal"
+            },
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P279",
+                "hash": "ffe200d4320b179e0c3da1960ce2687c5471dbba",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 3574069,
+                    "id": "Q3574069"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "id": "Q98456664$9d8f3573-42ce-f246-0483-c57aa7ff1c43",
+              "rank": "normal"
+            }
+          ],
+          "P373": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P373",
+                "hash": "362ab5e758683b506d3869786bdc1f5ad6ef83f2",
+                "datavalue": {
+                  "value": "Confectionery store chains",
+                  "type": "string"
+                },
+                "datatype": "string"
+              },
+              "type": "statement",
+              "id": "Q98456664$cdeeb20a-6d01-4acd-ae51-46c4927180e8",
+              "rank": "normal"
+            }
+          ]
+        },
+        "sitelinks": {
+          "commonswiki": {
+            "site": "commonswiki",
+            "title": "Category:Confectionery store chains",
+            "badges": []
+          }
+        }
+      },
+      "Q99980564": {
+        "type": "item",
+        "id": "Q99980564",
+        "labels": {
+          "ja": {
+            "language": "ja",
+            "value": "頂上駅"
+          },
+          "en": {
+            "language": "en",
+            "value": "top station"
+          }
+        },
+        "descriptions": {
+          "ja": {
+            "language": "ja",
+            "value": "索道の最上位にある駅"
+          },
+          "en": {
+            "language": "en",
+            "value": "an upper terminal of an aerial lift, cable car, gondola lift, chairlift, rack railway or ski lift"
+          }
+        },
+        "aliases": {
+          "ja": [
+            {
+              "language": "ja",
+              "value": "山頂駅"
+            },
+            {
+              "language": "ja",
+              "value": "山上駅"
+            }
+          ],
+          "en": [
+            {
+              "language": "en",
+              "value": "upper station"
+            },
+            {
+              "language": "en",
+              "value": "upper terminus"
+            },
+            {
+              "language": "en",
+              "value": "summit station"
+            },
+            {
+              "language": "en",
+              "value": "mountain station"
+            }
+          ]
+        },
+        "claims": {
+          "P31": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P31",
+                "hash": "e2b88cb84dc82001d404e161bf0bf9c99ef6b53b",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 11668217,
+                    "id": "Q11668217"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "id": "Q99980564$42e03226-4e1f-f48a-31b1-01122580e789",
+              "rank": "normal"
+            }
+          ],
+          "P279": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P279",
+                "hash": "0246ad4a4ba4b3a424e2123b7e2ee4f1d3ed82c0",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 44696264,
+                    "id": "Q44696264"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "id": "Q99980564$262ef592-48fa-a9ff-c4f6-74412456dec7",
+              "rank": "normal"
+            },
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P279",
+                "hash": "c0c524249b536ddabfba3fab901b44113cc3daec",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 15915771,
+                    "id": "Q15915771"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "id": "Q99980564$231a7c25-4f84-e750-fe48-48b8b2c73dc3",
+              "rank": "normal"
+            },
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P279",
+                "hash": "0fa9957d2bcb5353e3cec0730e3df96f2de05974",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 11606300,
+                    "id": "Q11606300"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "id": "Q99980564$11a9f1f6-4024-57e8-f008-0acb31126822",
+              "rank": "normal"
+            }
+          ],
+          "P461": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P461",
+                "hash": "c4f6cee003099084670ca7b15ed6754b72daf37f",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 2391004,
+                    "id": "Q2391004"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "id": "Q99980564$7b5fef3b-41ed-3fb1-725c-b7af6300eabb",
+              "rank": "normal"
+            }
+          ],
+          "P646": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P646",
+                "hash": "4ea151bead3c4d4a128f374e1bb358808a66bd4a",
+                "datavalue": {
+                  "value": "/m/010lt1x2",
+                  "type": "string"
+                },
+                "datatype": "external-id"
+              },
+              "type": "statement",
+              "id": "Q99980564$9E823971-08D4-4EC2-8D81-1933861917A0",
+              "rank": "normal"
+            }
+          ],
+          "P1552": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P1552",
+                "hash": "4f27fe05d9885b2723a8e35676932f9c1c6a488a",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 15332375,
+                    "id": "Q15332375"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "id": "Q99980564$8e5f90b1-4ae3-e878-1d20-3d8c0bd91555",
+              "rank": "normal"
+            }
+          ],
+          "P18": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P18",
+                "hash": "f3fed0220c073ccbe9f16ab71cd10eb1c0ceffdc",
+                "datavalue": {
+                  "value": "AUT — Tirol — Bezirk Reutte — Gmeinde Berwang (Sonnalmbahn · Bergstation) Mattes 2022-08-01.jpg",
+                  "type": "string"
+                },
+                "datatype": "commonsMedia"
+              },
+              "type": "statement",
+              "id": "Q99980564$76d0838c-4717-187c-c53a-fc52e0da961d",
+              "rank": "normal"
+            }
+          ],
+          "P1687": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P1687",
+                "hash": "ceb4d88d0086b3a159d2661b3ac44f5c8949bc3c",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "property",
+                    "numeric-id": 2044,
+                    "id": "P2044"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-property"
+              },
+              "type": "statement",
+              "id": "Q99980564$d17f44f9-499e-04c1-0a3b-3bd73432b6a7",
+              "rank": "normal"
+            }
+          ],
+          "P361": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P361",
+                "hash": "f54e1e6e5d3ea044c95b1488d203a7ed04663e4d",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 13409250,
+                    "id": "Q13409250"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "id": "Q99980564$d0dbb8a4-42cd-e0b3-44ba-43f6255b6b95",
+              "rank": "normal"
+            },
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P361",
+                "hash": "a2ea5befb49b2dd115c1dc93ea0fbb8cd247bf5f",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 142031,
+                    "id": "Q142031"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "id": "Q99980564$509f6c59-4e4b-a1e7-d724-183c0e8a1fb5",
+              "rank": "normal"
+            },
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P361",
+                "hash": "1454b1e067fb68586ea95f6d5bbd6a114dc1e242",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 378445,
+                    "id": "Q378445"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "id": "Q99980564$ee19ba0d-4683-d36d-ebeb-8076b5afa8c8",
+              "rank": "normal"
+            },
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P361",
+                "hash": "7da89706c6ce3a7c69c65aeef5ef1e41d507326f",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 634540,
+                    "id": "Q634540"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "id": "Q99980564$81c70653-434a-d524-bd81-0fb3cd30a06b",
+              "rank": "normal"
+            }
+          ],
+          "P16": [
+            {
+              "mainsnak": {
+                "snaktype": "value",
+                "property": "P16",
+                "hash": "6606720ac6f7f0821d19f429f8fe611b14761a15",
+                "datavalue": {
+                  "value": {
+                    "entity-type": "item",
+                    "numeric-id": 378445,
+                    "id": "Q378445"
+                  },
+                  "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+              },
+              "type": "statement",
+              "id": "Q99980564$24F6CBBA-364B-4457-849D-A831C660B12C",
+              "rank": "normal"
+            }
+          ]
+        },
+        "sitelinks": {
+          "enwiki": {
+            "site": "enwiki",
+            "title": "Top station",
+            "badges": []
+          },
+          "jawiki": {
+            "site": "jawiki",
+            "title": "頂上駅",
+            "badges": []
+          }
+        }
+      }
+    },
+    "success": 1
+  }
+}

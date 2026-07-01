@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:01.443Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 262943,
+          "ns": 0,
+          "title": "ザ・ベンチャーズ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "へんちやあす",
+            "page_image_free": "The_Ventures.png",
+            "wikibase_item": "Q770732"
+          },
+          "terms": {
+            "description": [
+              "アメリカ合衆国のインストゥルメンタル・ロック・バンド"
+            ]
+          }
+        },
+        {
+          "pageid": 1685110,
+          "ns": 0,
+          "title": "永山瑛太",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なかやま えいた",
+            "page_image_free": "Yokohama_International_Film_Festival_2024_Nagayama_Eita_(53869211868).jpg",
+            "wikibase_item": "Q683311"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優"
+            ]
+          }
+        },
+        {
+          "pageid": 1918817,
+          "ns": 0,
+          "title": "LiSA",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "りさ",
+            "page_image_free": "LiSA_by_Gage_Skidmore.jpg",
+            "wikibase_item": "Q333333"
+          },
+          "terms": {
+            "description": [
+              "日本の歌手"
+            ]
+          }
+        },
+        {
+          "pageid": 3718483,
+          "ns": 0,
+          "title": "西畠清順",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にしはた せいしゆん",
+            "wikibase_item": "Q47464967"
+          },
+          "terms": {
+            "description": [
+              "日本の経営者"
+            ]
+          }
+        },
+        {
+          "pageid": 4969261,
+          "ns": 0,
+          "title": "Ginza Sony Park",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きんさそにいはあく",
+            "page_image_free": "Ginza_Sony_Park.jpg",
+            "wikibase_item": "Q80507676"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67208333,
+              "lon": 139.76316667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都中央区銀座にあるビル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

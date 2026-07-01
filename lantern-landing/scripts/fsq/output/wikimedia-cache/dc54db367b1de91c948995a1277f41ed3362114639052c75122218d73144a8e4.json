@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:17.472Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 32935,
+          "ns": 0,
+          "title": "髙島屋",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たかしまや",
+            "page_image_free": "Namba_Station.JPG",
+            "wikibase_item": "Q2058024"
+          },
+          "terms": {
+            "description": [
+              "日本の百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 35571,
+          "ns": 0,
+          "title": "東急ストア",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきゆうすとあ",
+            "page_image_free": "Tokyustorehonsha.jpg",
+            "wikibase_item": "Q11526963"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64505556,
+              "lon": 139.69922222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東急グループのスーパーマーケット事業"
+            ]
+          }
+        },
+        {
+          "pageid": 271702,
+          "ns": 0,
+          "title": "ギャル",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きやる",
+            "wikibase_item": "Q10379733"
+          },
+          "terms": {
+            "description": [
+              "独特の文化を共有する、日本の若い女性の総称"
+            ]
+          }
+        },
+        {
+          "pageid": 578984,
+          "ns": 0,
+          "title": "日本の百貨店",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんのひやつかてん",
+            "page_image_free": "Takashimaya_Nihonbashi_Store_2010.jpg",
+            "wikibase_item": "Q763438"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1741731,
+          "ns": 0,
+          "title": "銀座",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きんさ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ginza_area_at_dusk_from_Tokyo_Tower.jpg",
+            "wikibase_item": "Q746052"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

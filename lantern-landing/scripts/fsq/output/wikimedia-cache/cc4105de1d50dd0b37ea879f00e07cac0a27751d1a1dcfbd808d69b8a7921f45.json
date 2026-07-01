@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:18.112Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 14813,
+          "ns": 0,
+          "title": "華族",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かそく",
+            "page_image_free": "Peers_Club_Inside.jpg",
+            "wikibase_item": "Q241734"
+          },
+          "terms": {
+            "description": [
+              "日本の明治時代以降に設置された貴族階級"
+            ]
+          }
+        },
+        {
+          "pageid": 89782,
+          "ns": 0,
+          "title": "小笠原氏",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おかさわらし",
+            "page_image_free": "Mon_ogasawara.svg",
+            "wikibase_item": "Q2975340"
+          },
+          "terms": {
+            "description": [
+              "日本の氏族"
+            ]
+          }
+        },
+        {
+          "pageid": 1375116,
+          "ns": 0,
+          "title": "小笠原伯爵邸",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おかさわらはくしやくてい",
+            "kartographer_frames": "1",
+            "page_image_free": "Former_Count_Ogasawara_Residence.JPG",
+            "wikibase_item": "Q11463332"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69838889,
+              "lon": 139.71747222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区にある建築物"
+            ]
+          }
+        },
+        {
+          "pageid": 1409569,
+          "ns": 0,
+          "title": "小笠原長幹",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おかさわら なかよし",
+            "page_image_free": "Nagayoshi_Ogasawara.jpg",
+            "wikibase_item": "Q11463420"
+          },
+          "terms": {
+            "description": [
+              "小笠原忠忱の長男。伯爵。府中小笠原氏30代（旧小倉藩小笠原家）。子に小笠原日英。"
+            ]
+          }
+        },
+        {
+          "pageid": 1438571,
+          "ns": 0,
+          "title": "江戸藩邸",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "えとはんてい",
+            "page_image_free": "Matsudaira_residence_Edo_P2.jpg",
+            "wikibase_item": "Q11551112"
+          },
+          "terms": {
+            "description": [
+              "江戸時代に江戸に置かれた藩の屋敷"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

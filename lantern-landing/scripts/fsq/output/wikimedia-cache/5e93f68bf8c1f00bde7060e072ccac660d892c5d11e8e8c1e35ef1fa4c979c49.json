@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:37.157Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 77569,
+          "ns": 0,
+          "title": "赤福餅",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あかふくもち",
+            "page_image_free": "Akafuku-mochi_001.jpg",
+            "wikibase_item": "Q736196"
+          },
+          "coordinates": [
+            {
+              "lat": 34.47777778,
+              "lon": 136.75266667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "和菓子商品"
+            ]
+          }
+        },
+        {
+          "pageid": 82377,
+          "ns": 0,
+          "title": "日本初の一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんはつのいちらん",
+            "wikibase_item": "Q22124102"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 140647,
+          "ns": 0,
+          "title": "日本の老舗一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんのしにせいちらん",
+            "wikibase_item": "Q11506070"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1932509,
+          "ns": 0,
+          "title": "船橋市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふなはしし",
+            "kartographer_frames": "1",
+            "page_image_free": "Funabashi_montage.jpg",
+            "wikibase_item": "Q271417"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69456,
+              "lon": 139.98256,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 3386418,
+          "ns": 0,
+          "title": "24時間テレビ 「愛は地球を救う」",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にしゆうよしかんてれひあいはちきゆうをすくう",
+            "page_image_free": "Nittele_24Hour_Television_logo.svg",
+            "wikibase_item": "Q11187319"
+          },
+          "terms": {
+            "description": [
+              "毎年8月に放送される、日本のテレビチャリティー特別番組 (1978-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

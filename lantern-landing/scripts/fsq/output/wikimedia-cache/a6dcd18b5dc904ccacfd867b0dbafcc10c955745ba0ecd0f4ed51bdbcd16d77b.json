@@ -1,0 +1,119 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:14.761Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 51783,
+          "ns": 0,
+          "title": "白井市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しろいし",
+            "kartographer_frames": "1",
+            "page_image_free": "Yakuou-ji-temple-main-chiba-feb21-2016.jpg",
+            "wikibase_item": "Q519187"
+          },
+          "coordinates": [
+            {
+              "lat": 35.79147,
+              "lon": 140.05631,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 501776,
+          "ns": 0,
+          "title": "カネスエ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かねすえ",
+            "page_image_free": "Kanesue_honsya.JPG",
+            "wikibase_item": "Q6362058"
+          },
+          "coordinates": [
+            {
+              "lat": 35.28538333,
+              "lon": 136.80869167,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本のスーパーマーケットチェーン"
+            ]
+          }
+        },
+        {
+          "pageid": 733815,
+          "ns": 0,
+          "title": "クスリのアオキ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "くすりのあおき",
+            "page_image_free": "Kusuri_no_Aoki_Headquarters.jpg",
+            "wikibase_item": "Q11298661"
+          },
+          "coordinates": [
+            {
+              "lat": 36.54583333,
+              "lon": 136.585,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の石川県白山市に本社を置くドラッグストア運営企業"
+            ]
+          }
+        },
+        {
+          "pageid": 846538,
+          "ns": 0,
+          "title": "シジシージャパン加盟スーパー一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しししいしやはん",
+            "toc": "",
+            "wikibase_item": "Q11307142"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2393108,
+          "ns": 0,
+          "title": "三和 (柏市)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さんわ かしわし",
+            "wikibase_item": "Q11354623"
+          },
+          "terms": {
+            "description": [
+              "柏市"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

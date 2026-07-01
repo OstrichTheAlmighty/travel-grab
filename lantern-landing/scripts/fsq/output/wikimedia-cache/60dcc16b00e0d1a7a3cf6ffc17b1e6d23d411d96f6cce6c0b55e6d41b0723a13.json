@@ -1,0 +1,65 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:06.806Z",
+  "value": {
+    "searchinfo": {
+      "search": "大塚山公園"
+    },
+    "search": [
+      {
+        "id": "Q11434028",
+        "title": "Q11434028",
+        "pageid": 12572817,
+        "concepturi": "http://www.wikidata.org/entity/Q11434028",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11434028",
+        "display": {
+          "label": {
+            "value": "Otsukayama Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Otsukayama Park",
+        "description": "park in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "大塚山公園"
+        },
+        "aliases": [
+          "大塚山公園"
+        ]
+      },
+      {
+        "id": "Q42312010",
+        "title": "Q42312010",
+        "pageid": 43594246,
+        "concepturi": "http://www.wikidata.org/entity/Q42312010",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q42312010",
+        "display": {
+          "label": {
+            "value": "大塚山公園",
+            "language": "ja"
+          },
+          "description": {
+            "value": "park in Meguro, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "大塚山公園",
+        "description": "park in Meguro, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "大塚山公園"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

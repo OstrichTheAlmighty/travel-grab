@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:46.316Z",
+  "value": {
+    "searchinfo": {
+      "search": "NTT技術史料館"
+    },
+    "search": [
+      {
+        "id": "Q20043894",
+        "title": "Q20043894",
+        "pageid": 21714249,
+        "concepturi": "http://www.wikidata.org/entity/Q20043894",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q20043894",
+        "display": {
+          "label": {
+            "value": "NTT History Center of Technologies",
+            "language": "en"
+          }
+        },
+        "label": "NTT History Center of Technologies",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "NTT技術史料館"
+        },
+        "aliases": [
+          "NTT技術史料館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

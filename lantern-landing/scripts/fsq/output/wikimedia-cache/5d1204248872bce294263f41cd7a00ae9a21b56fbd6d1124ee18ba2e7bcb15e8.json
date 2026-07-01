@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:51.446Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 328457,
+          "ns": 0,
+          "title": "Fukaya, Saitama",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Fukaya_City_Hall_1.JPG",
+            "wikibase-shortdesc": "City in Kantō, Japan",
+            "wikibase_item": "Q734532"
+          },
+          "coordinates": [
+            {
+              "lat": 36.19747222,
+              "lon": 139.2815,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "city in Saitama Prefecture, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 15040535,
+          "ns": 0,
+          "title": "Mitsubishi Colt 1000",
+          "index": 4,
+          "pageprops": {
+            "wikibase-shortdesc": "Motor vehicle",
+            "wikibase_item": "Q6883020"
+          },
+          "terms": {
+            "description": [
+              "motor vehicle"
+            ]
+          }
+        },
+        {
+          "pageid": 34969501,
+          "ns": 0,
+          "title": "Asukayama Park",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Asukayama_Park.jpg",
+            "wikibase-shortdesc": "Public park in Kita, Tokyo, Japan",
+            "wikibase_item": "Q901172"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75055556,
+              "lon": 139.73888889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "park"
+            ]
+          }
+        },
+        {
+          "pageid": 50552199,
+          "ns": 0,
+          "title": "Nezu Kaichirō",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Nezu Kaichiro",
+            "page_image_free": "NEZU_Kaichiro_I.jpg",
+            "wikibase_item": "Q11536442"
+          },
+          "terms": {
+            "description": [
+              "Japanese politician and businessperson (1860-1940)"
+            ]
+          }
+        },
+        {
+          "pageid": 52947879,
+          "ns": 0,
+          "title": "Jitsugyō no Nihon",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Jitsugyo no Nihon",
+            "displaytitle": "<i>Jitsugyō no Nihon</i>",
+            "wikibase-shortdesc": "Business magazine in Japan (1897–2002)",
+            "wikibase_item": "Q30324071"
+          },
+          "terms": {
+            "description": [
+              "Japanese business magazine"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

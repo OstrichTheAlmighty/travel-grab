@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:12.511Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 16600,
+          "ns": 0,
+          "title": "鹿児島市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かこしまし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kagoshima_Montage.jpg",
+            "wikibase_item": "Q15674"
+          },
+          "coordinates": [
+            {
+              "lat": 31.59681,
+              "lon": 130.55714,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "鹿児島県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 32683,
+          "ns": 0,
+          "title": "小田原市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おたわらし",
+            "kartographer_frames": "1",
+            "page_image_free": "Odawara_montage.JPG",
+            "wikibase_item": "Q267258"
+          },
+          "coordinates": [
+            {
+              "lat": 35.26461,
+              "lon": 139.15222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 75128,
+          "ns": 0,
+          "title": "日本酒の銘柄一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にほんしゆのめいからいちらん",
+            "notoc": "",
+            "wikibase_item": "Q11509281"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 765293,
+          "ns": 0,
+          "title": "名所江戸百景",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "めいしよえとひやくけい",
+            "page_image_free": "Hiroshige,_Table_of_contents.jpg",
+            "wikibase_item": "Q165190"
+          },
+          "terms": {
+            "description": [
+              "歌川広重の連作浮世絵名所絵"
+            ]
+          }
+        },
+        {
+          "pageid": 4474542,
+          "ns": 0,
+          "title": "三越日本橋本店",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みつこしにほんはしほんてん",
+            "kartographer_frames": "1",
+            "page_image_free": "Mitsukoshi_(8619735965).jpg",
+            "wikibase_item": "Q108899516"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68552778,
+              "lon": 139.77341667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京・日本橋の百貨店"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

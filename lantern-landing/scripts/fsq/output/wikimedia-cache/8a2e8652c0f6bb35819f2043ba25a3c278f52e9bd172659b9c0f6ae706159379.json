@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:06.769Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 61461,
+          "ns": 0,
+          "title": "鳥居",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とりい",
+            "page_image_free": "Miyajima_Alex.jpg",
+            "wikibase_item": "Q234731"
+          },
+          "terms": {
+            "description": [
+              "神域への入口を示す門の一種"
+            ]
+          }
+        },
+        {
+          "pageid": 805086,
+          "ns": 0,
+          "title": "冨士山下宮小室浅間神社",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふしさんしもみやおむろせんけんしんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Fujisan_Shimomiya_Omuro_Sengen_jinja_torii_—_2021.jpg",
+            "wikibase_item": "Q11459659"
+          },
+          "coordinates": [
+            {
+              "lat": 35.49482222,
+              "lon": 138.80316667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "山梨県富士吉田市下吉田にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 1124585,
+          "ns": 0,
+          "title": "日吉八幡神社",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひえはちまんしんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Shaden_of_Hie-Hachiman_jinja.jpg",
+            "wikibase_item": "Q11505030"
+          },
+          "coordinates": [
+            {
+              "lat": 39.72222222,
+              "lon": 140.09722222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "秋田県秋田市八橋本町にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 1876378,
+          "ns": 0,
+          "title": "日枝神社 (千代田区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひえしんしや ちよたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Hie-Shrine_Gate.jpg",
+            "wikibase_item": "Q702042"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67472222,
+              "lon": 139.73958333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区の神社"
+            ]
+          }
+        },
+        {
+          "pageid": 4585257,
+          "ns": 0,
+          "title": "日枝神社 (沼津市)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひえしんしや ぬますし",
+            "kartographer_frames": "1",
+            "page_image_free": "Hie_Jinja_(Numazu).JPG",
+            "wikibase_item": "Q117864683"
+          },
+          "coordinates": [
+            {
+              "lat": 35.10111111,
+              "lon": 138.86888889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡県沼津市平町にある神社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:29.459Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 53548,
+          "ns": 0,
+          "title": "三木武夫",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みき たけお",
+            "page_image_free": "Takeo_Miki_19741209.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q317675"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家(1907-1988)。第66代内閣総理大臣 、第89-90代外務大臣。"
+            ]
+          }
+        },
+        {
+          "pageid": 207653,
+          "ns": 0,
+          "title": "山本有三",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やまもと ゆうそう",
+            "page_image_free": "Yuzo_Yamamoto,_1954.jpg",
+            "wikibase_item": "Q986753"
+          },
+          "terms": {
+            "description": [
+              "作家 (1887-1974)"
+            ]
+          }
+        },
+        {
+          "pageid": 389549,
+          "ns": 0,
+          "title": "結城豊太郎",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ゆうき とよたろう",
+            "page_image_free": "Toyotarou_Yuuki.jpg",
+            "wikibase_item": "Q3080909"
+          },
+          "terms": {
+            "description": [
+              "日本の銀行家・政治家 (1877-1951)"
+            ]
+          }
+        },
+        {
+          "pageid": 778967,
+          "ns": 0,
+          "title": "南平台町",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なんへいたいちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "渋谷区南平台町・目黒区青葉台_マレーシア大使館前信号20260502.jpg",
+            "wikibase_item": "Q6964182"
+          },
+          "terms": {
+            "description": [
+              "東京都渋谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 2260937,
+          "ns": 0,
+          "title": "佐藤総合計画",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さとうそうこうけいかく",
+            "wikibase_item": "Q11384348"
+          }
+        }
+      ]
+    }
+  }
+}

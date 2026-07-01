@@ -1,0 +1,130 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:09.709Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 10742,
+          "ns": 0,
+          "title": "板橋区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いたはしく",
+            "kartographer_frames": "1",
+            "page_image_free": "Itabashi-at-nakajuku.JPG",
+            "wikibase_item": "Q232635"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75119,
+              "lon": 139.70928,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 384938,
+          "ns": 0,
+          "title": "アクアパーク品川",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あくあはあくしなかわ",
+            "kartographer_frames": "1",
+            "page_image_free": "Avatar_The_Way_of_Water_Tokyo_Press_Conference_(52562513647).jpg",
+            "wikibase_item": "Q3055859"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62782889,
+              "lon": 139.73508694,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京の水族館"
+            ]
+          }
+        },
+        {
+          "pageid": 510250,
+          "ns": 0,
+          "title": "夢の島熱帯植物館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ゆめのしまねつたいしよくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Yumenoshima_Tropical_Greenhouse_Dome.jpg",
+            "wikibase_item": "Q4388023"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65125,
+              "lon": 139.82944444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区の夢の島公園にある植物園"
+            ]
+          }
+        },
+        {
+          "pageid": 887309,
+          "ns": 0,
+          "title": "日本の植物園一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にほんのしよくふつえんのいちらん",
+            "wikibase_item": "Q6608110"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3935851,
+          "ns": 0,
+          "title": "板橋区立熱帯環境植物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いたはしくりつねつたいかんきようしよくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Itabashi_Botanical_Garden_2019-02-27_(01).jpg",
+            "wikibase_item": "Q9011001"
+          },
+          "coordinates": [
+            {
+              "lat": 35.79194444,
+              "lon": 139.66411111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都板橋区にある室内植物園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

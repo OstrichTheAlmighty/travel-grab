@@ -1,0 +1,76 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:16.831Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 198757,
+          "ns": 0,
+          "title": "てんとう虫コミックス",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "てんとうむしこみつくす",
+            "wikibase_item": "Q9085899"
+          }
+        },
+        {
+          "pageid": 272946,
+          "ns": 0,
+          "title": "ぴょんぴょん",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひよんひよん",
+            "wikibase_item": "Q11276920"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画雑誌"
+            ]
+          }
+        },
+        {
+          "pageid": 615475,
+          "ns": 0,
+          "title": "ザ☆ドラえもんズ ムシムシぴょんぴょん大作戦!",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さとらえもんすむしむしひよんひよんたいさくせん",
+            "wikibase_item": "Q7988472"
+          },
+          "terms": {
+            "description": [
+              "1998年に公開された日本のアニメ映画"
+            ]
+          }
+        },
+        {
+          "pageid": 1561299,
+          "ns": 0,
+          "title": "☆ぴょんぴょん☆",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひよんひよん",
+            "page_image_free": "Pyonpyon_(talent)_2010-3-27.jpg",
+            "wikibase_item": "Q11256214"
+          }
+        },
+        {
+          "pageid": 4424186,
+          "ns": 0,
+          "title": "こころぴょんぴょん",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こころひよんひよん",
+            "wikibase_item": "Q107762963"
+          }
+        }
+      ]
+    }
+  }
+}

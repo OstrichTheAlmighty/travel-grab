@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:34.770Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 388795,
+          "ns": 0,
+          "title": "阪神間モダニズム",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はんしんかんもたにすむ",
+            "page_image_free": "Hankyu_Umeda_Osaka_Japan_June_2005_A.jpg",
+            "wikibase_item": "Q5651123"
+          }
+        },
+        {
+          "pageid": 469370,
+          "ns": 0,
+          "title": "関西大学の人物一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かんさいたいかくのしんふついちらん",
+            "wikibase_item": "Q11656291"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 490545,
+          "ns": 0,
+          "title": "千葉県指定文化財一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "していふんかさい",
+            "wikibase_item": "Q11406175"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 772963,
+          "ns": 0,
+          "title": "那珂川市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なかかわし",
+            "kartographer_frames": "1",
+            "page_image_free": "Nakagawa_River_from_Shironohashi_Bridge_(south)_2.jpg",
+            "wikibase_item": "Q1206001"
+          },
+          "coordinates": [
+            {
+              "lat": 33.49958,
+              "lon": 130.42222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福岡県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 1517843,
+          "ns": 0,
+          "title": "一橋大学の人物一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひとつはし",
+            "wikibase_item": "Q11352900"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:34.218Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 337903,
+          "ns": 0,
+          "title": "Farmers' market",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Farmers Market",
+            "page_image_free": "Farmers_and_Artisans_Market_at_Farmington_-_Michigan.jpg",
+            "wikibase-shortdesc": "Market featuring foods sold directly by farmers to consumers",
+            "wikibase_item": "Q1522620"
+          },
+          "terms": {
+            "description": [
+              "market featuring foods sold directly by farmers to consumers"
+            ]
+          }
+        },
+        {
+          "pageid": 1996574,
+          "ns": 0,
+          "title": "The Grove at Farmers Market",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Grove at Farmers Market, The",
+            "kartographer_frames": "1",
+            "page_image_free": "052707-026-TheGrove.jpg",
+            "wikibase-shortdesc": "Shopping mall in Los Angeles, California",
+            "wikibase_item": "Q7738393"
+          },
+          "coordinates": [
+            {
+              "lat": 34.071964,
+              "lon": -118.357515,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "retail and entertainment complex in Los Angeles, California"
+            ]
+          }
+        },
+        {
+          "pageid": 9763031,
+          "ns": 0,
+          "title": "Sprouts Farmers Market",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Sprouts (Grocery Chain)",
+            "page_image_free": "Sprouts_Farmers_Market,_Westwood_Blvd,_Los_Angeles,_CA.jpg",
+            "wikibase-shortdesc": "American supermarket chain",
+            "wikibase_item": "Q7581369"
+          },
+          "terms": {
+            "description": [
+              "supermarket chain headquartered in Phoenix, Arizona"
+            ]
+          }
+        },
+        {
+          "pageid": 36534044,
+          "ns": 0,
+          "title": "Tanana Valley State Fair",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Tanana_Valley_State_Fair_Association_101_logo.png",
+            "wikibase_item": "Q7682281"
+          },
+          "coordinates": [
+            {
+              "lat": 64.86450833,
+              "lon": -147.76178611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 43130453,
+          "ns": 0,
+          "title": "The Farmer's Market",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Farmer's Market",
+            "page_image_free": "Imag0544w.jpg",
+            "wikibase-shortdesc": "Former Dark Web market",
+            "wikibase_item": "Q18216016"
+          },
+          "terms": {
+            "description": [
+              "former Dark Web market"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

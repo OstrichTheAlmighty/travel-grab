@@ -1,0 +1,98 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:00.874Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 681521,
+          "ns": 0,
+          "title": "エプコット",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "えふこつと",
+            "page_image_free": "1_epcot_spaceship_earth_2010a.JPG",
+            "wikibase_item": "Q1052042"
+          },
+          "coordinates": [
+            {
+              "lat": 28.371,
+              "lon": -81.55,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "アメリカのウォルト・ディズニー・ワールド・リゾートにあるディズニーパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 785383,
+          "ns": 0,
+          "title": "ショー・チューン",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しよちゆん",
+            "wikibase_item": "Q661651"
+          }
+        },
+        {
+          "pageid": 1063133,
+          "ns": 0,
+          "title": "トゥモローランド (企業)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうもろおらんと",
+            "page_image_free": "Tomorrowlandcoltd_logo3.png",
+            "wikibase_item": "Q11321040"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64659694,
+              "lon": 139.703925,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の企業"
+            ]
+          }
+        },
+        {
+          "pageid": 1196014,
+          "ns": 0,
+          "title": "マッドマックス/サンダードーム",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "まつとまつくすさんたあとおむ",
+            "wikibase_item": "Q426663"
+          },
+          "terms": {
+            "description": [
+              "オーストラリアの1985年のアクション映画"
+            ]
+          }
+        },
+        {
+          "pageid": 2612242,
+          "ns": 0,
+          "title": "ウエリ・スタイガー",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "すたいかあ うえり",
+            "wikibase_item": "Q125002"
+          }
+        }
+      ]
+    }
+  }
+}

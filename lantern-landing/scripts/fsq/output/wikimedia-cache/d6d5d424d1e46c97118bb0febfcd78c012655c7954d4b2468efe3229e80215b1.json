@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:35.862Z",
+  "value": {
+    "searchinfo": {
+      "search": "香川・愛媛せとうち旬彩館"
+    },
+    "search": [
+      {
+        "id": "Q11667265",
+        "title": "Q11667265",
+        "pageid": 12807324,
+        "concepturi": "http://www.wikidata.org/entity/Q11667265",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11667265",
+        "display": {
+          "label": {
+            "value": "香川・愛媛せとうち旬彩館",
+            "language": "ja"
+          }
+        },
+        "label": "香川・愛媛せとうち旬彩館",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "香川・愛媛せとうち旬彩館"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

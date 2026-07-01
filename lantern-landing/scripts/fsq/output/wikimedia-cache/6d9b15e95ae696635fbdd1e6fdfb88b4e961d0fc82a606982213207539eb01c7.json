@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:43.523Z",
+  "value": {
+    "searchinfo": {
+      "search": "法隆寺宝物館"
+    },
+    "search": [
+      {
+        "id": "Q123195811",
+        "title": "Q123195811",
+        "pageid": 117439874,
+        "concepturi": "http://www.wikidata.org/entity/Q123195811",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q123195811",
+        "display": {
+          "label": {
+            "value": "Gallery of Hōryū-ji Treasures",
+            "language": "en"
+          }
+        },
+        "label": "Gallery of Hōryū-ji Treasures",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "法隆寺宝物館"
+        },
+        "aliases": [
+          "法隆寺宝物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

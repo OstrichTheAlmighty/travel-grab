@@ -1,0 +1,42 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:22.895Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 110593,
+          "ns": 0,
+          "title": "太鼓の達人",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たいこのたつしん",
+            "page_image_free": "Taiko_no_Tatsujin_arcade_(Chinese_language_version).jpg",
+            "wikibase_item": "Q1198152"
+          },
+          "terms": {
+            "description": [
+              "2001年に稼働開始した日本の音楽ゲーム"
+            ]
+          }
+        },
+        {
+          "pageid": 4919272,
+          "ns": 0,
+          "title": "ラヴィット!",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "らういつと",
+            "wikibase_item": "Q106999662"
+          },
+          "terms": {
+            "description": [
+              "日本のTBSテレビの帯番組・情報バラエティ番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

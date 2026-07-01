@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:41.245Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 293624,
+          "ns": 0,
+          "title": "清澄庭園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きよすみていえん",
+            "page_image_free": "Kiyosumi_Teien_-_Japanese_gardern_1.JPG",
+            "wikibase_item": "Q4388146"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67994444,
+              "lon": 139.79772222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区清澄にある都立庭園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:29.354Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 66076,
+          "ns": 0,
+          "title": "Art museum",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Le_Louvre_-_Aile_Richelieu.jpg",
+            "wikibase-shortdesc": "Building or space for the exhibition of art",
+            "wikibase_item": "Q207694"
+          },
+          "terms": {
+            "description": [
+              "building or space for the exhibition of art (for institution, use Q3196771)"
+            ]
+          }
+        },
+        {
+          "pageid": 1579597,
+          "ns": 0,
+          "title": "National Cowboy & Western Heritage Museum",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "National Cowboy and Western Heritage Museum",
+            "kartographer_frames": "1",
+            "page_image_free": "Museum-Front-Sunrise.jpg",
+            "wikibase-shortdesc": "Museum in Oklahoma City, Oklahoma, US",
+            "wikibase_item": "Q6971981"
+          },
+          "coordinates": [
+            {
+              "lat": 35.53555556,
+              "lon": -97.48305556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "museum in Oklahoma City, Oklahoma, USA"
+            ]
+          }
+        },
+        {
+          "pageid": 8093724,
+          "ns": 0,
+          "title": "National Museum of Western Art",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "National Museum Of Western Art",
+            "kartographer_frames": "1",
+            "page_image_free": "National_museum_of_western_art05s3200.jpg",
+            "wikibase-shortdesc": "Art museum in Tokyo, Japan",
+            "wikibase_item": "Q1362629"
+          },
+          "terms": {
+            "description": [
+              "art museum in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 10768325,
+          "ns": 0,
+          "title": "National Museum of Modern Art, Tokyo",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "National_Museum_of_Modern_Art_Tokyo.jpg",
+            "wikibase-shortdesc": "Art museum in Tokyo, Japan",
+            "wikibase_item": "Q1359908"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69055556,
+              "lon": 139.75472222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Art museum in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 27421476,
+          "ns": 0,
+          "title": "List of most-visited art museums",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Most-visited art museums",
+            "notoc": "",
+            "page_image_free": "Giacomin_Carolina_10921839.svg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q1771711"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:31.549Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 7699,
+          "ns": 0,
+          "title": "小田原駅",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おたわら",
+            "kartographer_frames": "1",
+            "page_image_free": "161223_Odawara_Station_Odawara_Japan01s3.jpg",
+            "wikibase_item": "Q801290"
+          },
+          "coordinates": [
+            {
+              "lat": 35.25583333,
+              "lon": 139.15555556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県小田原市にある駅"
+            ]
+          }
+        },
+        {
+          "pageid": 408268,
+          "ns": 0,
+          "title": "中央大学の人物一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちゆうおう",
+            "wikibase_item": "Q11363661"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1906024,
+          "ns": 0,
+          "title": "空から日本を見てみよう",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "そらからにほんをみてみよう",
+            "wikibase_item": "Q11597289"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 4351964,
+          "ns": 0,
+          "title": "日本における死刑囚の一覧 (-1950年代)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんにおけるしけいしゆうのいちらん",
+            "wikibase_item": "Q113287161"
+          },
+          "terms": {
+            "description": [
+              "ウィキペディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

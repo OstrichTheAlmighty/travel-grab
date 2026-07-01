@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:39.872Z",
+  "value": {
+    "searchinfo": {
+      "search": "フォートレス・エクスプロレーション"
+    },
+    "search": [
+      {
+        "id": "Q11332978",
+        "title": "Q11332978",
+        "pageid": 12471058,
+        "concepturi": "http://www.wikidata.org/entity/Q11332978",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11332978",
+        "display": {
+          "label": {
+            "value": "Fortress Explorations",
+            "language": "en"
+          },
+          "description": {
+            "value": "Walk-through attraction at Tokyo DisneySea",
+            "language": "en"
+          }
+        },
+        "label": "Fortress Explorations",
+        "description": "Walk-through attraction at Tokyo DisneySea",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "フォートレス・エクスプロレーション"
+        },
+        "aliases": [
+          "フォートレス・エクスプロレーション"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

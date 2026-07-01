@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:51.380Z",
+  "value": {
+    "searchinfo": {
+      "search": "Picnic Area"
+    },
+    "search": [
+      {
+        "id": "Q47520603",
+        "title": "Q47520603",
+        "pageid": 48563789,
+        "concepturi": "http://www.wikidata.org/entity/Q47520603",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q47520603",
+        "display": {
+          "label": {
+            "value": "picnic site",
+            "language": "en"
+          },
+          "description": {
+            "value": "area in a park or other municipally maintained space designated for open-air food preparation and dining",
+            "language": "en"
+          }
+        },
+        "label": "picnic site",
+        "description": "area in a park or other municipally maintained space designated for open-air food preparation and dining",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "picnic area"
+        },
+        "aliases": [
+          "picnic area"
+        ]
+      },
+      {
+        "id": "Q119438877",
+        "title": "Q119438877",
+        "pageid": 113926159,
+        "concepturi": "http://www.wikidata.org/entity/Q119438877",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q119438877",
+        "display": {
+          "label": {
+            "value": "Picnic Area",
+            "language": "en"
+          },
+          "description": {
+            "value": "painting by Carol Rhodes (1959–2018), British Council Collection",
+            "language": "en"
+          }
+        },
+        "label": "Picnic Area",
+        "description": "painting by Carol Rhodes (1959–2018), British Council Collection",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Picnic Area"
+        }
+      },
+      {
+        "id": "Q126934353",
+        "title": "Q126934353",
+        "pageid": 120939101,
+        "concepturi": "http://www.wikidata.org/entity/Q126934353",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q126934353",
+        "display": {
+          "label": {
+            "value": "Picnic Area",
+            "language": "en"
+          },
+          "description": {
+            "value": "picnic area in Fleet Pond Nature Reserve",
+            "language": "en"
+          }
+        },
+        "label": "Picnic Area",
+        "description": "picnic area in Fleet Pond Nature Reserve",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Picnic Area"
+        }
+      },
+      {
+        "id": "Q74425351",
+        "title": "Q74425351",
+        "pageid": 74048392,
+        "concepturi": "http://www.wikidata.org/entity/Q74425351",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q74425351",
+        "display": {
+          "label": {
+            "value": "Picnic area Vosges view",
+            "language": "en"
+          },
+          "description": {
+            "value": "Scenic viewpoint, from which one can see the Vosges",
+            "language": "en"
+          }
+        },
+        "label": "Picnic area Vosges view",
+        "description": "Scenic viewpoint, from which one can see the Vosges",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Picnic area Vosges view"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

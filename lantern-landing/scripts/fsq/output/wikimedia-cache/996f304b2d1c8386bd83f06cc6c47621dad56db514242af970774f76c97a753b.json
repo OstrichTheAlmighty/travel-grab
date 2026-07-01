@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:05.750Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 12435,
+          "ns": 0,
+          "title": "両国駅",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "りようこく",
+            "kartographer_frames": "1",
+            "page_image_free": "Ryogoku-station_new.jpg",
+            "wikibase_item": "Q801389"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69611111,
+              "lon": 139.7925,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区にある東日本旅客鉄道・東京都交通局の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 777153,
+          "ns": 0,
+          "title": "木村荘八",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きむら しようはち",
+            "page_image_free": "Kimura_Shōhachi.jpg",
+            "wikibase_item": "Q3482776"
+          },
+          "terms": {
+            "description": [
+              "日本の洋画家、随筆家、版画家"
+            ]
+          }
+        },
+        {
+          "pageid": 1060918,
+          "ns": 0,
+          "title": "鉄道博物館 (さいたま市)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "てつとうはくふつかん",
+            "page_image_free": "Logo_of_Railway_museum(Saitama).svg",
+            "wikibase_item": "Q846106"
+          },
+          "coordinates": [
+            {
+              "lat": 35.920556,
+              "lon": 139.618333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県さいたま市大宮区にある鉄道博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 1691666,
+          "ns": 0,
+          "title": "東京都の観光地",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようと",
+            "page_image_free": "東京都区部-観光地図-1.jpg",
+            "wikibase_item": "Q10860697"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3386418,
+          "ns": 0,
+          "title": "24時間テレビ 「愛は地球を救う」",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にしゆうよしかんてれひあいはちきゆうをすくう",
+            "page_image_free": "Nittele_24Hour_Television_logo.svg",
+            "wikibase_item": "Q11187319"
+          },
+          "terms": {
+            "description": [
+              "毎年8月に放送される、日本のテレビチャリティー特別番組 (1978-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:04.348Z",
+  "value": {
+    "searchinfo": {
+      "search": "お札と切手の博物館"
+    },
+    "search": [
+      {
+        "id": "Q11263157",
+        "title": "Q11263157",
+        "pageid": 12407098,
+        "concepturi": "http://www.wikidata.org/entity/Q11263157",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11263157",
+        "display": {
+          "label": {
+            "value": "Banknote & Postage Stamp Museum",
+            "language": "en"
+          }
+        },
+        "label": "Banknote & Postage Stamp Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "お札と切手の博物館"
+        },
+        "aliases": [
+          "お札と切手の博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

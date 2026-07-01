@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:05.292Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 13823,
+          "ns": 0,
+          "title": "神戸市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こうへし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kobe_montage1.jpg",
+            "wikibase_item": "Q48320"
+          },
+          "coordinates": [
+            {
+              "lat": 34.69017,
+              "lon": 135.19544,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 331586,
+          "ns": 0,
+          "title": "ベルク (企業)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "へるく",
+            "page_image_free": "Belc_Co.,Ltd_1.jpg",
+            "wikibase_item": "Q11337090"
+          },
+          "terms": {
+            "description": [
+              "日本の埼玉県を中心に展開するスーパーマーケットチェーン"
+            ]
+          }
+        },
+        {
+          "pageid": 1089536,
+          "ns": 0,
+          "title": "過去に存在したジャスコの店舗",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かこにそんさいしたしやすこのてんほ",
+            "wikibase_item": "Q11640534"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1357598,
+          "ns": 0,
+          "title": "桑名市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "くわなし",
+            "kartographer_frames": "1",
+            "page_image_free": "六華宛庭園の池に写る邸宅.jpg",
+            "wikibase_item": "Q496472"
+          },
+          "coordinates": [
+            {
+              "lat": 35.06219,
+              "lon": 136.68367,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "三重県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 3025088,
+          "ns": 0,
+          "title": "FNS27時間テレビ (2014年)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "FNS27しかんてれひ2014",
+            "wikibase_item": "Q18048222"
+          },
+          "terms": {
+            "description": [
+              "フジテレビ系列の番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:26.900Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 68365,
+          "ns": 0,
+          "title": "ホノルル",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ほのるる",
+            "kartographer_frames": "1",
+            "page_image_free": "HonoluluM.png",
+            "wikibase_item": "Q18094"
+          },
+          "coordinates": [
+            {
+              "lat": 21.30666667,
+              "lon": -157.85888889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "アメリカ合衆国ハワイ州の州都"
+            ]
+          }
+        },
+        {
+          "pageid": 164868,
+          "ns": 0,
+          "title": "美術館の一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひしゆつかんのいちらん",
+            "toc": "",
+            "wikibase_item": "Q6606159"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 333833,
+          "ns": 0,
+          "title": "国立新美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こくりつしんひしゆつかん",
+            "page_image_free": "2018_National_Art_Center,_Tokyo_2.jpg",
+            "wikibase_item": "Q1362638"
+          },
+          "coordinates": [
+            {
+              "lat": 35.665,
+              "lon": 139.72638889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京・六本木にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 434606,
+          "ns": 0,
+          "title": "佐藤可士和",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さとう かしわ",
+            "page_image_free": "Kashiwa_Sato.jpg",
+            "wikibase_item": "Q9035103"
+          },
+          "terms": {
+            "description": [
+              "日本のクリエイティブディレクター、アートディレクター、グラフィックデザイナー (1965-)"
+            ]
+          }
+        },
+        {
+          "pageid": 3833820,
+          "ns": 0,
+          "title": "国立中世美術館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こくりつちゆうせいひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Paris_2012-aout-0006-2-Hotel-de-Cluny.jpg",
+            "wikibase_item": "Q1124095"
+          },
+          "coordinates": [
+            {
+              "lat": 48.85055556,
+              "lon": 2.34333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "パリの美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

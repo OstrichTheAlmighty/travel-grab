@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:29.872Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 476955,
+          "ns": 0,
+          "title": "国際興業バス赤羽営業所",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こくさいこうきようはすあかはねえいきようしよ",
+            "page_image_free": "Kokusai6918.JPG",
+            "wikibase_item": "Q11422574"
+          },
+          "terms": {
+            "description": [
+              "東京都北区西が丘に位置する国際興業バスの営業所"
+            ]
+          }
+        },
+        {
+          "pageid": 953332,
+          "ns": 0,
+          "title": "江北 (足立区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こうほく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Kohoku_station.jpg",
+            "wikibase_item": "Q11550668"
+          },
+          "terms": {
+            "description": [
+              "東京都足立区の町"
+            ]
+          }
+        },
+        {
+          "pageid": 1081685,
+          "ns": 0,
+          "title": "足立区立西新井中学校",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あたちくりつにしあらいちゆう",
+            "kartographer_frames": "1",
+            "page_image_free": "足立区西新井中学校.JPG",
+            "wikibase_item": "Q11636978"
+          },
+          "coordinates": [
+            {
+              "lat": 35.782694,
+              "lon": 139.771222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都足立区にある中学校"
+            ]
+          }
+        },
+        {
+          "pageid": 1115131,
+          "ns": 0,
+          "title": "神谷 (東京都北区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かみや",
+            "kartographer_frames": "1",
+            "page_image_free": "Akabane_police_station_Kita-ku_Tokyo_Japan.jpg",
+            "wikibase_item": "Q11590824"
+          },
+          "terms": {
+            "description": [
+              "東京都北区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 3729557,
+          "ns": 0,
+          "title": "3年B組金八先生",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さんねんひいくみきんはちせんせい",
+            "page_image_free": "Adachi-second_J.H.S.jpg",
+            "wikibase_item": "Q676764"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ番組シリーズ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

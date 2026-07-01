@@ -1,0 +1,43 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:21.964Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 25015,
+          "ns": 0,
+          "title": "日蓮宗",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にちれんしゆう",
+            "page_image_free": "日蓮宗橘（日蓮宗の宗紋）・平井筒に橘.png",
+            "wikibase_item": "Q206611"
+          },
+          "terms": {
+            "description": [
+              "日本の仏教の宗派"
+            ]
+          }
+        },
+        {
+          "pageid": 721501,
+          "ns": 0,
+          "title": "日本の学校法人一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんのかつこうほうしんいちらん",
+            "toc": "",
+            "wikibase_item": "Q11505907"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

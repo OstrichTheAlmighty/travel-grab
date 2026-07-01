@@ -1,0 +1,124 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:35.725Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 45517,
+          "ns": 0,
+          "title": "京王プラザホテル",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "けいおうふらさほてる",
+            "kartographer_frames": "1",
+            "page_image_free": "Keio_Plaza_Hotel_-01.jpg",
+            "wikibase_item": "Q6383787"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68989,
+              "lon": 139.69444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区のホテル"
+            ]
+          }
+        },
+        {
+          "pageid": 89401,
+          "ns": 0,
+          "title": "神戸ハーバーランド",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こうへはあはあらんと",
+            "page_image_free": "Harborland_Kobe_Japan01-r.jpg",
+            "wikibase_item": "Q5364704"
+          },
+          "coordinates": [
+            {
+              "lat": 34.67905556,
+              "lon": 135.18180556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 371653,
+          "ns": 0,
+          "title": "ハーモニーランド",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はあもにいらんと",
+            "page_image_free": "Harmony_Land_01.jpg",
+            "wikibase_item": "Q11327370"
+          },
+          "coordinates": [
+            {
+              "lat": 33.40161944,
+              "lon": 131.54656944,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大分県速見郡日出町にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 806122,
+          "ns": 0,
+          "title": "よみうりランド",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "よみうりらんと",
+            "kartographer_frames": "1",
+            "page_image_free": "Yomiuriland-20100411.jpg",
+            "wikibase_item": "Q1046970"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62583333,
+              "lon": 139.51861111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都と神奈川県の境界にある遊園地"
+            ]
+          }
+        },
+        {
+          "pageid": 1489003,
+          "ns": 0,
+          "title": "東急プラザ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきゆうふらさ",
+            "page_image_free": "TOKYU_PLAZA_Omotesando_Harajuku_4.jpg",
+            "wikibase_item": "Q11527003"
+          },
+          "terms": {
+            "description": [
+              "東急不動産SCマネジメントが運営する都市型ショッピングセンター"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

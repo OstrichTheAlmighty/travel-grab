@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:30.355Z",
+  "value": {
+    "searchinfo": {
+      "search": "日本科学未来館"
+    },
+    "search": [
+      {
+        "id": "Q656957",
+        "title": "Q656957",
+        "pageid": 618327,
+        "concepturi": "http://www.wikidata.org/entity/Q656957",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q656957",
+        "display": {
+          "label": {
+            "value": "Miraikan",
+            "language": "en"
+          },
+          "description": {
+            "value": "building",
+            "language": "en"
+          }
+        },
+        "label": "Miraikan",
+        "description": "building",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "日本科学未来館"
+        },
+        "aliases": [
+          "日本科学未来館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

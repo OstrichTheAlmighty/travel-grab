@@ -1,0 +1,152 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:42.986Z",
+  "value": {
+    "searchinfo": {
+      "search": "シンデレラ城"
+    },
+    "search": [
+      {
+        "id": "Q2742709",
+        "title": "Q2742709",
+        "pageid": 2633886,
+        "concepturi": "http://www.wikidata.org/entity/Q2742709",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2742709",
+        "display": {
+          "label": {
+            "value": "Cinderella Castle",
+            "language": "en"
+          },
+          "description": {
+            "value": "Wikipedia article covering multiple topics",
+            "language": "en"
+          }
+        },
+        "label": "Cinderella Castle",
+        "description": "Wikipedia article covering multiple topics",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "シンデレラ城"
+        },
+        "aliases": [
+          "シンデレラ城"
+        ]
+      },
+      {
+        "id": "Q116051899",
+        "title": "Q116051899",
+        "pageid": 110765973,
+        "concepturi": "http://www.wikidata.org/entity/Q116051899",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q116051899",
+        "display": {
+          "label": {
+            "value": "Cinderella Castle",
+            "language": "en"
+          },
+          "description": {
+            "value": "building in Tokyo Disneyland",
+            "language": "en"
+          }
+        },
+        "label": "Cinderella Castle",
+        "description": "building in Tokyo Disneyland",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "シンデレラ城"
+        },
+        "aliases": [
+          "シンデレラ城"
+        ]
+      },
+      {
+        "id": "Q124652827",
+        "title": "Q124652827",
+        "pageid": 118804009,
+        "concepturi": "http://www.wikidata.org/entity/Q124652827",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q124652827",
+        "display": {
+          "label": {
+            "value": "Cinderella Castle",
+            "language": "en"
+          },
+          "description": {
+            "value": "building in Walt Disney World",
+            "language": "en"
+          }
+        },
+        "label": "Cinderella Castle",
+        "description": "building in Walt Disney World",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "シンデレラ城"
+        },
+        "aliases": [
+          "シンデレラ城"
+        ]
+      },
+      {
+        "id": "Q6600320",
+        "title": "Q6600320",
+        "pageid": 6427084,
+        "concepturi": "http://www.wikidata.org/entity/Q6600320",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6600320",
+        "display": {
+          "label": {
+            "value": "list of Tokyo Disneyland attractions",
+            "language": "en"
+          },
+          "description": {
+            "value": "Wikimedia list article",
+            "language": "en"
+          }
+        },
+        "label": "list of Tokyo Disneyland attractions",
+        "description": "Wikimedia list article",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "シンデレラ城ミステリーツアー"
+        },
+        "aliases": [
+          "シンデレラ城ミステリーツアー"
+        ]
+      },
+      {
+        "id": "Q2972719",
+        "title": "Q2972719",
+        "pageid": 2842734,
+        "concepturi": "http://www.wikidata.org/entity/Q2972719",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2972719",
+        "display": {
+          "label": {
+            "value": "Cinderella Castle Mystery Tour",
+            "language": "en"
+          },
+          "description": {
+            "value": "walkthrough attraction formerly in Tokyo Disneyland",
+            "language": "en"
+          }
+        },
+        "label": "Cinderella Castle Mystery Tour",
+        "description": "walkthrough attraction formerly in Tokyo Disneyland",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "シンデレラ城ミステリーツアー"
+        },
+        "aliases": [
+          "シンデレラ城ミステリーツアー"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

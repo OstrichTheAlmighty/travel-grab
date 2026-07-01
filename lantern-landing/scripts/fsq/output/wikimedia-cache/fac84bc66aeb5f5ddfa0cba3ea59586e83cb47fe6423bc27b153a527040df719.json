@@ -1,0 +1,87 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:35.387Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 860138,
+          "ns": 0,
+          "title": "レトロテーマパーク",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "れとろてえまはあく",
+            "page_image_free": "Kaikyo-retro-douri.jpg",
+            "wikibase_item": "Q11349822"
+          }
+        },
+        {
+          "pageid": 1691666,
+          "ns": 0,
+          "title": "東京都の観光地",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようと",
+            "page_image_free": "東京都区部-観光地図-1.jpg",
+            "wikibase_item": "Q10860697"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2300493,
+          "ns": 0,
+          "title": "ぶらぶら美術・博物館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふらふらひしゆつはくふつかん",
+            "wikibase_item": "Q11277457"
+          },
+          "terms": {
+            "description": [
+              "日本の教養バラエティ番組(2010-2023)"
+            ]
+          }
+        },
+        {
+          "pageid": 2958182,
+          "ns": 0,
+          "title": "黒沢哲哉",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "くろさわ てつや",
+            "wikibase_item": "Q17130128"
+          },
+          "terms": {
+            "description": [
+              "日本の著作家 (1957-)"
+            ]
+          }
+        },
+        {
+          "pageid": 4322395,
+          "ns": 0,
+          "title": "ソロ活女子のススメ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "そろかつしよしのすすめ",
+            "wikibase_item": "Q109360197"
+          },
+          "terms": {
+            "description": [
+              "2019年の朝井麻由美によるエッセイ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:03.436Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 37214,
+          "ns": 0,
+          "title": "科学館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かかくかん",
+            "page_image_free": "Akashi-Minicipal-Planetarium3387.JPG",
+            "wikibase_item": "Q588140"
+          },
+          "terms": {
+            "description": [
+              "自然科学に関連する展示を行う博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 946530,
+          "ns": 0,
+          "title": "板橋区立教育科学館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いたはしくりつきよういくかかくかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Itabashi_Science_and_Education_Hall.JPG",
+            "wikibase_item": "Q11532661"
+          },
+          "coordinates": [
+            {
+              "lat": 35.76340556,
+              "lon": 139.67957222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都板橋区にある科学館"
+            ]
+          }
+        },
+        {
+          "pageid": 1596036,
+          "ns": 0,
+          "title": "港区 (東京都)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みなとく",
+            "kartographer_frames": "1",
+            "page_image_free": "20110405-TokyoTower-Sakura01.jpg",
+            "wikibase_item": "Q190088"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65803,
+              "lon": 139.75153,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 3348490,
+          "ns": 0,
+          "title": "港区立白金の丘学園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みなとくりつしろかねのおかかくえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Shirokanenooka_gakuen1.JPG",
+            "wikibase_item": "Q22120479"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64363611,
+              "lon": 139.72679167,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区白金にある公立の小中一貫教育校"
+            ]
+          }
+        },
+        {
+          "pageid": 4521793,
+          "ns": 0,
+          "title": "気象科学館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きしようかかくかん",
+            "kartographer_frames": "1",
+            "page_image_free": "JMA_Meteorological_Science_Museum.jpg",
+            "wikibase_item": "Q16872707"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66561111,
+              "lon": 139.74605556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区の気象庁本庁にある科学館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

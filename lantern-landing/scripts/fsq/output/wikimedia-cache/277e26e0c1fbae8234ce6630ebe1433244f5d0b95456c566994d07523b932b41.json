@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:11.201Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 64338,
+          "ns": 0,
+          "title": "トキワ荘",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ときわそう",
+            "kartographer_frames": "1",
+            "page_image": "Tokiwasou_Hanasaki_Park.JPG",
+            "page_image_free": "Modello_3D_Edificio_Tokiwa-sō_3.png",
+            "wikibase_item": "Q841272"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72408333,
+              "lon": 139.68830556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて日本の東京都豊島区にあったアパート"
+            ]
+          }
+        },
+        {
+          "pageid": 92229,
+          "ns": 0,
+          "title": "水野英子",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みすの ひてこ",
+            "wikibase_item": "Q1140911"
+          },
+          "terms": {
+            "description": [
+              "日本の女性漫画家 (1939-)"
+            ]
+          }
+        },
+        {
+          "pageid": 902386,
+          "ns": 0,
+          "title": "南長崎",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みなみなかさき",
+            "kartographer_frames": "1",
+            "page_image_free": "新宿区西落合・豊島区南長崎・中野区江原町_南長崎六丁目信号_20260505.jpg",
+            "wikibase_item": "Q11408694"
+          },
+          "terms": {
+            "description": [
+              "東京都豊島区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 951089,
+          "ns": 0,
+          "title": "日本加除出版",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんかしよしゆつはん",
+            "page_image_free": "Nihon_Kajo_Puplishing_headquarters_2026-04-26.jpg",
+            "wikibase_item": "Q11507408"
+          },
+          "terms": {
+            "description": [
+              "日本の出版社"
+            ]
+          }
+        },
+        {
+          "pageid": 4164228,
+          "ns": 0,
+          "title": "トキワ荘マンガミュージアム",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ときわそうまんかみゆうしあむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokiwaso-Manga-Museum.jpg",
+            "wikibase_item": "Q96707302"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72430556,
+              "lon": 139.68605556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

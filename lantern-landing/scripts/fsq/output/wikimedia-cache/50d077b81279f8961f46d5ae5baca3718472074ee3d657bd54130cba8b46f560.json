@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:42.262Z",
+  "value": {
+    "searchinfo": {
+      "search": "Meiji Jingu Shrine"
+    },
+    "search": [
+      {
+        "id": "Q287165",
+        "title": "Q287165",
+        "pageid": 277605,
+        "concepturi": "http://www.wikidata.org/entity/Q287165",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q287165",
+        "display": {
+          "label": {
+            "value": "Meiji Jingū",
+            "language": "en"
+          },
+          "description": {
+            "value": "Shinto shrine in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Meiji Jingū",
+        "description": "Shinto shrine in Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "Meiji Jingū Shrine"
+        },
+        "aliases": [
+          "Meiji Jingū Shrine"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

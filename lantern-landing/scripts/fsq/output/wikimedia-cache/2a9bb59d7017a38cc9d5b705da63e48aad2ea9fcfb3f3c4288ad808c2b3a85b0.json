@@ -1,0 +1,88 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:30:59.042Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 34251,
+          "ns": 0,
+          "title": "元寇",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "けんこう",
+            "page_image_free": "Mōko_Shūrai_Ekotoba.jpg",
+            "wikibase_item": "Q208156"
+          },
+          "terms": {
+            "description": [
+              "13世紀後半の元による九州への襲撃"
+            ]
+          }
+        },
+        {
+          "pageid": 596488,
+          "ns": 0,
+          "title": "桶狭間",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おけはさま",
+            "page_image_free": "View_of_Arimatsu_Green_Heights_from_Mount_Takane02,_Midori_Ward_Nagoya_2012.jpg",
+            "wikibase_item": "Q11538309"
+          },
+          "terms": {
+            "description": [
+              "愛知県名古屋市と豊明市にまたがる地域"
+            ]
+          }
+        },
+        {
+          "pageid": 3708170,
+          "ns": 0,
+          "title": "さいたま市指定文化財一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さいたまししていふんかさいいちらん",
+            "wikibase_item": "Q48753918"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3905730,
+          "ns": 0,
+          "title": "柏座",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かしわさ",
+            "page_image_free": "New_Ageo_Station_1.JPG",
+            "wikibase_item": "Q65271590"
+          },
+          "terms": {
+            "description": [
+              "埼玉県上尾市の町丁"
+            ]
+          }
+        },
+        {
+          "pageid": 4090687,
+          "ns": 0,
+          "title": "桶狭間の戦いの戦場に関する議論",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おけはさまのたたかいのせんしようにかんするきろん",
+            "wikibase_item": "Q97312488"
+          }
+        }
+      ]
+    }
+  }
+}

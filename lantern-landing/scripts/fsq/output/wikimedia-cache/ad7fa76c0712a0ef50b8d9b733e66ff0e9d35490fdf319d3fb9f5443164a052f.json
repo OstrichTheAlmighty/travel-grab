@@ -1,0 +1,63 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:14.499Z",
+  "value": {
+    "searchinfo": {
+      "search": "後楽園ホール"
+    },
+    "search": [
+      {
+        "id": "Q4389857",
+        "title": "Q4389857",
+        "pageid": 4193161,
+        "concepturi": "http://www.wikidata.org/entity/Q4389857",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q4389857",
+        "display": {
+          "label": {
+            "value": "Korakuen Hall",
+            "language": "en"
+          },
+          "description": {
+            "value": "Arena in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Korakuen Hall",
+        "description": "Arena in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "後楽園ホール"
+        },
+        "aliases": [
+          "後楽園ホール"
+        ]
+      },
+      {
+        "id": "Q130760638",
+        "title": "Q130760638",
+        "pageid": 124666451,
+        "concepturi": "http://www.wikidata.org/entity/Q130760638",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q130760638",
+        "display": {
+          "label": {
+            "value": "Korakuen Hall Building",
+            "language": "en"
+          }
+        },
+        "label": "Korakuen Hall Building",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "後楽園ホールビル"
+        },
+        "aliases": [
+          "後楽園ホールビル"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

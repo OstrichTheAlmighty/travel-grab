@@ -1,0 +1,152 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:14.339Z",
+  "value": {
+    "searchinfo": {
+      "search": "ドッグラン"
+    },
+    "search": [
+      {
+        "id": "Q38516",
+        "title": "Q38516",
+        "pageid": 41000,
+        "concepturi": "http://www.wikidata.org/entity/Q38516",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q38516",
+        "display": {
+          "label": {
+            "value": "dog park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park for dogs as a fenced area where dogs can roam free",
+            "language": "en"
+          }
+        },
+        "label": "dog park",
+        "description": "park for dogs as a fenced area where dogs can roam free",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ドッグラン"
+        },
+        "aliases": [
+          "ドッグラン"
+        ]
+      },
+      {
+        "id": "Q216360",
+        "title": "Q216360",
+        "pageid": 211582,
+        "concepturi": "http://www.wikidata.org/entity/Q216360",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q216360",
+        "display": {
+          "label": {
+            "value": "Docklands Light Railway",
+            "language": "en"
+          },
+          "description": {
+            "value": "automated light metro system in the Greater London, England",
+            "language": "en"
+          }
+        },
+        "label": "Docklands Light Railway",
+        "description": "automated light metro system in the Greater London, England",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ドックランズ・ライト・レイルウェイ"
+        },
+        "aliases": [
+          "ドックランズ・ライト・レイルウェイ"
+        ]
+      },
+      {
+        "id": "Q917998",
+        "title": "Q917998",
+        "pageid": 868431,
+        "concepturi": "http://www.wikidata.org/entity/Q917998",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q917998",
+        "display": {
+          "label": {
+            "value": "Docklands Stadium",
+            "language": "en"
+          },
+          "description": {
+            "value": "Multi-purpose stadium in Melbourne, Victoria, Australia",
+            "language": "en"
+          }
+        },
+        "label": "Docklands Stadium",
+        "description": "Multi-purpose stadium in Melbourne, Victoria, Australia",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ドックランズ・スタジアム"
+        },
+        "aliases": [
+          "ドックランズ・スタジアム"
+        ]
+      },
+      {
+        "id": "Q124041",
+        "title": "Q124041",
+        "pageid": 126238,
+        "concepturi": "http://www.wikidata.org/entity/Q124041",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q124041",
+        "display": {
+          "label": {
+            "value": "London Docklands",
+            "language": "en"
+          },
+          "description": {
+            "value": "area in east and southeast London, England, UK",
+            "language": "en"
+          }
+        },
+        "label": "London Docklands",
+        "description": "area in east and southeast London, England, UK",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ドックランズ"
+        },
+        "aliases": [
+          "ドックランズ"
+        ]
+      },
+      {
+        "id": "Q5287226",
+        "title": "Q5287226",
+        "pageid": 5056169,
+        "concepturi": "http://www.wikidata.org/entity/Q5287226",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5287226",
+        "display": {
+          "label": {
+            "value": "Docklands",
+            "language": "en"
+          },
+          "description": {
+            "value": "suburb of Melbourne, Victoria, Australia",
+            "language": "en"
+          }
+        },
+        "label": "Docklands",
+        "description": "suburb of Melbourne, Victoria, Australia",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ドックランズ (メルボルン)"
+        },
+        "aliases": [
+          "ドックランズ (メルボルン)"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

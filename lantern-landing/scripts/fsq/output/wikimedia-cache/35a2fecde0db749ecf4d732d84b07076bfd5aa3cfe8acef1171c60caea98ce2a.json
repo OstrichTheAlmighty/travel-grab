@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:03.990Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 14918,
+          "ns": 0,
+          "title": "フェンシング",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふえんしんく",
+            "page_image_free": "0408_USA_Olympic_fencing.jpg",
+            "wikibase_item": "Q12100"
+          },
+          "terms": {
+            "description": [
+              "ヨーロッパ発祥の、剣を用いるスポーツ競技"
+            ]
+          }
+        },
+        {
+          "pageid": 33963,
+          "ns": 0,
+          "title": "カルフール",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かるふうる",
+            "wikibase_item": "Q217599"
+          },
+          "terms": {
+            "description": [
+              "スーパー・マーケットのブランド名（フランス、グルッペ・カルフール傘下）"
+            ]
+          }
+        },
+        {
+          "pageid": 1279298,
+          "ns": 0,
+          "title": "NNN Newsリアルタイム",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "NNNにゆうすりあるたいむ",
+            "wikibase_item": "Q10854755"
+          },
+          "terms": {
+            "description": [
+              "かつて日本テレビが放送していたニュース番組"
+            ]
+          }
+        },
+        {
+          "pageid": 1553275,
+          "ns": 0,
+          "title": "6区 (パリ)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はり6く",
+            "kartographer_frames": "1",
+            "page_image_free": "Paris_6e_arr_jms.gif",
+            "wikibase_item": "Q245546"
+          },
+          "terms": {
+            "description": [
+              "フランス・パリ市内の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 1553283,
+          "ns": 0,
+          "title": "7区 (パリ)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はり7く",
+            "kartographer_frames": "1",
+            "page_image_free": "Paris_7e_arr_jms.gif",
+            "wikibase_item": "Q259463"
+          },
+          "terms": {
+            "description": [
+              "フランス・パリ市内の行政区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:19.917Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 53398,
+          "ns": 0,
+          "title": "農学部",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "のうかくふ",
+            "wikibase_item": "Q11637943"
+          }
+        },
+        {
+          "pageid": 248116,
+          "ns": 0,
+          "title": "御茶ノ水",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おちやのみす",
+            "page_image_free": "Ochanomizu_hijiribashi01.jpg",
+            "wikibase_item": "Q3120746"
+          },
+          "terms": {
+            "description": [
+              "千代田区神田駿河台を中心とした一帯の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 873942,
+          "ns": 0,
+          "title": "増毛町",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ましけちよう",
+            "page_image_free": "Mashike_Itsukushima_shrine.JPG",
+            "wikibase_item": "Q746578"
+          },
+          "coordinates": [
+            {
+              "lat": 43.85603,
+              "lon": 141.52508,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道増毛郡の町"
+            ]
+          }
+        },
+        {
+          "pageid": 991283,
+          "ns": 0,
+          "title": "東日本橋",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひかしにほんはし",
+            "kartographer_frames": "1",
+            "page_image_free": "Toei_HIgashinihombashi_sta_001.jpg",
+            "wikibase_item": "Q11527202"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 2590529,
+          "ns": 0,
+          "title": "順天堂大学",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しゆんてんとう",
+            "page_image_free": "Juntendo_un_logo.svg",
+            "wikibase_item": "Q3244340"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70222222,
+              "lon": 139.75972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都文京区にある私立大学"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

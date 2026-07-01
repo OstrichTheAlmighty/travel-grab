@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:25.837Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 10937,
+          "ns": 0,
+          "title": "国立国会図書館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こくりつこつかいとしよかん",
+            "kartographer_frames": "1",
+            "page_image_free": "National_diet_library_2009.jpg",
+            "wikibase_item": "Q477675"
+          },
+          "coordinates": [
+            {
+              "lat": 35.678376,
+              "lon": 139.744203,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の国立図書館"
+            ]
+          }
+        },
+        {
+          "pageid": 674089,
+          "ns": 0,
+          "title": "衆議院事務局",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しゆうきいんしむきよく",
+            "wikibase_item": "Q11625976"
+          },
+          "terms": {
+            "description": [
+              "衆議院に附置される補佐機関"
+            ]
+          }
+        },
+        {
+          "pageid": 1041799,
+          "ns": 0,
+          "title": "民主くん",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みんしゆくん",
+            "wikibase_item": "Q11547823"
+          },
+          "terms": {
+            "description": [
+              "民主党公認マスコットキャラクター（2007-2016）"
+            ]
+          }
+        },
+        {
+          "pageid": 1145639,
+          "ns": 0,
+          "title": "憲政記念館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "けんせいきねんかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Memorial_Hall_of_constitutional_politics_Japan01s3200.jpg",
+            "wikibase_item": "Q11495238"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67833333,
+              "lon": 139.747,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある展示施設"
+            ]
+          }
+        },
+        {
+          "pageid": 1609900,
+          "ns": 0,
+          "title": "海老原一郎",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "えひはら いちろう",
+            "wikibase_item": "Q11559121"
+          },
+          "terms": {
+            "description": [
+              "建築家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

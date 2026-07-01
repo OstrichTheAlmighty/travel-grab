@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:11.427Z",
+  "value": {
+    "searchinfo": {
+      "search": "井の頭弁財天"
+    },
+    "search": [
+      {
+        "id": "Q11438058",
+        "title": "Q11438058",
+        "pageid": 12576889,
+        "concepturi": "http://www.wikidata.org/entity/Q11438058",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11438058",
+        "display": {
+          "label": {
+            "value": "Taisei-ji Temple",
+            "language": "en"
+          },
+          "description": {
+            "value": "temple in Inokashira, Mitaka",
+            "language": "en"
+          }
+        },
+        "label": "Taisei-ji Temple",
+        "description": "temple in Inokashira, Mitaka",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "井の頭弁財天"
+        },
+        "aliases": [
+          "井の頭弁財天"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

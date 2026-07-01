@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:20.235Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 439159,
+          "ns": 0,
+          "title": "Yayoi Kusama",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Kusama, Yayoi",
+            "page_image_free": "Yayoi_Kusama_wax_model_at_Louis_Vitton.jpg",
+            "wikibase-shortdesc": "Japanese artist and writer (born 1929)",
+            "wikibase_item": "Q231121"
+          },
+          "terms": {
+            "description": [
+              "Japanese artist (born 1929)"
+            ]
+          }
+        },
+        {
+          "pageid": 1628352,
+          "ns": 0,
+          "title": "Roppongi Hills Mori Tower",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Views_from_Azabudai_Hills_Mori_JP_Tower_13.jpg",
+            "wikibase-shortdesc": "Skyscraper in Tokyo, Japan",
+            "wikibase_item": "Q1771772"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66055556,
+              "lon": 139.72916667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "building in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 10562465,
+          "ns": 0,
+          "title": "Dinh Q. Lê",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Le, Dinh Q.",
+            "wikibase-shortdesc": "Vietnamese American multimedia artist (1968–2024)",
+            "wikibase_item": "Q3248362"
+          },
+          "terms": {
+            "description": [
+              "Vietnamese artist and photographer (1968–2024)"
+            ]
+          }
+        },
+        {
+          "pageid": 30409460,
+          "ns": 0,
+          "title": "Mori Art Museum",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Mori_Art_Museum_-----.png",
+            "wikibase-shortdesc": "Contemporary art museum in Tokyo, Japan",
+            "wikibase_item": "Q4410434"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66050556,
+              "lon": 139.72906667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Contemporary art museum in Tokyo, Japan."
+            ]
+          }
+        },
+        {
+          "pageid": 56743964,
+          "ns": 0,
+          "title": "N. S. Harsha",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Harsha, N. S.",
+            "wikibase-shortdesc": "Indian contemporary artist from Mysore (born 1969)",
+            "wikibase_item": "Q22237597"
+          },
+          "terms": {
+            "description": [
+              "Indian visual artist"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

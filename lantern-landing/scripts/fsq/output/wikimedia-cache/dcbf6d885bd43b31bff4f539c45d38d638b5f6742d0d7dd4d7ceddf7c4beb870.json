@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:22.409Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 263479,
+          "ns": 0,
+          "title": "Nippon Budokan",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Nippon_Budokan_2010.jpg",
+            "wikibase-shortdesc": "Sporting arena in Chiyoda, Tokyo",
+            "wikibase_item": "Q386246"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6933,
+              "lon": 139.75,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "indoor arena located in Chiyoda, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 407655,
+          "ns": 0,
+          "title": "Cheap Trick at Budokan",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Cheap Trick At Budokan",
+            "displaytitle": "<i>Cheap Trick at Budokan</i>",
+            "page_image": "CheapTrick_Live_atBudokan.jpg",
+            "wikibase-shortdesc": "1978 live album by Cheap Trick",
+            "wikibase_item": "Q389160"
+          },
+          "terms": {
+            "description": [
+              "1978 live album by Cheap Trick"
+            ]
+          }
+        },
+        {
+          "pageid": 1485939,
+          "ns": 0,
+          "title": "At Budokan",
+          "index": 3,
+          "pageprops": {
+            "disambiguation": "",
+            "displaytitle": "<i>At Budokan</i>",
+            "toc": "",
+            "wikibase-shortdesc": "Topics referred to by the same term",
+            "wikibase_item": "Q101242929"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        },
+        {
+          "pageid": 75284902,
+          "ns": 0,
+          "title": "The Complete Budokan 1978",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Complete Budokan 1978",
+            "displaytitle": "<i>The Complete Budokan 1978</i>",
+            "page_image": "Bob_Dylan_-_The_Complete_Budokan_1978.png",
+            "wikibase-shortdesc": "2023 live album box set by Bob Dylan",
+            "wikibase_item": "Q123560925"
+          },
+          "terms": {
+            "description": [
+              "2023 live album box set by Bob Dylan"
+            ]
+          }
+        },
+        {
+          "pageid": 81041791,
+          "ns": 0,
+          "title": "List of releases recorded live at Nippon Budokan",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Nippon_Budokan_-_2024_feb_16_various_04_27_57_359000.jpeg",
+            "toc": "",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q136377615"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

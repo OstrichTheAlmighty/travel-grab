@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:50.338Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 15945,
+          "ns": 0,
+          "title": "東京ドーム",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようとおむ",
+            "page_image_free": "Tokyo_Dome_2007-12.jpg",
+            "wikibase_item": "Q733748"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70583333,
+              "lon": 139.75194444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 236732,
+          "ns": 0,
+          "title": "スカラ座",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すからさ",
+            "page_image_free": "Milano_-_Teatro_alla_Scala_3924.jpg",
+            "wikibase_item": "Q5471"
+          },
+          "terms": {
+            "description": [
+              "イタリア・ミラノにある歌劇場"
+            ]
+          }
+        },
+        {
+          "pageid": 905716,
+          "ns": 0,
+          "title": "バルコニー",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はるこにい",
+            "page_image_free": "Balkong,_Nordisk_familjebok.png",
+            "wikibase_item": "Q170552"
+          },
+          "terms": {
+            "description": [
+              "建築物の室内の床から連続して、室外に張出した床"
+            ]
+          }
+        },
+        {
+          "pageid": 2594055,
+          "ns": 0,
+          "title": "観客席",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かんきやくせき",
+            "page_image_free": "Takarazuka_Grand_Theater05s4s3104.jpg",
+            "wikibase_item": "Q5926856"
+          }
+        },
+        {
+          "pageid": 2901389,
+          "ns": 0,
+          "title": "EX THEATER ROPPONGI",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いえつくすしあたろつほんき",
+            "kartographer_frames": "1",
+            "page_image_free": "TV_Asahi_EX_Tower_20150429-001.jpg",
+            "wikibase_item": "Q17192779"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66147222,
+              "lon": 139.72722222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都港区にある劇場"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

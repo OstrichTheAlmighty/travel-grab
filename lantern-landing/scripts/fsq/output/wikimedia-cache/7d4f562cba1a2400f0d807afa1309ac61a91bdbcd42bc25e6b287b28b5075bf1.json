@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:52.913Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 133623,
+          "ns": 0,
+          "title": "鎌倉街道",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かまくらかいとう",
+            "page_image_free": "Asahina_kiridoshi_-03.jpg",
+            "wikibase_item": "Q2389309"
+          },
+          "terms": {
+            "description": [
+              "鎌倉時代に鎌倉と各地を結んでいた古道の総称"
+            ]
+          }
+        },
+        {
+          "pageid": 297275,
+          "ns": 0,
+          "title": "ひまわり (1996年のテレビドラマ)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひまわり",
+            "wikibase_item": "Q11276500"
+          },
+          "terms": {
+            "description": [
+              "1996年前期のNHK連続テレビ小説第54作"
+            ]
+          }
+        },
+        {
+          "pageid": 607388,
+          "ns": 0,
+          "title": "多摩川",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たまかわ",
+            "kartographer_frames": "2",
+            "page_image_free": "Odakyu_Tama_River_Bridge.jpg",
+            "wikibase_item": "Q1063006"
+          },
+          "coordinates": [
+            {
+              "lat": 35.521784,
+              "lon": 139.798333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "山梨県・東京都・神奈川県を流れる河川"
+            ]
+          }
+        },
+        {
+          "pageid": 1425692,
+          "ns": 0,
+          "title": "矢口",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "やくち",
+            "kartographer_frames": "1",
+            "page_image_free": "Site_of_Yaguchi_Ferry_Port.jpg",
+            "wikibase_item": "Q11583966"
+          },
+          "terms": {
+            "description": [
+              "東京都大田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1778099,
+          "ns": 0,
+          "title": "大田区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おおたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-International-Airport_Satellite.jpg",
+            "wikibase_item": "Q217234"
+          },
+          "coordinates": [
+            {
+              "lat": 35.56128,
+              "lon": 139.71603,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:45.655Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 26817,
+          "ns": 0,
+          "title": "津幡町",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "つはたまち",
+            "page_image_free": "IFP_kamoike.jpg",
+            "wikibase_item": "Q432014"
+          },
+          "coordinates": [
+            {
+              "lat": 36.66917,
+              "lon": 136.72878,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "石川県河北郡の町"
+            ]
+          }
+        },
+        {
+          "pageid": 91346,
+          "ns": 0,
+          "title": "園城寺",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おんしようし",
+            "page_image_free": "Mii-dera_Otsu_Shiga_pref01s5s4592.jpg",
+            "wikibase_item": "Q1756307"
+          },
+          "coordinates": [
+            {
+              "lat": 35.01335833,
+              "lon": 135.85285,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "滋賀県大津市にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 202694,
+          "ns": 0,
+          "title": "美馬市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みまし",
+            "kartographer_frames": "1",
+            "page_image_free": "Wakimati_minamimati_20250828_4.jpg",
+            "wikibase_item": "Q857828"
+          },
+          "coordinates": [
+            {
+              "lat": 34.05331,
+              "lon": 134.16981,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "徳島県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 3197361,
+          "ns": 0,
+          "title": "大間木 (さいたま市)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おおまぎ",
+            "page_image_free": "東縁一の関.JPG",
+            "wikibase_item": "Q20043469"
+          },
+          "terms": {
+            "description": [
+              "埼玉県さいたま市緑区の町丁および大字"
+            ]
+          }
+        },
+        {
+          "pageid": 4543019,
+          "ns": 0,
+          "title": "行弘寺",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きようこうし",
+            "page_image_free": "Gyoko-ji,_Saitama_1.jpg",
+            "wikibase_item": "Q116754843"
+          },
+          "coordinates": [
+            {
+              "lat": 35.85208333,
+              "lon": 139.68402778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県さいたま市南区にある天台寺門宗の寺院"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

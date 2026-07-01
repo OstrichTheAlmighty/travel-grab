@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:29.065Z",
+  "value": {
+    "searchinfo": {
+      "search": "ガラスドーム"
+    },
+    "search": [
+      {
+        "id": "Q130426564",
+        "title": "Q130426564",
+        "pageid": 124393088,
+        "concepturi": "http://www.wikidata.org/entity/Q130426564",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q130426564",
+        "display": {
+          "label": {
+            "value": "The Glass Dome",
+            "language": "en"
+          },
+          "description": {
+            "value": "Netflix series",
+            "language": "en"
+          }
+        },
+        "label": "The Glass Dome",
+        "description": "Netflix series",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ガラスドーム"
+        },
+        "aliases": [
+          "ガラスドーム"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

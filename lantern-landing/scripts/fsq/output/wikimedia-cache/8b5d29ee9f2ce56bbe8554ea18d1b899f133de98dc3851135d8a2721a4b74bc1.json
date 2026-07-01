@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:32.480Z",
+  "value": {
+    "searchinfo": {
+      "search": "Tokyo National Museum"
+    },
+    "search": [
+      {
+        "id": "Q653433",
+        "title": "Q653433",
+        "pageid": 615001,
+        "concepturi": "http://www.wikidata.org/entity/Q653433",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q653433",
+        "display": {
+          "label": {
+            "value": "Tokyo National Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "art museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo National Museum",
+        "description": "art museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo National Museum"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

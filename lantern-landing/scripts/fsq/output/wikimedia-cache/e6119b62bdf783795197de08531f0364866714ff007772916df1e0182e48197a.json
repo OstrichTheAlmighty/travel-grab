@@ -1,0 +1,108 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:14.717Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 233177,
+          "ns": 0,
+          "title": "四谷怪談",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "よつやかいたん",
+            "page_image_free": "Kuniyoshi_The_Ghost_in_the_Lantern.jpg",
+            "wikibase_item": "Q1339373"
+          },
+          "terms": {
+            "description": [
+              "元禄時代に起きたとされる事件を基に創作された日本の怪談"
+            ]
+          }
+        },
+        {
+          "pageid": 823670,
+          "ns": 0,
+          "title": "左門町",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さもんちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Samon_eleven_building_samoncho_shinjuku_tokyo.JPG",
+            "wikibase_item": "Q11479736"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1722294,
+          "ns": 0,
+          "title": "加瀬愛奈",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かせ あいな",
+            "wikibase_item": "Q11398710"
+          }
+        },
+        {
+          "pageid": 4198076,
+          "ns": 0,
+          "title": "於岩稲荷田宮神社 (東京都中央区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おいわいなりたみやしんしや ちゆうおうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Oiwa_inari_tamiya_jinja01.jpg",
+            "wikibase_item": "Q106852581"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67464722,
+              "lon": 139.78317222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都中央区にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 4235526,
+          "ns": 0,
+          "title": "於岩稲荷田宮神社 (新宿区)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おいわいなりたみやしんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "於岩稲荷田宮神社2.jpg",
+            "wikibase_item": "Q101418080"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68547222,
+              "lon": 139.721,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区にある神社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

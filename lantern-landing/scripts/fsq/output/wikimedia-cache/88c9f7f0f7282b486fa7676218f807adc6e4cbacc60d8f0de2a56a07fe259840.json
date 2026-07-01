@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:41.085Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 242250,
+          "ns": 0,
+          "title": "Asakusa",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Day2-2_(40909714314).jpg",
+            "wikibase-shortdesc": "District of Tokyo, Japan",
+            "wikibase_item": "Q720644"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71444444,
+              "lon": 139.79666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "town located in Taitō-ku, Tokyo"
+            ]
+          }
+        },
+        {
+          "pageid": 693120,
+          "ns": 0,
+          "title": "Maneki-neko",
+          "index": 3,
+          "pageprops": {
+            "displaytitle": "<span title=\"Japanese-language text\"><i lang=\"ja-Latn\">Maneki-neko</i></span>",
+            "page_image_free": "Manekineko1003.jpg",
+            "wikibase-shortdesc": "Japanese figurine of a beckoning cat",
+            "wikibase_item": "Q460679"
+          },
+          "terms": {
+            "description": [
+              "Japanese figurine of a cat, said to bring good luck and money especially to business owners"
+            ]
+          }
+        },
+        {
+          "pageid": 871044,
+          "ns": 0,
+          "title": "Sensō-ji",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Senso-ji",
+            "kartographer_frames": "1",
+            "page_image_free": "Sensoji_2023.jpg",
+            "wikibase-shortdesc": "Buddhist temple in Tokyo, Japan",
+            "wikibase_item": "Q615183"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71472222,
+              "lon": 139.79675,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Buddhist temple in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 11185952,
+          "ns": 0,
+          "title": "Sanja Matsuri",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "View_of_mikoshi_from_sensoji_Sanja_Matsuri_2006-3.jpg",
+            "wikibase-shortdesc": "Shinto festival in Tokyo, Japan",
+            "wikibase_item": "Q219122"
+          },
+          "terms": {
+            "description": [
+              "Shinto festival in Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 68447567,
+          "ns": 0,
+          "title": "List of Buddhist temples in Japan",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Buddhist temples",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q10311993"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

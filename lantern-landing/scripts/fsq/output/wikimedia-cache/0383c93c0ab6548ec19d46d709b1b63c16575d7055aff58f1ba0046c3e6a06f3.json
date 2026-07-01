@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:12.065Z",
+  "value": {
+    "searchinfo": {
+      "search": "田端文士村記念館"
+    },
+    "search": [
+      {
+        "id": "Q11577225",
+        "title": "Q11577225",
+        "pageid": 12717169,
+        "concepturi": "http://www.wikidata.org/entity/Q11577225",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11577225",
+        "display": {
+          "label": {
+            "value": "Tabata Memorial Museum of Writers and Artists",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Kita, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tabata Memorial Museum of Writers and Artists",
+        "description": "museum in Kita, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "田端文士村記念館"
+        },
+        "aliases": [
+          "田端文士村記念館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

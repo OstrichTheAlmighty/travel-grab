@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:01.784Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18986,
+          "ns": 0,
+          "title": "荒川区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あらかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "Entsuji_(Arakawa)_08.jpg",
+            "wikibase_item": "Q232624"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73611,
+              "lon": 139.78339,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 60600,
+          "ns": 0,
+          "title": "久喜市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "くきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kuki_Chōchin_Matsuri_04.jpg",
+            "wikibase_item": "Q47535"
+          },
+          "coordinates": [
+            {
+              "lat": 36.06208,
+              "lon": 139.66681,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 1043955,
+          "ns": 0,
+          "title": "西日暮里",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にしにつほり",
+            "kartographer_frames": "1",
+            "page_image_free": "開成中学校高等学校.JPG",
+            "wikibase_item": "Q3342140"
+          },
+          "terms": {
+            "description": [
+              "東京都荒川区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1212498,
+          "ns": 0,
+          "title": "桐生市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きりゆうし",
+            "kartographer_frames": "1",
+            "page_image_free": "桐生八木節まつり,_Kiryu_Honcho_Street_in_the_Festival_-_panoramio.jpg",
+            "wikibase_item": "Q634022"
+          },
+          "coordinates": [
+            {
+              "lat": 36.40533,
+              "lon": 139.33047,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "群馬県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 4079931,
+          "ns": 0,
+          "title": "ふしぎ駄菓子屋 銭天堂",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふしきたかしやせにてんとう",
+            "wikibase_item": "Q86742976"
+          },
+          "terms": {
+            "description": [
+              "偕成社の児童小説"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

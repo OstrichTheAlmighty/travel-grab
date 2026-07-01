@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:00.006Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 21208,
+          "ns": 0,
+          "title": "皇居",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こうきよ",
+            "kartographer_frames": "1",
+            "page_image_free": "Kokyo0057.jpg",
+            "wikibase_item": "Q500681"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6825,
+              "lon": 139.75277778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある天皇の住居"
+            ]
+          }
+        },
+        {
+          "pageid": 275464,
+          "ns": 0,
+          "title": "皇居三の丸尚蔵館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こうきよさんのまるしようそうかん",
+            "page_image_free": "三の丸尚蔵館.jpg",
+            "wikibase_item": "Q3076188"
+          },
+          "coordinates": [
+            {
+              "lat": 35.686302,
+              "lon": 139.759247,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区の皇居東御苑内にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 466313,
+          "ns": 0,
+          "title": "豊明殿",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ほうめいてん",
+            "wikibase_item": "Q11633731"
+          },
+          "terms": {
+            "description": [
+              "皇居にある宴会場"
+            ]
+          }
+        },
+        {
+          "pageid": 525242,
+          "ns": 0,
+          "title": "正殿",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せいてん",
+            "wikibase_item": "Q11545545"
+          },
+          "terms": {
+            "description": [
+              "皇居宮殿の中心となる殿舎"
+            ]
+          }
+        },
+        {
+          "pageid": 3518608,
+          "ns": 0,
+          "title": "宮中晩餐会",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きゆうちゆうはんさんかい",
+            "page_image_free": "President_Trump_Attends_a_State_Banquet_at_the_Imperial_Palace_(47945528527).jpg",
+            "wikibase_item": "Q28686708"
+          },
+          "terms": {
+            "description": [
+              "天皇・皇后が国賓をもてなすために皇居宮殿で催す晩餐会"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

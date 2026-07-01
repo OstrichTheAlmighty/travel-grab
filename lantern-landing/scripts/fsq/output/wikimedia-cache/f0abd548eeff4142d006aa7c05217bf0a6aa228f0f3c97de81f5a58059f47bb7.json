@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:48.234Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 537362,
+          "ns": 0,
+          "title": "Magic Kingdom",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "2",
+            "page_image_free": "Cinderella_Castle,_Magic_Kingdom_(2026).jpg",
+            "wikibase-shortdesc": "Theme park at Walt Disney World",
+            "wikibase_item": "Q1324340"
+          },
+          "coordinates": [
+            {
+              "lat": 28.41861111,
+              "lon": -81.58111111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Theme park at Walt Disney World Resort in Florida"
+            ]
+          }
+        },
+        {
+          "pageid": 1525146,
+          "ns": 0,
+          "title": "Fantasyland",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Fantasyland_logo.svg",
+            "wikibase-shortdesc": "Themed land at Disney theme parks",
+            "wikibase_item": "Q2441096"
+          },
+          "terms": {
+            "description": [
+              "themed land at Disney theme parks"
+            ]
+          }
+        },
+        {
+          "pageid": 10555827,
+          "ns": 0,
+          "title": "Fantasyland Theatre",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Stage_for_'Bluey's_Best_Day_Ever!'_in_Fantasyland_Theatre_at_Disneyland,_2026.jpg",
+            "wikibase-shortdesc": "Outdoor theater at Disneyland",
+            "wikibase_item": "Q3066622"
+          },
+          "terms": {
+            "description": [
+              "outdoor theater at Disneyland"
+            ]
+          }
+        },
+        {
+          "pageid": 64297283,
+          "ns": 0,
+          "title": "Fantasyland: How America Went Haywire",
+          "index": 5,
+          "pageprops": {
+            "displaytitle": "<i>Fantasyland: How America Went Haywire</i>",
+            "page_image": "Fantasyland.jpg",
+            "wikibase-shortdesc": "Non-fiction book by Kurt Andersen",
+            "wikibase_item": "Q96377766"
+          },
+          "terms": {
+            "description": [
+              "non-fiction book by Kurt Andersen"
+            ]
+          }
+        },
+        {
+          "pageid": 83432384,
+          "ns": 0,
+          "title": "Fantasyland (disambiguation)",
+          "index": 2,
+          "pageprops": {
+            "disambiguation": "",
+            "wikibase-shortdesc": "Topics referred to by the same term",
+            "wikibase_item": "Q140365703"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

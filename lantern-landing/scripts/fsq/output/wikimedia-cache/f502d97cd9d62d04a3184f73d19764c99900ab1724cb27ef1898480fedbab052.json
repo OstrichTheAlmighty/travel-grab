@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:18.065Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 30057,
+          "ns": 0,
+          "title": "Tokyo",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Capital and most populous city in Japan",
+            "wikibase_item": "Q1490"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68972222,
+              "lon": 139.69222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "capital and largest city of Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 147739,
+          "ns": 0,
+          "title": "Shibuya",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Shibuya_skyline_from_Tokyu_Plaza_in_Omotesando,_Harajuku,_Tokyo,_2024_May.jpg",
+            "wikibase-shortdesc": "Special ward in Tokyo, Japan",
+            "wikibase_item": "Q193638"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65944444,
+              "lon": 139.70055556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "special ward in the Tokyo Metropolis in Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 1201234,
+          "ns": 0,
+          "title": "Kabocha",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Kabocha.jpg",
+            "wikibase-shortdesc": "Type of winter squash",
+            "wikibase_item": "Q3191670"
+          },
+          "terms": {
+            "description": [
+              "Asian variety of winter squash of the species Cucurbita maxima"
+            ]
+          }
+        },
+        {
+          "pageid": 3425647,
+          "ns": 0,
+          "title": "Senna obtusifolia",
+          "index": 3,
+          "pageprops": {
+            "displaytitle": "<i>Senna obtusifolia</i>",
+            "page_image_free": "Senna_obtusifolia_with_flower_and_pods.jpg",
+            "wikibase-shortdesc": "Species of legume",
+            "wikibase_item": "Q1378803"
+          },
+          "terms": {
+            "description": [
+              "species of legume"
+            ]
+          }
+        },
+        {
+          "pageid": 26067321,
+          "ns": 0,
+          "title": "List of development projects in Tokyo",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Ebisu_Garden_Palace_from_Tokyo_Tower.jpg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q6616139"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

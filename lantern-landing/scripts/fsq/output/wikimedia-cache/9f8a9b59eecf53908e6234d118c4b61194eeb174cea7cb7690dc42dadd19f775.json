@@ -1,0 +1,116 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:43.802Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 329685,
+          "ns": 0,
+          "title": "7 Rideau Gate",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "9_Rideau_Gate.jpg",
+            "wikibase-shortdesc": "Official state guest house in Canada",
+            "wikibase_item": "Q4643871"
+          },
+          "coordinates": [
+            {
+              "lat": 45.443964,
+              "lon": -75.692142,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Canadian government's official guest house for distinguished visitors, such as heads of state and high-level government officials"
+            ]
+          }
+        },
+        {
+          "pageid": 9458632,
+          "ns": 0,
+          "title": "Karaiskakis Stadium disaster",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Karaiskakis Stadium disaster",
+            "kartographer_frames": "1",
+            "page_image_free": "Thyra_7_Mnimeio_(neo).jpg",
+            "wikibase-shortdesc": "1981 fatal incident in Piraeus, Greece",
+            "wikibase_item": "Q3556846"
+          },
+          "coordinates": [
+            {
+              "lat": 37.94644722,
+              "lon": 23.66431667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "1981 fatal incident in Piraeus, Greece"
+            ]
+          }
+        },
+        {
+          "pageid": 30872871,
+          "ns": 0,
+          "title": "Karaiskakis Stadium",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Karaiskakis_Stadium_Piraeus_Olympiacos-Arsenal.jpg",
+            "wikibase-shortdesc": "Football stadium in Piraeus, Attica, Greece",
+            "wikibase_item": "Q213508"
+          },
+          "terms": {
+            "description": [
+              "football stadium in Piraeus, Attica, Greece"
+            ]
+          }
+        },
+        {
+          "pageid": 31645242,
+          "ns": 0,
+          "title": "Gate 7",
+          "index": 1,
+          "pageprops": {
+            "displaytitle": "<i>Gate 7</i>",
+            "page_image": "Gate_7_vol1_cover.jpg",
+            "wikibase-shortdesc": "Manga",
+            "wikibase_item": "Q910514"
+          },
+          "terms": {
+            "description": [
+              "Japanese manga series"
+            ]
+          }
+        },
+        {
+          "pageid": 66410386,
+          "ns": 0,
+          "title": "Gate 7 (supporter group)",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Gate7_against_panathinaikos.jpg",
+            "wikibase-shortdesc": "Fan club of Olympiacos CFP, in Greece",
+            "wikibase_item": "Q105162721"
+          },
+          "terms": {
+            "description": [
+              "fan club of Olympiacos CFP, in Greece"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

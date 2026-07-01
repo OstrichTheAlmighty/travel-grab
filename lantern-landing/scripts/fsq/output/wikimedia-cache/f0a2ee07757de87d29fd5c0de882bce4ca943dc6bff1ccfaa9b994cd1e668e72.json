@@ -1,0 +1,123 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:27.659Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 19887,
+          "ns": 0,
+          "title": "国立歴史民俗博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こくりつれきしみんそくはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "National_Museum_of_Japanese_History_2008(cropped).jpg",
+            "wikibase_item": "Q3330690"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72449722,
+              "lon": 140.21908056,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県佐倉市にある日本の歴史、民俗学、考古学について総合的に研究・展示する歴史博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 55199,
+          "ns": 0,
+          "title": "大阪歴史博物館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおさかれきしはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "140923_Osaka_Museum_of_History_Osaka_Japan02s3.jpg",
+            "wikibase_item": "Q11261312"
+          },
+          "coordinates": [
+            {
+              "lat": 34.68272222,
+              "lon": 135.52080556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪府大阪市中央区にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 284239,
+          "ns": 0,
+          "title": "くじらの博物館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "くしらのはくふつかん",
+            "page_image_free": "Taiji_Town_Whale_Museum.jpg",
+            "wikibase_item": "Q11265357"
+          },
+          "terms": {
+            "description": [
+              "和歌山県太地町にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 866358,
+          "ns": 0,
+          "title": "風俗博物館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふうそくはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Izutsu-Samegai_building.jpg",
+            "wikibase_item": "Q11665410"
+          },
+          "coordinates": [
+            {
+              "lat": 34.99294444,
+              "lon": 135.75333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市下京区にある源氏物語に関する博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

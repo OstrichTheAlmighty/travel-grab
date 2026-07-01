@@ -1,0 +1,67 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:51.750Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 2242303,
+          "ns": 0,
+          "title": "TOKYO FM番組一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようえふえむはんくみいちらん",
+            "wikibase_item": "Q11249705"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2342332,
+          "ns": 0,
+          "title": "アングリーバード",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あんくりいはあと",
+            "wikibase_item": "Q165094"
+          },
+          "terms": {
+            "description": [
+              "フィンランドのモバイルゲーム"
+            ]
+          }
+        },
+        {
+          "pageid": 3645889,
+          "ns": 0,
+          "title": "アメリカ合衆国の道路標識",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あめりかかつしゆうこくのとうろひようしき",
+            "page_image_free": "U.S._states_by_2009_MUTCD_adoption.svg",
+            "wikibase_item": "Q800546"
+          }
+        },
+        {
+          "pageid": 4246160,
+          "ns": 0,
+          "title": "セサミストリートのエピソード一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せさみすとりいと",
+            "wikibase_item": "Q109358389"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

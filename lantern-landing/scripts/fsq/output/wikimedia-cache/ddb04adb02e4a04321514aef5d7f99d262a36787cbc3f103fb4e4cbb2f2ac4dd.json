@@ -1,0 +1,204 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:42.125Z",
+  "value": {
+    "searchinfo": {
+      "search": "明治神宮"
+    },
+    "search": [
+      {
+        "id": "Q287165",
+        "title": "Q287165",
+        "pageid": 277605,
+        "concepturi": "http://www.wikidata.org/entity/Q287165",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q287165",
+        "display": {
+          "label": {
+            "value": "Meiji Jingū",
+            "language": "en"
+          },
+          "description": {
+            "value": "Shinto shrine in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Meiji Jingū",
+        "description": "Shinto shrine in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "明治神宮"
+        },
+        "aliases": [
+          "明治神宮"
+        ]
+      },
+      {
+        "id": "Q944559",
+        "title": "Q944559",
+        "pageid": 894685,
+        "concepturi": "http://www.wikidata.org/entity/Q944559",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q944559",
+        "display": {
+          "label": {
+            "value": "Meiji Jingu Stadium",
+            "language": "en"
+          },
+          "description": {
+            "value": "baseball stadium in Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Meiji Jingu Stadium",
+        "description": "baseball stadium in Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "明治神宮野球場"
+        },
+        "aliases": [
+          "明治神宮野球場"
+        ]
+      },
+      {
+        "id": "Q80429",
+        "title": "Q80429",
+        "pageid": 82927,
+        "concepturi": "http://www.wikidata.org/entity/Q80429",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q80429",
+        "display": {
+          "label": {
+            "value": "Meiji-Jingūmae Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "metro station in Shibuya, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Meiji-Jingūmae Station",
+        "description": "metro station in Shibuya, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "明治神宮前駅"
+        },
+        "aliases": [
+          "明治神宮前駅"
+        ]
+      },
+      {
+        "id": "Q11512393",
+        "title": "Q11512393",
+        "pageid": 12652137,
+        "concepturi": "http://www.wikidata.org/entity/Q11512393",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11512393",
+        "display": {
+          "label": {
+            "value": "Meiji Jingu Baseball Tournament",
+            "language": "en"
+          }
+        },
+        "label": "Meiji Jingu Baseball Tournament",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "明治神宮野球大会"
+        },
+        "aliases": [
+          "明治神宮野球大会"
+        ]
+      },
+      {
+        "id": "Q6810037",
+        "title": "Q6810037",
+        "pageid": 6660353,
+        "concepturi": "http://www.wikidata.org/entity/Q6810037",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6810037",
+        "display": {
+          "label": {
+            "value": "Meiji Jingu Gaien Stadium",
+            "language": "en"
+          },
+          "description": {
+            "value": "demolished stadium in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Meiji Jingu Gaien Stadium",
+        "description": "demolished stadium in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "明治神宮外苑競技場"
+        },
+        "aliases": [
+          "明治神宮外苑競技場"
+        ]
+      },
+      {
+        "id": "Q1010020",
+        "title": "Q1010020",
+        "pageid": 959455,
+        "concepturi": "http://www.wikidata.org/entity/Q1010020",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1010020",
+        "display": {
+          "label": {
+            "value": "Sangūbashi Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "railway station in Shibuya, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Sangūbashi Station",
+        "description": "railway station in Shibuya, Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "明治神宮下車駅"
+        },
+        "aliases": [
+          "明治神宮下車駅"
+        ]
+      },
+      {
+        "id": "Q6631448",
+        "title": "Q6631448",
+        "pageid": 6460271,
+        "concepturi": "http://www.wikidata.org/entity/Q6631448",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6631448",
+        "display": {
+          "label": {
+            "value": "Meiji Shrine Outer Garden",
+            "language": "en"
+          },
+          "description": {
+            "value": "garden in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Meiji Shrine Outer Garden",
+        "description": "garden in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "明治神宮外苑"
+        },
+        "aliases": [
+          "明治神宮外苑"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

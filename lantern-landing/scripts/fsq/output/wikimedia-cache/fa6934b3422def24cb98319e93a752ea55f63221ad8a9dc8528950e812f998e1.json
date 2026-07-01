@@ -1,0 +1,183 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:28.578Z",
+  "value": {
+    "searchinfo": {
+      "search": "Tokyo Dome"
+    },
+    "search": [
+      {
+        "id": "Q733748",
+        "title": "Q733748",
+        "pageid": 689979,
+        "concepturi": "http://www.wikidata.org/entity/Q733748",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q733748",
+        "display": {
+          "label": {
+            "value": "Tokyo Dome",
+            "language": "en"
+          },
+          "description": {
+            "value": "indoor stadium in Bunkyō, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Dome",
+        "description": "indoor stadium in Bunkyō, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Dome"
+        }
+      },
+      {
+        "id": "Q11524325",
+        "title": "Q11524325",
+        "pageid": 12664195,
+        "concepturi": "http://www.wikidata.org/entity/Q11524325",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11524325",
+        "display": {
+          "label": {
+            "value": "Tokyo Dome",
+            "language": "en"
+          },
+          "description": {
+            "value": "unit of area and volume",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Dome",
+        "description": "unit of area and volume",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Dome"
+        }
+      },
+      {
+        "id": "Q19264012",
+        "title": "Q19264012",
+        "pageid": 20831223,
+        "concepturi": "http://www.wikidata.org/entity/Q19264012",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q19264012",
+        "display": {
+          "label": {
+            "value": "Tokyo Dome Live in Concert",
+            "language": "en"
+          },
+          "description": {
+            "value": "2015 live album by Van Halen",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Dome Live in Concert",
+        "description": "2015 live album by Van Halen",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Dome Live in Concert"
+        }
+      },
+      {
+        "id": "Q2439074",
+        "title": "Q2439074",
+        "pageid": 2355900,
+        "concepturi": "http://www.wikidata.org/entity/Q2439074",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2439074",
+        "display": {
+          "label": {
+            "value": "Tokyo Dome Corporation",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Dome Corporation",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Dome Corporation"
+        }
+      },
+      {
+        "id": "Q564554",
+        "title": "Q564554",
+        "pageid": 531538,
+        "concepturi": "http://www.wikidata.org/entity/Q564554",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q564554",
+        "display": {
+          "label": {
+            "value": "Tokyo Dome City",
+            "language": "en"
+          },
+          "description": {
+            "value": "entertainment complex in Bunkyo, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Dome City",
+        "description": "entertainment complex in Bunkyo, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Dome City"
+        }
+      },
+      {
+        "id": "Q3267633",
+        "title": "Q3267633",
+        "pageid": 3117506,
+        "concepturi": "http://www.wikidata.org/entity/Q3267633",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3267633",
+        "display": {
+          "label": {
+            "value": "Tokyo Dome City Hall",
+            "language": "en"
+          },
+          "description": {
+            "value": "event facility in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Dome City Hall",
+        "description": "event facility in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Dome City Hall"
+        }
+      },
+      {
+        "id": "Q564646",
+        "title": "Q564646",
+        "pageid": 531623,
+        "concepturi": "http://www.wikidata.org/entity/Q564646",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q564646",
+        "display": {
+          "label": {
+            "value": "Tokyo Dome City Attractions",
+            "language": "en"
+          },
+          "description": {
+            "value": "amusement park in Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Dome City Attractions",
+        "description": "amusement park in Tokyo",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Tokyo Dome City Attractions"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

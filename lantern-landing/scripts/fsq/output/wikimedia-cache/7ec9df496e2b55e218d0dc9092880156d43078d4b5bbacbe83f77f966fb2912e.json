@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:48.700Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1810516,
+          "ns": 0,
+          "title": "熊本市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "くまもとし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kumamoto_Montage.jpg",
+            "wikibase_item": "Q199889"
+          },
+          "coordinates": [
+            {
+              "lat": 32.803,
+              "lon": 130.70786,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "熊本県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 2160160,
+          "ns": 0,
+          "title": "爆走トラッカー軍団",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はくそうとらつかあくんたん",
+            "wikibase_item": "Q11569409"
+          },
+          "terms": {
+            "description": [
+              "映画"
+            ]
+          }
+        },
+        {
+          "pageid": 2636474,
+          "ns": 0,
+          "title": "MYNAME (音楽グループ)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "まいねえむ",
+            "page_image_free": "Myname_2nd_Mini_Album_shoot.jpg",
+            "wikibase_item": "Q487111"
+          },
+          "terms": {
+            "description": [
+              "韓国のボーイズグループ"
+            ]
+          }
+        },
+        {
+          "pageid": 3257453,
+          "ns": 0,
+          "title": "若宮はずき",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "わかみや はすき",
+            "wikibase_item": "Q22126290"
+          },
+          "terms": {
+            "description": [
+              "日本のAV女優"
+            ]
+          }
+        },
+        {
+          "pageid": 4420335,
+          "ns": 0,
+          "title": "オバケのQ太郎 (アニメ)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おはけのきゆうたろう",
+            "unexpectedUnconnectedPage": "0"
+          }
+        }
+      ]
+    }
+  }
+}

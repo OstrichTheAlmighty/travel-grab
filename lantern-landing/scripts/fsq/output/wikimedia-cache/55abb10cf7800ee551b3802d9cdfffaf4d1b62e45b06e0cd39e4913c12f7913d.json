@@ -1,0 +1,139 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:00.984Z",
+  "value": {
+    "searchinfo": {
+      "search": "アヲ"
+    },
+    "search": [
+      {
+        "id": "Q64020400",
+        "title": "Q64020400",
+        "pageid": 63724127,
+        "concepturi": "http://www.wikidata.org/entity/Q64020400",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q64020400",
+        "display": {
+          "label": {
+            "value": "Qingye Village",
+            "language": "en"
+          },
+          "description": {
+            "value": "village in Sandimen, Pingtung County, Taiwan",
+            "language": "en"
+          }
+        },
+        "label": "Qingye Village",
+        "description": "village in Sandimen, Pingtung County, Taiwan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "アヲバ"
+        },
+        "aliases": [
+          "アヲバ"
+        ]
+      },
+      {
+        "id": "Q56353195",
+        "title": "Q56353195",
+        "pageid": 56292164,
+        "concepturi": "http://www.wikidata.org/entity/Q56353195",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q56353195",
+        "display": {
+          "label": {
+            "value": "アヲアヲ",
+            "language": "ja"
+          },
+          "description": {
+            "value": "album by Chirinuruwowaka",
+            "language": "en"
+          }
+        },
+        "label": "アヲアヲ",
+        "description": "album by Chirinuruwowaka",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "アヲアヲ"
+        }
+      },
+      {
+        "id": "Q106081443",
+        "title": "Q106081443",
+        "pageid": 101397534,
+        "concepturi": "http://www.wikidata.org/entity/Q106081443",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q106081443",
+        "display": {
+          "label": {
+            "value": "Talamakau Tribe",
+            "language": "en"
+          }
+        },
+        "label": "Talamakau Tribe",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "アヲバ社"
+        },
+        "aliases": [
+          "アヲバ社"
+        ]
+      },
+      {
+        "id": "Q17192456",
+        "title": "Q17192456",
+        "pageid": 18786576,
+        "concepturi": "http://www.wikidata.org/entity/Q17192456",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q17192456",
+        "display": {
+          "label": {
+            "value": "Aohata Corporation",
+            "language": "en"
+          }
+        },
+        "label": "Aohata Corporation",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "アヲハタ"
+        },
+        "aliases": [
+          "アヲハタ"
+        ]
+      },
+      {
+        "id": "Q107590037",
+        "title": "Q107590037",
+        "pageid": 102876601,
+        "concepturi": "http://www.wikidata.org/entity/Q107590037",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q107590037",
+        "display": {
+          "label": {
+            "value": "Descriptive and Oecological Notes on the Larva of Aeschnophlcbia longistigma DE SELYS-LONGCHAMPS",
+            "language": "en"
+          },
+          "description": {
+            "value": "scientific article",
+            "language": "en"
+          }
+        },
+        "label": "Descriptive and Oecological Notes on the Larva of Aeschnophlcbia longistigma DE SELYS-LONGCHAMPS",
+        "description": "scientific article",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "アヲヤンマの幼蟲の記載と其生態"
+        },
+        "aliases": [
+          "アヲヤンマの幼蟲の記載と其生態"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

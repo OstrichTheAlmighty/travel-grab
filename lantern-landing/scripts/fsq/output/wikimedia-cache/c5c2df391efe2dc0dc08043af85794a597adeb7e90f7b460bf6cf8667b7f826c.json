@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:40.000Z",
+  "value": {
+    "searchinfo": {
+      "search": "明徳稲荷神社"
+    },
+    "search": [
+      {
+        "id": "Q121862925",
+        "title": "Q121862925",
+        "pageid": 116196665,
+        "concepturi": "http://www.wikidata.org/entity/Q121862925",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q121862925",
+        "display": {
+          "label": {
+            "value": "Meitoku Inari Shrine",
+            "language": "en"
+          },
+          "description": {
+            "value": "shrine in Nakano-ku, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Meitoku Inari Shrine",
+        "description": "shrine in Nakano-ku, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "明徳稲荷神社"
+        },
+        "aliases": [
+          "明徳稲荷神社"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

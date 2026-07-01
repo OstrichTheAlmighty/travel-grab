@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:04.712Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 5388,
+          "ns": 0,
+          "title": "日本料理",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんりようり",
+            "page_image_free": "Osechi_001.jpg",
+            "wikibase_item": "Q234138"
+          },
+          "terms": {
+            "description": [
+              "日本の料理あるいは食文化"
+            ]
+          }
+        },
+        {
+          "pageid": 14383,
+          "ns": 0,
+          "title": "日本酒",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんしゆ",
+            "page_image_free": "Sake_set.jpg",
+            "wikibase_item": "Q170219"
+          },
+          "terms": {
+            "description": [
+              "日本を起源とする醸造酒のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 17955,
+          "ns": 0,
+          "title": "厳島",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いつくしま",
+            "kartographer_frames": "1",
+            "page_image_free": "Miyajima_From_The_Ferry_(30093845).jpeg",
+            "wikibase_item": "Q875301"
+          },
+          "coordinates": [
+            {
+              "lat": 34.26666667,
+              "lon": 132.3,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "広島県、芸予諸島にある島"
+            ]
+          }
+        },
+        {
+          "pageid": 19657,
+          "ns": 0,
+          "title": "対馬",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "つしま",
+            "kartographer_frames": "1",
+            "page_image_free": "Tsushima_island_ja.png",
+            "wikibase_item": "Q52051"
+          },
+          "coordinates": [
+            {
+              "lat": 34.41666667,
+              "lon": 129.33333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "九州と朝鮮半島の間に位置する、日本の長崎県に属する島"
+            ]
+          }
+        },
+        {
+          "pageid": 4095963,
+          "ns": 0,
+          "title": "安芸国分寺",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あきこくふんし",
+            "page_image_free": "Aki_Kokubunji,_hondou.jpg",
+            "wikibase_item": "Q87504364"
+          },
+          "coordinates": [
+            {
+              "lat": 34.43423611,
+              "lon": 132.74875,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "広島県東広島市にある真言宗御室派の仏教寺院"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

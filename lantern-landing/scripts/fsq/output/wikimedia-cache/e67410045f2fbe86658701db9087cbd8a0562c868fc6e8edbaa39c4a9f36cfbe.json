@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:44.433Z",
+  "value": {
+    "searchinfo": {
+      "search": "武者小路実篤記念館"
+    },
+    "search": [
+      {
+        "id": "Q104698117",
+        "title": "Q104698117",
+        "pageid": 100126076,
+        "concepturi": "http://www.wikidata.org/entity/Q104698117",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q104698117",
+        "display": {
+          "label": {
+            "value": "Chōfu City Mushanokōji Saneatsu Memorial Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Chōfu, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Chōfu City Mushanokōji Saneatsu Memorial Museum",
+        "description": "museum in Chōfu, Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "武者小路実篤記念館"
+        },
+        "aliases": [
+          "武者小路実篤記念館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

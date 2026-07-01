@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:06.329Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 769016,
+          "ns": 0,
+          "title": "Japanese garden",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Saihouji-kokedera01.jpg",
+            "wikibase-shortdesc": "Type of traditional garden",
+            "wikibase_item": "Q15835"
+          },
+          "terms": {
+            "description": [
+              "type of traditional garden"
+            ]
+          }
+        },
+        {
+          "pageid": 2774164,
+          "ns": 0,
+          "title": "Hama-rikyū Gardens",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Hamarikyu_Garden_as_seen_from_Shiodome.jpg",
+            "wikibase-shortdesc": "Park in Chūō, Tokyo, Japan",
+            "wikibase_item": "Q1033333"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66,
+              "lon": 139.762,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "park in Chuo, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 5856028,
+          "ns": 0,
+          "title": "Shiodome",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Shiodome_Area_from_Tokyo_Tower.jpg",
+            "wikibase-shortdesc": "Area in Minato, Tokyo, Japan",
+            "wikibase_item": "Q1185910"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66277778,
+              "lon": 139.75984722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "area in Minato, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 15025536,
+          "ns": 0,
+          "title": "List of parks and gardens in Tokyo",
+          "index": 4,
+          "pageprops": {
+            "wikibase-shortdesc": "Parks and gardens in Tokyo, Japan",
+            "wikibase_item": "Q5158875"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 21017414,
+          "ns": 0,
+          "title": "Kyū Shiba Rikyū Garden",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Kyu_Shiba_Rikyu_En_Tokyo_04.jpg",
+            "wikibase-shortdesc": "Park in Minato, Tokyo, Japan",
+            "wikibase_item": "Q3266874"
+          },
+          "coordinates": [
+            {
+              "lat": 35.654903,
+              "lon": 139.758874,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "park in Minato, Tokyo, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

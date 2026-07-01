@@ -1,0 +1,63 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:55.682Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 541597,
+          "ns": 0,
+          "title": "成城",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せいしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Seijouniv2012055.jpg",
+            "wikibase_item": "Q11251371"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 3806067,
+          "ns": 0,
+          "title": "樫尾俊雄",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かしお としお",
+            "page_image_free": "Casio_Computer_A-14_operation_panel_and_display_panel.jpg",
+            "wikibase_item": "Q55228832"
+          },
+          "terms": {
+            "description": [
+              "日本の実業家"
+            ]
+          }
+        },
+        {
+          "pageid": 5016216,
+          "ns": 0,
+          "title": "樫尾俊雄発明記念館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かしおとしおはつめいきねんかん",
+            "page_image_free": "Kashio_Toshio_Invention_Memorial_Museum.jpg",
+            "wikibase_item": "Q131624697"
+          },
+          "coordinates": [
+            {
+              "lat": 35.644,
+              "lon": 139.59019444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

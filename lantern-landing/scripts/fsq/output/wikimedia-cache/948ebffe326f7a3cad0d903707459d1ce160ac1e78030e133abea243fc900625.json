@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:34.490Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 82502,
+          "ns": 0,
+          "title": "ノーザンファーム",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "のおさんふああむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Gthumb.svg",
+            "wikibase_item": "Q17215039"
+          },
+          "coordinates": [
+            {
+              "lat": 42.71561111,
+              "lon": 141.82433333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "安平町にあるサラブレッドの生産牧場"
+            ]
+          }
+        },
+        {
+          "pageid": 104078,
+          "ns": 0,
+          "title": "グリーンチャンネル",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "くりいんちやんねる",
+            "wikibase_item": "Q11300548"
+          },
+          "terms": {
+            "description": [
+              "日本の農業および競馬の専門チャンネル"
+            ]
+          }
+        },
+        {
+          "pageid": 407014,
+          "ns": 0,
+          "title": "社台ファーム",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しやたいふあむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Gthumb.svg",
+            "wikibase_item": "Q11588352"
+          },
+          "coordinates": [
+            {
+              "lat": 42.91933333,
+              "lon": 141.86566667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "競走馬の生産牧場"
+            ]
+          }
+        },
+        {
+          "pageid": 504640,
+          "ns": 0,
+          "title": "白老ファーム",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しらおいふああむ",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q11580317"
+          },
+          "coordinates": [
+            {
+              "lat": 42.56786111,
+              "lon": 141.39127778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1233766,
+          "ns": 0,
+          "title": "グリーンファーム",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "くりんふあむ",
+            "page_image_free": "Owner_Green_Farm.svg",
+            "wikibase_item": "Q11300572"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:01.470Z",
+  "value": {
+    "searchinfo": {
+      "search": "キッザニア"
+    },
+    "search": [
+      {
+        "id": "Q866049",
+        "title": "Q866049",
+        "pageid": 817400,
+        "concepturi": "http://www.wikidata.org/entity/Q866049",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q866049",
+        "display": {
+          "label": {
+            "value": "KidZania",
+            "language": "en"
+          },
+          "description": {
+            "value": "international chain of indoor family entertainment centers",
+            "language": "en"
+          }
+        },
+        "label": "KidZania",
+        "description": "international chain of indoor family entertainment centers",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "キッザニア"
+        },
+        "aliases": [
+          "キッザニア"
+        ]
+      },
+      {
+        "id": "Q5363436",
+        "title": "Q5363436",
+        "pageid": 5129943,
+        "concepturi": "http://www.wikidata.org/entity/Q5363436",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5363436",
+        "display": {
+          "label": {
+            "value": "Kidzania Tokyo",
+            "language": "en"
+          },
+          "description": {
+            "value": "family edutainment center amusement park",
+            "language": "en"
+          }
+        },
+        "label": "Kidzania Tokyo",
+        "description": "family edutainment center amusement park",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "キッザニア東京"
+        },
+        "aliases": [
+          "キッザニア東京"
+        ]
+      },
+      {
+        "id": "Q5358677",
+        "title": "Q5358677",
+        "pageid": 5125300,
+        "concepturi": "http://www.wikidata.org/entity/Q5358677",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5358677",
+        "display": {
+          "label": {
+            "value": "KidZania Koshien",
+            "language": "en"
+          },
+          "description": {
+            "value": "family edutainment center amusement park",
+            "language": "en"
+          }
+        },
+        "label": "KidZania Koshien",
+        "description": "family edutainment center amusement park",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "キッザニア甲子園"
+        },
+        "aliases": [
+          "キッザニア甲子園"
+        ]
+      },
+      {
+        "id": "Q11296772",
+        "title": "Q11296772",
+        "pageid": 12436752,
+        "concepturi": "http://www.wikidata.org/entity/Q11296772",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11296772",
+        "display": {
+          "label": {
+            "value": "キッザニアTV",
+            "language": "ja"
+          }
+        },
+        "label": "キッザニアTV",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "キッザニアTV"
+        }
+      },
+      {
+        "id": "Q113371298",
+        "title": "Q113371298",
+        "pageid": 108156994,
+        "concepturi": "http://www.wikidata.org/entity/Q113371298",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q113371298",
+        "display": {
+          "label": {
+            "value": "Kidzania Fukuoka",
+            "language": "en"
+          },
+          "description": {
+            "value": "family edutainment center amusement park",
+            "language": "en"
+          }
+        },
+        "label": "Kidzania Fukuoka",
+        "description": "family edutainment center amusement park",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "キッザニア福岡"
+        },
+        "aliases": [
+          "キッザニア福岡"
+        ]
+      },
+      {
+        "id": "Q16177959",
+        "title": "Q16177959",
+        "pageid": 17804067,
+        "concepturi": "http://www.wikidata.org/entity/Q16177959",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q16177959",
+        "display": {
+          "label": {
+            "value": "KidZania Seoul",
+            "language": "en"
+          }
+        },
+        "label": "KidZania Seoul",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "キッザニア ソウル"
+        },
+        "aliases": [
+          "キッザニア ソウル"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

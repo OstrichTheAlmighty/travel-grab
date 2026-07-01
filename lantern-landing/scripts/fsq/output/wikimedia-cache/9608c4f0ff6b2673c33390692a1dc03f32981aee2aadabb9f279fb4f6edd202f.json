@@ -1,0 +1,108 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:36.979Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 245439,
+          "ns": 0,
+          "title": "大田スタジアム",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおたすたしあむ",
+            "kartographer_frames": "1",
+            "page_image_free": "大田スタジアム.JPG",
+            "wikibase_item": "Q11437825"
+          },
+          "coordinates": [
+            {
+              "lat": 35.58797222,
+              "lon": 139.75375,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 283937,
+          "ns": 0,
+          "title": "大田ハナシチズン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "てしよんはなしちすん",
+            "page_image_free": "Daejeon_World_Cup_Stadium.JPG",
+            "wikibase_item": "Q484584"
+          },
+          "terms": {
+            "description": [
+              "韓国のサッカークラブ"
+            ]
+          }
+        },
+        {
+          "pageid": 925294,
+          "ns": 0,
+          "title": "勇者のスタジアム・プロ野球好珍プレー",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ゆうしやのすたしあむ ふろやきゆうこうちんふれ",
+            "wikibase_item": "Q11399986"
+          },
+          "terms": {
+            "description": [
+              "日本テレビで放送されたプロ野球の珍プレー特番"
+            ]
+          }
+        },
+        {
+          "pageid": 929141,
+          "ns": 0,
+          "title": "東海 (大田区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうかい",
+            "kartographer_frames": "1",
+            "page_image_free": "西淡水池.JPG",
+            "wikibase_item": "Q11527752"
+          },
+          "terms": {
+            "description": [
+              "東京都大田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1778099,
+          "ns": 0,
+          "title": "大田区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おおたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-International-Airport_Satellite.jpg",
+            "wikibase_item": "Q217234"
+          },
+          "coordinates": [
+            {
+              "lat": 35.56128,
+              "lon": 139.71603,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

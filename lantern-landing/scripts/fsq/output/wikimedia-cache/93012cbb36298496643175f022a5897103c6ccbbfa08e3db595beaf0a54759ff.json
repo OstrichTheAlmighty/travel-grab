@@ -1,0 +1,60 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:38.937Z",
+  "value": {
+    "searchinfo": {
+      "search": "ゾウのはな子"
+    },
+    "search": [
+      {
+        "id": "Q4495383",
+        "title": "Q4495383",
+        "pageid": 4290964,
+        "concepturi": "http://www.wikidata.org/entity/Q4495383",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q4495383",
+        "display": {
+          "label": {
+            "value": "Hanako",
+            "language": "en"
+          },
+          "description": {
+            "value": "Asian elephant (1947–2016)",
+            "language": "en"
+          }
+        },
+        "label": "Hanako",
+        "description": "Asian elephant (1947–2016)",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ゾウのはな子"
+        },
+        "aliases": [
+          "ゾウのはな子"
+        ]
+      },
+      {
+        "id": "Q11315582",
+        "title": "Q11315582",
+        "pageid": 12454267,
+        "concepturi": "http://www.wikidata.org/entity/Q11315582",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11315582",
+        "display": {
+          "label": {
+            "value": "ゾウのはな子",
+            "language": "ja"
+          }
+        },
+        "label": "ゾウのはな子",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ゾウのはな子"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

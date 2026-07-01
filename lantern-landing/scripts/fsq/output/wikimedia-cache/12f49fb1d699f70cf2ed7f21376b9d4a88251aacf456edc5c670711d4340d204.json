@@ -1,0 +1,81 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:43:04.466Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 23757,
+          "ns": 0,
+          "title": "魔術",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ましゆつ",
+            "wikibase_item": "Q81741"
+          },
+          "terms": {
+            "description": [
+              "超自然的な力を用いて不思議を行う秘儀"
+            ]
+          }
+        },
+        {
+          "pageid": 741265,
+          "ns": 0,
+          "title": "ガレノス",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かれのす",
+            "page_image_free": "Galen_detail.jpg",
+            "wikibase_item": "Q8778"
+          }
+        },
+        {
+          "pageid": 811648,
+          "ns": 0,
+          "title": "早春物語",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "そうしゆんものかたり",
+            "wikibase_item": "Q5326749"
+          }
+        },
+        {
+          "pageid": 923013,
+          "ns": 0,
+          "title": "澤井幸次",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さわい こうし",
+            "wikibase_item": "Q6426456"
+          },
+          "terms": {
+            "description": [
+              "日本のアニメ演出家、アニメ監督"
+            ]
+          }
+        },
+        {
+          "pageid": 2714786,
+          "ns": 0,
+          "title": "Wの悲劇 (映画)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たふりゆうのひけき",
+            "wikibase_item": "Q11254676"
+          },
+          "terms": {
+            "description": [
+              "澤井信一郎監督の日本の映画作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

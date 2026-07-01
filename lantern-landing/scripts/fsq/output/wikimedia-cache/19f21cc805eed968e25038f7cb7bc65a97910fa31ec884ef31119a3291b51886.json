@@ -1,0 +1,90 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:15.887Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3920,
+          "ns": 0,
+          "title": "路線バス",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ろせんはす",
+            "wikibase_item": "Q1373492"
+          },
+          "terms": {
+            "description": [
+              "バスの種類"
+            ]
+          }
+        },
+        {
+          "pageid": 4302,
+          "ns": 0,
+          "title": "バス (交通機関)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はす",
+            "wikibase_item": "Q5638"
+          },
+          "terms": {
+            "description": [
+              "大量の旅客を輸送することを目的とする自動車"
+            ]
+          }
+        },
+        {
+          "pageid": 17418,
+          "ns": 0,
+          "title": "バス停留所",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はすていりゆうしよ",
+            "wikibase_item": "Q953806"
+          },
+          "terms": {
+            "description": [
+              "旅客が乗合バスに乗降する地点"
+            ]
+          }
+        },
+        {
+          "pageid": 131017,
+          "ns": 0,
+          "title": "観光バス",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かんこうはす",
+            "wikibase_item": "Q565618"
+          },
+          "terms": {
+            "description": [
+              "観光を主目的としたバス、あるいはその運行形態のこと。"
+            ]
+          }
+        },
+        {
+          "pageid": 595113,
+          "ns": 0,
+          "title": "定期観光バス",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ていきかんこうはす",
+            "wikibase_item": "Q11452233"
+          },
+          "terms": {
+            "description": [
+              "定期観光バスの記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

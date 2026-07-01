@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:21.313Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 144463,
+          "ns": 0,
+          "title": "牛腸茂雄",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こちよう しけお",
+            "wikibase_item": "Q3482061"
+          },
+          "terms": {
+            "description": [
+              "1946-1983, 写真家"
+            ]
+          }
+        },
+        {
+          "pageid": 223234,
+          "ns": 0,
+          "title": "蜷川実花",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "になかわ みか",
+            "page_image_free": "Ninamika.jpg",
+            "wikibase_item": "Q843049"
+          },
+          "terms": {
+            "description": [
+              "日本の写真家、映画監督"
+            ]
+          }
+        },
+        {
+          "pageid": 321790,
+          "ns": 0,
+          "title": "平間至",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひらま いたる",
+            "wikibase_item": "Q11483770"
+          },
+          "terms": {
+            "description": [
+              "日本人写真家"
+            ]
+          }
+        },
+        {
+          "pageid": 400591,
+          "ns": 0,
+          "title": "東京ミッドタウン",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようみつとたうん",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Midtown.2.JPG",
+            "wikibase_item": "Q1364393"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66611111,
+              "lon": 139.73138889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区のビル群"
+            ]
+          }
+        },
+        {
+          "pageid": 3145758,
+          "ns": 0,
+          "title": "小出真朱",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こいて まみ",
+            "wikibase_item": "Q22130483"
+          }
+        }
+      ]
+    }
+  }
+}

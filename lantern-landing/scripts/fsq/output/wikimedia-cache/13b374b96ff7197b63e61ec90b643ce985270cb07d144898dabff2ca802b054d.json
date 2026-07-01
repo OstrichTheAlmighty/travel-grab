@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:25.970Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 14222,
+          "ns": 0,
+          "title": "神社一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しんしやいちらん",
+            "notoc": "",
+            "wikibase_item": "Q2517815"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 38440,
+          "ns": 0,
+          "title": "神社建築",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しんしやけんちく",
+            "page_image_free": "Ujigami_jinja01_2816.jpg",
+            "wikibase_item": "Q3080012"
+          },
+          "terms": {
+            "description": [
+              "神社の建築様式"
+            ]
+          }
+        },
+        {
+          "pageid": 77431,
+          "ns": 0,
+          "title": "氷川神社",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひかわしんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Hikawa-jinja_(Saitama),_keidai.jpg",
+            "wikibase_item": "Q703633"
+          },
+          "coordinates": [
+            {
+              "lat": 35.91675,
+              "lon": 139.62973333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県さいたま市大宮区にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 102613,
+          "ns": 0,
+          "title": "北関東",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きたかんとう",
+            "page_image_free": "Japan_Kanto_north_topographic_map.png",
+            "wikibase_item": "Q5366730"
+          },
+          "terms": {
+            "description": [
+              "関東地方の北部を指す名称"
+            ]
+          }
+        },
+        {
+          "pageid": 179886,
+          "ns": 0,
+          "title": "稲荷神",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "いなりのかみ",
+            "page_image_free": "Fushimiinari-taisha,_torii-2-1.jpg",
+            "wikibase_item": "Q719665"
+          },
+          "terms": {
+            "description": [
+              "日本の神"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

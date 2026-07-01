@@ -1,0 +1,129 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:12.814Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17561,
+          "ns": 0,
+          "title": "川崎市市民ミュージアム",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かわさきししみんみゆうしあむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Kawasaki_City_Museum.jpg",
+            "wikibase_item": "Q11478412"
+          },
+          "coordinates": [
+            {
+              "lat": 35.58858333,
+              "lon": 139.64725,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県川崎市の等々力緑地にある博物館・美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 206955,
+          "ns": 0,
+          "title": "ナムコミュージアム",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なむこみゆうしあむ",
+            "wikibase_item": "Q2248626"
+          },
+          "terms": {
+            "description": [
+              "ナムコのクラシックゲームの復刻シリーズ"
+            ]
+          }
+        },
+        {
+          "pageid": 712323,
+          "ns": 0,
+          "title": "宇治市源氏物語ミュージアム",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "うししけんしものかたりみゆうしあむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Genji_museum09s3s4380.jpg",
+            "wikibase_item": "Q5677900"
+          },
+          "coordinates": [
+            {
+              "lat": 34.89405556,
+              "lon": 135.81013889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都府宇治市の博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 1871043,
+          "ns": 0,
+          "title": "藤子・F・不二雄ミュージアム",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふしこえふふしおみゆうしあむ",
+            "page_image_free": "Fujiko･F･Fujio_Museum_-01.jpg",
+            "wikibase_item": "Q11623792"
+          },
+          "coordinates": [
+            {
+              "lat": 35.61,
+              "lon": 139.57361111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県川崎市の漫画博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 1940592,
+          "ns": 0,
+          "title": "アミューズミュージアム",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あみゆうすみゆうしあむ",
+            "kartographer_frames": "1",
+            "page_image_free": "AM_view1.jpg",
+            "wikibase_item": "Q17230481"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7145,
+              "lon": 139.79788889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて存在した日本の美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

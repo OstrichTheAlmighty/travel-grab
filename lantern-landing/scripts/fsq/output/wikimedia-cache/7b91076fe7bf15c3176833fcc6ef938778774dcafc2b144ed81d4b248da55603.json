@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:30.759Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 112956,
+          "ns": 0,
+          "title": "上野毛駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かみのけえき",
+            "kartographer_frames": "1",
+            "page_image_free": "Kami-Noge-Sta-Central.JPG",
+            "wikibase_item": "Q6357226"
+          },
+          "coordinates": [
+            {
+              "lat": 35.61194444,
+              "lon": 139.63888889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区上野毛にある東急電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 258785,
+          "ns": 0,
+          "title": "世田谷区",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せたかやく",
+            "kartographer_frames": "1",
+            "page_image_free": "Seijo_namikimichi_231011.jpg",
+            "wikibase_item": "Q231645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64656,
+              "lon": 139.65322,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 521987,
+          "ns": 0,
+          "title": "玉川地域",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たまかわちいき",
+            "page_image_free": "Tamagawa_General_Branch_Office_Building,_Setagaya_City,_Tokyo,_Japan.jpg",
+            "wikibase_item": "Q11572556"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60855278,
+              "lon": 139.64851111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区の5地域の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 572053,
+          "ns": 0,
+          "title": "上野毛",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かみのけ",
+            "kartographer_frames": "1",
+            "page_image_free": "Kami-Noge-Sta-Central.JPG",
+            "wikibase_item": "Q11360381"
+          },
+          "terms": {
+            "description": [
+              "東京都世田谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1559784,
+          "ns": 0,
+          "title": "伊藤邦衛",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いとう くにえ",
+            "wikibase_item": "Q10314798"
+          },
+          "terms": {
+            "description": [
+              "日本の建築家 (1924-2016)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

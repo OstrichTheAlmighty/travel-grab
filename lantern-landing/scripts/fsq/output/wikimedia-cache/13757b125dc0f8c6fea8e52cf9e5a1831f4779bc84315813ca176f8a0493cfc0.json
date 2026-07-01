@@ -1,0 +1,119 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:34.991Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 79620,
+          "ns": 0,
+          "title": "ダイドードリンコ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たいととりんこ",
+            "page_image_free": "Slic_osaka_nakanoshima_bld.jpg",
+            "wikibase_item": "Q11316814"
+          },
+          "coordinates": [
+            {
+              "lat": 34.69380556,
+              "lon": 135.49808333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の清涼飲料メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 89282,
+          "ns": 0,
+          "title": "ポッカサッポロフード&ビバレッジ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ほつかさつほろふうとあんとひはれつし",
+            "page_image_free": "Nagoya_Hirokoji_Place_Building.JPG",
+            "wikibase_item": "Q7208665"
+          },
+          "terms": {
+            "description": [
+              "日本の愛知県名古屋市にある飲料・食品メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 100969,
+          "ns": 0,
+          "title": "日本コカ・コーラ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんこかこおら",
+            "page_image_free": "Coca-Cola_building_-_Japan.jpg",
+            "wikibase_item": "Q11506438"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65830556,
+              "lon": 139.71233333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "ザ コカ・コーラ カンパニーの日本法人"
+            ]
+          }
+        },
+        {
+          "pageid": 106714,
+          "ns": 0,
+          "title": "三ツ矢サイダー",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みつやさいたあ",
+            "page_image_free": "Asahi.bottles.jpg",
+            "wikibase_item": "Q6883400"
+          },
+          "terms": {
+            "description": [
+              "アサヒ飲料が製造販売する炭酸飲料"
+            ]
+          }
+        },
+        {
+          "pageid": 166206,
+          "ns": 0,
+          "title": "伊藤園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いとうえん",
+            "page_image_free": "Itoen.jpg",
+            "wikibase_item": "Q3079325"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68811111,
+              "lon": 139.68263889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都渋谷区にある茶製品および清涼飲料水メーカー"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

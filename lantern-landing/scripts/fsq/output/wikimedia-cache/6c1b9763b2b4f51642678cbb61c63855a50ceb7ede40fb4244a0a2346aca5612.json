@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:54.262Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 75483,
+          "ns": 0,
+          "title": "東大島駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひかしおおしま",
+            "kartographer_frames": "1",
+            "page_image_free": "Higashi-ojima-station-building.jpg",
+            "wikibase_item": "Q908010"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68972222,
+              "lon": 139.84780556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区大島にある東京都交通局の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 348749,
+          "ns": 0,
+          "title": "船堀橋",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふなほりはし",
+            "page_image_free": "Funaboribridge-fromabove-2019-1-7.jpg",
+            "wikibase_item": "Q11614006"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68944444,
+              "lon": 139.85527778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の橋"
+            ]
+          }
+        },
+        {
+          "pageid": 1581522,
+          "ns": 0,
+          "title": "宮坂栄一",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みやさか えいいち",
+            "wikibase_item": "Q11453560"
+          },
+          "terms": {
+            "description": [
+              "日本の日本の漫画家 (1926-)"
+            ]
+          }
+        },
+        {
+          "pageid": 1691666,
+          "ns": 0,
+          "title": "東京都の観光地",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようと",
+            "page_image_free": "東京都区部-観光地図-1.jpg",
+            "wikibase_item": "Q10860697"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2301698,
+          "ns": 0,
+          "title": "中川船番所資料館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "なかかわふなはんしよしりようかん",
+            "kartographer_frames": "1",
+            "page_image_free": "NakagawaFunababbsho.JPG",
+            "wikibase_item": "Q11364944"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68766667,
+              "lon": 139.84627778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区にある資料館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

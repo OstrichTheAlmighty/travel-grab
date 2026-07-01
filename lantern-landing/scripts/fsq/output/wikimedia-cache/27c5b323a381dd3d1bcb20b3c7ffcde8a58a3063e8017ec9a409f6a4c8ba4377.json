@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:23.633Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4326833,
+          "ns": 0,
+          "title": "Tourism in Tokyo",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Hozomon_with_visitors_under_their_umbrellas,_a_rainy_day_in_Tokyo,_Japan.jpg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q7829220"
+          }
+        },
+        {
+          "pageid": 59013602,
+          "ns": 0,
+          "title": "Tactile technology",
+          "index": 5,
+          "pageprops": {
+            "wikibase-shortdesc": "Integration of multi-sensory triggers within physical objects",
+            "wikibase_item": "Q60752621"
+          },
+          "terms": {
+            "description": [
+              "Integration of multi-sensory triggers within physical objects"
+            ]
+          }
+        },
+        {
+          "pageid": 62479206,
+          "ns": 0,
+          "title": "Palette Town",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Palette_Town_Ⅱ.JPG",
+            "wikibase-shortdesc": "Former shopping mall and entertainment complex in Tokyo, Japan",
+            "wikibase_item": "Q11280640"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6262,
+              "lon": 139.7822,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "shopping mall and entertainment complex in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 62965154,
+          "ns": 0,
+          "title": "TeamLab (art collective)",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Teamlab_logo_RGB_color.png",
+            "wikibase-shortdesc": "Japanese art collective",
+            "wikibase_item": "Q11318607"
+          },
+          "terms": {
+            "description": [
+              "Japanese art collective"
+            ]
+          }
+        },
+        {
+          "pageid": 66057041,
+          "ns": 0,
+          "title": "TeamLab Planets TOKYO DMM.com",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "teamLab Planets TOKYO DMM.com",
+            "kartographer_frames": "1",
+            "wikibase-shortdesc": "Art facility in Tokyo, Japan",
+            "wikibase_item": "Q97613610"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6492,
+              "lon": 139.7897,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "art facility in Tokyo, Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

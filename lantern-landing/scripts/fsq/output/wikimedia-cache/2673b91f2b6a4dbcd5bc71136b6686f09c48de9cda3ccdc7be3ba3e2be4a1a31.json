@@ -1,0 +1,94 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:07.504Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 25426,
+          "ns": 0,
+          "title": "与謝野晶子",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "よさの あきこ",
+            "page_image_free": "Akiko_Yosano_younger.jpg",
+            "wikibase_item": "Q464104"
+          },
+          "terms": {
+            "description": [
+              "日本の歌人 (1878-1942)"
+            ]
+          }
+        },
+        {
+          "pageid": 44291,
+          "ns": 0,
+          "title": "日本の出版社一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんのしゆつはんしやいちらん",
+            "notoc": "",
+            "wikibase_item": "Q11505792"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 89231,
+          "ns": 0,
+          "title": "山川均",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やまかわ ひとし",
+            "page_image_free": "Hitoshi_Yamakawa_by_Shigeru_Tamura.jpg",
+            "wikibase_item": "Q3138672"
+          },
+          "terms": {
+            "description": [
+              "日本の社会運動家、思想家、評論家 (1880-1958)"
+            ]
+          }
+        },
+        {
+          "pageid": 584008,
+          "ns": 0,
+          "title": "雲井龍雄",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "くもい たつお",
+            "page_image_free": "Kumoi_Tatsuo.jpg",
+            "wikibase_item": "Q11660002"
+          },
+          "terms": {
+            "description": [
+              "日本の志士、集議院議員、漢詩人"
+            ]
+          }
+        },
+        {
+          "pageid": 1132846,
+          "ns": 0,
+          "title": "ティーンズラブ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ていいんすらふ",
+            "wikibase_item": "Q11319066"
+          },
+          "terms": {
+            "description": [
+              "日本におけるアダルト創作物のジャンルのひとつ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

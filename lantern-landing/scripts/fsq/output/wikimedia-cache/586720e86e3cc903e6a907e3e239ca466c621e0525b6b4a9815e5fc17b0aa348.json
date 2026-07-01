@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:29.264Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 160480,
+          "ns": 0,
+          "title": "石神井公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しやくしいこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "三宝寺池と厳島神社（2021年5月）.jpg",
+            "wikibase_item": "Q4388784"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73888889,
+              "lon": 139.5975,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1311423,
+          "ns": 0,
+          "title": "石神井町",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しやくしいまち",
+            "kartographer_frames": "1",
+            "page_image_free": "石神井公園駅南口ロータリーその２.jpg",
+            "wikibase_item": "Q11587120"
+          },
+          "terms": {
+            "description": [
+              "東京都練馬区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1370811,
+          "ns": 0,
+          "title": "練馬区指定・登録文化財一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ねりまくしていとうろくふんかさいいちらん",
+            "wikibase_item": "Q11608040"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2339600,
+          "ns": 0,
+          "title": "練馬区立石神井公園ふるさと文化館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ねりまくりつしやくしいこうえんふるさとふんかかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Nerima_Shakujiikoen_Furusato_Museum.jpg",
+            "wikibase_item": "Q11608060"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7375,
+              "lon": 139.59944444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都練馬区の郷土資料館"
+            ]
+          }
+        },
+        {
+          "pageid": 3121141,
+          "ns": 0,
+          "title": "石神井松の風文化公園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しやくしいまつのかせふんかこうえん",
+            "page_image_free": "石神井松の風文化公園（練馬区）.jpg",
+            "wikibase_item": "Q20045400"
+          },
+          "terms": {
+            "description": [
+              "東京都練馬区にあるスポーツ公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:28.149Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 53986,
+          "ns": 0,
+          "title": "武蔵野市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "むさしのし",
+            "kartographer_frames": "1",
+            "page_image_free": "Inokasira-sizen-bunkaen.jpg",
+            "wikibase_item": "Q210661"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71772,
+              "lon": 139.56606,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の市"
+            ]
+          }
+        },
+        {
+          "pageid": 115970,
+          "ns": 0,
+          "title": "白百合女子大学",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しらゆりしよし",
+            "page_image_free": "Shirayuri_University.jpg",
+            "wikibase_item": "Q7498329"
+          },
+          "coordinates": [
+            {
+              "lat": 35.668075,
+              "lon": 139.58099444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京の私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 169559,
+          "ns": 0,
+          "title": "武蔵野大学",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "むさしのたいかく",
+            "page_image_free": "Musashino_University_Ariake_-01.jpg",
+            "wikibase_item": "Q6940182"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63094444,
+              "lon": 139.78652778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区に本部を置く私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 619177,
+          "ns": 0,
+          "title": "慶應義塾體育會蹴球部",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "けいおうきしゆくたいいくかいしゆうきゆうふ",
+            "wikibase_item": "Q11495158"
+          },
+          "terms": {
+            "description": [
+              "慶應義塾大学のラグビー部"
+            ]
+          }
+        },
+        {
+          "pageid": 971971,
+          "ns": 0,
+          "title": "ぐんま未来大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "くんまみらいたいかく",
+            "page_image_free": "GUNMA_MIRAI_UNIVERSITY_entrance_n_Bldg_No_11_260411.jpg",
+            "wikibase_item": "Q6416339"
+          },
+          "coordinates": [
+            {
+              "lat": 36.37884722,
+              "lon": 139.29564167,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "群馬県みどり市にある私立大学"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

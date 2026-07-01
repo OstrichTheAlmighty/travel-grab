@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:34.287Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 38605,
+          "ns": 0,
+          "title": "横浜ランドマークタワー",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "よこはまらんとまあくたわあ",
+            "page_image_free": "Yokohama_Landmark_Tower_202207.jpg",
+            "wikibase_item": "Q587108"
+          },
+          "coordinates": [
+            {
+              "lat": 35.45459167,
+              "lon": 139.63147222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "横浜市の超高層ビル"
+            ]
+          }
+        },
+        {
+          "pageid": 179940,
+          "ns": 0,
+          "title": "東京スカイツリー",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようすかいつりい",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Skytree_2014_Ⅲ.jpg",
+            "wikibase_item": "Q57965"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71013889,
+              "lon": 139.81083333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区の電波塔"
+            ]
+          }
+        },
+        {
+          "pageid": 766219,
+          "ns": 0,
+          "title": "畑中正人",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はたなか まさと",
+            "wikibase_item": "Q6782710"
+          }
+        },
+        {
+          "pageid": 3326361,
+          "ns": 0,
+          "title": "ファイナルファンタジーVII リメイク",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふあいなるふあんたしい07りめいく",
+            "wikibase_item": "Q20155152"
+          },
+          "terms": {
+            "description": [
+              "日本のゲームソフト"
+            ]
+          }
+        },
+        {
+          "pageid": 4224370,
+          "ns": 0,
+          "title": "Step and a step",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すてつふあんとあすてつふ",
+            "wikibase_item": "Q99819858"
+          },
+          "terms": {
+            "description": [
+              "NiziUのデビューシングル (2020)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

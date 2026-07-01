@@ -1,0 +1,124 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:51.186Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 30057,
+          "ns": 0,
+          "title": "Tokyo",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Capital and most populous city in Japan",
+            "wikibase_item": "Q1490"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68972222,
+              "lon": 139.69222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "capital and largest city of Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 325119,
+          "ns": 0,
+          "title": "Tokugawa Tsunayoshi",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Tokugawa, Tsunayoshi",
+            "page_image_free": "Tsunyaoshi.jpg",
+            "wikibase-shortdesc": "Japanese Samurai, Daimyo and Military leader of Japan from 1680 to 1709",
+            "wikibase_item": "Q313745"
+          },
+          "terms": {
+            "description": [
+              "The fifth shogun of the Tokugawa shogunate of Japan (1646-1709)"
+            ]
+          }
+        },
+        {
+          "pageid": 335935,
+          "ns": 0,
+          "title": "Bunkyō",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Bunkyo, Tokyo",
+            "page_image_free": "Tokyo_Dome_2007-12.jpg",
+            "wikibase-shortdesc": "Special ward in Kantō, Japan",
+            "wikibase_item": "Q212713"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71666667,
+              "lon": 139.75,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "special ward in the Tokyo Metropolis in Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 14274947,
+          "ns": 0,
+          "title": "Rikugi-en Gardens",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Rikugien-10-2009-fujishirotoge02.jpg",
+            "wikibase-shortdesc": "Metropolitan park in Tokyo, Japan",
+            "wikibase_item": "Q1889010"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73305556,
+              "lon": 139.74666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "park in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 77217439,
+          "ns": 0,
+          "title": "Hisaya Iwasaki",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Hisaya_Iwasaki.jpg",
+            "wikibase-shortdesc": "Japanese industrialist (1865–1955)",
+            "wikibase_item": "Q11474430"
+          },
+          "terms": {
+            "description": [
+              "Japanese industrialist (1865–1955)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

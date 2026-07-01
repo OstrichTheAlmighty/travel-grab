@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:00.475Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 61695,
+          "ns": 0,
+          "title": "久川綾",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひさかわ あや",
+            "wikibase_item": "Q49573"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優、歌手"
+            ]
+          }
+        },
+        {
+          "pageid": 181393,
+          "ns": 0,
+          "title": "Onちゃん",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おんちやん",
+            "displaytitle": "onちゃん",
+            "page_image_free": "Eurocopter_AS365N2_HTB_Hokkaido_koku.JPG",
+            "wikibase_item": "Q11237934"
+          },
+          "terms": {
+            "description": [
+              "北海道テレビ放送（HTB）のマスコットキャラクター(1997-)"
+            ]
+          }
+        },
+        {
+          "pageid": 212837,
+          "ns": 0,
+          "title": "うたっておどろんぱ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "うたつておとろんは",
+            "page_image_free": "Utatte_Odoronpa!.png",
+            "wikibase_item": "Q11260471"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 217217,
+          "ns": 0,
+          "title": "おはよう!こどもショー",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おはようこともしよう",
+            "wikibase_item": "Q11262101"
+          },
+          "terms": {
+            "description": [
+              "日本テレビ系列の子供向け番組 (1965-1980)"
+            ]
+          }
+        },
+        {
+          "pageid": 320673,
+          "ns": 0,
+          "title": "アニマル横町",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あにまるよこちよう",
+            "wikibase_item": "Q496643"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画シリーズ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

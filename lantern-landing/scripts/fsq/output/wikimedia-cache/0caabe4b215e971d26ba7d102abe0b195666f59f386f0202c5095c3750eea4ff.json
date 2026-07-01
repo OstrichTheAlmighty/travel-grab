@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:10.551Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 563289,
+          "ns": 0,
+          "title": "ジュゼッペ・キアラ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きあら しゆせつへ",
+            "wikibase_item": "Q11310330"
+          },
+          "terms": {
+            "description": [
+              "イタリア出身のイエズス会宣教師"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

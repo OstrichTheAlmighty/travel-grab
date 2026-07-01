@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:32.852Z",
+  "value": {
+    "searchinfo": {
+      "search": "毛利庭園"
+    },
+    "search": [
+      {
+        "id": "Q11547673",
+        "title": "Q11547673",
+        "pageid": 12687601,
+        "concepturi": "http://www.wikidata.org/entity/Q11547673",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11547673",
+        "display": {
+          "label": {
+            "value": "Mōri Kai-no-kami's Residence",
+            "language": "en"
+          }
+        },
+        "label": "Mōri Kai-no-kami's Residence",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "毛利庭園"
+        },
+        "aliases": [
+          "毛利庭園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

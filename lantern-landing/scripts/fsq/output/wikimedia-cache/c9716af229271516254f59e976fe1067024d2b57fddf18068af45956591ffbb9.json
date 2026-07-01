@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:50.042Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 49676,
+          "ns": 0,
+          "title": "田河水泡",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たかわ すいほう",
+            "wikibase_item": "Q7635423"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画家、落語作家 (1899-1989)"
+            ]
+          }
+        },
+        {
+          "pageid": 207438,
+          "ns": 0,
+          "title": "のらくろ",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "のらくろシリーズ_(48009801263).jpg",
+            "wikibase_item": "Q2354149"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画、アニメーション作品、その主人公たる架空の犬"
+            ]
+          }
+        },
+        {
+          "pageid": 302097,
+          "ns": 0,
+          "title": "講談社文庫",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こうたんしやふんこ",
+            "wikibase_item": "Q11632222"
+          }
+        },
+        {
+          "pageid": 2270413,
+          "ns": 0,
+          "title": "丸 (雑誌)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "まる",
+            "page_image_free": "MARU_title_logo.png",
+            "wikibase_item": "Q11367924"
+          },
+          "terms": {
+            "description": [
+              "日本の雑誌"
+            ]
+          }
+        },
+        {
+          "pageid": 2870281,
+          "ns": 0,
+          "title": "田河水泡・のらくろ館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たかわすいほうのらくろかん",
+            "page_image_free": "Map_Tokyo_special_wards.svg",
+            "wikibase_item": "Q17209701"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68522222,
+              "lon": 139.80219444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区にある美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

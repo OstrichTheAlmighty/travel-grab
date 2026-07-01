@@ -1,0 +1,100 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:05.641Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 133619,
+          "ns": 0,
+          "title": "本田貴子",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ほんた たかこ",
+            "wikibase_item": "Q988955"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優 (1972-)"
+            ]
+          }
+        },
+        {
+          "pageid": 333958,
+          "ns": 0,
+          "title": "仮面ライダーシリーズ登場怪人一覧",
+          "index": 2,
+          "pageprops": {
+            "wikibase_item": "Q11378424"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1471779,
+          "ns": 0,
+          "title": "バンダイナムコエンターテインメント発売のゲームタイトル一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はんたいなむこえんたあていんめんとはつはいのけえむたいとるいちらん",
+            "wikibase_item": "Q3250369"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2007577,
+          "ns": 0,
+          "title": "草津熱帯圏",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "くさつねつたいけん",
+            "page_image_free": "Kusatsu_Nettaiken.JPG",
+            "wikibase_item": "Q11618188"
+          },
+          "coordinates": [
+            {
+              "lat": 36.62261111,
+              "lon": 138.60472222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "群馬県草津町にある動物園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

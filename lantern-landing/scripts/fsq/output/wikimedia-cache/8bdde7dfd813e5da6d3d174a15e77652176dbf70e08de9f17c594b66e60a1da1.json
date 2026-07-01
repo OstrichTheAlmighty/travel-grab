@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:15.211Z",
+  "value": {
+    "searchinfo": {
+      "search": "文京ふるさと歴史館"
+    },
+    "search": [
+      {
+        "id": "Q11499743",
+        "title": "Q11499743",
+        "pageid": 12639415,
+        "concepturi": "http://www.wikidata.org/entity/Q11499743",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11499743",
+        "display": {
+          "label": {
+            "value": "Bunkyo Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "City museum in Bunkyō, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Bunkyo Museum",
+        "description": "City museum in Bunkyō, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "文京ふるさと歴史館"
+        },
+        "aliases": [
+          "文京ふるさと歴史館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

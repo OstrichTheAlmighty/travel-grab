@@ -1,0 +1,209 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:28.773Z",
+  "value": {
+    "searchinfo": {
+      "search": "ゲート"
+    },
+    "search": [
+      {
+        "id": "Q209489",
+        "title": "Q209489",
+        "pageid": 205396,
+        "concepturi": "http://www.wikidata.org/entity/Q209489",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q209489",
+        "display": {
+          "label": {
+            "value": "Ceto",
+            "language": "en"
+          },
+          "description": {
+            "value": "Greek sea goddess",
+            "language": "en"
+          }
+        },
+        "label": "Ceto",
+        "description": "Greek sea goddess",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ケートー"
+        },
+        "aliases": [
+          "ケートー"
+        ]
+      },
+      {
+        "id": "Q604258",
+        "title": "Q604258",
+        "pageid": 568848,
+        "concepturi": "http://www.wikidata.org/entity/Q604258",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q604258",
+        "display": {
+          "label": {
+            "value": "Göd",
+            "language": "en"
+          },
+          "description": {
+            "value": "town in Hungary",
+            "language": "en"
+          }
+        },
+        "label": "Göd",
+        "description": "town in Hungary",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ゲド"
+        },
+        "aliases": [
+          "ゲド"
+        ]
+      },
+      {
+        "id": "Q75382531",
+        "title": "Q75382531",
+        "pageid": 74873736,
+        "concepturi": "http://www.wikidata.org/entity/Q75382531",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q75382531",
+        "display": {
+          "label": {
+            "value": "Geat",
+            "language": "en"
+          },
+          "description": {
+            "value": "mythical ancestor of Anglo-Saxon kings",
+            "language": "en"
+          }
+        },
+        "label": "Geat",
+        "description": "mythical ancestor of Anglo-Saxon kings",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ゲート"
+        },
+        "aliases": [
+          "ゲート"
+        ]
+      },
+      {
+        "id": "Q409192",
+        "title": "Q409192",
+        "pageid": 387778,
+        "concepturi": "http://www.wikidata.org/entity/Q409192",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q409192",
+        "display": {
+          "label": {
+            "value": "(RS)-ketoprofen",
+            "language": "en"
+          },
+          "description": {
+            "value": "chemical compound",
+            "language": "en"
+          }
+        },
+        "label": "(RS)-ketoprofen",
+        "description": "chemical compound",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ケトプロフェン"
+        },
+        "aliases": [
+          "ケトプロフェン"
+        ]
+      },
+      {
+        "id": "Q1123139",
+        "title": "Q1123139",
+        "pageid": 1070212,
+        "concepturi": "http://www.wikidata.org/entity/Q1123139",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1123139",
+        "display": {
+          "label": {
+            "value": "ketosis",
+            "language": "en"
+          },
+          "description": {
+            "value": "energy production using stored body fats as fuel when carbohydrates are not available",
+            "language": "en"
+          }
+        },
+        "label": "ketosis",
+        "description": "energy production using stored body fats as fuel when carbohydrates are not available",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ケトーシス"
+        },
+        "aliases": [
+          "ケトーシス"
+        ]
+      },
+      {
+        "id": "Q131191",
+        "title": "Q131191",
+        "pageid": 133048,
+        "concepturi": "http://www.wikidata.org/entity/Q131191",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q131191",
+        "display": {
+          "label": {
+            "value": "body mass index",
+            "language": "en"
+          },
+          "description": {
+            "value": "measure of relative weight based on an individual's mass and height",
+            "language": "en"
+          }
+        },
+        "label": "body mass index",
+        "description": "measure of relative weight based on an individual's mass and height",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ケトレー指数"
+        },
+        "aliases": [
+          "ケトレー指数"
+        ]
+      },
+      {
+        "id": "Q1130148",
+        "title": "Q1130148",
+        "pageid": 1077141,
+        "concepturi": "http://www.wikidata.org/entity/Q1130148",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1130148",
+        "display": {
+          "label": {
+            "value": "ketoacidosis",
+            "language": "en"
+          },
+          "description": {
+            "value": "metabolic condition",
+            "language": "en"
+          }
+        },
+        "label": "ketoacidosis",
+        "description": "metabolic condition",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ケトアシドーシス"
+        },
+        "aliases": [
+          "ケトアシドーシス"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

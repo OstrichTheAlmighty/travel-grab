@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:19.173Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4818,
+          "ns": 0,
+          "title": "1893年",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "1893ねん",
+            "wikibase_item": "Q7840"
+          },
+          "terms": {
+            "description": [
+              "年"
+            ]
+          }
+        },
+        {
+          "pageid": 47411,
+          "ns": 0,
+          "title": "大村益次郎",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおむら ますしろう",
+            "page_image_free": "Masujiro_Omura_cropped.jpg",
+            "wikibase_item": "Q385551"
+          },
+          "terms": {
+            "description": [
+              "日本の兵学者"
+            ]
+          }
+        },
+        {
+          "pageid": 48430,
+          "ns": 0,
+          "title": "適塾",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "てきしゆく",
+            "page_image_free": "Tekijuku_01.JPG",
+            "wikibase_item": "Q1049405"
+          },
+          "coordinates": [
+            {
+              "lat": 34.69125,
+              "lon": 135.50325,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "蘭学の私塾"
+            ]
+          }
+        },
+        {
+          "pageid": 169431,
+          "ns": 0,
+          "title": "上野戦争",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "うえのせんそう",
+            "page_image_free": "UenoSenso.jpg",
+            "wikibase_item": "Q715562"
+          },
+          "terms": {
+            "description": [
+              "戊辰戦争の戦闘の1つ"
+            ]
+          }
+        },
+        {
+          "pageid": 928897,
+          "ns": 0,
+          "title": "銅像",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうそう",
+            "page_image_free": "SaigoTakamori1332.jpg",
+            "wikibase_item": "Q928357"
+          },
+          "terms": {
+            "description": [
+              "銅で作られた像"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

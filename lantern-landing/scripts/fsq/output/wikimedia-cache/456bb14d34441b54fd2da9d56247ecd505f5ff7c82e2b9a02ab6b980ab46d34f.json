@@ -1,0 +1,27 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:20.546Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 2674658,
+          "ns": 0,
+          "title": "天明の打ちこわし",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "てんめいのうちこわし",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q11442675"
+          },
+          "terms": {
+            "description": [
+              "1787年に発生した打ちこわし"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

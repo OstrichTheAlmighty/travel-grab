@@ -1,0 +1,109 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:37.759Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 181418,
+          "ns": 0,
+          "title": "Pete Postlethwaite",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Postlethwaite, Pete",
+            "page_image_free": "Pete_Postlethwaite.JPG",
+            "wikibase-shortdesc": "English actor (1946–2011)",
+            "wikibase_item": "Q217137"
+          },
+          "terms": {
+            "description": [
+              "English character actor (1946–2011)"
+            ]
+          }
+        },
+        {
+          "pageid": 328531,
+          "ns": 0,
+          "title": "Inzai",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Inzai_montages.jpg",
+            "wikibase-shortdesc": "City in Kantō, Japan",
+            "wikibase_item": "Q637901"
+          },
+          "coordinates": [
+            {
+              "lat": 35.83333333,
+              "lon": 140.15,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "city in Chiba Prefecture, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 3668250,
+          "ns": 0,
+          "title": "Joey Chestnut",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Chestnut, Joey",
+            "page_image_free": "Joey_Chestnut_2009.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "American competitive eater (born 1983)",
+            "wikibase_item": "Q1341956"
+          },
+          "terms": {
+            "description": [
+              "American competitive eater and reality show contestant"
+            ]
+          }
+        },
+        {
+          "pageid": 14449597,
+          "ns": 0,
+          "title": "Noroi: The Curse",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Noroi: The Curse",
+            "displaytitle": "<i>Noroi: The Curse</i>",
+            "page_image": "Noroi_The_Curse_1a.jpg",
+            "wikibase-shortdesc": "2005 film by Kōji Shiraishi",
+            "wikibase_item": "Q2053980"
+          },
+          "terms": {
+            "description": [
+              "2005 film by Kōji Shiraishi"
+            ]
+          }
+        },
+        {
+          "pageid": 34779672,
+          "ns": 0,
+          "title": "Masato Kobayashi (baseball)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Kobayashi, Masato",
+            "page_image_free": "CD-Masato-Kobayashi.jpg",
+            "wikibase-shortdesc": "Japanese baseball player",
+            "wikibase_item": "Q6782717"
+          },
+          "terms": {
+            "description": [
+              "Japanese Baseball player"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

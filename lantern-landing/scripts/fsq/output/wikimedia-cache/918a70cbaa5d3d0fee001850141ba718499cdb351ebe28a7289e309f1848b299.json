@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:36.558Z",
+  "value": {
+    "searchinfo": {
+      "search": "チップとデールのツリーハウス"
+    },
+    "search": [
+      {
+        "id": "Q11317957",
+        "title": "Q11317957",
+        "pageid": 12456587,
+        "concepturi": "http://www.wikidata.org/entity/Q11317957",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11317957",
+        "display": {
+          "label": {
+            "value": "チップとデールのツリーハウス",
+            "language": "ja"
+          }
+        },
+        "label": "チップとデールのツリーハウス",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "チップとデールのツリーハウス"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

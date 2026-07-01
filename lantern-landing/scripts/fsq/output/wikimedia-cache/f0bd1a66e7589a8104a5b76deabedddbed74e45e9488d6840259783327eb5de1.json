@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:25.937Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 4653899,
+          "ns": 0,
+          "title": "千原ジュニアの愛知あたりまえワールド☆〜あなたの街に新仰天!〜",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ちはらしゆにあのあいちあたりまえわあるとあなたのまちにしんきようてん",
+            "wikibase_item": "Q113702575"
+          },
+          "terms": {
+            "description": [
+              "テレビ愛知のバラエティ番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:25.611Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 13823,
+          "ns": 0,
+          "title": "神戸市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こうへし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kobe_montage1.jpg",
+            "wikibase_item": "Q48320"
+          },
+          "coordinates": [
+            {
+              "lat": 34.69017,
+              "lon": 135.19544,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 75320,
+          "ns": 0,
+          "title": "伊吹山",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いふきやま",
+            "kartographer_frames": "1",
+            "page_image_free": "Ibukiyama_from_Kannonzaka(Maibara-Nagahama).jpg",
+            "wikibase_item": "Q2624360"
+          },
+          "coordinates": [
+            {
+              "lat": 35.41777778,
+              "lon": 136.40638889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "岐阜県/滋賀県の山"
+            ]
+          }
+        },
+        {
+          "pageid": 289313,
+          "ns": 0,
+          "title": "東京大学大学院理学系研究科附属植物園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようたいかくたいかくいんりかくけいけんきゆうかふそくしよくふつえん",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q1064892"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7175,
+              "lon": 139.74652778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京大学の附属施設の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 438035,
+          "ns": 0,
+          "title": "高架橋",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こうかきよう",
+            "page_image_free": "Great_Seto_Bridge-Rikujyo01.jpg",
+            "wikibase_item": "Q181348"
+          },
+          "terms": {
+            "description": [
+              "地上に連続して架けられた橋"
+            ]
+          }
+        },
+        {
+          "pageid": 4169486,
+          "ns": 0,
+          "title": "福山市本通・本通船町商店街",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふくやましほんとおり ほんとおりふなまちしょうてんかい",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q97166246"
+          }
+        }
+      ]
+    }
+  }
+}

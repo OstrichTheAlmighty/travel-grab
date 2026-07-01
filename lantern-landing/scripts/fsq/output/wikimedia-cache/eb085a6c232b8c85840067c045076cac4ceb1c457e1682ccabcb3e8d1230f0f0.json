@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:08.390Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 20297,
+          "ns": 0,
+          "title": "西園寺公望",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さいおんし きんもち",
+            "page_image_free": "Kinmochi_Saionji_2.jpg",
+            "wikibase_item": "Q297628"
+          },
+          "terms": {
+            "description": [
+              "日本の公家、政治家、教育者（1849-1940）。12・14代内閣総理大臣、外務大臣、大蔵大臣。"
+            ]
+          }
+        },
+        {
+          "pageid": 145289,
+          "ns": 0,
+          "title": "横光利一",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "よこみつ りいち",
+            "page_image_free": "Yokomitsu_Riichi.JPG",
+            "wikibase_item": "Q908573"
+          },
+          "terms": {
+            "description": [
+              "日本の小説家 (1898-1947)"
+            ]
+          }
+        },
+        {
+          "pageid": 161601,
+          "ns": 0,
+          "title": "大岡越前 (テレビドラマ)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおおかえちせん",
+            "wikibase_item": "Q8081674"
+          },
+          "terms": {
+            "description": [
+              "TBSで放送された日本のテレビドラマ"
+            ]
+          }
+        },
+        {
+          "pageid": 565631,
+          "ns": 0,
+          "title": "博士と助手〜細かすぎて伝わらないモノマネ選手権〜",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はかせとしよしゆこまかすきてつたわらないものまねせんしゆけん",
+            "wikibase_item": "Q11408915"
+          },
+          "terms": {
+            "description": [
+              "日本のフジテレビ制作のテレビ番組『とんねるずのみなさんのおかげでした』内のコーナー"
+            ]
+          }
+        },
+        {
+          "pageid": 4953327,
+          "ns": 0,
+          "title": "明治大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "めいし",
+            "page_image_free": "Meiji_University_Liberty_tower.jpg",
+            "wikibase_item": "Q46492"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69725,
+              "lon": 139.76144444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある私立大学"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

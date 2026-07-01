@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:25.039Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1743486,
+          "ns": 0,
+          "title": "Tokyo National Museum",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_National_Museum,_Honkan_2010.jpg",
+            "wikibase-shortdesc": "Art museum in Tokyo, Japan",
+            "wikibase_item": "Q653433"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7189,
+              "lon": 139.7764,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "art museum in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 8093724,
+          "ns": 0,
+          "title": "National Museum of Western Art",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "National Museum Of Western Art",
+            "kartographer_frames": "1",
+            "page_image_free": "National_museum_of_western_art05s3200.jpg",
+            "wikibase-shortdesc": "Art museum in Tokyo, Japan",
+            "wikibase_item": "Q1362629"
+          },
+          "terms": {
+            "description": [
+              "art museum in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 10768325,
+          "ns": 0,
+          "title": "National Museum of Modern Art, Tokyo",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "National_Museum_of_Modern_Art_Tokyo.jpg",
+            "wikibase-shortdesc": "Art museum in Tokyo, Japan",
+            "wikibase_item": "Q1359908"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69055556,
+              "lon": 139.75472222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "Art museum in Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 16810559,
+          "ns": 0,
+          "title": "National Museum of Modern Art, Kyoto",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "The_National_Museum_of_Modern_Art,_Kyoto.jpg",
+            "wikibase-shortdesc": "Museum in Kyoto, Japan",
+            "wikibase_item": "Q1055628"
+          },
+          "terms": {
+            "description": [
+              "art museum in Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 48646798,
+          "ns": 0,
+          "title": "National Museum of Modern Art",
+          "index": 5,
+          "pageprops": {
+            "disambiguation": "",
+            "wikibase-shortdesc": "Topics referred to by the same term",
+            "wikibase_item": "Q11421303"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia disambiguation page"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

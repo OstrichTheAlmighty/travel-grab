@@ -1,0 +1,63 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:26.190Z",
+  "value": {
+    "searchinfo": {
+      "search": "放送博物館"
+    },
+    "search": [
+      {
+        "id": "Q2176201",
+        "title": "Q2176201",
+        "pageid": 2101203,
+        "concepturi": "http://www.wikidata.org/entity/Q2176201",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2176201",
+        "display": {
+          "label": {
+            "value": "museum of broadcasting",
+            "language": "en"
+          },
+          "description": {
+            "value": "institution devoted to the exhibition of the history of broadcasting",
+            "language": "en"
+          }
+        },
+        "label": "museum of broadcasting",
+        "description": "institution devoted to the exhibition of the history of broadcasting",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "放送博物館"
+        },
+        "aliases": [
+          "放送博物館"
+        ]
+      },
+      {
+        "id": "Q11517232",
+        "title": "Q11517232",
+        "pageid": 12657045,
+        "concepturi": "http://www.wikidata.org/entity/Q11517232",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11517232",
+        "display": {
+          "label": {
+            "value": "Asadora Satsujin Jiken",
+            "language": "en"
+          }
+        },
+        "label": "Asadora Satsujin Jiken",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "放送博物館危機一髪"
+        },
+        "aliases": [
+          "放送博物館危機一髪"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:15.610Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 37224,
+          "ns": 0,
+          "title": "豊川市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とよかわし",
+            "kartographer_frames": "1",
+            "page_image_free": "Toyokawainari_honden_(cropped).jpg",
+            "wikibase_item": "Q389495"
+          },
+          "coordinates": [
+            {
+              "lat": 34.82678,
+              "lon": 137.37592,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 44328,
+          "ns": 0,
+          "title": "我孫子市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あひこし",
+            "kartographer_frames": "1",
+            "page_image_free": "Abiko_montage.jpg",
+            "wikibase_item": "Q243859"
+          },
+          "coordinates": [
+            {
+              "lat": 35.86422,
+              "lon": 140.02839,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 53389,
+          "ns": 0,
+          "title": "上京区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かみきようく",
+            "kartographer_frames": "1",
+            "page_image_free": "Kyoto_Imperial_Palace,_South_view_20130811.jpg",
+            "wikibase_item": "Q1321824"
+          },
+          "coordinates": [
+            {
+              "lat": 35.02972222,
+              "lon": 135.75666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都府京都市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 1258286,
+          "ns": 0,
+          "title": "小金宿",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こかねしゆく",
+            "page_image_free": "Chiba-ken_géolocalisation_relief.svg",
+            "wikibase_item": "Q11464339"
+          },
+          "coordinates": [
+            {
+              "lat": 35.82842,
+              "lon": 139.931979,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 3276873,
+          "ns": 0,
+          "title": "松戸市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "まつとし",
+            "kartographer_frames": "1",
+            "page_image_free": "Matsudo_montage.jpg",
+            "wikibase_item": "Q320943"
+          },
+          "coordinates": [
+            {
+              "lat": 35.78764,
+              "lon": 139.90317,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県の市"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

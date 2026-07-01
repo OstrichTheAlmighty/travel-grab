@@ -1,0 +1,89 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:26.492Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 90400,
+          "ns": 0,
+          "title": "東京都現代美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようとけんたいひしゆつかん",
+            "page_image_free": "Museum_of_Contemporary_Art_Tokyo,entrance.jpg",
+            "wikibase_item": "Q1649688"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 158272,
+          "ns": 0,
+          "title": "仏教美術",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふつきようひしゆつ",
+            "page_image_free": "Gandhara_Buddha_(tnm).jpeg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q1001041"
+          },
+          "terms": {
+            "description": [
+              "仏教信仰に基づいた礼拝対象、あるいはそれら活動のための美術"
+            ]
+          }
+        },
+        {
+          "pageid": 223234,
+          "ns": 0,
+          "title": "蜷川実花",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "になかわ みか",
+            "page_image_free": "Ninamika.jpg",
+            "wikibase_item": "Q843049"
+          },
+          "terms": {
+            "description": [
+              "日本の写真家、映画監督"
+            ]
+          }
+        },
+        {
+          "pageid": 1238436,
+          "ns": 0,
+          "title": "岡素之",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おか もとゆき",
+            "wikibase_item": "Q11473753"
+          }
+        },
+        {
+          "pageid": 2019102,
+          "ns": 0,
+          "title": "長谷川祐子",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はせかわ ゆうこ",
+            "wikibase_item": "Q11653939"
+          },
+          "terms": {
+            "description": [
+              "日本の美術評論家 (1957-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

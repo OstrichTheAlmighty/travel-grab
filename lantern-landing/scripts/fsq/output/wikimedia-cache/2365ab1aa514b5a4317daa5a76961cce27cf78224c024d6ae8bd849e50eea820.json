@@ -1,0 +1,86 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:03.282Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 9311,
+          "ns": 0,
+          "title": "宮藤官九郎",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "くとう かんくろう",
+            "wikibase_item": "Q860820"
+          },
+          "terms": {
+            "description": [
+              "日本の脚本家、俳優、ミュージシャン"
+            ]
+          }
+        },
+        {
+          "pageid": 15618,
+          "ns": 0,
+          "title": "江戸川乱歩賞",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "えとかわらんほしよう",
+            "wikibase_item": "Q906975"
+          },
+          "terms": {
+            "description": [
+              "日本の文学賞"
+            ]
+          }
+        },
+        {
+          "pageid": 84988,
+          "ns": 0,
+          "title": "ジェームス三木",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しええむすみき",
+            "wikibase_item": "Q11309423"
+          },
+          "terms": {
+            "description": [
+              "日本の脚本家 (1934-2025)"
+            ]
+          }
+        },
+        {
+          "pageid": 560372,
+          "ns": 0,
+          "title": "妻夫木聡",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "つまふき さとし",
+            "page_image_free": "Satoshi_Tsumabuki_Cannes_2015.jpg",
+            "wikibase_item": "Q1343721"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優"
+            ]
+          }
+        },
+        {
+          "pageid": 3563626,
+          "ns": 0,
+          "title": "日本劇作家協会新人戯曲賞",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にほんけきさつかきようかいしんしんききよくしよう",
+            "wikibase_item": "Q30924008"
+          }
+        }
+      ]
+    }
+  }
+}

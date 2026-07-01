@@ -1,0 +1,78 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:19.069Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17396,
+          "ns": 0,
+          "title": "鉄道車両の座席",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "てつとうしやりようのさせき",
+            "wikibase_item": "Q11649776"
+          }
+        },
+        {
+          "pageid": 639228,
+          "ns": 0,
+          "title": "BMD-1",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Verkhnyaya_Pyshma_Tank_Museum_2011_154.jpg",
+            "wikibase_item": "Q796336"
+          },
+          "terms": {
+            "description": [
+              "ソ連の歩兵戦闘車"
+            ]
+          }
+        },
+        {
+          "pageid": 814841,
+          "ns": 0,
+          "title": "九六式二十五粍機銃",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きゆうろくしきにしゆうこみりこうかくきしゆう",
+            "page_image_free": "Japanese_25mm_Anti-aircraft_gun_-_Guam.jpg",
+            "wikibase_item": "Q1151563"
+          }
+        },
+        {
+          "pageid": 1031452,
+          "ns": 0,
+          "title": "日本無線",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にほんむせん",
+            "page_image_free": "JRC_company_logos.svg",
+            "wikibase_item": "Q3077305"
+          },
+          "terms": {
+            "description": [
+              "日本の通信メーカ"
+            ]
+          }
+        },
+        {
+          "pageid": 1379313,
+          "ns": 0,
+          "title": "火災報知機",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かさいほうちき",
+            "page_image_free": "Proprietary-type_fire_alarm_manual_call_point.JPG",
+            "wikibase_item": "Q2994716"
+          }
+        }
+      ]
+    }
+  }
+}

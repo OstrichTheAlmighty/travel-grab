@@ -1,0 +1,89 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:26.306Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 125560,
+          "ns": 0,
+          "title": "にこにこぷん",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にこにこふん",
+            "wikibase_item": "Q11274736"
+          },
+          "terms": {
+            "description": [
+              "『おかあさんといっしょ』内人形劇コーナーの8作目"
+            ]
+          }
+        },
+        {
+          "pageid": 484046,
+          "ns": 0,
+          "title": "甲子園阪神パーク",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こうしえんはんしんはあく",
+            "page_image_free": "Hanshin-park01.jpg",
+            "wikibase_item": "Q11577719"
+          },
+          "coordinates": [
+            {
+              "lat": 34.71741667,
+              "lon": 135.36322222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 858924,
+          "ns": 0,
+          "title": "みんなの広場だ!わんパーク",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みんなのひろはたわんはく",
+            "wikibase_item": "Q11279472"
+          }
+        },
+        {
+          "pageid": 1501262,
+          "ns": 0,
+          "title": "コトブキ (企業)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ことふき",
+            "wikibase_item": "Q11302265"
+          },
+          "terms": {
+            "description": [
+              "企業"
+            ]
+          }
+        },
+        {
+          "pageid": 1802346,
+          "ns": 0,
+          "title": "にこにこぷんがやってきた",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にこにこふんかやつてきた",
+            "wikibase_item": "Q11274738"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビ番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

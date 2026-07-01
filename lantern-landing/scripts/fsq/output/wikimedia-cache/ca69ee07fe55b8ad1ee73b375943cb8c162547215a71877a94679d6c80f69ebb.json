@@ -1,0 +1,130 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:05.534Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 73672,
+          "ns": 0,
+          "title": "興福寺",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こうふくし",
+            "page_image_free": "Kofukuji12st5s3200.jpg",
+            "wikibase_item": "Q1070863"
+          },
+          "coordinates": [
+            {
+              "lat": 34.68325,
+              "lon": 135.83116667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "奈良市にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 91225,
+          "ns": 0,
+          "title": "観音寺",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かんのんし",
+            "disambiguation": "",
+            "toc": "",
+            "wikibase_item": "Q840756"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの曖昧さ回避ページ"
+            ]
+          }
+        },
+        {
+          "pageid": 1513440,
+          "ns": 0,
+          "title": "讃岐国分寺",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さぬきこくふんし",
+            "kartographer_frames": "1",
+            "page_image_free": "Kokubunji20210416_1.jpg",
+            "wikibase_item": "Q1101226"
+          },
+          "coordinates": [
+            {
+              "lat": 34.30313889,
+              "lon": 133.94416667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "香川県高松市にある寺院、四国八十八箇所霊場の第八十番札所"
+            ]
+          }
+        },
+        {
+          "pageid": 2619514,
+          "ns": 0,
+          "title": "三十三間堂",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さんしゆうさんけんとう",
+            "kartographer_frames": "1",
+            "page_image_free": "Sanjusangendo_2022.jpg",
+            "wikibase_item": "Q653319"
+          },
+          "coordinates": [
+            {
+              "lat": 34.98786389,
+              "lon": 135.77173056,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市東山区にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 4310507,
+          "ns": 0,
+          "title": "観音寺 (台東区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かんのんし たいとうく",
+            "page_image_free": "Kannon-ji_(Taito).JPG",
+            "wikibase_item": "Q106645233"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72563889,
+              "lon": 139.76808333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある寺院"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

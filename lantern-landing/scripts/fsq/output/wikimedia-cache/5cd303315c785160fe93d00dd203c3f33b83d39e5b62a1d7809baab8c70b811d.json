@@ -1,0 +1,126 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:17.663Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 22648,
+          "ns": 0,
+          "title": "岡崎市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おかさきし",
+            "kartographer_frames": "1",
+            "page_image_free": "Okazakijo-3-cropped.jpg",
+            "wikibase_item": "Q242783"
+          },
+          "coordinates": [
+            {
+              "lat": 34.95472,
+              "lon": 137.17303,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 82219,
+          "ns": 0,
+          "title": "諏訪大社",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すわたいしや",
+            "kartographer_frames": "3",
+            "kartographer_links": "3",
+            "page_image_free": "Suwa-taisha,_Kamisha_Honmiya,_haiden-1.jpg",
+            "wikibase_item": "Q218813"
+          },
+          "coordinates": [
+            {
+              "lat": 35.99815833,
+              "lon": 138.11946944,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長野県諏訪地域にある4つの神社の総称"
+            ]
+          }
+        },
+        {
+          "pageid": 332499,
+          "ns": 0,
+          "title": "大神神社 (一宮市)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおみわしんしや いちのみやし",
+            "kartographer_frames": "1",
+            "page_image_free": "Owari_Oomiwa_Shrine_haiden.jpeg",
+            "wikibase_item": "Q546197"
+          },
+          "coordinates": [
+            {
+              "lat": 35.29152778,
+              "lon": 136.79325,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県一宮市花池にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 700191,
+          "ns": 0,
+          "title": "大神社 (一宮市)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおしんしや いちのみや",
+            "kartographer_frames": "1",
+            "page_image_free": "Oo-jinja_(Ichinomiya)_shaden.JPG",
+            "wikibase_item": "Q11438337"
+          },
+          "coordinates": [
+            {
+              "lat": 35.27188889,
+              "lon": 136.79788889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "一宮市にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 2331793,
+          "ns": 0,
+          "title": "鳳神ヤツルギ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほうしんやつるき",
+            "wikibase_item": "Q11675295"
+          }
+        }
+      ]
+    }
+  }
+}

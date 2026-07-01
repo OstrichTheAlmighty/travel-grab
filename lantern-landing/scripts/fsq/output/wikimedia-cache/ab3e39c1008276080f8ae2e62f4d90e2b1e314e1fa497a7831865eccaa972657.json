@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:05.670Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 6024,
+          "ns": 0,
+          "title": "日露戦争",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にちろせんそう",
+            "page_image_free": "RUSSOJAPANESEWARIMAGE.jpg",
+            "wikibase_item": "Q159950"
+          },
+          "terms": {
+            "description": [
+              "1904年から1905年の日本とロシアの帝国間の戦争"
+            ]
+          }
+        },
+        {
+          "pageid": 17740,
+          "ns": 0,
+          "title": "日本国との平和条約",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんこくとのへいわしようやく",
+            "page_image_free": "Yoshida_signs_San_Francisco_Peace_Treaty.jpg",
+            "wikibase_item": "Q392541"
+          },
+          "terms": {
+            "description": [
+              "1951年9月に連合国諸国と日本との間で締結された平和条約"
+            ]
+          }
+        },
+        {
+          "pageid": 23571,
+          "ns": 0,
+          "title": "原爆ドーム",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "けんはくとおむ",
+            "page_image_free": "Genbaku_Dome04-r.JPG",
+            "wikibase_item": "Q231140"
+          },
+          "coordinates": [
+            {
+              "lat": 34.39555556,
+              "lon": 132.45361111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "広島市にある戦争遺構、世界遺産、旧広島県産業奨励館"
+            ]
+          }
+        },
+        {
+          "pageid": 747847,
+          "ns": 0,
+          "title": "丸山定夫",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "まるやま さたお",
+            "page_image_free": "Sadao_Maruyama_Scan10026-2.JPG",
+            "wikibase_item": "Q11368194"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優"
+            ]
+          }
+        },
+        {
+          "pageid": 2378483,
+          "ns": 0,
+          "title": "八重の桜",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やえのさくら",
+            "wikibase_item": "Q1182753"
+          },
+          "terms": {
+            "description": [
+              "2013年のNHK大河ドラマ第52作"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

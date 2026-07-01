@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:49.541Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 142433,
+          "ns": 0,
+          "title": "三井物産",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みついふつさん",
+            "page_image_free": "Mitsui_&_Co._Headquarters_Building.jpg",
+            "wikibase_item": "Q904240"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68775,
+              "lon": 139.76225,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の総合商社"
+            ]
+          }
+        },
+        {
+          "pageid": 331586,
+          "ns": 0,
+          "title": "ベルク (企業)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "へるく",
+            "page_image_free": "Belc_Co.,Ltd_1.jpg",
+            "wikibase_item": "Q11337090"
+          },
+          "terms": {
+            "description": [
+              "日本の埼玉県を中心に展開するスーパーマーケットチェーン"
+            ]
+          }
+        },
+        {
+          "pageid": 735595,
+          "ns": 0,
+          "title": "建物コレクション",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たてものこれくしよん",
+            "wikibase_item": "Q11486679"
+          }
+        },
+        {
+          "pageid": 1449291,
+          "ns": 0,
+          "title": "成田市公設地方卸売市場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なりたしこうせつちほうおろしうりししよう",
+            "page_image_free": "Narita_City_Public_Wholesale_Market_02.jpg",
+            "wikibase_item": "Q6965989"
+          },
+          "coordinates": [
+            {
+              "lat": 35.79166667,
+              "lon": 140.39416667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "成田市が開設・運営に当たる地方卸売市場"
+            ]
+          }
+        },
+        {
+          "pageid": 2960238,
+          "ns": 0,
+          "title": "Umios",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "うみおす",
+            "page_image_free": "TAKANAWA_GATEWAY_CITY_THE_LINKPILLAR_1_SOUTH_01.jpg",
+            "wikibase_item": "Q18635633"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63577778,
+              "lon": 139.73963889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の食品・水産会社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

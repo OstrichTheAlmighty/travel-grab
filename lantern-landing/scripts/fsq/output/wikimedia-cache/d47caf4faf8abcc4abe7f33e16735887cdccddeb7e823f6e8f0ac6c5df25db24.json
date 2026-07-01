@@ -1,0 +1,94 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:04.511Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 22260,
+          "ns": 0,
+          "title": "自動販売機",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しとうはんはいき",
+            "page_image_free": "HK_WTS_樂富廣場_Lok_Fu_Plaza_mall_drink_automatic_machine_Coke_Bonaqua_n_Vitasoy_May-2013.JPG",
+            "wikibase_item": "Q211584"
+          },
+          "terms": {
+            "description": [
+              "商品やサービスの販売・提供を自動で行う機械"
+            ]
+          }
+        },
+        {
+          "pageid": 186338,
+          "ns": 0,
+          "title": "ポップコーン",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ほつふこん",
+            "page_image_free": "Popcorn02.jpg",
+            "wikibase_item": "Q165112"
+          },
+          "terms": {
+            "description": [
+              "トウモロコシを炒って作るスナック菓子"
+            ]
+          }
+        },
+        {
+          "pageid": 215187,
+          "ns": 0,
+          "title": "店",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みせ",
+            "page_image_free": "Matsuya_Keihan_Moriguchi_Station.jpg",
+            "wikibase_item": "Q213441"
+          },
+          "terms": {
+            "description": [
+              "商品を売る場所"
+            ]
+          }
+        },
+        {
+          "pageid": 2978873,
+          "ns": 0,
+          "title": "直接販売",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちよくせつはんはい",
+            "wikibase_item": "Q5280224"
+          },
+          "terms": {
+            "description": [
+              "マーケティング用語"
+            ]
+          }
+        },
+        {
+          "pageid": 4277794,
+          "ns": 0,
+          "title": "無人店舗",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "むしんてんほ",
+            "page_image_free": "Kita_20220412-04.jpg",
+            "wikibase_item": "Q85852378"
+          },
+          "terms": {
+            "description": [
+              "特に小売業における販売員のいない店舗"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

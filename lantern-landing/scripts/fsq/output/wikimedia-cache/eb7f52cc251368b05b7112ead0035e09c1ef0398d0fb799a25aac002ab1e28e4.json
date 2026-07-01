@@ -1,0 +1,82 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:50.733Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 93591,
+          "ns": 0,
+          "title": "増岡弘",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ますおか ひろし",
+            "page_image_free": "増岡弘.png",
+            "wikibase_item": "Q3136358"
+          },
+          "terms": {
+            "description": [
+              "日本の声優、俳優、ナレーター (1936-2020)"
+            ]
+          }
+        },
+        {
+          "pageid": 145150,
+          "ns": 0,
+          "title": "千葉真一",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ちは しんいち",
+            "page_image_free": "Chiba-Shinichi-1.jpg",
+            "wikibase_item": "Q351732"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優・体操選手・空手家・歌手・芸能プロモーター・アクション監督・演出家・映画監督・映画プロデューサー (1939 - 2021)"
+            ]
+          }
+        },
+        {
+          "pageid": 273564,
+          "ns": 0,
+          "title": "千葉繁",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちは しける",
+            "wikibase_item": "Q2444815"
+          },
+          "terms": {
+            "description": [
+              "日本の声優、俳優、タレント"
+            ]
+          }
+        },
+        {
+          "pageid": 289821,
+          "ns": 0,
+          "title": "ドッカン!ロボ天どん",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とつかんろほてんとん",
+            "wikibase_item": "Q5288750"
+          }
+        },
+        {
+          "pageid": 3873004,
+          "ns": 0,
+          "title": "私のおじさん〜WATAOJI〜",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "わたしのおしさん わたおし",
+            "wikibase_item": "Q60988030"
+          }
+        }
+      ]
+    }
+  }
+}

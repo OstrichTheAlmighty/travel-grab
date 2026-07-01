@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:40.544Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17819,
+          "ns": 0,
+          "title": "中野区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なかのく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tetsugakudo_Park(Philosophy_Hall_Park)_-_哲学堂公園_-_panoramio_(1).jpg",
+            "wikibase_item": "Q234087"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70728,
+              "lon": 139.66375,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 264447,
+          "ns": 0,
+          "title": "中野サンプラザ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なかのさんふらさ",
+            "kartographer_frames": "1",
+            "page_image_free": "Nakano_Sunplaza_2016_Ⅱ.jpg",
+            "wikibase_item": "Q11367443"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7075,
+              "lon": 139.66472222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて東京都中野区にあった複合施設"
+            ]
+          }
+        },
+        {
+          "pageid": 608590,
+          "ns": 0,
+          "title": "江古田",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "えこた",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q11259193"
+          },
+          "terms": {
+            "description": [
+              "東京都中野区、練馬区に跨がる町"
+            ]
+          }
+        },
+        {
+          "pageid": 1838135,
+          "ns": 0,
+          "title": "旧制小学校",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きゆうせいしようかつこう",
+            "wikibase_item": "Q11510987"
+          },
+          "terms": {
+            "description": [
+              "1886年に定められた初等教育の学校"
+            ]
+          }
+        },
+        {
+          "pageid": 4537985,
+          "ns": 0,
+          "title": "中野区立歴史民俗資料館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "なかのくりつれきしみんそくしりようかん",
+            "page_image_free": "Nakano_Museum_of_History_and_Folklore_(2)_2022-12-25.jpg",
+            "wikibase_item": "Q104708387"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72458333,
+              "lon": 139.66497222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都中野区にある資料館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

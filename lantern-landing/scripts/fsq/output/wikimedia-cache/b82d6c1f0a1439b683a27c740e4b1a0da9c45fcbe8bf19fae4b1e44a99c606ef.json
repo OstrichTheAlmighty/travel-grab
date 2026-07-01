@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:24.002Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 412270,
+          "ns": 0,
+          "title": "廃兵院",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はいへいいん",
+            "wikibase_item": "Q7085496"
+          }
+        },
+        {
+          "pageid": 789079,
+          "ns": 0,
+          "title": "国立病院機構箱根病院",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こくりつひよういんきこうはこねひよういん",
+            "page_image_free": "National_Hospital_Organization_Hakone_National_Hospital.JPG",
+            "wikibase_item": "Q11571654"
+          },
+          "terms": {
+            "description": [
+              "神奈川県小田原市にある医療機関"
+            ]
+          }
+        },
+        {
+          "pageid": 932825,
+          "ns": 0,
+          "title": "戦闘ストレス反応",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せんとうすとれすはんのう",
+            "page_image_free": "Marine_after_Eniwetok_assault.jpg",
+            "wikibase_item": "Q1482034"
+          },
+          "terms": {
+            "description": [
+              "一般に戦闘によってもたらされる心理的な反応"
+            ]
+          }
+        },
+        {
+          "pageid": 1493295,
+          "ns": 0,
+          "title": "しょうけい館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しようけいかん",
+            "page_image_free": "しょうけい館.jpg",
+            "wikibase_item": "Q11269143"
+          },
+          "coordinates": [
+            {
+              "lat": 35.694917,
+              "lon": 139.752194,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 4684883,
+          "ns": 0,
+          "title": "日本傷痍軍人会",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんしよういくんしんかい",
+            "unexpectedUnconnectedPage": "0"
+          }
+        }
+      ]
+    }
+  }
+}

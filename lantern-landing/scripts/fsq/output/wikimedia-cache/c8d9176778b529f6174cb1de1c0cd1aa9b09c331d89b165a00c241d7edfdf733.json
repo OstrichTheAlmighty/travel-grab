@@ -1,0 +1,196 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:22.484Z",
+  "value": {
+    "searchinfo": {
+      "search": "国立競技場"
+    },
+    "search": [
+      {
+        "id": "Q1354010",
+        "title": "Q1354010",
+        "pageid": 1293613,
+        "concepturi": "http://www.wikidata.org/entity/Q1354010",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1354010",
+        "display": {
+          "label": {
+            "value": "Ta' Qali National Stadium",
+            "language": "en"
+          },
+          "description": {
+            "value": "football stadium",
+            "language": "en"
+          }
+        },
+        "label": "Ta' Qali National Stadium",
+        "description": "football stadium",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "国立競技場"
+        },
+        "aliases": [
+          "国立競技場"
+        ]
+      },
+      {
+        "id": "Q14862239",
+        "title": "Q14862239",
+        "pageid": 16531011,
+        "concepturi": "http://www.wikidata.org/entity/Q14862239",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q14862239",
+        "display": {
+          "label": {
+            "value": "Japan National Stadium",
+            "language": "en"
+          },
+          "description": {
+            "value": "stadium in Kasumigaoka, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Japan National Stadium",
+        "description": "stadium in Kasumigaoka, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "国立競技場"
+        },
+        "aliases": [
+          "国立競技場"
+        ]
+      },
+      {
+        "id": "Q330033",
+        "title": "Q330033",
+        "pageid": 316545,
+        "concepturi": "http://www.wikidata.org/entity/Q330033",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q330033",
+        "display": {
+          "label": {
+            "value": "National Stadium in Tokyo",
+            "language": "en"
+          },
+          "description": {
+            "value": "defunct multi-purpose stadium in Shinjuku, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "National Stadium in Tokyo",
+        "description": "defunct multi-purpose stadium in Shinjuku, Tokyo, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "国立競技場"
+        },
+        "aliases": [
+          "国立競技場"
+        ]
+      },
+      {
+        "id": "Q6634155",
+        "title": "Q6634155",
+        "pageid": 6463196,
+        "concepturi": "http://www.wikidata.org/entity/Q6634155",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6634155",
+        "display": {
+          "label": {
+            "value": "national stadium",
+            "language": "en"
+          },
+          "description": {
+            "value": "sport stadium, which typically serves as the primary or exclusive home for one or more of a country's national representative sports teams",
+            "language": "en"
+          }
+        },
+        "label": "national stadium",
+        "description": "sport stadium, which typically serves as the primary or exclusive home for one or more of a country's national representative sports teams",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "国立競技場"
+        },
+        "aliases": [
+          "国立競技場"
+        ]
+      },
+      {
+        "id": "Q11421295",
+        "title": "Q11421295",
+        "pageid": 12560053,
+        "concepturi": "http://www.wikidata.org/entity/Q11421295",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11421295",
+        "display": {
+          "label": {
+            "value": "国立競技場",
+            "language": "ja"
+          }
+        },
+        "label": "国立競技場",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "国立競技場"
+        }
+      },
+      {
+        "id": "Q275113",
+        "title": "Q275113",
+        "pageid": 266079,
+        "concepturi": "http://www.wikidata.org/entity/Q275113",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q275113",
+        "display": {
+          "label": {
+            "value": "Kokuritsu-Kyōgijō Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "metro station in Shinjuku, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Kokuritsu-Kyōgijō Station",
+        "description": "metro station in Shinjuku, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "国立競技場駅"
+        },
+        "aliases": [
+          "国立競技場駅"
+        ]
+      },
+      {
+        "id": "Q97311394",
+        "title": "Q97311394",
+        "pageid": 95742124,
+        "concepturi": "http://www.wikidata.org/entity/Q97311394",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q97311394",
+        "display": {
+          "label": {
+            "value": "reconstruction of the Japan National Stadium",
+            "language": "en"
+          }
+        },
+        "label": "reconstruction of the Japan National Stadium",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "国立競技場の建て替え"
+        },
+        "aliases": [
+          "国立競技場の建て替え"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

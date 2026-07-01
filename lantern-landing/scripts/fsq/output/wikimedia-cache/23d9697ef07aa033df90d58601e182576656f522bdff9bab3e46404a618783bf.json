@@ -1,0 +1,27 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:39.078Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1238095,
+          "ns": 0,
+          "title": "東京あおば農業協同組合",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようあおはのうきようきようとうくみあい",
+            "page_image_free": "JA_TokyoAoba.JPG",
+            "wikibase_item": "Q11524015"
+          },
+          "terms": {
+            "description": [
+              "東京都練馬区にある農業協同組合"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

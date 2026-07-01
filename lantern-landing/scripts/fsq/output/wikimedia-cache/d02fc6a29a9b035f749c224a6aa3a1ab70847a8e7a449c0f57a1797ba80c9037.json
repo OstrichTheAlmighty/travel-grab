@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:28.082Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京大学総合研究博物館小石川分館"
+    },
+    "search": [
+      {
+        "id": "Q3815581",
+        "title": "Q3815581",
+        "pageid": 3638940,
+        "concepturi": "http://www.wikidata.org/entity/Q3815581",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3815581",
+        "display": {
+          "label": {
+            "value": "Koishikawa Annex, The University Museum, The University of Tokyo",
+            "language": "en"
+          },
+          "description": {
+            "value": "natural history museum in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Koishikawa Annex, The University Museum, The University of Tokyo",
+        "description": "natural history museum in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京大学総合研究博物館小石川分館"
+        },
+        "aliases": [
+          "東京大学総合研究博物館小石川分館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

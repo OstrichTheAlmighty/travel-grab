@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:27.411Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 56598,
+          "ns": 0,
+          "title": "赤穂市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あこうし",
+            "kartographer_frames": "1",
+            "page_image_free": "Ako_montage.JPG",
+            "wikibase_item": "Q424813"
+          },
+          "coordinates": [
+            {
+              "lat": 34.75,
+              "lon": 134.39,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 145994,
+          "ns": 0,
+          "title": "泉岳寺",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "せんかくし",
+            "page_image_free": "Sengakuji_201904d2.jpg",
+            "wikibase_item": "Q3176144"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63772222,
+              "lon": 139.73627778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 301295,
+          "ns": 0,
+          "title": "大石良雄",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおいし よしお",
+            "page_image_free": "Ōishi_Yoshio.jpg",
+            "wikibase_item": "Q530128"
+          },
+          "terms": {
+            "description": [
+              "江戸時代前期の武士。播磨赤穂藩の筆頭家老。大石良昭の長男"
+            ]
+          }
+        },
+        {
+          "pageid": 380222,
+          "ns": 0,
+          "title": "桃中軒雲右衛門",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうちゆうけん くもえもん",
+            "page_image_free": "Kumoemon_Touchuken.jpg",
+            "wikibase_item": "Q11536935"
+          },
+          "terms": {
+            "description": [
+              "日本の明治時代前期～大正時代の浪曲師"
+            ]
+          }
+        },
+        {
+          "pageid": 585411,
+          "ns": 0,
+          "title": "瑤泉院",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ようせんいん",
+            "wikibase_item": "Q11574001"
+          },
+          "terms": {
+            "description": [
+              "浅野長矩の正室"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

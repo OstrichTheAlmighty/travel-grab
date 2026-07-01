@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:16.733Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 106614,
+          "ns": 0,
+          "title": "南国市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なんこくし",
+            "kartographer_frames": "1",
+            "page_image_free": "Onagadori_center,_Nankoku.jpg",
+            "wikibase_item": "Q861621"
+          },
+          "coordinates": [
+            {
+              "lat": 33.57569,
+              "lon": 133.64147,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "高知県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 132752,
+          "ns": 0,
+          "title": "沼田町",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ぬまたちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Numata_andon_festival.JPG",
+            "wikibase_item": "Q1357023"
+          },
+          "coordinates": [
+            {
+              "lat": 43.80681,
+              "lon": 141.93333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道雨竜郡の町"
+            ]
+          }
+        },
+        {
+          "pageid": 327921,
+          "ns": 0,
+          "title": "信州大学",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しんしゆうたいかく",
+            "page_image_free": "Shinshu_University_2018.jpg",
+            "wikibase_item": "Q1209029"
+          },
+          "coordinates": [
+            {
+              "lat": 36.25005833,
+              "lon": 137.97894167,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長野県松本市にある国立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 1166788,
+          "ns": 0,
+          "title": "美しい日本の歩きたくなるみち500選",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "うつくしいにほんのあるきたくなるみちこひやくせん",
+            "toc": "",
+            "wikibase_item": "Q10871795"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1680143,
+          "ns": 0,
+          "title": "北海道の観光地",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ほつかいとう",
+            "page_image_free": "Hokkaido,_Japan,_Lake_Mashū,_2008.jpg",
+            "wikibase_item": "Q11402453"
+          },
+          "terms": {
+            "description": [
+              "ウィキぺディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

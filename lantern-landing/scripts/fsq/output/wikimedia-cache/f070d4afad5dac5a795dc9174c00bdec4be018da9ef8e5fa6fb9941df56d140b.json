@@ -1,0 +1,136 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:13.427Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 133078,
+          "ns": 0,
+          "title": "平和祈念像",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "へいわきねんそう",
+            "page_image": "Heiwa_kinen_zou_2017.jpg",
+            "wikibase_item": "Q11482256"
+          },
+          "coordinates": [
+            {
+              "lat": 32.77691667,
+              "lon": 129.86397222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の長崎県長崎市にある青銅製の像"
+            ]
+          }
+        },
+        {
+          "pageid": 277725,
+          "ns": 0,
+          "title": "沖縄戦跡国定公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おきなわせんせきこくていこうえん",
+            "page_image_free": "Okinawa_Heiwakinen_Memorial_Park01n3104.jpg",
+            "wikibase_item": "Q794334"
+          },
+          "coordinates": [
+            {
+              "lat": 26.09519444,
+              "lon": 127.72502778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "沖縄県糸満市・島尻郡八重瀬町にある国定公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1409445,
+          "ns": 0,
+          "title": "沖縄県平和祈念資料館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おきなわけんりつへいわきねんしりようかん",
+            "page_image_free": "Okinawa_prefectural_Peace_memorial_Museum-2007-06-27_2.jpg",
+            "wikibase_item": "Q4555530"
+          },
+          "coordinates": [
+            {
+              "lat": 26.096447,
+              "lon": 127.725391,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "糸満市の平和祈念公園内にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 2523979,
+          "ns": 0,
+          "title": "平和記念公園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "へいわきねんこうえん",
+            "kartographer_frames": "2",
+            "page_image_free": "Hiroshima_Peace_Memorial_Museum_1.jpg",
+            "wikibase_item": "Q1207208"
+          },
+          "coordinates": [
+            {
+              "lat": 34.39272222,
+              "lon": 132.45236111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "広島市にある公園"
+            ]
+          }
+        },
+        {
+          "pageid": 3824748,
+          "ns": 0,
+          "title": "平和祈念展示資料館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "へいわきねんてんししりようかん",
+            "page_image_free": "Memorial_Museum_for_Soldiers,_Detainees_in_Siberia,_and_Postwar_Repatriates_(13835).jpg",
+            "wikibase_item": "Q56025796"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69138889,
+              "lon": 139.6925,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区にある総務省委託の資料館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:23.747Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 485931,
+          "ns": 0,
+          "title": "List of PlayStation 2 games (A–K)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "List of PlayStation 2 games (A-K)",
+            "notoc": "",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q586366"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 21643729,
+          "ns": 0,
+          "title": "List of Super Nintendo Entertainment System games",
+          "index": 1,
+          "pageprops": {
+            "notoc": "",
+            "page_image_free": "Nintendo-Super-Famicom-Set-FL.png",
+            "toc": "",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q1473772"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 45713693,
+          "ns": 0,
+          "title": "Atsumi Tanezaki",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Tanezaki, Atsumi",
+            "wikibase-shortdesc": "Japanese voice actress",
+            "wikibase_item": "Q3183413"
+          },
+          "terms": {
+            "description": [
+              "Japanese voice actress"
+            ]
+          }
+        },
+        {
+          "pageid": 68440339,
+          "ns": 0,
+          "title": "List of Nintendo Switch games (C–G)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Nintendo Switch games (C-G)",
+            "notoc": "",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q109524721"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 70060521,
+          "ns": 0,
+          "title": "List of Nintendo DS games (J–P)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "List of Nintendo DS games (J-P)",
+            "notoc": "",
+            "page_image_free": "Nintendo_Game_Cartridge_Size_Comparison.jpg",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q111181305"
+          },
+          "terms": {
+            "description": [
+              "is a list of physical video games for the Nintendo DS, DS Lite, and DSi handheld game consoles"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:04.137Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 23738176,
+          "ns": 0,
+          "title": "Tokyo DisneySea",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_DisneySea_logo.svg",
+            "wikibase-shortdesc": "Theme park in Chiba, Japan",
+            "wikibase_item": "Q1202341"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62666667,
+              "lon": 139.88805556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "theme park in Japan, owned by The Oriental Land Company"
+            ]
+          }
+        },
+        {
+          "pageid": 26142843,
+          "ns": 0,
+          "title": "Fantasy Springs Resort Casino",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image": "Fantasy_Springs_Resort_and_Casino_logo.gif",
+            "wikibase-shortdesc": "Casino and hotel in Palm Springs, California",
+            "wikibase_item": "Q5434331"
+          },
+          "coordinates": [
+            {
+              "lat": 33.7209,
+              "lon": -116.1941,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "casino and hotel in Palm Springs, California"
+            ]
+          }
+        },
+        {
+          "pageid": 61028041,
+          "ns": 0,
+          "title": "Fantasy Springs",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image": "Fantasy_Springs_Logo_(Tokyo_DisneySea).webp",
+            "wikibase-shortdesc": "Themed port in Tokyo DisneySea",
+            "wikibase_item": "Q65046459"
+          },
+          "terms": {
+            "description": [
+              "part of Tokyo DisneySea, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 64459922,
+          "ns": 0,
+          "title": "Blair Cobbs",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Cobbs, Blair",
+            "wikibase-shortdesc": "American boxer (born 1989)",
+            "wikibase_item": "Q96943469"
+          },
+          "terms": {
+            "description": [
+              "American boxer"
+            ]
+          }
+        },
+        {
+          "pageid": 69524558,
+          "ns": 0,
+          "title": "Ricardo Sandoval",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Sandoval, Ricardo",
+            "wikibase-shortdesc": "American boxer",
+            "wikibase_item": "Q110146636"
+          },
+          "terms": {
+            "description": [
+              "Japanese boxer"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

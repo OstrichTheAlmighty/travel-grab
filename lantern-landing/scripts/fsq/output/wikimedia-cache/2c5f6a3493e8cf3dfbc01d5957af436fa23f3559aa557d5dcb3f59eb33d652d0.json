@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:02.215Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 237,
+          "ns": 0,
+          "title": "赤塚不二夫",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あかつか ふしお",
+            "wikibase_item": "Q958256"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画家 (1935−2008)"
+            ]
+          }
+        },
+        {
+          "pageid": 58556,
+          "ns": 0,
+          "title": "寺田ヒロオ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "てらた ひろお",
+            "wikibase_item": "Q11457957"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画家 (1931-1992)"
+            ]
+          }
+        },
+        {
+          "pageid": 64338,
+          "ns": 0,
+          "title": "トキワ荘",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ときわそう",
+            "kartographer_frames": "1",
+            "page_image": "Tokiwasou_Hanasaki_Park.JPG",
+            "page_image_free": "Modello_3D_Edificio_Tokiwa-sō_3.png",
+            "wikibase_item": "Q841272"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72408333,
+              "lon": 139.68830556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて日本の東京都豊島区にあったアパート"
+            ]
+          }
+        },
+        {
+          "pageid": 169904,
+          "ns": 0,
+          "title": "鈴木伸一",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すすき しんいち",
+            "page_image": "Shinichi_Suzuki_monument.JPG",
+            "wikibase_item": "Q11648538"
+          },
+          "terms": {
+            "description": [
+              "日本のアニメーション作家、漫画家"
+            ]
+          }
+        },
+        {
+          "pageid": 4164228,
+          "ns": 0,
+          "title": "トキワ荘マンガミュージアム",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ときわそうまんかみゆうしあむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokiwaso-Manga-Museum.jpg",
+            "wikibase_item": "Q96707302"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72430556,
+              "lon": 139.68605556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:21.537Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 13722,
+          "ns": 0,
+          "title": "北区 (東京都)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Kyu-Furukawa_Tei_(House)2.jpg",
+            "wikibase_item": "Q235130"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75281,
+              "lon": 139.73356,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 902077,
+          "ns": 0,
+          "title": "滝野川 (東京都北区)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たきのかわ",
+            "kartographer_frames": "1",
+            "page_image_free": "The_skyline_of_Kita_Tokyo(west_sugamo).jpg",
+            "wikibase_item": "Q11565312"
+          },
+          "terms": {
+            "description": [
+              "東京都北区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1114238,
+          "ns": 0,
+          "title": "東京都道455号本郷赤羽線",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようととう455",
+            "page_image_free": "都道455号.jpg",
+            "wikibase_item": "Q11525817"
+          },
+          "terms": {
+            "description": [
+              "東京都の道路"
+            ]
+          }
+        },
+        {
+          "pageid": 1144699,
+          "ns": 0,
+          "title": "西ケ原",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にしかはら",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Route_455_-02.jpg",
+            "wikibase_item": "Q11627079"
+          },
+          "terms": {
+            "description": [
+              "東京都北区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1559784,
+          "ns": 0,
+          "title": "伊藤邦衛",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "いとう くにえ",
+            "wikibase_item": "Q10314798"
+          },
+          "terms": {
+            "description": [
+              "日本の建築家 (1924-2016)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

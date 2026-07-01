@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:17.715Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3880,
+          "ns": 0,
+          "title": "南アジア",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みなみあしあ",
+            "page_image_free": "South_Asia_(orthographic_projection)_without_national_boundaries.svg",
+            "wikibase_item": "Q771405"
+          },
+          "terms": {
+            "description": [
+              "アジアの南部地域"
+            ]
+          }
+        },
+        {
+          "pageid": 8587,
+          "ns": 0,
+          "title": "名古屋市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なこやし",
+            "kartographer_frames": "1",
+            "page_image_free": "View_of_Westward_from_Sky_Deck_MIRAI360,_Nishiki_Naka_Ward_Nagoya_2022.jpg",
+            "wikibase_item": "Q11751"
+          },
+          "coordinates": [
+            {
+              "lat": 35.1814,
+              "lon": 136.9064,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 51859,
+          "ns": 0,
+          "title": "スポーツニッポン",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すほおつにつほん",
+            "wikibase_item": "Q7579766"
+          },
+          "terms": {
+            "description": [
+              "株式会社スポーツニッポン新聞社の発行するスポーツ新聞"
+            ]
+          }
+        },
+        {
+          "pageid": 61356,
+          "ns": 0,
+          "title": "南区 (札幌市)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みなみくさつほろし",
+            "page_image_free": "TsukimiBashi2004-12.jpg",
+            "wikibase_item": "Q1134027"
+          },
+          "terms": {
+            "description": [
+              "北海道札幌市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 2210805,
+          "ns": 0,
+          "title": "中村南 (練馬区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "なかむらみなみ",
+            "kartographer_frames": "1",
+            "page_image_free": "Nakamura_Minami_Sports_Center.jpg",
+            "wikibase_item": "Q11365393"
+          },
+          "terms": {
+            "description": [
+              "東京都練馬区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

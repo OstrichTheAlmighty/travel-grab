@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:18.334Z",
+  "value": {
+    "searchinfo": {
+      "search": "そなエリア東京"
+    },
+    "search": [
+      {
+        "id": "Q11525110",
+        "title": "Q11525110",
+        "pageid": 12664984,
+        "concepturi": "http://www.wikidata.org/entity/Q11525110",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11525110",
+        "display": {
+          "label": {
+            "value": "Tokyo Rinkai Disaster Prevention Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Rinkai Disaster Prevention Park",
+        "description": "park in Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "そなエリア東京"
+        },
+        "aliases": [
+          "そなエリア東京"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

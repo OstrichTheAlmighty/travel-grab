@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:04.678Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 260224,
+          "ns": 0,
+          "title": "牧野富太郎",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "まきの とみたろう",
+            "page_image_free": "Makino_Tomitaro.jpg",
+            "wikibase_item": "Q729955"
+          },
+          "terms": {
+            "description": [
+              "日本の植物学者 (1862-1957)"
+            ]
+          }
+        },
+        {
+          "pageid": 1033869,
+          "ns": 0,
+          "title": "登録記念物",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうろくきねんふつ",
+            "page_image_free": "Sorakuen15st3200.jpg",
+            "wikibase_item": "Q7309389"
+          },
+          "terms": {
+            "description": [
+              "日本国指定の文化財の種類"
+            ]
+          }
+        },
+        {
+          "pageid": 1131688,
+          "ns": 0,
+          "title": "高知県立牧野植物園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こうちけんりつまきのしよくふつえん",
+            "kartographer_frames": "1",
+            "page_image_free": "200104_Kochi_Prefectural_Makino_Botanical_Garden01s5.jpg",
+            "wikibase_item": "Q3780715"
+          },
+          "coordinates": [
+            {
+              "lat": 33.54658333,
+              "lon": 133.57788889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "高知市にある植物園"
+            ]
+          }
+        },
+        {
+          "pageid": 1691666,
+          "ns": 0,
+          "title": "東京都の観光地",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようと",
+            "page_image_free": "東京都区部-観光地図-1.jpg",
+            "wikibase_item": "Q10860697"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2337039,
+          "ns": 0,
+          "title": "牧野記念庭園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "まきのきねんていえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Makino_Memorial_Garden_entrance_2023-05-25.jpg",
+            "wikibase_item": "Q5158903"
+          },
+          "coordinates": [
+            {
+              "lat": 35.74638889,
+              "lon": 139.58555556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都練馬区の公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:27.044Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 65264,
+          "ns": 0,
+          "title": "片岡鶴太郎",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かたおか つるたろう",
+            "wikibase_item": "Q2512372"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優、タレント、画家"
+            ]
+          }
+        },
+        {
+          "pageid": 67055,
+          "ns": 0,
+          "title": "松村邦洋",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "まつむら くにひろ",
+            "page_image_free": "Kunihiro_MATSUMURA_20190717.jpg",
+            "wikibase_item": "Q2657350"
+          },
+          "terms": {
+            "description": [
+              "日本のお笑いタレント、ものまねタレント"
+            ]
+          }
+        },
+        {
+          "pageid": 70953,
+          "ns": 0,
+          "title": "爆笑問題カーボーイ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はくしようもんたいかあほおい",
+            "wikibase_item": "Q11569385"
+          },
+          "terms": {
+            "description": [
+              "TBSラジオの深夜番組 (1997-)"
+            ]
+          }
+        },
+        {
+          "pageid": 101286,
+          "ns": 0,
+          "title": "十河信二",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "そこう しんし",
+            "page_image_free": "SOGO_Shinji.jpg",
+            "wikibase_item": "Q1995274"
+          },
+          "terms": {
+            "description": [
+              "日本の鉄道官僚、政治家 (1884-1981)"
+            ]
+          }
+        },
+        {
+          "pageid": 547595,
+          "ns": 0,
+          "title": "芳賀徹",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はか とおる",
+            "wikibase_item": "Q11615831"
+          },
+          "terms": {
+            "description": [
+              "日本の文学研究者、比較文学者"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

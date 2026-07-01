@@ -1,0 +1,191 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:45:55.995Z",
+  "value": {
+    "searchinfo": {
+      "search": "Akihabara"
+    },
+    "search": [
+      {
+        "id": "Q418096",
+        "title": "Q418096",
+        "pageid": 395435,
+        "concepturi": "http://www.wikidata.org/entity/Q418096",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q418096",
+        "display": {
+          "label": {
+            "value": "Akihabara",
+            "language": "en"
+          },
+          "description": {
+            "value": "town located in Chiyoda, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Akihabara",
+        "description": "town located in Chiyoda, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Akihabara"
+        }
+      },
+      {
+        "id": "Q800374",
+        "title": "Q800374",
+        "pageid": 753295,
+        "concepturi": "http://www.wikidata.org/entity/Q800374",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q800374",
+        "display": {
+          "label": {
+            "value": "Akihabara Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "railway station and metro station in Chiyoda, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Akihabara Station",
+        "description": "railway station and metro station in Chiyoda, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Akihabara Station"
+        }
+      },
+      {
+        "id": "Q51118",
+        "title": "Q51118",
+        "pageid": 53250,
+        "concepturi": "http://www.wikidata.org/entity/Q51118",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q51118",
+        "display": {
+          "label": {
+            "value": "AKB48",
+            "language": "en"
+          },
+          "description": {
+            "value": "Japanese female idol group",
+            "language": "en"
+          }
+        },
+        "label": "AKB48",
+        "description": "Japanese female idol group",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "Akihabara 48"
+        },
+        "aliases": [
+          "Akihabara 48"
+        ]
+      },
+      {
+        "id": "Q102416656",
+        "title": "Q102416656",
+        "pageid": 99184265,
+        "concepturi": "http://www.wikidata.org/entity/Q102416656",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q102416656",
+        "display": {
+          "label": {
+            "value": "Akihabara",
+            "language": "en"
+          },
+          "description": {
+            "value": "administrative division in Taitō-ku, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Akihabara",
+        "description": "administrative division in Taitō-ku, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Akihabara"
+        }
+      },
+      {
+        "id": "Q925737",
+        "title": "Q925737",
+        "pageid": 876126,
+        "concepturi": "http://www.wikidata.org/entity/Q925737",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q925737",
+        "display": {
+          "label": {
+            "value": "Akihabara massacre",
+            "language": "en"
+          },
+          "description": {
+            "value": "2008 mass murder in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Akihabara massacre",
+        "description": "2008 mass murder in Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Akihabara massacre"
+        }
+      },
+      {
+        "id": "Q124062863",
+        "title": "Q124062863",
+        "pageid": 118237325,
+        "concepturi": "http://www.wikidata.org/entity/Q124062863",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q124062863",
+        "display": {
+          "label": {
+            "value": "Akihabara - Feel the Rhythm",
+            "language": "en"
+          },
+          "description": {
+            "value": "2017 video game",
+            "language": "en"
+          }
+        },
+        "label": "Akihabara - Feel the Rhythm",
+        "description": "2017 video game",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Akihabara - Feel the Rhythm"
+        }
+      },
+      {
+        "id": "Q122350401",
+        "title": "Q122350401",
+        "pageid": 116670970,
+        "concepturi": "http://www.wikidata.org/entity/Q122350401",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q122350401",
+        "display": {
+          "label": {
+            "value": "Akihabara - Feel the Rhythm Remixed",
+            "language": "en"
+          },
+          "description": {
+            "value": "2018 video game",
+            "language": "en"
+          }
+        },
+        "label": "Akihabara - Feel the Rhythm Remixed",
+        "description": "2018 video game",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Akihabara - Feel the Rhythm Remixed"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

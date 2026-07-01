@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:47.181Z",
+  "value": {
+    "searchinfo": {
+      "search": "世界のカバン博物館"
+    },
+    "search": [
+      {
+        "id": "Q104698116",
+        "title": "Q104698116",
+        "pageid": 100126075,
+        "concepturi": "http://www.wikidata.org/entity/Q104698116",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q104698116",
+        "display": {
+          "label": {
+            "value": "World Bags & Luggage Museum",
+            "language": "en"
+          }
+        },
+        "label": "World Bags & Luggage Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "世界のカバン博物館"
+        },
+        "aliases": [
+          "世界のカバン博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

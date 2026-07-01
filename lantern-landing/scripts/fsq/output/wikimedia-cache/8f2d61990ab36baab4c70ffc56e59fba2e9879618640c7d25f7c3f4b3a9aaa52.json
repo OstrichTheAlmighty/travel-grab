@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:05.755Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 42743,
+          "ns": 0,
+          "title": "トレーディングカードゲーム",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とれえていんくかあとけえむ",
+            "wikibase_item": "Q734698"
+          },
+          "terms": {
+            "description": [
+              "カードゲームのジャンル"
+            ]
+          }
+        },
+        {
+          "pageid": 61933,
+          "ns": 0,
+          "title": "トップをねらえ!",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とつふをねらえ",
+            "wikibase_item": "Q1196284"
+          },
+          "terms": {
+            "description": [
+              "1988年から1989年に発売された日本の庵野秀明の監督したOVA"
+            ]
+          }
+        },
+        {
+          "pageid": 65947,
+          "ns": 0,
+          "title": "ホンダ・アコードエアロデッキ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほんた あこおとえあろてつき",
+            "page_image_free": "Aerodeck.jpg",
+            "wikibase_item": "Q17216355"
+          }
+        },
+        {
+          "pageid": 839902,
+          "ns": 0,
+          "title": "マウンテンボード",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "まうんてんほおと",
+            "page_image_free": "Ae07-1.jpg",
+            "wikibase_item": "Q612269"
+          }
+        },
+        {
+          "pageid": 1731153,
+          "ns": 0,
+          "title": "東京タワー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようたわあ",
+            "kartographer_frames": "1",
+            "page_image_free": "日本電波塔（東京タワー）.jpg",
+            "wikibase_item": "Q183536"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65861111,
+              "lon": 139.74555556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある電波塔"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:49.810Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 147739,
+          "ns": 0,
+          "title": "Shibuya",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Shibuya_skyline_from_Tokyu_Plaza_in_Omotesando,_Harajuku,_Tokyo,_2024_May.jpg",
+            "wikibase-shortdesc": "Special ward in Tokyo, Japan",
+            "wikibase_item": "Q193638"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65944444,
+              "lon": 139.70055556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "special ward in the Tokyo Metropolis in Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 15025584,
+          "ns": 0,
+          "title": "List of museums in Tokyo",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Ad_Museum_Tokyo.JPG",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q3735824"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 22304490,
+          "ns": 0,
+          "title": "Shōtō, Shibuya",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Shoto, Shibuya",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Governor's_Guest_House.jpg",
+            "wikibase-shortdesc": "District in Shibuya, Tokyo, Japan",
+            "wikibase_item": "Q3482725"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65972222,
+              "lon": 139.69361111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "District in Shibuya, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 77175112,
+          "ns": 0,
+          "title": "Hizen Porcelain Kiln Sites",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "The_site_of_the_Izumiyama_Clayworks.jpg",
+            "wikibase-shortdesc": "Kiln ruins in Saga, Japan",
+            "wikibase_item": "Q105109474"
+          },
+          "coordinates": [
+            {
+              "lat": 33.19416667,
+              "lon": 129.91,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "kiln ruins in Saga, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 79157280,
+          "ns": 0,
+          "title": "Toguri Museum",
+          "index": 1,
+          "pageprops": {
+            "wikibase_item": "Q11496415"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66144,
+              "lon": 139.6928,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "museum in Japan"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

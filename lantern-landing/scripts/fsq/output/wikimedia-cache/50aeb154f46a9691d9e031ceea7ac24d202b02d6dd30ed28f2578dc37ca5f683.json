@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:09.374Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 532566,
+          "ns": 0,
+          "title": "ハッピー15エントリー",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はつひい 15 えんとりい",
+            "wikibase_item": "Q11524259"
+          }
+        },
+        {
+          "pageid": 943186,
+          "ns": 0,
+          "title": "東京ディズニーシー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきよううていすにいしい",
+            "page_image_free": "Tokyo_DisneySea_logo.svg",
+            "wikibase_item": "Q1202341"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62666944,
+              "lon": 139.88806111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県浦安市にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 1205726,
+          "ns": 0,
+          "title": "東京ディズニーリゾート",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいりそおと",
+            "page_image_free": "Japan_Tokyo_keiyo_location_map.svg",
+            "wikibase_item": "Q605492"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63277778,
+              "lon": 139.88055556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県浦安市にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 2489486,
+          "ns": 0,
+          "title": "トヨタ・アクア",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とよたあくあ",
+            "page_image_free": "2nd_generation_Toyota_Aqua_Z.jpg",
+            "wikibase_item": "Q107570784"
+          },
+          "terms": {
+            "description": [
+              "トヨタ自動車のハッチバック型乗用車"
+            ]
+          }
+        },
+        {
+          "pageid": 3948879,
+          "ns": 0,
+          "title": "ファンタジースプリングス",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふあんたしいすふりんくす",
+            "wikibase_item": "Q65046459"
+          },
+          "terms": {
+            "description": [
+              "東京ディズニーシーのテーマポート"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

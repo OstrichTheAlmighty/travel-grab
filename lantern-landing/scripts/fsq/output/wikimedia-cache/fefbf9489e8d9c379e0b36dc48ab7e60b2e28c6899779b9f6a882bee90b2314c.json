@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:03.561Z",
+  "value": {
+    "searchinfo": {
+      "search": "科学技術館"
+    },
+    "search": [
+      {
+        "id": "Q2398990",
+        "title": "Q2398990",
+        "pageid": 2317506,
+        "concepturi": "http://www.wikidata.org/entity/Q2398990",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2398990",
+        "display": {
+          "label": {
+            "value": "technology museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum devoted to applied science and technological developments",
+            "language": "en"
+          }
+        },
+        "label": "technology museum",
+        "description": "museum devoted to applied science and technological developments",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "科学技術館"
+        },
+        "aliases": [
+          "科学技術館"
+        ]
+      },
+      {
+        "id": "Q10855424",
+        "title": "Q10855424",
+        "pageid": 12127667,
+        "concepturi": "http://www.wikidata.org/entity/Q10855424",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q10855424",
+        "display": {
+          "label": {
+            "value": "Science Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Chiyoda, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Science Museum",
+        "description": "museum in Chiyoda, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "科学技術館"
+        },
+        "aliases": [
+          "科学技術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

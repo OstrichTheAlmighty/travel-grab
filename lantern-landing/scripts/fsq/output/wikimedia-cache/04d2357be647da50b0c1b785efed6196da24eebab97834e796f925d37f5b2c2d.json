@@ -1,0 +1,82 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:22.281Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 17323,
+          "ns": 0,
+          "title": "松山市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "まつやまし",
+            "kartographer_frames": "1",
+            "page_image_free": "Matsuyama_montage.jpg",
+            "wikibase_item": "Q200022"
+          },
+          "coordinates": [
+            {
+              "lat": 33.83917,
+              "lon": 132.76564,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛媛県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 90999,
+          "ns": 0,
+          "title": "大野伴睦",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおの はんほく",
+            "page_image_free": "Banboku.jpg",
+            "wikibase_item": "Q11439509"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家"
+            ]
+          }
+        },
+        {
+          "pageid": 1834885,
+          "ns": 0,
+          "title": "大久保武雄",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おおくほ たけお",
+            "wikibase_item": "Q13365098"
+          },
+          "terms": {
+            "description": [
+              "日本の俳人、政治家"
+            ]
+          }
+        },
+        {
+          "pageid": 1905817,
+          "ns": 0,
+          "title": "平田佐矩",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひらた すけのり",
+            "wikibase_item": "Q11483288"
+          },
+          "terms": {
+            "description": [
+              "日本の実業家 (1895-1965)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

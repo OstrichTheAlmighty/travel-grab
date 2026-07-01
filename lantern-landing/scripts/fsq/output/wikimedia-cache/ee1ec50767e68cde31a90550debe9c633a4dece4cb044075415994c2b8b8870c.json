@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:50.512Z",
+  "value": {
+    "searchinfo": {
+      "search": "Edo-Tokyo Museum"
+    },
+    "search": [
+      {
+        "id": "Q1191042",
+        "title": "Q1191042",
+        "pageid": 1135368,
+        "concepturi": "http://www.wikidata.org/entity/Q1191042",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1191042",
+        "display": {
+          "label": {
+            "value": "Edo-Tokyo Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Sumida, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Edo-Tokyo Museum",
+        "description": "museum in Sumida, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Edo-Tokyo Museum"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

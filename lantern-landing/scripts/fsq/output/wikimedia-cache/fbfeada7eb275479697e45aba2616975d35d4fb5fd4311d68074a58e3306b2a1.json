@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:26.702Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 86966,
+          "ns": 0,
+          "title": "糸魚川市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いといかわし",
+            "kartographer_frames": "1",
+            "page_image_free": "Itoigawa_Montage.jpg",
+            "toc": "",
+            "wikibase_item": "Q857208"
+          },
+          "coordinates": [
+            {
+              "lat": 37.03903,
+              "lon": 137.86267,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "新潟県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 124021,
+          "ns": 0,
+          "title": "国文学研究資料館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こくふんかくけんきゆうしりようかん",
+            "page_image_free": "National_Institute_of_Japanese_Literature.jpg",
+            "wikibase_item": "Q4346458"
+          },
+          "terms": {
+            "description": [
+              "東京都立川市にある大学共同利用機関"
+            ]
+          }
+        },
+        {
+          "pageid": 335643,
+          "ns": 0,
+          "title": "国勢調査 (日本)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こくせいちようさ",
+            "page_image_free": "Emperor-Jinmu-from-series-Mirror-of-Famous-Generals-of-Great-Japan.png",
+            "wikibase_item": "Q986756"
+          },
+          "terms": {
+            "description": [
+              "5年ごとに日本国が実施する、回答義務のある全数調査"
+            ]
+          }
+        },
+        {
+          "pageid": 476993,
+          "ns": 0,
+          "title": "統計局",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうけいきよく",
+            "page_image_free": "Statistics_Bureau_of_Ministry_of_Internal_Affairs_and_Communications_2009.JPG",
+            "wikibase_item": "Q11606829"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7009733,
+              "lon": 139.71536468,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "総務省の内部部局の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 859382,
+          "ns": 0,
+          "title": "原爆資料館停留場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "けんはくしりようかん",
+            "page_image_free": "Atomic_Bomb_Museum_tramstop_20180819.jpg",
+            "wikibase_item": "Q11557579"
+          },
+          "terms": {
+            "description": [
+              "長崎県長崎市にある長崎電気軌道の路面電車停留場"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

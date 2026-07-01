@@ -1,0 +1,27 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:41.722Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1677498,
+          "ns": 0,
+          "title": "Negicco",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ねきつこ",
+            "page_image_free": "NegiccoLogo.jpg",
+            "wikibase_item": "Q11236458"
+          },
+          "terms": {
+            "description": [
+              "日本のアイドルグループ (2003-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

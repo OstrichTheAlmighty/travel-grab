@@ -1,0 +1,123 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:00.839Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1105243,
+          "ns": 0,
+          "title": "日本丸メモリアルパーク",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "につほんまるめもりあるはあく",
+            "page_image_free": "Kremlin.ru._Yokohama.jpeg",
+            "wikibase_item": "Q10856301"
+          },
+          "coordinates": [
+            {
+              "lat": 35.453667,
+              "lon": 139.633,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "横浜市にある公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1330470,
+          "ns": 0,
+          "title": "横浜ワールドポーターズ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "よこはまわあるとほおたあす",
+            "kartographer_frames": "1",
+            "page_image_free": "Yokohama_World_Porters_on_23rd_June_2024.jpg",
+            "wikibase_item": "Q11262869"
+          },
+          "coordinates": [
+            {
+              "lat": 35.45425,
+              "lon": 139.63855556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "横浜市の商業施設"
+            ]
+          }
+        },
+        {
+          "pageid": 1763717,
+          "ns": 0,
+          "title": "ホテルグランヴィア広島",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ほてるくらんういあひろしま",
+            "page_image_free": "Hotel-Granvia-Hiroshima-2.jpg",
+            "wikibase_item": "Q11337866"
+          },
+          "coordinates": [
+            {
+              "lat": 34.39911111,
+              "lon": 132.47547222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "広島市南区にあるホテル"
+            ]
+          }
+        },
+        {
+          "pageid": 1889814,
+          "ns": 0,
+          "title": "GENTO YOKOHAMA",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "けんとよこはま",
+            "kartographer_frames": "1",
+            "page_image_free": "GENTO_YOKOHAMA_-01.jpg",
+            "wikibase_item": "Q10854544"
+          },
+          "coordinates": [
+            {
+              "lat": 35.4615,
+              "lon": 139.62716667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 4653899,
+          "ns": 0,
+          "title": "千原ジュニアの愛知あたりまえワールド☆〜あなたの街に新仰天!〜",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ちはらしゆにあのあいちあたりまえわあるとあなたのまちにしんきようてん",
+            "wikibase_item": "Q113702575"
+          },
+          "terms": {
+            "description": [
+              "テレビ愛知のバラエティ番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

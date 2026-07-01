@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:20.579Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8731,
+          "ns": 0,
+          "title": "江戸",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "えと",
+            "wikibase_item": "Q215646"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸幕府の拠点都市"
+            ]
+          }
+        },
+        {
+          "pageid": 115014,
+          "ns": 0,
+          "title": "深川 (江東区)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふかかわ",
+            "kartographer_frames": "1",
+            "page_image_free": "Fukagawameshi.jpg",
+            "wikibase_item": "Q3090689"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 350253,
+          "ns": 0,
+          "title": "白河 (江東区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しらかわ",
+            "kartographer_frames": "1",
+            "page_image_free": "Fukagawa_Edo_Museum.JPG",
+            "wikibase_item": "Q11579942"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 363249,
+          "ns": 0,
+          "title": "深川区",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふかかわく",
+            "wikibase_item": "Q11559997"
+          },
+          "terms": {
+            "description": [
+              "かつて日本の東京府東京市にあった区"
+            ]
+          }
+        },
+        {
+          "pageid": 2439401,
+          "ns": 0,
+          "title": "深川江戸資料館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふかかわえとしりようかん",
+            "kartographer_frames": "2",
+            "page_image_free": "Fukagawa_Edo_Museum.JPG",
+            "wikibase_item": "Q3090685"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68111111,
+              "lon": 139.80055556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区にある資料館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

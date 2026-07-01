@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:17.464Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 68356,
+          "ns": 0,
+          "title": "六町駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ろくちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Rokucho_station_exit_A1_20130210a.jpg",
+            "wikibase_item": "Q5369300"
+          },
+          "coordinates": [
+            {
+              "lat": 35.78483333,
+              "lon": 139.82186111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都足立区六町にある首都圏新都市鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 549459,
+          "ns": 0,
+          "title": "足立区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あたちく",
+            "kartographer_frames": "1",
+            "page_image_free": "Nishiarai_Daishi.jpg",
+            "wikibase_item": "Q213464"
+          },
+          "coordinates": [
+            {
+              "lat": 35.77494,
+              "lon": 139.80436,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 579877,
+          "ns": 0,
+          "title": "西区 (浜松市)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にしく",
+            "page_image_free": "Kanzanji-hotspring.jpg",
+            "wikibase_item": "Q1131075"
+          },
+          "coordinates": [
+            {
+              "lat": 34.69275,
+              "lon": 137.64519444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて静岡県浜松市にあった行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 659575,
+          "ns": 0,
+          "title": "六町",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ろくちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Rokucho_station_exit_A1_20130210a.jpg",
+            "wikibase_item": "Q11392480"
+          },
+          "terms": {
+            "description": [
+              "東京都足立区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1911129,
+          "ns": 0,
+          "title": "渋谷区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しふやく",
+            "kartographer_frames": "1",
+            "page_image_free": "2018_Shibuya_Crossing.jpg",
+            "wikibase_item": "Q193638"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66367,
+              "lon": 139.69772,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

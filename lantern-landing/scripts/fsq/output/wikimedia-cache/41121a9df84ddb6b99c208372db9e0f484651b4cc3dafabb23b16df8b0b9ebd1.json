@@ -1,0 +1,183 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:30.207Z",
+  "value": {
+    "searchinfo": {
+      "search": "kanaloa"
+    },
+    "search": [
+      {
+        "id": "Q10313764",
+        "title": "Q10313764",
+        "pageid": 11618548,
+        "concepturi": "http://www.wikidata.org/entity/Q10313764",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q10313764",
+        "display": {
+          "label": {
+            "value": "Kanaloa",
+            "language": "en"
+          },
+          "description": {
+            "value": "genus of plants",
+            "language": "en"
+          }
+        },
+        "label": "Kanaloa",
+        "description": "genus of plants",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Kanaloa"
+        }
+      },
+      {
+        "id": "Q11844549",
+        "title": "Q11844549",
+        "pageid": 12978455,
+        "concepturi": "http://www.wikidata.org/entity/Q11844549",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11844549",
+        "display": {
+          "label": {
+            "value": "Kanaloa",
+            "language": "en"
+          },
+          "description": {
+            "value": "genus of crustaceans",
+            "language": "en"
+          }
+        },
+        "label": "Kanaloa",
+        "description": "genus of crustaceans",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Kanaloa"
+        }
+      },
+      {
+        "id": "Q1243107",
+        "title": "Q1243107",
+        "pageid": 1184247,
+        "concepturi": "http://www.wikidata.org/entity/Q1243107",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1243107",
+        "display": {
+          "label": {
+            "value": "Kanaloa kahoolawensis",
+            "language": "en"
+          },
+          "description": {
+            "value": "species of plant",
+            "language": "en"
+          }
+        },
+        "label": "Kanaloa kahoolawensis",
+        "description": "species of plant",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Kanaloa kahoolawensis"
+        }
+      },
+      {
+        "id": "Q6360529",
+        "title": "Q6360529",
+        "pageid": 6171572,
+        "concepturi": "http://www.wikidata.org/entity/Q6360529",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6360529",
+        "display": {
+          "label": {
+            "value": "Kanaloa",
+            "language": "en"
+          },
+          "description": {
+            "value": "Hawaiian god symbolized by the squid or by the octopus, typically associated with Kāne",
+            "language": "en"
+          }
+        },
+        "label": "Kanaloa",
+        "description": "Hawaiian god symbolized by the squid or by the octopus, typically associated with Kāne",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Kanaloa"
+        }
+      },
+      {
+        "id": "Q25908685",
+        "title": "Q25908685",
+        "pageid": 27861678,
+        "concepturi": "http://www.wikidata.org/entity/Q25908685",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q25908685",
+        "display": {
+          "label": {
+            "value": "Kanaloa",
+            "language": "en"
+          },
+          "description": {
+            "value": "crater on Umbriel",
+            "language": "en"
+          }
+        },
+        "label": "Kanaloa",
+        "description": "crater on Umbriel",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Kanaloa"
+        }
+      },
+      {
+        "id": "Q3934333",
+        "title": "Q3934333",
+        "pageid": 3751852,
+        "concepturi": "http://www.wikidata.org/entity/Q3934333",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3934333",
+        "display": {
+          "label": {
+            "value": "Kanaloa manoa",
+            "language": "en"
+          },
+          "description": {
+            "value": "species of crustacean",
+            "language": "en"
+          }
+        },
+        "label": "Kanaloa manoa",
+        "description": "species of crustacean",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Kanaloa manoa"
+        }
+      },
+      {
+        "id": "Q130215122",
+        "title": "Q130215122",
+        "pageid": 124181061,
+        "concepturi": "http://www.wikidata.org/entity/Q130215122",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q130215122",
+        "display": {
+          "label": {
+            "value": "Kanaloa-Kuaana",
+            "language": "en"
+          }
+        },
+        "label": "Kanaloa-Kuaana",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Kanaloa-Kuaana"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

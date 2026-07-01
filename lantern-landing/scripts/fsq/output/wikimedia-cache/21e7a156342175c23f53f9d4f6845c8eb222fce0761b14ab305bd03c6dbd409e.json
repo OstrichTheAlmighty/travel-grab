@@ -1,0 +1,84 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:19.482Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 37093,
+          "ns": 0,
+          "title": "マルエツ",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "まるえつ",
+            "page_image_free": "Maruetsuhonsha.jpg",
+            "wikibase_item": "Q11341197"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72641667,
+              "lon": 139.72861111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本のスーパーマーケット"
+            ]
+          }
+        },
+        {
+          "pageid": 736701,
+          "ns": 0,
+          "title": "ありがとう (テレビドラマ)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ありかとう",
+            "wikibase_item": "Q11258634"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 1375411,
+          "ns": 0,
+          "title": "かね彦",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かねひこ",
+            "wikibase_item": "Q11264098"
+          }
+        },
+        {
+          "pageid": 1430362,
+          "ns": 0,
+          "title": "機動公務員かもしか!",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きとうこうむいんかもしか",
+            "wikibase_item": "Q11544378"
+          }
+        },
+        {
+          "pageid": 2560627,
+          "ns": 0,
+          "title": "応化戦争記シリーズ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おうかせんそうきしりいす",
+            "wikibase_item": "Q11491249"
+          }
+        }
+      ]
+    }
+  }
+}

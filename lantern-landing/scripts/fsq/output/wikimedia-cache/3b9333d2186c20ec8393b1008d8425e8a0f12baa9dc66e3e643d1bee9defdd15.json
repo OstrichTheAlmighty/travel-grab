@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:22.832Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 32032,
+          "ns": 0,
+          "title": "日本科学未来館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんかかくみらいかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Miraikan_logo.svg",
+            "wikibase_item": "Q656957"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区青海にある科学館"
+            ]
+          }
+        },
+        {
+          "pageid": 68198,
+          "ns": 0,
+          "title": "アーネスト・ヘミングウェイ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "へみんくうえい あねすと",
+            "page_image_free": "ErnestHemingway.jpg",
+            "wikibase_item": "Q23434"
+          },
+          "terms": {
+            "description": [
+              "アメリカ合衆国の小説家、詩人"
+            ]
+          }
+        },
+        {
+          "pageid": 89492,
+          "ns": 0,
+          "title": "ブルックリン区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふるつくりん",
+            "page_image_free": "New_York_City_location_Brooklyn.svg",
+            "wikibase_item": "Q18419"
+          },
+          "terms": {
+            "description": [
+              "ニューヨーク市の区"
+            ]
+          }
+        },
+        {
+          "pageid": 124834,
+          "ns": 0,
+          "title": "遙洋子",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はるか ようこ",
+            "wikibase_item": "Q11641920"
+          },
+          "terms": {
+            "description": [
+              "日本の作家、タレント"
+            ]
+          }
+        },
+        {
+          "pageid": 263655,
+          "ns": 0,
+          "title": "日野原重明",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひのはら しけあき",
+            "page_image_free": "Shigeaki_Hinohara_and_Roos_20130515.jpg",
+            "wikibase_item": "Q11510571"
+          },
+          "terms": {
+            "description": [
+              "日本の医師、医学者"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

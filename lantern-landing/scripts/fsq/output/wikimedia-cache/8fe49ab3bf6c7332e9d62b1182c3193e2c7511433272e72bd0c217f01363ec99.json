@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:29.066Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 413,
+          "ns": 0,
+          "title": "栃木県",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とちきけん",
+            "page_image_free": "Nikko_toshogu_shrine.jpg",
+            "wikibase_item": "Q44843"
+          },
+          "coordinates": [
+            {
+              "lat": 36.56556,
+              "lon": 139.88353,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の都道府県"
+            ]
+          }
+        },
+        {
+          "pageid": 1917527,
+          "ns": 0,
+          "title": "神奈川県",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かなかわけん",
+            "kartographer_frames": "1",
+            "page_image_free": "横浜みなとみらい地区.jpg",
+            "wikibase_item": "Q127513"
+          },
+          "coordinates": [
+            {
+              "lat": 35.44775,
+              "lon": 139.64253,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の都道府県"
+            ]
+          }
+        },
+        {
+          "pageid": 2067590,
+          "ns": 0,
+          "title": "鎌倉河岸捕物控",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かまくらかしとりものひかえ",
+            "wikibase_item": "Q11650932"
+          }
+        },
+        {
+          "pageid": 2338789,
+          "ns": 0,
+          "title": "淡路国分寺",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "あわしこくふんし",
+            "page_image_free": "Awaji_Kokubunji_Temple.JPG",
+            "wikibase_item": "Q11559809"
+          },
+          "coordinates": [
+            {
+              "lat": 34.29853611,
+              "lon": 134.78265278,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県南あわじ市にある寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 3200192,
+          "ns": 0,
+          "title": "鎌倉橋 (日本橋川)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かまくらはし",
+            "page_image_free": "Kamakurabashi.JPG",
+            "wikibase_item": "Q20039493"
+          },
+          "terms": {
+            "description": [
+              "東京都の橋"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

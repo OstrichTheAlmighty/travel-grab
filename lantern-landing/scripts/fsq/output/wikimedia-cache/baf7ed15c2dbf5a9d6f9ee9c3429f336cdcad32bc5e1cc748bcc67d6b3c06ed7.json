@@ -1,0 +1,116 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:07.726Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 48621316,
+          "ns": 0,
+          "title": "The Kudan",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Kudan, The",
+            "kartographer_frames": "1",
+            "page_image_free": "Kudan,_Official_Residence_of_the_Philippine_Ambassador_to_Tokyo,_Japan.gif",
+            "wikibase-shortdesc": "Official residence of the ambassador of the Philippines to Japan",
+            "wikibase_item": "Q23044791"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69694444,
+              "lon": 139.74916667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "official residence of the ambassador of the Philippines to Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 49179231,
+          "ns": 0,
+          "title": "Kudan (yōkai)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Kudan (yokai)",
+            "page_image_free": "Ketteiban_yokai_mira_kanzen_FILE(2010)-p105-kudan-kawaraban.jpg",
+            "wikibase-shortdesc": "Japanese spirit",
+            "wikibase_item": "Q8018556"
+          },
+          "terms": {
+            "description": [
+              "Japanese spirit"
+            ]
+          }
+        },
+        {
+          "pageid": 68019837,
+          "ns": 0,
+          "title": "Emma S. Fitzhugh House",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "EmmaSFitzhughHouse02.jpg",
+            "wikibase-shortdesc": "Building in Washington D.C., United States",
+            "wikibase_item": "Q107349984"
+          },
+          "coordinates": [
+            {
+              "lat": 38.91280556,
+              "lon": -77.05075,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "official residence of the ambassador of the Philippines to the United States"
+            ]
+          }
+        },
+        {
+          "pageid": 71212976,
+          "ns": 0,
+          "title": "Isa Ashiru Kudan",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Ashiru, Isa Kudan",
+            "wikibase-shortdesc": "Nigerian politician",
+            "wikibase_item": "Q113334421"
+          },
+          "terms": {
+            "description": [
+              "Nigerian politician"
+            ]
+          }
+        },
+        {
+          "pageid": 73060450,
+          "ns": 0,
+          "title": "Yoichi Ochiai",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Ochiai, Yoichi",
+            "page_image_free": "Yoichi_Ochiai_(Craft_x_Tech_Tohoku_Project_2024)_(cropped).jpg",
+            "wikibase-shortdesc": "Japanese academic, artist, and entrepreneur",
+            "wikibase_item": "Q16265041"
+          },
+          "terms": {
+            "description": [
+              "Japanese academic and media artist"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

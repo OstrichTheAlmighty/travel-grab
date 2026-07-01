@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:26.816Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 9488,
+          "ns": 0,
+          "title": "ミクロネシア連邦",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "みくろねしあれんほう",
+            "page_image_free": "Flag_of_the_Federated_States_of_Micronesia.svg",
+            "wikibase_item": "Q702"
+          },
+          "terms": {
+            "description": [
+              "太平洋の島国"
+            ]
+          }
+        },
+        {
+          "pageid": 79552,
+          "ns": 0,
+          "title": "チューク諸島",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちゆうくしよとう",
+            "page_image_free": "Chuuk_islands_(satellite).JPG",
+            "wikibase_item": "Q3593555"
+          },
+          "coordinates": [
+            {
+              "lat": 7.41666667,
+              "lon": 151.78333333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "ミクロネシアの環礁"
+            ]
+          }
+        },
+        {
+          "pageid": 92602,
+          "ns": 0,
+          "title": "カロリン諸島",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かろりん",
+            "page_image_free": "Caroline_Islands-map.gif",
+            "wikibase_item": "Q118350"
+          },
+          "terms": {
+            "description": [
+              "西太平洋、ミクロネシア南部にある諸島"
+            ]
+          }
+        },
+        {
+          "pageid": 756581,
+          "ns": 0,
+          "title": "ウェーク島の戦い",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "うええくとうのたたかい",
+            "page_image_free": "Aerial_view_of_Wake_Island_on_14_February_1942.jpg",
+            "wikibase_item": "Q1141380"
+          },
+          "terms": {
+            "description": [
+              "北太平洋における太平洋戦争の戦いの一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 1698097,
+          "ns": 0,
+          "title": "ジープ島",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しいふとう",
+            "page_image_free": "JEEP_island.jpg",
+            "wikibase_item": "Q11311056"
+          },
+          "coordinates": [
+            {
+              "lat": 7.30925,
+              "lon": 151.94130556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:49.985Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 4080358,
+          "ns": 0,
+          "title": "龍が如くシリーズの登場人物",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "りゆうかことくしりいすのとうしようしんふつ",
+            "wikibase_item": "Q5073844"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

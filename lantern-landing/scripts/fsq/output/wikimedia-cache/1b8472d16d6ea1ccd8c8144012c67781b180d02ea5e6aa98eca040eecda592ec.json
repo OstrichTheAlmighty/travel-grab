@@ -1,0 +1,61 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:38.363Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 23322,
+          "ns": 0,
+          "title": "天才バカボン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "てんさいはかほん",
+            "wikibase_item": "Q2551007"
+          },
+          "terms": {
+            "description": [
+              "赤塚不二夫による日本のギャグ漫画"
+            ]
+          }
+        },
+        {
+          "pageid": 3992305,
+          "ns": 0,
+          "title": "2020年のラジオ (日本)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "2020ねんのらしお",
+            "wikibase_item": "Q63977947"
+          }
+        },
+        {
+          "pageid": 4655701,
+          "ns": 0,
+          "title": "ライトノベルの漫画化作品一覧 (2020年代 前半)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "らいとのへるのまんかかさくひんいちらん2020ねんたいせんはん",
+            "wikibase_item": "Q113995074"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 5155503,
+          "ns": 0,
+          "title": "2026年のテレビドラマ (日本)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "2026ねんのてれひとらまいちらん",
+            "unexpectedUnconnectedPage": "0"
+          }
+        }
+      ]
+    }
+  }
+}

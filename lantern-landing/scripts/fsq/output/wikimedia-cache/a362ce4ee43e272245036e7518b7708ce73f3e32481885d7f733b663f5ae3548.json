@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:43.850Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 20031,
+          "ns": 0,
+          "title": "東京国立博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようこくりつはくふつかん",
+            "page_image_free": "Tokyo_National_Museum,_Honkan_2010.jpg",
+            "wikibase_item": "Q653433"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71905556,
+              "lon": 139.77666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある国立博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 244586,
+          "ns": 0,
+          "title": "谷口吉生",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たにくち よしお",
+            "page_image_free": "Yoshio_Taniguchi_cropped_2_Yoshio_Taniguchi_20211103.jpg",
+            "wikibase_item": "Q1396719"
+          },
+          "terms": {
+            "description": [
+              "日本の建築家 (1937-2024)"
+            ]
+          }
+        },
+        {
+          "pageid": 1745639,
+          "ns": 0,
+          "title": "法隆寺献納宝物",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ほうりゆうしけんのうほうもつ",
+            "page_image_free": "Illustrated_Biography_of_Prince_Shōtoku_1.jpg",
+            "wikibase_item": "Q11555388"
+          },
+          "terms": {
+            "description": [
+              "法隆寺に伝来し、明治時代に皇室に献納された文化財の総称。現在は東京国立博物館所蔵"
+            ]
+          }
+        },
+        {
+          "pageid": 2007615,
+          "ns": 0,
+          "title": "法隆寺",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほうりゆうし",
+            "page_image_free": "Horyu-ji45s2s4500.jpg",
+            "wikibase_item": "Q261932"
+          },
+          "coordinates": [
+            {
+              "lat": 34.61473889,
+              "lon": 135.73417222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "奈良県斑鳩町にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 3309148,
+          "ns": 0,
+          "title": "トラディショナル・サクセション・アーキテクチャ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とらてしよなるさくせしよんああきてくちや",
+            "wikibase_item": "Q22131557"
+          }
+        }
+      ]
+    }
+  }
+}

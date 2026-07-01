@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:39.339Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 26738,
+          "ns": 0,
+          "title": "ブリ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふり",
+            "page_image_free": "Seriola_quinqueradiata_(200810).jpg",
+            "wikibase_item": "Q1202973"
+          },
+          "terms": {
+            "description": [
+              "アジ目アジ科の海水魚"
+            ]
+          }
+        },
+        {
+          "pageid": 142785,
+          "ns": 0,
+          "title": "さかなクン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さかなくん",
+            "page_image_free": "Masayuki_Miyazawa_cropped_2_Masayuki_Miyazawa_20141024.jpg",
+            "wikibase_item": "Q11267605"
+          },
+          "terms": {
+            "description": [
+              "日本のタレント、イラストレーター、魚類学者"
+            ]
+          }
+        },
+        {
+          "pageid": 254145,
+          "ns": 0,
+          "title": "別役実",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "へつやく みのる",
+            "wikibase_item": "Q1937517"
+          },
+          "terms": {
+            "description": [
+              "日本の劇作家・童話作家・評論家・随筆家（1937−2020）"
+            ]
+          }
+        },
+        {
+          "pageid": 1351454,
+          "ns": 0,
+          "title": "チムニー (居酒屋)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちむにい",
+            "page_image_free": "Chimney-Group.jpg",
+            "wikibase_item": "Q11318025"
+          },
+          "terms": {
+            "description": [
+              "日本の居酒屋チェーンおよびその運営会社"
+            ]
+          }
+        },
+        {
+          "pageid": 2197835,
+          "ns": 0,
+          "title": "はちきんガールズ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はちきんかあるす",
+            "wikibase_item": "Q11275629"
+          },
+          "terms": {
+            "description": [
+              "日本・高知県のローカルアイドルグループ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

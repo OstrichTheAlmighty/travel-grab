@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:53.109Z",
+  "value": {
+    "searchinfo": {
+      "search": "千疋屋総本店"
+    },
+    "search": [
+      {
+        "id": "Q11251526",
+        "title": "Q11251526",
+        "pageid": 12397805,
+        "concepturi": "http://www.wikidata.org/entity/Q11251526",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11251526",
+        "display": {
+          "label": {
+            "value": "Sembikiya",
+            "language": "en"
+          },
+          "description": {
+            "value": "Japanese fruit shop",
+            "language": "en"
+          }
+        },
+        "label": "Sembikiya",
+        "description": "Japanese fruit shop",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "千疋屋総本店"
+        },
+        "aliases": [
+          "千疋屋総本店"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

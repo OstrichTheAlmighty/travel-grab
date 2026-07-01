@@ -1,0 +1,98 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:58.681Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2570,
+          "ns": 0,
+          "title": "本",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほん",
+            "page_image_free": "Otvorena_knjiga.JPG",
+            "wikibase_item": "Q571"
+          },
+          "terms": {
+            "description": [
+              "情報を文字や図画でまとめ、通常、インクで紙に印刷したもの"
+            ]
+          }
+        },
+        {
+          "pageid": 61057,
+          "ns": 0,
+          "title": "本庄市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ほんしようし",
+            "kartographer_frames": "1",
+            "page_image_free": "Floats_lined_up_at_the_Honjo_Festival,Honjo_city,Japan.jpg",
+            "wikibase_item": "Q873565"
+          },
+          "coordinates": [
+            {
+              "lat": 36.24358,
+              "lon": 139.19039,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 248920,
+          "ns": 0,
+          "title": "蜂須賀重喜",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はちすか しけよし",
+            "page_image_free": "Hachisuka_Shigeyoshi.jpg",
+            "wikibase_item": "Q3125468"
+          },
+          "terms": {
+            "description": [
+              "日本の侍 (1738-1801)"
+            ]
+          }
+        },
+        {
+          "pageid": 530350,
+          "ns": 0,
+          "title": "三条実行",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "さんしよう さねゆき",
+            "page_image_free": "藤原実行_着色.png",
+            "wikibase_item": "Q11355837"
+          },
+          "terms": {
+            "description": [
+              "平安時代後期の公卿。藤原公実の次男。従一位、太政大臣。三条家の始祖・初代。勅撰集『金葉和歌集』以下に14首入集。"
+            ]
+          }
+        },
+        {
+          "pageid": 724781,
+          "ns": 0,
+          "title": "類聚符宣抄",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "るいしゆうふせんしよう",
+            "wikibase_item": "Q11665188"
+          }
+        }
+      ]
+    }
+  }
+}

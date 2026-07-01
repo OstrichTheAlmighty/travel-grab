@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:04.205Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 123549,
+          "ns": 0,
+          "title": "新井満",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あらい まん",
+            "wikibase_item": "Q10772355"
+          },
+          "terms": {
+            "description": [
+              "作家、シンガーソングライター (1946–2021)"
+            ]
+          }
+        },
+        {
+          "pageid": 1108613,
+          "ns": 0,
+          "title": "大森北",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおもりきた",
+            "kartographer_frames": "1",
+            "page_image_free": "Omori_Station.jpg",
+            "wikibase_item": "Q11436326"
+          },
+          "terms": {
+            "description": [
+              "東京都大田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1213908,
+          "ns": 0,
+          "title": "大森 (大田区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおもり",
+            "kartographer_frames": "1",
+            "page_image_free": "JR_omori_station_west_entrance.JPG",
+            "wikibase_item": "Q6147936"
+          },
+          "coordinates": [
+            {
+              "lat": 35.57253,
+              "lon": 139.73381,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都大田区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 1778099,
+          "ns": 0,
+          "title": "大田区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-International-Airport_Satellite.jpg",
+            "wikibase_item": "Q217234"
+          },
+          "coordinates": [
+            {
+              "lat": 35.56128,
+              "lon": 139.71603,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 1870538,
+          "ns": 0,
+          "title": "日野市の用水路",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひのしのようすいろ",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q11634133"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66512778,
+              "lon": 139.385525,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日野市を流れる用水路網"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

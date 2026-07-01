@@ -1,0 +1,36 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:06.594Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 82919,
+          "ns": 0,
+          "title": "高梁市",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たかはしし",
+            "kartographer_frames": "1",
+            "page_image_free": "Bitchu_Matsuyama_Castle_2.JPG",
+            "wikibase_item": "Q851675"
+          },
+          "coordinates": [
+            {
+              "lat": 34.79103,
+              "lon": 133.61683,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "岡山県の市"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

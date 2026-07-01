@@ -1,0 +1,69 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:03.188Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 47804,
+          "ns": 0,
+          "title": "お台場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おたいは",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-Odaiba.jpg",
+            "wikibase_item": "Q211861"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63,
+              "lon": 139.775,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京臨海副都心のエリア"
+            ]
+          }
+        },
+        {
+          "pageid": 104368,
+          "ns": 0,
+          "title": "東京臨海副都心",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようりんかいふくとしん",
+            "page_image_free": "Tokyo_waterfront_subcenter_from_aerial_shots.jpg",
+            "wikibase_item": "Q5354225"
+          },
+          "terms": {
+            "description": [
+              "東京都が策定した7番目の副都心で複数の特別区に跨がる442haのエリア"
+            ]
+          }
+        },
+        {
+          "pageid": 1054629,
+          "ns": 0,
+          "title": "青海 (江東区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あおみ",
+            "kartographer_frames": "1",
+            "page_image_free": "Zepp_DiverCity.JPG",
+            "wikibase_item": "Q4778662"
+          },
+          "terms": {
+            "description": [
+              "東京都江東区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

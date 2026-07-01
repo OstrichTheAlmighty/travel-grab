@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:15.510Z",
+  "value": {
+    "searchinfo": {
+      "search": "旧新橋停車場 鉄道歴史展示室"
+    },
+    "search": [
+      {
+        "id": "Q104698226",
+        "title": "Q104698226",
+        "pageid": 100126184,
+        "concepturi": "http://www.wikidata.org/entity/Q104698226",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q104698226",
+        "display": {
+          "label": {
+            "value": "Old Shimbashi Station Railway History Exhibition Hall",
+            "language": "en"
+          }
+        },
+        "label": "Old Shimbashi Station Railway History Exhibition Hall",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "旧新橋停車場 鉄道歴史展示室"
+        },
+        "aliases": [
+          "旧新橋停車場 鉄道歴史展示室"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

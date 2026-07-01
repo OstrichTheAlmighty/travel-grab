@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:06.819Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 216751,
+          "ns": 0,
+          "title": "ラプンツェル",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "らふんつえる",
+            "page_image_free": "Johnny_Gruelle_illustration_-_Rapunzel_-_Project_Gutenberg_etext_11027.jpg",
+            "wikibase_item": "Q273585"
+          },
+          "terms": {
+            "description": [
+              "グリム童話収録の作品のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 443604,
+          "ns": 0,
+          "title": "ディズニーキャラクターの一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ていすにいきやらくたあのいちらん",
+            "notoc": "",
+            "wikibase_item": "Q2302731"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2160401,
+          "ns": 0,
+          "title": "塔の上のラプンツェル",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうのうえのらふんつえる",
+            "page_image_free": "Tangled_gold_logo.svg",
+            "wikibase_item": "Q188439"
+          },
+          "terms": {
+            "description": [
+              "2010年のアメリカのアニメーション映画"
+            ]
+          }
+        },
+        {
+          "pageid": 3600024,
+          "ns": 0,
+          "title": "ラプンツェル あたらしい冒険",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "らふんつえるあたらしいほうけん",
+            "wikibase_item": "Q28804247"
+          },
+          "terms": {
+            "description": [
+              "アメリカのアニメ作品"
+            ]
+          }
+        },
+        {
+          "pageid": 3663110,
+          "ns": 0,
+          "title": "ラプンツェル ザ・シリーズ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "らふんつえるさしりいす",
+            "wikibase_item": "Q23680095"
+          },
+          "terms": {
+            "description": [
+              "アメリカのアニメ作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:17.064Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 317837,
+          "ns": 0,
+          "title": "村野武範",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "むらの たけのり",
+            "wikibase_item": "Q11523562"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優"
+            ]
+          }
+        },
+        {
+          "pageid": 4399699,
+          "ns": 0,
+          "title": "孤独のグルメ (テレビドラマ)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ことくのくるめ",
+            "wikibase_item": "Q107409856"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ番組シリーズ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

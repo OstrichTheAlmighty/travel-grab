@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:49.892Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1021600,
+          "ns": 0,
+          "title": "慰安婦",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いあんふ",
+            "wikibase_item": "Q10895016"
+          },
+          "terms": {
+            "description": [
+              "将兵の性の相手をした公娼"
+            ]
+          }
+        },
+        {
+          "pageid": 1113320,
+          "ns": 0,
+          "title": "女たちの戦争と平和資料館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おんなたちのせんそうとへいわしりようかん",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q11446206"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70805556,
+              "lon": 139.71666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "NPO法人が開設した新宿区西早稲田にある民間施設"
+            ]
+          }
+        },
+        {
+          "pageid": 2806399,
+          "ns": 0,
+          "title": "日本の慰安婦",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんのいあんふ",
+            "page_image_free": "Comfort_women.png",
+            "wikibase_item": "Q713540"
+          },
+          "terms": {
+            "description": [
+              "第二次世界大戦終結までに、主に日本軍人を相手に、性的労働をさせられた女性"
+            ]
+          }
+        },
+        {
+          "pageid": 3003697,
+          "ns": 0,
+          "title": "日韓市民でつくる日韓会談文書全面公開を求める会",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "につかんしみんてつくるにつかんかいたんふんしよせんめんこうかいをもとめるかい",
+            "wikibase_item": "Q17212013"
+          }
+        },
+        {
+          "pageid": 3818669,
+          "ns": 0,
+          "title": "日本の慰安婦問題",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にほんのいあんふもんたい",
+            "wikibase_item": "Q56347091"
+          },
+          "terms": {
+            "description": [
+              "旧日本軍の慰安婦に対する日本の国家責任に関する問題"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

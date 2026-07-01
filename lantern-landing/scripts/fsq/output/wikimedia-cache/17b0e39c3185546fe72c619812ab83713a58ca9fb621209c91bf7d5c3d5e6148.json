@@ -1,0 +1,89 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:42.665Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 375845,
+          "ns": 0,
+          "title": "List of most popular given names",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Given Names, Most Popular",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q6629080"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 862618,
+          "ns": 0,
+          "title": "Baby shower",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Diaper_cake_at_Siobhan's_baby_shower.jpg",
+            "wikibase-shortdesc": "Prenatal celebration",
+            "wikibase_item": "Q788043"
+          },
+          "terms": {
+            "description": [
+              "prenatal celebration"
+            ]
+          }
+        },
+        {
+          "pageid": 7270858,
+          "ns": 0,
+          "title": "BabyCenter",
+          "index": 2,
+          "pageprops": {
+            "wikibase-shortdesc": "Parenting website and mobile app",
+            "wikibase_item": "Q4838174"
+          },
+          "terms": {
+            "description": [
+              "parenting website"
+            ]
+          }
+        },
+        {
+          "pageid": 14604221,
+          "ns": 0,
+          "title": "Push present",
+          "index": 4,
+          "pageprops": {
+            "wikibase-shortdesc": "Gift to mark the occasion of giving birth to a child",
+            "wikibase_item": "Q7261764"
+          }
+        },
+        {
+          "pageid": 39095828,
+          "ns": 0,
+          "title": "Tina Sharkey",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Sharkey, Tina",
+            "page_image_free": "Tina_sharkey_(15548349201).jpg",
+            "wikibase-shortdesc": "American entrepreneur, advisor, and investor",
+            "wikibase_item": "Q16195800"
+          },
+          "terms": {
+            "description": [
+              "American entrepreneur, investor and advisor"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

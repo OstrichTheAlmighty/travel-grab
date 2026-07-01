@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:28.769Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 16058,
+          "ns": 0,
+          "title": "金沢市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かなさわし",
+            "kartographer_frames": "1",
+            "page_image_free": "2024-10-26_Kanazawa_Castle,_Ishikawa-mon.jpg",
+            "wikibase_item": "Q191130"
+          },
+          "coordinates": [
+            {
+              "lat": 36.56106,
+              "lon": 136.6565,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "石川県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 32935,
+          "ns": 0,
+          "title": "髙島屋",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たかしまや",
+            "page_image_free": "Namba_Station.JPG",
+            "wikibase_item": "Q2058024"
+          },
+          "terms": {
+            "description": [
+              "日本の百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 78100,
+          "ns": 0,
+          "title": "荘内銀行",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しようないきんこう",
+            "page_image_free": "The_Shonai_Bank,_Ltd.1.jpg",
+            "wikibase_item": "Q7500357"
+          },
+          "terms": {
+            "description": [
+              "山形県鶴岡市にある地方銀行"
+            ]
+          }
+        },
+        {
+          "pageid": 84103,
+          "ns": 0,
+          "title": "企業博物館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ききようはくふつかん",
+            "page_image_free": "TOYOTA_AUTOMOBILE_MUSEUM.JPG",
+            "toc": "",
+            "wikibase_item": "Q3867745"
+          },
+          "terms": {
+            "description": [
+              "博物館の一形態"
+            ]
+          }
+        },
+        {
+          "pageid": 121252,
+          "ns": 0,
+          "title": "東証Arrows",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうしようあろす",
+            "page_image_free": "The_Tokyo_Stock_Exchange_-_main_room_3.jpg",
+            "wikibase_item": "Q11528332"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68245,
+              "lon": 139.77909444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京証券取引所内にある情報提供スペース"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

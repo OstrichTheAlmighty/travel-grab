@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:26.738Z",
+  "value": {
+    "searchinfo": {
+      "search": "旧内田家住宅"
+    },
+    "search": [
+      {
+        "id": "Q60985249",
+        "title": "Q60985249",
+        "pageid": 60838708,
+        "concepturi": "http://www.wikidata.org/entity/Q60985249",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q60985249",
+        "display": {
+          "label": {
+            "value": "Home of a Diplomat",
+            "language": "en"
+          },
+          "description": {
+            "value": "Western-style building built as the residence of Sadatsuchi Uchida. Important cultural property of Japan",
+            "language": "en"
+          }
+        },
+        "label": "Home of a Diplomat",
+        "description": "Western-style building built as the residence of Sadatsuchi Uchida. Important cultural property of Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "旧内田家住宅"
+        },
+        "aliases": [
+          "旧内田家住宅"
+        ]
+      },
+      {
+        "id": "Q63092005",
+        "title": "Q63092005",
+        "pageid": 62863663,
+        "concepturi": "http://www.wikidata.org/entity/Q63092005",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q63092005",
+        "display": {
+          "label": {
+            "value": "Uchida Sashichi's House",
+            "language": "en"
+          },
+          "description": {
+            "value": "old house in Minamichita, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Uchida Sashichi's House",
+        "description": "old house in Minamichita, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "旧内田家住宅"
+        },
+        "aliases": [
+          "旧内田家住宅"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:05.764Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3708,
+          "ns": 0,
+          "title": "Brussels",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Grand_Place_Bruselas_2.jpg",
+            "wikibase-shortdesc": "Federal region of Belgium including the capital",
+            "wikibase_item": "Q240"
+          },
+          "coordinates": [
+            {
+              "lat": 50.84666667,
+              "lon": 4.3525,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "city and region of Belgium"
+            ]
+          }
+        },
+        {
+          "pageid": 86947,
+          "ns": 0,
+          "title": "Grand-Place",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Grand-Place,_Brussels_-_panorama,_June_2018.jpg",
+            "wikibase-shortdesc": "Square and UNESCO World Heritage Site in Brussels, Belgium",
+            "wikibase_item": "Q215429"
+          },
+          "coordinates": [
+            {
+              "lat": 50.84666667,
+              "lon": 4.3525,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "main square in Brussels, Belgium"
+            ]
+          }
+        },
+        {
+          "pageid": 39352523,
+          "ns": 0,
+          "title": "La Sape",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Sape, La",
+            "page_image_free": "Flickr_-_enric_bach_-_Entrevista_a_Mangrokoto_Bayaya.jpg",
+            "wikibase-shortdesc": "Sartorial subculture centered on the Congolese cities of Kinshasa and Brazzaville",
+            "wikibase_item": "Q3488076"
+          },
+          "terms": {
+            "description": [
+              "Congolese cultural movement"
+            ]
+          }
+        },
+        {
+          "pageid": 43570277,
+          "ns": 0,
+          "title": "Tour & Taxis",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Tour and Taxis",
+            "page_image_free": "Bruxelles_Tour_et_Taxis1.psd.jpg",
+            "wikibase-shortdesc": "Former industrial site, now mixed-use neighbourhood in Brussels, Belgium",
+            "wikibase_item": "Q2320851"
+          },
+          "coordinates": [
+            {
+              "lat": 50.86416667,
+              "lon": 4.34861111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "former railway station, now mixed-use neighbourhood, in Brussels, Belgium"
+            ]
+          }
+        },
+        {
+          "pageid": 68717951,
+          "ns": 0,
+          "title": "List of Art Deco architecture in Europe",
+          "index": 2,
+          "pageprops": {
+            "toc": "",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q108730686"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

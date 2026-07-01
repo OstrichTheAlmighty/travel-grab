@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:46.970Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 36332,
+          "ns": 0,
+          "title": "駒沢大学駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こまさわたいかくえき",
+            "kartographer_frames": "1",
+            "page_image_free": "Komazawa-daigaku_Station.jpg",
+            "wikibase_item": "Q6428224"
+          },
+          "coordinates": [
+            {
+              "lat": 35.63344444,
+              "lon": 139.66169444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区上馬にある東急電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 57465,
+          "ns": 0,
+          "title": "駒澤大学",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こまさわたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Komazawa_main.JPG",
+            "wikibase_item": "Q910518"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62888889,
+              "lon": 139.65808333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都世田谷区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 275681,
+          "ns": 0,
+          "title": "花園大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はなその",
+            "page_image_free": "Hanazono_University_Saisho-kan.JPG",
+            "wikibase_item": "Q5646966"
+          },
+          "coordinates": [
+            {
+              "lat": 35.01644444,
+              "lon": 135.72658333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市中京区に本部を置く私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 309360,
+          "ns": 0,
+          "title": "正法眼蔵",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しようほうけんそう",
+            "page_image_free": "NDL1018721_正法眼蔵_part2.pdf",
+            "wikibase_item": "Q1637816"
+          },
+          "terms": {
+            "description": [
+              "道元が執筆した仏教思想書"
+            ]
+          }
+        },
+        {
+          "pageid": 452178,
+          "ns": 0,
+          "title": "駒澤大学の人物一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こまさわ",
+            "wikibase_item": "Q11668418"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

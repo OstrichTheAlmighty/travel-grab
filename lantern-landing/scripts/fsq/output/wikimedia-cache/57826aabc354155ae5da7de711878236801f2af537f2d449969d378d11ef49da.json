@@ -1,0 +1,78 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:29.125Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 329945,
+          "ns": 0,
+          "title": "List of people from Illinois",
+          "index": 3,
+          "pageprops": {
+            "notoc": "",
+            "page_image_free": "Flag_of_Illinois.svg",
+            "wikibase-shortdesc": "List of notable people from Illinois",
+            "wikibase_item": "Q6272933"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 21756999,
+          "ns": 0,
+          "title": "Ernie Shelton",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Shelton, Ernie",
+            "page_image_free": "Ernie_Shelton_Army.jpg",
+            "wikibase-shortdesc": "American high jumper (born 1932)",
+            "wikibase_item": "Q5394723"
+          },
+          "terms": {
+            "description": [
+              "American high jumper"
+            ]
+          }
+        },
+        {
+          "pageid": 42547783,
+          "ns": 0,
+          "title": "May 1966",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Ap10-KSC-69PC-110.jpg",
+            "wikibase-shortdesc": "Month of 1966",
+            "wikibase_item": "Q13072275"
+          },
+          "terms": {
+            "description": [
+              "month of 1966"
+            ]
+          }
+        },
+        {
+          "pageid": 61921049,
+          "ns": 0,
+          "title": "List of Xbox 360 games (A–L)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "List of Xbox 360 games (A-L)",
+            "notoc": "",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q85778955"
+          },
+          "terms": {
+            "description": [
+              "wikimedia list article"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

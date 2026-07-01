@@ -1,0 +1,125 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:38.349Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 10742,
+          "ns": 0,
+          "title": "板橋区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いたはしく",
+            "kartographer_frames": "1",
+            "page_image_free": "Itabashi-at-nakajuku.JPG",
+            "wikibase_item": "Q232635"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75119,
+              "lon": 139.70928,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 256365,
+          "ns": 0,
+          "title": "高島平",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たかしまたいら",
+            "kartographer_frames": "1",
+            "page_image_free": "Takashimadairastation.jpg",
+            "wikibase_item": "Q11669638"
+          },
+          "terms": {
+            "description": [
+              "東京都板橋区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1410490,
+          "ns": 0,
+          "title": "東京都立赤塚公園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あかつかこうえん",
+            "page_image_free": "Akatsuka_Park,pedestrian_bridge.jpg",
+            "wikibase_item": "Q6629664"
+          },
+          "coordinates": [
+            {
+              "lat": 35.78491667,
+              "lon": 139.6565,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1590529,
+          "ns": 0,
+          "title": "板橋区立グリーンホール",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いたはしくりつくりんほる",
+            "kartographer_frames": "1",
+            "page_image_free": "Itabashi_Green_Hall.JPG",
+            "wikibase_item": "Q11532642"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75091667,
+              "lon": 139.70519444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 4521831,
+          "ns": 0,
+          "title": "板橋区立郷土資料館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いたはしくりつきようとしりようかん",
+            "page_image_free": "Itabashi_Historical_Museum_2025-04-29.jpg",
+            "wikibase_item": "Q104696866"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7855,
+              "lon": 139.64322222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都板橋区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:16.673Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 16368,
+          "ns": 0,
+          "title": "毛沢東",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "もう たくとう",
+            "page_image_free": "Mao_Tse_Tung_(cropped)(2).jpg",
+            "wikibase_item": "Q5816"
+          },
+          "terms": {
+            "description": [
+              "中国の政治家、思想家、中国共産党初代主席、中華人民共和国初代指導者 (1893-1976)"
+            ]
+          }
+        },
+        {
+          "pageid": 18708,
+          "ns": 0,
+          "title": "日中国交正常化",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "につちゆうこつこうせいしようか",
+            "page_image_free": "Joint_Communique_of_Japan_and_China.jpg",
+            "wikibase_item": "Q11504787"
+          },
+          "terms": {
+            "description": [
+              "1972年に日本国と中華人民共和国が国交を結んだこと"
+            ]
+          }
+        },
+        {
+          "pageid": 32083,
+          "ns": 0,
+          "title": "周恩来",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しゆう おんらい",
+            "page_image_free": "Zhou_Enlai_1972.jpg",
+            "wikibase_item": "Q17410"
+          },
+          "terms": {
+            "description": [
+              "中華人民共和国の初代国務院総理 (1898–1976)"
+            ]
+          }
+        },
+        {
+          "pageid": 267767,
+          "ns": 0,
+          "title": "朱徳",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しゆ とく",
+            "page_image_free": "Zhu_De.jpg",
+            "wikibase_item": "Q22513"
+          },
+          "terms": {
+            "description": [
+              "中華人民共和国の政治家、軍人，中華人民共和国元帥 (1886-1976)"
+            ]
+          }
+        },
+        {
+          "pageid": 1935348,
+          "ns": 0,
+          "title": "孫維世",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "そん いせい",
+            "page_image_free": "Sun_Weiseh.jpg",
+            "wikibase_item": "Q2582403"
+          },
+          "terms": {
+            "description": [
+              "中国の女優、周恩来の養女"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

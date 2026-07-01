@@ -1,0 +1,4155 @@
+{
+  "generatedAt": "2026-06-29T05:31:47.366Z",
+  "tierATotal": 3200,
+  "tierBTotal": 10083,
+  "categoryDistribution": {
+    "culture": 681,
+    "nature": 689,
+    "adventure": 448,
+    "food": 640,
+    "nightlife": 352,
+    "luxury": 256,
+    "free": 134
+  },
+  "geographyDistribution": {
+    "tokyo_core_23_wards": 3007,
+    "broader_tokyo": 84,
+    "yokohama_or_outside_tokyo": 64,
+    "unknown": 45
+  },
+  "categoryQuotas": {
+    "culture": {
+      "quota": 672,
+      "candidateCount": 1063,
+      "selectedCount": 681,
+      "rejectionCount": 382
+    },
+    "nature": {
+      "quota": 687,
+      "candidateCount": 4264,
+      "selectedCount": 689,
+      "rejectionCount": 3575
+    },
+    "adventure": {
+      "quota": 448,
+      "candidateCount": 658,
+      "selectedCount": 448,
+      "rejectionCount": 210
+    },
+    "food": {
+      "quota": 640,
+      "candidateCount": 3517,
+      "selectedCount": 640,
+      "rejectionCount": 2877
+    },
+    "nightlife": {
+      "quota": 352,
+      "candidateCount": 2315,
+      "selectedCount": 352,
+      "rejectionCount": 1963
+    },
+    "luxury": {
+      "quota": 256,
+      "candidateCount": 1321,
+      "selectedCount": 256,
+      "rejectionCount": 1065
+    },
+    "free": {
+      "quota": 145,
+      "candidateCount": 145,
+      "selectedCount": 134,
+      "rejectionCount": 11
+    }
+  },
+  "majorAttractions": [
+    {
+      "name": "Sensō-ji",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b0587a1f964a5207f9d22e3",
+      "fsqName": "浅草寺 (Sensō-ji Temple)",
+      "fsqCategory": "Community and Government > Spiritual Center > Buddhist Temple Landmarks and Outdoors > Historic and Protected Site",
+      "distanceFromGoogleM": 6.911407647876415,
+      "googleBenchmarkName": "Sensō-ji",
+      "curated": true,
+      "originalPreCurationScore": 99,
+      "finalProductionScore": 124,
+      "benchmarkBonusAppliedToProduction": false,
+      "productionBenchmarkBonusAmount": 0,
+      "removedLegacyBenchmarkBonusAmount": 140,
+      "rankBeforeBonus": 741,
+      "rankAfterHypotheticalLegacyBonus": 7
+    },
+    {
+      "name": "Meiji Jingū",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b5bd0a2f964a520c31729e3",
+      "fsqName": "明治神宮 (Meiji Jingu Shrine)",
+      "fsqCategory": "Community and Government > Spiritual Center > Shrine Landmarks and Outdoors > Historic and Protected Site",
+      "distanceFromGoogleM": 6.170553312133662,
+      "googleBenchmarkName": "Meiji Jingū",
+      "curated": true,
+      "originalPreCurationScore": 99,
+      "finalProductionScore": 124,
+      "benchmarkBonusAppliedToProduction": false,
+      "productionBenchmarkBonusAmount": 0,
+      "removedLegacyBenchmarkBonusAmount": 140,
+      "rankBeforeBonus": 746,
+      "rankAfterHypotheticalLegacyBonus": 8
+    },
+    {
+      "name": "Tokyo Skytree",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b569977f964a520551628e3",
+      "fsqName": "東京スカイツリー (Tokyo Skytree)",
+      "fsqCategory": "Landmarks and Outdoors > Monument Landmarks and Outdoors > Scenic Lookout",
+      "distanceFromGoogleM": 5.194042613173035,
+      "googleBenchmarkName": "Tokyo Skytree",
+      "curated": true,
+      "originalPreCurationScore": 96,
+      "finalProductionScore": 113,
+      "benchmarkBonusAppliedToProduction": false,
+      "productionBenchmarkBonusAmount": 0,
+      "removedLegacyBenchmarkBonusAmount": 140,
+      "rankBeforeBonus": 1092,
+      "rankAfterHypotheticalLegacyBonus": 10
+    },
+    {
+      "name": "Tokyo Tower",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b56a5e8f964a5208e1728e3",
+      "fsqName": "東京タワー (Tokyo Tower)",
+      "fsqCategory": "Landmarks and Outdoors > Monument Landmarks and Outdoors > Scenic Lookout",
+      "distanceFromGoogleM": 4.480257065113622,
+      "googleBenchmarkName": "Tokyo Tower",
+      "curated": true,
+      "originalPreCurationScore": 96,
+      "finalProductionScore": 113,
+      "benchmarkBonusAppliedToProduction": false,
+      "productionBenchmarkBonusAmount": 0,
+      "removedLegacyBenchmarkBonusAmount": 140,
+      "rankBeforeBonus": 1093,
+      "rankAfterHypotheticalLegacyBonus": 11
+    },
+    {
+      "name": "Shibuya Crossing",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b654f7df964a520beec2ae3",
+      "fsqName": "渋谷駅前スクランブル交差点 (Shibuya Crossing)",
+      "fsqCategory": "Travel and Transportation > Road > Intersection",
+      "distanceFromGoogleM": 11.184462863622148,
+      "googleBenchmarkName": "Shibuya Crossing",
+      "curated": true,
+      "originalPreCurationScore": 74,
+      "finalProductionScore": 91,
+      "benchmarkBonusAppliedToProduction": false,
+      "productionBenchmarkBonusAmount": 0,
+      "removedLegacyBenchmarkBonusAmount": 140,
+      "rankBeforeBonus": 1866,
+      "rankAfterHypotheticalLegacyBonus": 15
+    },
+    {
+      "name": "Imperial Palace",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b566b84f964a5209e0f28e3",
+      "fsqName": "皇居 (Imperial Palace)",
+      "fsqCategory": "Landmarks and Outdoors > Palace Landmarks and Outdoors > Historic and Protected Site",
+      "distanceFromGoogleM": 306.8108808864456,
+      "googleBenchmarkName": "Imperial Palace",
+      "curated": true,
+      "originalPreCurationScore": 96,
+      "finalProductionScore": 115,
+      "benchmarkBonusAppliedToProduction": false,
+      "productionBenchmarkBonusAmount": 0,
+      "removedLegacyBenchmarkBonusAmount": 140,
+      "rankBeforeBonus": 968,
+      "rankAfterHypotheticalLegacyBonus": 9
+    },
+    {
+      "name": "Ueno Park",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b0587a1f964a5209b9d22e3",
+      "fsqName": "上野恩賜公園 (Ueno Park)",
+      "fsqCategory": "Landmarks and Outdoors > Park",
+      "distanceFromGoogleM": 84.56824096149187,
+      "googleBenchmarkName": "Ueno Park",
+      "curated": true,
+      "originalPreCurationScore": 94,
+      "finalProductionScore": 107,
+      "benchmarkBonusAppliedToProduction": false,
+      "productionBenchmarkBonusAmount": 0,
+      "removedLegacyBenchmarkBonusAmount": 140,
+      "rankBeforeBonus": 1330,
+      "rankAfterHypotheticalLegacyBonus": 12
+    },
+    {
+      "name": "Tokyo National Museum",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b556c7ef964a520f5e327e3",
+      "fsqName": "東京国立博物館 (Tokyo National Museum)",
+      "fsqCategory": "Arts and Entertainment > Museum > History Museum Arts and Entertainment > Museum",
+      "distanceFromGoogleM": 16.730753653857487,
+      "googleBenchmarkName": "Tokyo National Museum",
+      "curated": true,
+      "originalPreCurationScore": 99,
+      "finalProductionScore": 136,
+      "benchmarkBonusAppliedToProduction": false,
+      "productionBenchmarkBonusAmount": 0,
+      "removedLegacyBenchmarkBonusAmount": 140,
+      "rankBeforeBonus": 205,
+      "rankAfterHypotheticalLegacyBonus": 3
+    },
+    {
+      "name": "teamLab Planets",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "5b3306103731ee002c2b3e78",
+      "fsqName": "チームラボプラネッツ (teamLab Planets)",
+      "fsqCategory": "Arts and Entertainment > Museum > Art Museum Arts and Entertainment > Amusement Park",
+      "distanceFromGoogleM": 580.8925534328324,
+      "googleBenchmarkName": "teamLab Planets",
+      "curated": true,
+      "originalPreCurationScore": 99,
+      "finalProductionScore": 174,
+      "benchmarkBonusAppliedToProduction": false,
+      "productionBenchmarkBonusAmount": 0,
+      "removedLegacyBenchmarkBonusAmount": 140,
+      "rankBeforeBonus": 2,
+      "rankAfterHypotheticalLegacyBonus": 1
+    },
+    {
+      "name": "Tsukiji Outer Market",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b57cb7cf964a5208b4128e3",
+      "fsqName": "築地場外市場",
+      "fsqCategory": "Retail > Market Retail > Food and Beverage Retail > Fish Market",
+      "distanceFromGoogleM": 77.15715773052501,
+      "googleBenchmarkName": "Tsukiji Outer Market",
+      "curated": true,
+      "originalPreCurationScore": 80,
+      "finalProductionScore": 103,
+      "benchmarkBonusAppliedToProduction": false,
+      "productionBenchmarkBonusAmount": 0,
+      "removedLegacyBenchmarkBonusAmount": 140,
+      "rankBeforeBonus": 1523,
+      "rankAfterHypotheticalLegacyBonus": 14
+    },
+    {
+      "name": "Shinjuku Gyoen",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b5ff761f964a520f1d129e3",
+      "fsqName": "新宿御苑 (Shinjuku Gyoen)",
+      "fsqCategory": "Landmarks and Outdoors > Garden",
+      "distanceFromGoogleM": 63.520531766304956,
+      "googleBenchmarkName": "Shinjuku Gyoen",
+      "curated": true,
+      "originalPreCurationScore": 94,
+      "finalProductionScore": 107,
+      "benchmarkBonusAppliedToProduction": false,
+      "productionBenchmarkBonusAmount": 0,
+      "removedLegacyBenchmarkBonusAmount": 140,
+      "rankBeforeBonus": 1367,
+      "rankAfterHypotheticalLegacyBonus": 13
+    },
+    {
+      "name": "Akihabara",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b5a80a4f964a52078c828e3",
+      "fsqName": "秋葉原 (Akihabara)",
+      "fsqCategory": "Landmarks and Outdoors > States and Municipalities > Neighborhood",
+      "distanceFromGoogleM": 92.92752548986756,
+      "googleBenchmarkName": "Akihabara",
+      "curated": true,
+      "originalPreCurationScore": 99,
+      "finalProductionScore": 142,
+      "benchmarkBonusAppliedToProduction": false,
+      "productionBenchmarkBonusAmount": 0,
+      "removedLegacyBenchmarkBonusAmount": 140,
+      "rankBeforeBonus": 45,
+      "rankAfterHypotheticalLegacyBonus": 2
+    },
+    {
+      "name": "Harajuku",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4e5f5340b0fb27e2bd450341",
+      "fsqName": "原宿 (Harajuku)",
+      "fsqCategory": "Landmarks and Outdoors > States and Municipalities > Neighborhood",
+      "distanceFromGoogleM": 87.81626448513681,
+      "googleBenchmarkName": "Harajuku",
+      "curated": true,
+      "originalPreCurationScore": 95,
+      "finalProductionScore": 135,
+      "benchmarkBonusAppliedToProduction": false,
+      "productionBenchmarkBonusAmount": 0,
+      "removedLegacyBenchmarkBonusAmount": 140,
+      "rankBeforeBonus": 406,
+      "rankAfterHypotheticalLegacyBonus": 4
+    },
+    {
+      "name": "Odaiba",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4f9df5d1e4b033dc2c12dd47",
+      "fsqName": "お台場 (Odaiba)",
+      "fsqCategory": "Landmarks and Outdoors > States and Municipalities > Neighborhood",
+      "distanceFromGoogleM": 27.211711379583548,
+      "googleBenchmarkName": "Odaiba",
+      "curated": true,
+      "originalPreCurationScore": 95,
+      "finalProductionScore": 135,
+      "benchmarkBonusAppliedToProduction": false,
+      "productionBenchmarkBonusAmount": 0,
+      "removedLegacyBenchmarkBonusAmount": 140,
+      "rankBeforeBonus": 408,
+      "rankAfterHypotheticalLegacyBonus": 5
+    },
+    {
+      "name": "Ghibli Museum",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b56ac4ff964a5202e1828e3",
+      "fsqName": "三鷹の森ジブリ美術館 (Ghibli Museum)",
+      "fsqCategory": "Arts and Entertainment > Museum > Art Museum",
+      "distanceFromGoogleM": 22.126157511303763,
+      "googleBenchmarkName": "Ghibli Museum",
+      "curated": true,
+      "originalPreCurationScore": 99,
+      "finalProductionScore": 130,
+      "benchmarkBonusAppliedToProduction": false,
+      "productionBenchmarkBonusAmount": 0,
+      "removedLegacyBenchmarkBonusAmount": 140,
+      "rankBeforeBonus": 437,
+      "rankAfterHypotheticalLegacyBonus": 6
+    },
+    {
+      "name": "Tokyo Disneyland",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4b59ebdaf964a52002a128e3",
+      "fsqName": "東京ディズニーランド (Tokyo Disneyland)",
+      "fsqCategory": "Arts and Entertainment > Amusement Park",
+      "distanceFromGoogleM": 2.577966804278949,
+      "googleBenchmarkName": "Tokyo Disneyland",
+      "curated": true,
+      "originalPreCurationScore": 83,
+      "finalProductionScore": 53,
+      "benchmarkBonusAppliedToProduction": false,
+      "productionBenchmarkBonusAmount": 0,
+      "removedLegacyBenchmarkBonusAmount": 140,
+      "rankBeforeBonus": 3199,
+      "rankAfterHypotheticalLegacyBonus": 16
+    },
+    {
+      "name": "Tokyo DisneySea",
+      "rawStatus": "present",
+      "retained": true,
+      "fsqPlaceId": "4c2bf7fe8abca593441c0120",
+      "fsqName": "東京ディズニーシー (Tokyo DisneySea)",
+      "fsqCategory": "Arts and Entertainment > Amusement Park",
+      "distanceFromGoogleM": 151.4139831910498,
+      "googleBenchmarkName": "Tokyo DisneySea",
+      "curated": true,
+      "originalPreCurationScore": 83,
+      "finalProductionScore": 53,
+      "benchmarkBonusAppliedToProduction": false,
+      "productionBenchmarkBonusAmount": 0,
+      "removedLegacyBenchmarkBonusAmount": 140,
+      "rankBeforeBonus": 3200,
+      "rankAfterHypotheticalLegacyBonus": 17
+    }
+  ],
+  "top50Overall": [
+    {
+      "rank": 1,
+      "fsqPlaceId": "4b80a4c6f964a520218330e3",
+      "name": "都電おもいで広場",
+      "category": "culture",
+      "geography": "tokyo_core_23_wards",
+      "score": 184,
+      "reasons": [
+        "strong_travel_category",
+        "cultural_significance",
+        "district_destination",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 2,
+      "fsqPlaceId": "5b3306103731ee002c2b3e78",
+      "name": "チームラボプラネッツ (teamLab Planets)",
+      "category": "culture",
+      "geography": "tokyo_core_23_wards",
+      "score": 174,
+      "reasons": [
+        "major_attraction",
+        "strong_travel_category",
+        "cultural_significance",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3,
+      "fsqPlaceId": "4f7fb9e3121d4ea728735977",
+      "name": "春花園BONSAI美術館",
+      "category": "culture",
+      "geography": "tokyo_core_23_wards",
+      "score": 156,
+      "reasons": [
+        "strong_travel_category",
+        "cultural_significance",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 4,
+      "fsqPlaceId": "5210636111d2ce6e671be072",
+      "name": "樫尾俊雄発明記念館 / 成城四丁目 発明の杜",
+      "category": "culture",
+      "geography": "tokyo_core_23_wards",
+      "score": 156,
+      "reasons": [
+        "strong_travel_category",
+        "cultural_significance",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 5,
+      "fsqPlaceId": "6271e9c477ad8c2b7a76b984",
+      "name": "アートアクアリウム美術館 GINZA",
+      "category": "culture",
+      "geography": "tokyo_core_23_wards",
+      "score": 154,
+      "reasons": [
+        "strong_travel_category",
+        "cultural_significance",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 6,
+      "fsqPlaceId": "da05df6c67694c98c10993ad",
+      "name": "Tsukiji Fish Market",
+      "category": "food",
+      "geography": "broader_tokyo",
+      "score": 153,
+      "reasons": [
+        "strong_travel_category",
+        "cultural_significance",
+        "district_destination",
+        "distinctive_food",
+        "official_website",
+        "high_category_specificity",
+        "broader_Tokyo"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 7,
+      "fsqPlaceId": "4bde825dffdec92874e3e8a1",
+      "name": "九品仏広場",
+      "category": "free",
+      "geography": "tokyo_core_23_wards",
+      "score": 152,
+      "reasons": [
+        "strong_travel_category",
+        "district_destination",
+        "free_attraction",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 8,
+      "fsqPlaceId": "50790c96e4b0bf54e138f834",
+      "name": "ふれあい動物広場",
+      "category": "free",
+      "geography": "tokyo_core_23_wards",
+      "score": 150,
+      "reasons": [
+        "strong_travel_category",
+        "district_destination",
+        "free_attraction",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 9,
+      "fsqPlaceId": "50aea3d9e4b034c5d70d4a8a",
+      "name": "野外展示場",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 150,
+      "reasons": [
+        "strong_travel_category",
+        "cultural_significance",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 10,
+      "fsqPlaceId": "5d4c14af2151900008d5f928",
+      "name": "うんこミュージアムTOKYO",
+      "category": "adventure",
+      "geography": "tokyo_core_23_wards",
+      "score": 150,
+      "reasons": [
+        "strong_travel_category",
+        "cultural_significance",
+        "official_website",
+        "Tokyo_core"
+      ],
+      "penalties": [
+        "low_category_specificity"
+      ]
+    },
+    {
+      "rank": 11,
+      "fsqPlaceId": "4b9a4774f964a52033a935e3",
+      "name": "東京ドームシティ アトラクションズ",
+      "category": "adventure",
+      "geography": "tokyo_core_23_wards",
+      "score": 149,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 12,
+      "fsqPlaceId": "4c4bd355f7cc1b8df4846a40",
+      "name": "朝倉彫塑館",
+      "category": "culture",
+      "geography": "tokyo_core_23_wards",
+      "score": 149,
+      "reasons": [
+        "strong_travel_category",
+        "cultural_significance",
+        "high_category_specificity",
+        "Tokyo_core",
+        "hidden_gem_candidate"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 13,
+      "fsqPlaceId": "4daac7f56a2303012f151bfb",
+      "name": "ナンジャ餃子スタジアム",
+      "category": "food",
+      "geography": "tokyo_core_23_wards",
+      "score": 147,
+      "reasons": [
+        "strong_travel_category",
+        "distinctive_food",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 14,
+      "fsqPlaceId": "6235cc4adcbe6c01a0bdc7f8",
+      "name": "IKEBUKURO THEATER〔CG STAR LIVE〕",
+      "category": "food",
+      "geography": "tokyo_core_23_wards",
+      "score": 147,
+      "reasons": [
+        "strong_travel_category",
+        "distinctive_food",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 15,
+      "fsqPlaceId": "62a9aad68a270f4405af133b",
+      "name": "Harry Potter Cafe",
+      "category": "food",
+      "geography": "tokyo_core_23_wards",
+      "score": 147,
+      "reasons": [
+        "strong_travel_category",
+        "distinctive_food",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 16,
+      "fsqPlaceId": "4be13acdc1732d7ff27d5b9a",
+      "name": "ダイヤと花の大観覧車",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 17,
+      "fsqPlaceId": "4c2efe587cc0c9b6fc02eb9a",
+      "name": "サンダードルフィン (Thunder Dolphin)",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 18,
+      "fsqPlaceId": "4dcdf8efd4c065592f742433",
+      "name": "ミニSL 世田谷公園駅",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 19,
+      "fsqPlaceId": "4e056687d1640223a48fe9e0",
+      "name": "お化け屋敷",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 20,
+      "fsqPlaceId": "4e4dc0fe62e14b77e3856a2d",
+      "name": "アソボ～ノ! ASOBono!",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 21,
+      "fsqPlaceId": "4e84141ccc215d6d1beb7acd",
+      "name": "ビッグ・オー",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 22,
+      "fsqPlaceId": "4efed0ba77c885c334c1a8ce",
+      "name": "台場怪奇学校",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 23,
+      "fsqPlaceId": "4f1a571fe4b0d9f8b8344420",
+      "name": "ヴィーナスラグーン",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 24,
+      "fsqPlaceId": "4f6843b3e4b04ab624847da3",
+      "name": "三菱モータース カーデザインスタジオ",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 25,
+      "fsqPlaceId": "4f687693e4b0b0f93cc3442d",
+      "name": "キッザニア 大和証券 証券会社",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 26,
+      "fsqPlaceId": "4fcff9c2e4b06631b8dc66c9",
+      "name": "ポート・オブ・パイレーツ",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 27,
+      "fsqPlaceId": "4fd2d027e4b003bf7a291e7a",
+      "name": "はとバス 観光バス",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 28,
+      "fsqPlaceId": "50cd549be4b029bcaaab6728",
+      "name": "ぴょんぴょん",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 29,
+      "fsqPlaceId": "51e3882a498e61b652df9cb8",
+      "name": "ワンダードロップ(WonderDrop)",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 30,
+      "fsqPlaceId": "51fdf6ad498ecbfb49fea631",
+      "name": "ドルフィンパーティー",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 31,
+      "fsqPlaceId": "5222e6e211d22a67ff3c7454",
+      "name": "スーパーバイキング ソラブネ",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 32,
+      "fsqPlaceId": "522abc60498ea81372491fa7",
+      "name": "ザ・ダイブ",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 33,
+      "fsqPlaceId": "5261e306498e2abb2c395ede",
+      "name": "資生堂 ビューティサロン",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 34,
+      "fsqPlaceId": "526cb672498e6fb36a66a70e",
+      "name": "Furi Furi GP",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 35,
+      "fsqPlaceId": "5ad9e884776540248f738325",
+      "name": "怨霊座敷",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 36,
+      "fsqPlaceId": "65a8bd43b262237dece04ea6",
+      "name": "Funasei Cruises",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 37,
+      "fsqPlaceId": "69b9bdaf59a87b6ce311e293",
+      "name": "ジープ島",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 38,
+      "fsqPlaceId": "69e74e1069fd420079834927",
+      "name": "Ramen Cooking Tokyo",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 146,
+      "reasons": [
+        "strong_travel_category",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 39,
+      "fsqPlaceId": "68a5a632f0b7d61e323c1add",
+      "name": "日本中華街の共演",
+      "category": "food",
+      "geography": "tokyo_core_23_wards",
+      "score": 145,
+      "reasons": [
+        "strong_travel_category",
+        "distinctive_food",
+        "high_category_specificity",
+        "Tokyo_core",
+        "hidden_gem_candidate"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 40,
+      "fsqPlaceId": "68b452a72a4d1c6d68cd48ad",
+      "name": "博多っ子ひとくち餃子",
+      "category": "food",
+      "geography": "tokyo_core_23_wards",
+      "score": 145,
+      "reasons": [
+        "strong_travel_category",
+        "distinctive_food",
+        "high_category_specificity",
+        "Tokyo_core",
+        "hidden_gem_candidate"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 41,
+      "fsqPlaceId": "4bc19582b492d13ac547a660",
+      "name": "天王寺五重塔跡",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 143,
+      "reasons": [
+        "strong_travel_category",
+        "cultural_significance",
+        "high_category_specificity",
+        "Tokyo_core",
+        "hidden_gem_candidate"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 42,
+      "fsqPlaceId": "4c133db07f7f2d7f4ad2de68",
+      "name": "池淵史跡公園",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 143,
+      "reasons": [
+        "strong_travel_category",
+        "cultural_significance",
+        "high_category_specificity",
+        "Tokyo_core",
+        "hidden_gem_candidate"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 43,
+      "fsqPlaceId": "52d9e76d498ec69a0c315df2",
+      "name": "若木三丁目貝塚公園 (中台馬場崎貝塚)",
+      "category": "nature",
+      "geography": "tokyo_core_23_wards",
+      "score": 143,
+      "reasons": [
+        "strong_travel_category",
+        "cultural_significance",
+        "high_category_specificity",
+        "Tokyo_core",
+        "hidden_gem_candidate"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 44,
+      "fsqPlaceId": "4b545279f964a5207cb727e3",
+      "name": "思い出横丁 (Omoide Yokocho)",
+      "category": "culture",
+      "geography": "tokyo_core_23_wards",
+      "score": 142,
+      "reasons": [
+        "strong_travel_category",
+        "district_destination",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 45,
+      "fsqPlaceId": "4b5a80a4f964a52078c828e3",
+      "name": "秋葉原 (Akihabara)",
+      "category": "culture",
+      "geography": "tokyo_core_23_wards",
+      "score": 142,
+      "reasons": [
+        "major_attraction",
+        "strong_travel_category",
+        "district_destination",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 46,
+      "fsqPlaceId": "4b5c1700f964a520cb2329e3",
+      "name": "阿佐谷すずらん通り商店街",
+      "category": "culture",
+      "geography": "tokyo_core_23_wards",
+      "score": 142,
+      "reasons": [
+        "strong_travel_category",
+        "district_destination",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 47,
+      "fsqPlaceId": "4b638e2ff964a52018832ae3",
+      "name": "高円寺ルック商店街",
+      "category": "culture",
+      "geography": "tokyo_core_23_wards",
+      "score": 142,
+      "reasons": [
+        "strong_travel_category",
+        "district_destination",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 48,
+      "fsqPlaceId": "4b7d7de1f964a5200bc22fe3",
+      "name": "高円寺中通り商店街",
+      "category": "culture",
+      "geography": "tokyo_core_23_wards",
+      "score": 142,
+      "reasons": [
+        "strong_travel_category",
+        "district_destination",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 49,
+      "fsqPlaceId": "4b837487f964a520c60631e3",
+      "name": "高円寺純情商店街",
+      "category": "culture",
+      "geography": "tokyo_core_23_wards",
+      "score": 142,
+      "reasons": [
+        "strong_travel_category",
+        "district_destination",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 50,
+      "fsqPlaceId": "4b854994f964a520ba5431e3",
+      "name": "よみせ通り商店街",
+      "category": "culture",
+      "geography": "tokyo_core_23_wards",
+      "score": 142,
+      "reasons": [
+        "strong_travel_category",
+        "district_destination",
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    }
+  ],
+  "top20PerCategory": {
+    "culture": [
+      {
+        "rank": 1,
+        "fsqPlaceId": "4b80a4c6f964a520218330e3",
+        "name": "都電おもいで広場",
+        "category": "culture",
+        "geography": "tokyo_core_23_wards",
+        "score": 184,
+        "reasons": [
+          "strong_travel_category",
+          "cultural_significance",
+          "district_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 2,
+        "fsqPlaceId": "5b3306103731ee002c2b3e78",
+        "name": "チームラボプラネッツ (teamLab Planets)",
+        "category": "culture",
+        "geography": "tokyo_core_23_wards",
+        "score": 174,
+        "reasons": [
+          "major_attraction",
+          "strong_travel_category",
+          "cultural_significance",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 3,
+        "fsqPlaceId": "4f7fb9e3121d4ea728735977",
+        "name": "春花園BONSAI美術館",
+        "category": "culture",
+        "geography": "tokyo_core_23_wards",
+        "score": 156,
+        "reasons": [
+          "strong_travel_category",
+          "cultural_significance",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 4,
+        "fsqPlaceId": "5210636111d2ce6e671be072",
+        "name": "樫尾俊雄発明記念館 / 成城四丁目 発明の杜",
+        "category": "culture",
+        "geography": "tokyo_core_23_wards",
+        "score": 156,
+        "reasons": [
+          "strong_travel_category",
+          "cultural_significance",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 5,
+        "fsqPlaceId": "6271e9c477ad8c2b7a76b984",
+        "name": "アートアクアリウム美術館 GINZA",
+        "category": "culture",
+        "geography": "tokyo_core_23_wards",
+        "score": 154,
+        "reasons": [
+          "strong_travel_category",
+          "cultural_significance",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 12,
+        "fsqPlaceId": "4c4bd355f7cc1b8df4846a40",
+        "name": "朝倉彫塑館",
+        "category": "culture",
+        "geography": "tokyo_core_23_wards",
+        "score": 149,
+        "reasons": [
+          "strong_travel_category",
+          "cultural_significance",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 44,
+        "fsqPlaceId": "4b545279f964a5207cb727e3",
+        "name": "思い出横丁 (Omoide Yokocho)",
+        "category": "culture",
+        "geography": "tokyo_core_23_wards",
+        "score": 142,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 45,
+        "fsqPlaceId": "4b5a80a4f964a52078c828e3",
+        "name": "秋葉原 (Akihabara)",
+        "category": "culture",
+        "geography": "tokyo_core_23_wards",
+        "score": 142,
+        "reasons": [
+          "major_attraction",
+          "strong_travel_category",
+          "district_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 46,
+        "fsqPlaceId": "4b5c1700f964a520cb2329e3",
+        "name": "阿佐谷すずらん通り商店街",
+        "category": "culture",
+        "geography": "tokyo_core_23_wards",
+        "score": 142,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 47,
+        "fsqPlaceId": "4b638e2ff964a52018832ae3",
+        "name": "高円寺ルック商店街",
+        "category": "culture",
+        "geography": "tokyo_core_23_wards",
+        "score": 142,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 48,
+        "fsqPlaceId": "4b7d7de1f964a5200bc22fe3",
+        "name": "高円寺中通り商店街",
+        "category": "culture",
+        "geography": "tokyo_core_23_wards",
+        "score": 142,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 49,
+        "fsqPlaceId": "4b837487f964a520c60631e3",
+        "name": "高円寺純情商店街",
+        "category": "culture",
+        "geography": "tokyo_core_23_wards",
+        "score": 142,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 50,
+        "fsqPlaceId": "4b854994f964a520ba5431e3",
+        "name": "よみせ通り商店街",
+        "category": "culture",
+        "geography": "tokyo_core_23_wards",
+        "score": 142,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 51,
+        "fsqPlaceId": "4b9058b1f964a520768533e3",
+        "name": "目黒銀座商店街",
+        "category": "culture",
+        "geography": "tokyo_core_23_wards",
+        "score": 142,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 52,
+        "fsqPlaceId": "4b99bc2df964a520118f35e3",
+        "name": "神田駅西口商店街",
+        "category": "culture",
+        "geography": "tokyo_core_23_wards",
+        "score": 142,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 53,
+        "fsqPlaceId": "4b9b2769f964a52084f635e3",
+        "name": "笹塚観音通り商店街",
+        "category": "culture",
+        "geography": "tokyo_core_23_wards",
+        "score": 142,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 54,
+        "fsqPlaceId": "4bc146902a89ef3b8232f288",
+        "name": "巣鴨地蔵通商店街",
+        "category": "culture",
+        "geography": "tokyo_core_23_wards",
+        "score": 142,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 55,
+        "fsqPlaceId": "4bca5e7ab6c49c74f2759091",
+        "name": "荻窪教会通商店街",
+        "category": "culture",
+        "geography": "tokyo_core_23_wards",
+        "score": 142,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 56,
+        "fsqPlaceId": "4bd3f5679854d13ac5f0fe4d",
+        "name": "月島西仲通り商店街",
+        "category": "culture",
+        "geography": "tokyo_core_23_wards",
+        "score": 142,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 57,
+        "fsqPlaceId": "4be64b5e2457a593d2c2ac15",
+        "name": "祖師谷商店街 (ウルトラマン商店街)",
+        "category": "culture",
+        "geography": "tokyo_core_23_wards",
+        "score": 142,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      }
+    ],
+    "nature": [
+      {
+        "rank": 9,
+        "fsqPlaceId": "50aea3d9e4b034c5d70d4a8a",
+        "name": "野外展示場",
+        "category": "nature",
+        "geography": "tokyo_core_23_wards",
+        "score": 150,
+        "reasons": [
+          "strong_travel_category",
+          "cultural_significance",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 16,
+        "fsqPlaceId": "4be13acdc1732d7ff27d5b9a",
+        "name": "ダイヤと花の大観覧車",
+        "category": "nature",
+        "geography": "tokyo_core_23_wards",
+        "score": 146,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 17,
+        "fsqPlaceId": "4c2efe587cc0c9b6fc02eb9a",
+        "name": "サンダードルフィン (Thunder Dolphin)",
+        "category": "nature",
+        "geography": "tokyo_core_23_wards",
+        "score": 146,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 18,
+        "fsqPlaceId": "4dcdf8efd4c065592f742433",
+        "name": "ミニSL 世田谷公園駅",
+        "category": "nature",
+        "geography": "tokyo_core_23_wards",
+        "score": 146,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 19,
+        "fsqPlaceId": "4e056687d1640223a48fe9e0",
+        "name": "お化け屋敷",
+        "category": "nature",
+        "geography": "tokyo_core_23_wards",
+        "score": 146,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 20,
+        "fsqPlaceId": "4e4dc0fe62e14b77e3856a2d",
+        "name": "アソボ～ノ! ASOBono!",
+        "category": "nature",
+        "geography": "tokyo_core_23_wards",
+        "score": 146,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 21,
+        "fsqPlaceId": "4e84141ccc215d6d1beb7acd",
+        "name": "ビッグ・オー",
+        "category": "nature",
+        "geography": "tokyo_core_23_wards",
+        "score": 146,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 22,
+        "fsqPlaceId": "4efed0ba77c885c334c1a8ce",
+        "name": "台場怪奇学校",
+        "category": "nature",
+        "geography": "tokyo_core_23_wards",
+        "score": 146,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 23,
+        "fsqPlaceId": "4f1a571fe4b0d9f8b8344420",
+        "name": "ヴィーナスラグーン",
+        "category": "nature",
+        "geography": "tokyo_core_23_wards",
+        "score": 146,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 24,
+        "fsqPlaceId": "4f6843b3e4b04ab624847da3",
+        "name": "三菱モータース カーデザインスタジオ",
+        "category": "nature",
+        "geography": "tokyo_core_23_wards",
+        "score": 146,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 25,
+        "fsqPlaceId": "4f687693e4b0b0f93cc3442d",
+        "name": "キッザニア 大和証券 証券会社",
+        "category": "nature",
+        "geography": "tokyo_core_23_wards",
+        "score": 146,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 26,
+        "fsqPlaceId": "4fcff9c2e4b06631b8dc66c9",
+        "name": "ポート・オブ・パイレーツ",
+        "category": "nature",
+        "geography": "tokyo_core_23_wards",
+        "score": 146,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 27,
+        "fsqPlaceId": "4fd2d027e4b003bf7a291e7a",
+        "name": "はとバス 観光バス",
+        "category": "nature",
+        "geography": "tokyo_core_23_wards",
+        "score": 146,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 28,
+        "fsqPlaceId": "50cd549be4b029bcaaab6728",
+        "name": "ぴょんぴょん",
+        "category": "nature",
+        "geography": "tokyo_core_23_wards",
+        "score": 146,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 29,
+        "fsqPlaceId": "51e3882a498e61b652df9cb8",
+        "name": "ワンダードロップ(WonderDrop)",
+        "category": "nature",
+        "geography": "tokyo_core_23_wards",
+        "score": 146,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 30,
+        "fsqPlaceId": "51fdf6ad498ecbfb49fea631",
+        "name": "ドルフィンパーティー",
+        "category": "nature",
+        "geography": "tokyo_core_23_wards",
+        "score": 146,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 31,
+        "fsqPlaceId": "5222e6e211d22a67ff3c7454",
+        "name": "スーパーバイキング ソラブネ",
+        "category": "nature",
+        "geography": "tokyo_core_23_wards",
+        "score": 146,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 32,
+        "fsqPlaceId": "522abc60498ea81372491fa7",
+        "name": "ザ・ダイブ",
+        "category": "nature",
+        "geography": "tokyo_core_23_wards",
+        "score": 146,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 33,
+        "fsqPlaceId": "5261e306498e2abb2c395ede",
+        "name": "資生堂 ビューティサロン",
+        "category": "nature",
+        "geography": "tokyo_core_23_wards",
+        "score": 146,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 34,
+        "fsqPlaceId": "526cb672498e6fb36a66a70e",
+        "name": "Furi Furi GP",
+        "category": "nature",
+        "geography": "tokyo_core_23_wards",
+        "score": 146,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      }
+    ],
+    "adventure": [
+      {
+        "rank": 10,
+        "fsqPlaceId": "5d4c14af2151900008d5f928",
+        "name": "うんこミュージアムTOKYO",
+        "category": "adventure",
+        "geography": "tokyo_core_23_wards",
+        "score": 150,
+        "reasons": [
+          "strong_travel_category",
+          "cultural_significance",
+          "official_website",
+          "Tokyo_core"
+        ],
+        "penalties": [
+          "low_category_specificity"
+        ]
+      },
+      {
+        "rank": 11,
+        "fsqPlaceId": "4b9a4774f964a52033a935e3",
+        "name": "東京ドームシティ アトラクションズ",
+        "category": "adventure",
+        "geography": "tokyo_core_23_wards",
+        "score": 149,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 71,
+        "fsqPlaceId": "5b24bc39f62f2b002c630feb",
+        "name": "天空のペンギン",
+        "category": "adventure",
+        "geography": "tokyo_core_23_wards",
+        "score": 142,
+        "reasons": [
+          "strong_travel_category",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 73,
+        "fsqPlaceId": "627cde32e322e92643388262",
+        "name": "ニャンジャタウン",
+        "category": "adventure",
+        "geography": "tokyo_core_23_wards",
+        "score": 142,
+        "reasons": [
+          "strong_travel_category",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 74,
+        "fsqPlaceId": "634bb6e4adef894c89cfc010",
+        "name": "あらかわ遊園どうぶつ広場",
+        "category": "adventure",
+        "geography": "tokyo_core_23_wards",
+        "score": 142,
+        "reasons": [
+          "strong_travel_category",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 75,
+        "fsqPlaceId": "66ac542364b945172a069aac",
+        "name": "SUBARU SUVパーク",
+        "category": "adventure",
+        "geography": "tokyo_core_23_wards",
+        "score": 142,
+        "reasons": [
+          "strong_travel_category",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 76,
+        "fsqPlaceId": "6a113ca738711d67b6f4bf44",
+        "name": "カミツキガメ",
+        "category": "adventure",
+        "geography": "tokyo_core_23_wards",
+        "score": 142,
+        "reasons": [
+          "strong_travel_category",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 77,
+        "fsqPlaceId": "6a113d4bb0e71879c45cb047",
+        "name": "カブトニオイガメ",
+        "category": "adventure",
+        "geography": "tokyo_core_23_wards",
+        "score": 142,
+        "reasons": [
+          "strong_travel_category",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 78,
+        "fsqPlaceId": "6a113d9f38711d67b6f52cea",
+        "name": "ミシシッピニオイガメ",
+        "category": "adventure",
+        "geography": "tokyo_core_23_wards",
+        "score": 142,
+        "reasons": [
+          "strong_travel_category",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 79,
+        "fsqPlaceId": "6a113f62d439c038300b4049",
+        "name": "ミツユビハコガメ",
+        "category": "adventure",
+        "geography": "tokyo_core_23_wards",
+        "score": 142,
+        "reasons": [
+          "strong_travel_category",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 479,
+        "fsqPlaceId": "08b6f0eee4e94f52ee009d26",
+        "name": "明治神宮外苑にこにこパーク",
+        "category": "adventure",
+        "geography": "tokyo_core_23_wards",
+        "score": 128,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "Tokyo_core"
+        ],
+        "penalties": [
+          "low_category_specificity"
+        ]
+      },
+      {
+        "rank": 481,
+        "fsqPlaceId": "4b0587a6f964a520509e22e3",
+        "name": "東京ジョイポリス (Tokyo Joypolis)",
+        "category": "adventure",
+        "geography": "tokyo_core_23_wards",
+        "score": 128,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "Tokyo_core"
+        ],
+        "penalties": [
+          "low_category_specificity"
+        ]
+      },
+      {
+        "rank": 486,
+        "fsqPlaceId": "4b571d7af964a520042728e3",
+        "name": "花やしき",
+        "category": "adventure",
+        "geography": "tokyo_core_23_wards",
+        "score": 128,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "Tokyo_core"
+        ],
+        "penalties": [
+          "low_category_specificity"
+        ]
+      },
+      {
+        "rank": 490,
+        "fsqPlaceId": "4b5d3372f964a520575629e3",
+        "name": "キッザニア東京 (KidZania Tokyo)",
+        "category": "adventure",
+        "geography": "tokyo_core_23_wards",
+        "score": 128,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "Tokyo_core"
+        ],
+        "penalties": [
+          "low_category_specificity"
+        ]
+      },
+      {
+        "rank": 491,
+        "fsqPlaceId": "4b5d8bf7f964a520036129e3",
+        "name": "足立区生物園",
+        "category": "adventure",
+        "geography": "tokyo_core_23_wards",
+        "score": 128,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "Tokyo_core"
+        ],
+        "penalties": [
+          "low_category_specificity"
+        ]
+      },
+      {
+        "rank": 493,
+        "fsqPlaceId": "4b63d9d0f964a52042942ae3",
+        "name": "ナンジャタウン (Namja Town)",
+        "category": "adventure",
+        "geography": "tokyo_core_23_wards",
+        "score": 128,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "Tokyo_core"
+        ],
+        "penalties": [
+          "low_category_specificity"
+        ]
+      },
+      {
+        "rank": 500,
+        "fsqPlaceId": "4b6fc3d2f964a520e2fb2ce3",
+        "name": "ソニー エクスプローラサイエンス",
+        "category": "adventure",
+        "geography": "tokyo_core_23_wards",
+        "score": 128,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "Tokyo_core"
+        ],
+        "penalties": [
+          "low_category_specificity"
+        ]
+      },
+      {
+        "rank": 537,
+        "fsqPlaceId": "4c30367c66e40f478f4dc38b",
+        "name": "そなエリア東京",
+        "category": "adventure",
+        "geography": "tokyo_core_23_wards",
+        "score": 128,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "Tokyo_core"
+        ],
+        "penalties": [
+          "low_category_specificity"
+        ]
+      },
+      {
+        "rank": 624,
+        "fsqPlaceId": "4f5efb32e4b07df96a2212b3",
+        "name": "ユックリズム振り子時計",
+        "category": "adventure",
+        "geography": "tokyo_core_23_wards",
+        "score": 128,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "Tokyo_core"
+        ],
+        "penalties": [
+          "low_category_specificity"
+        ]
+      },
+      {
+        "rank": 629,
+        "fsqPlaceId": "4fda7ecfe4b05b85932c4716",
+        "name": "レゴランド･ディスカバリー･センター東京 (LEGOLAND Discovery Center Tokyo)",
+        "category": "adventure",
+        "geography": "tokyo_core_23_wards",
+        "score": 128,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "Tokyo_core"
+        ],
+        "penalties": [
+          "low_category_specificity"
+        ]
+      }
+    ],
+    "food": [
+      {
+        "rank": 6,
+        "fsqPlaceId": "da05df6c67694c98c10993ad",
+        "name": "Tsukiji Fish Market",
+        "category": "food",
+        "geography": "broader_tokyo",
+        "score": 153,
+        "reasons": [
+          "strong_travel_category",
+          "cultural_significance",
+          "district_destination",
+          "distinctive_food",
+          "official_website",
+          "high_category_specificity",
+          "broader_Tokyo"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 13,
+        "fsqPlaceId": "4daac7f56a2303012f151bfb",
+        "name": "ナンジャ餃子スタジアム",
+        "category": "food",
+        "geography": "tokyo_core_23_wards",
+        "score": 147,
+        "reasons": [
+          "strong_travel_category",
+          "distinctive_food",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 14,
+        "fsqPlaceId": "6235cc4adcbe6c01a0bdc7f8",
+        "name": "IKEBUKURO THEATER〔CG STAR LIVE〕",
+        "category": "food",
+        "geography": "tokyo_core_23_wards",
+        "score": 147,
+        "reasons": [
+          "strong_travel_category",
+          "distinctive_food",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 15,
+        "fsqPlaceId": "62a9aad68a270f4405af133b",
+        "name": "Harry Potter Cafe",
+        "category": "food",
+        "geography": "tokyo_core_23_wards",
+        "score": 147,
+        "reasons": [
+          "strong_travel_category",
+          "distinctive_food",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 39,
+        "fsqPlaceId": "68a5a632f0b7d61e323c1add",
+        "name": "日本中華街の共演",
+        "category": "food",
+        "geography": "tokyo_core_23_wards",
+        "score": 145,
+        "reasons": [
+          "strong_travel_category",
+          "distinctive_food",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 40,
+        "fsqPlaceId": "68b452a72a4d1c6d68cd48ad",
+        "name": "博多っ子ひとくち餃子",
+        "category": "food",
+        "geography": "tokyo_core_23_wards",
+        "score": 145,
+        "reasons": [
+          "strong_travel_category",
+          "distinctive_food",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 184,
+        "fsqPlaceId": "649e68bcf8e922381787b2ec",
+        "name": "水産卸売場棟 見学ギャラリー",
+        "category": "food",
+        "geography": "tokyo_core_23_wards",
+        "score": 138,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "distinctive_food",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": [
+          "ordinary_neighborhood_venue"
+        ]
+      },
+      {
+        "rank": 186,
+        "fsqPlaceId": "573ffcbacd10395388bed493",
+        "name": "加藤いちご園",
+        "category": "food",
+        "geography": "tokyo_core_23_wards",
+        "score": 137,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "distinctive_food",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 427,
+        "fsqPlaceId": "4b5a689ef964a52039c328e3",
+        "name": "小笠原伯爵邸",
+        "category": "food",
+        "geography": "tokyo_core_23_wards",
+        "score": 131,
+        "reasons": [
+          "strong_travel_category",
+          "cultural_significance",
+          "distinctive_food",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 433,
+        "fsqPlaceId": "6084e81e94b1336604810eb3",
+        "name": "KOBAYASHI FARM いちごはうす",
+        "category": "food",
+        "geography": "broader_tokyo",
+        "score": 131,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "distinctive_food",
+          "official_website",
+          "high_category_specificity",
+          "broader_Tokyo"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 435,
+        "fsqPlaceId": "69ea24de036b9144202d2841",
+        "name": "Mercedes-Benz Studio Tokyo",
+        "category": "food",
+        "geography": "tokyo_core_23_wards",
+        "score": 131,
+        "reasons": [
+          "strong_travel_category",
+          "cultural_significance",
+          "distinctive_food",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 462,
+        "fsqPlaceId": "4e06b9752271dfa46bab38f8",
+        "name": "茶道会館",
+        "category": "food",
+        "geography": "tokyo_core_23_wards",
+        "score": 129,
+        "reasons": [
+          "strong_travel_category",
+          "distinctive_food",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 465,
+        "fsqPlaceId": "4ecdba95490168f8ccd05ae4",
+        "name": "Oyaco Cafe picnic (親子カフェ ピクニック)",
+        "category": "food",
+        "geography": "tokyo_core_23_wards",
+        "score": 129,
+        "reasons": [
+          "strong_travel_category",
+          "distinctive_food",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 764,
+        "fsqPlaceId": "5eb683c7a2f6900008474835",
+        "name": "Todoroki-En",
+        "category": "food",
+        "geography": "tokyo_core_23_wards",
+        "score": 123,
+        "reasons": [
+          "district_destination",
+          "distinctive_food",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 902,
+        "fsqPlaceId": "5bb310f6fe3740002ce7a91b",
+        "name": "見学ギャラリー",
+        "category": "food",
+        "geography": "tokyo_core_23_wards",
+        "score": 118,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "distinctive_food",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": [
+          "ordinary_neighborhood_venue"
+        ]
+      },
+      {
+        "rank": 1095,
+        "fsqPlaceId": "3625908d89eb497597e9a1e1",
+        "name": "pioppino",
+        "category": "food",
+        "geography": "tokyo_core_23_wards",
+        "score": 112,
+        "reasons": [
+          "strong_travel_category",
+          "cultural_significance",
+          "distinctive_food",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": [
+          "ordinary_neighborhood_venue"
+        ]
+      },
+      {
+        "rank": 1096,
+        "fsqPlaceId": "588c434eac136914a6088536",
+        "name": "弘仁亭・無事庵",
+        "category": "food",
+        "geography": "tokyo_core_23_wards",
+        "score": 112,
+        "reasons": [
+          "strong_travel_category",
+          "cultural_significance",
+          "distinctive_food",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": [
+          "ordinary_neighborhood_venue"
+        ]
+      },
+      {
+        "rank": 1097,
+        "fsqPlaceId": "6629eb792ba9fb3a3c960a9b",
+        "name": "喫茶タイムマシン",
+        "category": "food",
+        "geography": "tokyo_core_23_wards",
+        "score": 112,
+        "reasons": [
+          "strong_travel_category",
+          "cultural_significance",
+          "distinctive_food",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": [
+          "ordinary_neighborhood_venue"
+        ]
+      },
+      {
+        "rank": 1129,
+        "fsqPlaceId": "5f253069011e3572bfec71f3",
+        "name": "Breckenridge Cafe",
+        "category": "food",
+        "geography": "tokyo_core_23_wards",
+        "score": 110,
+        "reasons": [
+          "strong_travel_category",
+          "distinctive_food",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": [
+          "ordinary_neighborhood_venue"
+        ]
+      },
+      {
+        "rank": 1131,
+        "fsqPlaceId": "66af1a47a65fd176f0e1c324",
+        "name": "Bibiche de Café",
+        "category": "food",
+        "geography": "tokyo_core_23_wards",
+        "score": 110,
+        "reasons": [
+          "strong_travel_category",
+          "distinctive_food",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": [
+          "ordinary_neighborhood_venue"
+        ]
+      }
+    ],
+    "nightlife": [
+      {
+        "rank": 436,
+        "fsqPlaceId": "ce028e40be9b4669348f29ee",
+        "name": "ShimokitazawaERA",
+        "category": "nightlife",
+        "geography": "tokyo_core_23_wards",
+        "score": 131,
+        "reasons": [
+          "strong_travel_category",
+          "cultural_significance",
+          "nightlife_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 1506,
+        "fsqPlaceId": "5e421e53f1a21d00083b9dd8",
+        "name": "池袋AKビル",
+        "category": "nightlife",
+        "geography": "tokyo_core_23_wards",
+        "score": 105,
+        "reasons": [
+          "strong_travel_category",
+          "nightlife_destination",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 1563,
+        "fsqPlaceId": "5180aab2498e138b536f175f",
+        "name": "フレッシュワン",
+        "category": "nightlife",
+        "geography": "tokyo_core_23_wards",
+        "score": 103,
+        "reasons": [
+          "district_destination",
+          "nightlife_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 1790,
+        "fsqPlaceId": "f50123238e834dc3938e5a5a",
+        "name": "楽市錦糸町店",
+        "category": "nightlife",
+        "geography": "tokyo_core_23_wards",
+        "score": 98,
+        "reasons": [
+          "nightlife_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 1836,
+        "fsqPlaceId": "4b695229f964a520c19e2be3",
+        "name": "BIER REISE '98",
+        "category": "nightlife",
+        "geography": "tokyo_core_23_wards",
+        "score": 95,
+        "reasons": [
+          "nightlife_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 1838,
+        "fsqPlaceId": "4b7eb083f964a52060f92fe3",
+        "name": "82 ALE HOUSE 赤坂店",
+        "category": "nightlife",
+        "geography": "tokyo_core_23_wards",
+        "score": 95,
+        "reasons": [
+          "nightlife_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 1847,
+        "fsqPlaceId": "4c63b711eb82d13a608c08d6",
+        "name": "銀座ライオン",
+        "category": "nightlife",
+        "geography": "tokyo_core_23_wards",
+        "score": 95,
+        "reasons": [
+          "nightlife_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 1853,
+        "fsqPlaceId": "4ea8fb78cc217c087dfc3809",
+        "name": "ファッションヘルス スイカ",
+        "category": "nightlife",
+        "geography": "tokyo_core_23_wards",
+        "score": 95,
+        "reasons": [
+          "strong_travel_category",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": [
+          "low_category_specificity",
+          "ordinary_neighborhood_venue"
+        ]
+      },
+      {
+        "rank": 1854,
+        "fsqPlaceId": "502ccc70e4b0c65b4984c651",
+        "name": "Zum Bierhof 渋谷",
+        "category": "nightlife",
+        "geography": "tokyo_core_23_wards",
+        "score": 95,
+        "reasons": [
+          "nightlife_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 1936,
+        "fsqPlaceId": "4bb6ebe8f562ef3bbfe43097",
+        "name": "ヤマハ音楽振興会",
+        "category": "nightlife",
+        "geography": "tokyo_core_23_wards",
+        "score": 90,
+        "reasons": [
+          "strong_travel_category",
+          "nightlife_destination",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": [
+          "ordinary_neighborhood_venue"
+        ]
+      },
+      {
+        "rank": 1939,
+        "fsqPlaceId": "6180bcb5bf5c58453f5187da",
+        "name": "ブイロクの木",
+        "category": "nightlife",
+        "geography": "tokyo_core_23_wards",
+        "score": 90,
+        "reasons": [
+          "strong_travel_category",
+          "nightlife_destination",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": [
+          "ordinary_neighborhood_venue"
+        ]
+      },
+      {
+        "rank": 2265,
+        "fsqPlaceId": "048b1caba19a4b544a74026f",
+        "name": "とりやき源氣高円寺北口店",
+        "category": "nightlife",
+        "geography": "tokyo_core_23_wards",
+        "score": 80,
+        "reasons": [
+          "nightlife_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 2280,
+        "fsqPlaceId": "1207128608ad418a65503af0",
+        "name": "ル・キャヴィストウ",
+        "category": "nightlife",
+        "geography": "tokyo_core_23_wards",
+        "score": 80,
+        "reasons": [
+          "nightlife_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 2281,
+        "fsqPlaceId": "12780edbc64740241b63d173",
+        "name": "コントレイル",
+        "category": "nightlife",
+        "geography": "tokyo_core_23_wards",
+        "score": 80,
+        "reasons": [
+          "nightlife_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 2285,
+        "fsqPlaceId": "1512c3b861bd47806db68cb0",
+        "name": "グッチーナ・カッパス",
+        "category": "nightlife",
+        "geography": "tokyo_core_23_wards",
+        "score": 80,
+        "reasons": [
+          "nightlife_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 2287,
+        "fsqPlaceId": "158e43209816413292c8fc9c",
+        "name": "木村屋本店銀座一丁目店",
+        "category": "nightlife",
+        "geography": "tokyo_core_23_wards",
+        "score": 80,
+        "reasons": [
+          "nightlife_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 2291,
+        "fsqPlaceId": "1a6cf2dc34f744a6ad6da758",
+        "name": "秋吉銀座店",
+        "category": "nightlife",
+        "geography": "tokyo_core_23_wards",
+        "score": 80,
+        "reasons": [
+          "nightlife_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 2292,
+        "fsqPlaceId": "1b3e12591a83495fda10d4aa",
+        "name": "えんウィング高輪店",
+        "category": "nightlife",
+        "geography": "tokyo_core_23_wards",
+        "score": 80,
+        "reasons": [
+          "nightlife_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 2297,
+        "fsqPlaceId": "1d6ed103cbc6461458451053",
+        "name": "串かつ でんがな 大森東口店",
+        "category": "nightlife",
+        "geography": "tokyo_core_23_wards",
+        "score": 80,
+        "reasons": [
+          "nightlife_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 2304,
+        "fsqPlaceId": "29f5065049ac4ccaf5d5c8ff",
+        "name": "ノー バード",
+        "category": "nightlife",
+        "geography": "tokyo_core_23_wards",
+        "score": 80,
+        "reasons": [
+          "nightlife_destination",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      }
+    ],
+    "luxury": [
+      {
+        "rank": 1826,
+        "fsqPlaceId": "4be10f2a0365c9b606dcb238",
+        "name": "楽天地天然温泉 楽天地スパ",
+        "category": "luxury",
+        "geography": "tokyo_core_23_wards",
+        "score": 96,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 1827,
+        "fsqPlaceId": "4cc3fee4d43ba1436c2064f8",
+        "name": "炭酸泉浴アクアセゾン",
+        "category": "luxury",
+        "geography": "tokyo_core_23_wards",
+        "score": 96,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 1829,
+        "fsqPlaceId": "5739acd2498ed9e518c87829",
+        "name": "SPA大手町",
+        "category": "luxury",
+        "geography": "tokyo_core_23_wards",
+        "score": 96,
+        "reasons": [
+          "strong_travel_category",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 1941,
+        "fsqPlaceId": "4c109bf8ce57c928f82782d2",
+        "name": "ゆラックス",
+        "category": "luxury",
+        "geography": "tokyo_core_23_wards",
+        "score": 89,
+        "reasons": [
+          "strong_travel_category",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 1942,
+        "fsqPlaceId": "4e33d83ab0fb17f64f87318d",
+        "name": "ラジウム温泉保養センター",
+        "category": "luxury",
+        "geography": "tokyo_core_23_wards",
+        "score": 89,
+        "reasons": [
+          "strong_travel_category",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 1943,
+        "fsqPlaceId": "5c526dc1e4c459002c903235",
+        "name": "野草酵素の岩盤浴",
+        "category": "luxury",
+        "geography": "tokyo_core_23_wards",
+        "score": 89,
+        "reasons": [
+          "strong_travel_category",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 1944,
+        "fsqPlaceId": "5eff02a11fb293000847b9d4",
+        "name": "足湯スカイデッキ",
+        "category": "luxury",
+        "geography": "tokyo_core_23_wards",
+        "score": 89,
+        "reasons": [
+          "strong_travel_category",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 2943,
+        "fsqPlaceId": "4b0587a6f964a520469e22e3",
+        "name": "NAGOMI Spa and Fitness",
+        "category": "luxury",
+        "geography": "tokyo_core_23_wards",
+        "score": 65,
+        "reasons": [
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 2944,
+        "fsqPlaceId": "4b865750f964a520a28631e3",
+        "name": "アダムアンドイブ adam･eve",
+        "category": "luxury",
+        "geography": "tokyo_core_23_wards",
+        "score": 65,
+        "reasons": [
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 2945,
+        "fsqPlaceId": "4fc1d405e4b0d6554a905235",
+        "name": "evian Spa",
+        "category": "luxury",
+        "geography": "tokyo_core_23_wards",
+        "score": 65,
+        "reasons": [
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 2948,
+        "fsqPlaceId": "4b23b8f9f964a520915824e3",
+        "name": "THE SPA 成城",
+        "category": "luxury",
+        "geography": "tokyo_core_23_wards",
+        "score": 62,
+        "reasons": [
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 2949,
+        "fsqPlaceId": "4b52d69ff964a520058927e3",
+        "name": "金の指銀の指",
+        "category": "luxury",
+        "geography": "tokyo_core_23_wards",
+        "score": 62,
+        "reasons": [
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 2950,
+        "fsqPlaceId": "4b5c3647f964a5206a2729e3",
+        "name": "アジアンブリーズ三宿店",
+        "category": "luxury",
+        "geography": "tokyo_core_23_wards",
+        "score": 62,
+        "reasons": [
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 2951,
+        "fsqPlaceId": "4b6007c8f964a520aed329e3",
+        "name": "スパ ラクーア",
+        "category": "luxury",
+        "geography": "tokyo_core_23_wards",
+        "score": 62,
+        "reasons": [
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 2952,
+        "fsqPlaceId": "4b63c07ef964a520d88f2ae3",
+        "name": "酸素カプセル グラティア",
+        "category": "luxury",
+        "geography": "tokyo_core_23_wards",
+        "score": 62,
+        "reasons": [
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 2953,
+        "fsqPlaceId": "4b63e859f964a52096962ae3",
+        "name": "セレネ白金",
+        "category": "luxury",
+        "geography": "tokyo_core_23_wards",
+        "score": 62,
+        "reasons": [
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 2954,
+        "fsqPlaceId": "4b651629f964a5207de32ae3",
+        "name": "浅草ROX まつり湯",
+        "category": "luxury",
+        "geography": "tokyo_core_23_wards",
+        "score": 62,
+        "reasons": [
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 2955,
+        "fsqPlaceId": "4b6cb3f2f964a520874d2ce3",
+        "name": "元麻布ヒルズスパ",
+        "category": "luxury",
+        "geography": "tokyo_core_23_wards",
+        "score": 62,
+        "reasons": [
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 2956,
+        "fsqPlaceId": "4b75207af964a520b3fe2de3",
+        "name": "はり灸末廣堂",
+        "category": "luxury",
+        "geography": "tokyo_core_23_wards",
+        "score": 62,
+        "reasons": [
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 2957,
+        "fsqPlaceId": "4b771cc4f964a520a77e2ee3",
+        "name": "タイムズ スパ・レスタ (Times SPA RESTA)",
+        "category": "luxury",
+        "geography": "tokyo_core_23_wards",
+        "score": 62,
+        "reasons": [
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      }
+    ],
+    "free": [
+      {
+        "rank": 7,
+        "fsqPlaceId": "4bde825dffdec92874e3e8a1",
+        "name": "九品仏広場",
+        "category": "free",
+        "geography": "tokyo_core_23_wards",
+        "score": 152,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "free_attraction",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 8,
+        "fsqPlaceId": "50790c96e4b0bf54e138f834",
+        "name": "ふれあい動物広場",
+        "category": "free",
+        "geography": "tokyo_core_23_wards",
+        "score": 150,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "free_attraction",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 82,
+        "fsqPlaceId": "4c381c1318e72d7f45e017f5",
+        "name": "屋上 太陽の広場",
+        "category": "free",
+        "geography": "broader_tokyo",
+        "score": 139,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "free_attraction",
+          "high_category_specificity",
+          "broader_Tokyo",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 414,
+        "fsqPlaceId": "68204bf7de46a6381dbe1ac3",
+        "name": "“forest for momentum” 小金澤健人+西畠清順",
+        "category": "free",
+        "geography": "tokyo_core_23_wards",
+        "score": 135,
+        "reasons": [
+          "strong_travel_category",
+          "free_attraction",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 429,
+        "fsqPlaceId": "4bedf799946c0f472244a363",
+        "name": "一号館広場",
+        "category": "free",
+        "geography": "tokyo_core_23_wards",
+        "score": 131,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "free_attraction",
+          "official_website",
+          "Tokyo_core"
+        ],
+        "penalties": [
+          "low_category_specificity"
+        ]
+      },
+      {
+        "rank": 431,
+        "fsqPlaceId": "53a96d71498e8a01e39b999f",
+        "name": "オーバル広場",
+        "category": "free",
+        "geography": "tokyo_core_23_wards",
+        "score": 131,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "free_attraction",
+          "official_website",
+          "Tokyo_core"
+        ],
+        "penalties": [
+          "low_category_specificity"
+        ]
+      },
+      {
+        "rank": 434,
+        "fsqPlaceId": "656c29fee42f435876993fb0",
+        "name": "さかもと朝顔広場",
+        "category": "free",
+        "geography": "tokyo_core_23_wards",
+        "score": 131,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "free_attraction",
+          "official_website",
+          "Tokyo_core"
+        ],
+        "penalties": [
+          "low_category_specificity"
+        ]
+      },
+      {
+        "rank": 597,
+        "fsqPlaceId": "4e685dfac65be3a564ecc3f6",
+        "name": "陽だまり広場",
+        "category": "free",
+        "geography": "tokyo_core_23_wards",
+        "score": 128,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "free_attraction",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 602,
+        "fsqPlaceId": "4e83939c7beb04b92cd8a64d",
+        "name": "安田講堂前広場",
+        "category": "free",
+        "geography": "tokyo_core_23_wards",
+        "score": 128,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "free_attraction",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 731,
+        "fsqPlaceId": "55a1e73b498e08198e1d8d15",
+        "name": "安産子育河童",
+        "category": "free",
+        "geography": "tokyo_core_23_wards",
+        "score": 126,
+        "reasons": [
+          "strong_travel_category",
+          "cultural_significance",
+          "free_attraction",
+          "official_website",
+          "high_category_specificity",
+          "Tokyo_core"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 732,
+        "fsqPlaceId": "5ed0bc74bcd6af0008c86094",
+        "name": "真土小思い出広場",
+        "category": "free",
+        "geography": "tokyo_core_23_wards",
+        "score": 126,
+        "reasons": [
+          "strong_travel_category",
+          "cultural_significance",
+          "district_destination",
+          "free_attraction",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": [
+          "low_category_specificity"
+        ]
+      },
+      {
+        "rank": 733,
+        "fsqPlaceId": "4b6a933cf964a52005d92be3",
+        "name": "中目黒立体交差交差点",
+        "category": "free",
+        "geography": "tokyo_core_23_wards",
+        "score": 125,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "free_attraction",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 734,
+        "fsqPlaceId": "4da7cfe3fa8c4175d0ab0c9c",
+        "name": "新橋二丁目交差点",
+        "category": "free",
+        "geography": "tokyo_core_23_wards",
+        "score": 125,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "free_attraction",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 735,
+        "fsqPlaceId": "4e5d589ab99302aac4241126",
+        "name": "錦糸町駅北口広場",
+        "category": "free",
+        "geography": "tokyo_core_23_wards",
+        "score": 125,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "free_attraction",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 736,
+        "fsqPlaceId": "50a6bdc1498e538a8f3a9c8c",
+        "name": "京成橋交差点",
+        "category": "free",
+        "geography": "tokyo_core_23_wards",
+        "score": 125,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "free_attraction",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 738,
+        "fsqPlaceId": "60b163d1ab53ed1c602009f5",
+        "name": "烏山川緑道 区役所通り 交差点",
+        "category": "free",
+        "geography": "tokyo_core_23_wards",
+        "score": 125,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "free_attraction",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 740,
+        "fsqPlaceId": "6958b978f18cae0eed010cb1",
+        "name": "多目的広場",
+        "category": "free",
+        "geography": "tokyo_core_23_wards",
+        "score": 125,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "free_attraction",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 759,
+        "fsqPlaceId": "5ddfb070ed2ead0008fa6286",
+        "name": "よりみち広場",
+        "category": "free",
+        "geography": "tokyo_core_23_wards",
+        "score": 124,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "free_attraction",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": [
+          "low_category_specificity"
+        ]
+      },
+      {
+        "rank": 893,
+        "fsqPlaceId": "4b63b071f964a5203c8c2ae3",
+        "name": "井の頭橋/井の頭橋交差点",
+        "category": "free",
+        "geography": "broader_tokyo",
+        "score": 119,
+        "reasons": [
+          "strong_travel_category",
+          "district_destination",
+          "free_attraction",
+          "high_category_specificity",
+          "broader_Tokyo",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      },
+      {
+        "rank": 894,
+        "fsqPlaceId": "4dc3bd43fa76d685cdb46fbe",
+        "name": "ホセ・リサール博士の像",
+        "category": "free",
+        "geography": "tokyo_core_23_wards",
+        "score": 119,
+        "reasons": [
+          "strong_travel_category",
+          "cultural_significance",
+          "free_attraction",
+          "high_category_specificity",
+          "Tokyo_core",
+          "hidden_gem_candidate"
+        ],
+        "penalties": []
+      }
+    ]
+  },
+  "lowestScoring50TierA": [
+    {
+      "rank": 3200,
+      "fsqPlaceId": "4c2bf7fe8abca593441c0120",
+      "name": "東京ディズニーシー (Tokyo DisneySea)",
+      "category": "adventure",
+      "geography": "yokohama_or_outside_tokyo",
+      "score": 53,
+      "reasons": [
+        "major_attraction",
+        "strong_travel_category",
+        "official_website"
+      ],
+      "penalties": [
+        "low_category_specificity",
+        "outside_Tokyo",
+        "probable_chain_branch"
+      ]
+    },
+    {
+      "rank": 3199,
+      "fsqPlaceId": "4b59ebdaf964a52002a128e3",
+      "name": "東京ディズニーランド (Tokyo Disneyland)",
+      "category": "adventure",
+      "geography": "yokohama_or_outside_tokyo",
+      "score": 53,
+      "reasons": [
+        "major_attraction",
+        "strong_travel_category",
+        "official_website"
+      ],
+      "penalties": [
+        "low_category_specificity",
+        "outside_Tokyo",
+        "probable_chain_branch"
+      ]
+    },
+    {
+      "rank": 3198,
+      "fsqPlaceId": "5aec1976b9b37b002c3cf8ac",
+      "name": "くじら広場",
+      "category": "free",
+      "geography": "yokohama_or_outside_tokyo",
+      "score": 60,
+      "reasons": [
+        "strong_travel_category",
+        "district_destination",
+        "free_attraction",
+        "official_website"
+      ],
+      "penalties": [
+        "low_category_specificity",
+        "outside_Tokyo"
+      ]
+    },
+    {
+      "rank": 3197,
+      "fsqPlaceId": "5a11ba054c954c0dce8653a5",
+      "name": "オリーブと噴水の広場",
+      "category": "free",
+      "geography": "yokohama_or_outside_tokyo",
+      "score": 60,
+      "reasons": [
+        "strong_travel_category",
+        "district_destination",
+        "free_attraction",
+        "official_website"
+      ],
+      "penalties": [
+        "low_category_specificity",
+        "outside_Tokyo"
+      ]
+    },
+    {
+      "rank": 3196,
+      "fsqPlaceId": "53cc6434498e11624ecd73ca",
+      "name": "武蔵野市東部スポーツ広場",
+      "category": "free",
+      "geography": "yokohama_or_outside_tokyo",
+      "score": 60,
+      "reasons": [
+        "strong_travel_category",
+        "district_destination",
+        "free_attraction",
+        "official_website"
+      ],
+      "penalties": [
+        "low_category_specificity",
+        "outside_Tokyo"
+      ]
+    },
+    {
+      "rank": 3195,
+      "fsqPlaceId": "5039b3e5e4b01bb806b9f359",
+      "name": "ラ チッタデッラ 噴水広場",
+      "category": "free",
+      "geography": "yokohama_or_outside_tokyo",
+      "score": 60,
+      "reasons": [
+        "strong_travel_category",
+        "district_destination",
+        "free_attraction",
+        "official_website"
+      ],
+      "penalties": [
+        "low_category_specificity",
+        "outside_Tokyo"
+      ]
+    },
+    {
+      "rank": 3194,
+      "fsqPlaceId": "4ed1b4772c5bc350589b49f1",
+      "name": "丸子橋第1広場",
+      "category": "free",
+      "geography": "yokohama_or_outside_tokyo",
+      "score": 60,
+      "reasons": [
+        "strong_travel_category",
+        "district_destination",
+        "free_attraction",
+        "official_website"
+      ],
+      "penalties": [
+        "low_category_specificity",
+        "outside_Tokyo"
+      ]
+    },
+    {
+      "rank": 3193,
+      "fsqPlaceId": "4f29030ce4b0c56e6e58ca8c",
+      "name": "癒し処 yawaragi",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3192,
+      "fsqPlaceId": "4f279590e4b0f210aa8e9ce9",
+      "name": "ミッチェリー・ハウス",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3191,
+      "fsqPlaceId": "4f257dc54fc6336aa26342ca",
+      "name": "マナ・ビューティー 池袋店",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3190,
+      "fsqPlaceId": "4f24bfad4fc6336aa24ee3c2",
+      "name": "ダンディハウス 新宿本店",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3189,
+      "fsqPlaceId": "4f181adee4b024277110aa70",
+      "name": "アントロマーレ",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3188,
+      "fsqPlaceId": "4f16d23ae4b03f4c0501b53c",
+      "name": "ランナータイ",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3187,
+      "fsqPlaceId": "4f13b974e4b0a6ade296b8b6",
+      "name": "優子さんのお肌再生工場",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3186,
+      "fsqPlaceId": "4f110b67e4b019e990c426cd",
+      "name": "メディケア 五反田店",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3185,
+      "fsqPlaceId": "4f10f985e4b0253d4c423929",
+      "name": "スカッシュ",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3184,
+      "fsqPlaceId": "4f0ff78fe4b000502a726930",
+      "name": "だいもん接骨院",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3183,
+      "fsqPlaceId": "4f0d5fede4b057516849f2f7",
+      "name": "PMK 品川店",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3182,
+      "fsqPlaceId": "4f0a71fce4b0c3ff85fecb6f",
+      "name": "もみの気ハウス  池袋店",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3181,
+      "fsqPlaceId": "4f07e17de4b0540ca18f77e1",
+      "name": "足満足 本店",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3180,
+      "fsqPlaceId": "4f07cf11e4b0882d227afb85",
+      "name": "フルーツルーツ",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3179,
+      "fsqPlaceId": "4f057c024901346082748ee8",
+      "name": "日本カイロプラクティックセンター南池袋",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3178,
+      "fsqPlaceId": "4f03fcca4901a1400acfd665",
+      "name": "サンシャイン整骨院",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3177,
+      "fsqPlaceId": "4eff127a29c201c6fc9b2015",
+      "name": "リフレクソロジーサロン 凛",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3176,
+      "fsqPlaceId": "4efec82f29c201c6fc611d32",
+      "name": "Moon walk",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3175,
+      "fsqPlaceId": "4ef6e2e48b81ef98d04b6fb0",
+      "name": "薬手名家 銀座店",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3174,
+      "fsqPlaceId": "4ef546bc6d8683d22c4808b3",
+      "name": "もみーな 上北沢店",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3173,
+      "fsqPlaceId": "4ef453125c5cf3ede61b4530",
+      "name": "池上整体院 樂氣堂",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3172,
+      "fsqPlaceId": "4eee9bbf0aaf1d45b344e1b3",
+      "name": "VERMA ayurveda esute",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3171,
+      "fsqPlaceId": "4eed3c8346907303bed479af",
+      "name": "Swedish Care \"alva\"",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3170,
+      "fsqPlaceId": "4ee40bfd9a52c1dad9f160b1",
+      "name": "ベリーノ・ベレッツァ",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3169,
+      "fsqPlaceId": "4ee2f3f46c25be962efc8523",
+      "name": "Relax comfort",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3168,
+      "fsqPlaceId": "4ede0a560e011b46f2a53a7b",
+      "name": "ローズボディ 恵比寿店(Rose Body)",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3167,
+      "fsqPlaceId": "4eddc4cf77c8274e011d43e9",
+      "name": "めぐろ中央整骨院",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3166,
+      "fsqPlaceId": "4edc98aab6344371f96f82b8",
+      "name": "あおやま整骨院",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3165,
+      "fsqPlaceId": "4ed7301c0e6145a39089fa95",
+      "name": "吉原ソープランド ファンタジー",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3164,
+      "fsqPlaceId": "4ed2027d6c2510ace2e4ae19",
+      "name": "もみ処  らく屋  荻窪店",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3163,
+      "fsqPlaceId": "4ed18cd7f5b9832adba07e53",
+      "name": "コリンズ 芝大門店",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3162,
+      "fsqPlaceId": "4ecfa4df02d5feaa1b5171a2",
+      "name": "はなはら接骨院",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3161,
+      "fsqPlaceId": "4ecca6709a528a8ec6fd11a2",
+      "name": "ヒカリ治療院",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3160,
+      "fsqPlaceId": "4ecc64ed490144fb1f030a94",
+      "name": "aLs 青山店",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3159,
+      "fsqPlaceId": "4ecb256d61afbf06d8a6b9fd",
+      "name": "リフレージュ赤羽",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3158,
+      "fsqPlaceId": "4ec86428722e14379780359a",
+      "name": "日本ヌアボーランスクール",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3157,
+      "fsqPlaceId": "4ec7803e99115348d9080716",
+      "name": "サロン ド ファイン",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3156,
+      "fsqPlaceId": "4ec70bb4b8f758db73bb432d",
+      "name": "クライオサロン",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3155,
+      "fsqPlaceId": "4ec3b6c8be7b4ee610d0a9d5",
+      "name": "中国整体院 長寿堂",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3154,
+      "fsqPlaceId": "4ebc938cdab44628db7b94b1",
+      "name": "井上均整院",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3153,
+      "fsqPlaceId": "4eb7976293ad23657111adbb",
+      "name": "整骨院 もみの木",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3152,
+      "fsqPlaceId": "4eb24ea37ee5a4e5f504318e",
+      "name": "もみたん 梅屋敷店",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    },
+    {
+      "rank": 3151,
+      "fsqPlaceId": "4eaf85444690488dabc1f873",
+      "name": "かず接骨院",
+      "category": "luxury",
+      "geography": "tokyo_core_23_wards",
+      "score": 62,
+      "reasons": [
+        "official_website",
+        "high_category_specificity",
+        "Tokyo_core"
+      ],
+      "penalties": []
+    }
+  ],
+  "chains": {
+    "chainsDetected": 138,
+    "branchesConsidered": 1902,
+    "branchesRetainedTierA": 9,
+    "branchesMovedTierB": 1893,
+    "probableChainPercentage": 0.0028125
+  },
+  "genericBusinessRejectionCount": 696,
+  "duplicateCount": 132,
+  "recordsWithWebsites": 2027,
+  "withJapaneseNames": 2999,
+  "withEnglishOrBilingualNames": 581,
+  "recordsRequiringFutureNameEnrichment": 2619,
+  "acceptanceGates": {
+    "all17BenchmarkAttractionsRetained": true,
+    "tierASizeBetween2500And4000": true,
+    "atLeastSixCategories": true,
+    "noCategoryAbove45Percent": true,
+    "atLeast80PercentTokyo": true,
+    "outsideTokyoClearlySeparated": true,
+    "routineChainsDoNotDominate": true,
+    "noBenchmarkInteriorBusinessMismatch": true,
+    "noSupabaseWrites": true
+  },
+  "acceptancePassed": true,
+  "noSupabaseWrites": true
+}

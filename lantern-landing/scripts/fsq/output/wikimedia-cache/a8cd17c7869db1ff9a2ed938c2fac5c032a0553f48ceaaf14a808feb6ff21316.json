@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:04:16.497Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 32935,
+          "ns": 0,
+          "title": "髙島屋",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たかしまや",
+            "page_image_free": "Namba_Station.JPG",
+            "wikibase_item": "Q2058024"
+          },
+          "terms": {
+            "description": [
+              "日本の百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 37137,
+          "ns": 0,
+          "title": "国道15号",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こくとう015",
+            "kartographer_frames": "1",
+            "page_image_free": "Japan_National_Route_15_Map.png",
+            "wikibase_item": "Q1045667"
+          },
+          "terms": {
+            "description": [
+              "東京から神奈川県横浜市に至る一般国道"
+            ]
+          }
+        },
+        {
+          "pageid": 77529,
+          "ns": 0,
+          "title": "道頓堀",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうとんほり",
+            "kartographer_frames": "4",
+            "page_image_free": "Dotonburi_River_Namba_Japan_by_Don_Ramey_Logan.jpg",
+            "wikibase_item": "Q964876"
+          },
+          "terms": {
+            "description": [
+              "大阪市中央区の繁華街"
+            ]
+          }
+        },
+        {
+          "pageid": 579125,
+          "ns": 0,
+          "title": "4月3日",
+          "index": 5,
+          "pageprops": {
+            "wikibase_item": "Q2509"
+          },
+          "terms": {
+            "description": [
+              "日付"
+            ]
+          }
+        },
+        {
+          "pageid": 4474542,
+          "ns": 0,
+          "title": "三越日本橋本店",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みつこしにほんはしほんてん",
+            "kartographer_frames": "1",
+            "page_image_free": "Mitsukoshi_(8619735965).jpg",
+            "wikibase_item": "Q108899516"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68552778,
+              "lon": 139.77341667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京・日本橋の百貨店"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:09.793Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 5292,
+          "ns": 0,
+          "title": "松尾芭蕉",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "まつお はしよう",
+            "page_image_free": "Basho_by_Morikawa_Kyoriku_(1656-1715).jpg",
+            "wikibase_item": "Q5676"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸時代前期の俳諧師 (1644-1694)"
+            ]
+          }
+        },
+        {
+          "pageid": 76239,
+          "ns": 0,
+          "title": "与謝蕪村",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "よさ ふそん",
+            "page_image_free": "Yosa_Buson.jpg",
+            "wikibase_item": "Q31523"
+          },
+          "terms": {
+            "description": [
+              "日本の俳人、画家"
+            ]
+          }
+        },
+        {
+          "pageid": 301531,
+          "ns": 0,
+          "title": "小林一茶",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こはやし いつさ",
+            "page_image_free": "Kobayashi_Issa-Portrait.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q312709"
+          },
+          "terms": {
+            "description": [
+              "日本の俳人"
+            ]
+          }
+        },
+        {
+          "pageid": 936722,
+          "ns": 0,
+          "title": "蚶満寺",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かんまんし",
+            "page_image_free": "Main_Hall,_Kanman-ji.jpg",
+            "wikibase_item": "Q11625496"
+          },
+          "coordinates": [
+            {
+              "lat": 39.21541667,
+              "lon": 139.90308333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "秋田県にかほ市にある寺院"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

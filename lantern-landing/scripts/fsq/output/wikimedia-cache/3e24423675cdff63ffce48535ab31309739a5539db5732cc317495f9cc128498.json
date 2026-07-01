@@ -1,0 +1,21 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:17.754Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1833437,
+          "ns": 0,
+          "title": "日本の医学校",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いかつこう",
+            "wikibase_item": "Q11505800"
+          }
+        }
+      ]
+    }
+  }
+}

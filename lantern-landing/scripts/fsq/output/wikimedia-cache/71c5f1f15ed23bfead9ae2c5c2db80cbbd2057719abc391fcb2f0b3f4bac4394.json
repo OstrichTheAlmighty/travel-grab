@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:45.563Z",
+  "value": {
+    "searchinfo": {
+      "search": "佐野いこいの森"
+    },
+    "search": [
+      {
+        "id": "Q109365531",
+        "title": "Q109365531",
+        "pageid": 104527522,
+        "concepturi": "http://www.wikidata.org/entity/Q109365531",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q109365531",
+        "display": {
+          "label": {
+            "value": "Sano Ikoi no Mori Ryokuchi (Adachi)",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Sano, Adachi-ku",
+            "language": "en"
+          }
+        },
+        "label": "Sano Ikoi no Mori Ryokuchi (Adachi)",
+        "description": "park in Sano, Adachi-ku",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "佐野いこいの森緑地"
+        },
+        "aliases": [
+          "佐野いこいの森緑地"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

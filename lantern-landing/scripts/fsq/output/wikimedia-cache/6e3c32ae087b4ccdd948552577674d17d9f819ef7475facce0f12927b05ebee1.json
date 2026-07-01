@@ -1,0 +1,57 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:42.084Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 776930,
+          "ns": 0,
+          "title": "わがまま!気まま!旅気分",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "わかままきままたひきふん",
+            "wikibase_item": "Q11281708"
+          }
+        },
+        {
+          "pageid": 4002757,
+          "ns": 0,
+          "title": "2021年のテレビ (日本)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "2021ねんのてれひにほん",
+            "toc": "",
+            "wikibase_item": "Q86732706"
+          }
+        },
+        {
+          "pageid": 4399699,
+          "ns": 0,
+          "title": "孤独のグルメ (テレビドラマ)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ことくのくるめ",
+            "wikibase_item": "Q107409856"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ番組シリーズ"
+            ]
+          }
+        },
+        {
+          "pageid": 5008801,
+          "ns": 0,
+          "title": "2025年のテレビ特別番組一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "2025年のてれひとくへつはんくみいちらん",
+            "unexpectedUnconnectedPage": "0"
+          }
+        }
+      ]
+    }
+  }
+}

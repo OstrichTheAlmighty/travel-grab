@@ -1,0 +1,109 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:09.060Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1625,
+          "ns": 0,
+          "title": "カメラ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かめら",
+            "wikibase_item": "Q15328"
+          },
+          "terms": {
+            "description": [
+              "写真や映像を撮影するための光学機器"
+            ]
+          }
+        },
+        {
+          "pageid": 178378,
+          "ns": 0,
+          "title": "電車とバスの博物館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "てんしやとはすのはくふつかん",
+            "page_image_free": "Tokyu_Train_and_Bus_Museum.jpg",
+            "wikibase_item": "Q11660619"
+          },
+          "terms": {
+            "description": [
+              "神奈川県川崎市宮前区にある鉄道保存展示施設"
+            ]
+          }
+        },
+        {
+          "pageid": 235288,
+          "ns": 0,
+          "title": "芦屋市立美術博物館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あしやしりつひしゆつはくふつかん",
+            "page_image_free": "Ashiya_City_Museum_of_Art_&_History01s3200.jpg",
+            "wikibase_item": "Q11614836"
+          },
+          "coordinates": [
+            {
+              "lat": 34.72191667,
+              "lon": 135.31025,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県芦屋市にある美術博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 2606610,
+          "ns": 0,
+          "title": "映画ドラえもん のび太のひみつ道具博物館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とらえもんのひたのひみつとうくみゆうしあむ",
+            "wikibase_item": "Q2156382"
+          },
+          "terms": {
+            "description": [
+              "2013年の日本のアニメーション映画"
+            ]
+          }
+        },
+        {
+          "pageid": 3242775,
+          "ns": 0,
+          "title": "日本カメラ博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんかめらはくふつかん",
+            "page_image_free": "Camera_Nuseum1.JPG",
+            "wikibase_item": "Q21019310"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68604444,
+              "lon": 139.742875,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

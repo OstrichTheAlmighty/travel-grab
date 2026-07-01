@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:22.096Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2503,
+          "ns": 0,
+          "title": "1902年",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "1902ねん",
+            "wikibase_item": "Q2043"
+          },
+          "terms": {
+            "description": [
+              "年"
+            ]
+          }
+        },
+        {
+          "pageid": 123065,
+          "ns": 0,
+          "title": "平安神宮",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "へいあんしんくう",
+            "kartographer_frames": "1",
+            "page_image_free": "Heian-jingu,_keidai-1.jpg",
+            "wikibase_item": "Q385141"
+          },
+          "coordinates": [
+            {
+              "lat": 35.01666667,
+              "lon": 135.78222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市左京区にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 125890,
+          "ns": 0,
+          "title": "伊東忠太",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いとう ちゆうた",
+            "page_image_free": "Ito_Chuta_01.jpg",
+            "wikibase_item": "Q1050457"
+          },
+          "terms": {
+            "description": [
+              "建築家、建築史家 (1867-1954)"
+            ]
+          }
+        },
+        {
+          "pageid": 532936,
+          "ns": 0,
+          "title": "岐阜公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きふこうえん",
+            "page_image_free": "岐阜公園-正門と若き日の織田信長像gifukoen022.jpg",
+            "wikibase_item": "Q5359350"
+          },
+          "coordinates": [
+            {
+              "lat": 35.43342222,
+              "lon": 136.77521111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "岐阜市の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1592758,
+          "ns": 0,
+          "title": "横網町公園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "よこあみちようこうえん",
+            "kartographer_links": "1",
+            "page_image_free": "The_Great_Kanto_Earthquake._at_Tokyo_Memorial_Hall_for_the_Casualties.jpg",
+            "wikibase_item": "Q6941729"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69953,
+              "lon": 139.79669,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

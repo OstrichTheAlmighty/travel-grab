@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:44.666Z",
+  "value": {
+    "searchinfo": {
+      "search": "ウエスタンランド"
+    },
+    "search": [
+      {
+        "id": "Q732575",
+        "title": "Q732575",
+        "pageid": 688835,
+        "concepturi": "http://www.wikidata.org/entity/Q732575",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q732575",
+        "display": {
+          "label": {
+            "value": "Frontierland",
+            "language": "en"
+          },
+          "description": {
+            "value": "themed land at Disney theme parks",
+            "language": "en"
+          }
+        },
+        "label": "Frontierland",
+        "description": "themed land at Disney theme parks",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ウエスタンランド"
+        },
+        "aliases": [
+          "ウエスタンランド"
+        ]
+      },
+      {
+        "id": "Q1269741",
+        "title": "Q1269741",
+        "pageid": 1210402,
+        "concepturi": "http://www.wikidata.org/entity/Q1269741",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1269741",
+        "display": {
+          "label": {
+            "value": "SS Westernland",
+            "language": "en"
+          },
+          "description": {
+            "value": "steamship launched in 1917",
+            "language": "en"
+          }
+        },
+        "label": "SS Westernland",
+        "description": "steamship launched in 1917",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ウエスタンランド"
+        },
+        "aliases": [
+          "ウエスタンランド"
+        ]
+      },
+      {
+        "id": "Q50179770",
+        "title": "Q50179770",
+        "pageid": 51173064,
+        "concepturi": "http://www.wikidata.org/entity/Q50179770",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q50179770",
+        "display": {
+          "label": {
+            "value": "Westernland at Tokyo Disneyland",
+            "language": "en"
+          }
+        },
+        "label": "Westernland at Tokyo Disneyland",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "ウエスタンランド"
+        },
+        "aliases": [
+          "ウエスタンランド"
+        ]
+      },
+      {
+        "id": "Q11288648",
+        "title": "Q11288648",
+        "pageid": 12429348,
+        "concepturi": "http://www.wikidata.org/entity/Q11288648",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11288648",
+        "display": {
+          "label": {
+            "value": "Westernland Shootin' Gallery",
+            "language": "en"
+          }
+        },
+        "label": "Westernland Shootin' Gallery",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "ウエスタンランド・シューティングギャラリー"
+        },
+        "aliases": [
+          "ウエスタンランド・シューティングギャラリー"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

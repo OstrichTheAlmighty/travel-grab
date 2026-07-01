@@ -1,0 +1,82 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:01.638Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 64297,
+          "ns": 0,
+          "title": "マインズ農業協同組合",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "まいんす",
+            "wikibase_item": "Q11339827"
+          },
+          "terms": {
+            "description": [
+              "府中の農業協同組合"
+            ]
+          }
+        },
+        {
+          "pageid": 303323,
+          "ns": 0,
+          "title": "ペット・ショップ・ボーイズ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "へつとしよつふほおいす",
+            "page_image_free": "Glastonbury2022_(Pet_Shop_Boys).jpg",
+            "wikibase_item": "Q485625"
+          },
+          "terms": {
+            "description": [
+              "イギリスのシンセポップ・デュオ"
+            ]
+          }
+        },
+        {
+          "pageid": 943364,
+          "ns": 0,
+          "title": "東京ディズニーランドのショップの一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいらんとのしよつふ",
+            "wikibase_item": "Q11524284"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2037832,
+          "ns": 0,
+          "title": "CDショップ大賞",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しいていしよふやたいしよう",
+            "page_image_free": "Logo_CD_Shop_Awards.svg",
+            "wikibase_item": "Q10846677"
+          }
+        },
+        {
+          "pageid": 2347823,
+          "ns": 0,
+          "title": "ニンテンドーeショップ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にんてんとういいしよつふ",
+            "wikibase_item": "Q3070866"
+          }
+        }
+      ]
+    }
+  }
+}

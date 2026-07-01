@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:19.843Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 234375,
+          "ns": 0,
+          "title": "隈研吾",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "くま けんこ",
+            "page_image_free": "Kengo_Kuma.png",
+            "wikibase_item": "Q725462"
+          },
+          "terms": {
+            "description": [
+              "日本の建築家 (1954-)"
+            ]
+          }
+        },
+        {
+          "pageid": 261826,
+          "ns": 0,
+          "title": "田辺市立美術館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たなへしりつひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "131222_Tanabe_City_Museum_of_Art_Wakayama_pref_Japan01bs3.jpg",
+            "wikibase_item": "Q11577335"
+          },
+          "coordinates": [
+            {
+              "lat": 33.69738889,
+              "lon": 135.40075,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "和歌山県田辺市にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 272758,
+          "ns": 0,
+          "title": "個人美術館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こしんひしゆつかん",
+            "wikibase_item": "Q11387011"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 874502,
+          "ns": 0,
+          "title": "岐阜県美術館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きふけんひしゆつかん",
+            "page_image_free": "151219_Museum_of_Fine_Arts,GIFU_Japan01n.jpg",
+            "wikibase_item": "Q5359197"
+          },
+          "coordinates": [
+            {
+              "lat": 35.40158056,
+              "lon": 136.73059167,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 2022898,
+          "ns": 0,
+          "title": "村井正誠",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "むらい まさなり",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q11522985"
+          },
+          "terms": {
+            "description": [
+              "1905-1999, 洋画家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

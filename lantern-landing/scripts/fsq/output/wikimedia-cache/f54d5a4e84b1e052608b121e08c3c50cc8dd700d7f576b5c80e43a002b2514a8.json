@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:29.416Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 75434,
+          "ns": 0,
+          "title": "三式戦闘機",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さんしきせんとうき",
+            "page_image_free": "Kawasaki_Ki-61-14.jpg",
+            "wikibase_item": "Q700717"
+          },
+          "terms": {
+            "description": [
+              "大日本帝国陸軍が運用した戦闘機"
+            ]
+          }
+        },
+        {
+          "pageid": 969364,
+          "ns": 0,
+          "title": "本田技研工業",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ほんたきけんこうきよう",
+            "page_image_free": "Toranomon_Alcea_Tower.jpg",
+            "wikibase_item": "Q9584"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66902778,
+              "lon": 139.74616667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の輸送機器メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 1976222,
+          "ns": 0,
+          "title": "零式艦上戦闘機",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "れいしきかんしようせんとうき",
+            "page_image_free": "A6M3_Zero_N712Z.jpg",
+            "wikibase_item": "Q40156"
+          },
+          "terms": {
+            "description": [
+              "日本の艦上戦闘機"
+            ]
+          }
+        },
+        {
+          "pageid": 2809415,
+          "ns": 0,
+          "title": "社名の由来一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しやめいのゆらいいちらん",
+            "wikibase_item": "Q1864658"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3138061,
+          "ns": 0,
+          "title": "桃井原っぱ公園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ももいはらつはこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Momoi_harappa_park_suginami_2015.jpg",
+            "wikibase_item": "Q21019735"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71366667,
+              "lon": 139.60738889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都杉並区にある区立公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:24.407Z",
+  "value": {
+    "searchinfo": {
+      "search": "旧台徳院霊廟惣門"
+    },
+    "search": [
+      {
+        "id": "Q113385105",
+        "title": "Q113385105",
+        "pageid": 108166903,
+        "concepturi": "http://www.wikidata.org/entity/Q113385105",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q113385105",
+        "display": {
+          "label": {
+            "value": "Taitoku-in Mausoleum gate",
+            "language": "en"
+          },
+          "description": {
+            "value": "building in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Taitoku-in Mausoleum gate",
+        "description": "building in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "旧台徳院霊廟惣門"
+        },
+        "aliases": [
+          "旧台徳院霊廟惣門"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

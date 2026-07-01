@@ -1,0 +1,119 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:48.562Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 61199,
+          "ns": 0,
+          "title": "エフエム東京",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "えふえむとうきよう",
+            "page_image_free": "エフエム東京本社_2026.jpg",
+            "wikibase_item": "Q843841"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68343889,
+              "lon": 139.74323889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本のFMラジオ放送局、東京都に本社がある全国FM放送協議会（JFN）のキー局"
+            ]
+          }
+        },
+        {
+          "pageid": 137338,
+          "ns": 0,
+          "title": "東京タワー (小説)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようたわあ",
+            "wikibase_item": "Q431725"
+          },
+          "terms": {
+            "description": [
+              "日本の小説、メディアミックス作品、韓国のテレビドラマ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 179940,
+          "ns": 0,
+          "title": "東京スカイツリー",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようすかいつりい",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Skytree_2014_Ⅲ.jpg",
+            "wikibase_item": "Q57965"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71013889,
+              "lon": 139.81083333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区の電波塔"
+            ]
+          }
+        },
+        {
+          "pageid": 1731153,
+          "ns": 0,
+          "title": "東京タワー",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようたわあ",
+            "kartographer_frames": "1",
+            "page_image_free": "日本電波塔（東京タワー）.jpg",
+            "wikibase_item": "Q183536"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65861111,
+              "lon": 139.74555556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区にある電波塔"
+            ]
+          }
+        },
+        {
+          "pageid": 3568478,
+          "ns": 0,
+          "title": "東京ワンピースタワー",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようわんひいすたわあ",
+            "wikibase_item": "Q28531358"
+          },
+          "terms": {
+            "description": [
+              "日本のテーマパーク"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

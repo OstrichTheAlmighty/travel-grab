@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:50.917Z",
+  "value": {
+    "searchinfo": {
+      "search": "Shibusawa Memorial Museum"
+    },
+    "search": [
+      {
+        "id": "Q11254595",
+        "title": "Q11254595",
+        "pageid": 12400318,
+        "concepturi": "http://www.wikidata.org/entity/Q11254595",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11254595",
+        "display": {
+          "label": {
+            "value": "Shibusawa Memorial Museum",
+            "language": "en"
+          }
+        },
+        "label": "Shibusawa Memorial Museum",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Shibusawa Memorial Museum"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

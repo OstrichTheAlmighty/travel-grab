@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:52.336Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8251,
+          "ns": 0,
+          "title": "江東区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こうとうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tomioka_Hachiman-gu_201708.jpg",
+            "wikibase_item": "Q215175"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67281,
+              "lon": 139.81728,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 37081,
+          "ns": 0,
+          "title": "ライフコーポレーション",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "らいふこおほれいしよん",
+            "page_image_free": "Yumesse.jpg",
+            "wikibase_item": "Q11346476"
+          },
+          "terms": {
+            "description": [
+              "日本のスーパーマーケット業者"
+            ]
+          }
+        },
+        {
+          "pageid": 37093,
+          "ns": 0,
+          "title": "マルエツ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "まるえつ",
+            "page_image_free": "Maruetsuhonsha.jpg",
+            "wikibase_item": "Q11341197"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72641667,
+              "lon": 139.72861111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本のスーパーマーケット"
+            ]
+          }
+        },
+        {
+          "pageid": 1741731,
+          "ns": 0,
+          "title": "銀座",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "きんさ",
+            "kartographer_frames": "1",
+            "page_image_free": "Ginza_area_at_dusk_from_Tokyo_Tower.jpg",
+            "wikibase_item": "Q746052"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 2025410,
+          "ns": 0,
+          "title": "東京都の再開発の一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようのさいかいはつ",
+            "wikibase_item": "Q11524033"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

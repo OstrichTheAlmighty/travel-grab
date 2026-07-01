@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:21.704Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 262021,
+          "ns": 0,
+          "title": "奈良県立美術館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ならけんりつひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Nara_prefectural_museum_of_art02ds3200.jpg",
+            "wikibase_item": "Q11445231"
+          },
+          "terms": {
+            "description": [
+              "奈良県奈良市にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 513269,
+          "ns": 0,
+          "title": "久米邦武",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "くめ くにたけ",
+            "page_image_free": "Portrait_of_Kunitake_Kume.jpg",
+            "wikibase_item": "Q707533"
+          },
+          "terms": {
+            "description": [
+              "日本の歴史学者"
+            ]
+          }
+        },
+        {
+          "pageid": 973547,
+          "ns": 0,
+          "title": "久米桂一郎",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "くめ けいいちろう",
+            "page_image_free": "Kume_Keiichiro.jpg",
+            "wikibase_item": "Q3194688"
+          },
+          "terms": {
+            "description": [
+              "1866-1934, 洋画家。"
+            ]
+          }
+        },
+        {
+          "pageid": 1613496,
+          "ns": 0,
+          "title": "川崎市岡本太郎美術館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かわさきしおかもとたろうひしゆつかん",
+            "page_image_free": "Taro_Okamoto_Museum3a.jpg",
+            "wikibase_item": "Q7686506"
+          },
+          "coordinates": [
+            {
+              "lat": 35.608075,
+              "lon": 139.55747778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県川崎市多摩区桝形の生田緑地内にある市立美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 2474416,
+          "ns": 0,
+          "title": "久米美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "くめひしゆつかん",
+            "page_image_free": "Kume_Bijutsukan.jpg",
+            "wikibase_item": "Q11369635"
+          },
+          "coordinates": [
+            {
+              "lat": 35.634556,
+              "lon": 139.714694,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区にある美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

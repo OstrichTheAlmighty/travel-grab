@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:05.910Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 338342,
+          "ns": 0,
+          "title": "短甲",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たんこう",
+            "page_image_free": "Asuka_Museum_Keikô.jpg",
+            "wikibase_item": "Q1687003"
+          },
+          "terms": {
+            "description": [
+              "古代日本の奈良時代・平安時代に使用された小札甲の1種。「胴丸式」と呼ばれる形態のものと考えられている。"
+            ]
+          }
+        },
+        {
+          "pageid": 883846,
+          "ns": 0,
+          "title": "多摩川台公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たまかわたいこうえん",
+            "page_image_free": "Tamagawadai_park_plaza_0075.jpg",
+            "wikibase_item": "Q11430740"
+          },
+          "coordinates": [
+            {
+              "lat": 35.59013889,
+              "lon": 139.66691667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都大田区にある公園"
+            ]
+          }
+        },
+        {
+          "pageid": 2028834,
+          "ns": 0,
+          "title": "青木敬",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あおき たかし",
+            "wikibase_item": "Q11661734"
+          },
+          "terms": {
+            "description": [
+              "日本の考古学者"
+            ]
+          }
+        },
+        {
+          "pageid": 2605795,
+          "ns": 0,
+          "title": "荏原台古墳群",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "えはらたいこふんくん",
+            "kartographer_frames": "1",
+            "kartographer_links": "1",
+            "wikibase_item": "Q11618305"
+          },
+          "terms": {
+            "description": [
+              "東京都にある田園調布古墳群と野毛古墳群の総称"
+            ]
+          }
+        },
+        {
+          "pageid": 2607728,
+          "ns": 0,
+          "title": "宝萊山古墳",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ほうらいさんこふん",
+            "page_image_free": "Horaisan_Kofun_(Ota),_funkyu.jpg",
+            "wikibase_item": "Q11452676"
+          },
+          "coordinates": [
+            {
+              "lat": 35.59315278,
+              "lon": 139.66335833,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都大田区にある古墳"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

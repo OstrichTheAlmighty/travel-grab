@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:32.371Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 83738,
+          "ns": 0,
+          "title": "荻窪 (杉並区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おきくほ",
+            "kartographer_frames": "1",
+            "page_image_free": "2019_Otaguro_garden_in_autumn_1.jpg",
+            "wikibase_item": "Q7080041"
+          },
+          "terms": {
+            "description": [
+              "東京都杉並区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 130733,
+          "ns": 0,
+          "title": "阿佐谷",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あさかや",
+            "page_image_free": "Asagaya_ekimae.jpg",
+            "wikibase_item": "Q720383"
+          },
+          "terms": {
+            "description": [
+              "東京都杉並区の町名であり、阿佐谷北一丁目から阿佐谷北六丁目と阿佐谷南一丁目から阿佐谷南三丁目からなる"
+            ]
+          }
+        },
+        {
+          "pageid": 149558,
+          "ns": 0,
+          "title": "日本のアーケード商店街",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんのああけえと",
+            "page_image_free": "GalleriaTakemachi3.jpg",
+            "wikibase_item": "Q96288605"
+          },
+          "terms": {
+            "description": [
+              "全蓋式アーケードを備えた商店街"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1690273,
+          "ns": 0,
+          "title": "杉並区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "すきなみく",
+            "kartographer_frames": "1",
+            "page_image_free": "2018_Kōenji.jpg",
+            "wikibase_item": "Q232631"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6995,
+              "lon": 139.63642,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

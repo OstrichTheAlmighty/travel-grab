@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:47:43.127Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 115245,
+          "ns": 0,
+          "title": "宇都宮清原球場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "うつのみやきよはらきゆうしよう",
+            "page_image_free": "Utsunomiya_Kiyohara_Baseball_Stadium.jpg",
+            "wikibase_item": "Q5365656"
+          },
+          "coordinates": [
+            {
+              "lat": 36.54358333,
+              "lon": 139.98391667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 233131,
+          "ns": 0,
+          "title": "福島県営あづま球場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふくしまけんえいあつまきゆうしよう",
+            "page_image_free": "Fukushima_Azuma_Baseball_Stadium_180408.jpg",
+            "wikibase_item": "Q15221182"
+          },
+          "coordinates": [
+            {
+              "lat": 37.72145833,
+              "lon": 140.36360278,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本・福島県福島市にある野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 656395,
+          "ns": 0,
+          "title": "郡山総合運動場開成山野球場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こおりやまそうこううんとうしようかいせいさんやきゆうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Kaiseizan_Baseball_field.jpg",
+            "wikibase_item": "Q11643198"
+          },
+          "coordinates": [
+            {
+              "lat": 37.39897,
+              "lon": 140.35919,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の福島県郡山市にある野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 1091585,
+          "ns": 0,
+          "title": "全国高等学校野球選手権福島大会",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "せんこくこうとうかつこうやきゆうせんしゆけんふくしまたいかい",
+            "page_image_free": "Fukushima_Azuma_Baseball_Stadium_180408.jpg",
+            "wikibase_item": "Q11389809"
+          },
+          "terms": {
+            "description": [
+              "夏の甲子園 福島県地方大会"
+            ]
+          }
+        },
+        {
+          "pageid": 4330373,
+          "ns": 0,
+          "title": "山野太一",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "やまの たいち",
+            "page_image_free": "東京ヤクルトスワローズの山野太一投手.jpg",
+            "wikibase_item": "Q106479435"
+          },
+          "terms": {
+            "description": [
+              "日本のプロ野球選手 (1999-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

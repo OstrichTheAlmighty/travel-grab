@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:10.765Z",
+  "value": {
+    "searchinfo": {
+      "search": "東映アニメーションミュージアム"
+    },
+    "search": [
+      {
+        "id": "Q18337440",
+        "title": "Q18337440",
+        "pageid": 19867178,
+        "concepturi": "http://www.wikidata.org/entity/Q18337440",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q18337440",
+        "display": {
+          "label": {
+            "value": "Toei Animation Museum",
+            "language": "en"
+          }
+        },
+        "label": "Toei Animation Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東映アニメーションミュージアム"
+        },
+        "aliases": [
+          "東映アニメーションミュージアム"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

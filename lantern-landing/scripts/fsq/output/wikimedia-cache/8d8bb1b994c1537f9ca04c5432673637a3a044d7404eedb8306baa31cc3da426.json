@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:47.459Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 20940,
+          "ns": 0,
+          "title": "中山さら",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なかやま さら",
+            "wikibase_item": "Q737933"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 142785,
+          "ns": 0,
+          "title": "さかなクン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さかなくん",
+            "page_image_free": "Masayuki_Miyazawa_cropped_2_Masayuki_Miyazawa_20141024.jpg",
+            "wikibase_item": "Q11267605"
+          },
+          "terms": {
+            "description": [
+              "日本のタレント、イラストレーター、魚類学者"
+            ]
+          }
+        },
+        {
+          "pageid": 1351454,
+          "ns": 0,
+          "title": "チムニー (居酒屋)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ちむにい",
+            "page_image_free": "Chimney-Group.jpg",
+            "wikibase_item": "Q11318025"
+          },
+          "terms": {
+            "description": [
+              "日本の居酒屋チェーンおよびその運営会社"
+            ]
+          }
+        },
+        {
+          "pageid": 1682308,
+          "ns": 0,
+          "title": "おさかなはあみの中",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おさかなはあみのなか",
+            "wikibase_item": "Q2074194"
+          },
+          "terms": {
+            "description": [
+              "乱魔猫吉による日本の連載漫画"
+            ]
+          }
+        },
+        {
+          "pageid": 2252804,
+          "ns": 0,
+          "title": "映画ドラえもん のび太の人魚大海戦",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とらえもんのひたのにんきよたいかいせん",
+            "wikibase_item": "Q1184894"
+          },
+          "terms": {
+            "description": [
+              "映画ドラえもんシリーズ通算第30作"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

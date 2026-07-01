@@ -1,0 +1,65 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:30.229Z",
+  "value": {
+    "searchinfo": {
+      "search": "ALE HOUSE"
+    },
+    "search": [
+      {
+        "id": "Q212198",
+        "title": "Q212198",
+        "pageid": 207770,
+        "concepturi": "http://www.wikidata.org/entity/Q212198",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q212198",
+        "display": {
+          "label": {
+            "value": "pub",
+            "language": "en"
+          },
+          "description": {
+            "value": "drinking establishment",
+            "language": "en"
+          }
+        },
+        "label": "pub",
+        "description": "drinking establishment",
+        "match": {
+          "type": "alias",
+          "language": "en",
+          "text": "ale house"
+        },
+        "aliases": [
+          "ale house"
+        ]
+      },
+      {
+        "id": "Q4714046",
+        "title": "Q4714046",
+        "pageid": 4504458,
+        "concepturi": "http://www.wikidata.org/entity/Q4714046",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q4714046",
+        "display": {
+          "label": {
+            "value": "Ale Houses Act 1551",
+            "language": "en"
+          },
+          "description": {
+            "value": "United Kingdom legislation",
+            "language": "en"
+          }
+        },
+        "label": "Ale Houses Act 1551",
+        "description": "United Kingdom legislation",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Ale Houses Act 1551"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

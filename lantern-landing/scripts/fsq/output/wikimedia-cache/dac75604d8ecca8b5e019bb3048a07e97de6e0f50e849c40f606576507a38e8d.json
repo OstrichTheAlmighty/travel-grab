@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:39.072Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 6781,
+          "ns": 0,
+          "title": "横浜駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "よこはま",
+            "kartographer_frames": "2",
+            "kartographer_links": "1",
+            "page_image_free": "Yokohama_Station_20240630.jpg",
+            "wikibase_item": "Q801658"
+          },
+          "coordinates": [
+            {
+              "lat": 35.46611111,
+              "lon": 139.6225,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県横浜市西区にある駅"
+            ]
+          }
+        },
+        {
+          "pageid": 8458,
+          "ns": 0,
+          "title": "神田駅 (東京都)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かんた",
+            "kartographer_frames": "1",
+            "page_image_free": "JR_Kanda_Station_-_North_exit_-_May_30_2021_various_18_27_16_704000.jpeg",
+            "wikibase_item": "Q800989"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69166667,
+              "lon": 139.77083333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある東日本旅客鉄道・東京地下鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 11800,
+          "ns": 0,
+          "title": "川越市",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かわこえし",
+            "kartographer_frames": "1",
+            "page_image_free": "TokiNoKane_Kawagoe_2013Feb.JPG",
+            "wikibase_item": "Q319740"
+          },
+          "coordinates": [
+            {
+              "lat": 35.92514,
+              "lon": 139.48578,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "埼玉県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 21029,
+          "ns": 0,
+          "title": "大森駅 (東京都)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおもり",
+            "kartographer_frames": "1",
+            "page_image_free": "大森駅東口.jpg",
+            "wikibase_item": "Q80420"
+          },
+          "coordinates": [
+            {
+              "lat": 35.58844444,
+              "lon": 139.72791667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都大田区大森北にある東日本旅客鉄道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

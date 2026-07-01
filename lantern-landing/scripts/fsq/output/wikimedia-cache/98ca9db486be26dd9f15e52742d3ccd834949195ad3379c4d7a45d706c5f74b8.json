@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:36.625Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3378,
+          "ns": 0,
+          "title": "ローマ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ろま",
+            "kartographer_frames": "1",
+            "page_image_free": "Collage_Rome.jpg",
+            "wikibase_item": "Q220"
+          },
+          "coordinates": [
+            {
+              "lat": 41.89305556,
+              "lon": 12.48277778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "イタリアの首都"
+            ]
+          }
+        },
+        {
+          "pageid": 8587,
+          "ns": 0,
+          "title": "名古屋市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なこやし",
+            "kartographer_frames": "1",
+            "page_image_free": "View_of_Westward_from_Sky_Deck_MIRAI360,_Nishiki_Naka_Ward_Nagoya_2022.jpg",
+            "wikibase_item": "Q11751"
+          },
+          "coordinates": [
+            {
+              "lat": 35.1814,
+              "lon": 136.9064,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県庁所在地"
+            ]
+          }
+        },
+        {
+          "pageid": 415366,
+          "ns": 0,
+          "title": "蕨宿",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "わらひしゆく",
+            "page_image_free": "Kisokaido02_Warabi.jpg",
+            "wikibase_item": "Q3566246"
+          },
+          "terms": {
+            "description": [
+              "中山道六十九次のうち江戸・日本橋から数えて2番目の宿場"
+            ]
+          }
+        },
+        {
+          "pageid": 1009922,
+          "ns": 0,
+          "title": "神田和泉町",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "かんたいすみちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Mitsui_Memorial_Hospital-1.JPG",
+            "wikibase_item": "Q3347167"
+          },
+          "terms": {
+            "description": [
+              "東京都千代田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1013639,
+          "ns": 0,
+          "title": "神田佐久間町",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かんたさくまちよう",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q3346623"
+          },
+          "terms": {
+            "description": [
+              "東京都千代田区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

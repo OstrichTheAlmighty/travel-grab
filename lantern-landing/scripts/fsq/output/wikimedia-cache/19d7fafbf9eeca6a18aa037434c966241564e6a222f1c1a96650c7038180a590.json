@@ -1,0 +1,125 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:13:57.118Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 25360,
+          "ns": 0,
+          "title": "浅草寺",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せんそうし",
+            "page_image_free": "Asakusa_Senso-ji_2021-12_ac_(2).jpg",
+            "wikibase_item": "Q615183"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71472222,
+              "lon": 139.79675,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 83544,
+          "ns": 0,
+          "title": "智積院",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ちしやくいん",
+            "page_image_free": "150124_Chishakuin_Kyoto_Japan01s3.jpg",
+            "wikibase_item": "Q11090279"
+          },
+          "coordinates": [
+            {
+              "lat": 34.98805556,
+              "lon": 135.77638889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市東山区にある寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 257380,
+          "ns": 0,
+          "title": "根来寺",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ねころし",
+            "page_image_free": "Negoroji_spring.JPG",
+            "wikibase_item": "Q1552446"
+          },
+          "coordinates": [
+            {
+              "lat": 34.28722222,
+              "lon": 135.31666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "和歌山県岩出市にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 1339772,
+          "ns": 0,
+          "title": "三宝院",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さんほういん",
+            "page_image_free": "Daigoji_Sanboin_Kyoto04n4592.jpg",
+            "wikibase_item": "Q3471686"
+          },
+          "coordinates": [
+            {
+              "lat": 34.95227778,
+              "lon": 135.81944444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市伏見区にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 1477932,
+          "ns": 0,
+          "title": "日本国指定名勝の一覧",
+          "index": 2,
+          "pageprops": {
+            "wikibase_item": "Q11507702"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

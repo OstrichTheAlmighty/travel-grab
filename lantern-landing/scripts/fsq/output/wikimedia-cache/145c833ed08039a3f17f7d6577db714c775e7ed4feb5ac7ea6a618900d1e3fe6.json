@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:37:41.955Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 29237,
+          "ns": 0,
+          "title": "歌舞伎座",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かふきさ",
+            "kartographer_frames": "1",
+            "page_image_free": "2019_Kabuki-za.jpg",
+            "wikibase_item": "Q3082575"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66952778,
+              "lon": 139.768,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の劇場"
+            ]
+          }
+        },
+        {
+          "pageid": 48384,
+          "ns": 0,
+          "title": "文久",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふんきゆう",
+            "wikibase_item": "Q730266"
+          },
+          "terms": {
+            "description": [
+              "日本の元号 (1861-1864)"
+            ]
+          }
+        },
+        {
+          "pageid": 392174,
+          "ns": 0,
+          "title": "御木本伸介",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "みきもと しんすけ",
+            "page_image_free": "Shinsuke_Mikimoto_1967.jpg",
+            "wikibase_item": "Q3544403"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優（1931-2002）"
+            ]
+          }
+        },
+        {
+          "pageid": 408175,
+          "ns": 0,
+          "title": "片岡愛之助 (6代目)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かたおか あいのすけ6",
+            "page_image_free": "Ainosuke_Kataoka_20240312_(cropped).jpg",
+            "wikibase_item": "Q11569726"
+          },
+          "terms": {
+            "description": [
+              "日本の歌舞伎役者、舞踊家"
+            ]
+          }
+        },
+        {
+          "pageid": 442165,
+          "ns": 0,
+          "title": "南座",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みなみさ",
+            "kartographer_frames": "1",
+            "page_image_free": "Shochiku_Minami-za.jpg",
+            "wikibase_item": "Q919524"
+          },
+          "coordinates": [
+            {
+              "lat": 35.00353056,
+              "lon": 135.77235278,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市東山区にある劇場"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

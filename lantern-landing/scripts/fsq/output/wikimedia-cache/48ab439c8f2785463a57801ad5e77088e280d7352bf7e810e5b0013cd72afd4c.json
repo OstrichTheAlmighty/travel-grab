@@ -1,0 +1,124 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:43.527Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 13722,
+          "ns": 0,
+          "title": "北区 (東京都)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "きたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Kyu-Furukawa_Tei_(House)2.jpg",
+            "wikibase_item": "Q235130"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75281,
+              "lon": 139.73356,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 26687,
+          "ns": 0,
+          "title": "飛鳥山公園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あすかやまこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Asukayama_Park.jpg",
+            "wikibase_item": "Q901172"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75056111,
+              "lon": 139.73888889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都北区の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 195088,
+          "ns": 0,
+          "title": "王子 (東京都北区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おうし",
+            "kartographer_frames": "1",
+            "page_image_free": "Oji_station_2005.jpg",
+            "wikibase_item": "Q11572961"
+          },
+          "terms": {
+            "description": [
+              "東京都北区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 346683,
+          "ns": 0,
+          "title": "田端 (東京都北区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たはた",
+            "kartographer_frames": "1",
+            "page_image_free": "TabataBunshimuraKinenkan20120109.jpg",
+            "wikibase_item": "Q3512734"
+          },
+          "terms": {
+            "description": [
+              "東京都北区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 2165580,
+          "ns": 0,
+          "title": "北区飛鳥山博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きたくあすかやまはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Kita_Ward_Asukayama_Museum.jpg",
+            "wikibase_item": "Q11401205"
+          },
+          "coordinates": [
+            {
+              "lat": 35.74958333,
+              "lon": 139.73902778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都北区の飛鳥山公園にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

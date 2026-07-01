@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:52.983Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 40090,
+          "ns": 0,
+          "title": "横浜スタジアム",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "よこはますたしあむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Yokohama_stadium_2020_wing.jpg",
+            "wikibase_item": "Q1148681"
+          },
+          "coordinates": [
+            {
+              "lat": 35.443428,
+              "lon": 139.6401,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県横浜市中区にある野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 41920,
+          "ns": 0,
+          "title": "広島市民球場 (初代)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひろしましみんきゆうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Hiroshima_Municipal_Baseball_Stadium_2008.JPG",
+            "wikibase_item": "Q8012748"
+          },
+          "coordinates": [
+            {
+              "lat": 34.39694444,
+              "lon": 132.455,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて広島市中区にあった野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 236376,
+          "ns": 0,
+          "title": "岡山県総合グラウンド陸上競技場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おかやまけんそうこうくらうんとりくしようきようきしよう",
+            "page_image_free": "Momotaro_Stadium_01.jpg",
+            "wikibase_item": "Q5363497"
+          },
+          "coordinates": [
+            {
+              "lat": 34.68065833,
+              "lon": 133.91963611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "岡山市にある陸上競技場"
+            ]
+          }
+        },
+        {
+          "pageid": 1384627,
+          "ns": 0,
+          "title": "阪神甲子園球場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はんしんこうしえんきゆうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "202309081549_IMG_3516.jpg",
+            "wikibase_item": "Q959811"
+          },
+          "terms": {
+            "description": [
+              "兵庫県西宮市にある野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 1487708,
+          "ns": 0,
+          "title": "MAZDA Zoom-Zoom スタジアム広島",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "まつたすうむすうむすたしあむひろしま",
+            "kartographer_frames": "1",
+            "page_image_free": "MAZDA_Zoom-Zoom_Stadium_Hiroshima（2019）.jpg",
+            "wikibase_item": "Q1038647"
+          },
+          "coordinates": [
+            {
+              "lat": 34.39185,
+              "lon": 132.484325,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "広島県広島市南区にある野球場"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

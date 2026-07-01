@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:17.479Z",
+  "value": {
+    "searchinfo": {
+      "search": "練馬区立美術館"
+    },
+    "search": [
+      {
+        "id": "Q11608069",
+        "title": "Q11608069",
+        "pageid": 12748401,
+        "concepturi": "http://www.wikidata.org/entity/Q11608069",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11608069",
+        "display": {
+          "label": {
+            "value": "Nerima Art Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Nerima Art Museum",
+        "description": "museum in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "練馬区立美術館"
+        },
+        "aliases": [
+          "練馬区立美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

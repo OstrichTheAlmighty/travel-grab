@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:05.365Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 65409,
+          "ns": 0,
+          "title": "DREAMS COME TRUE",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とりいむすかむとるう",
+            "wikibase_item": "Q1195268"
+          },
+          "terms": {
+            "description": [
+              "日本のバンド"
+            ]
+          }
+        },
+        {
+          "pageid": 71718,
+          "ns": 0,
+          "title": "橋本潮",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はしもと うしお",
+            "wikibase_item": "Q11544001"
+          },
+          "terms": {
+            "description": [
+              "日本の女性歌手"
+            ]
+          }
+        },
+        {
+          "pageid": 3329340,
+          "ns": 0,
+          "title": "手裏剣戦隊ニンニンジャーVSトッキュウジャー THE MOVIE 忍者・イン・ワンダーランド",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しゆりけんせんたいにんにんしやあたいとつきゆうしやあさむうひいにんしやいんわんたあらんと",
+            "wikibase_item": "Q21996444"
+          },
+          "terms": {
+            "description": [
+              "2016年に公開された日本の映画"
+            ]
+          }
+        },
+        {
+          "pageid": 4001877,
+          "ns": 0,
+          "title": "島村龍乃介",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しまむら りゆうのすけ",
+            "wikibase_item": "Q74146980"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優"
+            ]
+          }
+        },
+        {
+          "pageid": 4242398,
+          "ns": 0,
+          "title": "DRIPPIN",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とりつひん",
+            "page_image_free": "201114_드리핀_DRIPPIN.png",
+            "wikibase_item": "Q101529768"
+          },
+          "terms": {
+            "description": [
+              "韓国の男性アイドルグループ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

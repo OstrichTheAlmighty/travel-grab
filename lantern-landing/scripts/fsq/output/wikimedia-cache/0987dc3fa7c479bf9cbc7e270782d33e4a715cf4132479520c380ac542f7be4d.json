@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:02.410Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 5292,
+          "ns": 0,
+          "title": "松尾芭蕉",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "まつお はしよう",
+            "page_image_free": "Basho_by_Morikawa_Kyoriku_(1656-1715).jpg",
+            "wikibase_item": "Q5676"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸時代前期の俳諧師 (1644-1694)"
+            ]
+          }
+        },
+        {
+          "pageid": 18792,
+          "ns": 0,
+          "title": "文京区",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふんきようく",
+            "kartographer_frames": "1",
+            "page_image_free": "Akamon,_University_of_Tokyo_2019.jpg",
+            "wikibase_item": "Q212713"
+          },
+          "coordinates": [
+            {
+              "lat": 35.708,
+              "lon": 139.75225,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 36619,
+          "ns": 0,
+          "title": "江戸川橋駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "えとかわはし",
+            "kartographer_frames": "1",
+            "page_image_free": "Edogawabashi-station-renewal-exit3.jpg",
+            "wikibase_item": "Q331929"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70944444,
+              "lon": 139.73352778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区にある東京地下鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 1041082,
+          "ns": 0,
+          "title": "肥後細川庭園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひこほそかわていえん",
+            "page_image_free": "Shin-Edogawa_Garden_(1).jpg",
+            "wikibase_item": "Q3162465"
+          },
+          "terms": {
+            "description": [
+              "東京都文京区にある公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1620312,
+          "ns": 0,
+          "title": "関口芭蕉庵",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せきくちはしようあん",
+            "page_image_free": "Sekiguchi_basyoan_bunkyo_tokyo_2009.JPG",
+            "wikibase_item": "Q11655663"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71230556,
+              "lon": 139.7235,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都文京区関口にある史跡"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

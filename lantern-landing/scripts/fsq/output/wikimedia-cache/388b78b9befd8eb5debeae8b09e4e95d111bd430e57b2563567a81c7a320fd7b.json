@@ -1,0 +1,111 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:05.557Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 23905,
+          "ns": 0,
+          "title": "皇室",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こうしつ",
+            "page_image_free": "Imperial_Seal_of_Japan.svg",
+            "wikibase_item": "Q909452"
+          },
+          "terms": {
+            "description": [
+              "日本の天皇と皇族で構成される一族"
+            ]
+          }
+        },
+        {
+          "pageid": 205457,
+          "ns": 0,
+          "title": "御用邸",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こようてい",
+            "wikibase_item": "Q67097832"
+          },
+          "terms": {
+            "description": [
+              "天皇や皇族の別荘"
+            ]
+          }
+        },
+        {
+          "pageid": 564361,
+          "ns": 0,
+          "title": "正仁親王妃華子",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "まさひとしんのうひ はなこ",
+            "page_image_free": "Princess_Hitachi_2012-1-2.jpg",
+            "wikibase_item": "Q448078"
+          },
+          "terms": {
+            "description": [
+              "日本の女性皇族、常陸宮正仁親王妃 (1940-)"
+            ]
+          }
+        },
+        {
+          "pageid": 590562,
+          "ns": 0,
+          "title": "赤坂御用地",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あかさかこようち",
+            "kartographer_frames": "1",
+            "page_image_free": "Akasakagoyouti.JPG",
+            "wikibase_item": "Q11635414"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67738889,
+              "lon": 139.72858333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京の皇室用地"
+            ]
+          }
+        },
+        {
+          "pageid": 3969600,
+          "ns": 0,
+          "title": "常盤松御用邸",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ときわまつこようてい",
+            "page_image_free": "Woods_of_Hitachinomiya_Palace_Tokyo_2.jpg",
+            "wikibase_item": "Q65266322"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6575,
+              "lon": 139.7125,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区東にある常陸宮家の邸宅"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

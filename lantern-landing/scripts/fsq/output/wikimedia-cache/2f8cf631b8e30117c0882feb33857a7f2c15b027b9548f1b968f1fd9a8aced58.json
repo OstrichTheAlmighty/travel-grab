@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:50.130Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 4523,
+          "ns": 0,
+          "title": "上野駅",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "うえの",
+            "kartographer_frames": "1",
+            "page_image_free": "JRE-Ueno-STA.jpg",
+            "wikibase_item": "Q801551"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71388889,
+              "lon": 139.77722222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある東日本旅客鉄道・東京地下鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 103722,
+          "ns": 0,
+          "title": "発車メロディ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はつしやめろてい",
+            "wikibase_item": "Q7832892"
+          },
+          "terms": {
+            "description": [
+              "鉄道駅において列車の発車を知らせるための音楽"
+            ]
+          }
+        },
+        {
+          "pageid": 227038,
+          "ns": 0,
+          "title": "井沢八郎",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いさわ はちろう",
+            "wikibase_item": "Q10882489"
+          },
+          "terms": {
+            "description": [
+              "日本の演歌歌手（1937−2007）"
+            ]
+          }
+        },
+        {
+          "pageid": 850486,
+          "ns": 0,
+          "title": "あゝ上野駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ああうえのえき",
+            "wikibase_item": "Q11258907"
+          },
+          "terms": {
+            "description": [
+              "1964年の井沢八郎のシングル曲"
+            ]
+          }
+        },
+        {
+          "pageid": 1035279,
+          "ns": 0,
+          "title": "違星北斗",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いほし ほくと",
+            "page_image_free": "Kotan05pic.gif",
+            "wikibase_item": "Q11265914"
+          },
+          "terms": {
+            "description": [
+              "アイヌの歌人、社会運動家 (1901-1929)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

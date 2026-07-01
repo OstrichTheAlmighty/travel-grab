@@ -1,0 +1,81 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:06.550Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 121202,
+          "ns": 0,
+          "title": "麦人",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "むきひと",
+            "wikibase_item": "Q2462286"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優、声優 (1944-)"
+            ]
+          }
+        },
+        {
+          "pageid": 220887,
+          "ns": 0,
+          "title": "小川真司",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おかわ しんし",
+            "wikibase_item": "Q3482247"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優、ナレーター (1941-2015)"
+            ]
+          }
+        },
+        {
+          "pageid": 2242397,
+          "ns": 0,
+          "title": "タンタンの冒険/ユニコーン号の秘密",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たんたんのほうけんゆにこおんこうのひみつ",
+            "wikibase_item": "Q980041"
+          }
+        },
+        {
+          "pageid": 2410703,
+          "ns": 0,
+          "title": "デジモン一覧 (た-は)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "てしもんいちらんたは",
+            "noindex": "",
+            "wikibase_item": "Q11320548"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2752245,
+          "ns": 0,
+          "title": "第62回英国アカデミー賞",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えいこくあかてみいしよう",
+            "wikibase_item": "Q918684"
+          }
+        }
+      ]
+    }
+  }
+}

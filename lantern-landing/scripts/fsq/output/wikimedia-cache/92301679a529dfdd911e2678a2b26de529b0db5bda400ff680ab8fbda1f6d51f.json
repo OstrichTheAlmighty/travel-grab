@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:52.282Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 37596,
+          "ns": 0,
+          "title": "佐世保市",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "させほし",
+            "kartographer_frames": "1",
+            "page_image_free": "Sasebo_Montage.jpg",
+            "wikibase_item": "Q328000"
+          },
+          "coordinates": [
+            {
+              "lat": 33.18,
+              "lon": 129.715,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長崎県の都市"
+            ]
+          }
+        },
+        {
+          "pageid": 38484,
+          "ns": 0,
+          "title": "小郡市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おこおりし",
+            "kartographer_frames": "1",
+            "page_image_free": "View_of_Sammon_Gate_of_Nyoirinji_Temple_20160515.jpg",
+            "wikibase_item": "Q683248"
+          },
+          "coordinates": [
+            {
+              "lat": 33.3964,
+              "lon": 130.5556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福岡県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 74983,
+          "ns": 0,
+          "title": "須磨区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "すまく",
+            "kartographer_frames": "1",
+            "page_image_free": "Suma_Beach.jpg",
+            "wikibase_item": "Q1155010"
+          },
+          "coordinates": [
+            {
+              "lat": 34.65864,
+              "lon": 135.13369,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県神戸市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 628219,
+          "ns": 0,
+          "title": "奴国の丘歴史公園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "なこくのおかれきしこうえん",
+            "page_image_free": "岡本遺跡の覆屋_Up200608032200.jpg",
+            "wikibase_item": "Q11446615"
+          },
+          "coordinates": [
+            {
+              "lat": 33.53805556,
+              "lon": 130.45166667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福岡県春日市にある須玖岡本遺跡を中心とした公園"
+            ]
+          }
+        },
+        {
+          "pageid": 4389566,
+          "ns": 0,
+          "title": "生の松原 (福岡市)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いきのまつはら",
+            "kartographer_frames": "1",
+            "page_image_free": "Ikinomatsubara_Beach_Ikinomatsubara-1-chōme_Nishi-ku_Fukuoka_City_20221107.jpg",
+            "wikibase_item": "Q115118040"
+          },
+          "terms": {
+            "description": [
+              "福岡市西区の地名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

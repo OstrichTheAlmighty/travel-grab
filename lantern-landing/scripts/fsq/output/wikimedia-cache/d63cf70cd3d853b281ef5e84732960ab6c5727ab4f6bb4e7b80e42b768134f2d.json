@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:50.703Z",
+  "value": {
+    "searchinfo": {
+      "search": "すみだ郷土文化資料館"
+    },
+    "search": [
+      {
+        "id": "Q104698259",
+        "title": "Q104698259",
+        "pageid": 100126213,
+        "concepturi": "http://www.wikidata.org/entity/Q104698259",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q104698259",
+        "display": {
+          "label": {
+            "value": "Sumida Heritage Museum",
+            "language": "en"
+          }
+        },
+        "label": "Sumida Heritage Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "すみだ郷土文化資料館"
+        },
+        "aliases": [
+          "すみだ郷土文化資料館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

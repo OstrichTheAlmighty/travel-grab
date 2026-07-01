@@ -1,0 +1,94 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:09.377Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 403334,
+          "ns": 0,
+          "title": "Ranbaxy Laboratories",
+          "index": 2,
+          "pageprops": {
+            "wikibase-shortdesc": "Defunct Indian pharmaceutical manufacturer",
+            "wikibase_item": "Q377214"
+          },
+          "terms": {
+            "description": [
+              "former Indian pharmaceutical company"
+            ]
+          }
+        },
+        {
+          "pageid": 769166,
+          "ns": 0,
+          "title": "Esomeprazole",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Esomeprazole_ball-and-stick_model.png",
+            "wikibase-shortdesc": "Medication which reduces stomach acid",
+            "wikibase_item": "Q553223"
+          },
+          "terms": {
+            "description": [
+              "chemical compound"
+            ]
+          }
+        },
+        {
+          "pageid": 5715314,
+          "ns": 0,
+          "title": "Daiichi Sankyo",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Daiichi-sankyo_logomark.svg",
+            "wikibase-shortdesc": "Japanese pharmaceutical company",
+            "wikibase_item": "Q669441"
+          },
+          "terms": {
+            "description": [
+              "Japanese pharmaceutical company"
+            ]
+          }
+        },
+        {
+          "pageid": 46404357,
+          "ns": 0,
+          "title": "Mirogabalin",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Mirogabalin_structure.svg",
+            "wikibase-shortdesc": "Chemical compound",
+            "wikibase_item": "Q20706932"
+          },
+          "terms": {
+            "description": [
+              "chemical compound"
+            ]
+          }
+        },
+        {
+          "pageid": 53494176,
+          "ns": 0,
+          "title": "List of largest biomedical companies by revenue",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "List Of Biotechnology Companies",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q30594719"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:23.745Z",
+  "value": {
+    "searchinfo": {
+      "search": "宗教法人八幡神社"
+    },
+    "search": [
+      {
+        "id": "Q132681293",
+        "title": "Q132681293",
+        "pageid": 126539910,
+        "concepturi": "http://www.wikidata.org/entity/Q132681293",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q132681293",
+        "display": {
+          "label": {
+            "value": "Hachiman Shrine",
+            "language": "en"
+          },
+          "description": {
+            "value": "Shinto shrine in Iwaname, Kakegawa City, Shizuoka Prefecture, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Hachiman Shrine",
+        "description": "Shinto shrine in Iwaname, Kakegawa City, Shizuoka Prefecture, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "宗教法人八幡神社"
+        },
+        "aliases": [
+          "宗教法人八幡神社"
+        ]
+      },
+      {
+        "id": "Q131274488",
+        "title": "Q131274488",
+        "pageid": 125168938,
+        "concepturi": "http://www.wikidata.org/entity/Q131274488",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q131274488",
+        "display": {
+          "label": {
+            "value": "Hachiman Shrine",
+            "language": "en"
+          },
+          "description": {
+            "value": "Shinto shrine in Suruga-ku, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Hachiman Shrine",
+        "description": "Shinto shrine in Suruga-ku, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "宗教法人八幡神社"
+        },
+        "aliases": [
+          "宗教法人八幡神社"
+        ]
+      },
+      {
+        "id": "Q134955714",
+        "title": "Q134955714",
+        "pageid": 128781197,
+        "concepturi": "http://www.wikidata.org/entity/Q134955714",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q134955714",
+        "display": {
+          "label": {
+            "value": "宗教法人八幡神社",
+            "language": "ja"
+          }
+        },
+        "label": "宗教法人八幡神社",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "宗教法人八幡神社"
+        }
+      },
+      {
+        "id": "Q134887343",
+        "title": "Q134887343",
+        "pageid": 128713752,
+        "concepturi": "http://www.wikidata.org/entity/Q134887343",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q134887343",
+        "display": {
+          "label": {
+            "value": "Hachiman Shrine",
+            "language": "en"
+          },
+          "description": {
+            "value": "Shinto shrine in Kamikawa, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Hachiman Shrine",
+        "description": "Shinto shrine in Kamikawa, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "宗教法人八幡神社"
+        },
+        "aliases": [
+          "宗教法人八幡神社"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

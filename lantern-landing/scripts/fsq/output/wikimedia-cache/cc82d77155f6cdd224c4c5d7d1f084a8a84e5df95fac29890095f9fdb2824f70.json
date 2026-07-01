@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:28.406Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17387,
+          "ns": 0,
+          "title": "成田市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なりたし",
+            "kartographer_frames": "1",
+            "page_image_free": "Narita_montage2.jpg",
+            "wikibase_item": "Q273798"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7767,
+              "lon": 140.3183,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 26026,
+          "ns": 0,
+          "title": "愛新覚羅溥儀",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あいしんかくら ふき",
+            "page_image_free": "溥仪.jpg",
+            "wikibase_item": "Q185152"
+          },
+          "terms": {
+            "description": [
+              "中国の皇族、第12代清国皇帝、初代満洲国皇帝 (1906-1967)"
+            ]
+          }
+        },
+        {
+          "pageid": 59484,
+          "ns": 0,
+          "title": "代々木八幡駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "よよきはちまん",
+            "kartographer_frames": "1",
+            "page_image_free": "Yoyogi-Hachiman-West-Exit-202009.jpg",
+            "wikibase_item": "Q1083866"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66944444,
+              "lon": 139.68861111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区代々木にある小田急電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 95234,
+          "ns": 0,
+          "title": "根上淳",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ねかみ しゆん",
+            "page_image": "Negami_jun_1960.jpeg",
+            "wikibase_item": "Q708654"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優（1923−2005）"
+            ]
+          }
+        },
+        {
+          "pageid": 249618,
+          "ns": 0,
+          "title": "ラングレー (CV-1)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "らんくれい1",
+            "page_image_free": "USS_Langley_(CV-1)_underway_in_June_1927_(cropped).jpg",
+            "wikibase_item": "Q860057"
+          },
+          "coordinates": [
+            {
+              "lat": -8.85111111,
+              "lon": 109.03416667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "艦"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

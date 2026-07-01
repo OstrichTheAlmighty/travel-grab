@@ -1,0 +1,86 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:54.319Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 91540,
+          "ns": 0,
+          "title": "中村雅俊",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "なかむら まさとし",
+            "wikibase_item": "Q2817191"
+          },
+          "terms": {
+            "description": [
+              "日本の俳優、歌手、タレント、司会者、ナレーター"
+            ]
+          }
+        },
+        {
+          "pageid": 259356,
+          "ns": 0,
+          "title": "氷上恭子",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ひかみ きようこ",
+            "wikibase_item": "Q1063785"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 864259,
+          "ns": 0,
+          "title": "ヒューネックス",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ひゆうねつくす",
+            "wikibase_item": "Q5942495"
+          }
+        },
+        {
+          "pageid": 1192020,
+          "ns": 0,
+          "title": "伊藤静",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "いとう しすか",
+            "wikibase_item": "Q269542"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 2944330,
+          "ns": 0,
+          "title": "伊達朱里紗",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たて ありさ",
+            "page_image_free": "日本プロ麻雀連盟伊達朱里紗プロの写真.jpg",
+            "wikibase_item": "Q17160797"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優、プロ雀士"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

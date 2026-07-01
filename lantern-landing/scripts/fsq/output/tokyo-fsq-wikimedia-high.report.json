@@ -1,0 +1,115 @@
+{
+  "generatedAt": "2026-06-29T08:01:25.266Z",
+  "eligibility": "high_wikimedia_likelihood",
+  "totalInputRecords": 1474,
+  "verifiedRecords": 248,
+  "verifiedEnrichmentApplied": 248,
+  "probableManualReviewRecords": 18,
+  "rejectedRecords": 1198,
+  "unmatchedRecords": 10,
+  "knownFalseAutomaticMatches": [],
+  "inconsistentVerifiedRecords": [],
+  "englishNameCoverage": {
+    "count": 425,
+    "rate": 0.2883310719131615
+  },
+  "descriptionCoverage": {
+    "count": 240,
+    "rate": 0.1628222523744912
+  },
+  "reusableImageCoverage": {
+    "count": 216,
+    "rate": 0.14654002713704206
+  },
+  "completeImageAttributionCount": 216,
+  "excludedImageCount": 0,
+  "excludedImages": [],
+  "licenseDistribution": {
+    "Attribution": 1,
+    "CC BY 2.0": 4,
+    "CC BY 2.5": 4,
+    "CC BY 3.0": 8,
+    "CC BY 4.0": 4,
+    "CC BY-SA 2.0": 1,
+    "CC BY-SA 3.0": 66,
+    "CC BY-SA 4.0": 61,
+    "CC0": 37,
+    "Public domain": 30
+  },
+  "recordsUnchangedFromFsq": 1226,
+  "duplicateCount": 0,
+  "missingRecordCount": 0,
+  "missingRecordIds": [],
+  "uniqueFsqPlaceIds": 1474,
+  "batchCounts": {
+    "1": {
+      "records": 250,
+      "verified": 120,
+      "probable_manual_review": 4,
+      "rejected": 123,
+      "unmatched": 3,
+      "apiRequests": 693,
+      "cacheHits": 603,
+      "runtimeMs": 243737
+    },
+    "2": {
+      "records": 250,
+      "verified": 42,
+      "probable_manual_review": 2,
+      "rejected": 206,
+      "unmatched": 0,
+      "apiRequests": 1040,
+      "cacheHits": 251,
+      "runtimeMs": 336196
+    },
+    "3": {
+      "records": 250,
+      "verified": 38,
+      "probable_manual_review": 0,
+      "rejected": 210,
+      "unmatched": 2,
+      "apiRequests": 1296,
+      "cacheHits": 17,
+      "runtimeMs": 410964
+    },
+    "4": {
+      "records": 250,
+      "verified": 33,
+      "probable_manual_review": 4,
+      "rejected": 211,
+      "unmatched": 2,
+      "apiRequests": 1266,
+      "cacheHits": 19,
+      "runtimeMs": 401863
+    },
+    "5": {
+      "records": 250,
+      "verified": 6,
+      "probable_manual_review": 8,
+      "rejected": 235,
+      "unmatched": 1,
+      "apiRequests": 1246,
+      "cacheHits": 69,
+      "runtimeMs": 390043
+    },
+    "6": {
+      "records": 224,
+      "verified": 9,
+      "probable_manual_review": 0,
+      "rejected": 213,
+      "unmatched": 2,
+      "apiRequests": 1144,
+      "cacheHits": 21,
+      "runtimeMs": 355344
+    }
+  },
+  "totalPriorApiRequests": 6685,
+  "totalPriorCacheHits": 980,
+  "aggregateRuntimeMs": 2138147,
+  "batchIntegrityPassed": true,
+  "noNewApiRequests": true,
+  "noSupabaseWrites": true,
+  "probableMatchesAutomaticallyApplied": 0,
+  "automaticOverridesGenerated": 0,
+  "consolidationRuntimeMs": 987
+}

@@ -1,0 +1,125 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:06.970Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 258785,
+          "ns": 0,
+          "title": "世田谷区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せたかやく",
+            "kartographer_frames": "1",
+            "page_image_free": "Seijo_namikimichi_231011.jpg",
+            "wikibase_item": "Q231645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64656,
+              "lon": 139.65322,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 583842,
+          "ns": 0,
+          "title": "周南市徳山動物園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しゆうなんしとくやまとうふつえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokuyamazoo.jpg",
+            "wikibase_item": "Q11416862"
+          },
+          "coordinates": [
+            {
+              "lat": 34.06141667,
+              "lon": 131.81486111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "山口県周南市にある動物園"
+            ]
+          }
+        },
+        {
+          "pageid": 870280,
+          "ns": 0,
+          "title": "世田谷公園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "せたかやこうえん",
+            "page_image_free": "Setagaya_Park2.jpg",
+            "wikibase_item": "Q11362060"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64333333,
+              "lon": 139.68111111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都世田谷区にある公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1637928,
+          "ns": 0,
+          "title": "Easy sports",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "いいしいすほつ",
+            "displaytitle": "easy sports",
+            "wikibase_item": "Q11198167"
+          }
+        },
+        {
+          "pageid": 4368783,
+          "ns": 0,
+          "title": "としまキッズパーク",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "としまきつすはあく",
+            "kartographer_frames": "1",
+            "page_image_free": "Toshima_Kids_Park_2020-09-29.jpg",
+            "wikibase_item": "Q106707543"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72730556,
+              "lon": 139.72138889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区の公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

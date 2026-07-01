@@ -1,0 +1,112 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:37.944Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8652,
+          "ns": 0,
+          "title": "中目黒駅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なかめくろ",
+            "kartographer_frames": "1",
+            "page_image_free": "Naka-Meguro_Station_2014.jpg",
+            "wikibase_item": "Q1132605"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6443,
+              "lon": 139.6992,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都目黒区にある東急電鉄・東京地下鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 36467,
+          "ns": 0,
+          "title": "中原区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なかはらく",
+            "kartographer_frames": "1",
+            "page_image_free": "Nakahara-heiwa_park_,_Kawasaki_-_panoramio.jpg",
+            "wikibase_item": "Q1205359"
+          },
+          "coordinates": [
+            {
+              "lat": 35.57627778,
+              "lon": 139.65575,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県川崎市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 59017,
+          "ns": 0,
+          "title": "阿波踊り",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あわおとり",
+            "page_image_free": "Awa-odori_2008_Tokushima.jpg",
+            "wikibase_item": "Q1185363"
+          },
+          "terms": {
+            "description": [
+              "徳島県を発祥とする盆踊り"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1691666,
+          "ns": 0,
+          "title": "東京都の観光地",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようと",
+            "page_image_free": "東京都区部-観光地図-1.jpg",
+            "wikibase_item": "Q10860697"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

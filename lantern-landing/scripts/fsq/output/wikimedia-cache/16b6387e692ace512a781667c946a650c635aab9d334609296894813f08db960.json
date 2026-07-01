@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:12.439Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3204,
+          "ns": 0,
+          "title": "芥川龍之介",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あくたかわ りゆうのすけ",
+            "page_image_free": "AkutagawaRyunosuke.jpg",
+            "wikibase_item": "Q186326"
+          },
+          "terms": {
+            "description": [
+              "日本の作家 (1892-1927)"
+            ]
+          }
+        },
+        {
+          "pageid": 346683,
+          "ns": 0,
+          "title": "田端 (東京都北区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たはた",
+            "kartographer_frames": "1",
+            "page_image_free": "TabataBunshimuraKinenkan20120109.jpg",
+            "wikibase_item": "Q3512734"
+          },
+          "terms": {
+            "description": [
+              "東京都北区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1600572,
+          "ns": 0,
+          "title": "吉田三郎",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "よした さふろう",
+            "wikibase_item": "Q11413557"
+          },
+          "terms": {
+            "description": [
+              "1889-1962, 彫刻家、日本芸術院会員"
+            ]
+          }
+        },
+        {
+          "pageid": 2704662,
+          "ns": 0,
+          "title": "田端文士村記念館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "たはたふんしむらきねんかん",
+            "kartographer_frames": "2",
+            "page_image_free": "TabataBunshimuraKinenkan20120109.jpg",
+            "wikibase_item": "Q11577225"
+          },
+          "coordinates": [
+            {
+              "lat": 35.738472,
+              "lon": 139.759278,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都北区にある文学館・公民館"
+            ]
+          }
+        },
+        {
+          "pageid": 3221316,
+          "ns": 0,
+          "title": "田端文士村",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "たはたふんしむら",
+            "wikibase_item": "Q21015453"
+          },
+          "terms": {
+            "description": [
+              "明治末期から昭和初期まで、現在の東京都北区に形成されていた文士村"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

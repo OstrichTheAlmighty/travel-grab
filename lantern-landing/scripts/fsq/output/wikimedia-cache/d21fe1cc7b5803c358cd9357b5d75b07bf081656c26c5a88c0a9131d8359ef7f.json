@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:49.386Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2083849,
+          "ns": 0,
+          "title": "Labo, Camarines Norte",
+          "index": 2,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Ph_locator_camarines_norte_labo.png",
+            "wikibase-shortdesc": "Municipality in Camarines Norte, Philippines",
+            "wikibase_item": "Q356708"
+          },
+          "coordinates": [
+            {
+              "lat": 14.1561,
+              "lon": 122.8294,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "municipality of the Philippines in the province of Camarines Norte"
+            ]
+          }
+        },
+        {
+          "pageid": 2138672,
+          "ns": 0,
+          "title": "Ozamiz",
+          "index": 1,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Ozamiz_City,_Mount_Malindang_view_from_Panguil_Bay_(Misamis_Occidental;_01-24-2024).jpg",
+            "wikibase-shortdesc": "Component city in Misamis Occidental, Philippines",
+            "wikibase_item": "Q263837"
+          },
+          "coordinates": [
+            {
+              "lat": 8.15,
+              "lon": 123.85,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "city of the Philippines in the province of Misamis Occidental"
+            ]
+          }
+        },
+        {
+          "pageid": 8267850,
+          "ns": 0,
+          "title": "Suzuki Carry",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Suzuki_Carry_Truck_KC_4WD_DA16T.JPG",
+            "wikibase-shortdesc": "Kei truck produced by the Japanese automaker Suzuki",
+            "wikibase_item": "Q488761"
+          },
+          "terms": {
+            "description": [
+              "Japanese kei truck"
+            ]
+          }
+        },
+        {
+          "pageid": 46898197,
+          "ns": 0,
+          "title": "Labo National High School",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "wikibase-shortdesc": "Public high school in Misamis Occidental, Philippines",
+            "wikibase_item": "Q25052501"
+          },
+          "coordinates": [
+            {
+              "lat": 8.18031,
+              "lon": 123.83106,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "public government-owned high school in Labo, Philippines"
+            ]
+          }
+        },
+        {
+          "pageid": 56333950,
+          "ns": 0,
+          "title": "Nintendo Labo",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Labo-logo-make-play.svg",
+            "wikibase-shortdesc": "Video game series",
+            "wikibase_item": "Q47457020"
+          },
+          "terms": {
+            "description": [
+              "toys-to-life concept developed by Nintendo"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

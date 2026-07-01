@@ -1,0 +1,147 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:49.272Z",
+  "value": {
+    "searchinfo": {
+      "search": "Biglietteria"
+    },
+    "search": [
+      {
+        "id": "Q56845288",
+        "title": "Q56845288",
+        "pageid": 56764525,
+        "concepturi": "http://www.wikidata.org/entity/Q56845288",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q56845288",
+        "display": {
+          "label": {
+            "value": "ticket office",
+            "language": "en"
+          },
+          "description": {
+            "value": "place where tickets are sold to the public for transport",
+            "language": "en"
+          }
+        },
+        "label": "ticket office",
+        "description": "place where tickets are sold to the public for transport",
+        "match": {
+          "type": "label",
+          "language": "it",
+          "text": "biglietteria"
+        },
+        "aliases": [
+          "biglietteria"
+        ]
+      },
+      {
+        "id": "Q47519615",
+        "title": "Q47519615",
+        "pageid": 48562835,
+        "concepturi": "http://www.wikidata.org/entity/Q47519615",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q47519615",
+        "display": {
+          "label": {
+            "value": "ticket shop",
+            "language": "en"
+          },
+          "description": {
+            "value": "shop selling tickets for concerts, events or public transport",
+            "language": "en"
+          }
+        },
+        "label": "ticket shop",
+        "description": "shop selling tickets for concerts, events or public transport",
+        "match": {
+          "type": "label",
+          "language": "it",
+          "text": "biglietteria"
+        },
+        "aliases": [
+          "biglietteria"
+        ]
+      },
+      {
+        "id": "Q877435",
+        "title": "Q877435",
+        "pageid": 828680,
+        "concepturi": "http://www.wikidata.org/entity/Q877435",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q877435",
+        "display": {
+          "label": {
+            "value": "box office",
+            "language": "en"
+          },
+          "description": {
+            "value": "place where tickets are sold to the public for admission to an event",
+            "language": "en"
+          }
+        },
+        "label": "box office",
+        "description": "place where tickets are sold to the public for admission to an event",
+        "match": {
+          "type": "alias",
+          "language": "it",
+          "text": "biglietteria"
+        },
+        "aliases": [
+          "biglietteria"
+        ]
+      },
+      {
+        "id": "Q657345",
+        "title": "Q657345",
+        "pageid": 618689,
+        "concepturi": "http://www.wikidata.org/entity/Q657345",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q657345",
+        "display": {
+          "label": {
+            "value": "ticket machine",
+            "language": "en"
+          },
+          "description": {
+            "value": "vending machine that produces paper or electronic tickets",
+            "language": "en"
+          }
+        },
+        "label": "ticket machine",
+        "description": "vending machine that produces paper or electronic tickets",
+        "match": {
+          "type": "label",
+          "language": "it",
+          "text": "biglietteria automatica"
+        },
+        "aliases": [
+          "biglietteria automatica"
+        ]
+      },
+      {
+        "id": "Q1392425",
+        "title": "Q1392425",
+        "pageid": 1331521,
+        "concepturi": "http://www.wikidata.org/entity/Q1392425",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1392425",
+        "display": {
+          "label": {
+            "value": "railway ticket counter",
+            "language": "en"
+          }
+        },
+        "label": "railway ticket counter",
+        "match": {
+          "type": "label",
+          "language": "it",
+          "text": "biglietteria ferroviaria"
+        },
+        "aliases": [
+          "biglietteria ferroviaria"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

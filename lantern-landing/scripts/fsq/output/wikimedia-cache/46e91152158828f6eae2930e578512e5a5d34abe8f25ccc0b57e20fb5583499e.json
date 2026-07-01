@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:17:52.001Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 2116192,
+          "ns": 0,
+          "title": "杉並区立角川庭園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すきなみくりつかとかわていえん",
+            "page_image_free": "Kadokawa_Teien_(Suginami_Tokyo_).JPG",
+            "wikibase_item": "Q11521698"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69879722,
+              "lon": 139.62446111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都杉並区の公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

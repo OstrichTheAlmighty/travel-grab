@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:38.194Z",
+  "value": {
+    "searchinfo": {
+      "search": "トゥーンパーク"
+    },
+    "search": [
+      {
+        "id": "Q6600320",
+        "title": "Q6600320",
+        "pageid": 6427084,
+        "concepturi": "http://www.wikidata.org/entity/Q6600320",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q6600320",
+        "display": {
+          "label": {
+            "value": "list of Tokyo Disneyland attractions",
+            "language": "en"
+          },
+          "description": {
+            "value": "Wikimedia list article",
+            "language": "en"
+          }
+        },
+        "label": "list of Tokyo Disneyland attractions",
+        "description": "Wikimedia list article",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "トゥーンパーク"
+        },
+        "aliases": [
+          "トゥーンパーク"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

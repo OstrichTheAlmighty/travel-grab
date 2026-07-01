@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:06.674Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 175779,
+          "ns": 0,
+          "title": "浜離宮恩賜庭園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はまりきゆうおんしていえん",
+            "kartographer_frames": "1",
+            "page_image_free": "2018_Hama-rikyū_Garden_02.jpg",
+            "wikibase_item": "Q1033333"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66,
+              "lon": 139.76361111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都中央区の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 518794,
+          "ns": 0,
+          "title": "破れ傘刀舟悪人狩り",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "やふれかさとうしゆうあくにんかり",
+            "wikibase_item": "Q11587586"
+          }
+        },
+        {
+          "pageid": 1483031,
+          "ns": 0,
+          "title": "日本映画批評家大賞",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にほんえいかひひようかたいしよう",
+            "wikibase_item": "Q11508250"
+          },
+          "terms": {
+            "description": [
+              "映画批評家が選考する日本の映画賞"
+            ]
+          }
+        },
+        {
+          "pageid": 2018030,
+          "ns": 0,
+          "title": "東京俳優市場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようはいゆういちは",
+            "wikibase_item": "Q11524524"
+          },
+          "terms": {
+            "description": [
+              "日本の演劇プロジェクト"
+            ]
+          }
+        },
+        {
+          "pageid": 4439492,
+          "ns": 0,
+          "title": "24時間テレビ37 愛は地球を救う",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "24しかんてれひ37あいはちきゆうをすくう",
+            "page_image_free": "Nippon_Budokan_2010.jpg",
+            "wikibase_item": "Q109598079"
+          },
+          "terms": {
+            "description": [
+              "日本テレビの番組（2014年）"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

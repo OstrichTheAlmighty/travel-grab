@@ -1,0 +1,77 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:50.662Z",
+  "value": {
+    "searchinfo": {
+      "search": "Samurai Museum"
+    },
+    "search": [
+      {
+        "id": "Q116917907",
+        "title": "Q116917907",
+        "pageid": 111680371,
+        "concepturi": "http://www.wikidata.org/entity/Q116917907",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q116917907",
+        "display": {
+          "label": {
+            "value": "Samurai Museum",
+            "language": "en"
+          }
+        },
+        "label": "Samurai Museum",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Samurai Museum"
+        }
+      },
+      {
+        "id": "Q68106357",
+        "title": "Q68106357",
+        "pageid": 67780026,
+        "concepturi": "http://www.wikidata.org/entity/Q68106357",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q68106357",
+        "display": {
+          "label": {
+            "value": "Samurai Museum Berlin",
+            "language": "en"
+          },
+          "description": {
+            "value": "samurai museum in Berlin, Germany",
+            "language": "en"
+          }
+        },
+        "label": "Samurai Museum Berlin",
+        "description": "samurai museum in Berlin, Germany",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Samurai Museum Berlin"
+        }
+      },
+      {
+        "id": "Q125807193",
+        "title": "Q125807193",
+        "pageid": 119909926,
+        "concepturi": "http://www.wikidata.org/entity/Q125807193",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q125807193",
+        "display": {
+          "label": {
+            "value": "Samurai Museum Berlin",
+            "language": "en"
+          }
+        },
+        "label": "Samurai Museum Berlin",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Samurai Museum Berlin"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

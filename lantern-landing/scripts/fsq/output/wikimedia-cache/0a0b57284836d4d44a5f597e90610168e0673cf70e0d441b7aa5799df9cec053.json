@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:38:51.676Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3363,
+          "ns": 0,
+          "title": "Beer",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Hacker-Pschorr_Oktoberfest_Girl_Remix.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "Alcoholic drink made from fermented cereal grains",
+            "wikibase_item": "Q44"
+          },
+          "terms": {
+            "description": [
+              "alcoholic beverage obtained by fermenting starchy materials and not distilled"
+            ]
+          }
+        },
+        {
+          "pageid": 1968085,
+          "ns": 0,
+          "title": "Old Bay Seasoning",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Old_Bay_Seasoning.jpg",
+            "wikibase-shortdesc": "Seasoning brand manufactured in Maryland",
+            "wikibase_item": "Q7083444"
+          },
+          "terms": {
+            "description": [
+              "seasoning manufactured in Maryland"
+            ]
+          }
+        },
+        {
+          "pageid": 22718323,
+          "ns": 0,
+          "title": "Tom Kuntz",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Kuntz, Tom",
+            "page_image_free": "TomKuntzPressPhoto.jpg",
+            "wikibase-shortdesc": "American director and filmmaker",
+            "wikibase_item": "Q7816510"
+          },
+          "terms": {
+            "description": [
+              "American director"
+            ]
+          }
+        },
+        {
+          "pageid": 25514525,
+          "ns": 0,
+          "title": "Anheuser-Busch brands",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Budweiser_beer.jpg",
+            "wikibase-shortdesc": "Brewing company",
+            "wikibase_item": "Q1830767"
+          },
+          "terms": {
+            "description": [
+              "Brewing company"
+            ]
+          }
+        },
+        {
+          "pageid": 48328232,
+          "ns": 0,
+          "title": "Great Australasian Beer SpecTAPular",
+          "index": 5,
+          "pageprops": {
+            "wikibase-shortdesc": "Annual festival in Melbourne and Sydney",
+            "wikibase_item": "Q22080841"
+          },
+          "terms": {
+            "description": [
+              "Annual festival in Melbourne and Sydney"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

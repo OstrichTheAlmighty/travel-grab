@@ -1,0 +1,80 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:22.667Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 486525,
+          "ns": 0,
+          "title": "東京ディズニーシーのスペシャルイベントの一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいしいのすへしやるいへんと",
+            "wikibase_item": "Q11524258"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 549118,
+          "ns": 0,
+          "title": "リドアイル",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "りとあいる",
+            "wikibase_item": "Q11348247"
+          }
+        },
+        {
+          "pageid": 553603,
+          "ns": 0,
+          "title": "東京ディズニーリゾートのメディアの一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいりそおとのめていあ",
+            "wikibase_item": "Q11524297"
+          },
+          "terms": {
+            "description": [
+              "東京ディズニーリゾートのCD"
+            ]
+          }
+        },
+        {
+          "pageid": 666776,
+          "ns": 0,
+          "title": "ディズニー・ハロウィーン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ていすにいはろういいん",
+            "unexpectedUnconnectedPage": "0"
+          }
+        },
+        {
+          "pageid": 2684843,
+          "ns": 0,
+          "title": "東京ディズニーリゾート30周年“ザ・ハピネス・イヤー”",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいりそおと30しゆうねんさはひねすいやあ",
+            "wikibase_item": "Q11524292"
+          },
+          "terms": {
+            "description": [
+              "東京ディズニーリゾートの30周年イベント"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

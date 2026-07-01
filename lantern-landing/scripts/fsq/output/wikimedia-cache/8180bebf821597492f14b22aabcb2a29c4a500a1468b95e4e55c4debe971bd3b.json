@@ -1,0 +1,204 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:14.588Z",
+  "value": {
+    "searchinfo": {
+      "search": "デスク"
+    },
+    "search": [
+      {
+        "id": "Q56155",
+        "title": "Q56155",
+        "pageid": 58912,
+        "concepturi": "http://www.wikidata.org/entity/Q56155",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q56155",
+        "display": {
+          "label": {
+            "value": "desktop computer",
+            "language": "en"
+          },
+          "description": {
+            "value": "personal computer in a form intended for regular use at a single location desk/table",
+            "language": "en"
+          }
+        },
+        "label": "desktop computer",
+        "description": "personal computer in a form intended for regular use at a single location desk/table",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "デスクトップパソコン"
+        },
+        "aliases": [
+          "デスクトップパソコン"
+        ]
+      },
+      {
+        "id": "Q205020",
+        "title": "Q205020",
+        "pageid": 201373,
+        "concepturi": "http://www.wikidata.org/entity/Q205020",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q205020",
+        "display": {
+          "label": {
+            "value": "desktop environment",
+            "language": "en"
+          },
+          "description": {
+            "value": "environment with a graphical user interface using the desktop metaphor",
+            "language": "en"
+          }
+        },
+        "label": "desktop environment",
+        "description": "environment with a graphical user interface using the desktop metaphor",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "デスクトップ環境"
+        },
+        "aliases": [
+          "デスクトップ環境"
+        ]
+      },
+      {
+        "id": "Q63284758",
+        "title": "Q63284758",
+        "pageid": 63019157,
+        "concepturi": "http://www.wikidata.org/entity/Q63284758",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q63284758",
+        "display": {
+          "label": {
+            "value": "Desktop Encyclopedic Dictionary",
+            "language": "en"
+          },
+          "description": {
+            "value": "Russian encyclopedic dictionary",
+            "language": "en"
+          }
+        },
+        "label": "Desktop Encyclopedic Dictionary",
+        "description": "Russian encyclopedic dictionary",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "デスクトップ百科辞書"
+        },
+        "aliases": [
+          "デスクトップ百科辞書"
+        ]
+      },
+      {
+        "id": "Q188610",
+        "title": "Q188610",
+        "pageid": 187249,
+        "concepturi": "http://www.wikidata.org/entity/Q188610",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q188610",
+        "display": {
+          "label": {
+            "value": "desktop publishing",
+            "language": "en"
+          },
+          "description": {
+            "value": "creation of documents using page layout skills on a personal computer",
+            "language": "en"
+          }
+        },
+        "label": "desktop publishing",
+        "description": "creation of documents using page layout skills on a personal computer",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "デスクトップパブリッシング"
+        },
+        "aliases": [
+          "デスクトップパブリッシング"
+        ]
+      },
+      {
+        "id": "Q5832807",
+        "title": "Q5832807",
+        "pageid": 5601378,
+        "concepturi": "http://www.wikidata.org/entity/Q5832807",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5832807",
+        "display": {
+          "label": {
+            "value": "Dezq",
+            "language": "en"
+          },
+          "description": {
+            "value": "village in Iran",
+            "language": "en"
+          }
+        },
+        "label": "Dezq",
+        "description": "village in Iran",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "デズク"
+        },
+        "aliases": [
+          "デズク"
+        ]
+      },
+      {
+        "id": "Q11319248",
+        "title": "Q11319248",
+        "pageid": 12457832,
+        "concepturi": "http://www.wikidata.org/entity/Q11319248",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11319248",
+        "display": {
+          "label": {
+            "value": "TISC",
+            "language": "en"
+          }
+        },
+        "label": "TISC",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "テスク"
+        },
+        "aliases": [
+          "テスク"
+        ]
+      },
+      {
+        "id": "Q888612",
+        "title": "Q888612",
+        "pageid": 839614,
+        "concepturi": "http://www.wikidata.org/entity/Q888612",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q888612",
+        "display": {
+          "label": {
+            "value": "deathgrind",
+            "language": "en"
+          },
+          "description": {
+            "value": "fusion genre of death metal and grindcore",
+            "language": "en"
+          }
+        },
+        "label": "deathgrind",
+        "description": "fusion genre of death metal and grindcore",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "デスグラインド"
+        },
+        "aliases": [
+          "デスグラインド"
+        ]
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

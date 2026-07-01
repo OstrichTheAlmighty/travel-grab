@@ -1,0 +1,28 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:40.917Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 815668,
+          "ns": 0,
+          "title": "東池袋",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひかしいけふくろ",
+            "kartographer_frames": "1",
+            "page_image_free": "Sunshine_60_Ikebukuro_Tokyo_20070304-01.jpg",
+            "wikibase_item": "Q11527572"
+          },
+          "terms": {
+            "description": [
+              "東京都豊島区の繁華街"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:39.762Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 50113,
+          "ns": 0,
+          "title": "平和島駅",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "へいわしま",
+            "kartographer_frames": "1",
+            "page_image_free": "Heiwa-Jima_Station_-_Sep_15_2019_-_various_16_46_46_695000.jpeg",
+            "wikibase_item": "Q5367220"
+          },
+          "coordinates": [
+            {
+              "lat": 35.57905556,
+              "lon": 139.735,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都大田区大森北にある京浜急行電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 602244,
+          "ns": 0,
+          "title": "平和島",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "へいわしま",
+            "kartographer_frames": "1",
+            "page_image_free": "Heiwa_island_1989_air.jpg",
+            "wikibase_item": "Q11482235"
+          },
+          "terms": {
+            "description": [
+              "東京都大田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 940295,
+          "ns": 0,
+          "title": "平和島公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "へいわしまこうえん",
+            "page_image_free": "Heiwajima_park.JPG",
+            "wikibase_item": "Q11482236"
+          },
+          "coordinates": [
+            {
+              "lat": 35.58227778,
+              "lon": 139.74255556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都大田区にある公園"
+            ]
+          }
+        },
+        {
+          "pageid": 994725,
+          "ns": 0,
+          "title": "大森ふるさとの浜辺公園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおもりふるさとのはまへこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "OomoriFurusatonoHamabePark-khoshi3-01.jpg",
+            "wikibase_item": "Q11436301"
+          },
+          "coordinates": [
+            {
+              "lat": 35.57305556,
+              "lon": 139.74166667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都大田区の公園、また町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1778099,
+          "ns": 0,
+          "title": "大田区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-International-Airport_Satellite.jpg",
+            "wikibase_item": "Q217234"
+          },
+          "coordinates": [
+            {
+              "lat": 35.56128,
+              "lon": 139.71603,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

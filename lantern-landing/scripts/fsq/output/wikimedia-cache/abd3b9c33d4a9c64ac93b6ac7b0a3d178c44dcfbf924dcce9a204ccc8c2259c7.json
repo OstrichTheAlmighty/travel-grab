@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:45.981Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 467355,
+          "ns": 0,
+          "title": "佐野 (足立区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さの",
+            "kartographer_frames": "1",
+            "page_image_free": "Adachi_Ward_Sanobashi_intersection.JPG",
+            "wikibase_item": "Q11384918"
+          },
+          "terms": {
+            "description": [
+              "東京都足立区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 620391,
+          "ns": 0,
+          "title": "牛頸ダム",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "うしくひたむ",
+            "page_image_free": "Ushikubi-2440-r1.JPG",
+            "wikibase_item": "Q7901946"
+          },
+          "coordinates": [
+            {
+              "lat": 33.48611111,
+              "lon": 130.47916667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 764138,
+          "ns": 0,
+          "title": "屋敷林",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やしきりん",
+            "page_image_free": "2015-12-17_Old_hous_in_Haterumajima_波照間島集落古民家_DSCF3199.JPG",
+            "wikibase_item": "Q11465701"
+          },
+          "terms": {
+            "description": [
+              "屋敷の周囲に設置された林"
+            ]
+          }
+        },
+        {
+          "pageid": 4067845,
+          "ns": 0,
+          "title": "戸隠森林植物園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とかくししんりんしよくふつえん",
+            "page_image_free": "Entrance_to_Togakushi_Shinrin_Shokubutsu_En.jpg",
+            "wikibase_item": "Q85616472"
+          },
+          "coordinates": [
+            {
+              "lat": 36.75197,
+              "lon": 138.07703,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "長野県長野市にある植物園"
+            ]
+          }
+        },
+        {
+          "pageid": 4236172,
+          "ns": 0,
+          "title": "佐野いこいの森緑地",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さのいこいのもりりよくち",
+            "page_image_free": "SanoikoiGate.jpg",
+            "wikibase_item": "Q109365531"
+          },
+          "coordinates": [
+            {
+              "lat": 35.78875,
+              "lon": 139.84344444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "足立区佐野にある緑地公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

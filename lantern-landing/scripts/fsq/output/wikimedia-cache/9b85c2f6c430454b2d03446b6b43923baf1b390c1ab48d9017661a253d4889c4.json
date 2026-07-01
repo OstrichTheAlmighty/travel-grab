@@ -1,0 +1,68 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:37:59.153Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 75847,
+          "ns": 0,
+          "title": "反ユダヤ主義",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はんゆたやしゆき",
+            "page_image_free": "Jude,_Gwiazda_Dawida,_Star_of_David,_Davidstern,_1940-1944.jpg",
+            "wikibase_item": "Q22649"
+          },
+          "terms": {
+            "description": [
+              "ユダヤ人に対する偏見や差別"
+            ]
+          }
+        },
+        {
+          "pageid": 2115114,
+          "ns": 0,
+          "title": "レオポルト・ミュルレル",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "みゆるれる れおほると",
+            "page_image_free": "Benjamin_Carl_Leopold_Müller.JPG",
+            "wikibase_item": "Q92148"
+          },
+          "terms": {
+            "description": [
+              "ドイツの医師"
+            ]
+          }
+        },
+        {
+          "pageid": 3026973,
+          "ns": 0,
+          "title": "バート・ザルツウフレン",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はと_さるつうふれん",
+            "kartographer_frames": "1",
+            "page_image_free": "DEU_Bad_Salzuflen_COA.svg",
+            "wikibase_item": "Q4108"
+          },
+          "coordinates": [
+            {
+              "lat": 52.0875,
+              "lon": 8.75055556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "ドイツの都市"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

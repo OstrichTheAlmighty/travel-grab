@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:03.321Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 90265,
+          "ns": 0,
+          "title": "落語協会",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "らくこきようかい",
+            "page_image_free": "Rakugo_kyokai_head_office_ueno_taito_tokyo_2009.JPG",
+            "wikibase_item": "Q11620670"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都台東区にある落語家団体"
+            ]
+          }
+        },
+        {
+          "pageid": 301618,
+          "ns": 0,
+          "title": "千葉テレビ放送",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちはてれひほうそう",
+            "page_image_free": "Chiba_Television,_headoffice.jpg",
+            "wikibase_item": "Q1071746"
+          },
+          "terms": {
+            "description": [
+              "千葉県の独立系民放テレビ局"
+            ]
+          }
+        },
+        {
+          "pageid": 514955,
+          "ns": 0,
+          "title": "アンテナショップ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あんてなしよつふ",
+            "wikibase_item": "Q17173503"
+          },
+          "terms": {
+            "description": [
+              "地域の商品を販売促進する店"
+            ]
+          }
+        },
+        {
+          "pageid": 694381,
+          "ns": 0,
+          "title": "ふるさと創生事業",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふるさとそうせいしきよう",
+            "wikibase_item": "Q11277299"
+          },
+          "terms": {
+            "description": [
+              "1988年から1989年にかけて、日本政府が各市区町村に対し地域振興のために1億円を交付した政策"
+            ]
+          }
+        },
+        {
+          "pageid": 1122060,
+          "ns": 0,
+          "title": "つば九郎",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "つはくろう",
+            "page_image_free": "Tetsuto_Yamada_.jpg",
+            "wikibase_item": "Q11272433"
+          },
+          "terms": {
+            "description": [
+              "東京ヤクルトスワローズの球団マスコットキャラクター"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

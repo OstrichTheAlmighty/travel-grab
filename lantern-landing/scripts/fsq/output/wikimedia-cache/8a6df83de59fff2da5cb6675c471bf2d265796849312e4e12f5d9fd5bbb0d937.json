@@ -1,0 +1,77 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:25.922Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 728711,
+          "ns": 0,
+          "title": "岡山表町商店街",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おかやまおもてちようしようてんかい",
+            "page_image_free": "Omote-chou_shopping_street.JPG",
+            "wikibase_item": "Q11472751"
+          },
+          "terms": {
+            "description": [
+              "岡山市の商店街"
+            ]
+          }
+        },
+        {
+          "pageid": 754187,
+          "ns": 0,
+          "title": "フレッシュボイス",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふれつしゆほいす",
+            "page_image_free": "Fresh_v.jpg",
+            "wikibase_item": "Q11334021"
+          }
+        },
+        {
+          "pageid": 1034481,
+          "ns": 0,
+          "title": "フレッシュ・ワロンヌ",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "La_Flèche_Wallonne_-_Logo.png",
+            "wikibase_item": "Q499192"
+          }
+        },
+        {
+          "pageid": 1129833,
+          "ns": 0,
+          "title": "東久ストア",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきゆうすとあ",
+            "wikibase_item": "Q11523896"
+          }
+        },
+        {
+          "pageid": 1957834,
+          "ns": 0,
+          "title": "フレッシュプリキュア!",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふれつしゆふりきゆあ",
+            "wikibase_item": "Q1205226"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビアニメ番組、メディアミックス作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

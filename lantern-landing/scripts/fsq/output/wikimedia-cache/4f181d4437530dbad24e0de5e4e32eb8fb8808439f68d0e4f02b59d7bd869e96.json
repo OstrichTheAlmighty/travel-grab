@@ -1,0 +1,137 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:43.386Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 20311,
+          "ns": 0,
+          "title": "日立柏サッカー場",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ひたちかしわさつかあしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Kashiwa20120311-4_(cropped).jpg",
+            "wikibase_item": "Q1366075"
+          },
+          "coordinates": [
+            {
+              "lat": 35.84848333,
+              "lon": 139.97517222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県柏市にあるサッカー場"
+            ]
+          }
+        },
+        {
+          "pageid": 41569,
+          "ns": 0,
+          "title": "ヤマハスタジアム",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "やまはすたしあむ",
+            "page_image_free": "ヤマハスタジアム1.jpg",
+            "wikibase_item": "Q1369275"
+          },
+          "coordinates": [
+            {
+              "lat": 34.72521667,
+              "lon": 137.87500556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "静岡県磐田市にある球技場"
+            ]
+          }
+        },
+        {
+          "pageid": 45955,
+          "ns": 0,
+          "title": "茨城県立カシマサッカースタジアム",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いはらきけんりつかしまさつかあすたしあむ",
+            "page_image_free": "Kashima_Stadium_1.JPG",
+            "wikibase_item": "Q494769"
+          },
+          "coordinates": [
+            {
+              "lat": 35.99173611,
+              "lon": 140.64053333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "茨城県鹿嶋市にあるサッカー専用競技場"
+            ]
+          }
+        },
+        {
+          "pageid": 1348925,
+          "ns": 0,
+          "title": "ヴィラ・パーク",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひら はあく",
+            "kartographer_frames": "1",
+            "page_image_free": "Villa_Park.jpg",
+            "wikibase_item": "Q175339"
+          },
+          "coordinates": [
+            {
+              "lat": 52.50916667,
+              "lon": -1.88472222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "アストン・ヴィラFCのホームスタジアム"
+            ]
+          }
+        },
+        {
+          "pageid": 1660042,
+          "ns": 0,
+          "title": "鳥取市営サッカー場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とつとりしえいさつかあしよう",
+            "page_image_free": "Tottori-bird131006-4.jpg",
+            "wikibase_item": "Q7828502"
+          },
+          "coordinates": [
+            {
+              "lat": 35.45821389,
+              "lon": 134.22167778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "鳥取市にあるサッカー場"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

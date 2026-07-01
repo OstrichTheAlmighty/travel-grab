@@ -1,0 +1,74 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:16.134Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 106911,
+          "ns": 0,
+          "title": "TMG",
+          "index": 1,
+          "pageprops": {
+            "disambiguation": "",
+            "wikibase_item": "Q408183"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの曖昧さ回避ページ"
+            ]
+          }
+        },
+        {
+          "pageid": 1553931,
+          "ns": 0,
+          "title": "Hyde",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はいと",
+            "displaytitle": "hyde",
+            "page_image_free": "Hyde_in_2013.jpg",
+            "wikibase_item": "Q306122"
+          },
+          "terms": {
+            "description": [
+              "日本のミュージシャン、ボーカリスト、シンガーソングライター、音楽プロデューサー"
+            ]
+          }
+        },
+        {
+          "pageid": 3116240,
+          "ns": 0,
+          "title": "フレデリック (バンド)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふれてりつく",
+            "wikibase_item": "Q20656226"
+          },
+          "terms": {
+            "description": [
+              "日本のロックバンド (2009-)"
+            ]
+          }
+        },
+        {
+          "pageid": 3254342,
+          "ns": 0,
+          "title": "2020年東京オリンピック・パラリンピックの会場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "2020ねんとうきようおりんひつくはらりんひつくのかいしよう",
+            "page_image_free": "IBA-OlympicStadium2020Tokyo-3.jpg",
+            "wikibase_item": "Q21018914"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

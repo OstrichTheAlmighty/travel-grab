@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:14.038Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 32924,
+          "ns": 0,
+          "title": "植物学",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しよくふつかく",
+            "page_image_free": "Botany.jpg",
+            "wikibase_item": "Q441"
+          },
+          "terms": {
+            "description": [
+              "植物を対象とする生物学の一分科"
+            ]
+          }
+        },
+        {
+          "pageid": 101430,
+          "ns": 0,
+          "title": "植物園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しよくふつえん",
+            "page_image_free": "Kew_Gardens_Palm_House,_London_-_July_2009.jpg",
+            "wikibase_item": "Q167346"
+          },
+          "terms": {
+            "description": [
+              "ラベル付けされた広範囲の植物を収集、 栽培 、保存および展示するための施設"
+            ]
+          }
+        },
+        {
+          "pageid": 130768,
+          "ns": 0,
+          "title": "小石川",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こいしかわ",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q2666269"
+          },
+          "terms": {
+            "description": [
+              "東京都文京区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 289313,
+          "ns": 0,
+          "title": "東京大学大学院理学系研究科附属植物園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようたいかくたいかくいんりかくけいけんきゆうかふそくしよくふつえん",
+            "kartographer_frames": "1",
+            "wikibase_item": "Q1064892"
+          },
+          "coordinates": [
+            {
+              "lat": 35.7175,
+              "lon": 139.74652778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京大学の附属施設の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 367989,
+          "ns": 0,
+          "title": "小石川区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こいしかわく",
+            "wikibase_item": "Q11463266"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70805556,
+              "lon": 139.74597222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて日本の東京府東京市にあった区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

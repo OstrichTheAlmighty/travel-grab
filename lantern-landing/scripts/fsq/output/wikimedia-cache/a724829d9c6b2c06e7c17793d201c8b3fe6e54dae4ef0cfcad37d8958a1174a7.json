@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:09.784Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京魚市場卸協同組合"
+    },
+    "search": [
+      {
+        "id": "Q105530440",
+        "title": "Q105530440",
+        "pageid": 100899296,
+        "concepturi": "http://www.wikidata.org/entity/Q105530440",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q105530440",
+        "display": {
+          "label": {
+            "value": "Touoroshi",
+            "language": "en"
+          },
+          "description": {
+            "value": "Co-operative union consisted by intermediate whole-sellers of Toyosu fish merket",
+            "language": "en"
+          }
+        },
+        "label": "Touoroshi",
+        "description": "Co-operative union consisted by intermediate whole-sellers of Toyosu fish merket",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京魚市場卸協同組合"
+        },
+        "aliases": [
+          "東京魚市場卸協同組合"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

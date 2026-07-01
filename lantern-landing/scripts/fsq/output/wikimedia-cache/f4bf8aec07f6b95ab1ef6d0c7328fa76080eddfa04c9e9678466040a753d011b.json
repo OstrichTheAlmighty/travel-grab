@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:21.356Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 121,
+          "ns": 0,
+          "title": "両国国技館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "りようこくこくきかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Ryogoku_Kokugikan_(taken_from_Kokugikan_Street).jpg",
+            "wikibase_item": "Q176821"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69691667,
+              "lon": 139.79352778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区にある大相撲の興行施設"
+            ]
+          }
+        },
+        {
+          "pageid": 386038,
+          "ns": 0,
+          "title": "東京東信用金庫",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようひかししんきん",
+            "page_image_free": "東京東信用金庫本部.jpg",
+            "wikibase_item": "Q11524925"
+          },
+          "terms": {
+            "description": [
+              "東京都墨田区にある信用金庫"
+            ]
+          }
+        },
+        {
+          "pageid": 1079495,
+          "ns": 0,
+          "title": "錦糸公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きんしこうえん",
+            "page_image_free": "Kinshi_Park_(2007.09.16).jpg",
+            "wikibase_item": "Q11650536"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69941667,
+              "lon": 139.81713889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1846413,
+          "ns": 0,
+          "title": "DANGAN",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たんかん",
+            "wikibase_item": "Q11241647"
+          }
+        },
+        {
+          "pageid": 2054654,
+          "ns": 0,
+          "title": "墨田区総合体育館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "すみたくそうこうたいいくかん",
+            "page_image_free": "りそなグループ_B.LEAGUE_2025-26_B1リーグ戦_第6節_サンロッカーズ渋谷_vs_レバンガ北海道_ひがしんアリーナ_2025年10月29日の東京_202510291646_IMG_0097.jpg",
+            "wikibase_item": "Q11429440"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69941667,
+              "lon": 139.81711111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区錦糸にある体育館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

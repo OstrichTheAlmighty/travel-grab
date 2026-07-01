@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:52.927Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 32894,
+          "ns": 0,
+          "title": "阪急百貨店",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はんきゆうひやつかてん",
+            "page_image_free": "Mido-suji_Osaka01s4s3200.jpg",
+            "wikibase_item": "Q5648576"
+          },
+          "terms": {
+            "description": [
+              "日本の百貨店"
+            ]
+          }
+        },
+        {
+          "pageid": 70911,
+          "ns": 0,
+          "title": "北海道拓殖銀行",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ほつかいとうたくしよくきんこう",
+            "page_image_free": "The_Hokkaido_Takushoku_Bank.JPG",
+            "wikibase_item": "Q3139207"
+          },
+          "terms": {
+            "description": [
+              "かつて存在した日本の銀行"
+            ]
+          }
+        },
+        {
+          "pageid": 369825,
+          "ns": 0,
+          "title": "ダイエー",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たいええ",
+            "page_image_free": "Daiei_logo.svg",
+            "wikibase_item": "Q3543891"
+          },
+          "terms": {
+            "description": [
+              "日本のスーパーマーケットを運営する企業"
+            ]
+          }
+        },
+        {
+          "pageid": 1778099,
+          "ns": 0,
+          "title": "大田区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おおたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-International-Airport_Satellite.jpg",
+            "wikibase_item": "Q217234"
+          },
+          "coordinates": [
+            {
+              "lat": 35.56128,
+              "lon": 139.71603,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 3859555,
+          "ns": 0,
+          "title": "有吉ぃぃeeeee!そうだ!今からお前んチでゲームしない?",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ありよしいいいいいそうたいまからおまえんちでけえむしない",
+            "wikibase_item": "Q60987028"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビeスポーツ・ゲーム情報バラエティ番組 (2018-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

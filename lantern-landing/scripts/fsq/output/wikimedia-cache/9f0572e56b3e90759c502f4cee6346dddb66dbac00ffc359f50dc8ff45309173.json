@@ -1,0 +1,87 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:33.773Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 13738,
+          "ns": 0,
+          "title": "福岡ドーム",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふくおかとおむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Mizuho_PayPay_dome_Fukuoka_2025.jpg",
+            "wikibase_item": "Q1365961"
+          },
+          "coordinates": [
+            {
+              "lat": 33.59545833,
+              "lon": 130.36211944,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福岡県福岡市中央区にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 510373,
+          "ns": 0,
+          "title": "ブルーシート",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふるうしいと",
+            "page_image_free": "Blue_tarp_-_01.jpg",
+            "wikibase_item": "Q11334904"
+          }
+        },
+        {
+          "pageid": 1056341,
+          "ns": 0,
+          "title": "ホンダ・ジュリオ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほんたしゆりお",
+            "wikibase_item": "Q11338255"
+          }
+        },
+        {
+          "pageid": 2133715,
+          "ns": 0,
+          "title": "優先席",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ゆうせんせき",
+            "page_image_free": "Tobu-10000_Priority_seating_sticker.jpg",
+            "wikibase_item": "Q10889457"
+          }
+        },
+        {
+          "pageid": 4599538,
+          "ns": 0,
+          "title": "オレンジkiss",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おれんしきす",
+            "wikibase_item": "Q116869316"
+          },
+          "terms": {
+            "description": [
+              "Snow Manの7枚目シングル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

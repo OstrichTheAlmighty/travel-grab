@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:54.379Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 7937,
+          "ns": 0,
+          "title": "千代田区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ちよたく",
+            "kartographer_frames": "1",
+            "page_image_free": "National_Diet_Building_02.jpg",
+            "wikibase_item": "Q214051"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69,
+              "lon": 139.75,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 60661,
+          "ns": 0,
+          "title": "神田 (千代田区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かんた",
+            "wikibase_item": "Q338861"
+          },
+          "terms": {
+            "description": [
+              "東京都千代田区北東部の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 845808,
+          "ns": 0,
+          "title": "千代田区立お茶の水小学校",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ちよたくりつおちやのみすしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Chiyoda_city_Ochanomizu_elementary_school.jpg",
+            "wikibase_item": "Q11405295"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69769444,
+              "lon": 139.74888889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都千代田区にある小学校"
+            ]
+          }
+        },
+        {
+          "pageid": 989446,
+          "ns": 0,
+          "title": "西神田",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にしかんた",
+            "kartographer_frames": "1",
+            "page_image_free": "Ohara10th.jpg",
+            "wikibase_item": "Q290895"
+          },
+          "terms": {
+            "description": [
+              "東京都千代田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1126214,
+          "ns": 0,
+          "title": "風ぐるま (千代田区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かさくるま",
+            "page_image_free": "Hitachi_Jidosha_Kotsu_1555_Kazaguruma_Poncho_HX.jpg",
+            "wikibase_item": "Q11665226"
+          },
+          "terms": {
+            "description": [
+              "東京都千代田区のコミュニティバス"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

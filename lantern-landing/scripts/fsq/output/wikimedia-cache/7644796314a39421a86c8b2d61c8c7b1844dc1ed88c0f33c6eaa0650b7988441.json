@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:09.855Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 202354,
+          "ns": 0,
+          "title": "Vietnam",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Flag_of_Vietnam.svg",
+            "wikibase-shortdesc": "Country in Southeast Asia",
+            "wikibase_item": "Q881"
+          },
+          "coordinates": [
+            {
+              "lat": 16,
+              "lon": 108,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "country in Southeast Asia"
+            ]
+          }
+        },
+        {
+          "pageid": 247888,
+          "ns": 0,
+          "title": "Tiến quân ca",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "Tien Quan Ca",
+            "page_image_free": "S.R._Viet_Nam_national_anthem_sheet_music.png",
+            "wikibase-shortdesc": "National anthem of Vietnam",
+            "wikibase_item": "Q208016"
+          },
+          "terms": {
+            "description": [
+              "national anthem of Vietnam"
+            ]
+          }
+        },
+        {
+          "pageid": 22143225,
+          "ns": 0,
+          "title": "Đại Nam thực lục",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "Dai Nam Thuc Luc",
+            "displaytitle": "<i>Đại Nam thực lục</i>",
+            "page_image_free": "大南寔錄前編.jpg",
+            "wikibase-shortdesc": "Official records kept by the Nguyễn dynasty of Vietnam, spanning 1844 to 1909",
+            "wikibase_item": "Q911328"
+          },
+          "terms": {
+            "description": [
+              "historical chronicle of Vietnam"
+            ]
+          }
+        },
+        {
+          "pageid": 23550210,
+          "ns": 0,
+          "title": "North Vietnam",
+          "index": 2,
+          "pageprops": {
+            "page_image_free": "Flag_of_North_Vietnam_(1945–1955).svg",
+            "wikibase-shortdesc": "Country in Southeast Asia (1945–1976)",
+            "wikibase_item": "Q172640"
+          },
+          "coordinates": [
+            {
+              "lat": 21.02833333,
+              "lon": 105.85416667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "former country in Southeast Asia that existed from 1945 to 1976"
+            ]
+          }
+        },
+        {
+          "pageid": 38790869,
+          "ns": 0,
+          "title": "Chữ Nôm",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Chu Nom",
+            "page_image_free": "Chữ_Nôm_(Khải_thư).svg",
+            "wikibase-shortdesc": "Chinese-based Vietnamese writing system",
+            "wikibase_item": "Q875344"
+          },
+          "terms": {
+            "description": [
+              "former logographic writing system for the Vietnamese language using Han ideographs"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

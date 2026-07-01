@@ -1,0 +1,129 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:35.270Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 366,
+          "ns": 0,
+          "title": "石川県",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いしかわけん",
+            "page_image_free": "Stone_lantern_Kenrokuen.jpg",
+            "wikibase_item": "Q131281"
+          },
+          "coordinates": [
+            {
+              "lat": 36.595,
+              "lon": 136.625,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の都道府県"
+            ]
+          }
+        },
+        {
+          "pageid": 74662,
+          "ns": 0,
+          "title": "小牧・長久手の戦い",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こまきなかくてのたたかい",
+            "page_image_free": "Komaki_Nagakute_Kassen_Zu_Byoubu,_Toyota.jpg",
+            "wikibase_item": "Q1353633"
+          },
+          "coordinates": [
+            {
+              "lat": 35.17367,
+              "lon": 137.04803,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "1584年に日本の中部地方で発生した戦役"
+            ]
+          }
+        },
+        {
+          "pageid": 263227,
+          "ns": 0,
+          "title": "平泉寺白山神社",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "へいせんしはくさんしんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Heisenji_Hakusanjinjya_HAIDEN.jpg",
+            "wikibase_item": "Q11483206"
+          },
+          "coordinates": [
+            {
+              "lat": 36.04391667,
+              "lon": 136.54211111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福井県勝山市にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 758791,
+          "ns": 0,
+          "title": "新潟市民芸術文化会館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にいかたしみんけいしゆつふんかかいかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Niigata_City_Performing_Arts_Center_2020.jpg",
+            "wikibase_item": "Q11502897"
+          },
+          "coordinates": [
+            {
+              "lat": 37.91344444,
+              "lon": 139.04047222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "新潟市のホール"
+            ]
+          }
+        },
+        {
+          "pageid": 2960443,
+          "ns": 0,
+          "title": "一番堀通町",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いちはんほりとおりちよう",
+            "page_image_free": "Niigata_Prefectural_Civic_Center_20070825.JPG",
+            "wikibase_item": "Q17193259"
+          },
+          "terms": {
+            "description": [
+              "新潟市の町"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

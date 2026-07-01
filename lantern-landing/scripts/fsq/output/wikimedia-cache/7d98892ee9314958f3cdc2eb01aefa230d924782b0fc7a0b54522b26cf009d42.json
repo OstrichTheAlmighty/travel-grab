@@ -1,0 +1,201 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T05:46:03.213Z",
+  "value": {
+    "searchinfo": {
+      "search": "カーニバル"
+    },
+    "search": [
+      {
+        "id": "Q839715",
+        "title": "Q839715",
+        "pageid": 792019,
+        "concepturi": "http://www.wikidata.org/entity/Q839715",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q839715",
+        "display": {
+          "label": {
+            "value": "Carnivàle",
+            "language": "en"
+          },
+          "description": {
+            "value": "American television series",
+            "language": "en"
+          }
+        },
+        "label": "Carnivàle",
+        "description": "American television series",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "カーニバル"
+        },
+        "aliases": [
+          "カーニバル"
+        ]
+      },
+      {
+        "id": "Q2853058",
+        "title": "Q2853058",
+        "pageid": 2732276,
+        "concepturi": "http://www.wikidata.org/entity/Q2853058",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2853058",
+        "display": {
+          "label": {
+            "value": "human cannibalism",
+            "language": "en"
+          },
+          "description": {
+            "value": "practice of humans eating the flesh or internal organs of other human beings",
+            "language": "en"
+          }
+        },
+        "label": "human cannibalism",
+        "description": "practice of humans eating the flesh or internal organs of other human beings",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "カニバル"
+        },
+        "aliases": [
+          "カニバル"
+        ]
+      },
+      {
+        "id": "Q2939793",
+        "title": "Q2939793",
+        "pageid": 2811958,
+        "concepturi": "http://www.wikidata.org/entity/Q2939793",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q2939793",
+        "display": {
+          "label": {
+            "value": "Carnival",
+            "language": "en"
+          },
+          "description": {
+            "value": "fixed shooter arcade game",
+            "language": "en"
+          }
+        },
+        "label": "Carnival",
+        "description": "fixed shooter arcade game",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "カーニバル"
+        },
+        "aliases": [
+          "カーニバル"
+        ]
+      },
+      {
+        "id": "Q5044079",
+        "title": "Q5044079",
+        "pageid": 4820330,
+        "concepturi": "http://www.wikidata.org/entity/Q5044079",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5044079",
+        "display": {
+          "label": {
+            "value": "Carnival",
+            "language": "en"
+          },
+          "description": {
+            "value": "song written and produced by Natalie Merchant",
+            "language": "en"
+          }
+        },
+        "label": "Carnival",
+        "description": "song written and produced by Natalie Merchant",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "カーニバル"
+        },
+        "aliases": [
+          "カーニバル"
+        ]
+      },
+      {
+        "id": "Q5044074",
+        "title": "Q5044074",
+        "pageid": 4820326,
+        "concepturi": "http://www.wikidata.org/entity/Q5044074",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5044074",
+        "display": {
+          "label": {
+            "value": "Carnival",
+            "language": "en"
+          },
+          "description": {
+            "value": "1935 American film directed by Walter Lang",
+            "language": "en"
+          }
+        },
+        "label": "Carnival",
+        "description": "1935 American film directed by Walter Lang",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "カーニバル"
+        },
+        "aliases": [
+          "カーニバル"
+        ]
+      },
+      {
+        "id": "Q3193527",
+        "title": "Q3193527",
+        "pageid": 3049854,
+        "concepturi": "http://www.wikidata.org/entity/Q3193527",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3193527",
+        "display": {
+          "label": {
+            "value": "Karnaval",
+            "language": "en"
+          },
+          "description": {
+            "value": "1999 film by Thomas Vincent",
+            "language": "en"
+          }
+        },
+        "label": "Karnaval",
+        "description": "1999 film by Thomas Vincent",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "カーニバル"
+        },
+        "aliases": [
+          "カーニバル"
+        ]
+      },
+      {
+        "id": "Q17209431",
+        "title": "Q17209431",
+        "pageid": 18803372,
+        "concepturi": "http://www.wikidata.org/entity/Q17209431",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q17209431",
+        "display": {
+          "label": {
+            "value": "カーニバル",
+            "language": "ja"
+          }
+        },
+        "label": "カーニバル",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "カーニバル"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

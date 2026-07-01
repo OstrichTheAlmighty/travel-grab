@@ -1,0 +1,81 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:16.777Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 17637,
+          "ns": 0,
+          "title": "縁日",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えんにち",
+            "wikibase_item": "Q985655"
+          },
+          "terms": {
+            "description": [
+              "神仏の降誕、示現、誓願などの縁のある日"
+            ]
+          }
+        },
+        {
+          "pageid": 63214,
+          "ns": 0,
+          "title": "足利直義",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あしかか たたよし",
+            "page_image_free": "足利直義.jpg",
+            "wikibase_item": "Q725375"
+          },
+          "terms": {
+            "description": [
+              "日本の鎌倉時代末期～南北朝時代（室町時代）前期の武将（1307-1352）"
+            ]
+          }
+        },
+        {
+          "pageid": 3389251,
+          "ns": 0,
+          "title": "泉福寺 (川崎市)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "せんふくし かわさきし",
+            "page_image_free": "泉福寺(川崎市宮前区)本堂.JPG",
+            "wikibase_item": "Q24875609"
+          },
+          "coordinates": [
+            {
+              "lat": 35.58140556,
+              "lon": 139.59160278,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "奈川県川崎市宮前区にある寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 3730355,
+          "ns": 0,
+          "title": "愛知県の寺院一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あいちけんのしいんいちらん",
+            "wikibase_item": "Q48760239"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

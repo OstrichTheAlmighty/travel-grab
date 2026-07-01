@@ -1,0 +1,100 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:35:39.407Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 41147,
+          "ns": 0,
+          "title": "ゾウ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "そう",
+            "page_image_free": "Elephant_near_ndutu.jpg",
+            "wikibase_item": "Q7378"
+          },
+          "terms": {
+            "description": [
+              "哺乳綱ゾウ目ゾウ科の動物"
+            ]
+          }
+        },
+        {
+          "pageid": 522532,
+          "ns": 0,
+          "title": "井の頭自然文化園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "いのかしらしせんふんかえん",
+            "page_image_free": "Inokashira-Park-Zoo_Maingate.jpg",
+            "wikibase_item": "Q10860225"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70083333,
+              "lon": 139.57275,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の動物園"
+            ]
+          }
+        },
+        {
+          "pageid": 1161379,
+          "ns": 0,
+          "title": "ゾウのはな子",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "そうのはなこ",
+            "wikibase_item": "Q11315582"
+          }
+        },
+        {
+          "pageid": 2177362,
+          "ns": 0,
+          "title": "ピンナワラのゾウの孤児園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひんなわらのそうのこしいん",
+            "page_image_free": "Pinnawala_01.jpg",
+            "wikibase_item": "Q2672104"
+          },
+          "coordinates": [
+            {
+              "lat": 7.30055556,
+              "lon": 80.38833333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 2666467,
+          "ns": 0,
+          "title": "はな子",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はなこ",
+            "page_image_free": "Elephas_maximus_bengalensis_hanako.jpg",
+            "wikibase_item": "Q4495383"
+          },
+          "terms": {
+            "description": [
+              "アジアゾウ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

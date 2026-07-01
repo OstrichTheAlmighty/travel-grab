@@ -1,0 +1,62 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:43.258Z",
+  "value": {
+    "searchinfo": {
+      "search": "GATE 7"
+    },
+    "search": [
+      {
+        "id": "Q910514",
+        "title": "Q910514",
+        "pageid": 861161,
+        "concepturi": "http://www.wikidata.org/entity/Q910514",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q910514",
+        "display": {
+          "label": {
+            "value": "Gate 7",
+            "language": "en"
+          },
+          "description": {
+            "value": "Japanese manga series",
+            "language": "en"
+          }
+        },
+        "label": "Gate 7",
+        "description": "Japanese manga series",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Gate 7"
+        }
+      },
+      {
+        "id": "Q105162721",
+        "title": "Q105162721",
+        "pageid": 100548415,
+        "concepturi": "http://www.wikidata.org/entity/Q105162721",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q105162721",
+        "display": {
+          "label": {
+            "value": "Gate 7",
+            "language": "en"
+          },
+          "description": {
+            "value": "fan club of Olympiacos CFP, in Greece",
+            "language": "en"
+          }
+        },
+        "label": "Gate 7",
+        "description": "fan club of Olympiacos CFP, in Greece",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Gate 7"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

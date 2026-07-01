@@ -1,0 +1,130 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:40:20.638Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 40090,
+          "ns": 0,
+          "title": "横浜スタジアム",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "よこはますたしあむ",
+            "kartographer_frames": "1",
+            "page_image_free": "Yokohama_stadium_2020_wing.jpg",
+            "wikibase_item": "Q1148681"
+          },
+          "coordinates": [
+            {
+              "lat": 35.443428,
+              "lon": 139.6401,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神奈川県横浜市中区にある野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 54832,
+          "ns": 0,
+          "title": "万博記念公園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はんはくきねんこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "131116_Expo_Commemoration_Park_Suita_Osaka_pref_Japan01s3.jpg",
+            "wikibase_item": "Q4817249"
+          },
+          "coordinates": [
+            {
+              "lat": 34.80952222,
+              "lon": 135.53240833,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪府吹田市にある公園"
+            ]
+          }
+        },
+        {
+          "pageid": 80720,
+          "ns": 0,
+          "title": "花咲スポーツ公園硬式野球場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はなさきすほつこうえんこうしきやきゆうしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Hokkaidō_géolocalisation.svg",
+            "wikibase_item": "Q11081691"
+          },
+          "coordinates": [
+            {
+              "lat": 43.78888889,
+              "lon": 142.36861111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道旭川市にある野球場"
+            ]
+          }
+        },
+        {
+          "pageid": 166041,
+          "ns": 0,
+          "title": "砧公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "きぬたこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Kinuta_Park_04.jpg",
+            "wikibase_item": "Q4388776"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62902778,
+              "lon": 139.62125,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の公園"
+            ]
+          }
+        },
+        {
+          "pageid": 1281134,
+          "ns": 0,
+          "title": "運動公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "うんとうこうえん",
+            "wikibase_item": "Q16363669"
+          },
+          "terms": {
+            "description": [
+              "都市公園の一種で主に運動用"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

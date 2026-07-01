@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:29.583Z",
+  "value": {
+    "searchinfo": {
+      "search": "東京都庭園美術館"
+    },
+    "search": [
+      {
+        "id": "Q743773",
+        "title": "Q743773",
+        "pageid": 699706,
+        "concepturi": "http://www.wikidata.org/entity/Q743773",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q743773",
+        "display": {
+          "label": {
+            "value": "Tokyo Metropolitan Teien Art Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum",
+            "language": "en"
+          }
+        },
+        "label": "Tokyo Metropolitan Teien Art Museum",
+        "description": "museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "東京都庭園美術館"
+        },
+        "aliases": [
+          "東京都庭園美術館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

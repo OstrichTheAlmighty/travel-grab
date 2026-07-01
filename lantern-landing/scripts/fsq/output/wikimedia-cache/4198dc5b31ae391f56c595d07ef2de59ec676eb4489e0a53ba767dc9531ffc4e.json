@@ -1,0 +1,125 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:23.850Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 37095,
+          "ns": 0,
+          "title": "フジ (チェーンストア)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふし",
+            "page_image_free": "Fuji_supermarket_logo.svg",
+            "wikibase_item": "Q8963035"
+          },
+          "coordinates": [
+            {
+              "lat": 34.38522222,
+              "lon": 132.47536111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "チェーンストア"
+            ]
+          }
+        },
+        {
+          "pageid": 290744,
+          "ns": 0,
+          "title": "檮原町",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ゆすはらちよう",
+            "kartographer_frames": "1",
+            "page_image": "Yusuhara_Ishinnno-mon_1.JPG",
+            "page_image_free": "Yusuhara_town_office.jpg",
+            "wikibase_item": "Q1206286"
+          },
+          "coordinates": [
+            {
+              "lat": 33.39219,
+              "lon": 132.92703,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "高知県高岡郡の町"
+            ]
+          }
+        },
+        {
+          "pageid": 2044365,
+          "ns": 0,
+          "title": "マルシェコロール",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "まるしえころおる",
+            "wikibase_item": "Q11341280"
+          }
+        },
+        {
+          "pageid": 2815797,
+          "ns": 0,
+          "title": "道の駅まくらがの里こが",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みちのえきまくらかのさとこか",
+            "kartographer_frames": "1",
+            "page_image_free": "Michinoeki_MakuraganoSato.JPG",
+            "wikibase_item": "Q17212981"
+          },
+          "coordinates": [
+            {
+              "lat": 36.19167,
+              "lon": 139.78964,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "茨城県古河市にある国道4号の道の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 4038623,
+          "ns": 0,
+          "title": "鳥羽マルシェ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とはまるしえ",
+            "kartographer_frames": "1",
+            "page_image_free": "Toba_Marché.jpg",
+            "wikibase_item": "Q76449457"
+          },
+          "coordinates": [
+            {
+              "lat": 34.48713889,
+              "lon": 136.84477778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の三重県鳥羽市にある農水産物直売所"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

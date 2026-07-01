@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:33.352Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 64079,
+          "ns": 0,
+          "title": "國學院大學",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "こくかくいんたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Kokugakuin_university_2021.jpg",
+            "wikibase_item": "Q495330"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65563889,
+              "lon": 139.71163889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都渋谷区にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 384619,
+          "ns": 0,
+          "title": "國學院大學栃木中学校・高等学校",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こくかくいんたいかくとちき",
+            "kartographer_frames": "1",
+            "page_image_free": "Kokugakuin_tochigi_hoghschool.jpg",
+            "wikibase_item": "Q11422704"
+          },
+          "coordinates": [
+            {
+              "lat": 36.36466667,
+              "lon": 139.70377778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "栃木県栃木市にある私立校"
+            ]
+          }
+        },
+        {
+          "pageid": 458755,
+          "ns": 0,
+          "title": "國學院大學の人物一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こくかくいん",
+            "wikibase_item": "Q11422699"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1832839,
+          "ns": 0,
+          "title": "國學院大學久我山中学校・高等学校",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こくかくいんたいかくくかやま",
+            "kartographer_frames": "1",
+            "page_image_free": "早春の久我山.JPG",
+            "wikibase_item": "Q11422701"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68384444,
+              "lon": 139.59436111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都杉並区久我山にある私立中学校・高等学校"
+            ]
+          }
+        },
+        {
+          "pageid": 3983575,
+          "ns": 0,
+          "title": "國學院大學博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こくかくいんたいかくはくふつかん",
+            "page_image_free": "國學院大學博物館考古展示室.jpg",
+            "wikibase_item": "Q81916990"
+          },
+          "terms": {
+            "description": [
+              "東京都渋谷区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

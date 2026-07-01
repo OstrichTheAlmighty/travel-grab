@@ -1,0 +1,128 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:06:08.665Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 17419,
+          "ns": 0,
+          "title": "東京都写真美術館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようとしやしんひしゆつかん",
+            "page_image_free": "Tokyo_Metropolitan_Museum_of_Photography_entrance_2011_January.jpg",
+            "wikibase_item": "Q862884"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6417,
+              "lon": 139.7132,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都目黒区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 55202,
+          "ns": 0,
+          "title": "大阪市立美術館",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おおさかしりつひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "20250827_大阪市立美術館.jpg",
+            "wikibase_item": "Q9004920"
+          },
+          "coordinates": [
+            {
+              "lat": 34.65011111,
+              "lon": 135.51052778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪市天王寺区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 80123,
+          "ns": 0,
+          "title": "東京都美術館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようとひしゆつかん",
+            "page_image_free": "Toukyoutoartmuseum.jpg",
+            "wikibase_item": "Q864957"
+          },
+          "terms": {
+            "description": [
+              "東京都台東区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 242162,
+          "ns": 0,
+          "title": "西宮市大谷記念美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にしのみやしおおたにきねんひしゆつかん",
+            "page_image_free": "230825_Otani_Memorial_Art_Museum_Nishinomiya_City_Hyogo_pref_Japan01s3.jpg",
+            "wikibase_item": "Q11627626"
+          },
+          "coordinates": [
+            {
+              "lat": 34.73211111,
+              "lon": 135.32452778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "兵庫県西宮市にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 333833,
+          "ns": 0,
+          "title": "国立新美術館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こくりつしんひしゆつかん",
+            "page_image_free": "2018_National_Art_Center,_Tokyo_2.jpg",
+            "wikibase_item": "Q1362638"
+          },
+          "coordinates": [
+            {
+              "lat": 35.665,
+              "lon": 139.72638889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京・六本木にある美術館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

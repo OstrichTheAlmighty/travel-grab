@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:01.938Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 2785760,
+          "ns": 0,
+          "title": "出光興産",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "いてみつこうさん",
+            "page_image_free": "Ōtemachitemachi_One_Tower.jpg",
+            "wikibase_item": "Q2216770"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68777778,
+              "lon": 139.76222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都千代田区にある石油元売会社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

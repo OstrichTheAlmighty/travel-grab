@@ -1,0 +1,137 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:04.005Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 141740,
+          "ns": 0,
+          "title": "森町 (北海道)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "もりまち",
+            "page_image_free": "Mori_station-20110827-For_Komagatake.jpg",
+            "wikibase_item": "Q1354319"
+          },
+          "coordinates": [
+            {
+              "lat": 42.10497,
+              "lon": 140.57642,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道茅部郡の町"
+            ]
+          }
+        },
+        {
+          "pageid": 1118605,
+          "ns": 0,
+          "title": "六道珍皇寺",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ろくとうちんのうし",
+            "page_image_free": "150124_Rokudo-Chinnoji_Kyoto_Japan02n.jpg",
+            "wikibase_item": "Q1391664"
+          },
+          "coordinates": [
+            {
+              "lat": 34.99845,
+              "lon": 135.77521944,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市東山区にある寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 1145149,
+          "ns": 0,
+          "title": "本妙寺 (豊島区)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ほんみようし としまく",
+            "kartographer_frames": "1",
+            "page_image_free": "Honmyoji_20100214.jpg",
+            "wikibase_item": "Q11520109"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73965917,
+              "lon": 139.7351075,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都豊島区にある寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 3817813,
+          "ns": 0,
+          "title": "大龍寺 (新宿区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たいりゆうし゛ しんしゆくく",
+            "kartographer_frames": "1",
+            "page_image_free": "Dairyuji_temple_waseda_2019.jpg",
+            "wikibase_item": "Q56346919"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70222222,
+              "lon": 139.72166667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都新宿区にある曹洞宗の寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 4117183,
+          "ns": 0,
+          "title": "長楽寺 (恵那市)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ちようらくし",
+            "page_image_free": "Chōraku-ji_temple,_Ena,_2018.jpg",
+            "wikibase_item": "Q97208282"
+          },
+          "coordinates": [
+            {
+              "lat": 35.48244444,
+              "lon": 137.3595,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "岐阜県恵那市にある寺院"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

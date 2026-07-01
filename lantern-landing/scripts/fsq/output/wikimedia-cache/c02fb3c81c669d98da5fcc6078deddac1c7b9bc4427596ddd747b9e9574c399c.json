@@ -1,0 +1,85 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:29.384Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 165248,
+          "ns": 0,
+          "title": "土曜ゴールデン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とようこおるてん",
+            "wikibase_item": "Q11423597"
+          },
+          "terms": {
+            "description": [
+              "テレビ東京の単発特別番組枠"
+            ]
+          }
+        },
+        {
+          "pageid": 2726645,
+          "ns": 0,
+          "title": "HKT48のおでかけ!",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "えいちけえていいふおおていいえいとのおてかけ",
+            "wikibase_item": "Q6547475"
+          }
+        },
+        {
+          "pageid": 2764117,
+          "ns": 0,
+          "title": "半田裕典",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はんた ゆうすけ",
+            "wikibase_item": "Q11407093"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 3058772,
+          "ns": 0,
+          "title": "警視庁捜査一課9係の登場人物",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "けいしちようそうさいつかきゆうかかり",
+            "wikibase_item": "Q18226410"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 4653899,
+          "ns": 0,
+          "title": "千原ジュニアの愛知あたりまえワールド☆〜あなたの街に新仰天!〜",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちはらしゆにあのあいちあたりまえわあるとあなたのまちにしんきようてん",
+            "wikibase_item": "Q113702575"
+          },
+          "terms": {
+            "description": [
+              "テレビ愛知のバラエティ番組"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

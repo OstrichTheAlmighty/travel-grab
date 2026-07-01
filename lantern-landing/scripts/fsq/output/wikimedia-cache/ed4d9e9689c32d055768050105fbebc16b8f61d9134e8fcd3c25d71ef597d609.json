@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:00.651Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18986,
+          "ns": 0,
+          "title": "荒川区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あらかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "Entsuji_(Arakawa)_08.jpg",
+            "wikibase_item": "Q232624"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73611,
+              "lon": 139.78339,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 1043955,
+          "ns": 0,
+          "title": "西日暮里",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にしにつほり",
+            "kartographer_frames": "1",
+            "page_image_free": "開成中学校高等学校.JPG",
+            "wikibase_item": "Q3342140"
+          },
+          "terms": {
+            "description": [
+              "東京都荒川区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1052653,
+          "ns": 0,
+          "title": "舎人 (足立区)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とねり",
+            "kartographer_frames": "1",
+            "page_image_free": "Minumadai_Shinsui_Park.jpg",
+            "wikibase_item": "Q11613508"
+          },
+          "terms": {
+            "description": [
+              "東京都足立区の町"
+            ]
+          }
+        },
+        {
+          "pageid": 2653369,
+          "ns": 0,
+          "title": "上野田 (白岡市)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かみのた",
+            "page_image_free": "Map_of_Saitama_Prefecture_Ja.svg",
+            "wikibase_item": "Q11360407"
+          },
+          "terms": {
+            "description": [
+              "日本の埼玉県白岡市の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 3802619,
+          "ns": 0,
+          "title": "荒川区立尾久西小学校",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あらかわくりつおくにし",
+            "kartographer_frames": "1",
+            "page_image_free": "荒川区立尾久西小学校.jpg",
+            "wikibase_item": "Q55534764"
+          },
+          "coordinates": [
+            {
+              "lat": 35.75017,
+              "lon": 139.75844,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都荒川区にある小学校"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

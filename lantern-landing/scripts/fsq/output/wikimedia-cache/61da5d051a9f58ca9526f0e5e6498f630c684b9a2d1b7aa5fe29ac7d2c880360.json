@@ -1,0 +1,97 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:17.435Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 443515,
+          "ns": 0,
+          "title": "谷中霊園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やなかれいえん",
+            "page_image_free": "Yanaka_cemetery.jpg",
+            "wikibase_item": "Q864387"
+          },
+          "terms": {
+            "description": [
+              "東京都の霊園"
+            ]
+          }
+        },
+        {
+          "pageid": 443881,
+          "ns": 0,
+          "title": "谷中五重塔放火心中事件",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "やなかこしゆうのとうほうかしんちゆうしけん",
+            "page_image_free": "Yanaka_Five-Storied_Pagoda.JPG",
+            "wikibase_item": "Q8048250"
+          }
+        },
+        {
+          "pageid": 459740,
+          "ns": 0,
+          "title": "天王寺 (台東区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "てんのうし たいとうく",
+            "page_image_free": "Tenno-ji_by_kolshica_in_Yanaka,_Tokyo_2.jpg",
+            "wikibase_item": "Q17218754"
+          },
+          "coordinates": [
+            {
+              "lat": 35.72658333,
+              "lon": 139.77136111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 638952,
+          "ns": 0,
+          "title": "五重塔",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "こしゆうのとう",
+            "page_image_free": "Horyu-ji06s3200.jpg",
+            "wikibase_item": "Q11372713"
+          },
+          "terms": {
+            "description": [
+              "仏塔の形式の一つで層塔と呼ばれる楼閣形式の仏塔のうち、五重の屋根を持つもの"
+            ]
+          }
+        },
+        {
+          "pageid": 1362219,
+          "ns": 0,
+          "title": "五重塔 (小説)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こしゆうのとう",
+            "wikibase_item": "Q7734263"
+          },
+          "terms": {
+            "description": [
+              "幸田露伴による文学作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

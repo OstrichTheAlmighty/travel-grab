@@ -1,0 +1,92 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:42.351Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 492269,
+          "ns": 0,
+          "title": "東京ディズニーランドのサービス施設の一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいらんとのさあひすしせついちらん",
+            "wikibase_item": "Q11524282"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 493656,
+          "ns": 0,
+          "title": "東京ディズニーシーのサービス施設の一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいしいのさあひすしせついちらん",
+            "wikibase_item": "Q11524254"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 943364,
+          "ns": 0,
+          "title": "東京ディズニーランドのショップの一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようていすにいらんとのしよつふ",
+            "wikibase_item": "Q11524284"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2426783,
+          "ns": 0,
+          "title": "JKT48",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しええけえていいふおおていいえいと",
+            "page_image_free": "JKT48.svg",
+            "wikibase_item": "Q182032"
+          },
+          "terms": {
+            "description": [
+              "インドネシアの女性アイドルグループ (2011-)"
+            ]
+          }
+        },
+        {
+          "pageid": 2463870,
+          "ns": 0,
+          "title": "BABYMETAL",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "へひいめたる",
+            "page_image_free": "Babymetal_performing_at_AFAS_Live_in_Amsterdam_13_May_2025.jpg",
+            "wikibase_item": "Q11190781"
+          },
+          "terms": {
+            "description": [
+              "日本のメタルダンス・ユニット (2010-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

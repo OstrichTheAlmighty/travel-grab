@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:41:24.078Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 41570,
+          "ns": 0,
+          "title": "ナゴヤドーム",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "なこやとおむ",
+            "page_image_free": "Nagoya_Dome_-_3.jpg",
+            "wikibase_item": "Q929524"
+          },
+          "coordinates": [
+            {
+              "lat": 35.18597778,
+              "lon": 136.94731389,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "愛知県名古屋市東区にある多目的ドーム球場"
+            ]
+          }
+        },
+        {
+          "pageid": 72021,
+          "ns": 0,
+          "title": "日本航空",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんこうくう",
+            "page_image_free": "JA01WJ_JFK_Climb_Out_31L_JL_A350_1041_A350_1000_Red_Sticker_Beacon_Small.png",
+            "wikibase_item": "Q213140"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62,
+              "lon": 139.75113889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都品川区にある航空会社"
+            ]
+          }
+        },
+        {
+          "pageid": 891414,
+          "ns": 0,
+          "title": "劇場版ポケットモンスター ダイヤモンド&パール ディアルガVSパルキアVSダークライ",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ほけつともんすたあたいやもんとはあるていあるかたいはるきあたいたあくらい",
+            "wikibase_item": "Q890660"
+          }
+        },
+        {
+          "pageid": 893852,
+          "ns": 0,
+          "title": "フレーム (自転車)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ふれむ",
+            "page_image_free": "TREK_1200.JPG",
+            "wikibase_item": "Q167130"
+          }
+        },
+        {
+          "pageid": 1049964,
+          "ns": 0,
+          "title": "映画 ふたりはプリキュア Max Heart",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ふたりはふりきゆあまつくすはあと",
+            "wikibase_item": "Q3720631"
+          },
+          "terms": {
+            "description": [
+              "2005年公開の日本のアニメ映画（プリキュアシリーズ）"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

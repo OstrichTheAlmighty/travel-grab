@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:49.597Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 200054,
+          "ns": 0,
+          "title": "東京楽天地",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようらくてんち",
+            "page_image_free": "Kinshicho_PARCO_ac.jpg",
+            "wikibase_item": "Q11524930"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69630556,
+              "lon": 139.81566667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区の企業"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1095388,
+          "ns": 0,
+          "title": "臨海町 (江戸川区)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "りんかいちよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Kasai-Rinkai-kōen_Station_20120219.jpg",
+            "wikibase_item": "Q11612550"
+          },
+          "terms": {
+            "description": [
+              "東京都江戸川区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 2558566,
+          "ns": 0,
+          "title": "若大将のゆうゆう散歩",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "わかたいしようのゆうゆうさんほ",
+            "page_image_free": "Yuyu_sanpo.png",
+            "wikibase_item": "Q11616230"
+          },
+          "terms": {
+            "description": [
+              "テレビ朝日系列の紀行番組 (2012 - 2015)"
+            ]
+          }
+        },
+        {
+          "pageid": 3859555,
+          "ns": 0,
+          "title": "有吉ぃぃeeeee!そうだ!今からお前んチでゲームしない?",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ありよしいいいいいそうたいまからおまえんちでけえむしない",
+            "wikibase_item": "Q60987028"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビeスポーツ・ゲーム情報バラエティ番組 (2018-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

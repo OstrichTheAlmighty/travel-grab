@@ -1,0 +1,81 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:46:34.646Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 546744,
+          "ns": 0,
+          "title": "畑亜貴",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はた あき",
+            "wikibase_item": "Q909015"
+          },
+          "terms": {
+            "description": [
+              "日本の女性シンガーソングライター、作詞家、作曲家、編曲家"
+            ]
+          }
+        },
+        {
+          "pageid": 2003591,
+          "ns": 0,
+          "title": "長門有希ちゃんの消失",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "なかとゆきちやんのしようしつ",
+            "page_image_free": "The_Disappearance_of_Nagato_Yuki-chan_logo.jpg",
+            "wikibase_item": "Q11654890"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画作品"
+            ]
+          }
+        },
+        {
+          "pageid": 3050934,
+          "ns": 0,
+          "title": "畑芽育",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はた めい",
+            "wikibase_item": "Q18054605"
+          },
+          "terms": {
+            "description": [
+              "日本の女優、タレント"
+            ]
+          }
+        },
+        {
+          "pageid": 3231485,
+          "ns": 0,
+          "title": "長門有希ちゃんの消失のディスコグラフィ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "なかとゆきちやんのしようしつのていすこくらふい",
+            "wikibase_item": "Q22124496"
+          }
+        },
+        {
+          "pageid": 3239540,
+          "ns": 0,
+          "title": "プリプリちぃちゃん!!",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふりふりちいちやん",
+            "wikibase_item": "Q22124851"
+          }
+        }
+      ]
+    }
+  }
+}

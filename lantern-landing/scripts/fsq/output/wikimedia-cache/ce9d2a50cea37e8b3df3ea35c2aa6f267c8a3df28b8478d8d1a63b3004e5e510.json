@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:02:40.202Z",
+  "value": {
+    "searchinfo": {
+      "search": "中野区立歴史民俗資料館"
+    },
+    "search": [
+      {
+        "id": "Q104708387",
+        "title": "Q104708387",
+        "pageid": 100136403,
+        "concepturi": "http://www.wikidata.org/entity/Q104708387",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q104708387",
+        "display": {
+          "label": {
+            "value": "Nakano Historical Museum",
+            "language": "en"
+          }
+        },
+        "label": "Nakano Historical Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "中野区立歴史民俗資料館"
+        },
+        "aliases": [
+          "中野区立歴史民俗資料館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:01:43.139Z",
+  "value": {
+    "searchinfo": {
+      "search": "北区飛鳥山博物館"
+    },
+    "search": [
+      {
+        "id": "Q11401205",
+        "title": "Q11401205",
+        "pageid": 12539821,
+        "concepturi": "http://www.wikidata.org/entity/Q11401205",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11401205",
+        "display": {
+          "label": {
+            "value": "Kita City Asukayama Museum",
+            "language": "en"
+          }
+        },
+        "label": "Kita City Asukayama Museum",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "北区飛鳥山博物館"
+        },
+        "aliases": [
+          "北区飛鳥山博物館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

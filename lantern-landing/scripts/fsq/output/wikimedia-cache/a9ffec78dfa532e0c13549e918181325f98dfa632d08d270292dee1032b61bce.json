@@ -1,0 +1,123 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:02.156Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 158466,
+          "ns": 0,
+          "title": "Madame Tussauds",
+          "index": 3,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "WaxMuseumMadameTussaudsLondon.JPG",
+            "wikibase-shortdesc": "Wax museum in London",
+            "wikibase_item": "Q186309"
+          },
+          "coordinates": [
+            {
+              "lat": 51.52277778,
+              "lon": -0.15527778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "wax museum in London"
+            ]
+          }
+        },
+        {
+          "pageid": 616390,
+          "ns": 0,
+          "title": "Marie Tussaud",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Tussaud, Marie",
+            "page_image_free": "Madame_Tussaud,_age_42.jpg",
+            "wikibase-shortdesc": "French wax museum founder (1761–1850)",
+            "wikibase_item": "Q219572"
+          },
+          "terms": {
+            "description": [
+              "French artist (1761–1850)"
+            ]
+          }
+        },
+        {
+          "pageid": 54151602,
+          "ns": 0,
+          "title": "Madame Tussauds Amsterdam",
+          "index": 4,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Madam_Tussaud.jpg",
+            "wikibase-shortdesc": "Wax museum in the Netherlands",
+            "wikibase_item": "Q3275333"
+          },
+          "coordinates": [
+            {
+              "lat": 52.3725,
+              "lon": 4.8925,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "wax museum in Amsterdam, Netherlands"
+            ]
+          }
+        },
+        {
+          "pageid": 55626013,
+          "ns": 0,
+          "title": "Madame Tussauds Vienna",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Madame_Tussauds_Wien-01.jpg",
+            "wikibase-shortdesc": "Wax museum in Austria",
+            "wikibase_item": "Q28549691"
+          },
+          "coordinates": [
+            {
+              "lat": 48.217222,
+              "lon": 16.396389,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "museum in Austria"
+            ]
+          }
+        },
+        {
+          "pageid": 57077082,
+          "ns": 0,
+          "title": "List of wax figures displayed at Madame Tussauds museums",
+          "index": 1,
+          "pageprops": {
+            "notoc": "",
+            "page_image_free": "Tussaud-Madame-Tussauds-London.JPG",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q52460182"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

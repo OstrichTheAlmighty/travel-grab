@@ -1,0 +1,82 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:12:54.077Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 208010,
+          "ns": 0,
+          "title": "柳宗悦",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やなき むねよし",
+            "page_image_free": "Soetsu.JPG",
+            "wikibase_item": "Q904161"
+          },
+          "terms": {
+            "description": [
+              "日本の哲学者、美学者"
+            ]
+          }
+        },
+        {
+          "pageid": 327511,
+          "ns": 0,
+          "title": "日本民藝館",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にほんみんけいかん",
+            "page_image_free": "Nihon_mingeikan_meguro_2009.JPG",
+            "wikibase_item": "Q3789149"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6608,
+              "lon": 139.67925833,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都目黒区にある美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 459791,
+          "ns": 0,
+          "title": "東京都指定文化財一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようとしていふんかさいいちらん",
+            "wikibase_item": "Q11525325"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 659485,
+          "ns": 0,
+          "title": "柳兼子",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "やなき かねこ",
+            "page_image_free": "Yanagi_Kaneko.jpg",
+            "wikibase_item": "Q11534122"
+          },
+          "terms": {
+            "description": [
+              "日本の声楽家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

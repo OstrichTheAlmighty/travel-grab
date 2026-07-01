@@ -1,0 +1,63 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:02.601Z",
+  "value": {
+    "searchinfo": {
+      "search": "恋人の聖地"
+    },
+    "search": [
+      {
+        "id": "Q11492001",
+        "title": "Q11492001",
+        "pageid": 12631641,
+        "concepturi": "http://www.wikidata.org/entity/Q11492001",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11492001",
+        "display": {
+          "label": {
+            "value": "Lover's Sanctuary",
+            "language": "en"
+          }
+        },
+        "label": "Lover's Sanctuary",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "恋人の聖地"
+        },
+        "aliases": [
+          "恋人の聖地"
+        ]
+      },
+      {
+        "id": "Q11640657",
+        "title": "Q11640657",
+        "pageid": 12781110,
+        "concepturi": "http://www.wikidata.org/entity/Q11640657",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11640657",
+        "display": {
+          "label": {
+            "value": "Roadside station Utazu Rinkaikoen",
+            "language": "en"
+          },
+          "description": {
+            "value": "roadside station in Utazu, Ayauta district, Kagawa prefecture, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Roadside station Utazu Rinkaikoen",
+        "description": "roadside station in Utazu, Ayauta district, Kagawa prefecture, Japan",
+        "match": {
+          "type": "alias",
+          "language": "ja",
+          "text": "恋人の聖地 うたづ臨海公園"
+        },
+        "aliases": [
+          "恋人の聖地 うたづ臨海公園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

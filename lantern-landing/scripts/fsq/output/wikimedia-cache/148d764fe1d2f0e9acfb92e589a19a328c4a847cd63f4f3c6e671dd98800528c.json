@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:37.352Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 20840,
+          "ns": 0,
+          "title": "ラム酒",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "らむしゆ",
+            "page_image_free": "Rum_display_in_liquor_store.jpg",
+            "wikibase_item": "Q83376"
+          },
+          "terms": {
+            "description": [
+              "サトウキビ原料の蒸留酒"
+            ]
+          }
+        },
+        {
+          "pageid": 22324,
+          "ns": 0,
+          "title": "菓子",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かし",
+            "page_image_free": "Mary's_chocates_gift_box,_made_in_Japan.jpg",
+            "wikibase_item": "Q5159627"
+          },
+          "terms": {
+            "description": [
+              "食事以外の嗜好品として食べる食品"
+            ]
+          }
+        },
+        {
+          "pageid": 27764,
+          "ns": 0,
+          "title": "サトウキビ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さとうきひ",
+            "page_image_free": "Saccharum_officinarum_-_Köhler–s_Medizinal-Pflanzen-125.jpg",
+            "wikibase_item": "Q3391243"
+          },
+          "terms": {
+            "description": [
+              "イネ科サトウキビ属の植物"
+            ]
+          }
+        },
+        {
+          "pageid": 64169,
+          "ns": 0,
+          "title": "寒天",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かんてん",
+            "wikibase_item": "Q177998"
+          },
+          "terms": {
+            "description": [
+              "紅藻類の粘液質を固めたものを凍結、乾燥させたもの"
+            ]
+          }
+        },
+        {
+          "pageid": 784400,
+          "ns": 0,
+          "title": "DM三井製糖",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ていえむみついせいとう",
+            "wikibase_item": "Q11354309"
+          },
+          "terms": {
+            "description": [
+              "日本の企業"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

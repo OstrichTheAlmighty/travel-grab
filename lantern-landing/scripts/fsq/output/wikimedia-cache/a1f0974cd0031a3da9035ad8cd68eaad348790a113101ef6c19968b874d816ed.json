@@ -1,0 +1,125 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:17:48.498Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 121,
+          "ns": 0,
+          "title": "両国国技館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "りようこくこくきかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Ryogoku_Kokugikan_(taken_from_Kokugikan_Street).jpg",
+            "wikibase_item": "Q176821"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69691667,
+              "lon": 139.79352778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区にある大相撲の興行施設"
+            ]
+          }
+        },
+        {
+          "pageid": 16969,
+          "ns": 0,
+          "title": "蔵前国技館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "くらまえこくきかん",
+            "page_image_free": "Kuramae_Kokugikan_in_1950s.JPG",
+            "wikibase_item": "Q6445562"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70222222,
+              "lon": 139.79166667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "かつて東京都台東区にあった大相撲の興行施設"
+            ]
+          }
+        },
+        {
+          "pageid": 40246,
+          "ns": 0,
+          "title": "蔵前駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "くらまえ",
+            "kartographer_frames": "1",
+            "page_image_free": "Kuramae_Station_July_31_2021_various_17_43_52_745000.jpeg",
+            "wikibase_item": "Q112348"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70322222,
+              "lon": 139.79094444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある東京都交通局の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 407541,
+          "ns": 0,
+          "title": "東京都下水道局",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようとけすいとうきよく",
+            "page_image_free": "Tokyo_Metropolitan_Government_Building_No.2_2009.jpg",
+            "wikibase_item": "Q11525207"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68919444,
+              "lon": 139.69163889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1295083,
+          "ns": 0,
+          "title": "蔵前",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "くらまえ",
+            "kartographer_frames": "1",
+            "page_image_free": "Toei-asakusa-line-kuramae-Station.jpg",
+            "wikibase_item": "Q11621884"
+          },
+          "terms": {
+            "description": [
+              "東京都台東区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

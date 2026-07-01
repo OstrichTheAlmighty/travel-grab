@@ -1,0 +1,60 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:37.654Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 10997,
+          "ns": 0,
+          "title": "東武鉄道",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうふてつとう",
+            "page_image_free": "Tobu_railway_head_office.jpg",
+            "wikibase_item": "Q1321914"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71238889,
+              "lon": 139.81377778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の鉄道会社"
+            ]
+          }
+        },
+        {
+          "pageid": 659285,
+          "ns": 0,
+          "title": "中央区 (東京都)",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ちゆうおうく",
+            "kartographer_frames": "1",
+            "page_image_free": "Ginza-WAKO_at_night.jpg",
+            "wikibase_item": "Q212704"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67058,
+              "lon": 139.77197,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

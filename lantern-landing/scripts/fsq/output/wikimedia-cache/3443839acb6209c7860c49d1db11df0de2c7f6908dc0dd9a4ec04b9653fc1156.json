@@ -1,0 +1,115 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:14:04.799Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 19701,
+          "ns": 0,
+          "title": "ピエール・リトバルスキー",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "りとはるすきい ひええる",
+            "page_image_free": "Pierre_Littbarski_-_2023141120241_2023-05-21_ZDF-Fernsehgarten_-_Sven_-_1D_X_MK_II_-_0396_-_B70I7819.jpg",
+            "wikibase_item": "Q47516"
+          },
+          "terms": {
+            "description": [
+              "ドイツのフットボール選手、指導者"
+            ]
+          }
+        },
+        {
+          "pageid": 452832,
+          "ns": 0,
+          "title": "ラインエネルギーシュタディオン",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "らいんえねるきいしゆたていおん",
+            "kartographer_frames": "1",
+            "page_image_free": "Drohnenaufnahme_RheinEnergieStadion_im_Sportpark_Müngersdorf-0551.jpg",
+            "wikibase_item": "Q151893"
+          },
+          "coordinates": [
+            {
+              "lat": 50.93349722,
+              "lon": 6.87499722,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "1.FCケルンのホームスタジアム"
+            ]
+          }
+        },
+        {
+          "pageid": 531332,
+          "ns": 0,
+          "title": "ルース・プラワー・ジャブヴァーラ",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しやふうあら るうすふらわあ",
+            "wikibase_item": "Q235759"
+          }
+        },
+        {
+          "pageid": 1204531,
+          "ns": 0,
+          "title": "ブルゴス大聖堂",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふるこすたいせいとう",
+            "page_image_free": "Escaleras_a_la_Catedral_--_2023_--_Burgos,_Castilla_y_León,_España.jpg",
+            "wikibase_item": "Q744420"
+          },
+          "coordinates": [
+            {
+              "lat": 42.34080556,
+              "lon": -3.70447222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "スペインの大聖堂"
+            ]
+          }
+        },
+        {
+          "pageid": 1454982,
+          "ns": 0,
+          "title": "萬年橋",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "まんねんはし",
+            "kartographer_frames": "1",
+            "page_image_free": "萬年橋.jpg",
+            "wikibase_item": "Q11620474"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68352778,
+              "lon": 139.79466667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の橋"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

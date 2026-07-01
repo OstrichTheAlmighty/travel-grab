@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:18:05.321Z",
+  "value": {
+    "searchinfo": {
+      "search": "KidZania Tokyo"
+    },
+    "search": [
+      {
+        "id": "Q5363436",
+        "title": "Q5363436",
+        "pageid": 5129943,
+        "concepturi": "http://www.wikidata.org/entity/Q5363436",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q5363436",
+        "display": {
+          "label": {
+            "value": "Kidzania Tokyo",
+            "language": "en"
+          },
+          "description": {
+            "value": "family edutainment center amusement park",
+            "language": "en"
+          }
+        },
+        "label": "Kidzania Tokyo",
+        "description": "family edutainment center amusement park",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Kidzania Tokyo"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

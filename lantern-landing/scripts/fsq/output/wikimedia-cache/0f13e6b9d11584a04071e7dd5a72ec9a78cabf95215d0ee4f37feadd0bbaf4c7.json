@@ -1,0 +1,123 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:16:12.862Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 43643,
+          "ns": 0,
+          "title": "皇大神宮",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "こうたいしんくう",
+            "kartographer_frames": "1",
+            "page_image_free": "Naiku_04.jpg",
+            "wikibase_item": "Q11581011"
+          },
+          "coordinates": [
+            {
+              "lat": 34.455,
+              "lon": 136.725175,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "三重県伊勢市にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 61461,
+          "ns": 0,
+          "title": "鳥居",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とりい",
+            "page_image_free": "Miyajima_Alex.jpg",
+            "wikibase_item": "Q234731"
+          },
+          "terms": {
+            "description": [
+              "神域への入口を示す門の一種"
+            ]
+          }
+        },
+        {
+          "pageid": 62124,
+          "ns": 0,
+          "title": "明治神宮",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めいししんくう",
+            "kartographer_frames": "1",
+            "page_image_free": "Courtyard_of_Meiji_Shrine_20190717.jpg",
+            "wikibase_item": "Q287165"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67611111,
+              "lon": 139.69916667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 1285165,
+          "ns": 0,
+          "title": "伊勢神宮",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "いせしんくう",
+            "kartographer_frames": "1",
+            "kartographer_links": "1",
+            "page_image_free": "Naiku_001.jpg",
+            "wikibase_item": "Q687168"
+          },
+          "coordinates": [
+            {
+              "lat": 34.455,
+              "lon": 136.725175,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の天照大御神を祀る最高位の神社"
+            ]
+          }
+        },
+        {
+          "pageid": 1732524,
+          "ns": 0,
+          "title": "神社",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しんしや",
+            "page_image_free": "Yasaka_Shrine_-_Stone_torii.jpg",
+            "wikibase_item": "Q845945"
+          },
+          "terms": {
+            "description": [
+              "神道の信仰に基づく祭祀施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

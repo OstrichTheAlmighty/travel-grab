@@ -1,0 +1,89 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:42:16.940Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 329961,
+          "ns": 0,
+          "title": "錦糸町",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きんしちよう",
+            "page_image_free": "Cityscape_from_Tokyo_Skytree_2014-09-09_04.jpg",
+            "wikibase_item": "Q11650537"
+          },
+          "terms": {
+            "description": [
+              "東京都墨田区の歓楽街"
+            ]
+          }
+        },
+        {
+          "pageid": 1138900,
+          "ns": 0,
+          "title": "北海道の川一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ほつかいとうのかわいちらん",
+            "wikibase_item": "Q11402442"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2809944,
+          "ns": 0,
+          "title": "美保純",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みほ しゆん",
+            "page_image_free": "26th_Tokyo_International_Film_Festival_Jun_Miho.jpg",
+            "wikibase_item": "Q10669833"
+          },
+          "terms": {
+            "description": [
+              "日本の女優、タレント、コメンテーター"
+            ]
+          }
+        },
+        {
+          "pageid": 3275585,
+          "ns": 0,
+          "title": "じゅん散歩",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しゆんさんほ",
+            "toc": "",
+            "wikibase_item": "Q22123635"
+          },
+          "terms": {
+            "description": [
+              "テレビ朝日系列の紀行番組"
+            ]
+          }
+        },
+        {
+          "pageid": 3619433,
+          "ns": 0,
+          "title": "二軒目どうする?〜ツマミのハナシ〜",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にけんめとうするつまみのはなし",
+            "wikibase_item": "Q48744460"
+          },
+          "terms": {
+            "description": [
+              "テレビ東京の深夜バラエティ (2017-)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

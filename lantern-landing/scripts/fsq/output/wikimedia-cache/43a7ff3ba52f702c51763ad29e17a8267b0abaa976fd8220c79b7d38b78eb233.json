@@ -1,0 +1,74 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:36:12.812Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 21114,
+          "ns": 0,
+          "title": "NASCAR",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "Nascar",
+            "wikibase-shortdesc": "American automobile racing company",
+            "wikibase_item": "Q233929"
+          },
+          "terms": {
+            "description": [
+              "American automobile racing company"
+            ]
+          }
+        },
+        {
+          "pageid": 1162242,
+          "ns": 0,
+          "title": "List of casual dining restaurant chains",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "Casual dining restaurant chains",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q6608991"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 33347964,
+          "ns": 0,
+          "title": "List of Diners, Drive-Ins and Dives episodes",
+          "index": 3,
+          "pageprops": {
+            "displaytitle": "List of <i>Diners, Drive-Ins and Dives</i> episodes",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q6569000"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 77682848,
+          "ns": 0,
+          "title": "List of kidnappings (1990–1999)",
+          "index": 2,
+          "pageprops": {
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q130240101"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

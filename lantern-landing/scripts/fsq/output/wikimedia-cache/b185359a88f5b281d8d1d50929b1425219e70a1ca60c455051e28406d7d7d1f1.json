@@ -1,0 +1,116 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:49.532Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8073,
+          "ns": 0,
+          "title": "新宿区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しんしゆくく",
+            "kartographer_frames": "1",
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "wikibase_item": "Q179645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69389,
+              "lon": 139.70342,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 18986,
+          "ns": 0,
+          "title": "荒川区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あらかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "Entsuji_(Arakawa)_08.jpg",
+            "wikibase_item": "Q232624"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73611,
+              "lon": 139.78339,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 130711,
+          "ns": 0,
+          "title": "音羽",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おとわ",
+            "kartographer_frames": "1",
+            "page_image_free": "Nezumi-zaka_(Bunkyo).jpg",
+            "wikibase_item": "Q11664320"
+          },
+          "terms": {
+            "description": [
+              "東京都文京区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 345786,
+          "ns": 0,
+          "title": "目黒 (目黒区)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "めくろ",
+            "kartographer_frames": "1",
+            "page_image_free": "Meguro_Museum_of_Art,_Tokyo.JPG",
+            "wikibase_item": "Q3541556"
+          },
+          "terms": {
+            "description": [
+              "東京都目黒区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 489775,
+          "ns": 0,
+          "title": "白金台",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しろかねたい",
+            "kartographer_frames": "1",
+            "page_image_free": "Platina_dori_Tokyo.jpg",
+            "wikibase_item": "Q7498925"
+          },
+          "terms": {
+            "description": [
+              "東京都港区の町名"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

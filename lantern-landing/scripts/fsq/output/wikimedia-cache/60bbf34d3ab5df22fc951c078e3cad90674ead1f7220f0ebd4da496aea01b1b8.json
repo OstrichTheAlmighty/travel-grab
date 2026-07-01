@@ -1,0 +1,125 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:45.157Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 40630,
+          "ns": 0,
+          "title": "通天閣",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "つうてんかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tsutenkaku_108m.jpg",
+            "wikibase_item": "Q1148463"
+          },
+          "coordinates": [
+            {
+              "lat": 34.65253611,
+              "lon": 135.506325,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "大阪市浪速区にある展望塔"
+            ]
+          }
+        },
+        {
+          "pageid": 179940,
+          "ns": 0,
+          "title": "東京スカイツリー",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようすかいつりい",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo_Skytree_2014_Ⅲ.jpg",
+            "wikibase_item": "Q57965"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71013889,
+              "lon": 139.81083333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都墨田区の電波塔"
+            ]
+          }
+        },
+        {
+          "pageid": 1302182,
+          "ns": 0,
+          "title": "雷門 (台東区)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かみなりもん",
+            "kartographer_frames": "1",
+            "page_image_free": "Asakusa_Culture_Tourist_Information_Center_at_night.jpg",
+            "wikibase_item": "Q11660197"
+          },
+          "terms": {
+            "description": [
+              "東京都台東区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1498618,
+          "ns": 0,
+          "title": "札幌三井JPビルディング",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さつほろみついひるていんく",
+            "page_image_free": "SapporomitsuiJP.jpg",
+            "wikibase_item": "Q11521135"
+          },
+          "coordinates": [
+            {
+              "lat": 43.06388889,
+              "lon": 141.35055556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 3443321,
+          "ns": 0,
+          "title": "浅草文化観光センター",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あさくさふんかかんこうせんた",
+            "page_image_free": "Asakusa_Culture_Tourist_Information_Center_at_night.jpg",
+            "wikibase_item": "Q24877101"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71066667,
+              "lon": 139.79652778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある複合施設"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

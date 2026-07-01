@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:26:01.148Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 102619,
+          "ns": 0,
+          "title": "神田川 (東京都)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "かんたかわ",
+            "kartographer_frames": "3",
+            "page_image_free": "Ochanomizu_hijiribashi01.jpg",
+            "wikibase_item": "Q3136772"
+          },
+          "terms": {
+            "description": [
+              "東京都内を井の頭池から荒川水系隅田川まで流れる河川"
+            ]
+          }
+        },
+        {
+          "pageid": 246776,
+          "ns": 0,
+          "title": "牛込",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "うしこめ",
+            "page_image_free": "Ushigome-Mon.JPG",
+            "wikibase_item": "Q7901941"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区の地域名"
+            ]
+          }
+        },
+        {
+          "pageid": 301265,
+          "ns": 0,
+          "title": "江戸城",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "えとしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "Edo_Castle_1979.94.21P01B.jpg",
+            "wikibase_item": "Q865913"
+          },
+          "coordinates": [
+            {
+              "lat": 35.688325,
+              "lon": 139.75436667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にあった城（現・皇居）"
+            ]
+          }
+        },
+        {
+          "pageid": 383796,
+          "ns": 0,
+          "title": "番町",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "はんちよう",
+            "page_image_free": "Ntv-street1@chiyodacity.jpg",
+            "wikibase_item": "Q2882061"
+          },
+          "terms": {
+            "description": [
+              "東京都千代田区の地名"
+            ]
+          }
+        },
+        {
+          "pageid": 922518,
+          "ns": 0,
+          "title": "外濠 (東京都)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "そとほり",
+            "page_image_free": "Edo_hori.png",
+            "wikibase_item": "Q11430499"
+          },
+          "terms": {
+            "description": [
+              "江戸城の外側の堀の総称"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

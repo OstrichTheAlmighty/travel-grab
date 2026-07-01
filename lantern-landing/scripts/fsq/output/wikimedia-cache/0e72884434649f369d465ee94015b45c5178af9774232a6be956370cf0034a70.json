@@ -1,0 +1,87 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:50.831Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 15361,
+          "ns": 0,
+          "title": "人形",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にんきよう",
+            "page_image_free": "お雛様-hinamatsuri-dolls-lamp.jpg",
+            "wikibase_item": "Q168658"
+          },
+          "terms": {
+            "description": [
+              "人間の姿を似せて作られた物"
+            ]
+          }
+        },
+        {
+          "pageid": 37821,
+          "ns": 0,
+          "title": "八木亜希子",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "やき あきこ",
+            "wikibase_item": "Q11391302"
+          },
+          "terms": {
+            "description": [
+              "日本の女性アナウンサー、女優"
+            ]
+          }
+        },
+        {
+          "pageid": 375066,
+          "ns": 0,
+          "title": "学校では教えてくれないこと!!",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "かつこうてはおしえてくれないこと",
+            "wikibase_item": "Q11448215"
+          }
+        },
+        {
+          "pageid": 997834,
+          "ns": 0,
+          "title": "サトちゃん",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "さとちやん",
+            "page_image_free": "2021-10-11_Sato-chan,Sato_Pharmaceutical_サトちゃん_布袋堂薬局_丹波篠山_DSCF2954.jpg",
+            "wikibase_item": "Q11304872"
+          },
+          "terms": {
+            "description": [
+              "佐藤製薬のマスコットキャラクター"
+            ]
+          }
+        },
+        {
+          "pageid": 1948663,
+          "ns": 0,
+          "title": "チャーミング (お笑いコンビ)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ちやあみんく",
+            "wikibase_item": "Q11318295"
+          },
+          "terms": {
+            "description": [
+              "日本のお笑いコンビ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

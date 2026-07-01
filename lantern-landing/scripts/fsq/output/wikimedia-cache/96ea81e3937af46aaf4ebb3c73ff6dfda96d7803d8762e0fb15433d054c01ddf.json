@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:04.501Z",
+  "value": {
+    "searchinfo": {
+      "search": "旧芝離宮恩賜庭園"
+    },
+    "search": [
+      {
+        "id": "Q3266874",
+        "title": "Q3266874",
+        "pageid": 3116839,
+        "concepturi": "http://www.wikidata.org/entity/Q3266874",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q3266874",
+        "display": {
+          "label": {
+            "value": "Kyu Shiba Rikyu Garden",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Minato, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Kyu Shiba Rikyu Garden",
+        "description": "park in Minato, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "旧芝離宮恩賜庭園"
+        },
+        "aliases": [
+          "旧芝離宮恩賜庭園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

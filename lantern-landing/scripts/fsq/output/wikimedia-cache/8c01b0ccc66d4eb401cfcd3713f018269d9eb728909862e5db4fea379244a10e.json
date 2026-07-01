@@ -1,0 +1,37 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:23.972Z",
+  "value": {
+    "searchinfo": {
+      "search": "Sky Deck"
+    },
+    "search": [
+      {
+        "id": "Q126417062",
+        "title": "Q126417062",
+        "pageid": 120442998,
+        "concepturi": "http://www.wikidata.org/entity/Q126417062",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q126417062",
+        "display": {
+          "label": {
+            "value": "Sky Deck",
+            "language": "en"
+          },
+          "description": {
+            "value": "outdoor observation deck",
+            "language": "en"
+          }
+        },
+        "label": "Sky Deck",
+        "description": "outdoor observation deck",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Sky Deck"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

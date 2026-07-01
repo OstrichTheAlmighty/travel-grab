@@ -1,0 +1,105 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:07:46.908Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18986,
+          "ns": 0,
+          "title": "荒川区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "あらかわく",
+            "kartographer_frames": "1",
+            "page_image_free": "Entsuji_(Arakawa)_08.jpg",
+            "wikibase_item": "Q232624"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73611,
+              "lon": 139.78339,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区の一つ"
+            ]
+          }
+        },
+        {
+          "pageid": 112129,
+          "ns": 0,
+          "title": "東京都電車",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようとてんしや",
+            "page_image_free": "Toden8800_4colors_20101225.jpg",
+            "wikibase_item": "Q7814005"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都交通局が運営する路面電車路線"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1043955,
+          "ns": 0,
+          "title": "西日暮里",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "にしにつほり",
+            "kartographer_frames": "1",
+            "page_image_free": "開成中学校高等学校.JPG",
+            "wikibase_item": "Q3342140"
+          },
+          "terms": {
+            "description": [
+              "東京都荒川区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1052653,
+          "ns": 0,
+          "title": "舎人 (足立区)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とねり",
+            "kartographer_frames": "1",
+            "page_image_free": "Minumadai_Shinsui_Park.jpg",
+            "wikibase_item": "Q11613508"
+          },
+          "terms": {
+            "description": [
+              "東京都足立区の町"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

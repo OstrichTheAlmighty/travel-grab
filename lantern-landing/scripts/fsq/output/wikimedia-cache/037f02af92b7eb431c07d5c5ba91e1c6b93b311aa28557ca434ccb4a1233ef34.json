@@ -1,0 +1,98 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:24:34.921Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 3973,
+          "ns": 0,
+          "title": "Bicycle",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Left_side_of_Flying_Pigeon.jpg",
+            "wikibase-shortdesc": "Pedal-driven two-wheel vehicle",
+            "wikibase_item": "Q11442"
+          },
+          "terms": {
+            "description": [
+              "pedal-driven two-wheel vehicle"
+            ]
+          }
+        },
+        {
+          "pageid": 907258,
+          "ns": 0,
+          "title": "Fuji Bikes",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Caja_Rural-Seguros_RGA_bicycles.jpg",
+            "wikibase-shortdesc": "Japanese manufacturer of bicycles",
+            "wikibase_item": "Q3661083"
+          },
+          "terms": {
+            "description": [
+              "company"
+            ]
+          }
+        },
+        {
+          "pageid": 1678919,
+          "ns": 0,
+          "title": "Bicycle kick",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Francescoli_River_Plate_Poland_1986.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "Association football kick",
+            "wikibase_item": "Q860430"
+          },
+          "terms": {
+            "description": [
+              "type of kick in association football"
+            ]
+          }
+        },
+        {
+          "pageid": 15025584,
+          "ns": 0,
+          "title": "List of museums in Tokyo",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Ad_Museum_Tokyo.JPG",
+            "wikibase-shortdesc": "",
+            "wikibase_item": "Q3735824"
+          },
+          "terms": {
+            "description": [
+              "Wikimedia list article"
+            ]
+          }
+        },
+        {
+          "pageid": 26984383,
+          "ns": 0,
+          "title": "Bicycling (magazine)",
+          "index": 2,
+          "pageprops": {
+            "displaytitle": "<i>Bicycling</i> (magazine)",
+            "page_image_free": "Bicycling_magazine_Spring_2024_cover.webp",
+            "toc": "",
+            "wikibase-shortdesc": "American cycling magazine",
+            "wikibase_item": "Q4903815"
+          },
+          "terms": {
+            "description": [
+              "magazine"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

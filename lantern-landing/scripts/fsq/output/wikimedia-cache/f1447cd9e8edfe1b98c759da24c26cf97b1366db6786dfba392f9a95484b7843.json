@@ -1,0 +1,137 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:28:13.245Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 401,
+          "ns": 0,
+          "title": "滋賀県",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "しかけん",
+            "page_image_free": "Chikubusumajinja01s3200.jpg",
+            "wikibase_item": "Q131358"
+          },
+          "coordinates": [
+            {
+              "lat": 35.00436,
+              "lon": 135.8685,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の都道府県"
+            ]
+          }
+        },
+        {
+          "pageid": 446,
+          "ns": 0,
+          "title": "山口県",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "やまくちけん",
+            "kartographer_frames": "1",
+            "page_image_free": "秋吉台風景.jpg",
+            "wikibase_item": "Q127264"
+          },
+          "coordinates": [
+            {
+              "lat": 34.1861,
+              "lon": 131.4703,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の中国地方にある県"
+            ]
+          }
+        },
+        {
+          "pageid": 49921,
+          "ns": 0,
+          "title": "三菱重工業",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みつひししゆうこうきよう",
+            "page_image_free": "Marunouchi_Nijūbashi_Building.jpg",
+            "wikibase_item": "Q648280"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67769444,
+              "lon": 139.76180556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都千代田区にある重工業メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 63946,
+          "ns": 0,
+          "title": "舞鶴市",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "まいつるし",
+            "kartographer_frames": "1",
+            "page_image_free": "Maizuru_red_brick_warehouses08s3200.jpg",
+            "wikibase_item": "Q750573"
+          },
+          "coordinates": [
+            {
+              "lat": 35.47475,
+              "lon": 135.38597,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都府の市"
+            ]
+          }
+        },
+        {
+          "pageid": 139890,
+          "ns": 0,
+          "title": "AGC",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えいしいしい",
+            "page_image_free": "Shin_Marunouchi_Bldg.jpg",
+            "wikibase_item": "Q720484"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68252778,
+              "lon": 139.76436111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都千代田区にあるガラスメーカー"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

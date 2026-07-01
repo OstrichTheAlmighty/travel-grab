@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:34.205Z",
+  "value": {
+    "searchinfo": {
+      "search": "すずめのお宿緑地公園"
+    },
+    "search": [
+      {
+        "id": "Q11269700",
+        "title": "Q11269700",
+        "pageid": 12412232,
+        "concepturi": "http://www.wikidata.org/entity/Q11269700",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11269700",
+        "display": {
+          "label": {
+            "value": "Suzume-no-Oyado Park",
+            "language": "en"
+          },
+          "description": {
+            "value": "park in Meguro, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Suzume-no-Oyado Park",
+        "description": "park in Meguro, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "すずめのお宿緑地公園"
+        },
+        "aliases": [
+          "すずめのお宿緑地公園"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

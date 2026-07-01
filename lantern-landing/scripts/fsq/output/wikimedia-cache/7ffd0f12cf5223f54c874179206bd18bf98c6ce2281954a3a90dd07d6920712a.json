@@ -1,0 +1,188 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:34.632Z",
+  "value": {
+    "searchinfo": {
+      "search": "Harajuku"
+    },
+    "search": [
+      {
+        "id": "Q746573",
+        "title": "Q746573",
+        "pageid": 702414,
+        "concepturi": "http://www.wikidata.org/entity/Q746573",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q746573",
+        "display": {
+          "label": {
+            "value": "Harajuku",
+            "language": "en"
+          },
+          "description": {
+            "value": "District in Shibuya, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Harajuku",
+        "description": "District in Shibuya, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Harajuku"
+        }
+      },
+      {
+        "id": "Q800894",
+        "title": "Q800894",
+        "pageid": 753814,
+        "concepturi": "http://www.wikidata.org/entity/Q800894",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q800894",
+        "display": {
+          "label": {
+            "value": "Harajuku Station",
+            "language": "en"
+          },
+          "description": {
+            "value": "railway station in Shibuya, Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Harajuku Station",
+        "description": "railway station in Shibuya, Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Harajuku Station"
+        }
+      },
+      {
+        "id": "Q11409562",
+        "title": "Q11409562",
+        "pageid": 12548245,
+        "concepturi": "http://www.wikidata.org/entity/Q11409562",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11409562",
+        "display": {
+          "label": {
+            "value": "Harajuku",
+            "language": "en"
+          },
+          "description": {
+            "value": "town located in Totsuka-ku, Yokohama City, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Harajuku",
+        "description": "town located in Totsuka-ku, Yokohama City, Japan",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Harajuku"
+        }
+      },
+      {
+        "id": "Q64952532",
+        "title": "Q64952532",
+        "pageid": 64596800,
+        "concepturi": "http://www.wikidata.org/entity/Q64952532",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q64952532",
+        "display": {
+          "label": {
+            "value": "Harajuku",
+            "language": "en"
+          },
+          "description": {
+            "value": "2018 film directed by Eirik Svensson",
+            "language": "en"
+          }
+        },
+        "label": "Harajuku",
+        "description": "2018 film directed by Eirik Svensson",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Harajuku"
+        }
+      },
+      {
+        "id": "Q11409570",
+        "title": "Q11409570",
+        "pageid": 12548253,
+        "concepturi": "http://www.wikidata.org/entity/Q11409570",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11409570",
+        "display": {
+          "label": {
+            "value": "Harajuku Tantei Gakuen Steel Wood",
+            "language": "en"
+          },
+          "description": {
+            "value": "2010 video game",
+            "language": "en"
+          }
+        },
+        "label": "Harajuku Tantei Gakuen Steel Wood",
+        "description": "2010 video game",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Harajuku Tantei Gakuen Steel Wood"
+        }
+      },
+      {
+        "id": "Q1584377",
+        "title": "Q1584377",
+        "pageid": 1520095,
+        "concepturi": "http://www.wikidata.org/entity/Q1584377",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q1584377",
+        "display": {
+          "label": {
+            "value": "Harajuku",
+            "language": "en"
+          },
+          "description": {
+            "value": "German band",
+            "language": "en"
+          }
+        },
+        "label": "Harajuku",
+        "description": "German band",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Harajuku"
+        }
+      },
+      {
+        "id": "Q115529068",
+        "title": "Q115529068",
+        "pageid": 110098809,
+        "concepturi": "http://www.wikidata.org/entity/Q115529068",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q115529068",
+        "display": {
+          "label": {
+            "value": "Harajuku",
+            "language": "en"
+          },
+          "description": {
+            "value": "Japanese writer and editor",
+            "language": "en"
+          }
+        },
+        "label": "Harajuku",
+        "description": "Japanese writer and editor",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "Harajuku"
+        }
+      }
+    ],
+    "search-continue": 7,
+    "success": 1
+  }
+}

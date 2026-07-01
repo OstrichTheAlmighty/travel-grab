@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:02.304Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 58652,
+          "ns": 0,
+          "title": "第一銀行",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たいいちきんこう",
+            "page_image_free": "Old_Daiichi_Bank_Head_Office_1930.jpg",
+            "wikibase_item": "Q11602127"
+          },
+          "terms": {
+            "description": [
+              "かつて日本の東京都千代田区にあった銀行"
+            ]
+          }
+        },
+        {
+          "pageid": 100531,
+          "ns": 0,
+          "title": "渋沢財閥",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しふさわさいはつ",
+            "page_image_free": "Keizo_Shibusawa.jpg",
+            "wikibase_item": "Q11561637"
+          },
+          "terms": {
+            "description": [
+              "日本の財閥"
+            ]
+          }
+        },
+        {
+          "pageid": 431775,
+          "ns": 0,
+          "title": "古河機械金属",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふるかわきかいきんそく",
+            "page_image_free": "Furukawa_syasyo.jpg",
+            "wikibase_item": "Q11411383"
+          },
+          "terms": {
+            "description": [
+              "日本の非鉄金属メーカー"
+            ]
+          }
+        },
+        {
+          "pageid": 457885,
+          "ns": 0,
+          "title": "澁澤倉庫",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しふさわそうこ",
+            "page_image_free": "澁澤シティプレイス永代.jpg",
+            "wikibase_item": "Q11565777"
+          },
+          "terms": {
+            "description": [
+              "日本の物流企業"
+            ]
+          }
+        },
+        {
+          "pageid": 1596036,
+          "ns": 0,
+          "title": "港区 (東京都)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みなとく",
+            "kartographer_frames": "1",
+            "page_image_free": "20110405-TokyoTower-Sakura01.jpg",
+            "wikibase_item": "Q190088"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65803,
+              "lon": 139.75153,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

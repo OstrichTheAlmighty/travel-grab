@@ -1,0 +1,73 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:42.070Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 45272,
+          "ns": 0,
+          "title": "田中真弓",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "たなか まゆみ",
+            "page_image_free": "Mayumi_Tanaka_2023.jpg",
+            "wikibase_item": "Q241771"
+          },
+          "terms": {
+            "description": [
+              "日本の女性声優、女優"
+            ]
+          }
+        },
+        {
+          "pageid": 88200,
+          "ns": 0,
+          "title": "ダウンタウンのごっつええ感じ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たうんたうんのこつつええかんし",
+            "wikibase_item": "Q5303625"
+          },
+          "terms": {
+            "description": [
+              "フジテレビのバラエティ番組 (1991-1997)"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1593320,
+          "ns": 0,
+          "title": "日本の建築家一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんのけんちくかいちらん",
+            "notoc": "",
+            "wikibase_item": "Q3088146"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

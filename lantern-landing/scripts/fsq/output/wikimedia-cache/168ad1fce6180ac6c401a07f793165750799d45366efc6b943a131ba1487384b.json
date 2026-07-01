@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:14.277Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 33027,
+          "ns": 0,
+          "title": "東急百貨店",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきゆうひやつかてん",
+            "page_image_free": "Tokyu-Honten_Bunkamura_201511.jpg",
+            "wikibase_item": "Q863194"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66144444,
+              "lon": 139.69619444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の百貨店運営会社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

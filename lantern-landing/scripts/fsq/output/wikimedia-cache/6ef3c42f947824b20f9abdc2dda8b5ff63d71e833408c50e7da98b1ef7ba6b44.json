@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:13:17.488Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 116394,
+          "ns": 0,
+          "title": "松本保典",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "まつもと やすのり",
+            "wikibase_item": "Q1192158"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優"
+            ]
+          }
+        },
+        {
+          "pageid": 236587,
+          "ns": 0,
+          "title": "QRIO",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きゆりお",
+            "page_image_free": "Sony_Qrio_Robot.jpg",
+            "wikibase_item": "Q1134062"
+          },
+          "terms": {
+            "description": [
+              "ソニーがかつて開発していた二足歩行ロボット"
+            ]
+          }
+        },
+        {
+          "pageid": 484097,
+          "ns": 0,
+          "title": "小阪淳",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "こさか しゆん",
+            "wikibase_item": "Q11464410"
+          }
+        },
+        {
+          "pageid": 696152,
+          "ns": 0,
+          "title": "アクアシティお台場",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "あくあしていおたいは",
+            "kartographer_frames": "1",
+            "page_image_free": "Aquacity_Odaiba.jpg",
+            "wikibase_item": "Q5368628"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62780556,
+              "lon": 139.77355556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区の商業施設"
+            ]
+          }
+        },
+        {
+          "pageid": 3404021,
+          "ns": 0,
+          "title": "おはスタのコーナー一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おはすたのこおなあいちらん",
+            "wikibase_item": "Q24867475"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

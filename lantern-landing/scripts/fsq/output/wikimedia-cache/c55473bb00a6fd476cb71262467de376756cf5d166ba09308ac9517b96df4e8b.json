@@ -1,0 +1,120 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:14:24.602Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 10368,
+          "ns": 0,
+          "title": "住宅",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しゆうたく",
+            "page_image_free": "建売住宅_(4355308311).jpg",
+            "wikibase_item": "Q699405"
+          },
+          "terms": {
+            "description": [
+              "居住のために用いられる場所"
+            ]
+          }
+        },
+        {
+          "pageid": 390763,
+          "ns": 0,
+          "title": "朝倉市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "あさくらし",
+            "kartographer_frames": "1",
+            "page_image_free": "Hishino_Three_Water_wheels_2018.jpg",
+            "wikibase_item": "Q720625"
+          },
+          "coordinates": [
+            {
+              "lat": 33.42342,
+              "lon": 130.66553,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福岡県の市"
+            ]
+          }
+        },
+        {
+          "pageid": 415542,
+          "ns": 0,
+          "title": "ヒルサイドテラス",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ひるさいとてらす",
+            "page_image_free": "Hillside_Terrace_A_B_2010.jpg",
+            "wikibase_item": "Q11288985"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64722222,
+              "lon": 139.70147222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "渋谷区猿楽町・鉢山町にある複合施設"
+            ]
+          }
+        },
+        {
+          "pageid": 3215245,
+          "ns": 0,
+          "title": "旧朝倉家住宅",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きゆうあさくらけしゆうたく",
+            "kartographer_links": "1",
+            "page_image_free": "Asakura-ke2a.jpg",
+            "wikibase_item": "Q16944532"
+          },
+          "coordinates": [
+            {
+              "lat": 35.65,
+              "lon": 139.7,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区にある民家"
+            ]
+          }
+        },
+        {
+          "pageid": 3754104,
+          "ns": 0,
+          "title": "朝倉虎治郎",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あさくら とらしろう",
+            "wikibase_item": "Q51166488"
+          },
+          "terms": {
+            "description": [
+              "日本の実業家、地方政治家 (1871-1944)"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

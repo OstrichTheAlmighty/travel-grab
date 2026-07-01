@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:06.175Z",
+  "value": {
+    "searchinfo": {
+      "search": "岡本太郎記念館"
+    },
+    "search": [
+      {
+        "id": "Q11473108",
+        "title": "Q11473108",
+        "pageid": 12612624,
+        "concepturi": "http://www.wikidata.org/entity/Q11473108",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11473108",
+        "display": {
+          "label": {
+            "value": "Taro Okamoto Memorial Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Japan",
+            "language": "en"
+          }
+        },
+        "label": "Taro Okamoto Memorial Museum",
+        "description": "museum in Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "岡本太郎記念館"
+        },
+        "aliases": [
+          "岡本太郎記念館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

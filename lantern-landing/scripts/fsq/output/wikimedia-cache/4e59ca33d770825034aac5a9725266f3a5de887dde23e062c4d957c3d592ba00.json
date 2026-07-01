@@ -1,0 +1,90 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:34:23.733Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 105378,
+          "ns": 0,
+          "title": "庄内地方",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しようないちほう",
+            "page_image_free": "Yamagata_Shonai-block.png",
+            "wikibase_item": "Q11485804"
+          },
+          "terms": {
+            "description": [
+              "日本の山形県の地方区分のひとつ"
+            ]
+          }
+        },
+        {
+          "pageid": 125976,
+          "ns": 0,
+          "title": "千葉県出身の人物一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ちはけんしゆつしんのしんふついちらん",
+            "toc": "",
+            "wikibase_item": "Q11406152"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 169469,
+          "ns": 0,
+          "title": "小野大輔",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "おの たいすけ",
+            "wikibase_item": "Q718358"
+          },
+          "terms": {
+            "description": [
+              "日本の男性声優、歌手"
+            ]
+          }
+        },
+        {
+          "pageid": 1137512,
+          "ns": 0,
+          "title": "日本の多目的ダム一覧",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "にほんのたもくてきたむいちらん",
+            "notoc": "",
+            "page_image_free": "Tokuyama_Dam.jpg",
+            "wikibase-badge-Q17506997": "",
+            "wikibase_item": "Q11505886"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1874964,
+          "ns": 0,
+          "title": "ウォッチング (テレビ番組)",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "うおつちんく",
+            "wikibase_item": "Q11288824"
+          }
+        }
+      ]
+    }
+  }
+}

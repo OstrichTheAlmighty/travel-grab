@@ -1,0 +1,96 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:09.459Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 279182,
+          "ns": 0,
+          "title": "沼島",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ぬしま",
+            "kartographer_frames": "1",
+            "page_image_free": "Nushima_1.jpg",
+            "wikibase_item": "Q5366609"
+          },
+          "coordinates": [
+            {
+              "lat": 34.1681,
+              "lon": 134.8258,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の兵庫県・紀伊水道にある島"
+            ]
+          }
+        },
+        {
+          "pageid": 1163642,
+          "ns": 0,
+          "title": "女かじき特急便",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "めかしきとつきゆうひん",
+            "wikibase_item": "Q11446198"
+          }
+        },
+        {
+          "pageid": 2525211,
+          "ns": 0,
+          "title": "大森玉木",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおもり たまき",
+            "page_image_free": "Omori_Tamaki.jpg",
+            "wikibase_item": "Q11436385"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家 (1886-1964)"
+            ]
+          }
+        },
+        {
+          "pageid": 4632934,
+          "ns": 0,
+          "title": "ファーストペンギン!",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふああすとへんきん",
+            "wikibase_item": "Q113296238"
+          },
+          "terms": {
+            "description": [
+              "日本のテレビドラマ番組"
+            ]
+          }
+        },
+        {
+          "pageid": 4635725,
+          "ns": 0,
+          "title": "私たちのブルース",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "わたしたちのふるーす",
+            "wikibase_item": "Q110627977"
+          },
+          "terms": {
+            "description": [
+              "2022年の韓国ドラマ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

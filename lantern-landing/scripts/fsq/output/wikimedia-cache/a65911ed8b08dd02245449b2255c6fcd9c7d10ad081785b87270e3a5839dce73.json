@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:44:21.951Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 83480,
+          "ns": 0,
+          "title": "三千院",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "さんせんいん",
+            "page_image_free": "Sanzen'in_01.JPG",
+            "wikibase_item": "Q1072538"
+          },
+          "coordinates": [
+            {
+              "lat": 35.11981944,
+              "lon": 135.83442222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都市左京区にある仏教寺院"
+            ]
+          }
+        },
+        {
+          "pageid": 935920,
+          "ns": 0,
+          "title": "桂文治 (7代目)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "かつら ふんし07",
+            "page_image_free": "Bunji_Katsura_VII_Scan10063.JPG",
+            "wikibase_item": "Q11536732"
+          }
+        },
+        {
+          "pageid": 1162232,
+          "ns": 0,
+          "title": "トゥーンハーバーワークス",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "とううんはあはあわあくす",
+            "page_image_free": "TMS_Entertainment_Studio_2024-04-11.jpg",
+            "wikibase_item": "Q11321460"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70230556,
+              "lon": 139.66513889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都中野区にあるデジタルアニメスタジオ"
+            ]
+          }
+        },
+        {
+          "pageid": 1859689,
+          "ns": 0,
+          "title": "自遊人",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "しゆうしん",
+            "wikibase_item": "Q11613148"
+          },
+          "terms": {
+            "description": [
+              "日本の雑誌"
+            ]
+          }
+        },
+        {
+          "pageid": 2726582,
+          "ns": 0,
+          "title": "ワールドトリガー",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "わあるととりかあ",
+            "wikibase_item": "Q14645935"
+          },
+          "terms": {
+            "description": [
+              "日本の漫画、メディアミックス作品"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

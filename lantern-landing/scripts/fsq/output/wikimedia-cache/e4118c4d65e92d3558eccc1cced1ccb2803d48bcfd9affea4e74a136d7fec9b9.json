@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:48:38.911Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 706901,
+          "ns": 0,
+          "title": "Tiny Toon Adventures 2: Trouble in Wackyland",
+          "index": 4,
+          "pageprops": {
+            "displaytitle": "<i>Tiny Toon Adventures 2: Trouble in Wackyland</i>",
+            "page_image": "Tiny_Toon_Adventures_2_Trouble_in_Wackyland_cover.jpg",
+            "wikibase-shortdesc": "1992 video game",
+            "wikibase_item": "Q2081556"
+          },
+          "terms": {
+            "description": [
+              "1992 NES game"
+            ]
+          }
+        },
+        {
+          "pageid": 1585890,
+          "ns": 0,
+          "title": "Tiny Toon Adventures: How I Spent My Vacation",
+          "index": 2,
+          "pageprops": {
+            "displaytitle": "<i>Tiny Toon Adventures: How I Spent My Vacation</i>",
+            "page_image": "Tiny_Toon_LD.jpg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "1992 American animated film",
+            "wikibase_item": "Q1315247"
+          },
+          "terms": {
+            "description": [
+              "1992 American animated film"
+            ]
+          }
+        },
+        {
+          "pageid": 1905027,
+          "ns": 0,
+          "title": "Mickey's Toontown",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Mickey's_Toontown_sign.jpg",
+            "wikibase-shortdesc": "Themed land at Disney parks",
+            "wikibase_item": "Q2916668"
+          },
+          "terms": {
+            "description": [
+              "Themed area in Disney theme parks."
+            ]
+          }
+        },
+        {
+          "pageid": 4118795,
+          "ns": 0,
+          "title": "Roger Rabbit's Car Toon Spin",
+          "index": 5,
+          "pageprops": {
+            "page_image_free": "Roger_Rabbit's_Car_Toon_Spin_sign_at_Disneyland.jpg",
+            "wikibase-shortdesc": "Disney parks dark ride",
+            "wikibase_item": "Q3439399"
+          },
+          "coordinates": [
+            {
+              "lat": 33.815227,
+              "lon": -117.918055,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "dark ride at Disney theme parks"
+            ]
+          }
+        },
+        {
+          "pageid": 12629988,
+          "ns": 0,
+          "title": "Toon Studio",
+          "index": 3,
+          "pageprops": {
+            "page_image": "Toon_Studio_logo.svg",
+            "wikibase-shortdesc": "Former area in Walt Disney Studios Park",
+            "wikibase_item": "Q2229100"
+          },
+          "terms": {
+            "description": [
+              "Themed land at Walt Disney Studios Park"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

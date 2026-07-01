@@ -1,0 +1,116 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:32.701Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 12494,
+          "ns": 0,
+          "title": "ワシントンD.C.",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "わしんとん",
+            "kartographer_frames": "1",
+            "page_image_free": "Washington_Montage_2016.png",
+            "wikibase-badge-Q17437796": "",
+            "wikibase_item": "Q61"
+          },
+          "coordinates": [
+            {
+              "lat": 38.89511111,
+              "lon": -77.03666667,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "アメリカ合衆国の首都"
+            ]
+          }
+        },
+        {
+          "pageid": 158272,
+          "ns": 0,
+          "title": "仏教美術",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふつきようひしゆつ",
+            "page_image_free": "Gandhara_Buddha_(tnm).jpeg",
+            "wikibase-badge-Q17437798": "",
+            "wikibase_item": "Q1001041"
+          },
+          "terms": {
+            "description": [
+              "仏教信仰に基づいた礼拝対象、あるいはそれら活動のための美術"
+            ]
+          }
+        },
+        {
+          "pageid": 394699,
+          "ns": 0,
+          "title": "坂茂",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はん しける",
+            "page_image_free": "Shigeru_Ban.jpg",
+            "wikibase_item": "Q526725"
+          },
+          "terms": {
+            "description": [
+              "日本の建築家 (1957-)"
+            ]
+          }
+        },
+        {
+          "pageid": 1745647,
+          "ns": 0,
+          "title": "紙の博物館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "かみのはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Paper_Museum.jpg",
+            "wikibase_item": "Q11605492"
+          },
+          "coordinates": [
+            {
+              "lat": 35.74986111,
+              "lon": 139.73869444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都北区の飛鳥山公園にある博物館"
+            ]
+          }
+        },
+        {
+          "pageid": 2299846,
+          "ns": 0,
+          "title": "国宝絵画の一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こくほうかいかのいちらん",
+            "page_image_free": "Genji_emaki_azumaya.jpg",
+            "wikibase-badge-Q17506997": "",
+            "wikibase_item": "Q3245518"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

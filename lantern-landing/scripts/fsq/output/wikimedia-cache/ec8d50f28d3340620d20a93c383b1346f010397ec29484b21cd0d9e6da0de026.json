@@ -1,0 +1,81 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:19.324Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 185445,
+          "ns": 0,
+          "title": "生放送",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "なまほうそう",
+            "wikibase_item": "Q431102"
+          },
+          "terms": {
+            "description": [
+              "ナレーション・演技・演奏・スポーツ中継といったコンテンツを、一旦録音・録画することなくリアルタイムに視聴者・聴取者に伝えるような放送手段"
+            ]
+          }
+        },
+        {
+          "pageid": 259455,
+          "ns": 0,
+          "title": "築地魚河岸三代目",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "つきしうおかしさんたいめ",
+            "wikibase_item": "Q7850070"
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 1691666,
+          "ns": 0,
+          "title": "東京都の観光地",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようと",
+            "page_image_free": "東京都区部-観光地図-1.jpg",
+            "wikibase_item": "Q10860697"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 2125522,
+          "ns": 0,
+          "title": "魚家",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さかなや",
+            "wikibase_item": "Q11673958"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:51.947Z",
+  "value": {
+    "searchinfo": {
+      "search": "一之江抹香亭"
+    },
+    "search": [
+      {
+        "id": "Q118985226",
+        "title": "Q118985226",
+        "pageid": 113489538,
+        "concepturi": "http://www.wikidata.org/entity/Q118985226",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q118985226",
+        "display": {
+          "label": {
+            "value": "Ichinoe Makkō-tei",
+            "language": "en"
+          },
+          "description": {
+            "value": "garden park in Edogawa-ku, Tokyo",
+            "language": "en"
+          }
+        },
+        "label": "Ichinoe Makkō-tei",
+        "description": "garden park in Edogawa-ku, Tokyo",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "一之江抹香亭"
+        },
+        "aliases": [
+          "一之江抹香亭"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

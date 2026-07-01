@@ -1,0 +1,35 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:18.660Z",
+  "value": {
+    "searchinfo": {
+      "search": "釣り文化資料館"
+    },
+    "search": [
+      {
+        "id": "Q104698254",
+        "title": "Q104698254",
+        "pageid": 100126208,
+        "concepturi": "http://www.wikidata.org/entity/Q104698254",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q104698254",
+        "display": {
+          "label": {
+            "value": "Tsuri Bunka Shiryoukan",
+            "language": "en"
+          }
+        },
+        "label": "Tsuri Bunka Shiryoukan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "釣り文化資料館"
+        },
+        "aliases": [
+          "釣り文化資料館"
+        ]
+      }
+    ],
+    "success": 1
+  }
+}

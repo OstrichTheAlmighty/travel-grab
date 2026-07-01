@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:52.336Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 28022,
+          "ns": 0,
+          "title": "吉田松陰",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "よした しよういん",
+            "page_image_free": "Yoshida_Shoin2.jpg",
+            "wikibase_item": "Q559747"
+          },
+          "terms": {
+            "description": [
+              "日本の志士・思想家 (1830-1859)"
+            ]
+          }
+        },
+        {
+          "pageid": 36851,
+          "ns": 0,
+          "title": "山縣有朋",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "やまかた ありとも",
+            "page_image_free": "Yamagata_Aritomo.jpg",
+            "wikibase_item": "Q297636"
+          },
+          "terms": {
+            "description": [
+              "日本の軍人、政治家。第3・9代内閣総理大臣、枢密院議長、司法大臣、内務大臣。"
+            ]
+          }
+        },
+        {
+          "pageid": 1362009,
+          "ns": 0,
+          "title": "伝馬町牢屋敷",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "てんまちようろうやしき",
+            "page_image_free": "Denmatyousyokeijyou.JPG",
+            "wikibase_item": "Q11381459"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69094444,
+              "lon": 139.77780556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "現在の東京都中央区にあった江戸時代の牢獄"
+            ]
+          }
+        },
+        {
+          "pageid": 1501503,
+          "ns": 0,
+          "title": "大塩平八郎",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おおしお へいはちろう",
+            "page_image_free": "Oshio_Heihachiro.jpg",
+            "wikibase_item": "Q1056715"
+          },
+          "terms": {
+            "description": [
+              "日本の江戸時代後期の武士・儒学者"
+            ]
+          }
+        },
+        {
+          "pageid": 2755101,
+          "ns": 0,
+          "title": "野村素介",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "のむら もとすけ",
+            "page_image_free": "Nomura_Motosuke.jpg",
+            "wikibase_item": "Q11645675"
+          },
+          "terms": {
+            "description": [
+              "日本の官僚・書家"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

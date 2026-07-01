@@ -1,0 +1,121 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:40.288Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 20048,
+          "ns": 0,
+          "title": "左京区",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さきようく",
+            "kartographer_frames": "1",
+            "page_image_free": "Ginkakuji_Kyoto04-r.jpg",
+            "wikibase_item": "Q1321832"
+          },
+          "coordinates": [
+            {
+              "lat": 35.04861111,
+              "lon": 135.77861111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "京都府京都市の行政区"
+            ]
+          }
+        },
+        {
+          "pageid": 537654,
+          "ns": 0,
+          "title": "千秋公園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "せんしゆうこうえん",
+            "page_image_free": "Kogetsu-pond_in_Senshu_Park_20180520.jpg",
+            "wikibase_item": "Q11405791"
+          },
+          "terms": {
+            "description": [
+              "秋田県秋田市にある公園"
+            ]
+          }
+        },
+        {
+          "pageid": 753563,
+          "ns": 0,
+          "title": "下谷神社",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "したやしんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Shitaya_Jinja_Shrine,_Ueno.jpg",
+            "wikibase_item": "Q11361339"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71080556,
+              "lon": 139.78130556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 845695,
+          "ns": 0,
+          "title": "氷川神社 (東京都港区赤坂)",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひかわしんしや みなとくあかさか",
+            "kartographer_frames": "1",
+            "page_image_free": "Hikawa-jinjya_Akasaka4.JPG",
+            "wikibase_item": "Q3135503"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66823333,
+              "lon": 139.73551389,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都港区の神社"
+            ]
+          }
+        },
+        {
+          "pageid": 2083797,
+          "ns": 0,
+          "title": "千秋 (秋田市)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せんしゆう",
+            "wikibase_item": "Q11405788"
+          },
+          "terms": {
+            "description": [
+              "秋田市の地区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

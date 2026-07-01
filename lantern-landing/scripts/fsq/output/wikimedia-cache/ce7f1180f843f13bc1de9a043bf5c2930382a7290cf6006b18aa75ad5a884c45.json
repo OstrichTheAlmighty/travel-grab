@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:15:51.077Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 28023,
+          "ns": 0,
+          "title": "靖国神社",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "やすくにしんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "2018_Haiden_(Yasukuni_Shrine).jpg",
+            "wikibase_item": "Q242803"
+          },
+          "coordinates": [
+            {
+              "lat": 35.69395833,
+              "lon": 139.74269167,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区の神社"
+            ]
+          }
+        },
+        {
+          "pageid": 133425,
+          "ns": 0,
+          "title": "湊川神社",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "みなとかわしんしや",
+            "kartographer_frames": "1",
+            "page_image_free": "Minatogawa_Shrine_Haiden.jpg",
+            "wikibase_item": "Q713188"
+          },
+          "coordinates": [
+            {
+              "lat": 34.68135806,
+              "lon": 135.17543806,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神戸市中央区にある神社"
+            ]
+          }
+        },
+        {
+          "pageid": 628763,
+          "ns": 0,
+          "title": "千葉工業大学",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ちはこうきようたいかく",
+            "kartographer_frames": "1",
+            "page_image_free": "Chiba_Institute_of_Technology_montage.jpg",
+            "wikibase_item": "Q1071738"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68920833,
+              "lon": 140.02133611,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県習志野市にある私立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 1221617,
+          "ns": 0,
+          "title": "立花宗茂",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "たちはな むねしけ",
+            "page_image_free": "Tachibana_Muneshige.jpg",
+            "wikibase_item": "Q1071770"
+          },
+          "terms": {
+            "description": [
+              "日本の安土桃山～江戸時代の武将、大名"
+            ]
+          }
+        },
+        {
+          "pageid": 1426788,
+          "ns": 0,
+          "title": "米沢城",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "よねさわしよう",
+            "page_image_free": "Yonezawajou001.jpg",
+            "wikibase_item": "Q11262656"
+          },
+          "terms": {
+            "description": [
+              "日本の山形県米沢市にあった城"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:32:48.835Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 33636,
+          "ns": 0,
+          "title": "梅田",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "うめた",
+            "kartographer_frames": "1",
+            "page_image_free": "Osaka_Umeda_Sky_Building_Panoramablick_05.jpg",
+            "wikibase_item": "Q1194307"
+          },
+          "terms": {
+            "description": [
+              "大阪市北区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 519532,
+          "ns": 0,
+          "title": "屋上庭園",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "おくしようていえん",
+            "page_image_free": "Hanging_Gardens_of_Babylon.jpg",
+            "wikibase_item": "Q1156696"
+          },
+          "terms": {
+            "description": [
+              "建築物の屋上などに造られた植栽を伴う庭園"
+            ]
+          }
+        },
+        {
+          "pageid": 1557714,
+          "ns": 0,
+          "title": "博多駅",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はかた",
+            "kartographer_frames": "1",
+            "page_image_free": "JR_Hakata_City_2011_Jan.jpg",
+            "wikibase_item": "Q800875"
+          },
+          "coordinates": [
+            {
+              "lat": 33.59,
+              "lon": 130.42061111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福岡県福岡市博多区にある駅"
+            ]
+          }
+        },
+        {
+          "pageid": 2185255,
+          "ns": 0,
+          "title": "JR博多シティ",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しえいああるはかたしてい",
+            "kartographer_frames": "1",
+            "page_image_free": "JR_Hakata_City_2016.jpg",
+            "wikibase_item": "Q11226208"
+          },
+          "coordinates": [
+            {
+              "lat": 33.59044444,
+              "lon": 130.41988889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "福岡市の商業施設"
+            ]
+          }
+        },
+        {
+          "pageid": 2597464,
+          "ns": 0,
+          "title": "JPタワー",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しえいひいたわあ",
+            "kartographer_frames": "1",
+            "page_image_free": "JP-Tower-01.jpg",
+            "wikibase_item": "Q11226072"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67975,
+              "lon": 139.76458333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都千代田区にある超高層ビル"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:31:23.046Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 113160,
+          "ns": 0,
+          "title": "あしかがフラワーパーク",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "あしかかふらわあはあく",
+            "kartographer_frames": "1",
+            "page_image_free": "Japanese_wisteria,_Ashikaga_Flower_Park_13.jpg",
+            "wikibase_item": "Q11257294"
+          },
+          "coordinates": [
+            {
+              "lat": 36.315,
+              "lon": 139.52202778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "栃木県足利市にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 700625,
+          "ns": 0,
+          "title": "山梨県立フラワーセンター ハイジの村",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "やまなしけんりつふらわせんたあはいしのむら",
+            "page_image_free": "明野ハイジの村_-_panoramio.jpg",
+            "wikibase_item": "Q11469688"
+          },
+          "coordinates": [
+            {
+              "lat": 35.78080556,
+              "lon": 138.46494444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "山梨県北杜市にあるテーマパーク"
+            ]
+          }
+        },
+        {
+          "pageid": 788765,
+          "ns": 0,
+          "title": "やまぐちフラワーランド",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "やまくちふらわあらんと",
+            "page_image_free": "Yamaguchi_flower_land.JPG",
+            "wikibase_item": "Q11280469"
+          }
+        },
+        {
+          "pageid": 806122,
+          "ns": 0,
+          "title": "よみうりランド",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "よみうりらんと",
+            "kartographer_frames": "1",
+            "page_image_free": "Yomiuriland-20100411.jpg",
+            "wikibase_item": "Q1046970"
+          },
+          "coordinates": [
+            {
+              "lat": 35.62583333,
+              "lon": 139.51861111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都と神奈川県の境界にある遊園地"
+            ]
+          }
+        },
+        {
+          "pageid": 1175993,
+          "ns": 0,
+          "title": "道の駅神戸フルーツ・フラワーパーク大沢",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "みちのえきこうへふるうつふらわあはあくおおそう",
+            "kartographer_frames": "1",
+            "page_image_free": "レッドクリフによるドローンショー「REDCLIFF_COUNTDOWN_DRONE_SHOW_2025」⑤.jpg",
+            "wikibase_item": "Q11589937"
+          },
+          "coordinates": [
+            {
+              "lat": 34.84888889,
+              "lon": 135.19111111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "神戸市北区にある兵庫県道73号の道の駅"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

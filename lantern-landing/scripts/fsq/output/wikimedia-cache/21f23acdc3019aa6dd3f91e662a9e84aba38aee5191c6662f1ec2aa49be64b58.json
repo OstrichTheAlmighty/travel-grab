@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:07.350Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 5300,
+          "ns": 0,
+          "title": "東京大空襲",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようたいくうしゆう",
+            "page_image_free": "After_Bombing_of_Tokyo_on_March_1945_19450310.jpg",
+            "wikibase_item": "Q51881408"
+          },
+          "terms": {
+            "description": [
+              "1945年3月10日の東京都区部に対する焼夷弾を用いた大規模な戦略爆撃"
+            ]
+          }
+        },
+        {
+          "pageid": 5304,
+          "ns": 0,
+          "title": "大阪大空襲",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "おおさかたいくうしゆう",
+            "page_image_free": "Osaka_after_the_1945_air_raid.JPG",
+            "wikibase_item": "Q2814395"
+          },
+          "terms": {
+            "description": [
+              "第二次世界大戦末期にアメリカ軍が繰り返し行った、大阪市への爆撃"
+            ]
+          }
+        },
+        {
+          "pageid": 913357,
+          "ns": 0,
+          "title": "日本本土空襲",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "にほんほんとくうしゆう",
+            "page_image_free": "B-29s_dropping_bombs.jpg",
+            "wikibase_item": "Q590545"
+          },
+          "terms": {
+            "description": [
+              "第二次世界大戦中に連合国軍が日本各都市に対して行った爆撃"
+            ]
+          }
+        },
+        {
+          "pageid": 1132822,
+          "ns": 0,
+          "title": "神戸大空襲",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "こうへたいくうしゆう",
+            "page_image_free": "Kobe_after_the_1945_air_raid.JPG",
+            "wikibase_item": "Q4940711"
+          },
+          "terms": {
+            "description": [
+              "第二次世界大戦末期にアメリカ軍が繰り返し行った神戸市に対する爆撃"
+            ]
+          }
+        },
+        {
+          "pageid": 3326125,
+          "ns": 0,
+          "title": "東京大空襲・戦災資料センター",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "とうきようたいきゆうしゆうせんさいしりようせんたあ",
+            "page_image_free": "Exterior_of_the_Center_of_the_Tokyo_Raids_and_War_Damage_in_January_2019.jpg",
+            "wikibase_item": "Q15961648"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68169444,
+              "lon": 139.82227778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都江東区にある博物館"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

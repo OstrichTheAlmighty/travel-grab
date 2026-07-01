@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:33:05.618Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 27271,
+          "ns": 0,
+          "title": "バラ",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "はら",
+            "page_image_free": "Mrs._Herbert_Stevens_May_2008.jpg",
+            "wikibase_item": "Q64140922"
+          },
+          "terms": {
+            "description": [
+              "バラ科バラ属の植物"
+            ]
+          }
+        },
+        {
+          "pageid": 463790,
+          "ns": 0,
+          "title": "布引ハーブ園",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ぬのひきはあふえん",
+            "page_image_free": "121208_Nunobiki_Herb_Garden_Kobe_Hyogo_pref_Japan04s3.jpg",
+            "wikibase_item": "Q7069905"
+          },
+          "coordinates": [
+            {
+              "lat": 34.71436111,
+              "lon": 135.19188889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 670460,
+          "ns": 0,
+          "title": "京成バラ園",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "けいせいはらえん",
+            "kartographer_frames": "1",
+            "page_image_free": "Keisei_Rose_Garden1.jpg",
+            "wikibase_item": "Q16626563"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73130556,
+              "lon": 140.08638889,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県八千代市にあるバラ園"
+            ]
+          }
+        },
+        {
+          "pageid": 2444218,
+          "ns": 0,
+          "title": "北海道ガーデン一覧",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ほつかいとうかあてんいちらん",
+            "wikibase_item": "Q11402465"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 3150983,
+          "ns": 0,
+          "title": "四季の香公園",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "しきのかおりこうえん",
+            "page_image_free": "色彩のローズガーデン(撮影スポット).jpg",
+            "wikibase_item": "Q20044710"
+          },
+          "coordinates": [
+            {
+              "lat": 35.76019444,
+              "lon": 139.62586111,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都練馬区の公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

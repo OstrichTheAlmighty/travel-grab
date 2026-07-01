@@ -1,0 +1,76 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:45:41.675Z",
+  "value": {
+    "batchcomplete": true,
+    "query": {
+      "pages": [
+        {
+          "pageid": 1069,
+          "ns": 0,
+          "title": "京浜急行電鉄",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "けいひんきゆうこうてんてつ",
+            "page_image_free": "Keikyu_Group_Headquarters_02.jpg",
+            "wikibase_item": "Q1322206"
+          },
+          "coordinates": [
+            {
+              "lat": 35.46244444,
+              "lon": 139.62622222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の鉄道会社"
+            ]
+          }
+        },
+        {
+          "pageid": 1883245,
+          "ns": 0,
+          "title": "京浜急行バス",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "けいひんきゆうこうはす",
+            "page_image_free": "Keikyu_Group_Headquarters_02.jpg",
+            "wikibase_item": "Q11374532"
+          },
+          "terms": {
+            "description": [
+              "日本の神奈川県横浜市にあるバス事業者"
+            ]
+          }
+        },
+        {
+          "pageid": 5209325,
+          "ns": 0,
+          "title": "銚子市",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ちようしし",
+            "kartographer_frames": "1",
+            "page_image_free": "Choshi_Montage_2.jpg",
+            "wikibase_item": "Q694317"
+          },
+          "coordinates": [
+            {
+              "lat": 35.73463889,
+              "lon": 140.82677778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "千葉県の市"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

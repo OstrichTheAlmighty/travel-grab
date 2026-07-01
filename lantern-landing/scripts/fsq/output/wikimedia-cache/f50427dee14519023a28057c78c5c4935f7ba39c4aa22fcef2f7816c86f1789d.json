@@ -1,0 +1,60 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:27.903Z",
+  "value": {
+    "searchinfo": {
+      "search": "上野の森美術館"
+    },
+    "search": [
+      {
+        "id": "Q11360245",
+        "title": "Q11360245",
+        "pageid": 12498209,
+        "concepturi": "http://www.wikidata.org/entity/Q11360245",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11360245",
+        "display": {
+          "label": {
+            "value": "Ueno Royal Museum",
+            "language": "en"
+          },
+          "description": {
+            "value": "museum in Tokyo, Japan",
+            "language": "en"
+          }
+        },
+        "label": "Ueno Royal Museum",
+        "description": "museum in Tokyo, Japan",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "上野の森美術館"
+        },
+        "aliases": [
+          "上野の森美術館"
+        ]
+      },
+      {
+        "id": "Q11360246",
+        "title": "Q11360246",
+        "pageid": 12498210,
+        "concepturi": "http://www.wikidata.org/entity/Q11360246",
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Q11360246",
+        "display": {
+          "label": {
+            "value": "上野の森美術館大賞展",
+            "language": "ja"
+          }
+        },
+        "label": "上野の森美術館大賞展",
+        "match": {
+          "type": "label",
+          "language": "ja",
+          "text": "上野の森美術館大賞展"
+        }
+      }
+    ],
+    "success": 1
+  }
+}

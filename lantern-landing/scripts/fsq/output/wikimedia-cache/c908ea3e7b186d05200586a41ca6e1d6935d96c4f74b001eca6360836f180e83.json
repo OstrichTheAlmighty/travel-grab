@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:03:21.023Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 349492,
+          "ns": 0,
+          "title": "中央大橋",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ちゆうおうおおはし",
+            "page_image_free": "Chuo-Ohashi.JPG",
+            "wikibase_item": "Q11363676"
+          },
+          "terms": {
+            "description": [
+              "東京都の橋"
+            ]
+          }
+        },
+        {
+          "pageid": 1368947,
+          "ns": 0,
+          "title": "兵庫県立考古博物館",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "ひようこけんこうこはくふつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "131123_Hyogo_Prefectural_Museum_of_Archaeology_Japan01bs3.jpg",
+            "wikibase_item": "Q11393095"
+          },
+          "coordinates": [
+            {
+              "lat": 34.72558333,
+              "lon": 134.87733333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ]
+        },
+        {
+          "pageid": 1476797,
+          "ns": 0,
+          "title": "路地",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ろし",
+            "page_image_free": "Alley_-_Shitamachi_Museum-_Ueno,_Taito,_Tokyo,_Japan_-_DSC08717.JPG",
+            "wikibase_item": "Q1251403"
+          },
+          "terms": {
+            "description": [
+              "密集市街地などに形成される狭い道や家と家の間の狭い道、通路"
+            ]
+          }
+        },
+        {
+          "pageid": 1498598,
+          "ns": 0,
+          "title": "隅田川テラス",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "すみたかわてらす",
+            "page_image_free": "Sumidagawa-River08080801.jpg",
+            "wikibase_item": "Q11658844"
+          },
+          "terms": {
+            "description": [
+              "東京都を流れる隅田川両岸に沿って整備された親水テラス"
+            ]
+          }
+        },
+        {
+          "pageid": 3564244,
+          "ns": 0,
+          "title": "佃公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "つくたこうえん",
+            "page_image_free": "Tsukuda_park_20190406.jpg",
+            "wikibase_item": "Q28840599"
+          },
+          "terms": {
+            "description": [
+              "東京都中央区の公園"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

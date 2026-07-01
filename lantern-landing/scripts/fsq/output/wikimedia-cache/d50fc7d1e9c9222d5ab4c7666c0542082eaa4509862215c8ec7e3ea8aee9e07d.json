@@ -1,0 +1,95 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:06.839Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 20297,
+          "ns": 0,
+          "title": "西園寺公望",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さいおんし きんもち",
+            "page_image_free": "Kinmochi_Saionji_2.jpg",
+            "wikibase_item": "Q297628"
+          },
+          "terms": {
+            "description": [
+              "日本の公家、政治家、教育者（1849-1940）。12・14代内閣総理大臣、外務大臣、大蔵大臣。"
+            ]
+          }
+        },
+        {
+          "pageid": 36851,
+          "ns": 0,
+          "title": "山縣有朋",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "やまかた ありとも",
+            "page_image_free": "Yamagata_Aritomo.jpg",
+            "wikibase_item": "Q297636"
+          },
+          "terms": {
+            "description": [
+              "日本の軍人、政治家。第3・9代内閣総理大臣、枢密院議長、司法大臣、内務大臣。"
+            ]
+          }
+        },
+        {
+          "pageid": 69990,
+          "ns": 0,
+          "title": "三条実美",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "さんしよう さねとみ",
+            "page_image_free": "Sanetomi_Sanjo_formal.jpg",
+            "wikibase_item": "Q516646"
+          },
+          "terms": {
+            "description": [
+              "日本の公卿・政治家 (1837-1891)"
+            ]
+          }
+        },
+        {
+          "pageid": 85140,
+          "ns": 0,
+          "title": "中川小十郎",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "なかかわ こしゆうろう",
+            "page_image_free": "中川小十郎.JPG",
+            "wikibase_item": "Q11364808"
+          },
+          "terms": {
+            "description": [
+              "日本の政治家 (1866-1944)"
+            ]
+          }
+        },
+        {
+          "pageid": 1636562,
+          "ns": 0,
+          "title": "近衛家",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "このえ",
+            "page_image_free": "Konoe_Botan_inverted.png",
+            "wikibase_item": "Q1781840"
+          },
+          "terms": {
+            "description": [
+              "日本の五摂家筆頭で藤原忠通の嫡流"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

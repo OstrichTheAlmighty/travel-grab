@@ -1,0 +1,129 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:27:24.745Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 7289,
+          "ns": 0,
+          "title": "東京競馬場",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうきようけいはしよう",
+            "kartographer_frames": "1",
+            "page_image_free": "東京競馬場_-_panoramio_(4).jpg",
+            "wikibase_item": "Q1055592"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66222222,
+              "lon": 139.48555556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都府中市にある競馬場"
+            ]
+          }
+        },
+        {
+          "pageid": 152497,
+          "ns": 0,
+          "title": "行幸",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きようこう",
+            "page_image_free": "Gyoukou.JPG",
+            "wikibase_item": "Q11626055"
+          },
+          "terms": {
+            "description": [
+              "皇帝が外出すること"
+            ]
+          }
+        },
+        {
+          "pageid": 202223,
+          "ns": 0,
+          "title": "常磐公園",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "ときわこうえん",
+            "kartographer_frames": "1",
+            "page_image_free": "旭川常磐公園2.JPG",
+            "wikibase_item": "Q11481559"
+          },
+          "coordinates": [
+            {
+              "lat": 43.775,
+              "lon": 142.35722222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "北海道旭川市にある公園・地名"
+            ]
+          }
+        },
+        {
+          "pageid": 249540,
+          "ns": 0,
+          "title": "円山公園 (札幌市)",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "まるやまこうえんさつほろし",
+            "page_image_free": "Monument_of_Shima-Hangan.JPG",
+            "wikibase_item": "Q6778052"
+          },
+          "coordinates": [
+            {
+              "lat": 43.05083333,
+              "lon": 141.30972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "札幌市中央区にある公園"
+            ]
+          }
+        },
+        {
+          "pageid": 3086684,
+          "ns": 0,
+          "title": "原爆死没者慰霊碑",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "けんはくしほつしやいれいひ",
+            "page_image_free": "Cenotaph_Hiroshima.jpg",
+            "wikibase_item": "Q11409718"
+          },
+          "coordinates": [
+            {
+              "lat": 34.39297222,
+              "lon": 132.45255556,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "広島平和記念公園内に設置されたアーチ型の石碑"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

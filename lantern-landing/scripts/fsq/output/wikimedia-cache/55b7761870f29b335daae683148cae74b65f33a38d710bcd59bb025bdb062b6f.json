@@ -1,0 +1,123 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:08:14.391Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 18724,
+          "ns": 0,
+          "title": "目黒区",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "めくろ",
+            "kartographer_frames": "1",
+            "page_image_free": "Meguro_Meguro_River_Cherry_Trees_1.JPG",
+            "wikibase_item": "Q233903"
+          },
+          "coordinates": [
+            {
+              "lat": 35.6415,
+              "lon": 139.69828,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 194209,
+          "ns": 0,
+          "title": "洗足池",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せんそくいけ",
+            "page_image_free": "洗足池01.JPG",
+            "wikibase_item": "Q11555793"
+          },
+          "coordinates": [
+            {
+              "lat": 35.60166667,
+              "lon": 139.69027778,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都大田区南千束にある池"
+            ]
+          }
+        },
+        {
+          "pageid": 1100938,
+          "ns": 0,
+          "title": "下目黒",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "しもめくろ",
+            "kartographer_frames": "1",
+            "page_image_free": "Gonnosuke-zaka_Street_Tokyo.JPG",
+            "wikibase_item": "Q3541543"
+          },
+          "terms": {
+            "description": [
+              "東京都目黒区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1414068,
+          "ns": 0,
+          "title": "北千束",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "きたせんそく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyu_Oookayama_sta_001.jpg",
+            "wikibase_item": "Q11401210"
+          },
+          "terms": {
+            "description": [
+              "東京都大田区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1778099,
+          "ns": 0,
+          "title": "大田区",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "おおたく",
+            "kartographer_frames": "1",
+            "page_image_free": "Tokyo-International-Airport_Satellite.jpg",
+            "wikibase_item": "Q217234"
+          },
+          "coordinates": [
+            {
+              "lat": 35.56128,
+              "lon": 139.71603,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

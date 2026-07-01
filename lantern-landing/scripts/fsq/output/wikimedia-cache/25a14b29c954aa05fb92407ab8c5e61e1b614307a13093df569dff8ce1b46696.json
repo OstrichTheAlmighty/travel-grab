@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:25:10.254Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 8692,
+          "ns": 0,
+          "title": "芸術",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "けいしゆつ",
+            "page_image_free": "Great_Wave_off_Kanagawa2.jpg",
+            "wikibase_item": "Q735"
+          },
+          "terms": {
+            "description": [
+              "作品の創作と鑑賞によって精神の充実体験を追求する文化活動"
+            ]
+          }
+        },
+        {
+          "pageid": 19888,
+          "ns": 0,
+          "title": "文化庁",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふんかちよう",
+            "page_image_free": "Logo_of_ACA.svg",
+            "wikibase_item": "Q1009519"
+          },
+          "terms": {
+            "description": [
+              "日本国文部科学省の外局"
+            ]
+          }
+        },
+        {
+          "pageid": 57496,
+          "ns": 0,
+          "title": "東京芸術大学",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "とうきようけいしゆつたいかく",
+            "page_image_free": "Tokyo_geidai_logo.svg",
+            "wikibase_item": "Q1153515"
+          },
+          "coordinates": [
+            {
+              "lat": 35.71944444,
+              "lon": 139.77222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都台東区にある国立大学"
+            ]
+          }
+        },
+        {
+          "pageid": 108281,
+          "ns": 0,
+          "title": "教育委員会",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "きよういくいいんかい",
+            "wikibase_item": "Q399541"
+          },
+          "terms": {
+            "description": [
+              "地方公共団体の教育行政を担う委員会"
+            ]
+          }
+        },
+        {
+          "pageid": 1082037,
+          "ns": 0,
+          "title": "芸術祭 (文化庁)",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "けいしゆつさい",
+            "wikibase_item": "Q11615990"
+          },
+          "terms": {
+            "description": [
+              "1946年から文化庁の主催により毎年秋に日本国内で行なわれている諸芸術の祭典"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

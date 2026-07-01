@@ -1,0 +1,113 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:05:49.616Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 44064,
+          "ns": 0,
+          "title": "幡ヶ谷駅",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "はたかやえき",
+            "kartographer_frames": "1",
+            "page_image_free": "Hatagaya_Station_Entrance_and_ELV.jpg",
+            "wikibase_item": "Q4496513"
+          },
+          "coordinates": [
+            {
+              "lat": 35.67705556,
+              "lon": 139.67619444,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都渋谷区幡ヶ谷にある京王電鉄の駅"
+            ]
+          }
+        },
+        {
+          "pageid": 202993,
+          "ns": 0,
+          "title": "東京都道431号角筈和泉町線",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "とうきようととう431",
+            "page_image_free": "都道431号.jpg",
+            "wikibase_item": "Q11525798"
+          },
+          "terms": {
+            "description": [
+              "東京都の道路"
+            ]
+          }
+        },
+        {
+          "pageid": 618986,
+          "ns": 0,
+          "title": "日本の商店街一覧",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "にほんのしようてんかいいちらん",
+            "wikibase_item": "Q1626171"
+          },
+          "terms": {
+            "description": [
+              "ウィキメディアの一覧記事"
+            ]
+          }
+        },
+        {
+          "pageid": 626968,
+          "ns": 0,
+          "title": "幡ヶ谷",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "はたかや",
+            "kartographer_frames": "1",
+            "page_image_free": "Hatagaya_Station_Entrance_and_ELV.jpg",
+            "wikibase_item": "Q5680881"
+          },
+          "terms": {
+            "description": [
+              "東京都渋谷区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 1911129,
+          "ns": 0,
+          "title": "渋谷区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "しふやく",
+            "kartographer_frames": "1",
+            "page_image_free": "2018_Shibuya_Crossing.jpg",
+            "wikibase_item": "Q193638"
+          },
+          "coordinates": [
+            {
+              "lat": 35.66367,
+              "lon": 139.69772,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

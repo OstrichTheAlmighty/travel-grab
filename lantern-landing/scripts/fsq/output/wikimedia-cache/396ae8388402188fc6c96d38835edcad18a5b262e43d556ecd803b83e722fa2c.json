@@ -1,0 +1,90 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:39:34.597Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 1413,
+          "ns": 0,
+          "title": "バンダイナムコエンターテインメント",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "はんたいなむこえんたあていんめんと",
+            "page_image_free": "Bandai_Namco_headquaters.jpg",
+            "wikibase_item": "Q1194689"
+          },
+          "coordinates": [
+            {
+              "lat": 35.64447222,
+              "lon": 139.7445,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "日本の東京都港区にあるゲーム制作会社"
+            ]
+          }
+        },
+        {
+          "pageid": 142606,
+          "ns": 0,
+          "title": "オムニバス・ジャパン",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "おむにはすしやはん",
+            "wikibase_item": "Q11292419"
+          },
+          "terms": {
+            "description": [
+              "日本のポストプロダクション・コンピュータグラフィックス・VFXの制作会社"
+            ]
+          }
+        },
+        {
+          "pageid": 379319,
+          "ns": 0,
+          "title": "定金伸治",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "さたかね しんし",
+            "wikibase_item": "Q11452266"
+          },
+          "terms": {
+            "description": [
+              "日本の小説家"
+            ]
+          }
+        },
+        {
+          "pageid": 810072,
+          "ns": 0,
+          "title": "ワークス・チーム",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "わあくすちいむ",
+            "page_image_free": "Fiat_Yamaha_Losail_2010.jpg",
+            "wikibase_item": "Q2384416"
+          }
+        },
+        {
+          "pageid": 2755047,
+          "ns": 0,
+          "title": "BOOGIE WOOGIE MAINLAND",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "ふきうきめいんらんと",
+            "wikibase_item": "Q11191529"
+          }
+        }
+      ]
+    }
+  }
+}

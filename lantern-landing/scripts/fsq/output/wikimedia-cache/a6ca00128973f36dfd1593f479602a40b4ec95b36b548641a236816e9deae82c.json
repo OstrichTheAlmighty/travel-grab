@@ -1,0 +1,104 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:09:25.908Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 73017,
+          "ns": 0,
+          "title": "東郷青児",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "とうこう せいし",
+            "page_image_free": "Togo_Seji.jpg",
+            "wikibase_item": "Q11528565"
+          },
+          "terms": {
+            "description": [
+              "1897-1978, 洋画家"
+            ]
+          }
+        },
+        {
+          "pageid": 85415,
+          "ns": 0,
+          "title": "ファン・ゴッホ美術館",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "ふあんこつほひしゆつかん",
+            "kartographer_frames": "1",
+            "page_image_free": "Van_Gogh_Museum.jpg",
+            "wikibase_item": "Q224124"
+          },
+          "coordinates": [
+            {
+              "lat": 52.35841667,
+              "lon": 4.88108333,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "アムステルダムにあるオランダの国立美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 561514,
+          "ns": 0,
+          "title": "損害保険ジャパン",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "そんかいほけんしやはん",
+            "page_image_free": "Shinjuku-Sompo-Japan-_Insurance-Building-02.jpg",
+            "wikibase_item": "Q1538466"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都新宿区にある損害保険会社"
+            ]
+          }
+        },
+        {
+          "pageid": 668595,
+          "ns": 0,
+          "title": "SOMPO美術館",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "そんほひしゆつかん",
+            "page_image_free": "Sompo_Museum_of_Art_2024-01-25.jpg",
+            "wikibase_item": "Q1614504"
+          },
+          "terms": {
+            "description": [
+              "東京都新宿区にある東郷青児の作品を中心とする美術館"
+            ]
+          }
+        },
+        {
+          "pageid": 1859554,
+          "ns": 0,
+          "title": "SOMPOホールディングス",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "そんほほるていんくす",
+            "page_image_free": "Shinjuku-Sompo-Japan-_Insurance-Building-02.jpg",
+            "wikibase_item": "Q5215858"
+          },
+          "terms": {
+            "description": [
+              "日本の東京都新宿区にある保険会社の持株会社"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

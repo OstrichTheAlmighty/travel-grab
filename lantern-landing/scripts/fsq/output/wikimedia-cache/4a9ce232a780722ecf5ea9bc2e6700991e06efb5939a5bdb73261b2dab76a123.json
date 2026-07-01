@@ -1,0 +1,132 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T06:04:50.739Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 30057,
+          "ns": 0,
+          "title": "Tokyo",
+          "index": 5,
+          "pageprops": {
+            "kartographer_frames": "1",
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "toc": "",
+            "wikibase-shortdesc": "Capital and most populous city in Japan",
+            "wikibase_item": "Q1490"
+          },
+          "coordinates": [
+            {
+              "lat": 35.68972222,
+              "lon": 139.69222222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "capital and largest city of Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 147734,
+          "ns": 0,
+          "title": "Shinjuku",
+          "index": 3,
+          "pageprops": {
+            "page_image_free": "Skyscrapers_of_Shinjuku_2009_January.jpg",
+            "wikibase-shortdesc": "Special ward in Kantō, Japan",
+            "wikibase_item": "Q179645"
+          },
+          "coordinates": [
+            {
+              "lat": 35.70138889,
+              "lon": 139.70972222,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "special ward in the Tokyo Metropolis, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 2439479,
+          "ns": 0,
+          "title": "Shinjuku Gyo-en",
+          "index": 1,
+          "pageprops": {
+            "page_image_free": "Shinjuku_Gyoen_National_Garden_-_sakura_3.JPG",
+            "wikibase-shortdesc": "National garden in Tokyo, Japan",
+            "wikibase_item": "Q776863"
+          },
+          "coordinates": [
+            {
+              "lat": 35.685,
+              "lon": 139.71,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "park and garden in Shinjuku and Shibuya, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 12034899,
+          "ns": 0,
+          "title": "Shinjuku-gyoemmae Station",
+          "index": 4,
+          "pageprops": {
+            "page_image_free": "Shinjuku-gyoemmae-station-Exit1.jpg",
+            "wikibase-shortdesc": "Metro station in Tokyo, Japan",
+            "wikibase_item": "Q1132610"
+          },
+          "coordinates": [
+            {
+              "lat": 35.688577,
+              "lon": 139.710764,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "metro station in Shinjuku, Tokyo, Japan"
+            ]
+          }
+        },
+        {
+          "pageid": 38009185,
+          "ns": 0,
+          "title": "The Garden of Words",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "Garden Of Words, The",
+            "displaytitle": "<i>The Garden of Words</i>",
+            "page_image": "Garden_of_Words_poster.png",
+            "wikibase-badge-Q17437798": "",
+            "wikibase-shortdesc": "2013 Japanese film by Makoto Shinkai",
+            "wikibase_item": "Q6434185"
+          },
+          "terms": {
+            "description": [
+              "2013 film by Makoto Shinkai"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

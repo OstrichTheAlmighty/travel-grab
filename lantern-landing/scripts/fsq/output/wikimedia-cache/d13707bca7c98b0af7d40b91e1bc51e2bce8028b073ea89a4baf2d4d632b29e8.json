@@ -1,0 +1,103 @@
+{
+  "status": "ok",
+  "cachedAt": "2026-06-29T07:23:36.633Z",
+  "value": {
+    "batchcomplete": true,
+    "continue": {
+      "gsroffset": 5,
+      "continue": "gsroffset||"
+    },
+    "query": {
+      "pages": [
+        {
+          "pageid": 2126,
+          "ns": 0,
+          "title": "江戸川乱歩",
+          "index": 1,
+          "pageprops": {
+            "defaultsort": "えとかわ らんほ",
+            "page_image_free": "Rampo_Edogawa_02.jpg",
+            "wikibase_item": "Q347412"
+          },
+          "terms": {
+            "description": [
+              "日本の小説家 (1894-1965)"
+            ]
+          }
+        },
+        {
+          "pageid": 18792,
+          "ns": 0,
+          "title": "文京区",
+          "index": 5,
+          "pageprops": {
+            "defaultsort": "ふんきようく",
+            "kartographer_frames": "1",
+            "page_image_free": "Akamon,_University_of_Tokyo_2019.jpg",
+            "wikibase_item": "Q212713"
+          },
+          "coordinates": [
+            {
+              "lat": 35.708,
+              "lon": 139.75225,
+              "primary": true,
+              "globe": "earth"
+            }
+          ],
+          "terms": {
+            "description": [
+              "東京都の特別区"
+            ]
+          }
+        },
+        {
+          "pageid": 113351,
+          "ns": 0,
+          "title": "黒蜥蜴",
+          "index": 2,
+          "pageprops": {
+            "defaultsort": "くろとかけ",
+            "wikibase_item": "Q2423884"
+          },
+          "terms": {
+            "description": [
+              "日本の小説"
+            ]
+          }
+        },
+        {
+          "pageid": 2027029,
+          "ns": 0,
+          "title": "千駄木",
+          "index": 4,
+          "pageprops": {
+            "defaultsort": "せんたき",
+            "kartographer_frames": "1",
+            "page_image_free": "Mori_Ogai_Memorial_Museum_Sendagi_Bunkyo_Tokyo_Japan_2021.jpg",
+            "wikibase_item": "Q11406891"
+          },
+          "terms": {
+            "description": [
+              "東京都文京区の町名"
+            ]
+          }
+        },
+        {
+          "pageid": 4684057,
+          "ns": 0,
+          "title": "探偵ロマンス",
+          "index": 3,
+          "pageprops": {
+            "defaultsort": "たんていろまんす",
+            "wikibase_item": "Q117076963"
+          },
+          "terms": {
+            "description": [
+              "2023年NHK土曜ドラマ"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
