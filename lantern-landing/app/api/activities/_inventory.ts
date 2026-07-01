@@ -1,13 +1,14 @@
 // Shared inventory store — imported by search/route.ts and inventory/status/route.ts.
 // Module-level state persists for the lifetime of the Node.js server process.
 
+import { after } from "next/server";
 import type { Activity, Category, Badge } from "../../activities/data/types";
 import {
   readGeoCache, writeGeoCache,
   readCityCache, writeQueryCache, makeCacheKey,
   type CachedEntry,
 } from "./_inventoryCache";
-import { supabaseAdmin } from "@/lib/db";
+import { getGoogleUsageSnapshot, recordGoogleUsage } from "@/lib/activities/google-usage";
 
 // ── Google Places API types ───────────────────────────────────────────────────
 
@@ -238,6 +239,7 @@ export interface CityInventory {
   queriesTotal: number;
   cacheSource?: "db" | "api";
   apiCallsMade?: number;
+  googleHttpRequests?: { textSearch: number; nearbySearch: number; geocoding: number };
 }
 
 // Singletons — persist for the lifetime of the server process
@@ -478,13 +480,13 @@ const PLACES_FIELD_MASK = [
   "places.id", "places.displayName", "places.formattedAddress",
   "places.shortFormattedAddress", "places.rating", "places.userRatingCount",
   "places.types", "places.photos", "places.priceLevel", "places.businessStatus",
-  "places.location", "places.editorialSummary", "places.regularOpeningHours",
-  "places.websiteUri", "places.googleMapsUri",
+  "places.location",
 ].join(",");
 
 export async function geocodeDestination(destination: string, apiKey: string): Promise<GeoResult | null> {
   console.log(`[inventory/geocode] dest="${destination}"`);
   try {
+    if (!recordGoogleUsage("geocoding")) return null;
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(destination)}&key=${apiKey}`;
     const res = await fetch(url, { signal: AbortSignal.timeout(10000) });
     if (!res.ok) { console.error(`[inventory/geocode] HTTP ${res.status}`); return null; }
@@ -551,6 +553,7 @@ async function nearbySearch(
   type: string, limit: number, apiKey: string,
 ): Promise<GooglePlace[]> {
   try {
+    if (!recordGoogleUsage("nearby_search")) return [];
     const res = await fetch("https://places.googleapis.com/v1/places:searchNearby", {
       method: "POST",
       headers: {
@@ -568,7 +571,7 @@ async function nearbySearch(
     if (!res.ok) { console.warn(`[inventory/nearby] HTTP ${res.status} type=${type}`); return []; }
     const data = await res.json() as PlacesResponse;
     console.log(`[inventory/nearby] type=${type} got=${data.places?.length ?? 0}`);
-    return data.places ?? [];
+    return (data.places ?? []).map((place) => ({ ...place, photos: place.photos?.slice(0, 1) }));
   } catch { return []; }
 }
 
@@ -581,6 +584,7 @@ async function textSearch(
 
   for (let page = 0; page < maxPages && all.length < limit; page++) {
     try {
+      if (!recordGoogleUsage("text_search")) break;
       const body: Record<string, unknown> = {
         textQuery: query, maxResultCount: 20,
         locationBias: { circle: { center: { latitude: lat, longitude: lng }, radius: 30000 } },
@@ -604,7 +608,7 @@ async function textSearch(
       }
 
       const data = await res.json() as PlacesResponse & { nextPageToken?: string };
-      const places = data.places ?? [];
+      const places = (data.places ?? []).map((place) => ({ ...place, photos: place.photos?.slice(0, 1) }));
       all.push(...places);
       console.log(`[inventory/text] p${page + 1} query="${query}" got=${places.length} total=${all.length}`);
 
@@ -697,6 +701,7 @@ export async function buildInventoryBatched(
   const BATCH = 12;
   const cityKey = inv.city.toLowerCase();
   let apiCallsMade = 0;
+  const usageStart = getGoogleUsageSnapshot().counts;
   const diagKm = haversineKm(
     inv.viewport.southwest.lat, inv.viewport.southwest.lng,
     inv.viewport.northeast.lat, inv.viewport.northeast.lng,
@@ -763,110 +768,43 @@ export async function buildInventoryBatched(
   inv.status = "ready";
   inv.builtAt = Date.now();
   inv.apiCallsMade = apiCallsMade;
+  const usageEnd = getGoogleUsageSnapshot().counts;
+  inv.googleHttpRequests = {
+    textSearch: usageEnd.text_search - usageStart.text_search,
+    nearbySearch: usageEnd.nearby_search - usageStart.nearby_search,
+    geocoding: usageEnd.geocoding - usageStart.geocoding,
+  };
   const elapsed = inv.builtAt - inv.buildStartedAt;
   console.log(`[inventory/build] ${inv.city}: COMPLETE — ${inv.entries.size} unique places in ${elapsed}ms (${apiCallsMade} API calls)`);
 
-  // Persist to Supabase so future searches for this city cost nothing
-  await writeInventoryToSupabase(inv).catch((err) => {
-    console.error(`[inventory/cache-write] error for "${inv.city}":`, err);
-  });
+  // Runtime and offline discovery never persist Google content implicitly.
+  // Catalog persistence requires a separately reviewed/imported data workflow.
 }
 
-// ── Permanent Supabase cache write ────────────────────────────────────────────
+// The former automatic Supabase inventory writer was intentionally removed.
+// Existing rows remain readable, but new Google content must pass through a
+// separately reviewed import policy before any future catalog persistence.
 
-async function writeInventoryToSupabase(inv: CityInventory): Promise<void> {
-  if (!supabaseAdmin) {
-    console.warn("[inventory/cache-write] supabaseAdmin not available — skipping");
-    return;
-  }
+export function runtimeGoogleActivityBuildEnabled(): boolean {
+  return process.env.ALLOW_RUNTIME_GOOGLE_ACTIVITY_BUILD === "true";
+}
 
-  const rows: Array<{
-    place_id: string;
-    title: string;
-    city: string;
-    category: string;
-    description: string | null;
-    image_url: string | null;
-    google_places_data: Record<string, unknown>;
-  }> = [];
+export function getLoadedInventory(destination: string): CityInventory | null {
+  const rawKey = destination.toLowerCase().trim();
+  const cityKey = destinationToKey.get(rawKey) ?? rawKey.split(",")[0].trim();
+  return inventoryStore.get(cityKey) ?? null;
+}
 
-  for (const entry of inv.entries.values()) {
-    try {
-      const { place } = entry;
-      const types = place.types ?? [];
-
-      const { price: basePrice, isFree: isFreeByPrice } = estimatePrice(place.priceLevel);
-      const freeByTypeSet = new Set(["park", "natural_feature", "beach", "hiking_area", "shrine"]);
-      const isFreeByType = !place.priceLevel && types.some((t) => freeByTypeSet.has(t));
-      const isFree = isFreeByPrice || isFreeByType;
-      const price = isFree ? "Free" : basePrice;
-
-      const neighborhood = extractNeighborhood(place, inv.city);
-      const badges = generateBadges(place);
-      if (isFreeByType && !badges.includes("free")) badges.push("free");
-
-      let category: Category = entry.category;
-      if (badges.includes("hidden_gem") && !["food", "nightlife", "luxury"].includes(category)) {
-        category = "hidden_gems";
-      }
-      if (category === "food" && place.priceLevel === "PRICE_LEVEL_VERY_EXPENSIVE") {
-        category = "luxury";
-      }
-
-      const tags = [...new Set([...buildTags(types), ...entry.tags])].slice(0, 8);
-      const emoji = pickEmoji(types) || CATEGORY_EMOJI[category];
-      const description = buildDescription(place, neighborhood);
-      const whyVisit = entry.whyVisit || buildWhyVisit(place, category, inv.city);
-
-      rows.push({
-        place_id:    place.id,
-        title:       place.displayName?.text ?? "(unnamed)",
-        city:        inv.city,
-        category,
-        description: description || null,
-        image_url:   place.photos?.[0]?.name ?? null,
-        google_places_data: {
-          rating:                place.rating,
-          userRatingCount:       place.userRatingCount,
-          formattedAddress:      place.formattedAddress,
-          shortFormattedAddress: place.shortFormattedAddress,
-          regularOpeningHours:   place.regularOpeningHours,
-          websiteUri:            place.websiteUri,
-          googleMapsUri:         place.googleMapsUri,
-          location:              place.location,
-          types:                 place.types,
-          priceLevel:            place.priceLevel,
-          neighborhood,
-          duration:              estimateDuration(types),
-          price,
-          isFree,
-          whyVisit,
-          tags,
-          badges,
-          emoji,
-          querySources: entry.querySources,
-        },
-      });
-    } catch (err) {
-      console.warn(`[inventory/cache-write] skipped ${entry.place.id}: ${String(err)}`);
-    }
-  }
-
-  if (rows.length === 0) return;
-
-  const UPSERT_BATCH = 100;
-  let upserted = 0;
-  for (let i = 0; i < rows.length; i += UPSERT_BATCH) {
-    const batch = rows.slice(i, i + UPSERT_BATCH);
-    const { error } = await supabaseAdmin.from("activities").upsert(batch, { onConflict: "place_id" });
-    if (error) {
-      console.error(`[inventory/cache-write] batch ${Math.floor(i / UPSERT_BATCH) + 1} error:`, error.message);
-    } else {
-      upserted += batch.length;
-    }
-  }
-
-  console.log(`[inventory/cache-write] ${inv.city}: wrote ${upserted}/${rows.length} places to Supabase permanently`);
+export async function buildInventoryOffline(destination: string, apiKey: string): Promise<CityInventory | null> {
+  const geo = await geocodeDestination(destination, apiKey);
+  if (!geo) return null;
+  const inv: CityInventory = {
+    city: geo.city, country: geo.country, lat: geo.lat, lng: geo.lng, viewport: geo.viewport,
+    entries: new Map(), status: "building", buildStartedAt: Date.now(),
+    queriesCompleted: 0, queriesTotal: SEARCH_GROUPS.length, cacheSource: "api", apiCallsMade: 0,
+  };
+  await buildInventoryBatched(inv, apiKey);
+  return inv;
 }
 
 // ── DB cache reconstruction ───────────────────────────────────────────────────
@@ -976,9 +914,25 @@ export async function getOrCreateInventory(
       inventoryStore.set(cityKey, inv);
       // Run missing queries in the background using skipKeys to avoid re-fetching cached ones
       const skipKeys = new Set(dbCache.keys());
-      buildInventoryBatched(inv, apiKey, skipKeys).catch((err) => {
-        console.error(`[inventory/build] error for "${inv.city}":`, err);
-        inv.status = "ready";
+      const buildStart = Date.now();
+      console.log(`[inventory/build/after] ${inv.city}: registering background build — ${SEARCH_GROUPS.length - skipKeys.size} queries remaining`);
+      const partialBuildPromise = buildInventoryBatched(inv, apiKey, skipKeys);
+      after(async () => {
+        console.log(`[inventory/build/after] ${inv.city}: after() callback started`);
+        try {
+          await partialBuildPromise;
+          const elapsed = Date.now() - buildStart;
+          console.log(
+            `[inventory/build/after] ${inv.city}: build finished — ` +
+            `${inv.entries.size} activities indexed — ${elapsed}ms total`,
+          );
+        } catch (err) {
+          console.error(
+            `[inventory/build/after] ${inv.city}: build error:`,
+            err instanceof Error ? err.message : String(err),
+          );
+          inv.status = "ready";
+        }
       });
       return inv;
     }
@@ -998,9 +952,25 @@ export async function getOrCreateInventory(
   };
   inventoryStore.set(cityKey, inv);
 
-  buildInventoryBatched(inv, apiKey, new Set()).catch((err) => {
-    console.error(`[inventory/build] fatal error for "${inv.city}":`, err);
-    inv.status = "ready";  // unblock clients even on error
+  const buildStart = Date.now();
+  console.log(`[inventory/build/after] ${inv.city}: registering full build — ${SEARCH_GROUPS.length} query groups`);
+  const buildPromise = buildInventoryBatched(inv, apiKey, new Set());
+  after(async () => {
+    console.log(`[inventory/build/after] ${inv.city}: after() callback started (full build)`);
+    try {
+      await buildPromise;
+      const elapsed = Date.now() - buildStart;
+      console.log(
+        `[inventory/build/after] ${inv.city}: build finished — ` +
+        `${inv.entries.size} activities indexed — ${elapsed}ms total`,
+      );
+    } catch (err) {
+      console.error(
+        `[inventory/build/after] ${inv.city}: build error:`,
+        err instanceof Error ? err.message : String(err),
+      );
+      inv.status = "ready";  // unblock clients even on error
+    }
   });
 
   // Wait for the seed batch (first 12 queries) to complete before returning.

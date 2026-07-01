@@ -5,10 +5,30 @@ import type { Activity } from "../../../activities/data/types";
 import { DESTINATION_DATA } from "../../../activities/data/tokyo";
 import {
   getOrCreateInventory,
+  getLoadedInventory,
+  runtimeGoogleActivityBuildEnabled,
   convertInventoryToActivities,
   SKIP_TYPES,
   type CityInventory,
 } from "../_inventory";
+import type { ActivitySearchApiResponse } from "@/lib/activities/activity-search-state";
+import { hasFsqCity, loadFsqCity } from "@/lib/activities/fsq-supabase-reader";
+
+export const runtime = "nodejs";
+export const maxDuration = 300;
+
+function cityNotBuiltPayload(destination: string): ActivitySearchApiResponse {
+  const parts = destination.split(",").map((part) => part.trim()).filter(Boolean);
+  return {
+    error: "This city catalog has not been built yet.",
+    cityNotBuilt: true,
+    requestedDestination: destination,
+    city: parts[0] ?? destination,
+    country: parts.slice(1).join(", "),
+    source: "catalog_unavailable",
+    activities: [],
+  };
+}
 
 // ── AI whyVisit generation ────────────────────────────────────────────────────
 // Runs at response time. Results are cached inside CityInventory.entries[id].whyVisit
@@ -117,12 +137,49 @@ export async function GET(req: NextRequest) {
     }
   }
 
+  // ── FSQ pre-built catalog ─────────────────────────────────────────────────
+  // If we have FSQ activities in Supabase for this city, serve them directly.
+  // If not, return "city not available yet" — do NOT fall back to Google discovery.
+  const fsqCityAvailable = await hasFsqCity(destination);
+  if (fsqCityAvailable) {
+    const fsqResult = await loadFsqCity(destination);
+    if (fsqResult && fsqResult.activities.length > 0) {
+      console.log(`[activities/search] Serving FSQ catalog for "${destination}" (${fsqResult.activities.length} activities)`);
+      return NextResponse.json({
+        activities:      fsqResult.activities,
+        city:            fsqResult.city,
+        country:         fsqResult.country,
+        source:          "fsq_supabase",
+        inventoryStatus: "ready" as const,
+        inventorySize:   fsqResult.activities.length,
+      } satisfies ActivitySearchApiResponse);
+    }
+  }
+
+  // City not in FSQ catalog — return "not available yet" state.
+  // (We do NOT fall back to Google Places discovery for non-FSQ cities.)
+  const cityName = destination.split(",")[0].trim().toLowerCase();
+  const isTokyoRequest = cityName === "tokyo";
+
+  if (!isTokyoRequest) {
+    return NextResponse.json(cityNotBuiltPayload(destination), { status: 404 });
+  }
+  // ── End FSQ path ──────────────────────────────────────────────────────────
+
   const apiKey = (process.env.GOOGLE_PLACES_API_KEY ?? "").trim();
 
-  // No API key — return mock data
+  // No API key — retain the Tokyo development fixture, but never present it as
+  // another destination's inventory.
   if (!apiKey) {
-    console.warn("[activities/search] GOOGLE_PLACES_API_KEY not set — returning mock data");
-    const mock = DESTINATION_DATA["Tokyo, Japan"];
+    const requestedCity = destination.split(",")[0].trim().toLowerCase();
+    const mockEntry = Object.entries(DESTINATION_DATA).find(([name]) =>
+      name.split(",")[0].trim().toLowerCase() === requestedCity,
+    );
+    if (!mockEntry) {
+      return NextResponse.json(cityNotBuiltPayload(destination), { status: 404 });
+    }
+    console.warn("[activities/search] GOOGLE_PLACES_API_KEY not set — returning matching development fixture");
+    const mock = mockEntry[1];
     return NextResponse.json({
       activities:      mock.activities,
       city:            mock.city,
@@ -133,29 +190,40 @@ export async function GET(req: NextRequest) {
     });
   }
 
-  // Get or create inventory (waits up to 7s for first batch on a new city)
-  const inv = await getOrCreateInventory(destination, apiKey);
+  // A public request may read an inventory already loaded by an explicit admin
+  // workflow, but must never launch the high-fan-out Google builder by default.
+  const runtimeBuildAllowed = runtimeGoogleActivityBuildEnabled();
+  const inv = runtimeBuildAllowed
+    ? await getOrCreateInventory(destination, apiKey)
+    : getLoadedInventory(destination);
+
+  if (!inv && !runtimeBuildAllowed) {
+    return NextResponse.json(cityNotBuiltPayload(destination), { status: 404 });
+  }
 
   // ── Cache / path diagnostics ────────────────────────────────────────────────
   console.log(`[activities/search] destination="${destination}"`);
   console.log(`[activities/search] RAW_INVENTORY_COUNT: ${inv?.entries.size ?? 0}  status=${inv?.status ?? "null"}  cacheSource=${inv?.cacheSource ?? "n/a"}  queriesCompleted=${inv?.queriesCompleted ?? 0}/${inv?.queriesTotal ?? 0}`);
   if (!inv || inv.entries.size === 0) {
-    console.warn(`[activities/search] PATH=mock_fallback — inv null or empty, Tokyo hardcoded data returned for "${destination}"`);
+    console.warn(`[activities/search] PATH=empty_inventory — no places returned for "${destination}"`);
   } else {
     console.log(`[activities/search] PATH=live_api — returning ${inv.entries.size} raw places for "${destination}"`);
   }
   // ───────────────────────────────────────────────────────────────────────────
 
-  if (!inv || inv.entries.size === 0) {
-    console.warn(`[activities/search] no inventory for "${destination}" — mock fallback`);
-    const mock = DESTINATION_DATA["Tokyo, Japan"];
+  if (!inv) {
+    return NextResponse.json(cityNotBuiltPayload(destination), { status: 404 });
+  }
+
+  if (inv.entries.size === 0) {
     return NextResponse.json({
-      activities:      mock.activities,
-      city:            mock.city,
-      country:         mock.country,
-      source:          "mock_fallback",
-      inventoryStatus: "ready" as const,
-      inventorySize:   mock.activities.length,
+      activities:        [],
+      city:              inv.city,
+      country:           inv.country,
+      source:            "places_api",
+      inventoryStatus:   inv.status,
+      inventorySize:     0,
+      inventoryProgress: { completed: inv.queriesCompleted, total: inv.queriesTotal },
     });
   }
 
@@ -246,6 +314,8 @@ export async function GET(req: NextRequest) {
       _debug: {
         cacheSource:   inv.cacheSource ?? "api",
         apiCallsMade:  inv.apiCallsMade ?? inv.queriesCompleted,
+        searchGroups:  inv.queriesCompleted,
+        googleHttpRequests: inv.googleHttpRequests ?? { textSearch: 0, nearbySearch: 0, geocoding: 0 },
         entriesLoaded: inv.entries.size,
       },
     } : {}),
