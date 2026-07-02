@@ -78,7 +78,7 @@ export function isJapaneseName(name: string): boolean {
  * Cyrillic, Korean, etc.) and needs an English variant lookup.
  */
 export function isNonLatinName(name: string): boolean {
-  return /[Ѐ-ӿ֐-׿؀-ۿऀ-ॿ฀-๿ᄀ-ᇿ぀-ゟ゠-ヿㇰ-ㇿ㐀-䶿一-鿿가-힯＀-￯]/.test(name);
+  return /[\u0400-\u04FF\u0590-\u05FF\u0600-\u06FF\u0900-\u097F\u0E00-\u0E7F\u1100-\u11FF\u3040-\u309F\u30A0-\u30FF\u31F0-\u31FF\u3400-\u4DBF\u4E00-\u9FFF\uAC00-\uD7AF\uFF00-\uFFEF]/.test(name);
 }
 
 /**
@@ -99,7 +99,7 @@ export function extractLatinPortion(name: string): string | null {
   }
 
   // Pattern 2 — contiguous run of 3+ Latin words separated by non-Latin characters
-  const latinRuns = name.split(/[Ѐ-ӿ֐-׿؀-ۿऀ-ॿ฀-๿ᄀ-ᇿ぀-ゟ゠-ヿㇰ-ㇿ㐀-䶿一-鿿가-힯＀-￯]+/u)
+  const latinRuns = name.split(/[\u0400-\u04FF\u0590-\u05FF\u0600-\u06FF\u0900-\u097F\u0E00-\u0E7F\u1100-\u11FF\u3040-\u309F\u30A0-\u30FF\u31F0-\u31FF\u3400-\u4DBF\u4E00-\u9FFF\uAC00-\uD7AF\uFF00-\uFFEF]+/u)
     .map((s) => s.trim())
     .filter((s) => s.length > 0 && /\S+\s+\S+\s+\S+/.test(s));
   if (latinRuns.length > 0) {
