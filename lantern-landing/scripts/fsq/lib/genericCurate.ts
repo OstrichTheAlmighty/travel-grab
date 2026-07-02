@@ -8,6 +8,7 @@
 
 import type { NormalizedActivity } from "../../../lib/activities/types";
 import { normalizeName } from "./dedup";
+import { isNonLatinName } from "./normalize";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -242,6 +243,9 @@ export function curateCityGeneric(
 
   const canSelect = (row: GenericCuratedActivity): boolean => {
     if (row.curation.score < 55) return false;
+    // Exclude places whose display name is still non-Latin — no English variant in FSQ data.
+    // Showing "浅草寺" or "مسجد" on a travel card is not useful for most users.
+    if (isNonLatinName(row.title)) return false;
     const chainId = row.curation.probable_chain_id;
     if (chainId && (chainSelected.get(chainId) ?? 0) >= 3) return false;
     return true;

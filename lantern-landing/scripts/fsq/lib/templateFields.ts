@@ -8,6 +8,7 @@
 
 import type { NormalizedActivity } from "../../../lib/activities/types";
 import type { Category, Badge } from "../../../app/activities/data/types";
+import { isNonLatinName } from "./normalize";
 
 // ── Output shape ──────────────────────────────────────────────────────────────
 
@@ -221,7 +222,10 @@ export function buildTemplateFields(
   const badges = buildBadges(category, labelText, isFree, price, qualityScore);
   const emoji = pickEmoji(category, labelText);
   const gradient = CATEGORY_GRADIENT[category] ?? CATEGORY_GRADIENT.culture;
-  const neighborhood = String(meta.locality ?? "");
+  const rawLocality = String(meta.locality ?? "");
+  const neighborhood = isNonLatinName(rawLocality)
+    ? (isNonLatinName(String(meta.region ?? "")) ? cityName : String(meta.region ?? ""))
+    : rawLocality;
   const duration = estimateDuration(labelText, category);
   const whyVisit = buildWhyVisit(
     activity.title,
