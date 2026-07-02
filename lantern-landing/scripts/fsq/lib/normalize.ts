@@ -78,7 +78,7 @@ export function isJapaneseName(name: string): boolean {
  * Cyrillic, Korean, etc.) and needs an English variant lookup.
  */
 export function isNonLatinName(name: string): boolean {
-  return /[฀-๿؀-ۿ֐-׿Ѐ-ӿ가-힯　-鿿豈-﫿＀-￯]/.test(name);
+  return /[Ѐ-ӿ֐-׿؀-ۿऀ-ॿ฀-๿ᄀ-ᇿ぀-ゟ゠-ヿㇰ-ㇿ㐀-䶿一-鿿가-힯＀-￯]/.test(name);
 }
 
 /**
@@ -99,7 +99,7 @@ export function extractLatinPortion(name: string): string | null {
   }
 
   // Pattern 2 — contiguous run of 3+ Latin words separated by non-Latin characters
-  const latinRuns = name.split(/[฀-๿؀-ۿ֐-׿Ѐ-ӿ가-힯　-鿿豈-﫿＀-￯]+/u)
+  const latinRuns = name.split(/[Ѐ-ӿ֐-׿؀-ۿऀ-ॿ฀-๿ᄀ-ᇿ぀-ゟ゠-ヿㇰ-ㇿ㐀-䶿一-鿿가-힯＀-￯]+/u)
     .map((s) => s.trim())
     .filter((s) => s.length > 0 && /\S+\s+\S+\s+\S+/.test(s));
   if (latinRuns.length > 0) {
