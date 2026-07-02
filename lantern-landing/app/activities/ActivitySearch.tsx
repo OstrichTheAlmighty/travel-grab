@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import { fetchWithAuth } from "@/lib/fetch-with-auth";
 import UsageBanner from "@/app/components/UsageBanner";
 import type { Activity, Badge, Category } from "./data/types";
+import { CardPlacePreview } from "./CardPlacePreview";
 import { supabase } from "@/lib/supabase";
 import { activityPhotoUrl, fetchGooglePlaceDetail } from "@/lib/activities/google-place-client";
 import type {
@@ -332,52 +333,33 @@ function ActivityCard({
   saved,
   onToggleSave,
   onViewDetails,
+  resolveImmediately = false,
 }: {
   activity: Activity;
   saved: boolean;
   onToggleSave: () => void;
   onViewDetails: () => void;
+  resolveImmediately?: boolean;
 }) {
-  const [showWhy,   setShowWhy]   = useState(false);
-  const [imgFailed, setImgFailed] = useState(false);
-  const [imgLoaded, setImgLoaded] = useState(false);
+  const [showWhy, setShowWhy] = useState(false);
+  const [resolved, setResolved] = useState<{ rating: number; reviewCount: number } | null>(null);
+
+  const displayRating      = resolved?.rating      ?? activity.rating;
+  const displayReviewCount = resolved?.reviewCount ?? activity.reviewCount;
 
   const heroBadges = activity.badges
     .filter((b) => !(b === "free" && activity.isFree))
     .slice(0, 2);
 
-  const hasPhoto = Boolean(activity.photoRef) && !imgFailed;
-
   return (
     <div className={`group flex flex-col rounded-2xl border border-gray-200 border-l-[3px] ${CATEGORY_BORDER[activity.category] ?? "border-l-teal-400"} bg-white overflow-hidden transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_8px_28px_rgba(0,0,0,0.10)] hover:border-gray-300`}>
 
       {/* ── Hero ── */}
-      <div className="relative h-52 overflow-hidden flex-shrink-0">
-        {/* Gradient + emoji always visible as background/loading placeholder */}
-        <div
-          className="absolute inset-0 w-full h-full flex items-center justify-center"
-          style={{ background: activity.gradient }}
-        >
-          <span
-            className="text-8xl select-none transition-transform duration-500 ease-out group-hover:scale-110"
-            style={{ filter: "drop-shadow(0 4px 24px rgba(0,0,0,0.5))" }}
-          >
-            {activity.emoji}
-          </span>
-        </div>
-        {/* Photo fades in over gradient once loaded */}
-        {hasPhoto && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={activityPhotoUrl(activity.photoRef!, 800)}
-            alt={activity.title}
-            loading="lazy"
-            className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-105 ${imgLoaded ? "opacity-100" : "opacity-0"}`}
-            onLoad={() => setImgLoaded(true)}
-            onError={() => setImgFailed(true)}
-          />
-        )}
-
+      <CardPlacePreview
+        activity={activity}
+        resolveImmediately={resolveImmediately}
+        onResolved={setResolved}
+      >
         {/* Bottom fade to panel bg */}
         <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-panel/70 to-transparent pointer-events-none z-10" />
 
@@ -418,7 +400,7 @@ function ActivityCard({
             ))}
           </div>
         )}
-      </div>
+      </CardPlacePreview>
 
       {/* ── Content ── */}
       <div className="flex-1 flex flex-col p-4 pt-3.5">
@@ -427,13 +409,13 @@ function ActivityCard({
         <div className="flex items-center gap-1.5 mb-2">
           <IconStar className="w-3 h-3 text-amber-400 flex-shrink-0" />
           <span className="text-[12px] font-bold text-gray-900 tabular-nums">
-            {activity.rating > 0 ? activity.rating.toFixed(1) : "—"}
+            {displayRating > 0 ? displayRating.toFixed(1) : "—"}
           </span>
-          {activity.reviewCount > 0 && (
+          {displayReviewCount > 0 && (
             <span className="text-[11px] text-gray-700">
-              ({activity.reviewCount >= 1000
-                ? `${(activity.reviewCount / 1000).toFixed(0)}k`
-                : activity.reviewCount.toLocaleString()})
+              ({displayReviewCount >= 1000
+                ? `${(displayReviewCount / 1000).toFixed(0)}k`
+                : displayReviewCount.toLocaleString()})
             </span>
           )}
           <span className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-semibold leading-none ${CATEGORY_BADGE[activity.category] ?? "bg-gray-50 text-gray-600 border-gray-200"}`}>
@@ -3047,13 +3029,14 @@ export default function ActivitySearch() {
               onClear={clearSearchAndFilters}
             />
           ) : pageState === "loaded" ? (
-            displayed.map((activity) => (
+            displayed.map((activity, index) => (
               <ActivityCard
                 key={activity.id}
                 activity={activity}
                 saved={savedIds.has(activity.id)}
                 onToggleSave={() => toggleSave(activity)}
                 onViewDetails={() => openDetails(activity)}
+                resolveImmediately={isFeatured && index < 30}
               />
             ))
           ) : (

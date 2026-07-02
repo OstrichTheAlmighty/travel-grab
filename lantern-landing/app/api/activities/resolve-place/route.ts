@@ -5,11 +5,11 @@ import { createClient } from "@supabase/supabase-js";
 //
 // Resolves an FSQ activity to its Google Place ID via Text Search.
 // Caches result to Supabase (google_places_data.google_place_id) so subsequent
-// modal opens skip the API call. Also caches first photo resource name.
+// modal opens skip the API call. Also caches photo, rating, and userRatingCount.
 //
-// Returns: { googlePlaceId?: string; photoUrl?: string }
+// Returns: { googlePlaceId?: string; photoUrl?: string; rating?: number; reviewCount?: number }
 
-const memCache = new Map<string, { googlePlaceId: string; photoUrl?: string; ts: number }>();
+const memCache = new Map<string, { googlePlaceId: string; photoUrl?: string; rating?: number; reviewCount?: number; ts: number }>();
 const CACHE_TTL = 24 * 60 * 60 * 1000;
 
 function getSupabase() {
@@ -52,10 +52,17 @@ export async function GET(req: NextRequest) {
       const result = {
         googlePlaceId: gd.google_place_id as string,
         photoUrl: (gd.photo_url as string | undefined),
+        rating: (gd.rating as number | undefined),
+        reviewCount: (gd.userRatingCount as number | undefined),
         ts: Date.now(),
       };
       memCache.set(placeId, result);
-      return NextResponse.json({ googlePlaceId: result.googlePlaceId, photoUrl: result.photoUrl });
+      return NextResponse.json({
+        googlePlaceId: result.googlePlaceId,
+        photoUrl: result.photoUrl,
+        rating: result.rating,
+        reviewCount: result.reviewCount,
+      });
     }
   } catch {
     // Non-fatal — fall through to Google API
@@ -72,7 +79,7 @@ export async function GET(req: NextRequest) {
       headers: {
         "Content-Type": "application/json",
         "X-Goog-Api-Key": apiKey,
-        "X-Goog-FieldMask": "places.id,places.photos",
+        "X-Goog-FieldMask": "places.id,places.photos,places.rating,places.userRatingCount",
       },
       body: JSON.stringify({
         textQuery: name,
@@ -93,7 +100,7 @@ export async function GET(req: NextRequest) {
     }
 
     const body = await resp.json() as {
-      places?: Array<{ id: string; photos?: Array<{ name: string }> }>;
+      places?: Array<{ id: string; photos?: Array<{ name: string }>; rating?: number; userRatingCount?: number }>;
     };
     const place = body.places?.[0];
     if (!place?.id) {
@@ -103,6 +110,8 @@ export async function GET(req: NextRequest) {
 
     const googlePlaceId = place.id;
     const photoUrl = place.photos?.[0]?.name ?? undefined;
+    const rating = place.rating ?? undefined;
+    const reviewCount = place.userRatingCount ?? undefined;
 
     // Write-back to Supabase (read-modify-write; race is benign — same value)
     try {
@@ -119,16 +128,18 @@ export async function GET(req: NextRequest) {
           ...existing,
           google_place_id: googlePlaceId,
           ...(photoUrl ? { photo_url: photoUrl } : {}),
+          ...(rating != null ? { rating } : {}),
+          ...(reviewCount != null ? { userRatingCount: reviewCount } : {}),
         },
       }).eq("place_id", placeId);
     } catch {
       // Cache write failure is non-fatal
     }
 
-    const result = { googlePlaceId, photoUrl, ts: Date.now() };
+    const result = { googlePlaceId, photoUrl, rating, reviewCount, ts: Date.now() };
     memCache.set(placeId, result);
     console.log(`[resolve-place] "${name}" → ${googlePlaceId}`);
-    return NextResponse.json({ googlePlaceId, photoUrl });
+    return NextResponse.json({ googlePlaceId, photoUrl, rating, reviewCount });
   } catch (err) {
     console.error("[resolve-place] error:", err instanceof Error ? err.message : String(err));
     return NextResponse.json({});
