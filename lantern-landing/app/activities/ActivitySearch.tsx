@@ -220,6 +220,24 @@ function rowToActivity(row: SupabaseRow): Activity {
   };
 }
 
+// ── Address sanitizer ─────────────────────────────────────────────────────────
+
+const NON_LATIN_RE = /[฀-๿؀-ۿ֐-׿Ѐ-ӿ가-힯　-鿿豈-﫿＀-￯]/;
+
+function sanitizeAddress(raw: string): string {
+  // Strip postal code markers (e.g. "〒141-0032")
+  let s = raw.replace(/〒[\d-]+/g, "").trim();
+  // Strip leading country prefix "Japan, " / "China, " etc.
+  s = s.replace(/^[A-Za-z\s]{2,20},\s*/, "");
+  // Drop comma-segments that are majority non-Latin
+  const segments = s.split(",").map((seg) => seg.trim()).filter(Boolean);
+  const latinSegments = segments.filter((seg) => {
+    const nonLatinCount = [...seg].filter((ch) => NON_LATIN_RE.test(ch)).length;
+    return nonLatinCount / seg.length <= 0.5;
+  });
+  return latinSegments.join(", ");
+}
+
 // ── Icons ─────────────────────────────────────────────────────────────────────
 
 function IconPin({ className }: { className?: string }) {
@@ -758,7 +776,12 @@ function ActivityDetailModal({
   const name          = detail?.displayName?.text ?? activity.title;
   const rating        = detail?.rating        ?? activity.rating;
   const reviewCount   = detail?.userRatingCount ?? activity.reviewCount;
-  const address       = detail?.formattedAddress ?? detail?.shortFormattedAddress ?? activity.neighborhood;
+  const address       = (() => {
+    const raw = detail?.formattedAddress ?? detail?.shortFormattedAddress ?? activity.neighborhood ?? "";
+    if (!raw) return undefined;
+    const clean = sanitizeAddress(raw);
+    return clean || raw; // if sanitizer strips everything, fall back to original
+  })();
   const summary       = activity.description;
   const openNow       = detail?.regularOpeningHours?.openNow ?? activity.openNow;
   const hours         = detail?.regularOpeningHours?.weekdayDescriptions ?? [];

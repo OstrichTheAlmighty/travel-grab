@@ -82,26 +82,64 @@ export function isNonLatinName(name: string): boolean {
 }
 
 /**
- * Returns the best English name for a place.
- * If the primary name is non-Latin (CJK, Thai, Arabic, Hebrew, Cyrillic, Korean),
- * look for an "en" entry in nameVariants. Otherwise use the primary name.
+ * Extracts a meaningful Latin portion from a mixed-language name.
+ *
+ * Handles two patterns:
+ *   1. Parenthesised English: "วัดพระแก้ว (Temple of the Emerald Buddha)" → "Temple of the Emerald Buddha"
+ *   2. Contiguous Latin runs of 3+ words separated by non-Latin script
+ *
+ * Returns null if no meaningful Latin portion is found.
+ */
+export function extractLatinPortion(name: string): string | null {
+  // Pattern 1 — content inside parentheses that is fully Latin (scan in reverse to prefer last match)
+  const parenMatches = [...name.matchAll(/(([^)]+))/g)];
+  for (const m of parenMatches.reverse()) {
+    const inner = m[1].trim();
+    if (inner.length >= 3 && !isNonLatinName(inner)) return inner;
+  }
+
+  // Pattern 2 — contiguous run of 3+ Latin words separated by non-Latin characters
+  const latinRuns = name.split(/[฀-๿؀-ۿ֐-׿Ѐ-ӿ가-힯　-鿿豈-﫿＀-￯]+/u)
+    .map((s) => s.trim())
+    .filter((s) => s.length > 0 && /S+s+S+s+S+/.test(s));
+  if (latinRuns.length > 0) {
+    return latinRuns.sort((a, b) => b.length - a.length)[0];
+  }
+
+  return null;
+}
+
+/**
+ * Returns the best English name for a place, or null if none can be found.
+ *
+ * Order of preference:
+ *   1. Primary name (if already Latin)
+ *   2. FSQ name_en / en-US / en-GB variant
+ *   3. Latin portion extracted from the primary name (e.g., text in parentheses)
+ *   4. null — place will be filtered from Tier A by isNonLatinName check
  */
 export function detectEnglishName(
   primaryName: string,
   nameVariants: Record<string, string>,
-): string {
+): string | null {
   if (!isNonLatinName(primaryName)) return primaryName;
 
+  // 1. Explicit English variants
   const EN_LANGS = ["en", "en-US", "en-GB"];
   for (const lang of EN_LANGS) {
-    if (nameVariants[lang]) return nameVariants[lang];
+    const v = nameVariants[lang];
+    if (v && !isNonLatinName(v)) return v;
   }
-  // Loose match
   for (const [lang, name] of Object.entries(nameVariants)) {
-    if (lang.startsWith("en") && name) return name;
+    if (lang.startsWith("en") && name && !isNonLatinName(name)) return name;
   }
 
-  return primaryName;
+  // 2. Latin portion embedded in the primary name
+  const latin = extractLatinPortion(primaryName);
+  if (latin) return latin;
+
+  // 3. No English name found — caller handles the null
+  return null;
 }
 
 // ── Quality score ─────────────────────────────────────────────────────────────
@@ -260,7 +298,7 @@ export function normalizeFsqPlace(
   place: FsqPlace,
   city: string,
 ): NormalizedActivity {
-  const title = place.nameEnglish || place.namePrimary;
+  const title = place.nameEnglish ?? place.namePrimary;
 
   const searchKeywords: string[] = [
     title.toLowerCase(),

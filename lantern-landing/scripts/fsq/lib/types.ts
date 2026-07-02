@@ -56,7 +56,7 @@ export interface FsqRawRow {
 export interface FsqPlace {
   id:                      string;
   namePrimary:             string;
-  nameEnglish:             string;
+  nameEnglish:             string | null;
   altNames:                Record<string, string>;
   lat:                     number;
   lng:                     number;

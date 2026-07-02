@@ -62,7 +62,7 @@ dotenv.config({ path: path.join(__dirname, "../../.env.local"), override: true }
 // ── Constants ─────────────────────────────────────────────────────────────────
 
 const QUERY_LIMIT      = 20_000;
-const QUERY_TIMEOUT_MS = 300_000;   // 5 min per DuckDB query
+const QUERY_TIMEOUT_MS = 600_000;   // 10 min per DuckDB query
 const POLL_INTERVAL_MS = 30_000;    // 30s between batch status checks
 const POLL_CONCURRENCY = 10;        // max simultaneous Anthropic poll + Supabase write tasks
 const SAMPLE_COUNT     = 3;
