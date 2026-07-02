@@ -121,7 +121,7 @@ export function buildFsqRow(
 
 // ── Bulk upsert ───────────────────────────────────────────────────────────────
 
-const CHUNK_SIZE = 500;
+const CHUNK_SIZE = 200;
 
 export async function writeFsqActivitiesToSupabase(
   rows: FsqSupabaseRow[],
