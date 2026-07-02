@@ -2439,39 +2439,7 @@ export default function ActivitySearch() {
     }
 
     try {
-      // 4. Supabase database — fast query, zero Google API cost
-      if (supabase) {
-        const cityName = dest.split(",")[0].trim();
-        const { data: rows, error: sbError } = await supabase
-          .from("activities")
-          .select("*")
-          .ilike("city", cityName)
-          .limit(200)
-          .order("title", { ascending: true });
-
-        if (requestId !== requestSequenceRef.current) return;
-
-        if (sbError) {
-          console.warn("[activities] Supabase query failed:", sbError.message);
-        } else if (rows && rows.length > 0) {
-          const activities = (rows as SupabaseRow[]).map(rowToActivity);
-          const r: ActivitySearchResult = {
-            activities,
-            city:            cityName,
-            country:         dest.includes(",") ? dest.split(",").slice(1).join(",").trim() : "",
-            source:          "supabase",
-            inventoryStatus: "ready",
-            inventorySize:   activities.length,
-          };
-          clientCache.current.set(key, r);
-          lsSetDestination(key, r);
-          dispatchLoad({ type: "loaded", requestId, result: r });
-          return;
-        }
-        // No rows → fall through to Google Places API
-      }
-
-      // 5. Google Places API
+      // FSQ catalog + Google Places API (server-side, returns all 1000 FSQ activities)
       const res = await fetchWithAuth(
         `/api/activities/search?destination=${encodeURIComponent(dest.trim())}`,
         { signal: controller.signal },
