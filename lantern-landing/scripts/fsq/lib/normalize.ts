@@ -92,7 +92,7 @@ export function isNonLatinName(name: string): boolean {
  */
 export function extractLatinPortion(name: string): string | null {
   // Pattern 1 — content inside parentheses that is fully Latin (scan in reverse to prefer last match)
-  const parenMatches = [...name.matchAll(/(([^)]+))/g)];
+  const parenMatches = [...name.matchAll(/\(([^)]+)\)/g)];
   for (const m of parenMatches.reverse()) {
     const inner = m[1].trim();
     if (inner.length >= 3 && !isNonLatinName(inner)) return inner;
@@ -101,7 +101,7 @@ export function extractLatinPortion(name: string): string | null {
   // Pattern 2 — contiguous run of 3+ Latin words separated by non-Latin characters
   const latinRuns = name.split(/[฀-๿؀-ۿ֐-׿Ѐ-ӿ가-힯　-鿿豈-﫿＀-￯]+/u)
     .map((s) => s.trim())
-    .filter((s) => s.length > 0 && /S+s+S+s+S+/.test(s));
+    .filter((s) => s.length > 0 && /\S+\s+\S+\s+\S+/.test(s));
   if (latinRuns.length > 0) {
     return latinRuns.sort((a, b) => b.length - a.length)[0];
   }
